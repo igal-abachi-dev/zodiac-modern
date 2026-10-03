@@ -31,7 +31,7 @@ The website accepts public keys only. The receiver handles private keys and pass
 
 ## Development
 
-The static scaffold, public-key/build validation, browser crypto library, independent Go test oracle and encrypted-key loader are implemented. The site currently shows disabled message controls; the unsigned receiver supports key verification only. Full sender UI, glyph/export/recovery flows and authenticated receiver decryption/output remain pending. No reviewed release is available. See [live task and milestone status](docs/status.md).
+The static scaffold, local public-key file/paste selection and fingerprint details, public-key/build validation, browser crypto library, independent Go test oracle and encrypted-key loader are implemented. The site currently shows disabled message controls; the unsigned receiver supports key verification only. Full sender UI, glyph/export/recovery flows and authenticated receiver decryption/output remain pending. No reviewed release is available. See [live task and milestone status](docs/status.md).
 
 Use Node.js 24.21.0 (the 24.x LTS line), pnpm 12.8.1 and the committed lockfile. Receiver checks require the pinned installed Go 1.27.1 toolchain; automatic toolchain downloads are disabled. OpenSSL is needed for key setup and interoperability fixtures, not for running browser encryption or the packaged receiver. Configure `ZODIAC_GO` when the pinned Go executable is outside PATH; the scripts also recognize the repository's ignored portable-toolchain cache.
 
@@ -68,6 +68,7 @@ pnpm test:interop
 pnpm test:receiver
 pnpm verify:receiver-deps
 pnpm check:rec01
+pnpm build:custom
 pnpm build:test
 pnpm spike:offline-html
 pnpm test:e2e
@@ -75,7 +76,7 @@ pnpm build
 pnpm check:artifact
 ```
 
-Install the pinned Playwright browsers with `pnpm exec playwright install chromium firefox` before browser tests. The fixture build writes only to `artifacts/test-site`; the standalone probe is explicitly synthetic and is not a release sender. Production `pnpm build` intentionally fails until real public configuration is supplied.
+Install the pinned Playwright browsers with `pnpm exec playwright install chromium firefox` before browser tests. Build both custom-only (`dist`) and fixture (`artifacts/test-site`) artifacts before `test:interop` or `test:e2e`; the suite serves them with production headers on loopback ports 4322 and 4321. The standalone probe is explicitly synthetic and is not a release sender. Production `pnpm build` intentionally fails until real public configuration is supplied.
 
 Use synthetic messages and labeled test keys. Receiver validation includes real OpenSSL 3.0/3.5 fixtures, independent OpenSSL oracle comparisons, strict profile/schema failures, pre-KDF stub fuzzing, bounded post-KDF fuzzing, and vendor integrity. For `pnpm test:receiver-oracle`, set `ZODIAC_OPENSSL30` and `ZODIAC_OPENSSL35` to the recorded executable versions in the fixture manifest. Testing an older generator does not broaden the accepted key-file profile. See [loader implementation and review limits](docs/decisions/rec01-fixed-loader.md).
 

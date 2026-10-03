@@ -20,7 +20,7 @@ test('static scaffold hydrates under enforced production headers', async ({
     "worker-src 'none'",
   );
   await page.getByRole('button', { name: 'Recipient details' }).click();
-  await expect(page.locator('.fingerprint')).toContainText('RSA-3072');
+  await expect(page.locator('.full-fingerprint')).toContainText('RSA-3072');
   expect(await page.locator('[style]').count()).toBe(0);
   expect(
     await page.evaluate(

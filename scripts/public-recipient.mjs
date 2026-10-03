@@ -1,7 +1,7 @@
 import { createHash, createPublicKey } from 'node:crypto';
 
 export function validatePublicPEM(pem) {
-  if (typeof pem !== 'string' || Buffer.byteLength(pem) > 16384)
+  if (typeof pem !== 'string' || pem.length > 16384)
     throw new Error('Public PEM exceeds limit.');
   const match =
     /^[ \t\r\n]*-----BEGIN PUBLIC KEY-----\r?\n([A-Za-z0-9+/=\r\n]+)-----END PUBLIC KEY-----[ \t\r\n]*$/.exec(

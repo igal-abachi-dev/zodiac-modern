@@ -27,7 +27,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E00 | Planning | P0 | Done | M0 | Source review and planning documents |
 | E01 | Enablers | P0 | In progress | M0 | Scaffold verification, harness/build pipeline review, partial offline spike |
 | E02 | Crypto | P0 | Backlog | M1 | Exact compatible browser encryption and strict codecs |
-| E03 | Key management | P0 | Backlog | M1 | Safe default/custom public recipients and offline key guide |
+| E03 | Key management | P0 | In progress | M1 | Safe default/custom public recipients and offline key guide |
 | E04 | Workspace | P1 | Backlog | M2 | Accessible edit/encrypt/result/reset flow |
 | E05 | Symbols/recovery | P1 | Backlog | M3 | Frozen glyph mapping, export-only SVG, raw/transcription recovery |
 | E06 | Exports/sharing | P1 | Backlog | M3 | Complete copy/download/image/print artifacts |

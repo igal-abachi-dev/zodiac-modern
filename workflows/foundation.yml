@@ -53,6 +53,8 @@ jobs:
         run: pnpm check:rec01
       - name: Fixture static artifact and synthetic offline probe
         run: |
+          pnpm build:custom
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           pnpm build:test
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           pnpm spike:offline-html

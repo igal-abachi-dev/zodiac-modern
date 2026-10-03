@@ -13,9 +13,17 @@ export default defineConfig({
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
     { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
   ],
-  webServer: {
-    command: 'node scripts/serve-local.mjs --fixture',
-    url: 'http://127.0.0.1:4321',
-    reuseExistingServer: false,
-  },
+  webServer: [
+    {
+      command: 'node scripts/serve-local.mjs --fixture',
+      url: 'http://127.0.0.1:4321',
+      reuseExistingServer: false,
+    },
+    {
+      command: 'node scripts/serve-local.mjs',
+      env: { ZODIAC_PORT: '4322' },
+      url: 'http://127.0.0.1:4322',
+      reuseExistingServer: false,
+    },
+  ],
 });
