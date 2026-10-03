@@ -2,7 +2,7 @@
 import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { resolve, relative } from 'node:path';
+import { resolve, relative, dirname, join } from 'node:path';
 import { platform, release, cpus } from 'node:os';
 import { filesAt } from './build-host-headers.mjs';
 import { requireGo, goExecutable, goEnv, runGo } from './receiver.mjs';
@@ -13,19 +13,26 @@ if (!process.env.ZODIAC_OPENSSL30 || !process.env.ZODIAC_OPENSSL35)
 const directory = resolve('artifacts/rec01');
 await mkdir(directory, { recursive: true });
 const sha256 = (bytes) => createHash('sha256').update(bytes).digest('hex');
-const inputs = [
-  '.go-version',
-  'receiver/go.mod',
-  'receiver/go.sum',
-  'receiver/tests/fixtures/manifest.json',
-  'scripts/receiver.mjs',
-  'scripts/oracle-key-fixtures.mjs',
-  'scripts/check-rec01.mjs',
-  ...(await filesAt(resolve('receiver/internal'))),
-  ...(await filesAt(resolve('receiver/cmd'))),
-  ...(await filesAt(resolve('receiver/vendor'))),
-  ...(await filesAt(resolve('receiver/tests/fixtures/keys'))),
-];
+async function collectInputs() {
+  return [
+    '.go-version',
+    '.gitattributes',
+    'receiver/go.mod',
+    'receiver/go.sum',
+    'receiver/tests/fixtures/manifest.json',
+    'scripts/receiver.mjs',
+    'scripts/oracle-key-fixtures.mjs',
+    'scripts/check-rec01.mjs',
+    'scripts/snapshot-rec01.mjs',
+    'scripts/setup-openssl-ci.mjs',
+    'workflows/foundation.yml',
+    ...(await filesAt(resolve('receiver/internal'))),
+    ...(await filesAt(resolve('receiver/cmd'))),
+    ...(await filesAt(resolve('receiver/vendor'))),
+    ...(await filesAt(resolve('receiver/tests/fixtures/keys'))),
+  ];
+}
+const inputs = await collectInputs();
 const hashes = {};
 for (const file of inputs)
   hashes[relative(process.cwd(), resolve(file)).replaceAll('\\', '/')] = sha256(
@@ -55,7 +62,13 @@ const save = () =>
     JSON.stringify(report, null, 2) + '\n',
   );
 await save();
-async function check(name, executable, args, env = process.env) {
+async function check(
+  name,
+  executable,
+  args,
+  env = process.env,
+  requireEmptyLog = false,
+) {
   const started = Date.now();
   const chunks = [];
   console.log(`REC-01 ${name}...`);
@@ -86,8 +99,29 @@ async function check(name, executable, args, env = process.env) {
   await save();
   if (exitCode !== 0)
     throw new Error(`REC-01 ${name} failed; see synthetic log.`);
+  if (requireEmptyLog && log.toString('utf8').trim())
+    throw new Error(`REC-01 ${name} reported unformatted Go source.`);
 }
 try {
+  const gofmt =
+    goExecutable === 'go'
+      ? 'gofmt'
+      : join(
+          dirname(goExecutable),
+          process.platform === 'win32' ? 'gofmt.exe' : 'gofmt',
+        );
+  await check(
+    'go-format',
+    gofmt,
+    [
+      '-l',
+      ...inputs.filter(
+        (file) => file.endsWith('.go') && !file.includes('vendor'),
+      ),
+    ],
+    goEnv,
+    true,
+  );
   await check('openssl-oracles', process.execPath, [
     'scripts/oracle-key-fixtures.mjs',
   ]);
@@ -120,6 +154,11 @@ try {
       { ...goEnv, GOMAXPROCS: '2', GOMEMLIMIT: '256MiB' },
     );
   // Evidence describes the exact input tree tested, including extra vendor files.
+  if (
+    JSON.stringify([...(await collectInputs())].sort()) !==
+    JSON.stringify([...inputs].sort())
+  )
+    throw new Error('Covered input file set changed during validation.');
   for (const [file, hash] of Object.entries(hashes))
     if (sha256(await readFile(file)) !== hash)
       throw new Error(`Input changed during validation: ${file}`);

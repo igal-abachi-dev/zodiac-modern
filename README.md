@@ -67,6 +67,7 @@ pnpm test
 pnpm test:interop
 pnpm test:receiver
 pnpm verify:receiver-deps
+pnpm check:rec01
 pnpm build:test
 pnpm spike:offline-html
 pnpm test:e2e

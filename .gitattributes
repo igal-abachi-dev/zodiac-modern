@@ -1,0 +1,11 @@
+# Preserve exact source/fixture bytes across Windows and Unix checkouts.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.zip binary
+*.pdf binary
+*.der binary
+*.exe binary
+*.dll binary

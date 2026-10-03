@@ -42,7 +42,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           (Join-Path $pwd '.cache/bootstrap/node_modules/.bin') | Out-File -FilePath $env:GITHUB_PATH -Append
       - name: Prepare both authenticated real OpenSSL oracles
-        run: ./scripts/setup-openssl-ci.ps1
+        run: node scripts/setup-openssl-ci.mjs
       - name: Type, formatting and unit checks
         run: |
           pnpm check
