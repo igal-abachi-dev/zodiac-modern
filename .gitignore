@@ -1,0 +1,103 @@
+# JavaScript dependencies and generated Astro output
+node_modules/
+.pnpm-store/
+.astro/
+dist/
+build/
+.cache/
+
+# Static hosting metadata and local provider state
+.vercel/
+.netlify/
+.wrangler/
+.surge/
+
+# Tests, coverage, generated reports and local process files
+coverage/
+test-results/
+playwright-report/
+blob-report/
+*.tsbuildinfo
+*.test
+*.exe
+*.dll
+*.so
+*.dylib
+*.prof
+*.pid
+*.pid.lock
+*.stackdump
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Compiled Go / optional CI-only .NET harness output
+/receiver/bin/
+/offline-launcher/bin/
+bin/
+obj/
+
+# Local packages, generated release bundles and user exports
+/artifacts/
+/releases/
+/exports/
+/downloads/
+/tmp/
+/temp/
+message.txt
+ciphertext.txt
+zodiac-ciphertext-*.txt
+zodiac-artwork-*.png
+zodiac-artwork-*.svg
+zodiac-artwork-*.pdf
+
+# Environment files and local credential stores
+.env
+.env.*
+!.env.example
+!.env.sample
+.aws/
+credentials.json
+secrets.json
+
+# Key material is excluded by default, including encrypted private keys.
+# Private keys and signing credentials belong outside this repository.
+*.pem
+*.der
+*.key
+*.p8
+*.pk8
+*.pkcs8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.kdbx
+
+# Reviewed public SPKI keys in the specified static-public location only.
+!/public/keys/*-public.pem
+
+# Synthetic test keys may be committed only in these explicit fixture locations.
+# Fixture provenance/fingerprints and release-exclusion checks remain mandatory.
+!/tests/fixtures/keys/*.pem
+!/tests/fixtures/keys/*.der
+!/receiver/tests/fixtures/keys/*.pem
+!/receiver/tests/fixtures/keys/*.der
+
+# Editor and OS-local files; shared VS Code configuration can be committed.
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Keep pnpm-lock.yaml, Go module files, vendor source and reference assets tracked.
+# Do not add blanket ZIP/PNG/SVG/TXT ignores: this repo contains reference assets.
+tamar-recipes-main.zip
