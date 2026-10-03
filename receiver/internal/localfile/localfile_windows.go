@@ -198,7 +198,7 @@ func verifyACL(h windows.Handle, sid *windows.SID) error {
 	}
 	return nil
 }
-func writeWith(ctx context.Context, path string, plain []byte, write func(io.Writer, []byte) error) error {
+func writeWith(ctx context.Context, path string, plain []byte, write func(io.Writer, []byte) error) (result error) {
 	if err := ctx.Err(); err != nil {
 		return err
 	}
@@ -228,7 +228,8 @@ func writeWith(ctx context.Context, path string, plain []byte, write func(io.Wri
 	defer func() {
 		if !committed {
 			disposition := [4]byte{1}
-			windows.SetFileInformationByHandle(h, windows.FileDispositionInfo, &disposition[0], 4)
+			result = errors.Join(result,windows.SetFileInformationByHandle(h, windows.FileDispositionInfo, &disposition[0], 4),f.Close())
+			return
 		}
 		f.Close()
 	}()

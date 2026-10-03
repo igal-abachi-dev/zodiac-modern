@@ -82,8 +82,8 @@ func TestCancelAndFailedWriteRemoveByHandle(t *testing.T) {
 				if err != nil {
 					t.Fatal(err)
 				}
-				b, _ := os.ReadFile(path)
-				if len(b) != 0 {
+			b, readError := os.ReadFile(path)
+			if readError != nil || len(b) != 0 {
 					t.Fatal("empty output changed")
 				}
 				return
