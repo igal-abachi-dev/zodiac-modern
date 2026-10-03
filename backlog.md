@@ -1,0 +1,757 @@
+# Zodiac Modern — delivery backlog
+
+Baseline: 2026-10-03. Specification: [plan.md](plan.md). Contributor rules: [AGENTS.md](AGENTS.md). This backlog tracks future implementation; it does not claim that the app, tests, audit, or deployment already exist.
+
+## 1. Priorities, statuses, and working rules
+
+| Priority | Meaning |
+| --- | --- |
+| P0 | Security/correctness foundation or release blocker; resolve before public use |
+| P1 | Required product behavior/quality; included in the complete first release |
+| P2 | Later improvement, explicitly outside the first release unless re-scoped |
+
+P1 does not mean optional. The user's first release includes default/custom recipients, local browser encryption, a downloadable offline Go decrypt CLI with encrypted key support, symbols, copying, raw recovery, print/image exports, Vercel hosting, pnpm local use, and a smooth repeat-message flow. All required P0/P1 acceptance criteria must pass before M5.
+
+Workflow: **Backlog → Ready → In progress → Review → Verification → Done**. **Blocked** is a temporary status from any active stage; record the blocking dependency, owner, next action, and return stage. **Deferred** applies only to explicitly excluded later work. Failed verification returns to In progress; security review findings reopen affected items. Epic status rolls up from children: Done only when every required child is Done; otherwise show the current active stage or Backlog/Ready.
+
+Definition of Ready: clear scope/AC, dependencies satisfied or usable fixtures documented, chosen implementation approach consistent with the plan, and an independent verification method. Definition of Done: all AC satisfied, relevant tests and production-build checks pass, evidence recorded, no sensitive artifacts introduced, and docs/statuses updated. An unavailable production recipient does not block fixture-based engineering; it blocks production configuration and release.
+
+Use one implementation story at a time per contributor. Do not substitute a passing mock for real WebCrypto/Go interoperability. Do not mark a cryptographic review complete based on automated tests. Subtasks below are Backlog unless marked otherwise; an unchecked box means not completed, not failure. Story acceptance criteria are mandatory even if a subtask is reorganized.
+
+When changing status, append evidence using: `ID | date | status | source commit/files | checks/evidence | reviewer | remaining constraint`. No estimates are promises; milestones express ordering rather than dates.
+
+## 2. Epics and milestones
+
+| Epic | Type | Priority | Status | Milestone | Outcome |
+| --- | --- | --- | --- | --- | --- |
+| E00 | Planning | P0 | Done | M0 | Source review and planning documents |
+| E01 | Enablers | P0 | Ready | M0 | Static scaffold, independent harness, recipient build pipeline |
+| E02 | Crypto | P0 | Backlog | M1 | Exact compatible browser encryption and strict codecs |
+| E03 | Key management | P0 | Backlog | M1 | Safe default/custom public recipients and offline key guide |
+| E04 | Workspace | P1 | Backlog | M2 | Accessible edit/encrypt/result/reset flow |
+| E05 | Symbols/recovery | P1 | Backlog | M3 | Frozen glyph mapping, export-only SVG, raw/transcription recovery |
+| E06 | Exports/sharing | P1 | Backlog | M3 | Complete copy/download/image/print artifacts |
+| E07 | Hardening | P0 | Backlog | M4 | CSP, local-only privacy behavior, clean static artifact |
+| E08 | Verification/review | P0 | Backlog | M4 | Browser/Go, UX/export QA, independent security assessment |
+| E09 | Release | P0 | Backlog | M5 | Real recipient, verified host/offline bundle, custody and rollback |
+| E10 | Later options | P2 | Deferred | Later | Explicitly separate future decisions |
+| E11 | Offline recipient | P0 | Ready | M0/M2/M4 | Early validated/reviewed encrypted PEM loader, authenticated Go CLI decryption, safe outputs and recipient guide |
+
+Critical-path start: `DOC-01 → (EN-01 alongside REC-01) → EN-02 → E02/E03 → E04/REC-02 → E05/E06 → E07/E08 → E09`. REC-01 starts in M0 without frontend/public-key importer dependencies; its real OpenSSL 3.0/3.5 prototype, fuzz/resource/vendor evidence and focused independent review are foundation gates, not deferred M2/release tasks. E07 policy starts during scaffold; E08 tests grow with each story and QA-03 retains the later system review. EN-04 begins file:// feasibility early and completes its full-flow delivery decision before release/review scope is finalized; do not commit to a native sender launcher before that decision. E02/E03/E11 use synthetic fixtures. E09 requires real public configuration, receiver decryption, review, independently verified sender bytes, signed receiver/any selected native launcher and a trusted verification channel.
+
+## 3. Completed planning
+
+### DOC-01 — establish the implementation baseline
+
+Type: enabler · Epic: E00 · Priority: P0 · Status: Done · Dependencies: none.
+
+Acceptance criteria:
+
+- [x] Browser-only user requirements supersede historical backend proposals.
+- [x] Go envelope, key support policy, symbol-copy tradeoffs, threat model, architecture, UX, tests, and release gates are documented in `plan.md`.
+- [x] Epics/stories/subtasks/enablers, priorities, status flow, AC, dependencies, and evidence expectations exist in this backlog.
+- [x] Repository-level `AGENTS.md` gives build contributors concrete security and framework conventions.
+
+Completed subtasks: `DOC-01.1` review source context/Go/reference ZIP/flow diagrams; `DOC-01.2` check primary crypto/framework/clipboard/email/key-format/hosting documentation; `DOC-01.3` write and cross-check planning documents and incorporate feedback and confirmed receiver decisions. Evidence: the three root planning/instruction files; documentation checks cover local links, fences, story metadata, dependencies and five envelope size examples. No application test or security-review status is inferred from this item.
+
+## 4. E01 — implementation enablers
+
+### EN-01 — create the minimal static Astro/Svelte 5 project
+
+Type: enabler · Priority: P0 · Status: Ready · Milestone: M0 · Dependencies: DOC-01.
+
+Acceptance criteria:
+
+- Static Astro output, compatible Astro Svelte integration, Svelte 5 runes, strict TypeScript, formatter, and pinned package manager/lockfile are present; supported engines are verified against official package requirements.
+- The planned directories/routes exist; the browser workspace uses `client:only="svelte"` with a usable static loading/no-JS explanation. No Sanity/React/API/SSR adapter enters dependencies or output.
+- `pnpm check`, `pnpm test`, and `pnpm build` have real documented scripts; fixture/test builds are explicit and separate from production configuration.
+- The original context/Go reference/ZIP remain preserved; local private key files and test artifacts are excluded from release output.
+
+Subtasks:
+
+- [ ] EN-01.1 — verify and pin Node/pnpm/framework versions; initialize minimal packages and lockfile.
+- [ ] EN-01.2 — scaffold Astro layout/routes, Svelte island, CSS tokens, and static explanatory content. for scaffold astro/svelte use standard cli commands from their docs(dont gen the files from memory) so its standard/updated,from that init scaffold our structure,
+- [ ] EN-01.3 — add formatter/type/test/build scripts, `.gitignore`, and a test-only recipient configuration path.
+
+### EN-02 — establish independent crypto fixtures and a Go test harness
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M0 · Dependencies: EN-01, REC-01.
+
+Acceptance criteria:
+
+- Clearly labeled nonproduction RSA-3072 and RSA-4096 fixture pairs and synthetic text/byte cases exist outside the public tree.
+- Consume REC-01's recorded OpenSSL 3.0/3.5 fixture/profile evidence after its foundation gate passes; do not make the loader depend on this harness. The envelope oracle remains independently implemented and exercised.
+- Offline Go harness independently parses/decrypts the exact format and can generate test envelopes. It enforces 32-byte recovered AES material, authentication before output, and the documented canonical decoder wrapper.
+- Real browser WebCrypto test setup exists; RNG/native crypto is not replaced by mocks in compatibility checks.
+- Fixture fingerprints/private keys/test-only decrypt code cannot enter release `dist`; scripts fail on leakage. Harness code is not an online service or an audited receiver claim.
+
+Subtasks:
+
+- [ ] EN-02.1 — create fixture key pairs, profile serialization cases, and multilingual/boundary corpus.
+- [ ] EN-02.2 — implement an isolated Go OAEP/GCM harness using the reference layout plus explicit parsing checks.
+- [ ] EN-02.3 — wire Playwright/interop script to exchange test-only envelopes with the harness; record tool versions.
+
+### EN-03 — validate and generate public recipient build data
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M1 · Dependencies: EN-01, KEY-01.
+
+Acceptance criteria:
+
+- `config/recipient.json` references a public SPKI PEM, recipient name, and independently expected fingerprint. The build generates only public browser data and serves the same PEM as a static download.
+- Production builds fail on missing/invalid/unsupported PEM, missing identity, fingerprint mismatch, or known fixture key; there is no throwaway generation path.
+- Development without a default shows custom-key import; fixture builds use an explicit test configuration and separate output location.
+- No encryption action fetches the PEM at runtime; the default browser fingerprint equals build validation output.
+
+Subtasks:
+
+- [ ] EN-03.1 — implement public config schema and build-time key/fingerprint validator.
+- [ ] EN-03.2 — generate `src/generated/default-recipient.ts` and public PEM consistency checks.
+- [ ] EN-03.3 — test fail-closed production cases and explicit fixture/development modes.
+
+### EN-04 — spike self-contained file:// sender before selecting a launcher
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M1/M4 · Dependencies: EN-01, CRY-01, EXP-01, SYM-02, SEC-01.
+
+Acceptance criteria:
+
+- Early feasibility prototype and final candidate share existing sender/WebCrypto/codecs/export logic; inline all compiled JS/CSS/glyphs/public configuration/offline help in one HTML file. No external ES imports/dynamic chunks/eval/fonts/fetch/adjacent-file or hosted-origin dependency. A normal Astro index.html with asset links is not claimed to be self-contained.
+- Test direct fresh file:// opens in stable Windows Edge/Chrome/Firefox under default security settings, paths with spaces/non-ASCII, recorded versions and blocked external networking. Both RSA sizes/default/custom public imports, exact text/reset, raw download/copy or manual fallback, full SVG, complete/page PNG copy or save fallback, print/raw recovery pass; compare independent Go decryption and exact exported order/count. Optional Safari/mobile support requires separate real-platform evidence.
+- Hash-based CSP meta precedes executable content, forbids connect/worker/object/form/base paths and unsafe-inline/eval, and matches actual inline blocks. Audit runtime/network/storage and absence of imported SVG/private-key code. Document meta-CSP/header limitations; independent review accepts the chosen local boundary without weakening hosted/localhost policies.
+- User verifies the full HTML hash outside the file, before opening, against an independently trusted value. Same-site hashes/self-verified badges are insufficient. Test altered HTML and usable Windows verification instructions. A verified file sender does not require native sender signing; receiver signing remains required.
+- Record compatibility, clipboard/print/save fallbacks, complete-flow usability, artifact size and maintenance cost vs pnpm/launcher. Prefer standalone HTML if required flows/verification/review pass; otherwise document concrete failures and select the signed launcher fallback. Do not disable browser security or decide from a crypto-only demo.
+
+Subtasks:
+
+- [ ] EN-04.1 — prototype a fully inline sender and test secure-context/WebCrypto/file imports under default browsers.
+- [ ] EN-04.2 — package the full sender, verify meta-CSP/export/privacy/clipboard fallbacks and independent-hash UX.
+- [ ] EN-04.3 — record measured selection/support matrix and revise conditional release implementation/review scope.
+
+## 5. E02 — cryptography and canonical data
+
+### CRY-01 — implement the exact hybrid encryption profile
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M1 · Dependencies: EN-02, KEY-01, CRY-02.
+
+As a sender, I can encrypt exact message bytes locally into an envelope decryptable by the independent receiver.
+
+Acceptance criteria:
+
+- Real WebCrypto uses fresh random 32-byte AES material, RSA-OAEP SHA-256/MGF1-SHA-256 with empty label, fresh 12-byte nonce, AES-256-GCM/128-bit tag, and exact AAD `wrappedKey || nonce`.
+- Output is precisely `wrappedKey || nonce || tag || ciphertext`, with assertions for each length and no embedded header/metadata/padding/compression.
+- AES `CryptoKey` is nonextractable; owned raw key/plaintext buffers are cleared in `finally` on success and failure, without claiming guaranteed memory erasure.
+- Browser encryption is independently decrypted byte-for-byte with both fixture key sizes. Wrong key and mutation in every field are rejected without plaintext release.
+- Failures produce no partial result/logged secrets; secure context/capability checks have no fallback crypto.
+
+Subtasks:
+
+- [ ] CRY-01.1 — implement profile constants, typed input/output, CSPRNG and OAEP/AES operations.
+- [ ] CRY-01.2 — implement GCM split/reordering, AAD and envelope assertions, cleanup/error paths.
+- [ ] CRY-01.3 — add real WebCrypto/Go interop and field tamper/wrong-key tests.
+
+### CRY-02 — implement byte-safe canonical Base64URL and envelope codecs
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M1 · Dependencies: EN-02.
+
+As a recipient using external tooling, I receive one canonical text encoding of the exact compatible bytes.
+
+Acceptance criteria:
+
+- Encoding uses only the 64 URL-safe characters, never padding; handles the maximum message size without argument-spread/stack failure.
+- Decoding rejects nonalphabet characters, invalid lengths, nonzero pad bits, and aliases through decode/re-encode equality. No implicit whitespace stripping in the cryptographic parser.
+- Envelope helpers use modulus-derived offsets, require the minimum size, and preserve an empty ciphertext at library level.
+- Length examples pass: 26 bytes → 584 raw characters with RSA-3072 and 755 with RSA-4096; maximum sizes match the plan.
+- Codecs stay pure and independent of UI, network, storage, and third-party crypto packages.
+
+Subtasks:
+
+- [ ] CRY-02.1 — implement chunk-safe bytes/Base64URL transforms and strict canonical validation.
+- [ ] CRY-02.2 — implement envelope split/serialize helpers and length formulas.
+- [ ] CRY-02.3 — test all byte values, boundary lengths, malformed strings/pad-bit aliases, and reference offsets.
+
+### CRY-03 — preserve exact input and local operation lifecycle
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M1/M2 · Dependencies: CRY-01.
+
+As a sender, my exact text is encrypted once, and a canceled or cleared operation cannot restore discarded data.
+
+Acceptance criteria:
+
+- Validate the original JS string for unpaired surrogates before TextEncoder or byte counting; valid emoji pairs pass. Then encode exact UTF-8 without trimming/normalization; cap 65,536 bytes; zero-byte UI input fails and whitespace-only text passes. Tests demonstrate that encoder replacement cannot mask an invalid input.
+- Key/result snapshots and generation IDs prevent duplicate submit, stale completion after clear/reset, and result relabeling after key changes.
+- Success clears the draft; failure retains the draft for retry; explicit discard clears owned state and invalidates pending promises.
+- No plaintext/result/history persistence, URL serialization, console logging, or server-rendered message props exists.
+
+Subtasks:
+
+- [ ] CRY-03.1 — implement UTF-8 byte count/validation and synthetic Unicode edge cases.
+- [ ] CRY-03.2 — implement explicit state transitions, immutable recipient snapshots, and generation IDs.
+- [ ] CRY-03.3 — test double-click, failed encryption, clear-in-flight, key-change, and delayed-resolution races.
+
+## 6. E03 — recipient key handling
+
+### KEY-01 — parse and identify valid public recipients
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M1 · Dependencies: EN-02.
+
+As a sender, I can see precisely which supported public key will receive the message.
+
+Acceptance criteria:
+
+- One RSA SPKI `PUBLIC KEY` PEM with supported 3072/4096-bit modulus and exponent 65537 is accepted; wrong type/size/exponent, PKCS#1, private/certificate/multiple blocks, trailing garbage, and >16 KiB inputs are rejected.
+- Fingerprint is full SHA-256 of canonical SPKI DER and remains stable across LF/CRLF/line wrapping. Build Node and browser fingerprints agree.
+- Errors explain public-format requirements without echoing pasted key contents; a rejected replacement never silently selects another key.
+- Public extraction/canonicalization is separate from nonextractable ephemeral AES policy.
+
+Subtasks:
+
+- [ ] KEY-01.1 — implement PEM block/base64 constraints and native SPKI import validation.
+- [ ] KEY-01.2 — canonicalize public DER and implement fingerprint display/formatting.
+- [ ] KEY-01.3 — test all valid/invalid cases and cross-runtime fingerprint equivalence.
+
+### KEY-02 — implement default and custom recipient selection
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M1/M2 · Dependencies: KEY-01, EN-03, UX-01.
+
+As a sender, I can use the configured recipient or read/paste another recipient's public key locally.
+
+Acceptance criteria:
+
+- Default identity/key size/abbreviated fingerprint are visible; details show the full fingerprint, PEM download, and independent verification guidance.
+- File/paste selection is local and memory-only; inputs are cleared after parsing. Local filename and labels are escaped text and never HTML.
+- Missing/invalid default prevents default encryption but leaves custom import available. Failed replacement preserves the previous validated selection with clear feedback.
+- Key changes are disabled during encryption; changing after completion uses an explicit new-message action and cannot change the old result's recipient metadata.
+- Reset/default restore and reload have the state behavior documented in the plan; no remembered key storage exists.
+
+Subtasks:
+
+- [ ] KEY-02.1 — build recipient summary/details and accessible file/paste controls.
+- [ ] KEY-02.2 — integrate validated selection, missing default, replacement failure, and default restoration.
+- [ ] KEY-02.3 — test recipient snapshot consistency, local-only behavior, and input/focus cleanup.
+
+### KEY-03 — publish offline creation, custody, and rotation guidance
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M2/M4 · Dependencies: KEY-01, REC-02.
+
+As a user, I can create my own recipient pair outside the site and understand how to retain the private half.
+
+Acceptance criteria:
+
+- `/keys/` includes tested encrypted intermediate generation, strengthened final PBES2/PBKDF2-SHA256/AES256-CBC profile (600,000 iterations), and SPKI extraction for 3072/4096 without plaintext private files or command-line passphrases. Each prompt/file/no-overwrite step is explained.
+- Windows instructions link the direct FireDaemon installer, recommend latest patched supported OpenSSL 3.5 LTS after rechecking upstream/vendor advisories, verify expected publisher/hash/architecture, and test the actual executable path in PowerShell. No FIPS claim, stale version pin, or search-ad download guidance.
+- Guide distinguishes public vs private PEM, gives OS-appropriate permission/backup advice, and warns that lost private keys cannot be recovered by the website.
+- Restrict the setup directory/access before generation (Unix umask vs Windows ACL instructions), check no-overwrite paths, use strong temporary/final passphrases and exclude the weaker intermediate from sync/backups. Remove it only after final-key/pair/backup verification; disclose retained-copy/deletion limits and that 600,000 iterations slow guesses rather than prevent brute force.
+- Describes fingerprint verification, encrypted-file/passphrase backup/restore drill, intermediate removal limits, recipient identity, old-key retention, and rotation. The website accepts public keys only; only the verified Go receiver unlocks private keys.
+- Default private-key custody is an operator responsibility outside the repository; docs never request real private material.
+
+Subtasks:
+
+- [ ] KEY-03.1 — write/test offline commands using disposable fixtures; validate emitted public PEM in the app.
+- [ ] KEY-03.2 — document fingerprint derivation, Unix/Windows custody, backups, and rotation examples.
+- [ ] KEY-03.3 — review language against actual product behavior and the default-recipient trust boundary.
+
+## 7. E04 — visual workspace and repeat-message flow
+
+### UX-01 — establish the trusted, responsive visual system
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M2 · Dependencies: EN-01.
+
+As a sender, I get a readable, restrained security workbench with clear labels and recipient information.
+
+Acceptance criteria:
+
+- Apply plan tokens, static header/footer/explanation routes, light-first surfaces, restrained celestial plate styling, and clear primary actions; no fake seals/certifications or copied brand marks.
+- 320 px mobile through desktop layouts and 200% zoom keep controls/text accessible; dark preference, reduced motion, and print variants remain legible.
+- Measured color states meet relevant WCAG AA contrast; controls have visible focus, clear labels, and preferred 44 px targets.
+- Fonts/icons are local; dependencies remain minimal and Svelte 5/CSP-compatible.
+
+Subtasks:
+
+- [ ] UX-01.1 — implement CSS tokens, layout shell, responsive surfaces, and utility icons.
+- [ ] UX-01.2 — build accessible button/notice/dialog/tab/pagination primitives as needed.
+- [ ] UX-01.3 — verify contrast, touch/zoom/reflow/focus, and restrained brand/security copy.
+
+### UX-02 — build message editing, encryption, and failure feedback
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M2 · Dependencies: UX-01, CRY-03, KEY-02.
+
+As a sender, I can type, explicitly encrypt, and understand success or correctable local failure.
+
+Acceptance criteria:
+
+- Exact message textarea, UTF-8 byte counter, recipient summary, input limits, and explicit encrypt action match the plan. Privacy-related input preferences and `dir="auto"` are set.
+- Ctrl/Cmd+Enter submits outside IME composition; Enter inserts a newline. Busy state prevents edits/key switches/duplicate submit without fake timings.
+- Initializing/missing key/unsupported HTTPS-WebCrypto states are actionable and do not offer alternate crypto or backend processing.
+- Success announces completion and focuses the result; crypto failure preserves the draft/key and exposes a retry path without secret logging.
+
+Subtasks:
+
+- [ ] UX-02.1 — wire composer, byte count, capability checks, keyboard shortcuts, and explicit states.
+- [ ] UX-02.2 — integrate local encrypt adapter and success/error/live-region feedback.
+- [ ] UX-02.3 — verify IME, multilingual directionality, errors, keyboard flow, and unsupported environment.
+
+### UX-03 — build results, another-message, and clear-all flows
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M2 · Dependencies: UX-02.
+
+As a sender, I can save the current ciphertext and then begin a clean new message quickly.
+
+Acceptance criteria:
+
+- Result includes immutable recipient snapshot, profile, length/checksum, display/raw views, and clear sharing/export actions; the composer no longer displays the plaintext.
+- Primary actions are Download ciphertext (.txt) and Copy raw; the Artwork (optional) group contains complete/page image, one-line SVG and print. Art-only files cannot be decrypted by the v1 CLI; explain accompanying raw delivery and the absence of an SVG importer.
+- “Encrypt another message” discards old result, retains current public recipient for this tab, focuses empty input, and explains result loss without repetitive modal prompts.
+- “Clear everything” discards sensitive workspace state and custom key, invalidates pending operations, clears inputs, and restores only a valid default.
+- Reload/back-forward-cache behavior is tested; no messages appear in title/URL/history state/storage. Result remains accessible without traversing decorative glyphs.
+
+Subtasks:
+
+- [ ] UX-03.1 — implement result shell, accessible views/summary, and action slots.
+- [ ] UX-03.2 — implement repeat-message/clear-all/pageshow reset and focus handling.
+- [ ] UX-03.3 — test successive messages, busy clear/discard, reload, history navigation, and screen-reader summaries.
+
+## 8. E05 — glyphs and recovery
+
+### SYM-01 — freeze and render the celestial glyph alphabet
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: CRY-02, UX-03.
+
+As a sender, I see a celestial plate that deterministically represents every raw ciphertext character.
+
+Acceptance criteria:
+
+- `S64L1` resolves exactly 64 distinct entries in Base64URL order; verify actual Lucide exports, freeze vector paths/license/provenance, and reject unmapped characters rather than substituting.
+- Visual review addresses similar symbols at screen/print/low resolution; package updates do not change released paths or ordering.
+- 8/16-column live display preserves LTR order, uses at most 1,024 mounted glyphs, and provides complete pagination with range/total labels. Copy/export operates on the full result.
+- Glyphs remain presentation only; accessible raw data/summary and legend exist. Selected archival page positions are independent from responsive grid columns.
+
+Subtasks:
+
+- [ ] SYM-01.1 — resolve the context icon list, freeze vectors/provenance, and add uniqueness/completeness checks.
+- [ ] SYM-01.2 — implement glyph plate, bounded preview pagination, row offsets, and legend.
+- [ ] SYM-01.3 — visually verify symbol distinctness, small-screen order, grayscale, print size, and maximum-result behavior.
+
+### SYM-02 — implement raw and printed-row recovery
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: CRY-02, EXP-04.
+
+As a recipient, I can validate raw ciphertext or assemble printed raw chunks locally before decrypting.
+
+Acceptance criteria:
+
+- `/restore/` accepts raw `.txt`/paste and explicit printed-row transcription; it returns bounded canonical raw (at most 88,102 characters). Presentation whitespace removal is explicit and separate from strict crypto decoding.
+- Check row/page digests with the full S64CHECK1 context; identify the erroneous row/page, require contiguous complete chunks, and check the whole-envelope digest after assembly. Labels and check codes never enter raw ciphertext.
+- Refuse SVG/HTML/images with instructions to obtain the raw `.txt` or transcribe printed raw rows. No XML/SVG parser ships in any v1 product; automatic SVG restoration is FUT-08.
+- Recovery does not request a private key, run decryption, access email, fetch references, or imply OCR support.
+
+Subtasks:
+
+- [ ] SYM-02.1 — implement bounded canonical raw and printed-chunk validation/reassembly.
+- [ ] SYM-02.2 — build the raw recovery island with explicit cleaning, row/page errors, copy/download, and unsupported-format guidance.
+- [ ] SYM-02.3 — test malformed raw, missing/duplicate/wrong rows/pages, checks, and maximum-size recovery without an SVG importer.
+
+## 9. E06 — sharing, images, and print
+
+### EXP-01 — implement exact text copying/downloads and image clipboard support
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: UX-03, CRY-02, EXP-02.
+
+As a sender, I can copy exact recoverable ciphertext and share the glyph appearance through supported clipboard formats.
+
+Acceptance criteria:
+
+- “Copy raw” and raw `.txt` download contain the entire canonical Base64URL and nothing else, including at maximum size. Metadata is separate and contains no plaintext.
+- “Copy artwork image” copies a complete bounded compact-grid PNG from the full result. The 584-character example fits one image despite two print pages; larger results beyond bounds expose “Copy artwork page X of Y.” Raw/.txt remain primary and required; SVG has embedded data but no v1 consumer. Inline SVG email paste is not promised.
+- Secure-context/clipboard feature checks are explicit. Success notices follow resolved writes; denial/unsupported rich formats expose manual text copy and image/SVG download.
+- Plain text and image clipboard representations are not promised to be pasted together by an email client. No automatic message sending, email API, `mailto` payload, or remote image hosting exists.
+- Clipboard checks preserve user activation (precomputed bounded PNG or tested promise-valued ClipboardItem). Unicode symbol-text copying is deferred per the confirmed user choice.
+
+Subtasks:
+
+- [ ] EXP-01.1 — implement raw/metadata Blob downloads and neutral filenames.
+- [ ] EXP-01.2 — implement `ClipboardItem` capability detection, text/PNG copy, feedback, and denial fallbacks.
+- [ ] EXP-01.3 — verify complete payload, user-gesture/permissions behavior, and actual paste outcomes in the chosen browser/email matrix.
+
+### EXP-02 — generate ordered, recoverable SVG and bounded PNG artifacts
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: SYM-01, CRY-02, EXP-04.
+
+As a sender, I can save the same glyph artwork while retaining an exact recovery path.
+
+Acceptance criteria:
+
+- Trusted vector serializer preserves every raw character exactly once, in order; one-line SVG strip and paged plate exports are separate clearly labeled layouts.
+- Complete one-line `S64SVG1` uses frozen local definitions and one deterministic-position `<use>` per raw character, versioned raw metadata and checksum. Serializer tests compare emitted order/metadata to original raw without adding a runtime XML importer. Raw wire bytes remain unchanged; maximum export fits the future 16 MiB cap.
+- Archival pages contain at most 512 symbols with global offsets, page count, profile/key/map/whole-envelope identity, per-page 12-hex check codes, per-row 8-hex check codes, and readable raw chunk recovery text. Final blank cells are not payload; check labels do not enter copied raw.
+- PNG rasterization is local and limited to 4,096 px per dimension/16 megapixels including margins/labels. A complete 32-column compact layout is independent of 512-character archival pagination; 584 glyphs require 19 rows/768×456 px glyph area at 24 px cells. It includes all raw tokens in order/blank final cells, and the artwork/raw-file reminder. Large outputs use truthful selected-page fallback, never clipping or unreadable strip shrinking; the one-line SVG remains one line.
+- Only trusted pinned paths generate output; no untrusted SVG rendering/HTML/`foreignObject`, remote assets, plaintext, or hidden composer state reaches output. URLs/canvases are cleaned up; errors keep raw/SVG save available.
+
+Subtasks:
+
+- [ ] EXP-02.1 — implement shared complete/paged layout, token positions, recovery metadata, and full-envelope/page/row check formatting.
+- [ ] EXP-02.2 — serialize self-contained SVGs and rasterize bounded PNGs from pinned paths.
+- [ ] EXP-02.3 — test strip/page inverse ordering, long-output limits, cleanup/failure, no plaintext, and image visual QA.
+
+### EXP-03 — print/save PDF with complete ciphertext recovery
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: EXP-02.
+
+As a sender, I can print the plate or save a browser PDF without losing data or printing my message.
+
+Acceptance criteria:
+
+- Print-only DOM uses the full immutable result and 512-character archival pages; default scope is all pages. Preview pagination cannot truncate print output.
+- A4/Letter layouts preserve glyph/raw order, header/footer metadata, readable raw chunks, first/middle/final page boundaries, and blank final cells.
+- No plaintext/editor/key-entry UI prints. Page count is disclosed before long jobs; subset output is explicitly labeled partial.
+- Temporary print state is removed after print; cancellation/retry does not destroy current result. “Print dialog opened” does not claim a file was saved.
+- Row/page transcription errors are located using their check codes before reassembly; completed print raw chunks pass whole-envelope checksum and independent decryption using synthetic fixtures.
+
+Subtasks:
+
+- [ ] EXP-03.1 — build print document/scope controls and request-only print lifecycle.
+- [ ] EXP-03.2 — create A4/Letter print CSS and safe page breaks/headers.
+- [ ] EXP-03.3 — render real browser PDFs, inspect representative pages, and verify raw recovery plus cancel/retry behavior.
+
+### EXP-04 — locate page and row transcription errors locally
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: CRY-02.
+
+As a recipient retyping a printed artifact, I can find an incorrect page or row before reassembling the whole envelope.
+
+Acceptance criteria:
+
+- Implement exact `S64CHECK1` JSON-array domain-separated SHA-256 inputs from the plan, using full envelope/fingerprint identity, profile/map, total length, integer page/row indices, offsets, and exact raw chunks. No change to encryption envelope/AAD occurs.
+- Full page/row digests enter metadata; page headers show 12 hex characters and raw rows show 8. Human positions are one-based; schema indices/offsets are zero-based. Labels and whitespace are excluded from raw payload.
+- Whole-envelope checksum is accurately described as final assembly verification, not a page-local check. All public checks are described as accidental-error aids, not authenticity or resistance to an attacker recomputing them.
+- Local restore/transcription mode accepts printed identity/page context and typed rows/check codes, identifies specific failed rows/pages, reports context/order errors, and rejects duplicate/missing/overlapping chunks.
+- A changed row is identified before the rest of the document is present; wrong-page mix, label/context changes, reordered pages, empty/missing chunks, and partial final rows are tested.
+
+Subtasks:
+
+- [ ] EXP-04.1 — implement deterministic page/row digest helpers and nonsecret fixed encoding vectors.
+- [ ] EXP-04.2 — integrate metadata/print labels and local transcription-check form/feedback.
+- [ ] EXP-04.3 — test row/page error localization, final assembly digest, offsets, and exclusion of labels from ciphertext.
+
+## 10. E07 — static security and privacy hardening
+
+### SEC-01 — enforce production CSP and host headers
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4 · Dependencies: EN-01, EXP-01, EXP-03.
+
+Acceptance criteria:
+
+- Exact build emits valid script/style hashes; enforced production policy follows the plan, including `connect-src 'none'`, `object-src 'none'`, restricted local assets, no unsafe-eval/unsafe-inline, and host `frame-ancestors 'none'`.
+- Required referrer/MIME/frame/permission headers are generated for the selected static host. No reliance on CSP meta for unsupported directives.
+- Hydration, all views, import/restore/copy/download/raster/print operate under the same enforced policy with no unexplained CSP errors.
+- Dev HMR policy is isolated; no production runtime dependency on a permissive dev policy or same-origin fetch.
+- Audit production DOM/HTML/SVG/print artifacts for all style attributes and Svelte style/transition directives under `style-src-attr 'none'`; use classes and SVG geometry attributes. Keep `worker-src 'none'` until a measured worker feature explicitly updates policy/tests.
+
+Subtasks:
+
+- [ ] SEC-01.1 — configure version-appropriate Astro CSP and production header generation.
+- [ ] SEC-01.2 — implement a local production preview that serves actual headers for tests.
+- [ ] SEC-01.3 — verify full workflows and artifact/policy synchronization; document host-specific adapter-free settings.
+
+### SEC-02 — prove intended local-only data flow and memory-state behavior
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M4 · Dependencies: UX-03, EXP-01, SYM-02, SEC-01, REC-02.
+
+Acceptance criteria:
+
+- Initial requests are same-origin static assets with no sensitive fields; no remote requests occur while typing/encrypting/importing/restoring/copying/exporting after assets load.
+- Warm the app, block HTTP networking, and complete all supported actions. Inspect logs, URLs/title/history, cookies, local/session storage, IndexedDB, CacheStorage, and service-worker registration.
+- Reload/close/history restore behave as documented; no hidden autosave/result resurrection occurs. Best-effort byte cleanup remains correctly limited in claims.
+- Host analytics/widgets/error collectors/prefetch are absent or explicitly disabled; provider access-log disclosure stays accurate.
+- Receiver unlock/decrypt/output works with network disabled; it has no listener/HTTP client, private material in arguments/env/logs, automatic clipboard/editor, key cache, or partial plaintext on failure. CLI output files are deliberate exports, not application history; the privacy copy makes that distinction.
+
+Subtasks:
+
+- [ ] SEC-02.1 — instrument synthetic browser flows for network/storage/log/URL leakage checks.
+- [ ] SEC-02.2 — test offline-after-load and navigation/reset memory lifecycle.
+- [ ] SEC-02.3 — review delivered bundle/runtime integrations and revise privacy disclosures against observed behavior.
+
+### SEC-03 — verify dependencies, static artifact, and trust copy
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4 · Dependencies: EN-03, SEC-01, KEY-03.
+
+Acceptance criteria:
+
+- Frozen installs/builds succeed; runtime dependencies are minimal and licensed; pinned vector artifacts have provenance and complete notices. Go receiver dependencies are only pinned Go-maintained x/term/x/sys; no third-party crypto/key decoder. Verify authenticated module cache with go mod verify and compare freshly regenerated vendor's full tree/file set/modules.txt with committed vendor; module-cache verification alone is insufficient. Offline -mod=vendor builds use the pinned supported toolchain and unchanged go.mod/go.sum.
+- Hosted artifact check rejects fixture/private PEM, browser/test-only decrypt code, receiver package imports, server functions/API routes, remote runtime resources, secret env names, and sourcemap/telemetry uploads. The supported Go decrypt executable is separately signed/packaged; download links do not expose private material.
+- Security/privacy/about copy states browser processing, selected recipient custody, length leakage, delivered-JS trust, verified offline-release option, lack of sender authentication/forward secrecy/post-quantum security, and review status accurately.
+- Public code-native diagrams match browser processing and current Go API behavior. Historical PNGs/backend claims and the incorrect `rand.Reader` blinding label do not enter public documentation.
+- No unsupported zero-knowledge/IND-CCA2 proof/constant-time/FIPS/government claims appear. Source and build evidence reflect what is actually verified.
+
+Subtasks:
+
+- [ ] SEC-03.1 — implement artifact/dependency/license checks and release input/output separation.
+- [ ] SEC-03.2 — write security/privacy/how-it-works pages and visible recipient/trust facts.
+- [ ] SEC-03.3 — audit generated HTML/bundles/copy for leaks, overstated claims, and stale backend instructions.
+
+### SEC-04 — establish lookalike and delivered-code trust controls
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4/M5 · Dependencies: KEY-03, SEC-03.
+
+Acceptance criteria:
+
+- Document independently trusted official origin, expected Authenticode publisher, exact reviewed artifact hashes and default recipient fingerprint. Same-site hashes/badges/TLS are not described as proof of honest code or recipient identity.
+- Public guidance covers bookmarks, search ads/unsolicited links, expected-publisher verification, recipient confirmation and use of a pinned local sender before sensitive typing when the host is untrusted. Private keys/passphrases never go to the hosted website.
+- Establish operational owners for domain/signing identity, independent verification channel, incident/rotation notice and reviewed-release hashes. A clone can copy all visible page content; controls do not claim to detect every clone automatically.
+- Test altered keys/assets/manifests, wrong publisher/hash, cancel/error paths and instructions with synthetic data. A signed binary proves provenance relative to a trusted identity, not safe code; it needs review too.
+
+Subtasks:
+
+- [ ] SEC-04.1 — specify domain/publisher/hash trust anchors, independent publication and incident ownership.
+- [ ] SEC-04.2 — implement clear verification/download/recipient guidance without fake verified badges.
+- [ ] SEC-04.3 — test substitution/failure paths and record the remaining hosted-plaintext trust gap.
+
+## 11. E08 — integrated quality and independent review
+
+### QA-01 — run the full browser/Go compatibility and attack-regression matrix
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4 · Dependencies: CRY-01, CRY-02, CRY-03, KEY-01, SYM-02, REC-02.
+
+Acceptance criteria:
+
+- Chromium/Firefox/WebKit encryptions with both RSA sizes decrypt using the actual shipping CLI and independent oracle; Go test envelopes decrypt in test-only browser code. Compare exact bytes, not random ciphertext equality. Do not replace independence with two callers of the same library.
+- Full multilingual/boundary corpus, repeated input, canonical Base64URL, wrong key, every field mutation/truncation, spliced key/nonce, malformed RSA recovery length, and parser negatives pass.
+- Fixed public serialization/known-answer cases supplement randomized tests; no browser native crypto mocks are used as proof of compatibility.
+- Regression suite runs in CI with recorded versions and synthetic data only; failures block release.
+- Re-run REC-01's real OpenSSL 3.0/3.5 fixture/profile/oracle matrix, parser/KDF bounds and pre/post-KDF fuzz regressions against the integrated receiver; terminal cancellation, safe outputs, fingerprint agreement and CLI error categories pass. Synthetic malformed OAEP payloads recovering 16/24/31/33 bytes fail the fixed 32-byte suite even if AES otherwise accepts the size.
+
+Subtasks:
+
+- [ ] QA-01.1 — complete browser/Go positive and reverse-direction matrix.
+- [ ] QA-01.2 — complete tampering/canonicalization/input/key-validation matrix and isolate cleanup/error-path checks.
+- [ ] QA-01.3 — publish CI evidence, tool versions, fixture designation, and unresolved compatibility limits.
+
+### QA-02 — verify accessibility, exports, performance, and email paste behavior
+
+Type: enabler · Priority: P1 · Status: Backlog · Milestone: M4 · Dependencies: UX-03, SYM-01, EXP-01, EXP-02, EXP-03, SEC-02, REC-03.
+
+Acceptance criteria:
+
+- Keyboard/manual screen reader and automated accessibility checks cover forms/views/dialogs/live regions/focus; contrast/reflow/RTL/plaintext/LTR ciphertext/reduced motion pass.
+- SVG/PNG/PDF visual QA covers short, partial-final, and long paginated outputs. Every exported raw chunk round-trips; page/row check codes identify synthetic transcription mistakes before full reassembly; no plaintext/clipping/omission exists.
+- Recorded hardware/browser measurements assess ≤200 KiB initial compressed JS, encryption/result targets, ≤1,024 mounted glyphs, canvas limits, and UI long tasks; misses are resolved or explicitly reviewed before release.
+- Actual email paste tests cover supported browser targets and selected Gmail/Outlook/Apple Mail clients using disposable synthetic data only. Record whether image/source/HTML/plain-text representations survive; unsupported SVG/email cases have explicit fallback guidance.
+- Any rich-email convenience feature is not marked supported merely because its HTML renders in a local browser. No live email is sent through agent tools without explicit authorization.
+- Five representative nontechnical recipients trial the supported Windows guide; after setup at least four decrypt one synthetic message with one copied command without assistance. Paths with spaces, wrong key/password, tampering and existing output files produce corrective guidance; no private key is uploaded. Record failures and improve UX before release.
+
+Subtasks:
+
+- [ ] QA-02.1 — conduct a11y/responsive/manual focus and assistive-technology checks.
+- [ ] QA-02.2 — render/inspect export artifacts and measure performance on recorded reference devices.
+- [ ] QA-02.3 — perform synthetic clipboard/email-client compatibility checks and document supported/fallback sharing paths.
+
+### QA-03 — obtain and disposition an independent security review
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4/M5 · Dependencies: QA-01, SEC-01, SEC-02, SEC-03, SEC-04, REC-01, EN-04.
+
+Acceptance criteria:
+
+- Qualified review includes composition/IND-CCA2 objective, encodings, Go receiver/terminal/output/keyfile/KDF bounds, custody/identity, delivered-JS trust, independent release verification and signing, plus the EN-04 selected file:// CSP/runtime boundary or native launcher. SVG import is excluded from v1 and receives a separate FUT-08 review.
+- Reviewer findings/severity/scope/limitations are recorded; all critical/high findings are fixed and independently rechecked. Tests and implementation self-review are not relabeled as independent review.
+- Formal security wording follows the actual assessment; absence of review prevents reviewed/verified IND-CCA2 marketing claims and keeps the public release gate open.
+- No real production private key or user plaintext is given to the reviewer through this project.
+
+Subtasks:
+
+- [ ] QA-03.1 — prepare profile/threat model/test evidence/source package and choose a reviewer with appropriate scope.
+- [ ] QA-03.2 — record assessment/findings and create linked fix tasks for every required remediation.
+- [ ] QA-03.3 — verify remediations, review permitted claims, and publish an accurate review status.
+
+## 12. E09 — production release and operations
+
+### REL-01 — provision the real public recipient and complete custody verification
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M5 · Dependencies: KEY-03, EN-03, QA-01, REC-03.
+
+External input: operator supplies only the production **public** PEM, recipient identity, and independently confirmed full fingerprint. These inputs are not present at this planning baseline; do not invent them.
+
+Acceptance criteria:
+
+- Valid real recipient config builds without fixtures/fallback; name/fingerprint in served PEM, generated app, key details, and artifacts agree.
+- Encrypted private key/passphrase custody stays outside repo/build/host; intended recipient verifies the key pair and decrypts a synthetic production envelope using the shipping CLI, including encrypted-backup restoration. Record nonsecret confirmation only.
+- Independent fingerprint publication/verification and tested recovery/rotation procedure exist; old-key retention policy is recorded.
+- Build validator rejects missing/mismatched/test key config and never starts a throwaway pair.
+
+Subtasks:
+
+- [ ] REL-01.1 — document public input handoff and independently verify recipient identity/fingerprint.
+- [ ] REL-01.2 — install only public configuration and run the production build/consistency checks.
+- [ ] REL-01.3 — have the recipient verify offline decryption/custody/rotation using synthetic data and record nonsecret evidence.
+
+### REL-02 — publish the verified static artifact and exercise rollback
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M5 · Dependencies: REL-01, REL-03, REL-04, QA-02, QA-03, SEC-03.
+
+As a user, I can access a stable HTTPS site whose deployed behavior matches the reviewed release.
+
+Acceptance criteria:
+
+- Deploy the static release to Vercel first with generated security headers; no Astro runtime adapter, API/functions/secrets, analytics or remote injected resources. Document Cloudflare Pages/Netlify alternatives and Surge limitations from REL-04.
+- Final-origin HTTPS/CSP/MIME/referrer/frame/permission headers and complete smoke flow are checked, including local encryption, custom key, copy/export/restore, and missing-key failure.
+- Deployment evidence identifies source commit/build checksums/versions and key fingerprint; source/license/security/privacy/deployment/offline guides are linked and accurate. Hosted and local application assets match the reviewed release.
+- Prior known-good artifact/config can be restored; rotation rollback does not discard private custody or mislabel existing ciphertext. Public release occurs only after all required P0/P1 AC and launch gates pass.
+
+Subtasks:
+
+- [ ] REL-02.1 — choose provider/domain, document header/cache/TLS setup, and prepare deployable artifact.
+- [ ] REL-02.2 — deploy within the user's authorized scope and verify final-origin behavior/headers/data flow.
+- [ ] REL-02.3 — exercise artifact rollback and record release manifest, remaining limits, and maintenance ownership.
+
+### REL-03 — verify and distribute the selected offline sender and signed Go decrypt CLI
+
+Type: enabler · Priority: P0 · Status: Backlog · Milestone: M5 · Dependencies: REL-01, QA-03, SEC-03, SEC-04, REC-02, EN-04.
+
+As a user concerned about mutable hosted code, I can independently verify a pinned release and run its reviewed assets locally without automatic updates.
+
+Acceptance criteria:
+
+- Package the EN-04 selected sender (self-contained HTML preferred if it passes; native launcher only if justified), separately signed Go receiver, public configuration/licenses/versions/instructions and per-file SHA-256 manifest. Publish final ZIP, selected HTML and receiver hashes independently; sign native files before hashing, exclude manifest self-hash. Pnpm source use remains supported in either case.
+- Expected Authenticode publisher and exact reviewed hashes are independently trusted before execution. Signing credentials/rotation are managed outside repo/build inputs and separate from recipient keys. Missing signing/trust inputs leave this gate open; no OS-warning bypass advice or unproven reproducibility claim.
+- If standalone HTML is selected, verify its full hash outside the file before opening; ship documented tested browsers/meta-CSP limits/fallbacks and no native sender/signing/server dependency. If a launcher is selected, sign it, pin the asset manifest, confine loopback Host/paths/GET-HEAD/MIME/security headers, reject mismatches and provide Quit/no admin. No private-key/message/decrypt API or receiver imports/listener in either path. Node helper supports pnpm local source use.
+- With external networking blocked, fresh local sender load/reload/default/custom/encrypt/export/raw-recovery and CLI unlock/decryption work. No updater/service worker/remote asset/key change; disclose unrelated OS signature/reputation networking during installation.
+- Test altered ZIP/HTML/manifest/assets, wrong applicable publisher/hash, output permissions, fingerprints and rollback; traversal/reparse/Host/method attacks apply if a launcher ships. Independent hash or signed origin does not prove safe code or an uncompromised device.
+
+Subtasks:
+
+- [ ] REL-03.1 — package/sign controlled binaries, manifests and separate hashes; establish expected publisher and trusted review channel.
+- [ ] REL-03.2 — productionize the EN-04 selected sender; implement/sign a confined static launcher only if that path is selected. Otherwise record the native-launcher subtask as not applicable with decision evidence.
+- [ ] REL-03.3 — test fresh offline sender/CLI flows, signature/tamper checks and rollback; publish accurate versioned evidence.
+
+### REL-04 — support Vercel deployment, alternative hosts and pnpm local use
+
+Type: enabler · Priority: P1 · Status: Backlog · Milestone: M4/M5 · Dependencies: EN-01, EN-03, SEC-01.
+
+Acceptance criteria:
+
+- Primary Vercel configuration uses static Astro, frozen pnpm install, `pnpm build`, `dist` and static Build Output API config/headers generated from exact artifact hashes after building. Do not rely on mutating root vercel.json after provider config evaluation or deploying stale hashes. No SSR adapter/functions/API or production analytics/toolbar injection.
+- Document equivalent Cloudflare Pages and Netlify static builds with generated `_headers` from the same policy source. Validate syntax/header limits and actual final-origin CSP/frame/MIME/referrer/permissions/cache behavior before marking a provider supported.
+- Surge is optional/conditional: verify current HTTPS and arbitrary header support for the actual account/config. If required headers cannot be enforced, label it unsupported for the hardened release; do not imply CSP meta provides `frame-ancestors`. A proxy adding headers is a separate documented deployment choice.
+- README/local guide supports verified source checkout, supported Node/pinned pnpm, frozen install, `pnpm dev` for development, and `pnpm build` plus `pnpm start:local` for actual built sender with enforced headers and loopback binding. `pnpm local` combines the latter; no Go/OpenSSL needed to run encryption.
+- Explicit custom-key-only local mode can run without production public configuration and visibly has no default recipient. Production Vercel builds still fail on missing/mismatched/test defaults. Never generate a throwaway key, expose LAN by default, or relax production CSP for HMR.
+- Test Windows paths with spaces, fresh clone/install/build, local browser reload and no message API. Install/build may fetch dependencies; once installed/built the local sender needs no external networking. Source builds require trusted code/dependencies; locality alone is not verification.
+
+Subtasks:
+
+- [ ] REL-04.1 — implement one policy source and Vercel/Pages/Netlify output/config, and document Surge eligibility.
+- [ ] REL-04.2 — implement/document pnpm dev/build/start:local/local/custom-only modes with secure loopback serving.
+- [ ] REL-04.3 — verify primary final origin, chosen alternatives, clean local setup and correct missing-key policy.
+
+## 13. E11 — supported offline Go recipient
+
+### REC-01 — implement and validate encrypted-PKCS#8 key loading early
+
+Type: enabler · Priority: P0 · Status: Ready · Milestone: M0 · Dependencies: DOC-01.
+
+Execution order: first establish the real OpenSSL 3.0/3.5 fixture/oracle baseline from REC-01.3, then prototype REC-01.1 against it, complete the negative/fuzz/resource evidence, integrate REC-01.2, and obtain the focused independent loader review. Start alongside EN-01; no dependency on Astro, EN-02's envelope harness, KEY-01's browser importer or production custody. Ready means the approach and synthetic work are authorized; nothing is implemented or verified yet.
+
+Acceptance criteria:
+
+- Implement repository-owned `receiver/internal/keyfile/pbes2.go` using Go standard-library primitives/parser and a single fixed profile. This supersedes decoder selection and the old ban on handwritten PBES2 integration. No third-party decoder, algorithm registry, custom crypto/KDF/TLV parser, legacy DecryptPEMBlock, plaintext/legacy fallback or OpenSSL runtime subprocess. Pin a currently supported patched Go toolchain with the Go 1.24+ crypto/pbkdf2 API; a 150-line estimate is not a security gate.
+- Before wider interop/UI work, build and record the prototype against actual isolated OpenSSL 3.0 and 3.5 executables, both RSA sizes, recording versions/providers/generator commands, fixture hashes/public fingerprints and decoded profile fields. Record expected rejection separately from successful import. OpenSSL 3.0 lacks the 3.5 CLI salt-length option; do not silently accept a sub-16-byte salt. Test supported 3.5 output with explicit -saltlen 16 and 3.0-origin keys rewrapped by 3.5 with unchanged public halves and no plaintext intermediate. Testing the older branch is not a user recommendation to install it.
+- Accept one `ENCRYPTED PRIVATE KEY` PEM, capped at 16 KiB before parsing, with no PEM headers, extra blocks or non-whitespace prefix/suffix. Require PBES2 (`1.2.840.113549.1.5.13`), PBKDF2 (`1.2.840.113549.1.5.12`), explicit HMAC-SHA256 PRF (`1.2.840.113549.2.9`) with NULL parameters, and AES256-CBC (`2.16.840.1.101.3.4.1.42`). Salt is a primitive 16–64-byte OCTET STRING, iterations 600,000–2,000,000, IV exactly 16, key length absent or explicitly 32, ciphertext nonempty/bounded/divisible by 16. Reject default/SHA1 PRF and explicit zero key length.
+- Separate bounded parse/policy validation from KDF/unlock. Check exact nested SEQUENCE fields, class/tag/constructedness/order, parameter presence and full consumption with encoding/asn1 RawValue; empty outer rest alone cannot catch ignored extra struct fields. Reject unknown/duplicate/trailing members, otherSource salt, overflow/negative integers and hostile lengths before costly derivation/CBC; no panic/unbounded recursion/allocation.
+- Use `pbkdf2.Key(sha256.New, string(passphraseBytes), salt, iterations, 32)` and handle its error, then native AES/CBC. Scan all 16 final-block bytes uniformly for PKCS#7 length/value validity before parsing. Check complete fixed version-0 RSA-NULL PKCS#8 and two-prime PKCS#1 structure without trailing/unexpected fields, then call x509.ParsePKCS8PrivateKey; require *rsa.PrivateKey, exactly two primes, e=65537, 3072/4096 modulus bits and Validate success. Derive the actual canonical SPKI fingerprint.
+- Prompt through a controlling terminal without echo using pinned/vendor-reviewed x/term and its Go-maintained x/sys dependency (also allowed for Windows ACLs); no secret argv/env/piped stdin/history/logs. Accept at most 1,024 password bytes, cancel safely and restore terminal; missing terminal is an actionable refusal. Clear owned passphrase bytes, derived key and entire decrypted allocation on all paths. Native PBKDF2 needs an immutable password string; string/internal/key-integer/OS copies cannot be guaranteed erased. Do not add unsafe string conversions or a custom KDF.
+- Every key format/profile/password/padding/inner-key validation failure has the same local unlock message/exit 3. CBC has no MAC; successful padding/parse/Validate is not authenticated key-container encryption. No remote unlock service, guaranteed erasure, audited-glue or whole-program constant-time claim. Keep ciphertext/usage and I/O errors in their existing categories.
+- Mandatory differential tests use the recorded OpenSSL 3.0/3.5 pkcs8 -topk8 fixtures and pkcs8 -in as local oracles for both key sizes, comparing canonical public halves. Include all valid profile boundaries, wrong passwords, all padding lengths 1–16/corrupt bytes, invalid/multi-prime keys and hostile schema inputs. Fuzz pre-KDF parsing with a test-only KDF stub/counter, plus bounded post-KDF CBC/padding/inner parsing; seed SHA1/absent PRF, omitted/invalid PRF parameters, 10^9/negative/overflow iterations, 1 MiB salt/file, IV lengths, explicit zero/wrong key length, trailing bytes/extra nested members and adversarial lengths. Unsupported inputs never invoke real PBKDF2. Independent review covers the owned loader and tests.
+- youmark/pkcs8 and .NET runtime source are read-only references with inspected commit provenance; neither is a production dependency. Do not copy broader algorithms/permissive defaults. Optional CI-only .NET oracle uses decoded DER, identical password bytes and a full bytesRead check, not out _. Pin/vendor Go-maintained modules; local go mod verify, complete regenerated-vendor comparison and offline builds pass here in M0; SEC-03 later re-runs these checks on the integrated artifact, without blocking the initial loader work.
+- REC-01 and M0 cannot become Done without real fixture/oracle, strict negative corpus, recorded pre/post-KDF fuzz runs/resource bounds, measured KDF latency, vendor integrity and focused independent review with fixes verified. These gates are non-negotiable; no postponing them to M2, mock substitution or schedule waiver. Maintain CI regression evidence and re-open affected gates after loader/policy/toolchain changes; QA-03 later covers the integrated system without replacing the early review.
+
+Subtasks:
+
+- [ ] REC-01.1 — implement keyfile/pbes2.go using the Go standard library, with youmark/pkcs8 and the .NET runtime source as read-only references.
+- [ ] REC-01.2 — integrate bounded hidden prompt/cancellation, cleanup/error mapping, RSA validation and fingerprint derivation; pin/vendor x/term/x/sys with provenance and full vendor verification.
+- [ ] REC-01.3 — start with real OpenSSL 3.0/3.5 fixture/oracle generation before the loader prototype, then test/fuzz pre-KDF and post-KDF hostile cases, record latency/resource/corpus evidence, and obtain independent loader review before M0 closes.
+
+### REC-02 — implement authenticated offline decryption and safe plaintext output
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M2 · Dependencies: REC-01, CRY-02, CRY-01.
+
+As a recipient, I decrypt a received raw text file with one command, keeping my private key/passphrase local.
+
+Acceptance criteria:
+
+- `zodiac-decrypt decrypt --key <encrypted.pem> --in <ciphertext.txt> --out <new-message.txt>` uses only file paths in arguments and the hidden local prompt. No CLI encryption/keygen feature, server/listener, network, updater, browser receiver, key cache or telemetry.
+- Adapt reference_impl.go.md envelope split/OAEP/AAD/tag-recombine/GCM logic while removing all server/CORS/env/fallback initialization. Enforce canonical raw/size limits and exactly 32 recovered AES bytes. Do not copy unchecked synthetic RNG or incorrect timing/blinding claims; tests exercise real native crypto.
+- Authenticate before any plaintext release/file creation; identical generic message failure/exit 4 for wrong key/OAEP/GCM. Input/usage, local key unlock and I/O have documented separate corrective categories without secret diagnostics or timing promises.
+- Require valid UTF-8 and preserve exact authenticated bytes, including empty crypto-level messages and terminal control characters. No automatic terminal/stdout/clipboard/editor output. Use exclusive new-file creation only after authentication, private Windows ACLs/POSIX permissions as appropriate, reject symlink/reparse redirection/existing paths, and remove partial output on write failure.
+- Clear owned AES/passphrase/DER/plaintext buffers and release private state best effort on success/failure/cancel. Tests cover tampering/length/aliases, output permissions/races/write failure/cancel, no secret logs and offline execution. No claim that Go heap/key integers/OS paging or exported files are securely erased.
+
+Subtasks:
+
+- [ ] REC-02.1 — extract corrected compatible Go decrypt core and CLI command/error contracts.
+- [ ] REC-02.2 — implement authenticated output creation, Windows permissions, safe paths/cancellation and cleanup.
+- [ ] REC-02.3 — run real browser/CLI and independent oracle regressions, tampering and output-lifecycle checks.
+
+### REC-03 — document and prove recipient readiness
+
+Type: story · Priority: P1 · Status: Backlog · Milestone: M2/M4 · Dependencies: REC-02, KEY-03, UX-01.
+
+As a nontechnical recipient, I know which verified executable/key/files to use and can recover a real test message.
+
+Acceptance criteria:
+
+- `verify-key --key <encrypted.pem> --public <public.pem>` unlocks locally, compares actual canonical public halves/fingerprints and returns nonsecret identity/size only. Wrong pairs fail; no default-key substitution or network identity lookup.
+- `/receive/` is static instructions/download links only. Include independently verified publisher/hash steps, exact PowerShell command with quoted paths, architecture/version, filenames/headers, passphrase prompts, success/output location and actionable wrong-file/password/tamper/existing-output guidance. No request to paste private contents into the site/support.
+- A guided nonsecret sender→CLI round trip and encrypted backup restoration confirm recipient readiness through the existing trusted channel. Production setup must pass it; encryption/checksums alone do not prove private-key possession or sender identity.
+- One-command decryption usability is tested in QA-02. The guide is accessible and explicitly acknowledges CLI friction and plaintext-file persistence; no OpenSSL/manual cryptographic steps per message.
+
+Subtasks:
+
+- [ ] REC-03.1 — implement verify-key and exact browser/CLI fingerprint comparison tests.
+- [ ] REC-03.2 — write accessible receive/setup/download/error and encrypted-backup guides with disposable examples.
+- [ ] REC-03.3 — perform synthetic readiness/restoration/usability trials and improve failed steps.
+
+## 14. E10 — explicitly deferred decisions
+
+| ID | Type | Priority | Status | Scope and entry condition |
+| --- | --- | --- | --- | --- |
+| FUT-01 | Enabler | P2 | Deferred | Browser RSA generation/private export: separate explicit request, custody/erasure review, user-controlled backup UX; never silently add to import flow |
+| FUT-02 | Enabler | P2 | Deferred | HPKE/post-quantum/signatures/padding/commitment: separately versioned protocol and receiver/interoperability/security assessment |
+| FUT-03 | Story | P2 | Deferred | Image OCR/QR recovery: validated error handling/capacity; existing raw recovery stays available |
+| FUT-04 | Enabler | P2 | Deferred | Worker/PWA/service-worker installation: separate from the required verified localhost ZIP; justify from measured performance or new requirements and update policy/privacy tests |
+| FUT-05 | Story | P2 | Deferred | Additional languages, broader RSA sizes, custom glyph skins: validate accessibility/key performance and preserve released map/profile semantics |
+| FUT-06 | Story | P2 | Deferred | Rich inline SVG/HTML email copy: enable only for tested client combinations; never replace a recoverable raw/SVG attachment path |
+| FUT-07 | Story | P2 | Deferred | Unicode symbol-string sharing: only on later request; explain changed font appearance and define a separately frozen reversible alphabet |
+| FUT-09 | Enabler | P2 | Deferred | Browser receiver/encrypted-PEM import or native receiver GUI: new explicit scope and importer/key-custody/security assessment; v1 receiver is the confirmed Go CLI |
+
+### FUT-08 — restore app-produced SVG only after fuzzing and review
+
+Type: story · Priority: P2 · Status: Deferred · Milestone: v1.1 · Dependencies: EXP-02, SYM-02, QA-03.
+
+Acceptance criteria:
+
+- Add a separately specified strict inert grammar for known S64SVG1 strip/page exports, cap each file at 16 MiB/recovered raw at 88,102, and validate pinned paths/IDs/counts/coordinates/metadata/checks and complete nonoverlapping page coverage. Never render/execute imports or fetch references.
+- Reject DOCTYPE/entities/parser errors, script/foreignObject/style/animation/filter/image, event attributes, foreign namespaces/external URLs and all out-of-grammar elements/attributes. Token order determines raw; metadata cannot override it. No regex-only extraction shortcut.
+- Property-based generation/mutation plus coverage-guided parser fuzzing include depth/size/resource limits, namespaces/entities/duplicate IDs/path encodings/transforms/order/count and parser differential corpus. Demonstrate zero induced execution/networking, fail closed on inconsistencies and localize page/row errors.
+- Independent security review with no unresolved critical/high parser findings precedes enabling SVG import. Existing v1 raw recovery remains available; this task is not an M5 dependency.
+
+Subtasks:
+
+- [ ] FUT-08.1 — define allowlist/normalization/resource contract and implement an isolated inert parser.
+- [ ] FUT-08.2 — build property-based/coverage fuzz harness and hostile/differential corpus.
+- [ ] FUT-08.3 — obtain independent parser review, recheck fixes and release as an explicit v1.1 feature.
+
+Deferred items do not block M5 and have no implied authorization to change the compatible envelope, private-key policy, or message persistence.
+
+## 15. Initial evidence and open gates
+
+| Item | Current evidence / next action |
+| --- | --- |
+| Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
+| Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. Application/loader/spike checks not run because implementation has not started |
+| Engineering | Not started; EN-01 and REC-01 are Ready for independent M0 starts; REC-01's foundation evidence gates EN-02 and cannot wait for M2 |
+| Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; download every glyph in a reversible one-line SVG; Unicode symbol strings deferred |
+| Production recipient | Public PEM/name/full fingerprint needed for REL-01; fixture-based engineering can proceed |
+| Host/domain | Vercel primary; Cloudflare Pages/Netlify alternatives, Surge conditional on verified header support; exact domain/account pending (REL-04/REL-02) |
+| Independent review | Not obtained; QA-03 remains a required gate |
+| Review feedback | EN-04 file:// spike/conditional launcher; raw-primary vs optional artwork/no v1 SVG consumer; complete compact PNG distinct from archival pages; REC-01 owned fixed-profile stdlib loader replaces third-party decoder selection, with youmark/pkcs8/.NET read-only references and strict parsing/fuzz/vendor gates |
+| Offline artifact trust | Independent artifact hash/reviewer channel needed for REL-03; hashing and locality do not by themselves establish code trust |
+| Receiver decision | Confirmed: browser encryption plus downloadable offline Go decrypt CLI, encrypted OpenSSL keys and hidden prompt; supersedes the earlier offline-browser selection |
+| Receiver/signing gates | Fixed-profile stdlib loader confirmed and promoted to M0 critical path; real OpenSSL 3.0/3.5 prototype/oracle/fuzz/resource/vendor/focused-review evidence (REC-01), expected Authenticode publisher/credentials and independent release channel (SEC-04/REL-03) remain pending |
+| Offline sender decision | EN-04 planned, not executed: prefer tested independently verified self-contained HTML; native sender launcher/signing is conditional fallback, not a settled requirement |
+| Local repo use | Required pnpm dev/build/start:local/local paths, frozen install and explicit custom-only mode planned in REL-04; no implementation exists yet |
+| Security claim | Design objective only; no proof/certification/audit/production validation claimed |
