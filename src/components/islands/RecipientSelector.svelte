@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, tick } from 'svelte';
+  import { onMount, tick, untrack } from 'svelte';
   import {
     importPublicKey,
     MAX_PUBLIC_PEM_BYTES,
@@ -12,10 +12,12 @@
   let {
     recipient = null,
     disabled = false,
+    resetVersion = 0,
     onselection,
   }: {
     recipient?: PublicRecipientData | null;
     disabled?: boolean;
+    resetVersion?: number;
     onselection?: (value: SelectedRecipient | null) => void;
   } = $props();
   let selected = $state<SelectedRecipient | null>(null);
@@ -29,6 +31,31 @@
   let pasteInput: HTMLTextAreaElement;
   let generation = 0;
   const locked = $derived(disabled || busy);
+  let seenReset = untrack(() => resetVersion);
+  $effect(() => {
+    const version = resetVersion;
+    if (version === seenReset) return;
+    seenReset = version;
+    untrack(() => {
+      generation++;
+      busy = false;
+      paste = '';
+      error = '';
+      showDetails = false;
+      if (fileInput) fileInput.value = '';
+      selected = defaultSelection;
+      onselection?.(selected);
+      notice = selected
+        ? 'Configured recipient restored.'
+        : 'Recipient cleared. Choose a public key.';
+      if (!selected && recipient)
+        void importSelection(
+          async () => recipient!.pem,
+          { name: recipient.name, source: recipient.source },
+          recipient.fingerprint,
+        );
+    });
+  });
 
   onMount(() => {
     const configured = recipient;

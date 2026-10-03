@@ -12,14 +12,14 @@ import { defaultRecipient } from '../generated/default-recipient';
     Celestial form.
   </h1>
   <p>
-    Zodiac Modern is being built to encrypt messages in your browser and export
-    raw ciphertext with optional artwork. The recipient will decrypt with a
-    separate offline tool.
+    Encrypt exact message bytes locally in your browser and download raw
+    ciphertext. The recipient decrypts with a separate offline tool. Optional
+    artwork is in development.
   </p>
   <EncryptWorkbench client:only="svelte" recipient={defaultRecipient}>
     <div slot="fallback" class="panel">
-      The sender requires JavaScript and native WebCrypto. This development
-      scaffold does not yet encrypt messages.
+      The sender requires JavaScript, native WebCrypto and HTTPS or loopback.
+      This development build is for synthetic messages only.
     </div>
   </EncryptWorkbench>
 </Layout>

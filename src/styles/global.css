@@ -72,9 +72,10 @@ button {
   border: 1px solid var(--color-accent);
   border-radius: 0.5rem;
   padding: 0.6rem 1rem;
-  color: var(--color-bg);
+  color: var(--color-on-accent);
   background: var(--color-accent);
   cursor: pointer;
+  min-height: 44px;
 }
 button:disabled {
   cursor: not-allowed;
@@ -110,4 +111,32 @@ textarea {
 }
 .fingerprint {
   overflow-wrap: anywhere;
+}
+input {
+  min-height: 44px;
+}
+label {
+  display: block;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto;
+    animation: none;
+    transition: none;
+  }
+}
+@media print {
+  header nav,
+  button,
+  input[type='file'] {
+    display: none;
+  }
+  main {
+    padding-block: 0;
+  }
+  .panel {
+    border-radius: 0;
+  }
 }

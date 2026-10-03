@@ -15,8 +15,12 @@ import Layout from '../layouts/Layout.astro';
     instructions and receiver readiness checks are pending.
   </p>
   <p>
-    For portable Windows key setup, choose a long random passphrase using ASCII
-    characters. Non-ASCII bytes can differ between OpenSSL's interactive console
+    For portable Windows key setup, generate a random 24–32 character ASCII
+    passphrase with a trusted local password manager or cryptographic random
+    generator. Eight characters is too weak. Length alone does not establish
+    entropy: predictable phrases and patterns remain guessable. Use independent
+    temporary and final passphrases and retain a protected backup outside the
+    key file. Non-ASCII bytes can differ between OpenSSL's interactive console
     and the receiver; that interactive compatibility has not yet been tested.
     UTF-8 synthetic file fixtures passing does not establish console
     compatibility.

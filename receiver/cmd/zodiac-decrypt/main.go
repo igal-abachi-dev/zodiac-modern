@@ -1,5 +1,5 @@
-// The M0 receiver currently exposes key verification only. Authenticated message
-// decryption and exclusive private output belong to REC-02 and are not enabled.
+// Offline receiver. Plaintext is written only to a new private local disk file,
+// after authentication. No listener, secret arguments or plaintext stdout.
 package main
 
 import (
@@ -16,7 +16,9 @@ import (
 	"os/signal"
 	"runtime"
 	"zodiac-modern/receiver/internal/cli"
+	"zodiac-modern/receiver/internal/envelope"
 	"zodiac-modern/receiver/internal/keyfile"
+	"zodiac-modern/receiver/internal/localfile"
 )
 
 func main() { os.Exit(run(os.Args[1:])) }
@@ -25,15 +27,18 @@ func run(args []string) int {
 }
 func runWithPrompt(args []string, prompt func(context.Context) ([]byte, error)) int {
 	if len(args) == 1 && (args[0] == "--help" || args[0] == "help") {
-		fmt.Println("zodiac-decrypt verify-key --key encrypted.pem --public public.pem\nM0 development build; decrypt is not yet implemented. Passphrases are entered only in a hidden controlling-terminal prompt.")
+		fmt.Println("zodiac-decrypt verify-key --key encrypted.pem --public public.pem\nzodiac-decrypt decrypt --key encrypted.pem --in ciphertext.txt --out new-message.txt\nUnsigned development build; Windows local fixed-disk files only. Passphrases use a hidden controlling-terminal prompt. Plaintext files persist; no overwrite. Exits: input/usage 2, key unlock 3, message failure 4, local I/O 5, cancel 130.")
 		return 0
 	}
 	if len(args) == 1 && args[0] == "--version" {
 		fmt.Println("zodiac-decrypt 0.0.1-dev (unreviewed, unsigned)")
 		return 0
 	}
+	if len(args) > 0 && args[0] == "decrypt" {
+		return runDecrypt(args[1:], prompt)
+	}
 	if len(args) == 0 || args[0] != "verify-key" {
-		fmt.Fprintln(os.Stderr, "expected verify-key; use --help")
+		fmt.Fprintln(os.Stderr, "expected verify-key or decrypt; use --help")
 		return 2
 	}
 	flags := flag.NewFlagSet("verify-key", flag.ContinueOnError)
@@ -60,7 +65,7 @@ func runWithPrompt(args []string, prompt func(context.Context) ([]byte, error)) 
 		return 2
 	}
 	defer func() { clear(password); runtime.KeepAlive(password) }()
-	private, fingerprint, err := keyfile.LoadFile(*keyPath, password)
+	private, fingerprint, err := readKey(*keyPath, password)
 	if err != nil {
 		if errors.Is(err, keyfile.ErrUnlock) {
 			fmt.Fprintln(os.Stderr, keyfile.ErrUnlock)
@@ -80,14 +85,12 @@ func runWithPrompt(args []string, prompt func(context.Context) ([]byte, error)) 
 }
 func readPublic(path string) ([]byte, int, error) {
 	invalid := errors.New("invalid public key")
-	file, err := os.Open(path)
+	publicPEM, err := localfile.Read(path, 16384)
+	if errors.Is(err, localfile.ErrLimit) {
+		return nil, 2, invalid
+	}
 	if err != nil {
 		return nil, 5, errors.New("unable to read public file")
-	}
-	defer file.Close()
-	publicPEM, err := io.ReadAll(io.LimitReader(file, 16385))
-	if err != nil || len(publicPEM) > 16384 {
-		return nil, 2, invalid
 	}
 	trimmed := bytes.Trim(publicPEM, " \t\r\n")
 	block, rest := pem.Decode(trimmed)
@@ -107,4 +110,95 @@ func readPublic(path string) ([]byte, int, error) {
 		return nil, 2, invalid
 	}
 	return canonical, 0, nil
+}
+
+func readKey(path string, password []byte) (*rsa.PrivateKey, string, error) {
+	defer func() { clear(password); runtime.KeepAlive(password) }()
+	encoded, err := localfile.Read(path, keyfile.MaxPEMBytes)
+	defer func() { clear(encoded); runtime.KeepAlive(encoded) }()
+	if errors.Is(err, localfile.ErrLimit) {
+		return nil, "", keyfile.ErrUnlock
+	}
+	if err != nil {
+		return nil, "", err
+	}
+	return keyfile.Load(encoded, password)
+}
+
+func runDecrypt(args []string, prompt func(context.Context) ([]byte, error)) int {
+	flags := flag.NewFlagSet("decrypt", flag.ContinueOnError)
+	flags.SetOutput(io.Discard)
+	keyPath := flags.String("key", "", "encrypted private PEM path")
+	inPath := flags.String("in", "", "canonical ciphertext file")
+	outPath := flags.String("out", "", "new private plaintext file")
+	if flags.Parse(args) != nil || flags.NArg() != 0 || *keyPath == "" || *inPath == "" || *outPath == "" {
+		fmt.Fprintln(os.Stderr, "decrypt requires --key, --in and --out paths")
+		return 2
+	}
+	for _, path := range []string{*keyPath, *inPath, *outPath} {
+		if localfile.Validate(path) != nil {
+			fmt.Fprintln(os.Stderr, localfile.ErrPath)
+			return 5
+		}
+	}
+	raw, err := localfile.Read(*inPath, envelope.MaxRaw)
+	if errors.Is(err, localfile.ErrLimit) {
+		fmt.Fprintln(os.Stderr, envelope.ErrInput)
+		return 2
+	}
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "unable to read ciphertext file")
+		return 5
+	}
+	encoded, err := envelope.Decode(raw)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, envelope.ErrInput)
+		return 2
+	}
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer cancel()
+	password, err := prompt(ctx)
+	defer func() { clear(password); runtime.KeepAlive(password) }()
+	if err != nil {
+		if errors.Is(err, cli.ErrCanceled) || errors.Is(err, context.Canceled) {
+			fmt.Fprintln(os.Stderr, cli.ErrCanceled)
+			return 130
+		}
+		fmt.Fprintln(os.Stderr, "unable to read hidden passphrase")
+		return 2
+	}
+	private, _, err := readKey(*keyPath, password)
+	if ctx.Err() != nil {
+		fmt.Fprintln(os.Stderr, cli.ErrCanceled)
+		return 130
+	}
+	if err != nil {
+		if errors.Is(err, keyfile.ErrUnlock) {
+			fmt.Fprintln(os.Stderr, keyfile.ErrUnlock)
+			return 3
+		}
+		fmt.Fprintln(os.Stderr, "unable to read key file")
+		return 5
+	}
+	plain, err := envelope.Decrypt(encoded, private)
+	private = nil
+	defer func() { clear(plain); runtime.KeepAlive(plain) }()
+	if ctx.Err() != nil {
+		fmt.Fprintln(os.Stderr, cli.ErrCanceled)
+		return 130
+	}
+	if err != nil {
+		fmt.Fprintln(os.Stderr, envelope.ErrDecrypt)
+		return 4
+	}
+	if err := localfile.Write(ctx, *outPath, plain); err != nil {
+		if errors.Is(err, context.Canceled) {
+			fmt.Fprintln(os.Stderr, cli.ErrCanceled)
+			return 130
+		}
+		fmt.Fprintln(os.Stderr, "unable to create new private local output file")
+		return 5
+	}
+	fmt.Println("Authenticated message written to the requested new private file.")
+	return 0
 }

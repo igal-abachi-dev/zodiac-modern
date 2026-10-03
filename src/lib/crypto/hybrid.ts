@@ -1,14 +1,52 @@
 import { encodeBase64URL } from '../codecs/base64url';
 import { encodeMessage } from '../validation/input';
 import type { RecipientKey } from './public-key';
+import { serializeEnvelope } from '../codecs/envelope';
+import {
+  AES_KEY_BYTES,
+  NONCE_BYTES,
+  TAG_BYTES,
+  wrappedKeyBytes,
+} from './profile';
+
+export class EncryptionError extends Error {
+  constructor(
+    message = 'Unable to encrypt locally. Retry with the selected recipient.',
+  ) {
+    super(message);
+    this.name = 'EncryptionError';
+  }
+}
+export function encryptionAvailable(): boolean {
+  return (
+    globalThis.isSecureContext === true &&
+    typeof globalThis.crypto?.subtle?.encrypt === 'function'
+  );
+}
 
 // Shared by isolated interoperability tests and EN-04's feasibility probe.
 // The production workspace does not enable this until its integrated gates pass.
 export async function encryptMessage(text: string, recipient: RecipientKey) {
-  if (!globalThis.isSecureContext || !globalThis.crypto?.subtle)
-    throw new Error('Secure context and native WebCrypto required.');
+  if (!encryptionAvailable())
+    throw new EncryptionError(
+      'Use HTTPS or a supported local sender with native WebCrypto.',
+    );
+  const algorithm = recipient.key.algorithm as RsaHashedKeyAlgorithm;
+  if (
+    recipient.key.type !== 'public' ||
+    algorithm.name !== 'RSA-OAEP' ||
+    algorithm.hash?.name !== 'SHA-256' ||
+    algorithm.modulusLength !== recipient.bits ||
+    algorithm.publicExponent?.length !== 3 ||
+    algorithm.publicExponent[0] !== 1 ||
+    algorithm.publicExponent[1] !== 0 ||
+    algorithm.publicExponent[2] !== 1 ||
+    !recipient.key.usages.includes('encrypt')
+  )
+    throw new EncryptionError('Choose a validated RSA public recipient.');
+  wrappedKeyBytes(recipient.bits);
   const plaintext = encodeMessage(text);
-  const rawKey = new Uint8Array(32);
+  const rawKey = new Uint8Array(AES_KEY_BYTES);
   let aesKey: CryptoKey | null = null;
   try {
     crypto.getRandomValues(rawKey);
@@ -21,29 +59,41 @@ export async function encryptMessage(text: string, recipient: RecipientKey) {
       'encrypt',
     ]);
     rawKey.fill(0);
-    const nonce = crypto.getRandomValues(new Uint8Array(12));
+    const nonce = crypto.getRandomValues(new Uint8Array(NONCE_BYTES));
     const aad = new Uint8Array(wrapped.length + nonce.length);
     aad.set(wrapped);
     aad.set(nonce, wrapped.length);
     const sealed = new Uint8Array(
       await crypto.subtle.encrypt(
-        { name: 'AES-GCM', iv: nonce, additionalData: aad, tagLength: 128 },
+        {
+          name: 'AES-GCM',
+          iv: nonce,
+          additionalData: aad,
+          tagLength: TAG_BYTES * 8,
+        },
         aesKey,
         plaintext,
       ),
     );
-    if (sealed.length !== plaintext.length + 16)
+    if (sealed.length !== plaintext.length + TAG_BYTES)
       throw new Error('Invalid ciphertext size.');
-    const envelope = new Uint8Array(aad.length + sealed.length);
-    envelope.set(aad);
-    envelope.set(sealed.subarray(sealed.length - 16), aad.length);
-    envelope.set(sealed.subarray(0, sealed.length - 16), aad.length + 16);
+    const envelope = serializeEnvelope(
+      {
+        wrappedKey: wrapped,
+        nonce,
+        tag: sealed.subarray(sealed.length - TAG_BYTES),
+        ciphertext: sealed.subarray(0, sealed.length - TAG_BYTES),
+      },
+      recipient.bits,
+    );
     return {
       raw: encodeBase64URL(envelope),
       envelope,
       fingerprint: recipient.fingerprint,
       bits: recipient.bits,
     };
+  } catch {
+    throw new EncryptionError();
   } finally {
     rawKey.fill(0);
     plaintext.fill(0);

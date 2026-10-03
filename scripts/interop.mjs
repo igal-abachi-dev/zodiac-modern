@@ -15,6 +15,26 @@ export async function prepareInterop() {
     resolve('artifacts/interop-oracle.exe'),
     '.',
   ]);
+  runGo([
+    '-C',
+    'receiver',
+    'test',
+    '-mod=vendor',
+    '-c',
+    '-o',
+    resolve('artifacts/receiver-command-tests.exe'),
+    './cmd/zodiac-decrypt',
+  ]);
+  runGo([
+    '-C',
+    'receiver',
+    'build',
+    '-mod=vendor',
+    '-trimpath',
+    '-o',
+    resolve('receiver/bin/zodiac-decrypt.exe'),
+    './cmd/zodiac-decrypt',
+  ]);
   await build({
     entryPoints: ['tests/browser/bridge.ts'],
     bundle: true,
