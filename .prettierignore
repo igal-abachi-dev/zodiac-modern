@@ -5,6 +5,7 @@ dist/
 artifacts/
 # Exact machine-generated review snapshot; preserve the generator's JSON output.
 docs/reviews/rec01-evidence.json
+docs/reviews/m1-evidence.json
 receiver/vendor/
 receiver/tests/fixtures/
 tests/fixtures/

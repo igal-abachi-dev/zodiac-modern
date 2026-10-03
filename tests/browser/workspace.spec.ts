@@ -1,5 +1,11 @@
 import { expect, test, type Page } from '@playwright/test';
-import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import {
+  readFileSync,
+  mkdtempSync,
+  writeFileSync,
+  rmSync,
+  mkdirSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -45,7 +51,11 @@ function command(raw: string, bits: number, plaintext: string, expected = 0) {
 }
 test('sender exact bytes, command interoperability, exports, immutable recipient and reset', async ({
   page,
-}) => {
+}, testInfo) => {
+  testInfo.annotations.push({
+    type: 'browser-version',
+    description: page.context().browser()!.version(),
+  });
   const failures: string[] = [],
     requests: string[] = [],
     errors: string[] = [];
@@ -59,9 +69,7 @@ test('sender exact bytes, command interoperability, exports, immutable recipient
     );
   });
   await page.goto('/');
-  await expect(
-    page.getByRole('button', { name: 'Encrypt message', exact: true }),
-  ).toBeEnabled();
+  await expect(page.locator('.recipient-summary strong')).toBeVisible();
   page.on('request', (r) => requests.push(r.url()));
   for (const bits of [3072, 4096]) {
     if (bits === 4096) await custom(page, bits);
@@ -80,6 +88,15 @@ test('sender exact bytes, command interoperability, exports, immutable recipient
     expect(await message.count()).toBe(0);
     await expect(page.getByLabel('Paste public PEM')).toBeDisabled();
     const raw = await page.getByLabel('Raw ciphertext').inputValue();
+    mkdirSync('artifacts/rec02', { recursive: true });
+    writeFileSync(
+      `artifacts/rec02/browser-${testInfo.project.name}-${bits}.txt`,
+      raw,
+    );
+    writeFileSync(
+      `artifacts/rec02/browser-${testInfo.project.name}-${bits}-expected.txt`,
+      plaintext,
+    );
     command(raw, bits, plaintext);
     for (const offset of [0, bits / 8, bits / 8 + 12, bits / 8 + 28]) {
       const mutant = Buffer.from(raw, 'base64url');
@@ -149,9 +166,8 @@ test('input boundaries, IME, failures, clear while pending and navigation discar
     name: 'Encrypt message',
     exact: true,
   });
-  await expect(encrypt).toBeEnabled();
-  await encrypt.click();
-  await expect(page.getByRole('alert')).toContainText('Enter a message');
+  await expect(page.locator('.recipient-summary strong')).toBeVisible();
+  await expect(encrypt).toBeDisabled();
   await message.fill('🔑'.repeat(16385));
   await encrypt.click();
   await expect(page.getByRole('alert')).toContainText('65,536');
@@ -186,7 +202,8 @@ test('input boundaries, IME, failures, clear while pending and navigation discar
   await expect(page.getByRole('alert')).toContainText('Unable to encrypt');
   await expect(message).toHaveValue('synthetic\n');
   await page.reload();
-  await expect(encrypt).toBeEnabled();
+  await expect(page.locator('.recipient-summary strong')).toBeVisible();
+  await expect(encrypt).toBeDisabled();
   await expect(message).toHaveValue('');
   await page.evaluate(() => {
     const real = crypto.subtle.encrypt.bind(crypto.subtle);
@@ -225,6 +242,7 @@ test('custom-only clear and unavailable WebCrypto have no fallback', async ({
   });
   await expect(encrypt).toBeDisabled();
   await custom(page, 4096);
+  await page.getByLabel('Message', { exact: true }).fill('synthetic');
   await expect(encrypt).toBeEnabled();
   await page
     .getByRole('button', { name: 'Clear everything', exact: true })
@@ -250,13 +268,14 @@ test('light/dark contrast, mobile reflow, zoom, focus and print', async ({
     await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' });
     await page.setViewportSize({ width: 320, height: 900 });
     await page.goto('/');
-    await expect(
-      page.getByRole('button', { name: 'Encrypt message', exact: true }),
-    ).toBeEnabled();
+    await expect(page.locator('.recipient-summary strong')).toBeVisible();
     const metrics = await page.evaluate(() => {
       const style = getComputedStyle(document.body),
         panel = getComputedStyle(document.querySelector('.panel')!),
         button = getComputedStyle(document.querySelector('button')!);
+      const muted = getComputedStyle(document.querySelector('.muted')!);
+      const link = getComputedStyle(document.querySelector('a')!);
+      const input = getComputedStyle(document.querySelector('textarea')!);
       const rgb = (s: string) =>
         s
           .match(/[\d.]+/g)!
@@ -279,6 +298,9 @@ test('light/dark contrast, mobile reflow, zoom, focus and print', async ({
         text: contrast(style.color, style.backgroundColor),
         panel: contrast(panel.color, panel.backgroundColor),
         button: contrast(button.color, button.backgroundColor),
+        muted: contrast(muted.color, panel.backgroundColor),
+        link: contrast(link.color, style.backgroundColor),
+        control: contrast(input.borderTopColor, input.backgroundColor),
         target: parseFloat(button.minHeight),
       };
     });
@@ -286,13 +308,25 @@ test('light/dark contrast, mobile reflow, zoom, focus and print', async ({
     expect(metrics.text).toBeGreaterThanOrEqual(4.5);
     expect(metrics.panel).toBeGreaterThanOrEqual(4.5);
     expect(metrics.button).toBeGreaterThanOrEqual(4.5);
+    expect(metrics.muted).toBeGreaterThanOrEqual(4.5);
+    expect(metrics.link).toBeGreaterThanOrEqual(4.5);
+    expect(metrics.control).toBeGreaterThanOrEqual(3);
     expect(metrics.target).toBeGreaterThanOrEqual(44);
-    // 200% text zoom with 320px viewport exercises wrapping without stylesheet mutation.
+    // Synthetic 200% text zoom exercises reflow; reset this test mutation below.
     await page.evaluate(() => {
       document.documentElement.style.fontSize = '200%';
     });
     // Synthetic test styling is removed before CSP/DOM assertions in other tests.
-    const zoomOverflow=await page.evaluate(()=>Array.from(document.querySelectorAll('*')).filter(el=>el.getBoundingClientRect().right>innerWidth+1).map(el=>({tag:el.tagName,id:el.id,text:el.textContent?.slice(0,50),right:el.getBoundingClientRect().right})));
+    const zoomOverflow = await page.evaluate(() =>
+      Array.from(document.querySelectorAll('*'))
+        .filter((el) => el.getBoundingClientRect().right > innerWidth + 1)
+        .map((el) => ({
+          tag: el.tagName,
+          id: el.id,
+          text: el.textContent?.slice(0, 50),
+          right: el.getBoundingClientRect().right,
+        })),
+    );
     expect(zoomOverflow).toEqual([]);
     await page.reload();
     await page.getByLabel('Message', { exact: true }).focus();

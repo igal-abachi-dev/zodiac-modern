@@ -45,6 +45,23 @@ for (const bits of [3072, 4096]) {
     );
     expect(result.status).toBe(0);
     const privateDER = result.stdout;
+    const other = spawnSync(
+      openssl,
+      [
+        'pkcs8',
+        '-in',
+        resolve(
+          `receiver/tests/fixtures/keys/openssl-3.0-rewrapped-3.5-${bits}.pem`,
+        ),
+        '-passin',
+        `file:${syntheticPassword}`,
+        '-outform',
+        'DER',
+      ],
+      { windowsHide: true },
+    );
+    expect(other.status).toBe(0);
+    const wrongDER = other.stdout;
     try {
       for (const text of [
         '',
@@ -70,11 +87,11 @@ for (const bits of [3072, 4096]) {
               f.filename === `openssl-3.5-${bits}.pem`,
           ).fingerprint,
         );
-        const decrypt = (raw: string) =>
+        const decrypt = (raw: string, privateKey = privateDER) =>
           spawnSync(oracle, [], {
             input: JSON.stringify({
               Mode: 'decrypt',
-              PrivateDER: privateDER.toString('base64'),
+              PrivateDER: privateKey.toString('base64'),
               Raw: raw,
             }),
             encoding: 'utf8',
@@ -82,6 +99,7 @@ for (const bits of [3072, 4096]) {
           });
         const decrypted = decrypt(output.raw);
         expect(decrypted.status).toBe(0);
+        expect(decrypt(output.raw, wrongDER).status).toBe(4);
         expect(
           Buffer.from(JSON.parse(decrypted.stdout).result, 'base64'),
         ).toEqual(Buffer.from(text));
@@ -126,6 +144,7 @@ for (const bits of [3072, 4096]) {
       ).toMatchObject({ local: 0, session: 0, cookies: '' });
     } finally {
       privateDER.fill(0);
+      wrongDER.fill(0);
     }
   });
 }

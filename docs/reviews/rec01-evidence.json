@@ -1,5 +1,5 @@
 {
-  "started": "2026-10-03T19:21:28.236Z",
+  "started": "2026-10-03T23:42:18.537Z",
   "status": "automated checks passed",
   "independentReview": "required; automated success does not close REC-01",
   "toolchain": "go version go1.27.1 windows/amd64",
@@ -26,7 +26,7 @@
     "receiver/go.mod": "fde7e596bc42d686f701dca35a958e5111359ac5c592b223dc5e9f756dc7538b",
     "receiver/go.sum": "03664af1a1a706794a65ef50dde2f086d54878c237fe5e8032c877fb7d9b0457",
     "receiver/tests/fixtures/manifest.json": "fccebc35c4248ca248e8556bbae5470a802799bd769e645def80730172393ec4",
-    "scripts/receiver.mjs": "20dbfe7c1de86305be9b0763bef7c2cd3d69dbd3744f4357e768910a16d04575",
+    "scripts/receiver.mjs": "e99732afce136dd02c4ffc649acb6e5aca2da52c1080cc9427041dd37e906199",
     "scripts/oracle-key-fixtures.mjs": "52f8f3fa3bd15ad7ed51202cdf587886a75dc53a584d0cdcf933afd5f143a699",
     "scripts/check-rec01.mjs": "ecbec9de894218d2cf2e69cf31502c5b64f297bfe763df25eb755b157ffaf0b7",
     "scripts/snapshot-rec01.mjs": "33330f07ffdce393f2e9d84e3be863f7cb4d614456be36402f6aa8d4240f3fee",
@@ -41,10 +41,17 @@
     "receiver/internal/cli/terminal_windows.go": "6874d854ee2efa4633ed40269b2ea481190656eba2fee1e3a7b933eee4871dbb",
     "receiver/internal/cli/terminal_windows_errors_test.go": "d86ed6d25a8bf4f0ffefa5a9c87663c3f513b1bc1ae894d56a96f0fba7f19bb9",
     "receiver/internal/cli/terminal_windows_test.go": "e38314afd6fb3453e68d618df3dfa69fdedbb81a76639ad0878392b27a79efdc",
+    "receiver/internal/envelope/envelope.go": "e2c50798ae3c0e9dd8efa46e82d8a805a742be84f36852043aa00bacb5b2ef17",
+    "receiver/internal/envelope/envelope_test.go": "b5326d03c5bf11fd3f80d2d332f09e93582e7d40e0236148d74dd66acb67de19",
     "receiver/internal/keyfile/pbes2.go": "bb3d37007d7950646cc3776dfef5d5b76b51359fdf20e78ea2ea4491bedeb154",
     "receiver/internal/keyfile/pbes2_fuzz_test.go": "7b9fd9d866f664d5a5b3faa98a2ebb1aaf4f8f18410ec076d412b17ccca64438",
     "receiver/internal/keyfile/pbes2_test.go": "8129fd8266a7934bca7255f82ba3fc0f4245c426501cd8049b15778a431dc6a4",
-    "receiver/cmd/zodiac-decrypt/main.go": "1d0af55843284fe2d3557b61c660ac551d9b4d78413a2e9b4852d91ad578b80d",
+    "receiver/internal/localfile/localfile.go": "c01775e1548dd83a8f8c010c8008c8dd5a0fd52b93330f4c2ca8b45da6b10558",
+    "receiver/internal/localfile/localfile_other.go": "a4271806c188b8ba33ef24154fdcaeb65d8d5865cd135e11d93140e41f8d52cf",
+    "receiver/internal/localfile/localfile_windows.go": "65a892466d018a20c8b38845f1baed6906068d25e15864a9306e20c88dcc7dda",
+    "receiver/internal/localfile/localfile_windows_test.go": "0a4ff9eef6edf353116be8f0775cd530bd748fe47c7d60f99f14eaf976e1caec",
+    "receiver/cmd/zodiac-decrypt/decrypt_test.go": "901743b356cdc12e9ab4e1a824ce34d458ab94992ccb64bf356657616059fed3",
+    "receiver/cmd/zodiac-decrypt/main.go": "f814059d8029a7fe57927b3be85ee49717a533160cefff4d39451167f2156454",
     "receiver/cmd/zodiac-decrypt/main_test.go": "425cb8460a1b7163c1f4b768794a7a6a1dcece1740652b6de25d011ae16b5a86",
     "receiver/vendor/golang.org/x/sys/LICENSE": "911f8f5782931320f5b8d1160a76365b83aea6447ee6c04fa6d5591467db9dad",
     "receiver/vendor/golang.org/x/sys/PATENTS": "96f408bfae65bf137fc2525d3ecb030271c50c1e90799f87abf8846d8dd505cc",
@@ -446,7 +453,7 @@
     {
       "name": "go-format",
       "exitCode": 0,
-      "milliseconds": 71,
+      "milliseconds": 87,
       "log": "artifacts/rec01/go-format.log",
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "evidence": ""
@@ -454,7 +461,7 @@
     {
       "name": "openssl-oracles",
       "exitCode": 0,
-      "milliseconds": 1170,
+      "milliseconds": 1395,
       "log": "artifacts/rec01/openssl-oracles.log",
       "sha256": "82ab33cf529e490f60ab28033779ab282f186a99087f744276053d2e2da99039",
       "evidence": "openssl-3.0-3072.pem: OpenSSL oracle and hashes passed; policy reject: 8-byte salt\nopenssl-3.0-rewrapped-3.5-3072.pem: OpenSSL oracle and hashes passed; policy success\nopenssl-3.0-4096.pem: OpenSSL oracle and hashes passed; policy reject: 8-byte salt\nopenssl-3.0-rewrapped-3.5-4096.pem: OpenSSL oracle and hashes passed; policy success\nopenssl-3.5-3072.pem: OpenSSL oracle and hashes passed; policy success\nopenssl-3.5-4096.pem: OpenSSL oracle and hashes passed; policy success\n"
@@ -462,15 +469,15 @@
     {
       "name": "native-tests",
       "exitCode": 0,
-      "milliseconds": 11941,
+      "milliseconds": 10787,
       "log": "artifacts/rec01/native-tests.log",
-      "sha256": "efc8d26969cb8f7b9e07116d3208e4de979df1c4dcdb078b2bda39b0b0f81292",
-      "evidence": "PASS\nok  \tzodiac-modern/receiver/cmd/zodiac-decrypt\t0.442s\nPASS\nok  \tzodiac-modern/receiver/internal/cli\t0.112s\n    pbes2_test.go:56: native unlock duration: 534.5µs\n    pbes2_test.go:56: native unlock duration: 92.2925ms\n    pbes2_test.go:56: native unlock duration: 0s\n    pbes2_test.go:56: native unlock duration: 93.9903ms\n    pbes2_test.go:56: native unlock duration: 92.1004ms\n    pbes2_test.go:56: native unlock duration: 90.2109ms\n    pbes2_test.go:247: salt=16 iterations=600000 explicitLength=false native KDF+unlock=89.1221ms\n    pbes2_test.go:247: salt=16 iterations=600000 explicitLength=true native KDF+unlock=87.6046ms\n    pbes2_test.go:247: salt=16 iterations=2000000 explicitLength=false native KDF+unlock=299.1418ms\n    pbes2_test.go:247: salt=16 iterations=2000000 explicitLength=true native KDF+unlock=294.4506ms\n    pbes2_test.go:247: salt=64 iterations=600000 explicitLength=false native KDF+unlock=88.5851ms\n    pbes2_test.go:247: salt=64 iterations=600000 explicitLength=true native KDF+unlock=89.1464ms\n    pbes2_test.go:247: salt=64 iterations=2000000 explicitLength=false native KDF+unlock=320.9978ms\n    pbes2_test.go:247: salt=64 iterations=2000000 explicitLength=true native KDF+unlock=355.5962ms\n    pbes2_test.go:342: bounded profile parse/serialization allocations: 136 (limit 300)\n    pbes2_test.go:390: rejected all 3069 single-bit private-exponent mutations\n    pbes2_test.go:390: rejected all 4094 single-bit private-exponent mutations\nPASS\nok  \tzodiac-modern/receiver/internal/keyfile\t11.216s"
+      "sha256": "a07316db856dccb65392d806b22dcd71c19a643c2ff775192a03a4ca7776dd1d",
+      "evidence": "PASS\nok  \tzodiac-modern/receiver/cmd/zodiac-decrypt\t1.930s\nPASS\nok  \tzodiac-modern/receiver/internal/cli\t0.018s\nPASS\nok  \tzodiac-modern/receiver/internal/envelope\t0.540s\n    pbes2_test.go:56: native unlock duration: 535.2µs\n    pbes2_test.go:56: native unlock duration: 94.0429ms\n    pbes2_test.go:56: native unlock duration: 594.7µs\n    pbes2_test.go:56: native unlock duration: 90.5815ms\n    pbes2_test.go:56: native unlock duration: 91.8536ms\n    pbes2_test.go:56: native unlock duration: 90.2883ms\n    pbes2_test.go:247: salt=16 iterations=600000 explicitLength=false native KDF+unlock=89.991ms\n    pbes2_test.go:247: salt=16 iterations=600000 explicitLength=true native KDF+unlock=89.2864ms\n    pbes2_test.go:247: salt=16 iterations=2000000 explicitLength=false native KDF+unlock=305.163ms\n    pbes2_test.go:247: salt=16 iterations=2000000 explicitLength=true native KDF+unlock=287.3019ms\n    pbes2_test.go:247: salt=64 iterations=600000 explicitLength=false native KDF+unlock=86.1132ms\n    pbes2_test.go:247: salt=64 iterations=600000 explicitLength=true native KDF+unlock=85.1076ms\n    pbes2_test.go:247: salt=64 iterations=2000000 explicitLength=false native KDF+unlock=291.2533ms\n    pbes2_test.go:247: salt=64 iterations=2000000 explicitLength=true native KDF+unlock=295.202ms\n    pbes2_test.go:342: bounded profile parse/serialization allocations: 136 (limit 300)\n    pbes2_test.go:390: rejected all 3069 single-bit private-exponent mutations\n    pbes2_test.go:390: rejected all 4094 single-bit private-exponent mutations\nPASS\nok  \tzodiac-modern/receiver/internal/keyfile\t9.948s\nPASS\nok  \tzodiac-modern/receiver/internal/localfile\t0.111s"
     },
     {
       "name": "vendor-integrity",
       "exitCode": 0,
-      "milliseconds": 13946,
+      "milliseconds": 6412,
       "log": "artifacts/rec01/vendor-integrity.log",
       "sha256": "96a85ad728396f25f2dd9bf30a1e87d156931ffd9fb7cc95dee32493d250e05a",
       "evidence": "all modules verified\nVendor full tree/modules.txt and module pins verified; offline tests/build passed.\n"
@@ -478,19 +485,19 @@
     {
       "name": "FuzzPreKDF",
       "exitCode": 0,
-      "milliseconds": 32100,
+      "milliseconds": 40704,
       "log": "artifacts/rec01/FuzzPreKDF.log",
-      "sha256": "4a37e4af38e640da88de57d5a00a1f44e1e961e1efde52a9371aaada003efd51",
-      "evidence": "fuzz: elapsed: 0s, gathering baseline coverage: 0/67 completed\nfuzz: elapsed: 0s, gathering baseline coverage: 67/67 completed, now fuzzing with 2 workers\nfuzz: elapsed: 3s, execs: 2441 (814/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 6s, execs: 2441 (0/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 9s, execs: 2441 (0/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 12s, execs: 2441 (0/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 15s, execs: 494260 (163950/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 18s, execs: 627059 (44265/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 21s, execs: 748582 (40507/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 24s, execs: 854110 (35176/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 27s, execs: 985646 (43843/sec), new interesting: 0 (total: 67)\nfuzz: elapsed: 30s, execs: 1124512 (46292/sec), new interesting: 1 (total: 68)\nfuzz: elapsed: 30s, execs: 1124512 (0/sec), new interesting: 1 (total: 68)\nPASS\nok  \tzodiac-modern/receiver/internal/keyfile\t30.419s\n"
+      "sha256": "1ad36c8263b0d04ef62c47cb67d6fc3bd61a7f05928f643f77e85b0343c01b59",
+      "evidence": "fuzz: elapsed: 0s, gathering baseline coverage: 0/68 completed\nfuzz: elapsed: 0s, gathering baseline coverage: 68/68 completed, now fuzzing with 2 workers\nfuzz: elapsed: 3s, execs: 78189 (26061/sec), new interesting: 0 (total: 68)\nfuzz: elapsed: 6s, execs: 340568 (87458/sec), new interesting: 0 (total: 68)\nfuzz: elapsed: 9s, execs: 561570 (73666/sec), new interesting: 0 (total: 68)\nfuzz: elapsed: 12s, execs: 759342 (65928/sec), new interesting: 0 (total: 68)\nfuzz: elapsed: 15s, execs: 842544 (27734/sec), new interesting: 2 (total: 70)\nfuzz: elapsed: 18s, execs: 842544 (0/sec), new interesting: 2 (total: 70)\nfuzz: elapsed: 21s, execs: 1060487 (72656/sec), new interesting: 2 (total: 70)\nfuzz: elapsed: 24s, execs: 1423011 (120838/sec), new interesting: 2 (total: 70)\nfuzz: elapsed: 27s, execs: 1632370 (69778/sec), new interesting: 2 (total: 70)\nfuzz: elapsed: 30s, execs: 1842602 (70078/sec), new interesting: 2 (total: 70)\nfuzz: elapsed: 30s, execs: 1842602 (0/sec), new interesting: 2 (total: 70)\nPASS\nok  \tzodiac-modern/receiver/internal/keyfile\t30.355s\n"
     },
     {
       "name": "FuzzPostKDF",
       "exitCode": 0,
-      "milliseconds": 31987,
+      "milliseconds": 31972,
       "log": "artifacts/rec01/FuzzPostKDF.log",
-      "sha256": "012b34346aa3c8c6a4ee7c4173fcbe64e73e6506763558899f840eb8b98f065c",
-      "evidence": "fuzz: elapsed: 0s, gathering baseline coverage: 0/62 completed\nfuzz: elapsed: 0s, gathering baseline coverage: 62/62 completed, now fuzzing with 2 workers\nfuzz: elapsed: 3s, execs: 4649 (1550/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 6s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 9s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 12s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 15s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 18s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 21s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 24s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 27s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 30s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nfuzz: elapsed: 31s, execs: 4649 (0/sec), new interesting: 0 (total: 62)\nPASS\nok  \tzodiac-modern/receiver/internal/keyfile\t31.291s\n"
+      "sha256": "4d6175eb5a75951eb838d61fa938ab4826075b72947f6b14a8c1ee778488032c",
+      "evidence": "fuzz: elapsed: 0s, gathering baseline coverage: 0/62 completed\nfuzz: elapsed: 0s, gathering baseline coverage: 62/62 completed, now fuzzing with 2 workers\nfuzz: elapsed: 3s, execs: 15840 (5279/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 6s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 9s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 12s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 15s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 18s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 21s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 24s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 27s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 30s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nfuzz: elapsed: 31s, execs: 15840 (0/sec), new interesting: 1 (total: 63)\nPASS\nok  \tzodiac-modern/receiver/internal/keyfile\t31.309s\n"
     }
   ],
-  "finished": "2026-10-03T19:22:59.642Z"
+  "finished": "2026-10-03T23:43:50.068Z"
 }

@@ -215,7 +215,8 @@
       bind:value={paste}
       spellcheck="false"
       autocapitalize="off"
-      autocomplete="off"></textarea>
+      autocomplete="off"
+      maxlength="16385"></textarea>
     <div class="recipient-actions">
       <button type="button" onclick={choosePaste} disabled={!paste.trim()}
         >Use pasted public key</button

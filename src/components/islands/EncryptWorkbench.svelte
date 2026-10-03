@@ -176,6 +176,7 @@
       dir="auto"
       spellcheck="false"
       autocomplete="off"
+      maxlength="65537"
       autocapitalize="off"
       {...{ autocorrect: 'off' }}
       aria-describedby="message-count message-help"></textarea>
@@ -193,7 +194,11 @@
     <button
       type="button"
       onclick={submit}
-      disabled={!initialized || !available || !view.recipient || busy}
+      disabled={!initialized ||
+        !available ||
+        !view.recipient ||
+        busy ||
+        view.draft.length === 0}
       >{busy ? 'Encrypting locally…' : 'Encrypt message'}</button
     >
   {/if}
@@ -204,7 +209,7 @@
   </div>
   <p role="status">{notice}</p>
   <p class="muted">
-    Workspace view stays in memory and is cleared on navigation. This cannot
+    Workspace state stays in memory and is cleared on navigation. This cannot
     guarantee erasure of browser, operating-system or undo-buffer copies.
   </p>
 </section>

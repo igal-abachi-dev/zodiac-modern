@@ -60,6 +60,15 @@ type parents struct {
 	leaf    string
 }
 
+func (p *parents) check() error {
+	for _, h := range p.handles {
+		if _, err := info(h, true, p.volume); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func (p *parents) close() {
 	for i := len(p.handles) - 1; i >= 0; i-- {
 		windows.CloseHandle(p.handles[i])
@@ -147,12 +156,21 @@ func openRead(path string) (*os.File, func(), error) {
 	if err != nil {
 		return nil, nil, err
 	}
+	if err := p.check(); err != nil {
+		p.close()
+		return nil, nil, err
+	}
 	h, err := relative(p.handles[len(p.handles)-1], p.leaf, windows.GENERIC_READ|windows.SYNCHRONIZE, windows.FILE_OPEN, windows.FILE_NON_DIRECTORY_FILE, nil, windows.FILE_SHARE_READ)
 	if err != nil {
 		p.close()
 		return nil, nil, err
 	}
 	if _, err := info(h, false, p.volume); err != nil {
+		windows.CloseHandle(h)
+		p.close()
+		return nil, nil, err
+	}
+	if err := p.check(); err != nil {
 		windows.CloseHandle(h)
 		p.close()
 		return nil, nil, err
@@ -219,6 +237,9 @@ func writeWith(ctx context.Context, path string, plain []byte, write func(io.Wri
 	if windows.GetVolumeInformationByHandle(p.handles[0], nil, 0, nil, nil, &flags, nil, 0) != nil || flags&windows.FILE_PERSISTENT_ACLS == 0 {
 		return ErrPath
 	}
+	if err := p.check(); err != nil {
+		return err
+	}
 	h, err := relative(p.handles[len(p.handles)-1], p.leaf, windows.GENERIC_WRITE|windows.READ_CONTROL|windows.FILE_READ_ATTRIBUTES|windows.DELETE|windows.SYNCHRONIZE, windows.FILE_CREATE, windows.FILE_NON_DIRECTORY_FILE, sd, 0)
 	if err != nil {
 		return err
@@ -239,6 +260,9 @@ func writeWith(ctx context.Context, path string, plain []byte, write func(io.Wri
 	if err := verifyACL(h, sid); err != nil {
 		return err
 	}
+	if err := p.check(); err != nil {
+		return err
+	}
 	// Mark for deletion before any plaintext write. Unlike FILE_DELETE_ON_CLOSE,
 	// a disposition set on the handle can be canceled at the explicit commit.
 	pending := [4]byte{1}
@@ -252,6 +276,9 @@ func writeWith(ctx context.Context, path string, plain []byte, write func(io.Wri
 		return err
 	}
 	if err := ctx.Err(); err != nil {
+		return err
+	}
+	if err := p.check(); err != nil {
 		return err
 	}
 	// This is the commit point. Keep parents held until the private handle closes.

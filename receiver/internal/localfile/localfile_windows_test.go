@@ -3,6 +3,7 @@ package localfile
 import (
 	"bytes"
 	"context"
+	"encoding/binary"
 	"errors"
 	"golang.org/x/sys/windows"
 	"io"
@@ -147,13 +148,7 @@ func TestParentJunctionAndSwap(t *testing.T) {
 		if err := os.Rename(original, filepath.Join(root, "swapped")); err == nil {
 			t.Fatal("held parent was renamed")
 		}
-		ptr, _ := windows.UTF16PtrFromString(original)
-		writeHandle, err := windows.CreateFile(ptr, windows.GENERIC_WRITE, windows.FILE_SHARE_READ|windows.FILE_SHARE_WRITE|windows.FILE_SHARE_DELETE, nil, windows.OPEN_EXISTING, windows.FILE_FLAG_BACKUP_SEMANTICS|windows.FILE_FLAG_OPEN_REPARSE_POINT, 0)
-		if err == nil {
-			windows.CloseHandle(writeHandle)
-			t.Fatal("held parent allowed reparse-modification access")
-		}
-		_, err = w.Write(b)
+		_, err := w.Write(b)
 		return err
 	})
 	if err != nil {
@@ -167,6 +162,58 @@ func TestParentJunctionAndSwap(t *testing.T) {
 	}
 	if _, err := Read(original, 100); err == nil {
 		t.Fatal("directory input accepted")
+	}
+}
+
+// Native test-only mount-point buffer, unrelated to cryptographic ASN.1.
+func setJunction(path, target string) error {
+	ptr, _ := windows.UTF16PtrFromString(path)
+	h, err := windows.CreateFile(ptr, windows.GENERIC_WRITE, windows.FILE_SHARE_READ|windows.FILE_SHARE_WRITE|windows.FILE_SHARE_DELETE, nil, windows.OPEN_EXISTING, windows.FILE_FLAG_BACKUP_SEMANTICS|windows.FILE_FLAG_OPEN_REPARSE_POINT, 0)
+	if err != nil {
+		return err
+	}
+	defer windows.CloseHandle(h)
+	substitute, _ := windows.UTF16FromString(`\??\` + target)
+	printName, _ := windows.UTF16FromString(target)
+	data := make([]byte, 16+2*(len(substitute)+len(printName)))
+	binary.LittleEndian.PutUint32(data, windows.IO_REPARSE_TAG_MOUNT_POINT)
+	binary.LittleEndian.PutUint16(data[4:], uint16(len(data)-8))
+	binary.LittleEndian.PutUint16(data[10:], uint16((len(substitute)-1)*2))
+	binary.LittleEndian.PutUint16(data[12:], uint16(len(substitute)*2))
+	binary.LittleEndian.PutUint16(data[14:], uint16((len(printName)-1)*2))
+	for i, v := range append(substitute, printName...) {
+		binary.LittleEndian.PutUint16(data[16+i*2:], v)
+	}
+	var returned uint32
+	return windows.DeviceIoControl(h, windows.FSCTL_SET_REPARSE_POINT, &data[0], uint32(len(data)), nil, 0, &returned, nil)
+}
+func TestReparseMutationOfHeldEmptyParent(t *testing.T) {
+	root := t.TempDir()
+	parent := filepath.Join(root, "parent")
+	target := filepath.Join(root, "target")
+	for _, path := range []string{parent, target} {
+		if err := os.Mkdir(path, 0700); err != nil {
+			t.Fatal(err)
+		}
+	}
+	p, err := holdParents(filepath.Join(parent, "message.txt"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer p.close()
+	if err := setJunction(parent, target); err != nil {
+		t.Logf("OS rejected mutation of held directory: %v", err)
+		return
+	}
+	if p.check() == nil {
+		t.Fatal("held-parent mutation was not detected")
+	}
+	h, err := relative(p.handles[len(p.handles)-1], p.leaf, windows.GENERIC_WRITE|windows.SYNCHRONIZE, windows.FILE_CREATE, windows.FILE_NON_DIRECTORY_FILE, nil, 0)
+	if err == nil {
+		windows.CloseHandle(h)
+	} // If allowed, it stays anchored to the held directory.
+	if _, err := os.Stat(filepath.Join(target, "message.txt")); !os.IsNotExist(err) {
+		t.Fatal("relative handle escaped to junction target")
 	}
 }
 
