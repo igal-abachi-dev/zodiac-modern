@@ -28,7 +28,7 @@ func TestPasswordInput(t *testing.T) {
 		t.Fatal("boundary rejected")
 	}
 	clear(password)
-	if _, err := readPassword(context.Background(), inputEvents(bytes.Repeat([]byte{'x'}, keyfile.MaxPasswordBytes+1))); err != ErrPassword {
+	if _, err := readPassword(context.Background(), inputEvents(append(bytes.Repeat([]byte{'x'}, keyfile.MaxPasswordBytes+1),'\r'))); err != ErrPassword {
 		t.Fatal("oversize input accepted")
 	}
 	for _, cancel := range []byte{3, 4, 26, 27} {
@@ -41,4 +41,13 @@ func TestPasswordInput(t *testing.T) {
 	if _, err := readPassword(ctx, make(chan inputEvent)); err != ErrCanceled {
 		t.Fatal("context cancellation ignored")
 	}
+}
+
+func TestDemandReaderDoesNotReadAhead(t *testing.T){
+ ctx,cancel:=context.WithCancel(context.Background());defer cancel()
+ events:=make(chan inputEvent);requests:=make(chan struct{});done:=make(chan struct{})
+ calls:=0;input:=[]byte("synthetic\r")
+ go func(){defer close(done);readEvents(ctx,requests,events,func(buffer []byte)(int,error){buffer[0]=input[calls];calls++;return 1,nil})}()
+ password,err:=readPasswordWithRequests(ctx,events,requests);if err!=nil||string(password)!="synthetic"{t.Fatal("demand read failed")};clear(password)
+ cancel();<-done;if calls!=len(input){t.Fatal("reader consumed input after Enter")}
 }

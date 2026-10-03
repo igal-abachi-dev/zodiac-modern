@@ -16,7 +16,7 @@ var ErrPassword = errors.New("passphrase must be at most 1024 bytes")
 
 // Prompt never reads a password from argv, environment or piped stdin.
 // Raw mode lets the owned byte buffer remain bounded before accepting input.
-func Prompt(ctx context.Context) ([]byte, error) {
+func Prompt(ctx context.Context) (password []byte, err error) {
 	input, output, err := openTerminal()
 	if err != nil {
 		return nil, ErrTerminal
@@ -31,7 +31,11 @@ func Prompt(ctx context.Context) ([]byte, error) {
 	if err != nil {
 		return nil, ErrTerminal
 	}
-	defer term.Restore(fd, state)
+	defer func(){
+		flushErr:=flushTerminalInput(input)
+		restoreErr:=term.Restore(fd,state)
+		if flushErr!=nil||restoreErr!=nil{clear(password);runtime.KeepAlive(password);password=nil;err=ErrTerminal}
+	}()
 	if _, err := io.WriteString(output, "Private key passphrase (hidden): "); err != nil {
 		return nil, ErrTerminal
 	}
@@ -56,6 +60,7 @@ func readPassword(ctx context.Context, events <-chan inputEvent) (password []byt
 func readPasswordWithRequests(ctx context.Context, events <-chan inputEvent, requests chan<- struct{}) (password []byte, err error) {
 	buffer := make([]byte, keyfile.MaxPasswordBytes)
 	used := 0
+	overflow := false
 	defer func() {
 		if err != nil {
 			clear(buffer)
@@ -79,19 +84,20 @@ func readPasswordWithRequests(ctx context.Context, events <-chan inputEvent, req
 			}
 			switch event.value {
 			case '\r', '\n':
+				if overflow{return nil,ErrPassword}
 				return buffer[:used], nil
 			case 3, 4, 26, 27:
 				return nil, ErrCanceled
 			case 8, 127:
+				if overflow{continue}
 				if used > 0 {
 					_, size := utf8.DecodeLastRune(buffer[:used])
 					clear(buffer[used-size : used])
 					used -= size
 				}
 			default:
-				if used == len(buffer) {
-					return nil, ErrPassword
-				}
+				if used == len(buffer) {overflow=true;continue}
+				if overflow{continue}
 				buffer[used] = event.value
 				used++
 			}

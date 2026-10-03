@@ -24,6 +24,10 @@ func openTerminal() (*os.File, *os.File, error) {
 }
 
 var cancelSynchronousIO = windows.NewLazySystemDLL("kernel32.dll").NewProc("CancelSynchronousIo")
+var flushConsoleInput = windows.NewLazySystemDLL("kernel32.dll").NewProc("FlushConsoleInputBuffer")
+func flushTerminalInput(input *os.File)error{
+ result,_,err:=flushConsoleInput.Call(input.Fd());if result==0{return err};return nil
+}
 
 func runTerminalReader(ctx context.Context, input *os.File, requests <-chan struct{}, events chan<- inputEvent) {
 	// ReadConsole is synchronous. Keep its worker on one OS thread so cancellation
