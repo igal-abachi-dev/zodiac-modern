@@ -37,28 +37,12 @@ func Prompt(ctx context.Context) ([]byte, error) {
 	}
 	defer io.WriteString(output, "\r\n")
 	events := make(chan inputEvent)
+	requests := make(chan struct{})
+	readerDone := make(chan struct{})
 	readerCtx, cancel := context.WithCancel(ctx)
-	defer cancel()
-	go func() {
-		var one [1]byte
-		defer func() { clear(one[:]); runtime.KeepAlive(one) }()
-		for {
-			n, err := input.Read(one[:])
-			event := inputEvent{err: err}
-			if n != 0 {
-				event.value = one[0]
-			}
-			select {
-			case events <- event:
-			case <-readerCtx.Done():
-				return
-			}
-			if err != nil {
-				return
-			}
-		}
-	}()
-	return readPassword(ctx, events)
+	defer func() { cancel(); <-readerDone }()
+	go func() { defer close(readerDone); runTerminalReader(readerCtx, input, requests, events) }()
+	return readPasswordWithRequests(ctx, events, requests)
 }
 
 type inputEvent struct {
@@ -67,6 +51,9 @@ type inputEvent struct {
 }
 
 func readPassword(ctx context.Context, events <-chan inputEvent) (password []byte, err error) {
+	return readPasswordWithRequests(ctx, events, nil)
+}
+func readPasswordWithRequests(ctx context.Context, events <-chan inputEvent, requests chan<- struct{}) (password []byte, err error) {
 	buffer := make([]byte, keyfile.MaxPasswordBytes)
 	used := 0
 	defer func() {
@@ -76,6 +63,13 @@ func readPassword(ctx context.Context, events <-chan inputEvent) (password []byt
 		}
 	}()
 	for {
+		if requests != nil {
+			select {
+			case <-ctx.Done():
+				return nil, ErrCanceled
+			case requests <- struct{}{}:
+			}
+		}
 		select {
 		case <-ctx.Done():
 			return nil, ErrCanceled
@@ -101,6 +95,36 @@ func readPassword(ctx context.Context, events <-chan inputEvent) (password []byt
 				buffer[used] = event.value
 				used++
 			}
+		}
+	}
+}
+
+func readEvents(ctx context.Context, requests <-chan struct{}, events chan<- inputEvent, read func([]byte) (int, error)) {
+	var one [1]byte
+	defer func() { clear(one[:]); runtime.KeepAlive(one) }()
+	for {
+		select {
+		case <-ctx.Done():
+			return
+		case <-requests:
+		}
+		if ctx.Err() != nil {
+			return
+		}
+		n, err := read(one[:])
+		event := inputEvent{err: err}
+		if n != 0 {
+			event.value = one[0]
+		}
+		select {
+		case events <- event:
+		case <-ctx.Done():
+			return
+		}
+		event.value = 0
+		clear(one[:])
+		if err != nil {
+			return
 		}
 	}
 }
