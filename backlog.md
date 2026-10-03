@@ -35,7 +35,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E08 | Verification/review | P0 | Backlog | M4 | Browser/Go, UX/export QA, independent security assessment |
 | E09 | Release | P0 | Backlog | M5 | Real recipient, verified host/offline bundle, custody and rollback |
 | E10 | Later options | P2 | Deferred | Later | Explicitly separate future decisions |
-| E11 | Offline recipient | P0 | Review | M0/M2/M4 | REC-01 implementation under review; authenticated decryption/output still pending |
+| E11 | Offline recipient | P0 | In progress | M0/M2/M4 | REC-01 Done; authenticated decryption/output still pending |
 
 Critical-path start: `DOC-01 → (EN-01 alongside REC-01) → EN-02 → E02/E03 → E04/REC-02 → E05/E06 → E07/E08 → E09`. REC-01 starts in M0 without frontend/public-key importer dependencies; its real OpenSSL 3.0/3.5 prototype, fuzz/resource/vendor evidence and focused independent review are foundation gates, not deferred M2/release tasks. E07 policy starts during scaffold; E08 tests grow with each story and QA-03 retains the later system review. EN-04 begins file:// feasibility early and completes its full-flow delivery decision before release/review scope is finalized; do not commit to a native sender launcher before that decision. E02/E03/E11 use synthetic fixtures. E09 requires real public configuration, receiver decryption, review, independently verified sender bytes, signed receiver/any selected native launcher and a trusted verification channel.
 
@@ -75,7 +75,7 @@ Subtasks:
 
 ### EN-02 — establish independent crypto fixtures and a Go test harness
 
-Type: enabler · Priority: P0 · Status: Review · Milestone: M0 · Dependencies: EN-01, REC-01.
+Type: enabler · Priority: P0 · Status: Done · Milestone: M0 · Dependencies: EN-01, REC-01.
 
 Acceptance criteria:
 
@@ -89,7 +89,7 @@ Subtasks:
 
 - [x] EN-02.1 — create fixture key pairs, profile serialization cases, and multilingual/boundary corpus.
 - [x] EN-02.2 — implement an isolated Go OAEP/GCM harness using the reference layout plus explicit parsing checks.
-- [x] EN-02.3 — wire Playwright/interop script to exchange test-only envelopes with the harness; record tool versions. Completion remains gated by REC-01 review; current runs are provisional engineering evidence.
+- [x] EN-02.3 — wire Playwright/interop script to exchange test-only envelopes with the harness; record tool versions. Both RSA sizes pass real Chromium/Firefox checks and REC-01's focused gate is satisfied; QA-03 integrated review remains separate.
 
 ### EN-03 — validate and generate public recipient build data
 
@@ -106,7 +106,7 @@ Subtasks:
 
 - [x] EN-03.1 — implement public config schema and build-time key/fingerprint validator.
 - [x] EN-03.2 — generate `src/generated/default-recipient.ts` and public PEM consistency checks.
-- [x] EN-03.3 — test fail-closed production cases and explicit fixture/development modes. KEY-01 integration and production recipient configuration remain open.
+- [x] EN-03.3 — test fail-closed production cases and explicit fixture/development modes. Browser/build fingerprint equivalence and custom-only import are verified; production recipient configuration remains open.
 
 ### EN-04 — spike self-contained file:// sender before selecting a launcher
 
@@ -191,7 +191,7 @@ Subtasks:
 
 ### KEY-01 — parse and identify valid public recipients
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M1 · Dependencies: EN-02.
+Type: story · Priority: P0 · Status: Done · Milestone: M1 · Dependencies: EN-02.
 
 As a sender, I can see precisely which supported public key will receive the message.
 
@@ -204,13 +204,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] KEY-01.1 — implement PEM block/base64 constraints and native SPKI import validation.
-- [ ] KEY-01.2 — canonicalize public DER and implement fingerprint display/formatting.
-- [ ] KEY-01.3 — test all valid/invalid cases and cross-runtime fingerprint equivalence.
+- [x] KEY-01.1 — implement bounded PEM/canonical Base64 and native SPKI validation; check the public integer to reject Firefox's rounded modulus metadata.
+- [x] KEY-01.2 — canonicalize public DER and implement fingerprint display/formatting.
+- [x] KEY-01.3 — real Chromium/Firefox and Node checks cover both supported sizes, exact adjacent modulus sizes, wrong exponents/types/containers, byte bounds, controlled errors and fingerprint equivalence. See docs/decisions/browser-public-key-validation.md.
 
 ### KEY-02 — implement default and custom recipient selection
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M1/M2 · Dependencies: KEY-01, EN-03, UX-01.
+Type: story · Priority: P0 · Status: In progress · Milestone: M1/M2 · Dependencies: KEY-01, EN-03, UX-01.
 
 As a sender, I can use the configured recipient or read/paste another recipient's public key locally.
 
@@ -224,9 +224,9 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] KEY-02.1 — build recipient summary/details and accessible file/paste controls.
-- [ ] KEY-02.2 — integrate validated selection, missing default, replacement failure, and default restoration.
-- [ ] KEY-02.3 — test recipient snapshot consistency, local-only behavior, and input/focus cleanup.
+- [x] KEY-02.1 — recipient summary/details, explicit public PEM download and accessible file/paste controls pass real-browser keyboard, responsive and CSP checks.
+- [ ] KEY-02.2 — file/paste selection, custom-only missing default, rejected replacement, clear/reload and default restoration pass real-browser checks. Invalid configured default is handled; integrated encryption/result state remains pending.
+- [ ] KEY-02.3 — local-only behavior, size checking before reading, escaped filenames and input/focus cleanup pass Chromium/Firefox checks. Immutable result recipient snapshots and disabling/restarting key changes during/after encryption remain pending with UX/crypto integration.
 
 ### KEY-03 — publish offline creation, custody, and rotation guidance
 
@@ -643,9 +643,9 @@ Subtasks:
 
 ### REC-01 — implement and validate encrypted-PKCS#8 key loading early
 
-Type: enabler · Priority: P0 · Status: Review · Milestone: M0 · Dependencies: DOC-01.
+Type: enabler · Priority: P0 · Status: Done · Milestone: M0 · Dependencies: DOC-01.
 
-Execution order: first establish the real OpenSSL 3.0/3.5 fixture/oracle baseline from REC-01.3, then prototype REC-01.1 against it, complete the negative/fuzz/resource evidence, integrate REC-01.2, and obtain the focused independent loader review. Start alongside EN-01; no dependency on Astro, EN-02's envelope harness, KEY-01's browser importer or production custody. Code, real fixtures and passing checks exist; user-supplied review findings and their disposition are recorded in [docs/reviews/2026-10-03-feedback.md](docs/reviews/2026-10-03-feedback.md). Expanded required fuzz seeds and reproducible local gates pass; post-fix focused review remains open. The CI regression workflow stays in workflows/ as a template by explicit user instruction, with its local checks available. See docs/reviews/rec01-review-packet.md.
+Execution order: first establish the real OpenSSL 3.0/3.5 fixture/oracle baseline from REC-01.3, then prototype REC-01.1 against it, complete the negative/fuzz/resource evidence, integrate REC-01.2, and obtain the focused independent loader review. Start alongside EN-01; no dependency on Astro, EN-02's envelope harness, KEY-01's browser importer or production custody. Code, real fixtures and passing checks exist; user-supplied review findings and their disposition are recorded in [docs/reviews/2026-10-03-feedback.md](docs/reviews/2026-10-03-feedback.md). Expanded required fuzz seeds and reproducible local gates pass. The user supplied conditional focused approval; its follow-up fixes and native Windows behavior are verified in docs/reviews/2026-10-03-rec01-followup.md. Exact LF fixture and covered-source evidence is refreshed. The CI regression workflow stays in workflows/ as a template by explicit user instruction, with its local checks available. See docs/reviews/rec01-review-packet.md.
 
 Acceptance criteria:
 
@@ -663,8 +663,8 @@ Acceptance criteria:
 Subtasks:
 
 - [x] REC-01.1 — implement keyfile/pbes2.go using the Go standard library, with youmark/pkcs8 and the .NET runtime source as read-only references. Implementation is not review completion.
-- [ ] REC-01.2 — integrate bounded hidden prompt/cancellation, cleanup/error mapping, RSA validation and fingerprint derivation; pin/vendor x/term/x/sys with provenance and full vendor verification.
-- [ ] REC-01.3 — start with real OpenSSL 3.0/3.5 fixture/oracle generation before the loader prototype, then test/fuzz pre-KDF and post-KDF hostile cases, record latency/resource/corpus evidence, and obtain independent loader review before M0 closes.
+- [x] REC-01.2 — bounded hidden prompt/cancellation, cleanup/error mapping, strict RSA/private-exponent consistency and fingerprints pass. Pinned x/term/x/sys provenance/full vendor verification pass. Native Windows navigation, Ctrl-C and blocked-read restoration tests pass; unexpected cancellation errors are observed only after reader shutdown.
+- [x] REC-01.3 — real OpenSSL 3.0/3.5 fixtures/oracles preceded the prototype; strict tests, pre/post-KDF fuzz/resource/latency and vendor evidence pass. User-supplied focused approval was conditional on the follow-up fixes, now verified. See docs/reviews/2026-10-03-rec01-followup.md and exact current evidence. QA-03/release remain separate.
 
 ### REC-02 — implement authenticated offline decryption and safe plaintext output
 
@@ -744,17 +744,24 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | --- | --- |
 | Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
 | Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. At the original planning baseline application checks had not run; subsequent implementation evidence is recorded below and in docs/status.md |
-| Engineering | EN-01 Done; EN-02/EN-03 and REC-01 in Review; EN-04 synthetic probe in progress. Current checks and milestone gates: [docs/status.md](docs/status.md) |
+| Engineering | EN-01/EN-02/KEY-01/REC-01 Done; EN-03 in Review; KEY-02 and EN-04 in progress. M0 foundation complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; download every glyph in a reversible one-line SVG; Unicode symbol strings deferred |
 | Production recipient | Public PEM/name/full fingerprint needed for REL-01; fixture-based engineering can proceed |
 | Host/domain | Vercel primary; Cloudflare Pages/Netlify alternatives, Surge conditional on verified header support; exact domain/account pending (REL-04/REL-02) |
-| Independent review | User-supplied focused feedback received and recorded; reviewed revision/scope and post-fix terminal/loader verification still needed. REC-01 is not Done; QA-03 remains a separate required gate |
+| Independent review | User-supplied REC-01 conditional approval recorded; specified fixes pass native/synthetic verification and all mandatory evidence gates. Reviewer identity/tool was not supplied and no external post-fix execution is claimed. QA-03 integrated review remains open. See docs/reviews/2026-10-03-rec01-followup.md |
 | Review feedback | EN-04 file:// spike/conditional launcher; raw-primary vs optional artwork/no v1 SVG consumer; complete compact PNG distinct from archival pages; REC-01 owned fixed-profile stdlib loader replaces third-party decoder selection, with youmark/pkcs8/.NET read-only references and strict parsing/fuzz/vendor gates |
 | Offline artifact trust | Independent artifact hash/reviewer channel needed for REL-03; hashing and locality do not by themselves establish code trust |
 | Receiver decision | Confirmed: browser encryption plus downloadable offline Go decrypt CLI, encrypted OpenSSL keys and hidden prompt; supersedes the earlier offline-browser selection |
-| Receiver/signing gates | Real OpenSSL fixture/oracle, native negative/boundary tests, initial fuzz/resource/latency and vendor checks pass. REC-01 post-fix review remains open; CI stays a template by user choice; expanded fuzz corpus and repeatable local gate pass. REC-02 output, signing publisher/credentials and independent release channel remain pending |
+| Receiver/signing gates | REC-01 focused conditional approval and verified fixes, exact LF fixture/oracle, native boundary/mutation/prompt, fuzz/resource/latency and complete vendor evidence pass. Workflow remains a template. REC-02 output, QA-03, signing and independent release channel remain pending |
 | Offline sender decision | EN-04 has a fully bundled synthetic crypto feasibility probe; full export/recovery/stable-browser/verification/review gates remain open. Native sender launcher/signing remains conditional |
 | Local repo use | pnpm dev/build/start:local/local and custom-only scripts implemented. Production builds require real public configuration; REL-04 final installation/hosting documentation gates remain open |
 | Security claim | Passing synthetic implementation tests and provisional external feedback; no proof/certification/completed audit/production validation claimed |
 
-Status evidence (2026-10-03): EN-01 | Done | `src/`, package/config files and scripts | seven unit tests, zero type diagnostics and 12 passing Chromium/Firefox checks | author verification | scaffold complete; later product flows and release remain separate. EN-02/EN-03 | Review | `tests/interop/`, `tests/browser/`, recipient scripts | real Chromium/Firefox interoperability, fail-closed build tests | author verification | REC-01/KEY-01 gates remain. REC-01 | Review | `receiver/` and fixture manifest | native tests, real OpenSSL oracle, initial 30-second pre/post fuzz and full vendor verification | user-supplied review plus author checks | post-fix focused review open; CI template retained by user instruction; expanded seeds/local regression gate pass. EN-04 | In progress | `offline/` | bundled synthetic probe, Chromium/Firefox file:// tests | author verification | full-flow/stable-platform/review evidence open.
+Earlier implementation snapshot (superseded by the status evidence below): EN-01 | Done | `src/`, package/config files and scripts | seven unit tests, zero type diagnostics and 12 passing Chromium/Firefox checks | author verification | scaffold complete; later product flows and release remain separate. EN-02/EN-03 | Review | `tests/interop/`, `tests/browser/`, recipient scripts | real Chromium/Firefox interoperability, fail-closed build tests | author verification | REC-01/KEY-01 gates remain. REC-01 | Review | `receiver/` and fixture manifest | native tests, real OpenSSL oracle, initial 30-second pre/post fuzz and full vendor verification | user-supplied review plus author checks | post-fix focused review open; CI template retained by user instruction; expanded seeds/local regression gate pass. EN-04 | In progress | `offline/` | bundled synthetic probe, Chromium/Firefox file:// tests | author verification | full-flow/stable-platform/review evidence open.
+
+Status evidence:
+
+- REC-01 | 2026-10-03 | Done | current exact files/hashes in docs/reviews/rec01-evidence.json | complete OpenSSL/native/vendor/fuzz/resource gate plus native console evidence | external focused report relayed by user; conditional approval and verified fixes in docs/reviews/2026-10-03-rec01-followup.md | Windows tested; other terminal platforms experimental; QA-03/release pending.
+- EN-02 | 2026-10-03 | Done | tests/browser/interop.spec.ts and tests/interop/go | real Chromium/Firefox WebCrypto and independent Go oracle pass; REC-01 dependency gate satisfied | author verification | integrated system review pending.
+- KEY-01 | 2026-10-03 | Done | src/lib/crypto/public-key.ts and tests/browser/public-key.spec.ts | native SPKI/actual integer policy, cross-runtime fingerprints, strict negative corpus pass | author verification | release trust/custody remains separate.
+- KEY-02 | 2026-10-03 | In progress | RecipientSelector.svelte and tests/browser/recipient-selection.spec.ts | local file/paste, rejected replacement, clear/default/reload, public export, keyboard/privacy/CSP pass | author verification | encryption/result snapshots and new-message integration pending.

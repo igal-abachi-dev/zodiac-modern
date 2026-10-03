@@ -12,6 +12,7 @@ import (
 
 var ErrCanceled = errors.New("operation canceled")
 var ErrTerminal = errors.New("a controlling terminal is required; run this command in an interactive terminal")
+var ErrTerminalIO = errors.New("unable to safely read or restore the controlling terminal")
 var ErrPassword = errors.New("passphrase must be at most 1024 bytes")
 
 // Prompt never reads a password from argv, environment or piped stdin.
@@ -38,11 +39,11 @@ func Prompt(ctx context.Context) (password []byte, err error) {
 			clear(password)
 			runtime.KeepAlive(password)
 			password = nil
-			err = ErrTerminal
+			err = ErrTerminalIO
 		}
 	}()
 	if configureTerminalInput(input) != nil {
-		return nil, ErrTerminal
+		return nil, ErrTerminalIO
 	}
 	if _, err := io.WriteString(output, "Private key passphrase (hidden): "); err != nil {
 		return nil, ErrTerminal
@@ -58,7 +59,7 @@ func Prompt(ctx context.Context) (password []byte, err error) {
 			clear(password)
 			runtime.KeepAlive(password)
 			password = nil
-			err = ErrTerminal
+			err = ErrTerminalIO
 		}
 	}()
 	go func() { readerDone <- runTerminalReader(readerCtx, input, requests, events) }()

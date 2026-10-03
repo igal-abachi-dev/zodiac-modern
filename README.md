@@ -64,13 +64,13 @@ Private keys and release-signing credentials stay outside the repository. Custom
 ```sh
 pnpm check
 pnpm test
-pnpm test:interop
 pnpm test:receiver
 pnpm verify:receiver-deps
 pnpm check:rec01
 pnpm build:custom
 pnpm build:test
 pnpm spike:offline-html
+pnpm test:interop
 pnpm test:e2e
 pnpm build
 pnpm check:artifact

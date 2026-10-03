@@ -32,7 +32,12 @@ function run(exe, args, input) {
   return result.stdout;
 }
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
-const evidence = { synthetic: true, pemLineEndings: 'LF; normalized before byte hashing', generators: {}, fixtures: [] };
+const evidence = {
+  synthetic: true,
+  pemLineEndings: 'LF; normalized before byte hashing',
+  generators: {},
+  fixtures: [],
+};
 for (const [branch, exe] of Object.entries(executables)) {
   evidence.generators[branch] = {
     version: run(exe, ['version', '-a']).toString(),

@@ -1,0 +1,42 @@
+{
+  "recorded": "2026-10-03T19:23:45.883Z",
+  "platform": "Windows 11 build 26200 x64; disposable controlling PTY",
+  "toolchain": "Go 1.27.1; GOTOOLCHAIN=local, GOPROXY=off, -mod=vendor",
+  "source": "Author-run native verification of user-supplied conditional review fixes",
+  "secretInputs": "Synthetic a/b/c characters and navigation/control key records only; no private key/passphrase",
+  "build": "go -C receiver test -mod=vendor -c -o artifacts/rec01-cli-tests.exe ./internal/cli",
+  "run": "$env:ZODIAC_TEST_CONSOLE = \"1\"; .\\artifacts\\rec01-cli-tests.exe \"-test.v\" \"-test.run=TestNativeConsole(Navigation|ContextCancellation)$\" \"-test.timeout=15s\"",
+  "results": [
+    {
+      "name": "TestNativeConsoleNavigation/navigation",
+      "result": "PASS",
+      "observed": "arrows, Home, End, Delete ignored between synthetic a/b/c; returned abc promptly; hidden input; terminal restored"
+    },
+    {
+      "name": "TestNativeConsoleNavigation/control-c",
+      "result": "PASS",
+      "observed": "Ctrl-C canceled promptly before context deadline; terminal restored"
+    },
+    {
+      "name": "TestNativeConsoleContextCancellation",
+      "result": "PASS",
+      "observed": "blocked read canceled; password nil; terminal restored",
+      "seconds": 1.0003342
+    }
+  ],
+  "exitCode": 0,
+  "ordinaryCINote": "These native controlling-terminal cases are opt-in and skipped by ordinary noninteractive CI.",
+  "hashes": {
+    "receiver/internal/cli/navigation_windows_test.go": "2878c7076f8140ae4fe2775701e6c2e43ecac53bd3706aa9d724d01ddc62c4a3",
+    "receiver/internal/cli/password.go": "f3ce6df119e490f4786b676cbe84eb9eb568b632d298f6fff6cff1d0a75e3aa9",
+    "receiver/internal/cli/password_test.go": "0e32a9c170389048f3994a7f0ff7a251e5f546f73aafdca4b285cbeb95745d9a",
+    "receiver/internal/cli/terminal_unix.go": "3f5e224df056258a99a4526fcb32750518a3d1139e256fa37016fa10c2f06849",
+    "receiver/internal/cli/terminal_windows.go": "6874d854ee2efa4633ed40269b2ea481190656eba2fee1e3a7b933eee4871dbb",
+    "receiver/internal/cli/terminal_windows_errors_test.go": "d86ed6d25a8bf4f0ffefa5a9c87663c3f513b1bc1ae894d56a96f0fba7f19bb9",
+    "receiver/internal/cli/terminal_windows_test.go": "e38314afd6fb3453e68d618df3dfa69fdedbb81a76639ad0878392b27a79efdc",
+    ".go-version": "a8844fbc8c3eb51c26ed00aec4cd5a5a9d647f849c6ead07bcc83ed24c4a7718",
+    "receiver/go.mod": "fde7e596bc42d686f701dca35a958e5111359ac5c592b223dc5e9f756dc7538b",
+    "receiver/go.sum": "03664af1a1a706794a65ef50dde2f086d54878c237fe5e8032c877fb7d9b0457",
+    "artifacts/rec01-cli-tests.exe": "71119ec5c64552a8973554da7bd639f71f5755083ff63f098331d12014835c6b"
+  }
+}

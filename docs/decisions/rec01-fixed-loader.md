@@ -42,7 +42,7 @@ PBKDF2 password string, Go/RSA/cipher internals, OS copies and exported files
 cannot be guaranteed erased. Browser private-key import is not enabled.
 
 The development executable currently supports `--help`, `--version`, and
-`verify-key --key encrypted.pem --public public.pem`. It is unsigned and unreviewed.
+`verify-key --key encrypted.pem --public public.pem`. It is unsigned; the complete receiver/release has not received QA-03 review.
 Authenticated message decryption/private output remain REC-02. Do not use this
 build for real secrets.
 
@@ -50,3 +50,10 @@ REC-01 is not Done until an independent focused reviewer assesses the owned
 loader, schema/padding tests, resource/fuzz evidence and terminal/vendor glue,
 and all findings are resolved and rechecked. Automated tests and author inspection
 do not substitute for this gate or for QA-03's later integrated review.
+
+The [focused follow-up review](../reviews/2026-10-03-rec01-followup.md) and verified
+conditions close REC-01 for the exact current evidence. Explicit private-exponent
+consistency checks complement native RSA validation. Windows raw input disables
+VT input so navigation keys are ignored; Ctrl-C cancels. Unexpected synchronous
+cancellation failures remain observable after reader shutdown, before restoration.
+The native console tests pass separately from ordinary noninteractive CI.

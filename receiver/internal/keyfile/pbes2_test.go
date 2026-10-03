@@ -15,6 +15,7 @@ import (
 	"encoding/json"
 	"encoding/pem"
 	"errors"
+	"math/big"
 	"os"
 	"path/filepath"
 	"strings"
@@ -345,6 +346,50 @@ func TestParseBounds(t *testing.T) {
 	random := make([]byte, 4096)
 	rand.Read(random)
 	assertPreKDF(t, random)
+}
+
+func TestCorruptedPrivateExponent(t *testing.T) {
+	for _, filename := range []string{"openssl-3.5-3072.pem", "openssl-3.5-4096.pem"} {
+		t.Run(filename, func(t *testing.T) {
+			key, _, err := Load(fixture(t, filename), []byte(fixturePassword))
+			if err != nil {
+				t.Fatal(err)
+			}
+			der, err := x509.MarshalPKCS8PrivateKey(key)
+			if err != nil {
+				t.Fatal(err)
+			}
+			defer wipe(der)
+			outer, _ := sequenceDER(der, 3, 3)
+			inner, _ := sequenceDER(outer[2].Bytes, 9, 9)
+			var last []byte
+			for bit := 0; bit < key.D.BitLen(); bit++ {
+				mutant := new(big.Int).Set(key.D)
+				mutant.SetBit(mutant, bit, 1-key.D.Bit(bit))
+				members := append([]asn1.RawValue{}, inner...)
+				members[3] = raw(t, mutant)
+				wrapper := append([]asn1.RawValue{}, outer...)
+				wrapper[2] = raw(t, seq(t, members...).FullBytes)
+				encoded := seq(t, wrapper...).FullBytes
+				_, err := parsePrivate(encoded)
+				if err != ErrUnlock {
+					wipe(encoded)
+					t.Fatalf("private exponent bit %d accepted", bit)
+				}
+				wipe(last)
+				last = encoded
+			}
+			defer wipe(last)
+			// Exercise generic error mapping and owned-password cleanup through CBC.
+			encoded := encryptTest(t, standard(t), last)
+			password := []byte(fixturePassword)
+			loaded, fp, err := Load(encoded, password)
+			if err != ErrUnlock || loaded != nil || fp != "" || !bytes.Equal(password, make([]byte, len(password))) {
+				t.Fatal("corrupted D escaped the generic unlock/cleanup boundary")
+			}
+			t.Logf("rejected all %d single-bit private-exponent mutations", key.D.BitLen())
+		})
+	}
 }
 
 func TestUnsupportedAndMalformedInnerKeys(t *testing.T) {

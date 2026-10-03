@@ -24,7 +24,7 @@ for (const check of report.checks) {
         ? output
             .split('\n')
             .filter((line) =>
-              /native unlock duration|native KDF\+unlock|allocations:|^ok\s|^PASS$/.test(
+              /native unlock duration|native KDF\+unlock|allocations:|single-bit private-exponent mutations|^ok\s|^PASS$/.test(
                 line,
               ),
             )

@@ -19,6 +19,7 @@ Review these sources:
 - `receiver/go.mod`, `go.sum`, `vendor/` and `scripts/receiver.mjs`: authenticated
   pinned dependencies, complete regenerated vendor comparison and offline build.
 - `scripts/oracle-key-fixtures.mjs`, `setup-openssl-ci.mjs`, `check-rec01.mjs`,
+  `walk-files.mjs`, `generate-key-fixtures.mjs`,
   the fixture manifest and workflow template: fail-closed, versioned evidence.
 
 Pinned provenance and policy are in [the loader decision](../decisions/rec01-fixed-loader.md).
@@ -91,5 +92,13 @@ standard-library primitives alone do not satisfy this review. The earlier
 user-supplied Go 1.24.7/Node WebCrypto report remains useful input, distinct from
 the pinned native/real-browser evidence and updated code reviewed here.
 
-REC-01 stays in Review until the mandatory focused gate closes. QA-03 later
-assesses the integrated sender/receiver/output/trust boundary separately.
+The user-supplied [focused follow-up review](2026-10-03-rec01-followup.md) grants
+conditional approval once its findings are fixed. Those fixes, mandatory automated
+evidence and [native Windows console checks](rec01-console-evidence.json) pass.
+REC-01 is Done on that basis; this does not claim an external post-fix execution.
+QA-03 later assesses the integrated sender/receiver/output/trust boundary separately.
+
+The tracked encrypted PEM fixtures are normalized to LF before hashing, with
+original generator-byte hashes retained in the manifest. Current exact checkout
+hashes supersede earlier CRLF working-copy snapshots. The gate uses only the
+covered standard-library file walker and does not import website CSP code.
