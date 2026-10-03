@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { filesAt } from './build-host-headers.mjs';
+import { filesAt } from './walk-files.mjs';
 
 export async function checkArtifact(root = 'dist', mode = 'production') {
   const files = await filesAt(root);

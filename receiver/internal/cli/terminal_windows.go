@@ -4,6 +4,7 @@ package cli
 
 import (
 	"context"
+	"errors"
 	"golang.org/x/sys/windows"
 	"os"
 	"runtime"
@@ -26,6 +27,26 @@ func openTerminal() (*os.File, *os.File, error) {
 var cancelSynchronousIO = windows.NewLazySystemDLL("kernel32.dll").NewProc("CancelSynchronousIo")
 var flushConsoleInput = windows.NewLazySystemDLL("kernel32.dll").NewProc("FlushConsoleInputBuffer")
 
+func configureTerminalInput(input *os.File) error {
+	var mode uint32
+	if err := windows.GetConsoleMode(windows.Handle(input.Fd()), &mode); err != nil {
+		return err
+	}
+	// MakeRaw enables VT input. This byte-oriented hidden prompt does not edit
+	// with navigation keys: let ReadConsole ignore them instead of emitting ESC.
+	return windows.SetConsoleMode(windows.Handle(input.Fd()), mode &^ windows.ENABLE_VIRTUAL_TERMINAL_INPUT)
+}
+
+func cancelResult(result uintptr, err error) error {
+	if result != 0 || errors.Is(err, windows.ERROR_NOT_FOUND) {
+		return nil
+	}
+	if err == nil || errors.Is(err, windows.ERROR_SUCCESS) {
+		return ErrTerminal
+	}
+	return err
+}
+
 func flushTerminalInput(input *os.File) error {
 	result, _, err := flushConsoleInput.Call(input.Fd())
 	if result == 0 {
@@ -34,7 +55,7 @@ func flushTerminalInput(input *os.File) error {
 	return nil
 }
 
-func runTerminalReader(ctx context.Context, input *os.File, requests <-chan struct{}, events chan<- inputEvent) {
+func runTerminalReader(ctx context.Context, input *os.File, requests <-chan struct{}, events chan<- inputEvent) error {
 	// ReadConsole is synchronous. Keep its worker on one OS thread so cancellation
 	// can interrupt that specific pending read; CancelIoEx is not sufficient here.
 	runtime.LockOSThread()
@@ -42,34 +63,49 @@ func runTerminalReader(ctx context.Context, input *os.File, requests <-chan stru
 	thread, err := windows.OpenThread(windows.THREAD_TERMINATE, false, windows.GetCurrentThreadId())
 	if err != nil {
 		readEvents(ctx, requests, events, func([]byte) (int, error) { return 0, err })
-		return
+		return err
 	}
+	defer windows.CloseHandle(thread)
+	return runWindowsReader(ctx, requests, events, input.Read, func() error {
+		result, _, err := cancelSynchronousIO.Call(uintptr(thread))
+		return cancelResult(result, err)
+	})
+}
+
+func runWindowsReader(ctx context.Context, requests <-chan struct{}, events chan<- inputEvent, read func([]byte) (int, error), cancelRead func() error) error {
 	done := make(chan struct{})
-	cancelDone := make(chan struct{})
+	cancelDone := make(chan error, 1)
 	go func() {
-		defer close(cancelDone)
+		cancelDone <- cancelPendingRead(ctx, done, cancelRead)
+	}()
+	readEvents(ctx, requests, events, read)
+	close(done)
+	// Never restore/return while the synchronous reader is still running.
+	return <-cancelDone
+}
+
+func cancelPendingRead(ctx context.Context, done <-chan struct{}, cancelRead func() error) error {
 		select {
 		case <-done:
-			return
+			return nil
 		case <-ctx.Done():
 		}
 		ticker := time.NewTicker(20 * time.Millisecond)
 		defer ticker.Stop()
+		var firstFailure error
 		for {
 			select {
 			case <-done:
-				return
+				return firstFailure
 			default:
 			}
-			// ERROR_NOT_FOUND simply means the demanded read has not started/has ended.
-			cancelSynchronousIO.Call(uintptr(thread))
+			if err := cancelRead(); err != nil && firstFailure == nil {
+				firstFailure = err
+			}
 			select {
 			case <-done:
-				return
+				return firstFailure
 			case <-ticker.C:
 			}
 		}
-	}()
-	defer func() { close(done); <-cancelDone; windows.CloseHandle(thread) }()
-	readEvents(ctx, requests, events, input.Read)
 }

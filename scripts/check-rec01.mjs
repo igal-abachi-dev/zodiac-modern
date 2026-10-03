@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, dirname, join } from 'node:path';
 import { platform, release, cpus } from 'node:os';
-import { filesAt } from './build-host-headers.mjs';
+import { filesAt } from './walk-files.mjs';
 import { requireGo, goExecutable, goEnv, runGo } from './receiver.mjs';
 
 await requireGo();
@@ -25,6 +25,8 @@ async function collectInputs() {
     'scripts/check-rec01.mjs',
     'scripts/snapshot-rec01.mjs',
     'scripts/setup-openssl-ci.mjs',
+    'scripts/walk-files.mjs',
+    'scripts/generate-key-fixtures.mjs',
     'workflows/foundation.yml',
     ...(await filesAt(resolve('receiver/internal'))),
     ...(await filesAt(resolve('receiver/cmd'))),

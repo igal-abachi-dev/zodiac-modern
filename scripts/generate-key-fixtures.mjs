@@ -32,7 +32,7 @@ function run(exe, args, input) {
   return result.stdout;
 }
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
-const evidence = { synthetic: true, generators: {}, fixtures: [] };
+const evidence = { synthetic: true, pemLineEndings: 'LF; normalized before byte hashing', generators: {}, fixtures: [] };
 for (const [branch, exe] of Object.entries(executables)) {
   evidence.generators[branch] = {
     version: run(exe, ['version', '-a']).toString(),
@@ -114,6 +114,8 @@ for (const [branch, exe] of Object.entries(executables)) {
 function record(branch, bits, filename, command, expected, origin) {
   const exe = executables[branch];
   const path = resolve(root, filename);
+  // Keep the exact tracked bytes portable before the oracle or manifest hash.
+  writeFileSync(path, readFileSync(path, 'utf8').replaceAll('\r\n', '\n'));
   let privateDER;
   try {
     privateDER = run(exe, [

@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, rm } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
-import { filesAt } from './build-host-headers.mjs';
+import { filesAt } from './walk-files.mjs';
 
 export const goExecutable =
   process.env.ZODIAC_GO ??

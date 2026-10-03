@@ -41,16 +41,27 @@ func Prompt(ctx context.Context) (password []byte, err error) {
 			err = ErrTerminal
 		}
 	}()
+	if configureTerminalInput(input) != nil {
+		return nil, ErrTerminal
+	}
 	if _, err := io.WriteString(output, "Private key passphrase (hidden): "); err != nil {
 		return nil, ErrTerminal
 	}
 	defer io.WriteString(output, "\r\n")
 	events := make(chan inputEvent)
 	requests := make(chan struct{})
-	readerDone := make(chan struct{})
+	readerDone := make(chan error, 1)
 	readerCtx, cancel := context.WithCancel(ctx)
-	defer func() { cancel(); <-readerDone }()
-	go func() { defer close(readerDone); runTerminalReader(readerCtx, input, requests, events) }()
+	defer func() {
+		cancel()
+		if readerErr := <-readerDone; readerErr != nil {
+			clear(password)
+			runtime.KeepAlive(password)
+			password = nil
+			err = ErrTerminal
+		}
+	}()
+	go func() { readerDone <- runTerminalReader(readerCtx, input, requests, events) }()
 	return readPasswordWithRequests(ctx, events, requests)
 }
 

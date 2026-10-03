@@ -1,19 +1,8 @@
 import { createHash } from 'node:crypto';
-import { readFile, readdir, writeFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { securityHeaders } from '../config/security-policy.ts';
-
-export async function filesAt(root) {
-  const result = [];
-  for (const item of await readdir(root, { withFileTypes: true })) {
-    const path = join(root, item.name);
-    if (item.isSymbolicLink())
-      throw new Error('Build artifacts must not contain symlinks.');
-    if (item.isDirectory()) result.push(...(await filesAt(path)));
-    else result.push(path);
-  }
-  return result;
-}
+import { filesAt } from './walk-files.mjs';
 export async function buildHeaders(root) {
   const scripts = new Set();
   const styles = new Set();

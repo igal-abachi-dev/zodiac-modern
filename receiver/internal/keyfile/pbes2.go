@@ -293,5 +293,14 @@ func parsePrivate(der []byte) (*rsa.PrivateKey, error) {
 	if !ok || len(key.Primes) != 2 || key.E != 65537 || (key.N.BitLen() != 3072 && key.N.BitLen() != 4096) || key.Validate() != nil {
 		return nil, ErrUnlock
 	}
+	// Some Go versions validate the CRT exponents without checking the encoded D.
+	// Keep this fixed-profile consistency check explicit alongside native Validate.
+	one := big.NewInt(1)
+	de := new(big.Int).Mul(key.D, big.NewInt(int64(key.E)))
+	for _, prime := range key.Primes {
+		if new(big.Int).Mod(de, new(big.Int).Sub(prime, one)).Cmp(one) != 0 {
+			return nil, ErrUnlock
+		}
+	}
 	return key, nil
 }
