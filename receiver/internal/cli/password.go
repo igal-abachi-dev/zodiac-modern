@@ -31,10 +31,15 @@ func Prompt(ctx context.Context) (password []byte, err error) {
 	if err != nil {
 		return nil, ErrTerminal
 	}
-	defer func(){
-		flushErr:=flushTerminalInput(input)
-		restoreErr:=term.Restore(fd,state)
-		if flushErr!=nil||restoreErr!=nil{clear(password);runtime.KeepAlive(password);password=nil;err=ErrTerminal}
+	defer func() {
+		flushErr := flushTerminalInput(input)
+		restoreErr := term.Restore(fd, state)
+		if flushErr != nil || restoreErr != nil {
+			clear(password)
+			runtime.KeepAlive(password)
+			password = nil
+			err = ErrTerminal
+		}
 	}()
 	if _, err := io.WriteString(output, "Private key passphrase (hidden): "); err != nil {
 		return nil, ErrTerminal
@@ -84,20 +89,29 @@ func readPasswordWithRequests(ctx context.Context, events <-chan inputEvent, req
 			}
 			switch event.value {
 			case '\r', '\n':
-				if overflow{return nil,ErrPassword}
+				if overflow {
+					return nil, ErrPassword
+				}
 				return buffer[:used], nil
 			case 3, 4, 26, 27:
 				return nil, ErrCanceled
 			case 8, 127:
-				if overflow{continue}
+				if overflow {
+					continue
+				}
 				if used > 0 {
 					_, size := utf8.DecodeLastRune(buffer[:used])
 					clear(buffer[used-size : used])
 					used -= size
 				}
 			default:
-				if used == len(buffer) {overflow=true;continue}
-				if overflow{continue}
+				if used == len(buffer) {
+					overflow = true
+					continue
+				}
+				if overflow {
+					continue
+				}
 				buffer[used] = event.value
 				used++
 			}

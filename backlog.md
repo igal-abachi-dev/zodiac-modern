@@ -1,6 +1,6 @@
 # Zodiac Modern — delivery backlog
 
-Baseline: 2026-10-03. Specification: [plan.md](plan.md). Contributor rules: [AGENTS.md](AGENTS.md). This backlog tracks future implementation; it does not claim that the app, tests, audit, or deployment already exist.
+Baseline: 2026-10-03. Specification: [plan.md](plan.md). Contributor rules: [AGENTS.md](AGENTS.md). Foundation code and tests now exist; task/milestone evidence is maintained in [docs/status.md](docs/status.md). No completed audit or deployment is claimed.
 
 ## 1. Priorities, statuses, and working rules
 
@@ -25,7 +25,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | Epic | Type | Priority | Status | Milestone | Outcome |
 | --- | --- | --- | --- | --- | --- |
 | E00 | Planning | P0 | Done | M0 | Source review and planning documents |
-| E01 | Enablers | P0 | Ready | M0 | Static scaffold, independent harness, recipient build pipeline |
+| E01 | Enablers | P0 | In progress | M0 | Scaffold verification, harness/build pipeline review, partial offline spike |
 | E02 | Crypto | P0 | Backlog | M1 | Exact compatible browser encryption and strict codecs |
 | E03 | Key management | P0 | Backlog | M1 | Safe default/custom public recipients and offline key guide |
 | E04 | Workspace | P1 | Backlog | M2 | Accessible edit/encrypt/result/reset flow |
@@ -35,7 +35,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E08 | Verification/review | P0 | Backlog | M4 | Browser/Go, UX/export QA, independent security assessment |
 | E09 | Release | P0 | Backlog | M5 | Real recipient, verified host/offline bundle, custody and rollback |
 | E10 | Later options | P2 | Deferred | Later | Explicitly separate future decisions |
-| E11 | Offline recipient | P0 | Ready | M0/M2/M4 | Early validated/reviewed encrypted PEM loader, authenticated Go CLI decryption, safe outputs and recipient guide |
+| E11 | Offline recipient | P0 | Review | M0/M2/M4 | REC-01 implementation under review; authenticated decryption/output still pending |
 
 Critical-path start: `DOC-01 → (EN-01 alongside REC-01) → EN-02 → E02/E03 → E04/REC-02 → E05/E06 → E07/E08 → E09`. REC-01 starts in M0 without frontend/public-key importer dependencies; its real OpenSSL 3.0/3.5 prototype, fuzz/resource/vendor evidence and focused independent review are foundation gates, not deferred M2/release tasks. E07 policy starts during scaffold; E08 tests grow with each story and QA-03 retains the later system review. EN-04 begins file:// feasibility early and completes its full-flow delivery decision before release/review scope is finalized; do not commit to a native sender launcher before that decision. E02/E03/E11 use synthetic fixtures. E09 requires real public configuration, receiver decryption, review, independently verified sender bytes, signed receiver/any selected native launcher and a trusted verification channel.
 
@@ -58,7 +58,7 @@ Completed subtasks: `DOC-01.1` review source context/Go/reference ZIP/flow diagr
 
 ### EN-01 — create the minimal static Astro/Svelte 5 project
 
-Type: enabler · Priority: P0 · Status: Ready · Milestone: M0 · Dependencies: DOC-01.
+Type: enabler · Priority: P0 · Status: Done · Milestone: M0 · Dependencies: DOC-01.
 
 Acceptance criteria:
 
@@ -69,13 +69,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] EN-01.1 — verify and pin Node/pnpm/framework versions; initialize minimal packages and lockfile.
-- [ ] EN-01.2 — scaffold Astro layout/routes, Svelte island, CSS tokens, and static explanatory content. for scaffold astro/svelte use standard cli commands from their docs(dont gen the files from memory) so its standard/updated,from that init scaffold our structure,
-- [ ] EN-01.3 — add formatter/type/test/build scripts, `.gitignore`, and a test-only recipient configuration path.
+- [x] EN-01.1 — verify and pin Node/pnpm/framework versions; initialize minimal packages and lockfile.
+- [x] EN-01.2 — scaffold Astro layout/routes, Svelte island, CSS tokens, and static explanatory content using the standard create-astro and astro add svelte CLIs, then extend the structure.
+- [x] EN-01.3 — add formatter/type/test/build scripts, `.gitignore`, and a test-only recipient configuration path.
 
 ### EN-02 — establish independent crypto fixtures and a Go test harness
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M0 · Dependencies: EN-01, REC-01.
+Type: enabler · Priority: P0 · Status: Review · Milestone: M0 · Dependencies: EN-01, REC-01.
 
 Acceptance criteria:
 
@@ -87,13 +87,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] EN-02.1 — create fixture key pairs, profile serialization cases, and multilingual/boundary corpus.
-- [ ] EN-02.2 — implement an isolated Go OAEP/GCM harness using the reference layout plus explicit parsing checks.
-- [ ] EN-02.3 — wire Playwright/interop script to exchange test-only envelopes with the harness; record tool versions.
+- [x] EN-02.1 — create fixture key pairs, profile serialization cases, and multilingual/boundary corpus.
+- [x] EN-02.2 — implement an isolated Go OAEP/GCM harness using the reference layout plus explicit parsing checks.
+- [x] EN-02.3 — wire Playwright/interop script to exchange test-only envelopes with the harness; record tool versions. Completion remains gated by REC-01 review; current runs are provisional engineering evidence.
 
 ### EN-03 — validate and generate public recipient build data
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M1 · Dependencies: EN-01, KEY-01.
+Type: enabler · Priority: P0 · Status: Review · Milestone: M1 · Dependencies: EN-01, KEY-01.
 
 Acceptance criteria:
 
@@ -104,13 +104,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] EN-03.1 — implement public config schema and build-time key/fingerprint validator.
-- [ ] EN-03.2 — generate `src/generated/default-recipient.ts` and public PEM consistency checks.
-- [ ] EN-03.3 — test fail-closed production cases and explicit fixture/development modes.
+- [x] EN-03.1 — implement public config schema and build-time key/fingerprint validator.
+- [x] EN-03.2 — generate `src/generated/default-recipient.ts` and public PEM consistency checks.
+- [x] EN-03.3 — test fail-closed production cases and explicit fixture/development modes. KEY-01 integration and production recipient configuration remain open.
 
 ### EN-04 — spike self-contained file:// sender before selecting a launcher
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M1/M4 · Dependencies: EN-01, CRY-01, EXP-01, SYM-02, SEC-01.
+Type: enabler · Priority: P0 · Status: In progress · Milestone: M1/M4 · Dependencies: EN-01, CRY-01, EXP-01, SYM-02, SEC-01.
 
 Acceptance criteria:
 
@@ -643,9 +643,9 @@ Subtasks:
 
 ### REC-01 — implement and validate encrypted-PKCS#8 key loading early
 
-Type: enabler · Priority: P0 · Status: Ready · Milestone: M0 · Dependencies: DOC-01.
+Type: enabler · Priority: P0 · Status: Review · Milestone: M0 · Dependencies: DOC-01.
 
-Execution order: first establish the real OpenSSL 3.0/3.5 fixture/oracle baseline from REC-01.3, then prototype REC-01.1 against it, complete the negative/fuzz/resource evidence, integrate REC-01.2, and obtain the focused independent loader review. Start alongside EN-01; no dependency on Astro, EN-02's envelope harness, KEY-01's browser importer or production custody. Ready means the approach and synthetic work are authorized; nothing is implemented or verified yet.
+Execution order: first establish the real OpenSSL 3.0/3.5 fixture/oracle baseline from REC-01.3, then prototype REC-01.1 against it, complete the negative/fuzz/resource evidence, integrate REC-01.2, and obtain the focused independent loader review. Start alongside EN-01; no dependency on Astro, EN-02's envelope harness, KEY-01's browser importer or production custody. Code, real fixtures and passing checks exist; user-supplied review findings and their disposition are recorded in [docs/reviews/2026-10-03-feedback.md](docs/reviews/2026-10-03-feedback.md). Post-fix focused review, full required fuzz seed coverage and CI regression gates remain open.
 
 Acceptance criteria:
 
@@ -662,7 +662,7 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] REC-01.1 — implement keyfile/pbes2.go using the Go standard library, with youmark/pkcs8 and the .NET runtime source as read-only references.
+- [x] REC-01.1 — implement keyfile/pbes2.go using the Go standard library, with youmark/pkcs8 and the .NET runtime source as read-only references. Implementation is not review completion.
 - [ ] REC-01.2 — integrate bounded hidden prompt/cancellation, cleanup/error mapping, RSA validation and fingerprint derivation; pin/vendor x/term/x/sys with provenance and full vendor verification.
 - [ ] REC-01.3 — start with real OpenSSL 3.0/3.5 fixture/oracle generation before the loader prototype, then test/fuzz pre-KDF and post-KDF hostile cases, record latency/resource/corpus evidence, and obtain independent loader review before M0 closes.
 
@@ -738,21 +738,23 @@ Subtasks:
 
 Deferred items do not block M5 and have no implied authorization to change the compatible envelope, private-key policy, or message persistence.
 
-## 15. Initial evidence and open gates
+## 15. Current evidence and open gates
 
 | Item | Current evidence / next action |
 | --- | --- |
 | Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
-| Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. Application/loader/spike checks not run because implementation has not started |
-| Engineering | Not started; EN-01 and REC-01 are Ready for independent M0 starts; REC-01's foundation evidence gates EN-02 and cannot wait for M2 |
+| Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. At the original planning baseline application checks had not run; subsequent implementation evidence is recorded below and in docs/status.md |
+| Engineering | EN-01 Done; EN-02/EN-03 and REC-01 in Review; EN-04 synthetic probe in progress. Current checks and milestone gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; download every glyph in a reversible one-line SVG; Unicode symbol strings deferred |
 | Production recipient | Public PEM/name/full fingerprint needed for REL-01; fixture-based engineering can proceed |
 | Host/domain | Vercel primary; Cloudflare Pages/Netlify alternatives, Surge conditional on verified header support; exact domain/account pending (REL-04/REL-02) |
-| Independent review | Not obtained; QA-03 remains a required gate |
+| Independent review | User-supplied focused feedback received and recorded; reviewed revision/scope and post-fix terminal/loader verification still needed. REC-01 is not Done; QA-03 remains a separate required gate |
 | Review feedback | EN-04 file:// spike/conditional launcher; raw-primary vs optional artwork/no v1 SVG consumer; complete compact PNG distinct from archival pages; REC-01 owned fixed-profile stdlib loader replaces third-party decoder selection, with youmark/pkcs8/.NET read-only references and strict parsing/fuzz/vendor gates |
 | Offline artifact trust | Independent artifact hash/reviewer channel needed for REL-03; hashing and locality do not by themselves establish code trust |
 | Receiver decision | Confirmed: browser encryption plus downloadable offline Go decrypt CLI, encrypted OpenSSL keys and hidden prompt; supersedes the earlier offline-browser selection |
-| Receiver/signing gates | Fixed-profile stdlib loader confirmed and promoted to M0 critical path; real OpenSSL 3.0/3.5 prototype/oracle/fuzz/resource/vendor/focused-review evidence (REC-01), expected Authenticode publisher/credentials and independent release channel (SEC-04/REL-03) remain pending |
-| Offline sender decision | EN-04 planned, not executed: prefer tested independently verified self-contained HTML; native sender launcher/signing is conditional fallback, not a settled requirement |
-| Local repo use | Required pnpm dev/build/start:local/local paths, frozen install and explicit custom-only mode planned in REL-04; no implementation exists yet |
-| Security claim | Design objective only; no proof/certification/audit/production validation claimed |
+| Receiver/signing gates | Real OpenSSL fixture/oracle, native negative/boundary tests, initial fuzz/resource/latency and vendor checks pass. REC-01 review/full seed/CI gates remain open. REC-02 output, signing publisher/credentials and independent release channel remain pending |
+| Offline sender decision | EN-04 has a fully bundled synthetic crypto feasibility probe; full export/recovery/stable-browser/verification/review gates remain open. Native sender launcher/signing remains conditional |
+| Local repo use | pnpm dev/build/start:local/local and custom-only scripts implemented. Production builds require real public configuration; REL-04 final installation/hosting documentation gates remain open |
+| Security claim | Passing synthetic implementation tests and provisional external feedback; no proof/certification/completed audit/production validation claimed |
+
+Status evidence (2026-10-03): EN-01 | Done | `src/`, package/config files and scripts | seven unit tests, zero type diagnostics and 12 passing Chromium/Firefox checks | author verification | scaffold complete; later product flows and release remain separate. EN-02/EN-03 | Review | `tests/interop/`, `tests/browser/`, recipient scripts | real Chromium/Firefox interoperability, fail-closed build tests | author verification | REC-01/KEY-01 gates remain. REC-01 | Review | `receiver/` and fixture manifest | native tests, real OpenSSL oracle, initial 30-second pre/post fuzz and full vendor verification | user-supplied review plus author checks | post-fix focused review/full seeds/CI open. EN-04 | In progress | `offline/` | bundled synthetic probe, Chromium/Firefox file:// tests | author verification | full-flow/stable-platform/review evidence open.

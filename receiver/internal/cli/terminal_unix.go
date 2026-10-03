@@ -20,8 +20,9 @@ func openTerminal() (*os.File, *os.File, error) {
 	}
 	return input, output, nil
 }
+
 // Non-Windows terminal integration is experimental until real-platform tests.
-func flushTerminalInput(input *os.File)error{return nil}
+func flushTerminalInput(input *os.File) error { return nil }
 
 func runTerminalReader(ctx context.Context, input *os.File, requests <-chan struct{}, events chan<- inputEvent) {
 	fd := int(input.Fd())

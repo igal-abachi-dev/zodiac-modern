@@ -4,7 +4,7 @@ Local-first message encryption with a browser sender, celestial glyph artwork, a
 
 Choose a recipient public key, encrypt a message locally, and share the ciphertext. Keep private keys and decryption on the recipient's device.
 
-## Features
+## Planned first-release features
 
 - Native WebCrypto: RSA-OAEP-SHA256 and AES-256-GCM.
 - Default and custom recipient public keys with full SHA-256 fingerprints.
@@ -31,9 +31,9 @@ The website accepts public keys only. The receiver handles private keys and pass
 
 ## Development
 
-> This README describes the target scaffolded project. The current checkout contains design and reference files; the commands below become available after scaffolding. No reviewed release is available yet.
+The static scaffold, public-key/build validation, browser crypto library, independent Go test oracle and encrypted-key loader are implemented. The site currently shows disabled message controls; the unsigned receiver supports key verification only. Full sender UI, glyph/export/recovery flows and authenticated receiver decryption/output remain pending. No reviewed release is available. See [live task and milestone status](docs/status.md).
 
-Use a supported Node.js LTS compatible with the project's engines, the pnpm version pinned in `package.json`, and the committed lockfile. Receiver development additionally requires the pinned supported Go toolchain; its standard-library PBKDF2 API requires Go 1.24 or newer. OpenSSL is needed for key setup and interoperability fixtures, not for running browser encryption or the packaged receiver.
+Use Node.js 24.21.0 (the 24.x LTS line), pnpm 12.8.1 and the committed lockfile. Receiver checks require the pinned installed Go 1.27.1 toolchain; automatic toolchain downloads are disabled. OpenSSL is needed for key setup and interoperability fixtures, not for running browser encryption or the packaged receiver. Configure `ZODIAC_GO` when the pinned Go executable is outside PATH; the scripts also recognize the repository's ignored portable-toolchain cache.
 
 From the repository root:
 
@@ -67,12 +67,16 @@ pnpm test
 pnpm test:interop
 pnpm test:receiver
 pnpm verify:receiver-deps
-pnpm build
+pnpm build:test
+pnpm spike:offline-html
 pnpm test:e2e
+pnpm build
 pnpm check:artifact
 ```
 
-Use synthetic messages and labeled test keys. Receiver validation includes real OpenSSL 3.0/3.5 fixtures, independent OpenSSL oracle comparisons, strict profile/schema failures, pre-KDF stub fuzzing, bounded post-KDF fuzzing, and vendor integrity. Testing an older generator does not broaden the accepted key-file profile.
+Install the pinned Playwright browsers with `pnpm exec playwright install chromium firefox` before browser tests. The fixture build writes only to `artifacts/test-site`; the standalone probe is explicitly synthetic and is not a release sender. Production `pnpm build` intentionally fails until real public configuration is supplied.
+
+Use synthetic messages and labeled test keys. Receiver validation includes real OpenSSL 3.0/3.5 fixtures, independent OpenSSL oracle comparisons, strict profile/schema failures, pre-KDF stub fuzzing, bounded post-KDF fuzzing, and vendor integrity. For `pnpm test:receiver-oracle`, set `ZODIAC_OPENSSL30` and `ZODIAC_OPENSSL35` to the recorded executable versions in the fixture manifest. Testing an older generator does not broaden the accepted key-file profile. See [loader implementation and review limits](docs/decisions/rec01-fixed-loader.md).
 
 ## Recipient workflow
 
@@ -84,7 +88,7 @@ After a verified receiver release is available, save the sender's raw ciphertext
 .\zodiac-decrypt.exe decrypt --key ".\rsa-private-encrypted.pem" --in ".\ciphertext.txt" --out ".\message.txt"
 ```
 
-The command contract uses a hidden local passphrase prompt. Authenticated plaintext is written to a new private file; existing output is never overwritten. Routine decryption requires neither Go nor OpenSSL installation. Verify the release's expected publisher and artifact hash through an independently trusted channel before execution.
+This is the planned REC-02 command, currently unavailable. Its contract requires a hidden local passphrase prompt, authentication before creation of a new private ordinary local-disk file, no overwrite and validated parent directories/Windows ACLs. The eventual executable will require neither Go nor OpenSSL installation. Verify its expected publisher and artifact hash through an independently trusted channel before execution. For Windows interactive OpenSSL key setup, use a strong ASCII-only passphrase until non-ASCII console encoding interoperability has been proven.
 
 ## Message format
 
