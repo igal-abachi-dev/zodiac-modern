@@ -1,0 +1,25 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EncryptWorkbench from '../components/islands/EncryptWorkbench.svelte';
+import { defaultRecipient } from '../generated/default-recipient';
+---
+
+<Layout title="Sender">
+  <p class="eyebrow">A message under your chosen stars</p>
+  <h1>
+    Private words.
+    <br />
+    Celestial form.
+  </h1>
+  <p>
+    Zodiac Modern is being built to encrypt messages in your browser and export
+    raw ciphertext with optional artwork. The recipient will decrypt with a
+    separate offline tool.
+  </p>
+  <EncryptWorkbench client:only="svelte" recipient={defaultRecipient}>
+    <div slot="fallback" class="panel">
+      The sender requires JavaScript and native WebCrypto. This development
+      scaffold does not yet encrypt messages.
+    </div>
+  </EncryptWorkbench>
+</Layout>

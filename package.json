@@ -1,0 +1,53 @@
+{
+  "name": "zodiac-modern",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": "^24.21.0"
+  },
+  "scripts": {
+    "dev": "node scripts/prepare-recipient.mjs --custom-only && astro dev --host 127.0.0.1",
+    "build": "node scripts/build.mjs production",
+    "build:test": "node scripts/build.mjs fixture",
+    "build:custom": "node scripts/build.mjs custom",
+    "build:vercel": "node scripts/build.mjs production --vercel",
+    "start:local": "node scripts/serve-local.mjs",
+    "local": "pnpm build && pnpm start:local",
+    "local:custom": "pnpm build:custom && pnpm start:local",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm format:check && node scripts/prepare-recipient.mjs --custom-only && astro check && svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "test:interop": "node scripts/interop.mjs",
+    "test:e2e": "playwright test",
+    "check:artifact": "node scripts/check-artifact.mjs",
+    "test:receiver": "node scripts/receiver.mjs test",
+    "verify:receiver-deps": "node scripts/receiver.mjs verify",
+    "build:receiver": "node scripts/receiver.mjs build",
+    "spike:offline-html": "node scripts/build-offline.mjs",
+    "astro": "astro"
+  },
+  "packageManager": "pnpm@12.8.1",
+  "dependencies": {
+    "@astrojs/svelte": "9.0.1",
+    "@lucide/svelte": "1.51.0",
+    "astro": "7.3.5",
+    "svelte": "5.57.1",
+    "typescript": "6.0.3"
+  },
+  "allowScripts": {
+    "esbuild": true
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.19.1",
+    "esbuild": "0.28.2",
+    "prettier": "3.9.9",
+    "prettier-plugin-astro": "1.1.0",
+    "prettier-plugin-svelte": "4.1.1",
+    "svelte-check": "4.7.6",
+    "vitest": "5.0.3"
+  }
+}

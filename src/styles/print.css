@@ -1,0 +1,27 @@
+@media print {
+  :root {
+    color-scheme: light;
+  }
+  body {
+    background: white;
+    color: black;
+  }
+  nav,
+  button,
+  .skip-link {
+    display: none;
+  }
+  main {
+    width: 100%;
+    min-height: auto;
+  }
+  .panel {
+    color: black;
+    background: white;
+    border-color: black;
+    break-inside: avoid;
+  }
+  a {
+    color: black;
+  }
+}

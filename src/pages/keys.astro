@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Keys">
+  <h1>Recipient keys</h1>
+  <p>
+    The sender will accept one RSA-3072 or RSA-4096 SPKI PUBLIC KEY PEM with
+    exponent 65537. Verify its full SHA-256 fingerprint through a trusted
+    channel.
+  </p>
+  <p>
+    Never paste private keys or passphrases into the website. Encrypted private
+    keys belong only in the separately verified offline receiver. Key setup
+    instructions and receiver readiness checks are pending.
+  </p>
+</Layout>

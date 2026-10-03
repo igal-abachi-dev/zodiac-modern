@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!--CSP-->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zodiac Modern — synthetic file feasibility probe</title>
+    <!--STYLE-->
+  </head>
+  <body>
+    <main>
+      <h1>Self-contained sender feasibility probe</h1>
+      <p>
+        This unreviewed synthetic probe tests direct file opening. It is not the
+        selected sender release. Do not enter sensitive messages.
+      </p>
+      <p>
+        Before opening a release HTML, verify its full SHA-256 outside the file
+        against an independently trusted value. This probe has no
+        self-verification badge.
+      </p>
+      <label for="public-key">Synthetic public SPKI PEM</label
+      ><textarea id="public-key" spellcheck="false"></textarea>
+      <label for="key-file">Or import a public PEM file</label
+      ><input type="file" id="key-file" accept=".pem" />
+      <label for="message">Synthetic message</label
+      ><textarea id="message" spellcheck="false" autocomplete="off">
+Synthetic file test: שלום 🔑</textarea>
+      <button id="encrypt" type="button">Encrypt synthetic message</button
+      ><button id="reset" type="button">Clear all</button>
+      <p id="status" role="status">Checking native WebCrypto…</p>
+      <label for="raw">Canonical raw ciphertext</label
+      ><textarea id="raw" readonly spellcheck="false"></textarea>
+      <button id="copy" type="button">Copy raw</button
+      ><button id="download" type="button">Save raw .txt</button>
+      <p>
+        Copying and saving persist outside the page. If clipboard permission is
+        unavailable, select the raw text manually. SVG, PNG, print checks and
+        the integrated recovery flow are required before EN-04 can select a
+        sender artifact.
+      </p>
+    </main>
+    <!--SCRIPT-->
+  </body>
+</html>

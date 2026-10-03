@@ -1,0 +1,14 @@
+---
+import Layout from '../layouts/Layout.astro';
+import RawRecovery from '../components/islands/RawRecovery.svelte';
+---
+
+<Layout title="Restore raw text">
+  <h1>Restore raw ciphertext</h1>
+  <RawRecovery client:only="svelte">
+    <p slot="fallback">
+      Raw recovery requires JavaScript. Keep the original raw text; SVG and
+      image import are outside version 1.
+    </p>
+  </RawRecovery>
+</Layout>

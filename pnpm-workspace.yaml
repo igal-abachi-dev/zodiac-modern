@@ -1,0 +1,6 @@
+packages:
+  - '.'
+allowBuilds:
+  esbuild: true
+minimumReleaseAgeExclude:
+  - '@lucide/svelte@1.51.0'

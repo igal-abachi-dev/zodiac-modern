@@ -1,0 +1,17 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="How it works">
+  <h1>How it works</h1>
+  <p>
+    The planned sender uses native WebCrypto to wrap a fresh AES-256 key with
+    RSA-OAEP SHA-256, then encrypt exact UTF-8 message bytes with AES-GCM.
+    Celestial glyphs present ciphertext reversibly; they do not add security.
+  </p>
+  <p>
+    Send raw ciphertext with the artwork. Only the matching private key can
+    normally decrypt it. Public-key encryption does not identify the sender.
+  </p>
+  <p>The application and independent security review are in development.</p>
+</Layout>

@@ -5,6 +5,10 @@ node_modules/
 dist/
 build/
 .cache/
+/src/generated/default-recipient.ts
+/tmp-*.json
+/tmp-*.html
+/tmp-*.txt
 
 # Static hosting metadata and local provider state
 .vercel/

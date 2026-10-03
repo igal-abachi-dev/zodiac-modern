@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Security">
+  <h1>Security boundaries</h1>
+  <p>
+    No reviewed release is available. Tests and restrictive browser policies do
+    not establish a cryptographic proof or audit.
+  </p>
+  <p>
+    A malicious host can replace delivered JavaScript. Before sensitive use,
+    verify a pinned local sender through an independently trusted channel. A
+    same-site hash or badge does not establish trust.
+  </p>
+  <p>
+    RSA provides neither forward secrecy nor post-quantum security. Browser
+    strings, extensions, operating systems and exported files remain outside
+    guaranteed erasure.
+  </p>
+</Layout>

@@ -1,0 +1,11 @@
+:root {
+  color-scheme: dark;
+  --color-bg: #10141e;
+  --color-panel: #1b2231;
+  --color-text: #f0eee8;
+  --color-muted: #babfcb;
+  --color-accent: #e2c48a;
+  --color-border: #45516a;
+  --radius: 1rem;
+  font-family: system-ui, sans-serif;
+}

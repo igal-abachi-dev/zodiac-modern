@@ -1,0 +1,16 @@
+.cache/
+.astro/
+node_modules/
+dist/
+artifacts/
+receiver/vendor/
+receiver/tests/fixtures/
+tests/fixtures/
+context.md
+reference_impl.go.md
+plan.md
+backlog.md
+AGENTS.md
+README.md
+pnpm-lock.yaml
+tmp-*

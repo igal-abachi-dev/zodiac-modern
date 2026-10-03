@@ -1,0 +1,113 @@
+@import './tokens.css';
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.65;
+}
+a {
+  color: var(--color-accent);
+  text-underline-offset: 0.2em;
+}
+header,
+main,
+footer {
+  width: min(100% - 2rem, 65rem);
+  margin-inline: auto;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-block: 1.5rem;
+}
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+main {
+  min-height: 65vh;
+  padding-block: 2rem 4rem;
+}
+footer {
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  padding-block: 1.5rem;
+}
+h1 {
+  line-height: 1.15;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 550;
+}
+h2 {
+  line-height: 1.3;
+}
+p {
+  max-width: 70ch;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  font-size: 0.8rem;
+}
+.panel {
+  background: var(--color-panel);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 3vw, 2rem);
+  margin-block: 1.5rem;
+}
+button,
+input,
+textarea {
+  font: inherit;
+}
+button {
+  border: 1px solid var(--color-accent);
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+textarea {
+  display: block;
+  width: 100%;
+  margin-block: 0.5rem 1rem;
+  min-height: 8rem;
+  padding: 0.75rem;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+}
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.skip-link {
+  position: absolute;
+  top: -10rem;
+}
+.skip-link:focus {
+  top: 0.5rem;
+  left: 0.5rem;
+  background: var(--color-bg);
+  padding: 0.5rem;
+}
+.muted {
+  color: var(--color-muted);
+}
+.fingerprint {
+  overflow-wrap: anywhere;
+}
