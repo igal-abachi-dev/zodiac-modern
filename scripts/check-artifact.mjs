@@ -15,7 +15,9 @@ export async function checkArtifact(root = 'dist', mode = 'production') {
       throw new Error('Private key material found in hosted output.');
     if (/\.(?:html|js|css|svg|pem)$/.test(path)) {
       const text = bytes.toString('utf8');
-      if (/\bstyle\s*=|\bon\w+\s*=/.test(text) && path.endsWith('.html'))
+      // Inspect markup, not property assignments in generated script bodies.
+      const markup = text.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '');
+      if (/<[^>]*\s(?:style|on[a-z]+)\s*=/i.test(markup) && path.endsWith('.html'))
         throw new Error('Inline style or event handler found.');
       if (
         /(?:src|href)=["']https?:\/\//.test(text) ||

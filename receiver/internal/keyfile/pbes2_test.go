@@ -4,8 +4,11 @@ import (
 	"bytes"
 	"crypto/aes"
 	"crypto/cipher"
+	"crypto/ecdsa"
+	"crypto/elliptic"
 	"crypto/pbkdf2"
 	"crypto/rand"
+	"crypto/rsa"
 	"crypto/sha256"
 	"crypto/x509"
 	"encoding/asn1"
@@ -340,4 +343,106 @@ func TestParseBounds(t *testing.T) {
 	random := make([]byte, 4096)
 	rand.Read(random)
 	assertPreKDF(t, random)
+}
+
+func TestUnsupportedAndMalformedInnerKeys(t *testing.T) {
+	small, err := rsa.GenerateKey(rand.Reader, 2048)
+	if err != nil {
+		t.Fatal(err)
+	}
+	multi, err := rsa.GenerateMultiPrimeKey(rand.Reader, 3, 3072)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ec, err := ecdsa.GenerateKey(elliptic.P256(), rand.Reader)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, key := range []any{small, multi, ec} {
+		der, err := x509.MarshalPKCS8PrivateKey(key)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if _, err := parsePrivate(der); err != ErrUnlock {
+			t.Fatal("unsupported inner key accepted")
+		}
+		encoded := encryptTest(t, standard(t), der)
+		wipe(der)
+		if key, fp, err := Load(encoded, []byte(fixturePassword)); err != ErrUnlock || key != nil || fp != "" {
+			t.Fatal("unsupported key produced distinguished unlock result")
+		}
+	}
+	supported, _, err := Load(fixture(t, "openssl-3.5-3072.pem"), []byte(fixturePassword))
+	if err != nil {
+		t.Fatal(err)
+	}
+	der, _ := x509.MarshalPKCS8PrivateKey(supported)
+	defer wipe(der)
+	fields, _ := sequenceDER(der, 3, 3)
+	inner, _ := sequenceDER(fields[2].Bytes, 9, 9)
+	for _, exponent := range []int{3, 17, 65539} {
+		mutated := append([]asn1.RawValue{}, inner...)
+		mutated[2] = raw(t, exponent)
+		outer := append([]asn1.RawValue{}, fields...)
+		outer[2] = raw(t, seq(t, mutated...).FullBytes)
+		if _, err := parsePrivate(seq(t, outer...).FullBytes); err != ErrUnlock {
+			t.Fatal("unsupported exponent accepted")
+		}
+	}
+	// PKCS#8 attributes, non-NULL RSA parameters and extra PKCS#1 integers.
+	outer := append([]asn1.RawValue{}, fields...)
+	outer[1] = seq(t, raw(t, oidRSA))
+	if _, err := parsePrivate(seq(t, outer...).FullBytes); err != ErrUnlock {
+		t.Fatal("absent RSA parameters accepted")
+	}
+	outer[1] = alg(t, oidRSA, raw(t, 0))
+	if _, err := parsePrivate(seq(t, outer...).FullBytes); err != ErrUnlock {
+		t.Fatal("non-NULL RSA parameters accepted")
+	}
+	outer[1] = fields[1]
+	outer[2] = raw(t, seq(t, append(inner, raw(t, 1))...).FullBytes)
+	if _, err := parsePrivate(seq(t, outer...).FullBytes); err != ErrUnlock {
+		t.Fatal("extra RSA member accepted")
+	}
+}
+
+func TestTagsClassesAndOrderRejectBeforeKDF(t *testing.T) {
+	block, _ := pem.Decode(encodeProfile(t, standard(t)))
+	var base asn1.RawValue
+	asn1.Unmarshal(block.Bytes, &base)
+	paths := [][]int{{}, {0}, {0, 1}, {0, 1, 0}, {0, 1, 0, 1}, {0, 1, 0, 1, 2}, {0, 1, 1}}
+	for _, path := range paths {
+		for _, change := range []func(asn1.RawValue) asn1.RawValue{
+			func(v asn1.RawValue) asn1.RawValue {
+				v.Class = asn1.ClassContextSpecific
+				v.FullBytes = nil
+				return raw(t, v)
+			},
+			func(v asn1.RawValue) asn1.RawValue { v.IsCompound = false; v.FullBytes = nil; return raw(t, v) },
+		} {
+			mutated := mutateRaw(t, base, path, change)
+			assertPreKDF(t, pem.EncodeToMemory(&pem.Block{Type: "ENCRYPTED PRIVATE KEY", Bytes: mutated.FullBytes}))
+		}
+		swapped := mutateSequence(t, base, path, func(fields []asn1.RawValue) asn1.RawValue {
+			fields[0], fields[1] = fields[1], fields[0]
+			return seq(t, fields...)
+		})
+		assertPreKDF(t, pem.EncodeToMemory(&pem.Block{Type: "ENCRYPTED PRIVATE KEY", Bytes: swapped.FullBytes}))
+	}
+	for _, path := range [][]int{{1}, {0, 1, 0, 1, 0}, {0, 1, 1, 1}} {
+		constructed := mutateRaw(t, base, path, func(v asn1.RawValue) asn1.RawValue { v.IsCompound = true; v.FullBytes = nil; return raw(t, v) })
+		assertPreKDF(t, pem.EncodeToMemory(&pem.Block{Type: "ENCRYPTED PRIVATE KEY", Bytes: constructed.FullBytes}))
+	}
+}
+func mutateRaw(t testing.TB, node asn1.RawValue, path []int, change func(asn1.RawValue) asn1.RawValue) asn1.RawValue {
+	t.Helper()
+	if len(path) == 0 {
+		return change(node)
+	}
+	fields, err := sequence(node, 1, 10)
+	if err != nil {
+		t.Fatal("bad test schema path")
+	}
+	fields[path[0]] = mutateRaw(t, fields[path[0]], path[1:], change)
+	return seq(t, fields...)
 }
