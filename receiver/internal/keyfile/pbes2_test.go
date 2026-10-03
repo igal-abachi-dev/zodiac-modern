@@ -331,13 +331,15 @@ func TestParseBounds(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer wipe(parsed.der)
-	if allocations := testing.AllocsPerRun(100, func() {
+	allocations := testing.AllocsPerRun(100, func() {
 		profile, err := parseProfile(encodeProfile(t, p))
 		if err != nil {
 			panic(err)
 		}
 		wipe(profile.der)
-	}); allocations > 300 {
+	})
+	t.Logf("bounded profile parse/serialization allocations: %.0f (limit 300)", allocations)
+	if allocations > 300 {
 		t.Fatalf("unexpected parse allocation growth: %.0f", allocations)
 	}
 	random := make([]byte, 4096)

@@ -1,0 +1,73 @@
+name: Foundation regression gates
+on:
+  pull_request:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  foundation:
+    runs-on: windows-2025
+    timeout-minutes: 25
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      GOTOOLCHAIN: local
+      GOSUMDB: sum.golang.org
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version-file: .node-version
+      - uses: actions/setup-go@924ae3a1cded613372ab5595356fb5720e22ba16 # v6.5.0
+        with:
+          go-version-file: .go-version
+          cache: false
+      - name: Authenticate pinned Go modules into isolated cache
+        run: |
+          $env:GOMODCACHE = Join-Path $pwd '.cache/go-mod'
+          $env:GOPATH = Join-Path $pwd '.cache/gopath'
+          go -C receiver mod download
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          go -C receiver mod verify
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Install pinned package manager and frozen dependencies
+        run: |
+          npm install --prefix .cache/bootstrap --ignore-scripts --save-exact pnpm@12.8.1
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          node .cache/bootstrap/node_modules/pnpm/bin/pnpm.mjs install --frozen-lockfile
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          (Join-Path $pwd '.cache/bootstrap/node_modules/.bin') | Out-File -FilePath $env:GITHUB_PATH -Append
+      - name: Prepare both authenticated real OpenSSL oracles
+        run: ./scripts/setup-openssl-ci.ps1
+      - name: Type, formatting and unit checks
+        run: |
+          pnpm check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pnpm test
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Loader oracle, strict schema, resource, fuzz and vendor gates
+        run: pnpm check:rec01
+      - name: Fixture static artifact and synthetic offline probe
+        run: |
+          pnpm build:test
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pnpm spike:offline-html
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Real browser crypto, production CSP and file probe
+        run: |
+          pnpm exec playwright install chromium firefox
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          pnpm test:e2e
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Evidence summary (synthetic tests only)
+        if: always()
+        run: |
+          if (Test-Path 'artifacts/rec01/latest.json') {
+            $taskEvidence = Get-Content 'artifacts/rec01/latest.json' -Raw | ConvertFrom-Json
+            "REC-01 automated status: $($taskEvidence.status). Focused independent review remains a separate required gate." | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+            $taskEvidence.checks | Format-Table name,exitCode,milliseconds | Out-String | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Append
+          }
