@@ -48,7 +48,7 @@ test('static fallback explains capabilities with JavaScript disabled', async ({
     const page = await context.newPage();
     await page.goto('http://127.0.0.1:4321/');
     await expect(
-      page.getByText('The sender requires JavaScript and native WebCrypto.', {
+      page.getByText('The sender requires JavaScript, native WebCrypto', {
         exact: false,
       }),
     ).toBeVisible();

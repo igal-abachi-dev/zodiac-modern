@@ -85,9 +85,11 @@
     if (!raw) return;
     try {
       await navigator.clipboard.writeText(raw);
+      if (view.result?.raw !== raw) return;
       notice =
         'Raw ciphertext copied. The clipboard persists outside this tab.';
     } catch {
+      if (view.result?.raw !== raw) return;
       notice =
         'Clipboard unavailable. Select and copy the raw ciphertext manually.';
       rawInput?.focus();

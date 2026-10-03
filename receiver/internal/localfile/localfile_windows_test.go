@@ -10,6 +10,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"testing"
+	"unsafe"
 )
 
 func TestDangerousWindowsNames(t *testing.T) {
@@ -25,7 +26,20 @@ func TestDangerousWindowsNames(t *testing.T) {
 	}
 }
 func TestPrivateOutputAndExclusiveRead(t *testing.T) {
-	path := filepath.Join(t.TempDir(), "message.txt")
+	root := t.TempDir()
+	// Deliberately permissive inheritance must not enter the output DACL.
+	sd, err := windows.SecurityDescriptorFromString("D:P(A;OICI;FA;;;WD)")
+	if err != nil {
+		t.Fatal(err)
+	}
+	dacl, _, err := sd.DACL()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := windows.SetNamedSecurityInfo(root, windows.SE_FILE_OBJECT, windows.DACL_SECURITY_INFORMATION|windows.PROTECTED_DACL_SECURITY_INFORMATION, nil, nil, dacl, nil); err != nil {
+		t.Fatal(err)
+	}
+	path := filepath.Join(root, "message.txt")
 	want := []byte("synthetic\x00שלום\r\n")
 	if err := Write(context.Background(), path, want); err != nil {
 		t.Fatal(err)
@@ -82,8 +96,8 @@ func TestCancelAndFailedWriteRemoveByHandle(t *testing.T) {
 				if err != nil {
 					t.Fatal(err)
 				}
-			b, readError := os.ReadFile(path)
-			if readError != nil || len(b) != 0 {
+				b, readError := os.ReadFile(path)
+				if readError != nil || len(b) != 0 {
 					t.Fatal("empty output changed")
 				}
 				return
@@ -133,7 +147,13 @@ func TestParentJunctionAndSwap(t *testing.T) {
 		if err := os.Rename(original, filepath.Join(root, "swapped")); err == nil {
 			t.Fatal("held parent was renamed")
 		}
-		_, err := w.Write(b)
+		ptr, _ := windows.UTF16PtrFromString(original)
+		writeHandle, err := windows.CreateFile(ptr, windows.GENERIC_WRITE, windows.FILE_SHARE_READ|windows.FILE_SHARE_WRITE|windows.FILE_SHARE_DELETE, nil, windows.OPEN_EXISTING, windows.FILE_FLAG_BACKUP_SEMANTICS|windows.FILE_FLAG_OPEN_REPARSE_POINT, 0)
+		if err == nil {
+			windows.CloseHandle(writeHandle)
+			t.Fatal("held parent allowed reparse-modification access")
+		}
+		_, err = w.Write(b)
 		return err
 	})
 	if err != nil {
@@ -147,5 +167,76 @@ func TestParentJunctionAndSwap(t *testing.T) {
 	}
 	if _, err := Read(original, 100); err == nil {
 		t.Fatal("directory input accepted")
+	}
+}
+
+func TestFinalReparseHardlinkAndMappedAlias(t *testing.T) {
+	root := t.TempDir()
+	target := filepath.Join(root, "target.txt")
+	link := filepath.Join(root, "link.txt")
+	if err := os.WriteFile(target, []byte("synthetic"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := os.Link(target, link); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := Read(link, 100); err == nil {
+		t.Fatal("hardlink input alias accepted")
+	}
+	if err := Write(context.Background(), link, []byte("replacement")); err == nil {
+		t.Fatal("hardlink destination accepted")
+	}
+	if actual, _ := os.ReadFile(target); string(actual) != "synthetic" {
+		t.Fatal("hardlink target modified")
+	}
+	// A junction is also rejected when it is the final component, not just a parent.
+	junction := filepath.Join(root, "final-junction")
+	if output, err := exec.Command("cmd.exe", "/c", "mklink", "/J", junction, root).CombinedOutput(); err != nil {
+		t.Fatalf("junction fixture: %s %v", output, err)
+	}
+	if _, err := Read(junction, 100); err == nil {
+		t.Fatal("final reparse input accepted")
+	}
+	if err := Write(context.Background(), junction, nil); err == nil {
+		t.Fatal("final reparse output accepted")
+	}
+	// Test a mapped DOS alias without contacting any network. A locally mapped
+	// directory reports a fixed drive; the resolved root-handle check rejects it.
+	define := windows.NewLazySystemDLL("kernel32.dll").NewProc("DefineDosDeviceW")
+	drives, err := windows.GetLogicalDrives()
+	if err != nil {
+		t.Fatal(err)
+	}
+	var letter byte
+	for c := byte('Z'); c >= 'D'; c-- {
+		if drives&(1<<uint(c-'A')) == 0 {
+			letter = c
+			break
+		}
+	}
+	if letter == 0 {
+		t.Fatal("no free drive for alias fixture")
+	}
+	device, _ := windows.UTF16PtrFromString(string([]byte{letter, ':'}))
+	destination, _ := windows.UTF16PtrFromString(`\??\` + root)
+	const rawTarget = 1
+	const removeDefinition = 2
+	const exactMatch = 4
+	const noBroadcast = 8
+	ok, _, nativeErr := define.Call(rawTarget|noBroadcast, uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(destination)))
+	if ok == 0 {
+		t.Fatalf("local mapped alias setup: %v", nativeErr)
+	}
+	defer func() {
+		ok, _, err := define.Call(rawTarget|removeDefinition|exactMatch|noBroadcast, uintptr(unsafe.Pointer(device)), uintptr(unsafe.Pointer(destination)))
+		if ok == 0 {
+			t.Errorf("mapped alias cleanup: %v", err)
+		}
+	}()
+	if err := Write(context.Background(), string([]byte{letter, ':', '\\'})+"escape.txt", []byte("synthetic")); err == nil {
+		t.Fatal("mapped directory alias accepted")
+	}
+	if _, err := os.Stat(filepath.Join(root, "escape.txt")); !os.IsNotExist(err) {
+		t.Fatal("mapped alias created file")
 	}
 }

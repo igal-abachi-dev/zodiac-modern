@@ -24,8 +24,8 @@ export function encryptionAvailable(): boolean {
   );
 }
 
-// Shared by isolated interoperability tests and EN-04's feasibility probe.
-// The production workspace does not enable this until its integrated gates pass.
+// Shared by the development sender, independent interoperability tests and
+// EN-04's feasibility probe. Integrated review and release gates remain open.
 export async function encryptMessage(text: string, recipient: RecipientKey) {
   if (!encryptionAvailable())
     throw new EncryptionError(

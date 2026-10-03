@@ -292,11 +292,8 @@ test('light/dark contrast, mobile reflow, zoom, focus and print', async ({
       document.documentElement.style.fontSize = '200%';
     });
     // Synthetic test styling is removed before CSP/DOM assertions in other tests.
-    expect(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= innerWidth,
-      ),
-    ).toBe(true);
+    const zoomOverflow=await page.evaluate(()=>Array.from(document.querySelectorAll('*')).filter(el=>el.getBoundingClientRect().right>innerWidth+1).map(el=>({tag:el.tagName,id:el.id,text:el.textContent?.slice(0,50),right:el.getBoundingClientRect().right})));
+    expect(zoomOverflow).toEqual([]);
     await page.reload();
     await page.getByLabel('Message', { exact: true }).focus();
     await expect(page.getByLabel('Message', { exact: true })).toBeFocused();

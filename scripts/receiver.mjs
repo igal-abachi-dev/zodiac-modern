@@ -119,6 +119,6 @@ if (
       'bin/zodiac-decrypt.exe',
       './cmd/zodiac-decrypt',
     ]);
-    console.log('Built unsigned development key-verification executable.');
+    console.log('Built unsigned development offline receiver executable.');
   } else throw new Error('Expected test, verify or build.');
 }

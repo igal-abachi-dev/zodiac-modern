@@ -228,7 +228,7 @@ func writeWith(ctx context.Context, path string, plain []byte, write func(io.Wri
 	defer func() {
 		if !committed {
 			disposition := [4]byte{1}
-			result = errors.Join(result,windows.SetFileInformationByHandle(h, windows.FileDispositionInfo, &disposition[0], 4),f.Close())
+			result = errors.Join(result, windows.SetFileInformationByHandle(h, windows.FileDispositionInfo, &disposition[0], 4), f.Close())
 			return
 		}
 		f.Close()
