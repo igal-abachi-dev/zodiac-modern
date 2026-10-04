@@ -28,34 +28,33 @@ const compiled = await build({
             css: 'external',
             dev: false,
           });
-          if (component.css) styles.push(component.css.code);
+        if (component.css) styles.push({ path, code: component.css.code });
           return { contents: component.js.code, loader: 'js' };
         });
       },
     },
   ],
 });
-const script = compiled.outputFiles[0].text.replaceAll(
-  '</script',
-  '<\\/script',
-);
+const script = compiled.outputFiles[0].text
+  .replace(/\r\n?/g, '\n')
+  .replace(/<\/script/gi, (match) => match.replace('</', '<\\/'));
 const style = [
   await readFile('src/styles/tokens.css', 'utf8'),
   (await readFile('src/styles/global.css', 'utf8')).replace(
     "@import './tokens.css';",
     '',
   ),
-  ...styles,
-].join('\n');
+  ...styles.sort((a, b) => a.path.localeCompare(b.path)).map((s) => s.code),
+].join('\n').replace(/\r\n?/g, '\n');
 const hash = (body) => createHash('sha256').update(body).digest('base64');
 const csp = `default-src 'none'; script-src 'sha256-${hash(script)}'; script-src-attr 'none'; style-src 'sha256-${hash(style)}'; style-src-attr 'none'; img-src blob: data:; connect-src 'none'; worker-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'`;
 const shell = (await readFile('offline/shell.html', 'utf8'))
   .replace(
     '<!--CSP-->',
-    `<meta http-equiv="Content-Security-Policy" content="${csp}">`,
+    () => `<meta http-equiv="Content-Security-Policy" content="${csp}">`,
   )
-  .replace('<!--STYLE-->', `<style>${style}</style>`)
-  .replace('<!--SCRIPT-->', `<script>${script}</script>`);
+  .replace('<!--STYLE-->', () => `<style>${style}</style>`)
+  .replace('<!--SCRIPT-->', () => `<script>${script}</script>`);
 if (/\b(?:src|href)=["'](?!blob:)/.test(shell))
   throw new Error(
     'Offline probe must not reference adjacent or external files.',

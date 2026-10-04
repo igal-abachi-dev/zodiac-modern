@@ -19,14 +19,14 @@ if ($SelfTest) {
     }
     if ($count -ne 94 -or $limit -ne 188 -or $rejected -ne 68 -or
         @($frequencies | Where-Object { $_ -ne 2 }).Count -ne 0) { throw 'Unbiased mapping self-test failed.' }
-    Write-Host 'PASS: all 94 printable ASCII indices occur exactly twice; all 68 biased-tail bytes reject. No password generated.'
-    exit 0
 }
-if ([Console]::IsInputRedirected -or [Console]::IsOutputRedirected -or $Host.Name -ne 'ConsoleHost') {
+if (-not $SelfTest -and ([Console]::IsInputRedirected -or [Console]::IsOutputRedirected -or $Host.Name -ne 'ConsoleHost')) {
     throw 'Password generation requires your own interactive local console; redirected input/output is refused.'
 }
-Write-Host 'Disable transcripts, recording and screen sharing before continuing. This script cannot detect every recorder.'
-if ((Read-Host 'Type GENERATE to display a new password in this local console') -cne 'GENERATE') { exit 0 }
+if (-not $SelfTest) {
+    Write-Host 'Disable transcripts, recording and screen sharing before continuing. This script cannot detect every recorder.'
+    if ((Read-Host 'Type GENERATE to display a new password in this local console') -cne 'GENERATE') { exit 0 }
+}
 $characters = New-Object char[] $Length
 $sampleBytes = New-Object byte[] 1
 $rng = $null
@@ -45,6 +45,11 @@ try {
             do { $rng.GetBytes($sampleBytes) } while ($sampleBytes[0] -ge $limit)
             $characters[$i] = $alphabet[$sampleBytes[0] % $count]
         }
+    }
+    if ($SelfTest) {
+        if (@($characters | Where-Object { [int]$_ -lt 33 -or [int]$_ -gt 126 }).Count -ne 0) { throw 'Generator alphabet test failed.' }
+        Write-Host 'PASS: all 94 printable ASCII indices occur exactly twice; all 68 biased-tail bytes reject. Native CSPRNG and bounded alphabet work. No password displayed.'
+        exit 0
     }
     $password = -join $characters
     Write-Host "New $Length-character ASCII passphrase (no automatic clipboard or file save):"

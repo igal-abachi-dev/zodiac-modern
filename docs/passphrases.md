@@ -26,8 +26,9 @@ It defaults to 32 printable ASCII characters, requires explicit local confirmati
 refuses redirected input/output, and uses native `GetInt32(94)` on modern .NET or
 cryptographic byte rejection below 188 on Windows PowerShell 5.1. It never writes a
 file or copies to the clipboard. `-Length 24` is also supported; shorter than 24
-is rejected. `-SelfTest` checks the complete unbiased mapping without generating
-or displaying a password. The script cannot detect every transcript/recorder.
+is rejected. `-SelfTest` checks the complete unbiased mapping and native generator
+with disposable samples, without displaying a password. The script cannot
+detect every transcript/recorder.
 
 ```powershell
 $length = 32 # Choose 24 through 32.

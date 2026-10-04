@@ -128,6 +128,7 @@ openssl pkey -in rsa-private-encrypted.pem -check -noout
     command arguments, environment variables, piped input or shell history.
   </p>
   <h2 id="generate">3. Create the encrypted pair once</h2>
+  <p>Repository users can run <code>&amp; .\scripts\New-ZodiacPassphrase.ps1</code> in their own trusted local PowerShell console. It defaults to 32 printable ASCII characters with unbiased cryptographic sampling and refuses redirected output. Generate independently for the temporary and final key, store each securely, and never run this generator in a captured assistant terminal.</p>
   <p>
     The first command asks you to enter and confirm the temporary passphrase.
     The second unlocks that intermediate with the temporary passphrase, then
