@@ -1,5 +1,36 @@
 # Zodiac Modern
 
+Local recipient setup is available in [scripts/create-recipient.ps1](scripts/create-recipient.ps1).
+Run it only in your own trusted interactive PowerShell console. Generate two
+independent random ASCII passphrases using
+[scripts/New-ZodiacPassphrase.ps1](scripts/New-ZodiacPassphrase.ps1) or your trusted
+password manager; the default generator length is 32. Never run production
+password generation in an assistant/captured terminal, transcript or recording.
+
+```powershell
+& .\scripts\New-ZodiacPassphrase.ps1
+# Repeat independently for the final passphrase; store both securely.
+```
+
+Use a new private nonsynced folder outside this repository by default. At the
+user's explicit request, this checkout also ignores `.local/` for local custody;
+ignoring a file does not protect it from sync, other programs or disk loss.
+Create the empty parent with `New-Item -ItemType Directory -Path .\.local -Force`,
+then use a new `.local\recipient` destination:
+
+```powershell
+& .\scripts\create-recipient.ps1 -Destination .\.local\recipient -OpenSSL 'C:\Program Files\FireDaemon OpenSSL 3.5\bin\openssl.exe' -Receiver .\receiver\bin\zodiac-decrypt.exe -Bits 4096 -RecipientName 'Zodiac Modern recipient' -ConfigureRecipient
+```
+
+The script verifies the FireDaemon signature, installs a protected current-user
+folder ACL before key generation, refuses existing destinations, runs hidden
+OpenSSL/receiver prompts, and requires local full-fingerprint confirmation before
+copying only public PEM/config into build inputs. The current development receiver
+is unsigned: this setup does not close integrated review or signing gates. Keep
+the weaker encrypted intermediate until final-pair and encrypted-backup readiness
+checks pass. See [key guidance](src/pages/keys.astro) and
+[passphrase guidance](docs/passphrases.md).
+
 Local-first message encryption with a browser sender, celestial glyph artwork, and an offline Go recipient tool.
 
 Choose a recipient public key, encrypt a message locally, and share the ciphertext. Keep private keys and decryption on the recipient's device.
