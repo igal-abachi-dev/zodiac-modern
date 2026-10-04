@@ -66,7 +66,9 @@ import Layout from '../layouts/Layout.astro';
     <li>
       Exchange your verified public PEM and full fingerprint with the sender
       through the existing trusted channel. Ask for a harmless test message
-      whose exact text you can confirm.
+      whose exact text you can confirm. In an empty sender workspace, choose
+      “Prepare nonsecret readiness token.” Record its complete text locally,
+      including every character; do not send private material to the sender.
     </li>
     <li>
       The sender downloads raw ciphertext.txt. Transfer that exact file: no
@@ -97,6 +99,8 @@ import Layout from '../layouts/Layout.astro';
     message, with no OpenSSL steps per message. CLI friction and independent
     nontechnical usability trials remain open.
   </p>
+  <h2>First-time user trial</h2>
+  <p>Have someone who has not used the receiver follow these instructions with synthetic data. Record their Windows/browser versions, the step where help was needed, exit codes, whether original and restored keys recovered the exact token, and whether the output file was easy to find. Report outcomes only, never private files or passwords. A developer-run test does not replace this usability observation.</p>
   <h2>If a step fails</h2>
   <dl>
     <dt>Exit 2: usage, public pair or raw format</dt>

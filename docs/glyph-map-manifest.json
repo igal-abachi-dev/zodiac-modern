@@ -1,0 +1,589 @@
+{
+  "map": "S64L1",
+  "alphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",
+  "package": "@lucide/svelte",
+  "version": "1.51.0",
+  "packageIntegrity": "sha512-FNoBtfrnQS1LV7yRm8T8pF6OH72BzCyPOWrOmVcpqGGLFmQZndRB4h0qhzUKqPq2JNkSfF7f4tUaiCwdY4WFfg==",
+  "source": "https://github.com/lucide-icons/lucide/tree/1.51.0/packages/svelte",
+  "license": "docs/licenses/lucide-1.51.0.txt",
+  "licenseSHA256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+  "canonicalVectorsSHA256": "d192f5f1904667e5550c4b6c789580d8cf86aca66074af685717f59e9854cd6d",
+  "glyphs": [
+    {
+      "character": "A",
+      "name": "Sun",
+      "resolvedName": "Sun",
+      "file": "dist/icons/sun.svelte",
+      "sourceSHA256": "9e356de4a65635e285294f0ab6a0f363a7eec004467a4641f0126c19c2b87fa3",
+      "vectorSHA256": "00ac7e740a646c428ece1bf4633d12f2c4440e270b655e268edbd8720be80049",
+      "correction": null
+    },
+    {
+      "character": "B",
+      "name": "Moon",
+      "resolvedName": "Moon",
+      "file": "dist/icons/moon.svelte",
+      "sourceSHA256": "7d34d0cdba9276353df004057f192cbc20e59f104679add05736598fcb0f23bd",
+      "vectorSHA256": "ce9f231702a2bbe88af18766efddfac13ff5f13229342399e90c1b5edc34d4dd",
+      "correction": null
+    },
+    {
+      "character": "C",
+      "name": "MoonStar",
+      "resolvedName": "MoonStar",
+      "file": "dist/icons/moon-star.svelte",
+      "sourceSHA256": "9cb4028704c0e849f3181d3de610b0c00ee0fa02a263132501abd2cc261d8855",
+      "vectorSHA256": "b98f62b86b8630539538acd3f04cc01164c859dbcc6b480ec05d18cdb20ad3d4",
+      "correction": null
+    },
+    {
+      "character": "D",
+      "name": "Eclipse",
+      "resolvedName": "Eclipse",
+      "file": "dist/icons/eclipse.svelte",
+      "sourceSHA256": "98d57e81a5df312eab2dc53bb40e96697537daa176b183576df2b555db82b2af",
+      "vectorSHA256": "bf81f80344edd1e224f4dd746e1dc882264e184c805125abfaff93dce0ce8e90",
+      "correction": null
+    },
+    {
+      "character": "E",
+      "name": "Star",
+      "resolvedName": "Star",
+      "file": "dist/icons/star.svelte",
+      "sourceSHA256": "52fcf80f081aef758cca92df44c72b828c58c92e4ed57ba310cfbcc0a9684c13",
+      "vectorSHA256": "2580c0543a1b4ca9d9ac3b9e1b947aa7d9f76ab68176c057a0a354e861464c54",
+      "correction": null
+    },
+    {
+      "character": "F",
+      "name": "Sparkles",
+      "resolvedName": "Sparkles",
+      "file": "dist/icons/sparkles.svelte",
+      "sourceSHA256": "b89cf3b382ccf34fa4cf2271adec166b82fc21432777e82ed687bf624d437467",
+      "vectorSHA256": "76c4a014f2c8937301165655bc58e830310d774fdf48a65e9c01ff7758462b63",
+      "correction": null
+    },
+    {
+      "character": "G",
+      "name": "Sparkle",
+      "resolvedName": "Sparkle",
+      "file": "dist/icons/sparkle.svelte",
+      "sourceSHA256": "f5c2d3b0228580ff59512a5198751f84667f321a65baab07d72a8a0fe54a2af9",
+      "vectorSHA256": "0a37d1e26e917e08181cc8cc95d051e4480b738d933af6fc46f632d549c50c41",
+      "correction": null
+    },
+    {
+      "character": "H",
+      "name": "Orbit",
+      "resolvedName": "Orbit",
+      "file": "dist/icons/orbit.svelte",
+      "sourceSHA256": "a649b0df5e0dbfb828b23efcf0098c2fc52c39009d85a3f0842a2105423c6456",
+      "vectorSHA256": "79b39a1b32de145146faaaeb9005fa4e5d3cc77f3c1a381b677695b72d70d621",
+      "correction": null
+    },
+    {
+      "character": "I",
+      "name": "Compass",
+      "resolvedName": "Compass",
+      "file": "dist/icons/compass.svelte",
+      "sourceSHA256": "57e22c8a4ec372fdab3752a25a6c64f5563741cb6005d76405b34806744285e2",
+      "vectorSHA256": "30663c66a133bb006d71fa89d36dc34be52335d9278b9c4e55f9d5cd2c8c4eae",
+      "correction": null
+    },
+    {
+      "character": "J",
+      "name": "Atom",
+      "resolvedName": "Atom",
+      "file": "dist/icons/atom.svelte",
+      "sourceSHA256": "c98ba1130fa05863c7a5469d34929d840c315f0a7c86349c25c2da71628bf9e4",
+      "vectorSHA256": "a5f706c915e9f401a8b2f1f38ddac28032d9d79f01c9c39fca20f751ad4a9dc1",
+      "correction": null
+    },
+    {
+      "character": "K",
+      "name": "Flame",
+      "resolvedName": "Flame",
+      "file": "dist/icons/flame.svelte",
+      "sourceSHA256": "9a3f261f364700faf1e626a4097bd65c1aeb4496d1f3a3a84ca7cfa233aa9daa",
+      "vectorSHA256": "fefa0fa77614c70eb1a0febaf876348781af93408b1342c361b2c67a86243ced",
+      "correction": null
+    },
+    {
+      "character": "L",
+      "name": "Droplets",
+      "resolvedName": "Droplets",
+      "file": "dist/icons/droplets.svelte",
+      "sourceSHA256": "2a0e3f8a0d41dc8bed78a50bce4dff1444f0411a269aef9480baf15a68cf5a9d",
+      "vectorSHA256": "9a8353829a457dbfda0d20736fe1464503f5e4b1ded8a46d8243754e87428c95",
+      "correction": null
+    },
+    {
+      "character": "M",
+      "name": "Wind",
+      "resolvedName": "Wind",
+      "file": "dist/icons/wind.svelte",
+      "sourceSHA256": "3fa8f0ad8891a4ee0f790b6c1dea941c1d1313d9df66287350caefe34b6f2209",
+      "vectorSHA256": "99def2b4559c19b86c45b7044d4912b761f064336794a0efb2dabca25e3dc048",
+      "correction": null
+    },
+    {
+      "character": "N",
+      "name": "Waves",
+      "resolvedName": "WavesHorizontal",
+      "file": "dist/icons/waves-horizontal.svelte",
+      "sourceSHA256": "49ed90f1b0c5e15fc619ab448f1348eed99b2032451593e158dc35f3dfe4cbc5",
+      "vectorSHA256": "3c4c33bdfd01334c86fcede1f84bba15ac77e3d5c396c3a4907619e83f458e22",
+      "correction": "Waves -> WavesHorizontal: explicit Lucide v1 name correction"
+    },
+    {
+      "character": "O",
+      "name": "Mountain",
+      "resolvedName": "Mountain",
+      "file": "dist/icons/mountain.svelte",
+      "sourceSHA256": "08a48920131d1755653d746613edcbd03a44669efa77ff01d5770efe6117b810",
+      "vectorSHA256": "8dae061751a9bc050c46874cf9f69a4f11d9443174c74b446c6cb3a95c475149",
+      "correction": null
+    },
+    {
+      "character": "P",
+      "name": "Anchor",
+      "resolvedName": "Anchor",
+      "file": "dist/icons/anchor.svelte",
+      "sourceSHA256": "a5c1bf4fdd72a1a62eee0964bb2879aa8223741bfa9969f40e1188c7e55d38d9",
+      "vectorSHA256": "fbd891072ba25704ed3289bf3e0e8f640dc72bc4c705d74a9589cdf3fe51e2df",
+      "correction": null
+    },
+    {
+      "character": "Q",
+      "name": "Eye",
+      "resolvedName": "Eye",
+      "file": "dist/icons/eye.svelte",
+      "sourceSHA256": "1d355cf404ace8629180baa2831727a795d43871d6ba0e19d7df53c9671b5cb4",
+      "vectorSHA256": "014a92e763d1b66b6bed4270adc2938768277921fa6747925da48bcddfc454bc",
+      "correction": null
+    },
+    {
+      "character": "R",
+      "name": "Key",
+      "resolvedName": "Key",
+      "file": "dist/icons/key.svelte",
+      "sourceSHA256": "40bf5de7172d82c0a740a5593befe582b1e181e6bf49f61a80d5e3401350465f",
+      "vectorSHA256": "e0747540606f96b7d13989e26f66a207c0ebb2234b2de33296fc621274af8442",
+      "correction": null
+    },
+    {
+      "character": "S",
+      "name": "Shield",
+      "resolvedName": "Shield",
+      "file": "dist/icons/shield.svelte",
+      "sourceSHA256": "ea10ee045f4d370c70be93a3e5447f78407cbf3a6cb7fe3080660aa68557c5f6",
+      "vectorSHA256": "6c735ff2890011f939c62c3b7a80aafb54f1e6ba4320547536e3d5e0a0dfd95b",
+      "correction": null
+    },
+    {
+      "character": "T",
+      "name": "Crown",
+      "resolvedName": "Crown",
+      "file": "dist/icons/crown.svelte",
+      "sourceSHA256": "28d9e8b7f7c8ce437005ede89c60b850d76db8a084db4b77cc45ad392613b699",
+      "vectorSHA256": "aa720035a0365c073ac3bb076b29dcbc3140a9a9ba6b705295aa7a535e3713b8",
+      "correction": null
+    },
+    {
+      "character": "U",
+      "name": "Gem",
+      "resolvedName": "Gem",
+      "file": "dist/icons/gem.svelte",
+      "sourceSHA256": "b62ea2478b90391e04e4c151b2fd6ae4bb58851e66edc9f8077b3d8ee167e324",
+      "vectorSHA256": "efb25cea39242764fe827f3e70957d2e2ae6efccacf12ffd03fdd6d4e3c2a5ef",
+      "correction": null
+    },
+    {
+      "character": "V",
+      "name": "Feather",
+      "resolvedName": "Feather",
+      "file": "dist/icons/feather.svelte",
+      "sourceSHA256": "9e2109abe7dc0973d05ae1eac84d27652b87061770f10c8a4a3592a562b6d7f9",
+      "vectorSHA256": "347d49864802cefa2413d94cac62b1018902603f58d10f8fb15f8736a00ffddc",
+      "correction": null
+    },
+    {
+      "character": "W",
+      "name": "Scale",
+      "resolvedName": "Scale",
+      "file": "dist/icons/scale.svelte",
+      "sourceSHA256": "d9f344f94c21b26574d4fee3f59ce6d92efdf35b9412f1aad919b50425777b9a",
+      "vectorSHA256": "d9a11b7206b15ac68d049b376a13ff45ee3852ebcaacc6aba386daf188c2efb6",
+      "correction": null
+    },
+    {
+      "character": "X",
+      "name": "Hourglass",
+      "resolvedName": "Hourglass",
+      "file": "dist/icons/hourglass.svelte",
+      "sourceSHA256": "701aabedaf967f4cb373742a25c1eb7064c06bfef73f3429dc3b7d2ba3399ecf",
+      "vectorSHA256": "f6540f41642707e4a59fe314adbcc5ef59ea4201bc85b8336cde083fbd01bb3b",
+      "correction": null
+    },
+    {
+      "character": "Y",
+      "name": "Infinity",
+      "resolvedName": "Infinity",
+      "file": "dist/icons/infinity.svelte",
+      "sourceSHA256": "0d0db3f831a726b3e5557b469f8db5042574983b77d1ae403675a24ba4fd7d4e",
+      "vectorSHA256": "94ff754c84cff45f412cbfc196b477049108278dfeb34633c1d512c83eaaa2d6",
+      "correction": null
+    },
+    {
+      "character": "Z",
+      "name": "Pyramid",
+      "resolvedName": "Pyramid",
+      "file": "dist/icons/pyramid.svelte",
+      "sourceSHA256": "ce52fc4adb23f70cde2eb0329197e4d3f8cc4fcd4722ec756c88afd67cc7a06e",
+      "vectorSHA256": "725102d7fecb7b28724629a5168945f4d65a8ff59f7b37558d6c28c06c51dbaf",
+      "correction": null
+    },
+    {
+      "character": "a",
+      "name": "Circle",
+      "resolvedName": "Circle",
+      "file": "dist/icons/circle.svelte",
+      "sourceSHA256": "a9ebf0872c420db1220f59812bddd4ad9077044b484c13772c1653834b376ed2",
+      "vectorSHA256": "dbef0dc6ec02734dcfaa120e5f3e1d7c64791da6df5b1b146755ccfafb0bae5e",
+      "correction": null
+    },
+    {
+      "character": "b",
+      "name": "CircleDot",
+      "resolvedName": "CircleDot",
+      "file": "dist/icons/circle-dot.svelte",
+      "sourceSHA256": "853abcf2ff6a505c120d6b5e3ea2dd958a333c298eff233cdbc9ce2916c837a0",
+      "vectorSHA256": "bacd4205acd78ebda01a77d81cab8945e69f53696912b14cb0620daf86ef71cb",
+      "correction": null
+    },
+    {
+      "character": "c",
+      "name": "Square",
+      "resolvedName": "Square",
+      "file": "dist/icons/square.svelte",
+      "sourceSHA256": "e96388472b49e72ab5a3b83e561dde942d8c87d8ef92dba9cfb90b9b3dc86167",
+      "vectorSHA256": "1b65202dbe6660a66b80cdd398d1beb459e5ffeb17d4a8eb8ed2f46d4928bca3",
+      "correction": null
+    },
+    {
+      "character": "d",
+      "name": "SquareDot",
+      "resolvedName": "SquareDot",
+      "file": "dist/icons/square-dot.svelte",
+      "sourceSHA256": "f08fa8f3caef3b1687b5e60e298a4da5b2f4255a5bf079310241136ba742bea3",
+      "vectorSHA256": "4edc58d36a6c6c172e025b17f80a11caad621ac5900747c8ffb7dad9a76c9cb6",
+      "correction": null
+    },
+    {
+      "character": "e",
+      "name": "Triangle",
+      "resolvedName": "Triangle",
+      "file": "dist/icons/triangle.svelte",
+      "sourceSHA256": "d526a02b1d57413e1d3df88e3665bc308a65b0d242bc69ef682a191f26a191b8",
+      "vectorSHA256": "201df54cbb36d16b78f274a78168307bc088cd6a462fc0ff314b1c2a1a34185c",
+      "correction": null
+    },
+    {
+      "character": "f",
+      "name": "Diamond",
+      "resolvedName": "Diamond",
+      "file": "dist/icons/diamond.svelte",
+      "sourceSHA256": "26eb30f40e04fe25fc953f6b8a1affec04de7d588999ecdf9060ea0765bc888c",
+      "vectorSHA256": "ef4aafa795d7598e332194b64a741aa75f578d8a4577de7488e2883c4683f2a3",
+      "correction": null
+    },
+    {
+      "character": "g",
+      "name": "Hexagon",
+      "resolvedName": "Hexagon",
+      "file": "dist/icons/hexagon.svelte",
+      "sourceSHA256": "2abb2146dafb68b86753f7858bb30d411e638646c6a1bd88df908bb7579597ab",
+      "vectorSHA256": "95051249f23ab6dddd1bca86ba35aaa2e3172051c90202fdc20182d59bb8b51a",
+      "correction": null
+    },
+    {
+      "character": "h",
+      "name": "Octagon",
+      "resolvedName": "Octagon",
+      "file": "dist/icons/octagon.svelte",
+      "sourceSHA256": "19a6adc56f5fe22bf5a2cc08e3a591f218d710cdbcd43d5881e09a3d4a10b562",
+      "vectorSHA256": "9af9dc41db3291099721d2d174fb0f41e33e199a9174587a2f50863381e9465b",
+      "correction": null
+    },
+    {
+      "character": "i",
+      "name": "Pentagon",
+      "resolvedName": "Pentagon",
+      "file": "dist/icons/pentagon.svelte",
+      "sourceSHA256": "df5f0baab6c03158c4b352259552b385878626c2b33bb644bbb10d85633c8357",
+      "vectorSHA256": "4da356ab8739ab0e2bf9f4c5bff55f91c1e19a5b0645bb9a960b6e7f4af19b61",
+      "correction": null
+    },
+    {
+      "character": "j",
+      "name": "Crosshair",
+      "resolvedName": "Crosshair",
+      "file": "dist/icons/crosshair.svelte",
+      "sourceSHA256": "bcfc65d6aabd139119fb38ee8861d4ef646420f341d4a148c3b1a355c450bf88",
+      "vectorSHA256": "0af02ad9f5514b112bbbfcadd80296f362fd1e2a2056fc5d492ac05ba21f27c4",
+      "correction": null
+    },
+    {
+      "character": "k",
+      "name": "Target",
+      "resolvedName": "Target",
+      "file": "dist/icons/target.svelte",
+      "sourceSHA256": "81b1ffc43f7927ef3ab6835383943d168a69f7393a7d3b9210db45f5311ed034",
+      "vectorSHA256": "ed6390550675b6f03d6a271b4f5b8c02b47f933f65b7c5bb9a801c7f27ab4b9b",
+      "correction": null
+    },
+    {
+      "character": "l",
+      "name": "Disc",
+      "resolvedName": "Disc",
+      "file": "dist/icons/disc.svelte",
+      "sourceSHA256": "7831e479efdbe035610b1f870130d1d2197332183f3858c71834ab17d2635ad7",
+      "vectorSHA256": "e73b452a253c46a63b5e9a3d61485d2c9f14fd37cdb1193bfc96817d3fc35155",
+      "correction": null
+    },
+    {
+      "character": "m",
+      "name": "Radar",
+      "resolvedName": "Radar",
+      "file": "dist/icons/radar.svelte",
+      "sourceSHA256": "d40e68436cc8c9625cb073aeb2c70e673e0f6477faa453883c0f00dbfe0de6b7",
+      "vectorSHA256": "9b054261150cb95c45a959d0c5252fbff2b9ac4480f7ba68eb00ee3b41a76029",
+      "correction": null
+    },
+    {
+      "character": "n",
+      "name": "Aperture",
+      "resolvedName": "Aperture",
+      "file": "dist/icons/aperture.svelte",
+      "sourceSHA256": "f8ed901128c4bc472ba306a415d12bac6035acc71622059aa4ffccc63e3d8820",
+      "vectorSHA256": "1dc2e4f9ab138190fb823737e68b7795c1178d236b36c0a1b399bd5d7c65e960",
+      "correction": null
+    },
+    {
+      "character": "o",
+      "name": "Focus",
+      "resolvedName": "Focus",
+      "file": "dist/icons/focus.svelte",
+      "sourceSHA256": "ea915b008fbb6f75a23360ab7681ebee82df95756518bf5b04abc64b48a8d386",
+      "vectorSHA256": "ac41f2a4e6da977d0f34cea8d9a028b2d5821e3aa5d16ca57428780fff28063b",
+      "correction": null
+    },
+    {
+      "character": "p",
+      "name": "Scan",
+      "resolvedName": "Scan",
+      "file": "dist/icons/scan.svelte",
+      "sourceSHA256": "af2d9278acbec548472873b02eacb723dfb28393863bf932573ef429034ae14f",
+      "vectorSHA256": "5923bb86741fa5cd5ab3dc9ef804157afbaa1e65a9a9a6ba98e7a0fb36c43781",
+      "correction": null
+    },
+    {
+      "character": "q",
+      "name": "ScanEye",
+      "resolvedName": "ScanEye",
+      "file": "dist/icons/scan-eye.svelte",
+      "sourceSHA256": "b89b045435555727326c39075e5f82f0cdf31972e428b7075c94f70f84995092",
+      "vectorSHA256": "d90b96457351f4622e5ffe8d2d54f5908412057bb3945dbc09e0af097896284e",
+      "correction": null
+    },
+    {
+      "character": "r",
+      "name": "Layers",
+      "resolvedName": "Layers",
+      "file": "dist/icons/layers.svelte",
+      "sourceSHA256": "5e8b205d88cc991f66b1549b53b83994e2c28f74bfae767bfcff96493703c163",
+      "vectorSHA256": "ae25fec6ba1ff3e8f3a408e6bed21f435f290317ce220c6fb92f1c0ae99fd3b3",
+      "correction": null
+    },
+    {
+      "character": "s",
+      "name": "Boxes",
+      "resolvedName": "Boxes",
+      "file": "dist/icons/boxes.svelte",
+      "sourceSHA256": "3fa67b8ad595959380c49c82b0dbe1e75f463ad6363276632874637bd3fd8519",
+      "vectorSHA256": "237cbae009a96f602e9b9e03502b716c3d7acc3b7794f8a1e1b3393a19b868d2",
+      "correction": null
+    },
+    {
+      "character": "t",
+      "name": "Shapes",
+      "resolvedName": "Shapes",
+      "file": "dist/icons/shapes.svelte",
+      "sourceSHA256": "c462e8fecaaa035ae79fa3164c0c554348692271cf70baeaa1f2883a9ed5e594",
+      "vectorSHA256": "7967b3037da304077916786c23494ec4054a63bd5c85e7f45822bac03f0fee09",
+      "correction": null
+    },
+    {
+      "character": "u",
+      "name": "Spline",
+      "resolvedName": "Spline",
+      "file": "dist/icons/spline.svelte",
+      "sourceSHA256": "452af3f7fef376f73c41ecc8d9c9c940b02728ff7db11f5f1d5fc99cdb2729e6",
+      "vectorSHA256": "67f913415bc3c0f915bd96fcd2ac6d3ccf604df12b7fc1eee7b7797ffe7b5f7f",
+      "correction": null
+    },
+    {
+      "character": "v",
+      "name": "Radius",
+      "resolvedName": "Radius",
+      "file": "dist/icons/radius.svelte",
+      "sourceSHA256": "6b8e9f4fc8e24ed382c6be0ec97df94ad6a040eb001ce5390971d4cc8f4b2380",
+      "vectorSHA256": "a134660a6d65f7a2e11ee6e3c2f1a72e573d1052d9b6695f02a82715f36cfe8e",
+      "correction": null
+    },
+    {
+      "character": "w",
+      "name": "Component",
+      "resolvedName": "Component",
+      "file": "dist/icons/component.svelte",
+      "sourceSHA256": "8475a6b8ec14a4979c0798e916d2a17b88b17aa72af3c5be9bb6f35dd4146fe0",
+      "vectorSHA256": "4a5b6aae1bc22d7dc37288ebe4eb716844d550ab54e3e3e84eedcd347cd80f29",
+      "correction": null
+    },
+    {
+      "character": "x",
+      "name": "Workflow",
+      "resolvedName": "Workflow",
+      "file": "dist/icons/workflow.svelte",
+      "sourceSHA256": "f39894c2fc08e5b961950db9f12ced9e8cea3e2ea3ecfbb4dfda2bd04154cf6c",
+      "vectorSHA256": "b14cdee54aa76092f0779664610aed8d55b066bb3c04a569c70833fd8853b3cb",
+      "correction": null
+    },
+    {
+      "character": "y",
+      "name": "Network",
+      "resolvedName": "Network",
+      "file": "dist/icons/network.svelte",
+      "sourceSHA256": "0556b46095ededbb96bc759ec9fa6a32b9bd1f2e484854858f7af3f6d328ad7c",
+      "vectorSHA256": "685a6a30a4ac0247711b97a30f15d2daf660638bfe675778dc38aeda22512694",
+      "correction": null
+    },
+    {
+      "character": "z",
+      "name": "Fingerprint",
+      "resolvedName": "FingerprintPattern",
+      "file": "dist/icons/fingerprint-pattern.svelte",
+      "sourceSHA256": "89530f093a0335cb83159164b0cb7fa6805ecd04e8141e4f1627b9419e6eecf1",
+      "vectorSHA256": "81a350488939561afdd31fd71a9004ef7912ea98f03e140c1853a84b4aef9f4d",
+      "correction": "Fingerprint -> FingerprintPattern: explicit Lucide v1 name correction"
+    },
+    {
+      "character": "0",
+      "name": "Globe",
+      "resolvedName": "Globe",
+      "file": "dist/icons/globe.svelte",
+      "sourceSHA256": "9e95859229ebc921e81a80f88e3bf62604ea640a3db7d339dccffe5a4cd47337",
+      "vectorSHA256": "33324cd78886e519c4f7cd1fb08e580e0f92c1330ac7648245a59c9723a1a2c0",
+      "correction": null
+    },
+    {
+      "character": "1",
+      "name": "Cpu",
+      "resolvedName": "Cpu",
+      "file": "dist/icons/cpu.svelte",
+      "sourceSHA256": "261756b061d629f671589faaaf230e4b0cf93c7c468494238a93896b43a68254",
+      "vectorSHA256": "7b47709ce9c730e7b849ce572345143e480479ed3534ee5045f1f2bd6066a65c",
+      "correction": null
+    },
+    {
+      "character": "2",
+      "name": "Binary",
+      "resolvedName": "Binary",
+      "file": "dist/icons/binary.svelte",
+      "sourceSHA256": "648925a847460c652861398bfe8f7146e9d0c8fe07207d69c559b3437983338f",
+      "vectorSHA256": "0e707a8c0576c63c416a7f321d0ae8d91e39a7e08362183f9b05f513649b2b2d",
+      "correction": null
+    },
+    {
+      "character": "3",
+      "name": "Activity",
+      "resolvedName": "Activity",
+      "file": "dist/icons/activity.svelte",
+      "sourceSHA256": "2ac71c51be955f3ff68220f173476f2322816f6677df37ef61bc2d0b5520151d",
+      "vectorSHA256": "515d34b71336b67c1d2d40b2b17bb5176d7d612ffe8b139fe9e7cbb4fec80268",
+      "correction": null
+    },
+    {
+      "character": "4",
+      "name": "Zap",
+      "resolvedName": "Zap",
+      "file": "dist/icons/zap.svelte",
+      "sourceSHA256": "51becce24bfde11b33ef187efc014de606a297158e67f2aaf7777b2ffbeb6a30",
+      "vectorSHA256": "f41faaa5e011a7f3d5a52acfdf45f49e85e5b615e923ce5dec08caa6b44f3eba",
+      "correction": null
+    },
+    {
+      "character": "5",
+      "name": "Cross",
+      "resolvedName": "Cross",
+      "file": "dist/icons/cross.svelte",
+      "sourceSHA256": "06d69b8a8bf779bd27b2e7b30787c9f88a65302ce3654bedcd8f0117ba8d49d9",
+      "vectorSHA256": "2e898ca2cf4e2428f4f672141ae8d0985563a674be52f45b408bfdf4f772ac19",
+      "correction": null
+    },
+    {
+      "character": "6",
+      "name": "Asterisk",
+      "resolvedName": "Asterisk",
+      "file": "dist/icons/asterisk.svelte",
+      "sourceSHA256": "8bfed1dcecf59e53c22a980c7c3800354ab0f7c95005c02d9b8aeb5ef69969bc",
+      "vectorSHA256": "71c458eae85113ce76e8e10fb03b05cf6a4e054da3ccff9cd931097efcf785d9",
+      "correction": null
+    },
+    {
+      "character": "7",
+      "name": "Hash",
+      "resolvedName": "Hash",
+      "file": "dist/icons/hash.svelte",
+      "sourceSHA256": "784d682808913d6a01645946b80a2185e602e8d79bd3315e10556385507280f6",
+      "vectorSHA256": "50e4ef58780c9fd695ca9a018f540f168bd5846ec4753d6edd9d0d868885aeaf",
+      "correction": null
+    },
+    {
+      "character": "8",
+      "name": "Radio",
+      "resolvedName": "Radio",
+      "file": "dist/icons/radio.svelte",
+      "sourceSHA256": "3a579941c235098e8299433c377370388d04c450ea78649d8cb7aa3cb07306ef",
+      "vectorSHA256": "749124896205008dac436061b5e159900831c1a28507a930bc9c8ecf1ce91064",
+      "correction": null
+    },
+    {
+      "character": "9",
+      "name": "Terminal",
+      "resolvedName": "Terminal",
+      "file": "dist/icons/terminal.svelte",
+      "sourceSHA256": "447ade89c4968804a64a5e61243779235d1ce2188e838bcb00e1a97f50b258ab",
+      "vectorSHA256": "6254e08650d8044ae4677d7170487b6e4ad909a658b7583bc5aef21b2d15bcdc",
+      "correction": null
+    },
+    {
+      "character": "-",
+      "name": "Minus",
+      "resolvedName": "Minus",
+      "file": "dist/icons/minus.svelte",
+      "sourceSHA256": "4bf8c94cd20272d1a8a3ed2141c71ad08cd5eb54a6c6c783569acbf525ed7b25",
+      "vectorSHA256": "97fd80fde2451118055c2ef4c9987b42d823085f89b7120d32530ad74899bc1f",
+      "correction": null
+    },
+    {
+      "character": "_",
+      "name": "Equal",
+      "resolvedName": "Equal",
+      "file": "dist/icons/equal.svelte",
+      "sourceSHA256": "cd690d7053464ebb2070cbcbe063b4d8909b967b27ffa2e567f79e0c62cf2a6b",
+      "vectorSHA256": "86096dd7b43e909b5f1cd51b87dac699ca2554d8fc5f9b229540517253ecedfc",
+      "correction": null
+    }
+  ]
+}
