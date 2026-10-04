@@ -128,6 +128,7 @@ try {
     ...(await filesAt(resolve('tests'))),
     ...(await filesAt(resolve('scripts'))),
     ...(await filesAt(resolve('config'))),
+    ...(await filesAt(resolve('offline'))),
   ];
   for (const file of sources)
     report.hashes[

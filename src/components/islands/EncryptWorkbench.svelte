@@ -143,7 +143,6 @@
         The checksum is a public transcription check, not authentication. Send
         the raw text to the recipient's offline receiver.
       </p>
-      <label for="raw-ciphertext">Raw ciphertext (canonical Base64URL)</label>
       <nav class="workspace-actions" aria-label="Encrypted result views">
         <button
           type="button"
@@ -172,8 +171,9 @@
       <section
         id="result-raw"
         hidden={resultView !== 'raw'}
-        aria-label="Raw ciphertext view"
+        aria-label="Canonical transport view"
       >
+        <label for="raw-ciphertext">Raw ciphertext (canonical Base64URL)</label>
         <textarea
           id="raw-ciphertext"
           bind:this={rawInput}
