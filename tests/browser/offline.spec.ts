@@ -34,13 +34,11 @@ test('file probe opens under default settings with no adjacent files or network'
     const text = 'Synthetic exact UTF-8 שלום 🔑\r\n  ';
     // textarea normalizes CRLF by design; compare the actual original DOM string.
     if (bits === 3072) {
-      await page
-        .getByLabel('Choose public PEM file')
-        .setInputFiles({
-          name: 'synthetic-public.pem',
-          mimeType: 'text/plain',
-          buffer: Buffer.from(pem),
-        });
+      await page.getByLabel('Choose public PEM file').setInputFiles({
+        name: 'synthetic-public.pem',
+        mimeType: 'text/plain',
+        buffer: Buffer.from(pem),
+      });
     } else {
       await page.getByLabel('Paste public PEM').fill(pem);
       await page

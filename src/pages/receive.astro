@@ -33,4 +33,100 @@ import Layout from '../layouts/Layout.astro';
     hash through an independently trusted channel. These checks, release custody
     guidance and integrated independent review are still pending.
   </p>
+  <h2>Before the first message</h2>
+  <p>
+    The supported development target is Windows x64, version 0.0.1-dev. ARM64,
+    other operating systems and a signed public download remain pending. Do not
+    treat this development binary as a verified release.
+  </p>
+  <p>
+    For a future release, obtain its full SHA-256 and expected signing publisher
+    through a trusted independent channel. Check Get-FileHash -Algorithm SHA256
+    and Get-AuthenticodeSignature on the executable before running it: require
+    the expected full hash, Valid signature and matching publisher. Stop on
+    missing or mismatched evidence; do not bypass Windows warnings. The release
+    publisher/channel has not yet been established.
+  </p>
+  <p>
+    Keep the executable separately from the private key. Use the{' '}
+    <a href="/keys/">offline key setup guide</a> once. The final key file has
+    the ENCRYPTED PRIVATE KEY header, and the shareable public file has PUBLIC
+    KEY. Check the actual pair locally:
+  </p>
+  <pre><code>&amp; 'C:\Verified Tools\zodiac-decrypt.exe' verify-key --key 'D:\Private Zodiac Keys\rsa-private-encrypted.pem' --public 'D:\Private Zodiac Keys\rsa-public.pem'</code></pre>
+  <p>
+    Enter the final passphrase at the hidden local console prompt. Expect
+    RSA-3072 or RSA-4096 and the full SHA-256 SPKI fingerprint. Compare it with
+    the sender’s Recipient details and the independently verified recipient
+    identity. A wrong pair fails; a filename does not prove identity. No private
+    contents or password need to be pasted into the site.
+  </p>
+  <h2>Readiness and encrypted backup drill</h2>
+  <ol>
+    <li>
+      Exchange your verified public PEM and full fingerprint with the sender
+      through the existing trusted channel. Ask for a harmless test message
+      whose exact text you can confirm.
+    </li>
+    <li>
+      The sender downloads raw ciphertext.txt. Transfer that exact file: no
+      added newline, whitespace, BOM, wrapping or artwork substitution.
+    </li>
+    <li>
+      Run the decrypt command above with quoted local paths and a new output
+      filename. Enter the final passphrase at the hidden prompt. Success reports
+      only that a private plaintext file was saved. It does not print the
+      message or open an editor.
+    </li>
+    <li>
+      Open the saved file yourself and confirm the exact nonsecret test text
+      through the trusted channel. The output persists on disk; decide who may
+      access it and how long to retain it.
+    </li>
+    <li>
+      Restore the final encrypted key backup into a separate restricted
+      nonsynced local folder. Run verify-key against the original public PEM,
+      compare the full fingerprint, and decrypt the same test file to another
+      new output. Test the separately backed-up passphrase too. Keep the
+      original key until this drill succeeds.
+    </li>
+  </ol>
+  <p>
+    Readiness proves the tested recipient could decrypt that message; it does
+    not authenticate every future sender. The receiver requires one command per
+    message, with no OpenSSL steps per message. CLI friction and independent
+    nontechnical usability trials remain open.
+  </p>
+  <h2>If a step fails</h2>
+  <dl>
+    <dt>Exit 2: usage, public pair or raw format</dt>
+    <dd>
+      Check quoted flags and filenames, select the matching public PEM, and
+      obtain a fresh exact raw download. The tool deliberately does not strip
+      whitespace.
+    </dd>
+    <dt>Exit 3: unable to unlock</dt>
+    <dd>
+      Check the final encrypted key and its exact ASCII passphrase. A wrong
+      password, damaged key or unsupported encryption profile shares the same
+      local error. Do not upload it to support.
+    </dd>
+    <dt>Exit 4: message cannot authenticate</dt>
+    <dd>
+      Check the intended recipient key and request a fresh raw file. Wrong keys
+      and tampering cannot be distinguished reliably. No plaintext output is
+      created.
+    </dd>
+    <dt>Exit 5: local file error</dt>
+    <dd>
+      Use an ordinary local fixed-disk folder, check access and choose a new
+      output name. Existing files are never replaced. Avoid cloud redirection,
+      junctions, network shares, devices and alternate streams.
+    </dd>
+    <dt>Exit 130: canceled</dt>
+    <dd>
+      Esc or Ctrl+C cancels. Retry when ready using a new output name if a prior
+      operation completed.
+    </dd>
+  </dl>
 </Layout>

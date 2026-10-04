@@ -20,6 +20,15 @@ transcript, screen recording or captured terminal. It deliberately displays the
 generated passphrase; terminal scrollback and strings cannot be reliably wiped.
 Do not run it inside an assistant session or paste its output into a chat.
 
+The reusable local generator is [New-ZodiacPassphrase.ps1](../scripts/New-ZodiacPassphrase.ps1).
+In your own trusted PowerShell console run `& .\scripts\New-ZodiacPassphrase.ps1`.
+It defaults to 32 printable ASCII characters, requires explicit local confirmation,
+refuses redirected input/output, and uses native `GetInt32(94)` on modern .NET or
+cryptographic byte rejection below 188 on Windows PowerShell 5.1. It never writes a
+file or copies to the clipboard. `-Length 24` is also supported; shorter than 24
+is rejected. `-SelfTest` checks the complete unbiased mapping without generating
+or displaying a password. The script cannot detect every transcript/recorder.
+
 ```powershell
 $length = 32 # Choose 24 through 32.
 $alphabet = -join (33..126 | ForEach-Object { [char]$_ })
