@@ -1,0 +1,26 @@
+{
+  "recorded": "2026-10-04T23:15:04.865Z",
+  "scope": "Author-run native Windows PowerShell readiness-helper trials with synthetic OpenSSL fixture keys only. No production private material. Not novice usability or operator production readiness.",
+  "helperSHA256": "44c7a3cb294ab13046c6ed8a8b70a95b9bfe5c65f9a8d592292d29630b67e541",
+  "receiverSHA256": "d5f768f7e3b58c2f4de90b9d20033deec5d3b3d50d3a4f43c2f3f2a4b87dd829",
+  "controllingConsole": true,
+  "passwords": "Hidden Go prompts only; known synthetic fixture password entered directly into controlling console, never argv/environment/piped input.",
+  "cases": [
+    {
+      "rsaBits": 3072,
+      "originalAndRestoredPairExit": 0,
+      "originalAndRestoredDecryptExit": 0,
+      "exactNonsecretToken": true,
+      "restoredFolder": ".cache/rec03-helper-trial-3072-01"
+    },
+    {
+      "rsaBits": 4096,
+      "originalAndRestoredPairExit": 0,
+      "originalAndRestoredDecryptExit": 0,
+      "exactNonsecretToken": true,
+      "restoredFolder": ".cache/rec03-helper-trial-4096-01"
+    }
+  ],
+  "operatorBackupTrial": "awaiting observed result",
+  "firstTimeUserTrial": "awaiting observed result"
+}

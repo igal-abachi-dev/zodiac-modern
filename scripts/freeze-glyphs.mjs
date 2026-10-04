@@ -125,11 +125,20 @@ if (process.argv.includes('--check')) {
   );
   if (JSON.stringify(stored) !== JSON.stringify(manifest))
     throw Error('Frozen map provenance changed.');
-  const { frozenGlyphs: data } = await import(pathToFileURL(resolve(target)).href);
+  const { frozenGlyphs: data } = await import(
+    pathToFileURL(resolve(target)).href
+  );
   if (JSON.stringify(data) !== canonical)
     throw Error('Frozen geometry changed.');
-  const { glyphLicense } = await import(pathToFileURL(resolve('src/lib/symbols/license.ts')).href);
-  if (hash(glyphLicense) !== manifest.licenseSHA256 || hash(await readFile('public/licenses/lucide-1.51.0.txt')) !== manifest.licenseSHA256) throw Error('Missing or changed delivered glyph license.');
+  const { glyphLicense } = await import(
+    pathToFileURL(resolve('src/lib/symbols/license.ts')).href
+  );
+  if (
+    hash(glyphLicense) !== manifest.licenseSHA256 ||
+    hash(await readFile('public/licenses/lucide-1.51.0.txt')) !==
+      manifest.licenseSHA256
+  )
+    throw Error('Missing or changed delivered glyph license.');
   console.log('S64L1: all 64 named exports, vectors and provenance match.');
 } else {
   try {
@@ -160,7 +169,13 @@ if (process.argv.includes('--check')) {
   await mkdir('public/licenses', { recursive: true });
   const license = await readFile(resolve(root, 'LICENSE'));
   await writeFile('public/licenses/lucide-1.51.0.txt', license, { flag: 'wx' });
-  await writeFile('src/lib/symbols/license.ts', '// Exact license notice accompanying all frozen vectors.\nexport const glyphLicense = ' + JSON.stringify(license.toString('utf8')) + ';\n', { flag: 'wx' });
+  await writeFile(
+    'src/lib/symbols/license.ts',
+    '// Exact license notice accompanying all frozen vectors.\nexport const glyphLicense = ' +
+      JSON.stringify(license.toString('utf8')) +
+      ';\n',
+    { flag: 'wx' },
+  );
   console.log(
     'Captured 64 vectors; review evidence is required before release.',
   );

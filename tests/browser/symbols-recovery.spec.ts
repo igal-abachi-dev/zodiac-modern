@@ -66,21 +66,21 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     .click();
   await expect(page.locator('.glyph-legend li')).toHaveCount(64);
   await page.setViewportSize({ width: 1100, height: 900 });
-  // Only synthetic ciphertext/artwork; no plaintext composer or private input.
-  await page
-    .locator('.glyph-legend')
-    .screenshot({ path: `artifacts/glyph-legend-${info.project.name}.png` });
-  await page.emulateMedia({ media: 'print', colorScheme: 'light' });
-  await page
-    .locator('.glyph-legend')
-    .screenshot({
-      path: `artifacts/glyph-legend-print-${info.project.name}.png`,
-    });
-  await page.emulateMedia({ media: 'screen' });
   await page.getByRole('button', { name: 'Raw view', exact: true }).click();
   await expect(page.getByLabel('Raw ciphertext')).toHaveValue(raw);
   expect(await page.locator('[style]').count()).toBe(0);
   expect(errors).toEqual([]);
+  await page.getByRole('button', { name: 'Display view', exact: true }).click();
+  // Only synthetic ciphertext/artwork; no plaintext composer or private input.
+  // Playwright screenshots temporarily alter DOM styles. Product DOM assertions
+  // above precede that test-tool intervention; screenshots are visual evidence.
+  await page
+    .locator('.glyph-legend')
+    .screenshot({ path: `artifacts/glyph-legend-${info.project.name}.png` });
+  await page.emulateMedia({ media: 'print', colorScheme: 'light' });
+  await page.locator('.glyph-legend').screenshot({
+    path: `artifacts/glyph-legend-print-${info.project.name}.png`,
+  });
 });
 
 test('raw recovery cleans only by explicit choice, refuses imports and interoperates with native receiver', async ({
@@ -94,6 +94,10 @@ test('raw recovery cleans only by explicit choice, refuses imports and interoper
     .click();
   const raw = await page.getByLabel('Raw ciphertext').inputValue();
   await page.goto('/restore/');
+  // Warm the hydrated island before denying subsequent networking.
+  await expect(
+    page.getByRole('button', { name: 'Printed rows', exact: true }),
+  ).toBeVisible();
   const input = page.getByLabel('Paste raw ciphertext', { exact: true });
   await input.fill(' \t' + raw.slice(0, 40) + '\r\n' + raw.slice(40));
   await page
@@ -152,24 +156,17 @@ test('raw recovery cleans only by explicit choice, refuses imports and interoper
   }
   await input.fill(raw + '=');
   await expect(output).toHaveCount(0);
-  await page
-    .getByLabel('Choose raw ciphertext .txt')
-    .setInputFiles({
-      name: 'malicious.svg',
-      mimeType: 'image/svg+xml',
-      buffer: Buffer.from('<svg><script>alert(1)</script></svg>'),
-    });
+  await page.getByLabel('Choose raw ciphertext .txt').setInputFiles({
+    name: 'malicious.svg',
+    mimeType: 'image/svg+xml',
+    buffer: Buffer.from('<svg><script>alert(1)</script></svg>'),
+  });
   await expect(page.getByRole('alert')).toContainText('cannot be imported');
-  await page
-    .getByLabel('Choose raw ciphertext .txt')
-    .setInputFiles({
-      name: 'raw.txt',
-      mimeType: 'text/plain',
-      buffer: Buffer.concat([
-        Buffer.from([0xef, 0xbb, 0xbf]),
-        Buffer.from(raw),
-      ]),
-    });
+  await page.getByLabel('Choose raw ciphertext .txt').setInputFiles({
+    name: 'raw.txt',
+    mimeType: 'text/plain',
+    buffer: Buffer.concat([Buffer.from([0xef, 0xbb, 0xbf]), Buffer.from(raw)]),
+  });
   await page
     .getByRole('button', { name: 'Validate raw ciphertext', exact: true })
     .click();
@@ -197,6 +194,8 @@ test('printed rows localize errors, require complete ordered pages and verify fi
     );
   });
   await page.goto('/restore/');
+  // The production island must finish hydration before runtime network denial.
+  await expect(page.getByRole('button', { name: 'Printed rows', exact: true })).toBeVisible();
   const requests: string[] = [],
     errors: string[] = [];
   page.on('request', (r) => requests.push(r.url()));
