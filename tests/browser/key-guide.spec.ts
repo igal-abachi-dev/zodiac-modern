@@ -98,7 +98,7 @@ test('guide-created encrypted keys import and recover exact nonsecret text after
         .digest('hex');
       await page.getByLabel('Choose public PEM file').setInputFiles(publicPath);
       await expect(
-        page.locator('.recipient-summary .fingerprint'),
+        page.locator('.recipient-summary .fingerprint:not(.full-fingerprint)'),
       ).toContainText(fingerprint.slice(0, 12));
       const details = page.getByRole('button', {
         name: 'Recipient details',

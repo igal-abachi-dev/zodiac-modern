@@ -1,5 +1,5 @@
 {
-  "started": "2026-10-04T00:24:16.901Z",
+  "started": "2026-10-04T06:11:18.717Z",
   "status": "development acceptance passed",
   "scope": "M1 development acceptance; synthetic data only; author-run. Production identity/signing, EN-04 full delivery and QA-03 remain separate gates.",
   "node": "v24.21.0",
@@ -10,49 +10,49 @@
       "name": "type-format",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 47833,
-      "logSHA256": "06aa5024938773bb32537926fb7ca0014578356ef78fc27e830573a992ac86dc"
+      "milliseconds": 21265,
+      "logSHA256": "1b0c20194e27ea3afcc64a366376e00f54298813280776151b488067654b30a0"
     },
     {
       "name": "unit",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 1891,
-      "logSHA256": "2272914acce6c472a6f562a86ce3eb114571b17de97e008eeaca29b9a0348521"
+      "milliseconds": 2536,
+      "logSHA256": "3eff3d5500e2453f93c09a0ff92cacb2135457fd0116eb840dfd39c595039ed8"
     },
     {
       "name": "fixture-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 6062,
-      "logSHA256": "0c6fdf325f155b3eca46e265ee1fb3643578a11396ec1f58abc1cbcf8616412a"
+      "milliseconds": 4533,
+      "logSHA256": "cfd0d4691c4d3bd736b34838c05503a4e5d9e875f7401f0f5922679f47bcb187"
     },
     {
       "name": "custom-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4706,
-      "logSHA256": "40df6138f8b4d3e42f4bb75899a81b35fa298dcc188cc7d3920ba8dccf7e02cf"
+      "milliseconds": 4529,
+      "logSHA256": "2014b5f14e7de38ead4caac67039be18d2ab167ebafc9f2dfe46a4b663305bb8"
     },
     {
       "name": "offline-feasibility-probe",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 251,
-      "logSHA256": "67d00d87245899f99f9397dc52e9547d22f90464a421e37e6675a351ee1c2c0b"
+      "milliseconds": 1806,
+      "logSHA256": "0256b13d393124f02f75fcb1b34df9883aacec869116df35d5134d5d82d732db"
     },
     {
       "name": "browser",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 31940,
-      "logSHA256": "284c7c0b1fc15dab6125ec23b261c1c1529c8219788b1409c60b1c0fee0caaf3"
+      "milliseconds": 37378,
+      "logSHA256": "6242b2066141942879bfe0e20c9a662ff6f84a9df37cb0a79e152d02646af77c"
     },
     {
       "name": "unconfigured-production-refusal",
       "exitCode": 1,
       "expectedExit": 1,
-      "milliseconds": 248,
+      "milliseconds": 283,
       "logSHA256": "5fa35c7ee7bf2dc7a0150ec30be7cd5c125d9d80849ff4d246e6f3f4fb2cdc79"
     }
   ],
@@ -62,8 +62,8 @@
     "package.json": "e338b52aa110fcc7336bb60187f23810f80a4334632bcf384fe3633bde8b4be0",
     "pnpm-lock.yaml": "ef93716decee0db520b22d9a592850459cbed1984406759426ba6e9d168e6b90",
     "astro.config.mjs": "2838e58c7018e3b74fd66510e49b5f50bdf0871992709f20d0c48d12960259d2",
-    "playwright.config.ts": "5b01650b56378fd1b31295c26521bf944b22d48487288c7563bf907c34cf8a02",
-    "src/components/islands/EncryptWorkbench.svelte": "b941bbd5c339626ff853e39dbcd8eb43ac8c8e707ede6a9a982806e705f4af39",
+    "playwright.config.ts": "8239ad861f0ec985cb6cf731b2251e4dcec08f68083210443bc04842cd8d8e0c",
+    "src/components/islands/EncryptWorkbench.svelte": "ddaec4aafb80733a20756b754abe12bb14c1329d14cb041d05efcd1ed0cb8bbb",
     "src/components/islands/RawRecovery.svelte": "0eb0bd8f3552e82d2355e20f2be97d2fe9f4d46f3f1a381acaa7e883e3bd8309",
     "src/components/islands/RecipientSelector.svelte": "5cbf24e88f0845e126760e55b0f9349fc9608fbe928316fbd7121b4aa7d88826",
     "src/components/layout/Footer.astro": "0a8ce06cd86989d442f64928fb2e27044c209f34dd57aa8249922b5896f41e00",
@@ -81,9 +81,9 @@
     "src/pages/404.astro": "137930b5f8d835a22e3a50b4c18149f2bd354291de047770790f7ff53a53c9c6",
     "src/pages/how-it-works.astro": "40e01c8507f91bd3c3b646a0175b7ebec9f7eb23df28008086a0236806fa60be",
     "src/pages/index.astro": "e8a3d75eab17f31b2546dc26d208b689367749ee9ef6d05afc7b42665f426c76",
-    "src/pages/keys.astro": "aaf7f95cbc2717bdc48f368223e49363857765b9837c9d6899a13a281afa661a",
+    "src/pages/keys.astro": "e63fad186bf1779d2511d44d7ae42ed785d3cf2251b900f17d8c75f35d22088e",
     "src/pages/privacy.astro": "b189272181aacfd2d2128476568aacb4b189f72fffd79e8bdf4a72a88efc2445",
-    "src/pages/receive.astro": "c5b7e14663372cabcd0e6a6e389194755dd5c8c0ab99b18309da001050b2a1de",
+    "src/pages/receive.astro": "8a036fcb63ade04e9ee3583a3ea291f7fc17eebf6cbcc62449c431e32f3be756",
     "src/pages/restore.astro": "c30e35b93e6ff6d2ca2ace99347d5133576aa9ce6048a4348916a0fa044d1eb0",
     "src/pages/security.astro": "c096192217fc33ddf693e28977dfe84ae08c819e0a392071a6049d5cbbd500f4",
     "src/styles/global.css": "d0d7aba826c47c7412387f4f804abe87587be2a3ce1a95329fbe6739260cb109",
@@ -94,8 +94,9 @@
     "tests/browser/bridge.ts": "79af72d62fa37026c43f2f7ed29472c8dc139c1f6b618ec5e0596c06672105c3",
     "tests/browser/crypto-cleanup.spec.ts": "99e05e17152286136e810b0a64c3af812d3f2440646e3c53e9b1fe7d8937b9b5",
     "tests/browser/interop.spec.ts": "90c8b65491f069dd261f36df18698f440b2578bed9636c19017c5fa8b049bb6b",
+    "tests/browser/key-guide.spec.ts": "8444f9e39935ab5fb2f59adbfd1805a0589a46de47ef6f8367166cc9770ed942",
     "tests/browser/local-server.spec.ts": "f814c3c42306f5f2db5f2729c93d6b0188dd66e4d138827d4ffed55808d64dee",
-    "tests/browser/offline.spec.ts": "3a0293d9cbf958626a1c0c1874c9c22ba853513cddb87ef72dc31d00d2bd0609",
+    "tests/browser/offline.spec.ts": "f2c62a232a73e1cfb440b70e858c1de540d8010670403c74e652e4db31183557",
     "tests/browser/public-key.spec.ts": "2c5937b3b9c58d8ea0f10a8b29a4f78e52a023b204219330a89538254f46aa45",
     "tests/browser/recipient-selection.spec.ts": "e99804839940c89a5a5291325f7bad9e4bbf94531501fde353f54775737445fb",
     "tests/browser/scaffold.spec.ts": "1349d229617a937a71b6c418dcddbb8c351dbb1c87596021a6eb700fc1a488fb",
@@ -103,18 +104,22 @@
     "tests/fixtures/recipient.json": "7c7104ef5f424320dfb002dc991f0e5c41ae6110018de35035554a71800099dc",
     "tests/interop/go/go.mod": "bccab34728818bedfcdcf56b240f43088b3b672a766e31f29d0243bb2cc35869",
     "tests/interop/go/main.go": "0ba66072c8a03980e9d88ca74e8fd34452ed9d10360454fcadfee3d1067015cb",
+    "tests/unit/artifact-resources.test.ts": "f3a41d28290f911a847c37fc3a819afbdeca39047ea727ca19de5e3d3c826a96",
     "tests/unit/build-policy.test.ts": "fc2c4ba332e9314f9b354bee73090c2c3fab4a94810a0b234a01011e8a2d3701",
     "tests/unit/crypto.test.ts": "11fd2424ef4a3e576b9de72e56d91aa815b62450f1669654646f7cf1f18dcd4a",
     "tests/unit/envelope.test.ts": "9838cd64791882b6bd6daf4f9f4560b6175d0c01710a46e54c501c8ba3854de2",
     "tests/unit/gitignore.test.ts": "47b2f05d7d6a6bf7f161210722cbc0a36a86a97298bbc4fad845c5846a717881",
+    "tests/unit/passphrase-tools.test.ts": "b8986c1df08f35ed90db27e63d61479f6fedfbb7ddca7fed9ce77c699250ac0c",
     "tests/unit/recipient.test.ts": "2dbb0821fecef80b8fcf19cbb1683a557fb3a0531213c0d62dd4f0dc6ba94e71",
     "tests/unit/workspace.test.ts": "3586ad17a38faef8e3d5d9a8ebe100c79fb38e0dcc1e56fb7c2fa49b447b61ef",
+    "scripts/New-ZodiacPassphrase.ps1": "e3e5078e43ccb15f236616d67d512037482ed7d772f5264c965d17711110377f",
     "scripts/build-host-headers.mjs": "a50159982f4ebc1975a202f1d981d73c0c6b36c47e440eddcd41f328295fcebe",
-    "scripts/build-offline.mjs": "de1af855b114d7b131035b783a0c285eded0446364682de3100129ce6959d3fb",
+    "scripts/build-offline.mjs": "9a0f5e74e68b50faa3f259a2e515ce4ced944a1cfaa2913549ae9c017e02b99c",
     "scripts/build.mjs": "10d04a08a87ff9e33fa8cb64f6bdfa5f21d003d27e272747f48ef78cc8ab23d2",
-    "scripts/check-artifact.mjs": "20c7e31ae3240c99bb4ec96c831541bdec9629a6c57ac51783de247d1e75b47b",
-    "scripts/check-m1.mjs": "250a41eb4e2f7a9bf971719aa36a81d84dece7b97c9ac4aa1a1225353913a5f4",
+    "scripts/check-artifact.mjs": "f6d34fb239578d4af117021aa8fa973d4956c89e23a2133361552e1423c3d8d4",
+    "scripts/check-m1.mjs": "9375cc959c36f3a5b0f4a3b84cba242d4a3b13f8f24a5cd20ef27da02e2dee91",
     "scripts/check-rec01.mjs": "ecbec9de894218d2cf2e69cf31502c5b64f297bfe763df25eb755b157ffaf0b7",
+    "scripts/create-recipient.ps1": "ca42356c48018f17ce06821e99bc733acdf502d3c524a42a3ad1287f849e6f76",
     "scripts/generate-key-fixtures.mjs": "b7c4b346bcfa67bf0a70230f9aea2b4cee0469bb790ed3fd0d9bbd2a76c281c1",
     "scripts/interop.mjs": "2a0b7b7360cc62e02611bc34b12353078a815edc619a0c0faff325c859bf2490",
     "scripts/oracle-key-fixtures.mjs": "52f8f3fa3bd15ad7ed51202cdf587886a75dc53a584d0cdcf933afd5f143a699",
@@ -126,14 +131,18 @@
     "scripts/setup-openssl-ci.mjs": "a9e29c2b18ac29932b597a7ee9dd6faf5c0c9a191af4a2cfcff70053e3f022fa",
     "scripts/snapshot-rec01.mjs": "33330f07ffdce393f2e9d84e3be863f7cb4d614456be36402f6aa8d4240f3fee",
     "scripts/test-browser.mjs": "867d25daf65967519155a469ace49519994d10266817ca33ad2cdfb84c2ead42",
+    "scripts/verify-sender.ps1": "e0997877bb1069e0490fdfb63904c928fccc896fe9ed6ad902d5a89a3bb6020c",
     "scripts/walk-files.mjs": "f514513fb0391761298c9811007e1baf0aa070f0b049ce2027480ad5f27394cb",
     "config/recipient.json": "2ef228f09396b4bd4393378a9b964aeeb7b69c4509c7535f4ba81473901226d5",
-    "config/security-policy.ts": "c1d9e2212f2c7f67091c1e3203cbfdd2ce2a2fddc9415b4d0d2a31d715a41c54"
+    "config/security-policy.ts": "c1d9e2212f2c7f67091c1e3203cbfdd2ce2a2fddc9415b4d0d2a31d715a41c54",
+    "offline/OfflineSender.svelte": "3764229ed02300c3b57f4a6b109c53945043f5d5f9cd612d728dbb72c4df6e64",
+    "offline/entry.ts": "3dab80c086992193aae790dcb1f7d3d99ec800b2d7399e921c6523402a414a71",
+    "offline/shell.html": "b44bb28020dbe3cc2e49aebed0f11d82609ad5903a03722f13db7428f39ec271"
   },
   "browser": {
-    "startTime": "2026-10-04T00:25:20.803Z",
-    "duration": 28815.707,
-    "expected": 30,
+    "startTime": "2026-10-04T06:11:56.103Z",
+    "duration": 34692.113000000005,
+    "expected": 32,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0,
@@ -146,5 +155,5 @@
       "firefox": "155.0"
     }
   },
-  "finished": "2026-10-04T00:25:50.084Z"
+  "finished": "2026-10-04T06:12:31.135Z"
 }
