@@ -84,11 +84,11 @@ pnpm start:local
 
 ### Default recipient
 
-1. Place the recipient's **public SPKI PEM** at `public/keys/default-public.pem`.
+1. Place the recipient's **public SPKI PEM** at `public/keys/recipient-public.pem`.
 2. Configure the recipient name, public-key path, and independently confirmed full fingerprint in `config/recipient.json`.
 3. Build the site. Missing, unsupported, mismatched, or known test keys must fail a production build.
 
-Private keys and release-signing credentials stay outside the repository. Custom recipient keys stay in tab memory; reloading clears them. Never use a throwaway generated key as a production default.
+The operator-confirmed Zodiac Modern recipient is configured; its public fingerprint and browser evidence are recorded in [the status report](docs/status.md). Private keys and release-signing credentials belong outside the repository by default; the explicitly authorized `.local/recipient` custody folder is ignored and excluded from build inputs. Custom recipient keys stay in tab memory; reloading clears them. Never use a throwaway generated key as a production default.
 
 ### Checks
 
@@ -108,11 +108,11 @@ pnpm build
 pnpm check:artifact
 ```
 
-Install the pinned Playwright browsers with `pnpm exec playwright install chromium firefox` before browser tests. Build both custom-only (`dist`) and fixture (`artifacts/test-site`) artifacts before `test:interop` or `test:e2e`; the suite serves them with production headers on loopback ports 4322 and 4321. The standalone probe is explicitly synthetic and is not a release sender. Production `pnpm build` intentionally fails until real public configuration is supplied.
+Install the pinned Playwright browsers with `pnpm exec playwright install chromium firefox` before browser tests. Build both custom-only (`dist`) and fixture (`artifacts/test-site`) artifacts before `test:interop` or `test:e2e`; the suite serves them with production headers on loopback ports 4322 and 4321. The standalone shared Svelte sender prototype uses synthetic keys and is not a release sender. Production `pnpm build` passes with the operator-confirmed public configuration; missing or invalid configuration still fails closed.
 
 Use synthetic messages and labeled test keys. Receiver validation includes real OpenSSL 3.0/3.5 fixtures, independent OpenSSL oracle comparisons, strict profile/schema failures, pre-KDF stub fuzzing, bounded post-KDF fuzzing, and vendor integrity. For `pnpm test:receiver-oracle`, set `ZODIAC_OPENSSL30` and `ZODIAC_OPENSSL35` to the recorded executable versions in the fixture manifest. Testing an older generator does not broaden the accepted key-file profile. See [loader implementation and review limits](docs/decisions/rec01-fixed-loader.md).
 
-`pnpm check:m1` requires the current passing receiver snapshot (`pnpm check:rec01`, then `node scripts/snapshot-rec01.mjs`). It records formatting/types, unit tests, both static modes, the synthetic file probe, real Chromium/Firefox UI/WebCrypto/Go command checks and expected unconfigured-production refusal. Evidence is author-run, not an integrated audit. The workflow stays a template under `workflows/` by user choice.
+`pnpm check:m1` requires the current passing receiver snapshot (`pnpm check:rec01`, then `node scripts/snapshot-rec01.mjs`). It records formatting/types, unit tests, fixture/custom static builds, the bundled synthetic sender and real Chromium/Firefox UI/WebCrypto/Go command checks. With public recipient configuration present, it also checks the production build and actual browser default/fingerprint/public export; otherwise it requires production refusal. Evidence is author-run, not an integrated audit. The workflow stays a template under `workflows/` by user choice.
 
 ## Recipient workflow
 

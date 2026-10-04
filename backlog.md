@@ -27,7 +27,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E00 | Planning | P0 | Done | M0 | Source review and planning documents |
 | E01 | Enablers | P0 | In progress | M0 | Scaffold verification, harness/build pipeline review, partial offline spike |
 | E02 | Crypto | P0 | Done | M1 | Exact compatible browser encryption and strict codecs |
-| E03 | Key management | P0 | In progress | M1 | Safe default/custom public recipients and offline key guide |
+| E03 | Key management | P0 | Done | M1 | Safe default/custom public recipients and tested offline key guide |
 | E04 | Workspace | P1 | In progress | M2 | Accessible edit/encrypt/result/reset flow |
 | E05 | Symbols/recovery | P1 | Backlog | M3 | Frozen glyph mapping, export-only SVG, raw/transcription recovery |
 | E06 | Exports/sharing | P1 | Backlog | M3 | Complete copy/download/image/print artifacts |
@@ -123,8 +123,8 @@ Acceptance criteria:
 Subtasks:
 
 - [x] EN-04.1 — fully inline actual Svelte sender with shared workspace/crypto/codecs/raw exports and local help; file:// imports, exact text/reset/export/manual fallback pass Chromium/Firefox and installed stable Edge. Full artwork/recovery, remaining stable-browser matrix and independent delivery review stay in EN-04.2/.3.
-- [ ] EN-04.2 — package the full sender, verify meta-CSP/export/privacy/clipboard fallbacks and independent-hash UX.
-- [ ] EN-04.3 — record measured selection/support matrix and revise conditional release implementation/review scope.
+- [ ] EN-04.2 — in progress: shared sender packaging, meta-CSP, raw exports/privacy/manual-copy fallback and external hash-helper regression pass. Full glyph/SVG/PNG/print/recovery flows depend on E05/E06; remaining stable-browser, headed usability and independent boundary/hash-verification review are open.
+- [ ] EN-04.3 — pending full-flow evidence: record measured selection/support matrix and revise conditional release implementation/review scope. The prototype does not select the release delivery method.
 
 ## 5. E02 — cryptography and canonical data
 
@@ -744,9 +744,9 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | --- | --- |
 | Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
 | Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. At the original planning baseline application checks had not run; subsequent implementation evidence is recorded below and in docs/status.md |
-| Engineering | EN-01/EN-02/KEY-01/KEY-02/CRY-01/02/03/UX-01/02/REC-01/02 Done; EN-03 in Review; EN-04/UX-03 in progress. M0/M1 development gates complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
+| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1 and REC-01/02 Done; EN-04.1 Done; EN-04/UX-03/REC-03 in progress. M0/M1 development gates complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; download every glyph in a reversible one-line SVG; Unicode symbol strings deferred |
-| Production recipient | Public PEM/name/full fingerprint needed for REL-01; fixture-based engineering can proceed |
+| Production recipient | Operator-confirmed RSA-4096 public PEM/name/full fingerprint configured; production build/browser checks pass. Operator backup/readiness, independent integrated review and signed release remain open. |
 | Host/domain | Vercel primary; Cloudflare Pages/Netlify alternatives, Surge conditional on verified header support; exact domain/account pending (REL-04/REL-02) |
 | Independent review | User-supplied REC-01 conditional approval recorded; specified fixes pass native/synthetic verification and all mandatory evidence gates. Reviewer identity/tool was not supplied and no external post-fix execution is claimed. QA-03 integrated review remains open. See docs/reviews/2026-10-03-rec01-followup.md |
 | Review feedback | EN-04 file:// spike/conditional launcher; raw-primary vs optional artwork/no v1 SVG consumer; complete compact PNG distinct from archival pages; REC-01 owned fixed-profile stdlib loader replaces third-party decoder selection, with youmark/pkcs8/.NET read-only references and strict parsing/fuzz/vendor gates |
