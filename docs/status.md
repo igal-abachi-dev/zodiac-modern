@@ -40,7 +40,7 @@ Current automated evidence:
   production builds fail intentionally. The offline probe remains synthetic.
 - Go 1.27.1 native suite and all six OpenSSL 3.0.22/3.5.9 LF fixture/oracle checks
   pass. Native 3.0 eight-byte salts reject; 3.5 rewrap preserves public keys.
-- Latest recorded 30-second fuzz runs: 1,842,602 pre-KDF and 15,840 post-KDF
+- Latest recorded 30-second fuzz runs: 709,933 pre-KDF and 2,472 post-KDF
   executions; refreshed totals are in the exact receiver snapshot. Resource
   check: 136 allocations (limit 300). All 7,163 private-exponent bit mutations
   reject. Full vendor tree/file set/modules.txt, module hashes/pins and offline

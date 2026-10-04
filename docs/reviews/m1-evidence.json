@@ -1,58 +1,58 @@
 {
-  "started": "2026-10-03T23:49:42.714Z",
+  "started": "2026-10-04T00:24:16.901Z",
   "status": "development acceptance passed",
   "scope": "M1 development acceptance; synthetic data only; author-run. Production identity/signing, EN-04 full delivery and QA-03 remain separate gates.",
   "node": "v24.21.0",
   "go": "go version go1.27.1 windows/amd64",
-  "receiverEvidenceSHA256": "64e49ba035dbf82e08c48bce80fc25a3241dba32d0403b4907c466dcb5cbf209",
+  "receiverEvidenceSHA256": "d91e8b5083f96e4e2d9d9a415df385e5fbaaac3c80a034a7eee05399bdec7f78",
   "checks": [
     {
       "name": "type-format",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 17688,
-      "logSHA256": "da279081bf42de0e624fd5eadc1ab152c6c2a00f3bc1705de73541e985a446f0"
+      "milliseconds": 47833,
+      "logSHA256": "06aa5024938773bb32537926fb7ca0014578356ef78fc27e830573a992ac86dc"
     },
     {
       "name": "unit",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 2197,
-      "logSHA256": "fdb4913eb0bc46990b1e120bed1584e20a748f187561a53a155e64a390c3e9cb"
+      "milliseconds": 1891,
+      "logSHA256": "2272914acce6c472a6f562a86ce3eb114571b17de97e008eeaca29b9a0348521"
     },
     {
       "name": "fixture-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4373,
-      "logSHA256": "b7b582a8e5d0c1a31c26066deb2cb5376b3597c625be12e8fcf295fdf0a1d2ac"
+      "milliseconds": 6062,
+      "logSHA256": "0c6fdf325f155b3eca46e265ee1fb3643578a11396ec1f58abc1cbcf8616412a"
     },
     {
       "name": "custom-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4482,
-      "logSHA256": "780e5f6f4bc0d03f45463909a15b85fd43db75fe19c3242e76bbcdcbf1f3d75d"
+      "milliseconds": 4706,
+      "logSHA256": "40df6138f8b4d3e42f4bb75899a81b35fa298dcc188cc7d3920ba8dccf7e02cf"
     },
     {
       "name": "offline-feasibility-probe",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 331,
+      "milliseconds": 251,
       "logSHA256": "67d00d87245899f99f9397dc52e9547d22f90464a421e37e6675a351ee1c2c0b"
     },
     {
       "name": "browser",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 31544,
-      "logSHA256": "1e3cf1ab1220d9ba34776e08ae9f5cea2e5b8303d2eb9ad9d70d28eb458ab46c"
+      "milliseconds": 31940,
+      "logSHA256": "284c7c0b1fc15dab6125ec23b261c1c1529c8219788b1409c60b1c0fee0caaf3"
     },
     {
       "name": "unconfigured-production-refusal",
       "exitCode": 1,
       "expectedExit": 1,
-      "milliseconds": 225,
+      "milliseconds": 248,
       "logSHA256": "5fa35c7ee7bf2dc7a0150ec30be7cd5c125d9d80849ff4d246e6f3f4fb2cdc79"
     }
   ],
@@ -83,10 +83,10 @@
     "src/pages/index.astro": "e8a3d75eab17f31b2546dc26d208b689367749ee9ef6d05afc7b42665f426c76",
     "src/pages/keys.astro": "aaf7f95cbc2717bdc48f368223e49363857765b9837c9d6899a13a281afa661a",
     "src/pages/privacy.astro": "b189272181aacfd2d2128476568aacb4b189f72fffd79e8bdf4a72a88efc2445",
-    "src/pages/receive.astro": "e453a306696835c1bf445e23002a4c2dfe7beea4fb31bca1953c3b47f152baa4",
+    "src/pages/receive.astro": "c5b7e14663372cabcd0e6a6e389194755dd5c8c0ab99b18309da001050b2a1de",
     "src/pages/restore.astro": "c30e35b93e6ff6d2ca2ace99347d5133576aa9ce6048a4348916a0fa044d1eb0",
     "src/pages/security.astro": "c096192217fc33ddf693e28977dfe84ae08c819e0a392071a6049d5cbbd500f4",
-    "src/styles/global.css": "deaadd3414fa999f949d3d162e4560f1155ef7b2beb219d849df108487dcfbc3",
+    "src/styles/global.css": "d0d7aba826c47c7412387f4f804abe87587be2a3ce1a95329fbe6739260cb109",
     "src/styles/print.css": "80e2132cc57a488d09e2ab31484f2b4fb9b2e230eb496f3de4fad0a7baf18a74",
     "src/styles/tokens.css": "65da780c7070ca8a56240c2e68199b920b064f3d76dad4ac6c1d4cade70bba88",
     "src/types/crypto.ts": "ce9a4717ed91a2cdeffcab159ab847ffd1c317332ba8fedd3fe686b1c16f1692",
@@ -131,8 +131,8 @@
     "config/security-policy.ts": "c1d9e2212f2c7f67091c1e3203cbfdd2ce2a2fddc9415b4d0d2a31d715a41c54"
   },
   "browser": {
-    "startTime": "2026-10-03T23:50:13.406Z",
-    "duration": 29956.981,
+    "startTime": "2026-10-04T00:25:20.803Z",
+    "duration": 28815.707,
     "expected": 30,
     "skipped": 0,
     "unexpected": 0,
@@ -146,5 +146,5 @@
       "firefox": "155.0"
     }
   },
-  "finished": "2026-10-03T23:50:43.650Z"
+  "finished": "2026-10-04T00:25:50.084Z"
 }
