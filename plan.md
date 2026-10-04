@@ -186,6 +186,16 @@ The fingerprint is a key identifier, not proof of identity. A same-site value ca
 
 ### Creating one's own key: one-time OpenSSL setup
 
+Implementation note (2026-10-05): key setup and unbiased passphrase generation are
+local interactive PowerShell helpers, never browser features. The user's explicit
+local-custody exception permits an ignored `.local/recipient` folder in this
+checkout; private material remains excluded from Git, builds and hosted code.
+Ordinary setup still recommends a nonsynced private folder outside the repository.
+The operator-confirmed RSA-4096 public key/fingerprint may be copied into
+`public/keys/recipient-public.pem` and `config/recipient.json`; no generated fixture
+or agent-known production passphrase is used. Independent integrated review,
+backup/readiness, signing and trusted release channels remain separate gates.
+
 The final confirmed split is **OpenSSL key generation, browser encryption, offline Go CLI decryption**. Do not add a browser key generator or custom key container. `/keys/` gives Windows installer steps, copyable commands, expected PEM headers, filenames, permissions, backup, and a recipient test-message check. `/receive/` is an informational guide/download page only: it must never accept private keys/passphrases or decrypt messages.
 
 For Windows, recommend the latest patched **FireDaemon OpenSSL 3.5 LTS** build for the user's architecture. The longer upstream support horizon makes 3.5 LTS a reasonable default over 4.0 for this small RSA setup; a larger major version is not inherently more secure for this construction. As checked on 2026-10-03, upstream/FireDaemon direct pages list 3.5.9 and 4.0.3; OpenSSL lists 3.5 support through 2030-04-08 and 4.0 through 2027-05-14. Recheck current patches/advisories/support at implementation and guide maintenance time; never recommend an old unsupported branch, alpha/beta, or a fixed stale patch indefinitely. [OpenSSL release policy](https://openssl-library.org/policies/releasestrat/), [Current upstream downloads](https://openssl-library.org/source/), [FireDaemon Windows downloads](https://www.firedaemon.com/download-firedaemon-openssl)

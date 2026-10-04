@@ -93,7 +93,7 @@ Subtasks:
 
 ### EN-03 — validate and generate public recipient build data
 
-Type: enabler · Priority: P0 · Status: Review · Milestone: M1 · Dependencies: EN-01, KEY-01.
+Type: enabler · Priority: P0 · Status: Done · Milestone: M1 · Dependencies: EN-01, KEY-01.
 
 Acceptance criteria:
 
@@ -106,7 +106,7 @@ Subtasks:
 
 - [x] EN-03.1 — implement public config schema and build-time key/fingerprint validator.
 - [x] EN-03.2 — generate `src/generated/default-recipient.ts` and public PEM consistency checks.
-- [x] EN-03.3 — test fail-closed production cases and explicit fixture/development modes. Browser/build fingerprint equivalence and custom-only import are verified; production recipient configuration remains open.
+- [x] EN-03.3 — fail-closed production/fixture/development cases pass. The operator-confirmed RSA-4096 public configuration now passes production build and real-browser default/fingerprint/public export checks; signing and integrated release review remain separate.
 
 ### EN-04 — spike self-contained file:// sender before selecting a launcher
 
@@ -122,7 +122,7 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] EN-04.1 — prototype a fully inline sender and test secure-context/WebCrypto/file imports under default browsers.
+- [x] EN-04.1 — fully inline actual Svelte sender with shared workspace/crypto/codecs/raw exports and local help; file:// imports, exact text/reset/export/manual fallback pass Chromium/Firefox and installed stable Edge. Full artwork/recovery, remaining stable-browser matrix and independent delivery review stay in EN-04.2/.3.
 - [ ] EN-04.2 — package the full sender, verify meta-CSP/export/privacy/clipboard fallbacks and independent-hash UX.
 - [ ] EN-04.3 — record measured selection/support matrix and revise conditional release implementation/review scope.
 
@@ -230,7 +230,7 @@ Subtasks:
 
 ### KEY-03 — publish offline creation, custody, and rotation guidance
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M2/M4 · Dependencies: KEY-01, REC-02.
+Type: story · Priority: P0 · Status: Done · Milestone: M2/M4 · Dependencies: KEY-01, REC-02.
 
 As a user, I can create my own recipient pair outside the site and understand how to retain the private half.
 
@@ -245,9 +245,9 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] KEY-03.1 — write/test offline commands using disposable fixtures; validate emitted public PEM in the app.
-- [ ] KEY-03.2 — document fingerprint derivation, Unix/Windows custody, backups, and rotation examples.
-- [ ] KEY-03.3 — review language against actual product behavior and the default-recipient trust boundary.
+- [x] KEY-03.1 — tested encrypted intermediate/final generation and hidden prompts for both sizes, real-browser public import and independent Go recovery; native encrypted-backup receiver drills pass.
+- [x] KEY-03.2 — published DER fingerprint, Windows ACL/Unix umask, separate passphrase custody, encrypted-backup drill, intermediate removal limits and rotation guidance.
+- [x] KEY-03.3 — guidance matches the development product and distinguishes current verification from future signing/publisher/audit gates. Actual installer payload tested; Unix/ARM64/non-ASCII interactive support is not claimed.
 
 ## 7. E04 — visual workspace and repeat-message flow
 
@@ -305,7 +305,7 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] UX-03.1 — implement result shell, accessible views/summary, and action slots.
+- [x] UX-03.1 — immutable result shell, native accessible display/raw view controls and typed Svelte display/artwork action slots; primary raw exports work. Optional artwork actions remain unavailable until M3 validates them.
 - [x] UX-03.2 — implement repeat-message/clear-all/pageshow reset and focus handling.
 - [x] UX-03.3 — test successive messages, busy clear/discard, reload, history navigation, and screen-reader summaries.
 
@@ -689,7 +689,7 @@ Subtasks:
 
 ### REC-03 — document and prove recipient readiness
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M2/M4 · Dependencies: REC-02, KEY-03, UX-01.
+Type: story · Priority: P1 · Status: In progress · Milestone: M2/M4 · Dependencies: REC-02, KEY-03, UX-01.
 
 As a nontechnical recipient, I know which verified executable/key/files to use and can recover a real test message.
 
@@ -702,8 +702,8 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] REC-03.1 — implement verify-key and exact browser/CLI fingerprint comparison tests.
-- [ ] REC-03.2 — write accessible receive/setup/download/error and encrypted-backup guides with disposable examples.
+- [x] REC-03.1 — verify-key pair/error/fingerprint tests and native restored-key verification pass for both supported sizes.
+- [x] REC-03.2 — static receive/setup/error/backup guide implemented; signed download/publisher links remain conditional release gates and are not fabricated.
 - [ ] REC-03.3 — perform synthetic readiness/restoration/usability trials and improve failed steps.
 
 ## 14. E10 — explicitly deferred decisions

@@ -48,3 +48,17 @@ it('external full HTML verifier refuses an altered file before opening', () => {
     rmSync(root, { recursive: true, force: true });
   }
 });
+it('public configuration succeeds in a fresh checkout and refuses replacing a recipient', () => {
+  const root = mkdtempSync(resolve('.cache/public-config-regression-'));
+  try {
+    const result = run(
+      'scripts/test-public-recipient-write.ps1',
+      '-Root',
+      root,
+    );
+    expect(result.status, result.stderr).toBe(0);
+    expect(result.stdout).toContain('absent public folder created');
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});

@@ -1,5 +1,5 @@
 {
-  "started": "2026-10-04T06:11:18.717Z",
+  "started": "2026-10-04T22:36:57.678Z",
   "status": "development acceptance passed",
   "scope": "M1 development acceptance; synthetic data only; author-run. Production identity/signing, EN-04 full delivery and QA-03 remain separate gates.",
   "node": "v24.21.0",
@@ -10,50 +10,57 @@
       "name": "type-format",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 21265,
-      "logSHA256": "1b0c20194e27ea3afcc64a366376e00f54298813280776151b488067654b30a0"
+      "milliseconds": 72358,
+      "logSHA256": "0cdd5935cd332f5f6192bd05986cb70cc8dc8af4f08cdb8e409fb2144a647ef1"
     },
     {
       "name": "unit",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 2536,
-      "logSHA256": "3eff3d5500e2453f93c09a0ff92cacb2135457fd0116eb840dfd39c595039ed8"
+      "milliseconds": 2885,
+      "logSHA256": "bdb4f6cfe458be88de1d2b3ca26a377ec354d8885dbde62f21c87316741a1223"
     },
     {
       "name": "fixture-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4533,
-      "logSHA256": "cfd0d4691c4d3bd736b34838c05503a4e5d9e875f7401f0f5922679f47bcb187"
+      "milliseconds": 5864,
+      "logSHA256": "a6e8a1a68d3d98ba12ee9e4f4fadca78f46565a42cea4c87d4934b215ddfdb69"
     },
     {
       "name": "custom-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4529,
-      "logSHA256": "2014b5f14e7de38ead4caac67039be18d2ab167ebafc9f2dfe46a4b663305bb8"
+      "milliseconds": 4558,
+      "logSHA256": "c4ab211731f2a5f41682fe48d63221744eb3b0b82f690539e4d46ad24a6237a9"
     },
     {
       "name": "offline-feasibility-probe",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 1806,
+      "milliseconds": 1919,
       "logSHA256": "0256b13d393124f02f75fcb1b34df9883aacec869116df35d5134d5d82d732db"
     },
     {
       "name": "browser",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 37378,
-      "logSHA256": "6242b2066141942879bfe0e20c9a662ff6f84a9df37cb0a79e152d02646af77c"
+      "milliseconds": 47789,
+      "logSHA256": "b0d018af2cc7727aea842dad827c9859d45c7a8cd32f1aa142f835f121b49f87"
     },
     {
-      "name": "unconfigured-production-refusal",
-      "exitCode": 1,
-      "expectedExit": 1,
-      "milliseconds": 283,
-      "logSHA256": "5fa35c7ee7bf2dc7a0150ec30be7cd5c125d9d80849ff4d246e6f3f4fb2cdc79"
+      "name": "configured-production-build",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "milliseconds": 5082,
+      "logSHA256": "dd5896bc8643221774cd0fc209206923dfcbc920313e1ce8f40453fcb0910e85"
+    },
+    {
+      "name": "production-recipient-browser",
+      "exitCode": 0,
+      "expectedExit": 0,
+      "milliseconds": 1002,
+      "logSHA256": "2993d832c20105c3defb955a70d58d896130ead7a578ec6b9a9cb04d455ff82b"
     }
   ],
   "hashes": {
@@ -62,7 +69,7 @@
     "package.json": "e338b52aa110fcc7336bb60187f23810f80a4334632bcf384fe3633bde8b4be0",
     "pnpm-lock.yaml": "ef93716decee0db520b22d9a592850459cbed1984406759426ba6e9d168e6b90",
     "astro.config.mjs": "2838e58c7018e3b74fd66510e49b5f50bdf0871992709f20d0c48d12960259d2",
-    "playwright.config.ts": "8239ad861f0ec985cb6cf731b2251e4dcec08f68083210443bc04842cd8d8e0c",
+    "playwright.config.ts": "5c1a7227b498fc1e6d552485f46c03ac874ff8be47fd0ae0ea9e1b6009416a82",
     "src/components/islands/EncryptWorkbench.svelte": "ddaec4aafb80733a20756b754abe12bb14c1329d14cb041d05efcd1ed0cb8bbb",
     "src/components/islands/RawRecovery.svelte": "0eb0bd8f3552e82d2355e20f2be97d2fe9f4d46f3f1a381acaa7e883e3bd8309",
     "src/components/islands/RecipientSelector.svelte": "5cbf24e88f0845e126760e55b0f9349fc9608fbe928316fbd7121b4aa7d88826",
@@ -109,7 +116,7 @@
     "tests/unit/crypto.test.ts": "11fd2424ef4a3e576b9de72e56d91aa815b62450f1669654646f7cf1f18dcd4a",
     "tests/unit/envelope.test.ts": "9838cd64791882b6bd6daf4f9f4560b6175d0c01710a46e54c501c8ba3854de2",
     "tests/unit/gitignore.test.ts": "47b2f05d7d6a6bf7f161210722cbc0a36a86a97298bbc4fad845c5846a717881",
-    "tests/unit/passphrase-tools.test.ts": "b8986c1df08f35ed90db27e63d61479f6fedfbb7ddca7fed9ce77c699250ac0c",
+    "tests/unit/passphrase-tools.test.ts": "65a6b2f377fb70d597825b8db8da0ac4b6616c5ecb1c5ac5cc21dfacea318a31",
     "tests/unit/recipient.test.ts": "2dbb0821fecef80b8fcf19cbb1683a557fb3a0531213c0d62dd4f0dc6ba94e71",
     "tests/unit/workspace.test.ts": "3586ad17a38faef8e3d5d9a8ebe100c79fb38e0dcc1e56fb7c2fa49b447b61ef",
     "scripts/New-ZodiacPassphrase.ps1": "e3e5078e43ccb15f236616d67d512037482ed7d772f5264c965d17711110377f",
@@ -117,9 +124,10 @@
     "scripts/build-offline.mjs": "9a0f5e74e68b50faa3f259a2e515ce4ced944a1cfaa2913549ae9c017e02b99c",
     "scripts/build.mjs": "10d04a08a87ff9e33fa8cb64f6bdfa5f21d003d27e272747f48ef78cc8ab23d2",
     "scripts/check-artifact.mjs": "f6d34fb239578d4af117021aa8fa973d4956c89e23a2133361552e1423c3d8d4",
-    "scripts/check-m1.mjs": "9375cc959c36f3a5b0f4a3b84cba242d4a3b13f8f24a5cd20ef27da02e2dee91",
+    "scripts/check-m1.mjs": "b499ef8efc9448ff5d1d365c5ceee8612c2f4768789c0413e2e9342eaa8205f7",
+    "scripts/check-production-recipient.mjs": "fa80da67eef255772416638f1496db7115dee9381f5a1a955084a4931a3992b5",
     "scripts/check-rec01.mjs": "ecbec9de894218d2cf2e69cf31502c5b64f297bfe763df25eb755b157ffaf0b7",
-    "scripts/create-recipient.ps1": "ca42356c48018f17ce06821e99bc733acdf502d3c524a42a3ad1287f849e6f76",
+    "scripts/create-recipient.ps1": "77f835fe6961251c16e609cf841fab6b1920de79f3e43d74548080291d88a3e0",
     "scripts/generate-key-fixtures.mjs": "b7c4b346bcfa67bf0a70230f9aea2b4cee0469bb790ed3fd0d9bbd2a76c281c1",
     "scripts/interop.mjs": "2a0b7b7360cc62e02611bc34b12353078a815edc619a0c0faff325c859bf2490",
     "scripts/oracle-key-fixtures.mjs": "52f8f3fa3bd15ad7ed51202cdf587886a75dc53a584d0cdcf933afd5f143a699",
@@ -131,17 +139,20 @@
     "scripts/setup-openssl-ci.mjs": "a9e29c2b18ac29932b597a7ee9dd6faf5c0c9a191af4a2cfcff70053e3f022fa",
     "scripts/snapshot-rec01.mjs": "33330f07ffdce393f2e9d84e3be863f7cb4d614456be36402f6aa8d4240f3fee",
     "scripts/test-browser.mjs": "867d25daf65967519155a469ace49519994d10266817ca33ad2cdfb84c2ead42",
+    "scripts/test-public-recipient-write.ps1": "6508edc04537578ec12ce52e4d785b81eb82a54728572eaf374cd20da6a319f2",
     "scripts/verify-sender.ps1": "e0997877bb1069e0490fdfb63904c928fccc896fe9ed6ad902d5a89a3bb6020c",
     "scripts/walk-files.mjs": "f514513fb0391761298c9811007e1baf0aa070f0b049ce2027480ad5f27394cb",
-    "config/recipient.json": "2ef228f09396b4bd4393378a9b964aeeb7b69c4509c7535f4ba81473901226d5",
+    "scripts/write-public-recipient.ps1": "3f55a12eea48cc680b25ed2d8977011bc07cd4f0f0c2ddbb8b96b9bff9ae4fd7",
+    "config/recipient.json": "125a40fc70baf60e6a2caa8df68e946f5a90e5c2678a6198dd4e21797d1a61e7",
     "config/security-policy.ts": "c1d9e2212f2c7f67091c1e3203cbfdd2ce2a2fddc9415b4d0d2a31d715a41c54",
     "offline/OfflineSender.svelte": "3764229ed02300c3b57f4a6b109c53945043f5d5f9cd612d728dbb72c4df6e64",
     "offline/entry.ts": "3dab80c086992193aae790dcb1f7d3d99ec800b2d7399e921c6523402a414a71",
-    "offline/shell.html": "b44bb28020dbe3cc2e49aebed0f11d82609ad5903a03722f13db7428f39ec271"
+    "offline/shell.html": "b44bb28020dbe3cc2e49aebed0f11d82609ad5903a03722f13db7428f39ec271",
+    "public/keys/recipient-public.pem": "f6931dfb8679fa9871351d7ce9e8ee5e7c0cc65a2dfa8f181e5fb163fcea5090"
   },
   "browser": {
-    "startTime": "2026-10-04T06:11:56.103Z",
-    "duration": 34692.113000000005,
+    "startTime": "2026-10-04T22:38:37.895Z",
+    "duration": 35187.65,
     "expected": 32,
     "skipped": 0,
     "unexpected": 0,
@@ -155,5 +166,6 @@
       "firefox": "155.0"
     }
   },
-  "finished": "2026-10-04T06:12:31.135Z"
+  "production": "Explicit public recipient validated; review/signing remain open.",
+  "finished": "2026-10-04T22:39:19.222Z"
 }

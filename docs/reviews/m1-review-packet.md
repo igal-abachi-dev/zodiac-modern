@@ -10,7 +10,8 @@ copy/download, immutable recipient/profile/checksum, repeat-message, clear and
 navigation lifecycle are working. Its full display/artwork action group remains
 dependent on M3 symbols/SVG/PNG/print and must not be marked entirely Done.
 REC-02 implements the Windows native authenticated command and private output;
-readiness/custody/usability (REC-03, KEY-03) and QA-03 remain separate work.
+KEY-03 guidance and native synthetic backup drills now pass. REC-03's independent
+nontechnical usability/release steps and QA-03 remain separate work.
 
 Reproduce with the pinned installed toolchains and already authenticated caches:
 
@@ -27,9 +28,10 @@ token can correctly be denied by owner-only output ACLs. The workflow is a
 template in `workflows/`, not active GitHub Actions.
 
 [M1 machine evidence](m1-evidence.json) records source hashes, exact versions,
-format/types, 14 unit tests, 30 real Chromium/Firefox cases, separate fixture/
-custom builds and artifact checks, rebuilt fully inline synthetic file probe,
-and expected production refusal with missing real configuration.
+format/types, unit/browser counts, separate fixture/custom builds and artifact
+checks, rebuilt fully inline actual Svelte sender prototype, and the configured
+production build/public-only browser fingerprint/export check. Missing production
+configuration and fixture substitutions remain covered by isolated refusal tests.
 [Receiver evidence](rec01-evidence.json) records native tests, six real
 OpenSSL oracle profiles, schema/resource/mutation tests, two 30-second fuzz
 targets and full regenerated-vendor/pin/offline verification.
@@ -58,3 +60,19 @@ for the native path/ACL/race/error boundary and evidence limits.
 Next review scope: key creation/custody/readiness, symbols/recovery/export,
 complete offline sender verification UX, native output and terminal integration,
 privacy/host trust, release packaging/publisher hashes/signatures and QA-03.
+
+The current production recipient is the operator-confirmed RSA-4096 public key,
+labelled Zodiac Modern recipient. The full DER SPKI fingerprint was confirmed
+through the operator's separate local OpenSSL/receiver console, not a website
+badge. [Public-only browser evidence](production-recipient-evidence.json) checks
+the actual default and exported canonical public PEM. Private files remain in
+the explicitly authorized ignored local folder and are not read by these checks.
+
+[Key setup evidence](key-setup-evidence.json) covers actual hidden OpenSSL and Go
+prompts, both RSA sizes and byte-exact restored encrypted-backup drills. The
+missing public directory error in the first operator setup was repaired without
+regenerating the key; the public-copy helper has a fresh-directory/overwrite
+regression. Windows PowerShell 5.1 native random-byte rejection and redirected
+output refusal are tested; modern GetInt32 availability is handled explicitly.
+Unix permissions, ARM64 and interactive non-ASCII OpenSSL compatibility remain
+unclaimed. EN-04's full artwork/recovery/platform/review gate remains open.

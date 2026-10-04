@@ -1,0 +1,43 @@
+{
+  "recorded": "2026-10-04T22:38:25.138Z",
+  "scope": "Author-run disposable native OpenSSL key setup and encrypted-backup restoration. No production private-key/password access. Not independent review or nontechnical usability QA.",
+  "openssl": "OpenSSL 3.5.9; verified FireDaemon installer payload",
+  "installerSHA256": "cecbaee4ae836693ae60e6e010fe374449fefde093b5dd8e93953b6657e4225d",
+  "profile": {
+    "rsaExponent": 65537,
+    "pbes2": true,
+    "kdf": "PBKDF2-HMAC-SHA256",
+    "cipher": "AES-256-CBC",
+    "iterations": 600000,
+    "saltBytes": 16
+  },
+  "prompt": "Actual hidden controlling-console prompts; ASCII synthetic passphrases only; no secret argv/environment/piped password input.",
+  "receiverSHA256": "19bc573e874e8e0aef07d43009e5a1de139b497c6baad494e4b2c1c9bb01ac0d",
+  "existingDestinationRefused": true,
+  "publicCopyRegression": "Fresh missing public/keys directory and overwrite refusal checked separately by native PowerShell regression.",
+  "limits": "Native setup trials preceded the public-copy helper fix; generation/unlock steps are unchanged. Only the public-config failure path was refactored and regression-tested. Unix permissions, ARM64 and OpenSSL interactive non-ASCII remain untested.",
+  "trials": [
+    {
+      "rsaBits": 3072,
+      "publicFingerprint": "476925d006e404638384b72a5bf4864cb014d3621a136ed9c27da4a172521a0c",
+      "encryptedBackupSHA256": "2fc894fa64761d296a58ea090eaa01263aacf41a04c4af449bdca7bb2eb1e267",
+      "ciphertextSHA256": "f209258dea2f2ebe54f13f93744c1d7574cb074675d357ae8fded04aba209724",
+      "plaintextSHA256": "9f940efe0daba3aef09436a31009a4393798db05f3bd7d8fc2fee65aa0656c3d",
+      "plaintextBytes": 50,
+      "verifyKeyExit": 0,
+      "decryptExit": 0,
+      "exactBytes": true
+    },
+    {
+      "rsaBits": 4096,
+      "publicFingerprint": "03b9eceadaebdbee506252db270ae620ec1deb376f28fa5b05dccbb7907b5ecd",
+      "encryptedBackupSHA256": "628b09e7a14b3f82f5732b420f48325d43ac7a1be2696f7367da04122dd7aa78",
+      "ciphertextSHA256": "6e8f940fe75ee6f50e1ac47d78234c69b05f62ceeeb7dabb092050e87b17438c",
+      "plaintextSHA256": "b5a07342f84109721cfd7187d260645fa55caa8d0ff4e88699654462a5d32ddd",
+      "plaintextBytes": 50,
+      "verifyKeyExit": 0,
+      "decryptExit": 0,
+      "exactBytes": true
+    }
+  ]
+}

@@ -1,76 +1,82 @@
 # Live delivery status
 
-Updated 2026-10-04 (Asia/Jerusalem); evidence records UTC timestamps.
-M0 is complete and M1 development acceptance passes. The final receiver path-mapping refinement passes the refreshed gate.
+Updated 2026-10-05 (Asia/Jerusalem); evidence records UTC timestamps.
+M0 and M1 development acceptance pass. The operator-confirmed production public
+recipient is configured; integrated review, signing and release remain open.
 Acceptance criteria remain in [the backlog](../backlog.md).
-Implementation, focused review, integrated review and release are distinct.
 
-| Task                 | State          | Evidence / remaining work                                                                                                                                                                                     |
-| -------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| DOC-01, EN-01, EN-02 | Done           | Static scaffold, pinned scripts/toolchains and independent browser/Go harness.                                                                                                                                |
-| CRY-01               | Done           | Native hybrid profile, immutable output, fresh key/nonce, nonextractable AES and owned-buffer cleanup; independent Go and command interoperability/tampering.                                                 |
-| CRY-02               | Done           | Pure canonical Base64URL, modulus-derived split/serialize, exact offsets and min/max/empty-library lengths.                                                                                                   |
-| CRY-03               | Done           | Original UTF-16 validation, exact UTF-8 count/limits, duplicate/retry/reset/digest races and immutable recipient snapshot.                                                                                    |
-| KEY-01, KEY-02       | Done           | Strict public import/fingerprints, local default/custom file/paste/details/export; busy/result locks and explicit restart/default reset.                                                                      |
-| EN-03                | Review         | Build validation and browser equivalence pass. Real independently confirmed production identity/public PEM/fingerprint remains a launch gate.                                                                 |
-| UX-01, UX-02         | Done           | Light-first tokens, dark/reduced-motion/print variants, measured contrast and 320px/200% text reflow; exact composer, IME/keyboard/capabilities/errors/focus.                                                 |
-| UX-03                | In progress    | Raw result/profile/checksum/copy/download, another-message/clear/reload/navigation pass. Full display/artwork action group depends on M3.                                                                     |
-| REC-01               | Done           | Focused conditional loader approval and verified fixes; refreshed exact OpenSSL/native/vendor/resource/fuzz evidence.                                                                                         |
-| REC-02               | Done (Windows) | Authenticated offline command and private owner-only exclusive output; native path/mapping/reparse/race/ACL/cancel/cleanup tests. Actual browser/hidden-console runs pass. New integration still needs QA-03. |
-| KEY-03, REC-03       | Backlog        | Complete tested key creation/custody/rotation, backup restoration and recipient readiness/usability guidance. ASCII/random-passphrase guidance added.                                                         |
-| EN-04                | In progress    | Rebuilt fully bundled synthetic file:// probe passes Chromium/Firefox. Full sender/export/recovery/platform/verification UX and reviewed delivery choice remain open.                                         |
+| Task                   | State          | Evidence / remaining work                                                                                                                                                                                          |
+| ---------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| DOC-01, EN-01, EN-02   | Done           | Static scaffold, pinned tools/scripts and independent browser/Go harness.                                                                                                                                          |
+| CRY-01, CRY-02, CRY-03 | Done           | Native compatible hybrid crypto, canonical codecs, exact UTF-8/bounds, buffer cleanup and in-memory lifecycle.                                                                                                     |
+| KEY-01, KEY-02         | Done           | Strict SPKI import, fingerprints, default/custom file/paste/details/export and recipient snapshots.                                                                                                                |
+| EN-03                  | Done           | Operator-confirmed RSA-4096 public PEM/name/fingerprint; production build, actual default browser import and canonical public export pass. Private files remain ignored and outside build inputs.                  |
+| UX-01, UX-02           | Done           | Accessible responsive visual system and exact message/encrypt/error/IME/focus flow.                                                                                                                                |
+| UX-03.1                | Done           | Immutable result summary, native display/raw view controls, typed display/artwork action slots and working primary raw exports.                                                                                    |
+| UX-03                  | In progress    | Repeat/reset/navigation also pass. Actual glyph display and optional SVG/PNG/print actions depend on M3.                                                                                                           |
+| REC-01                 | Done           | Focused conditional loader approval and verified fixes; mandatory fixture/native/vendor/resource/fuzz gates retained.                                                                                              |
+| REC-02                 | Done (Windows) | Authenticated offline command, exclusive private output and native path/mapping/reparse/race/ACL/cancel/cleanup tests. QA-03 remains separate.                                                                     |
+| KEY-03                 | Done           | Tested encrypted generation for both sizes, current vendor verification, custody/fingerprint/backup/rotation guide and secure local passphrase generator. Public-folder failure fixed and regression-tested.       |
+| REC-03                 | In progress    | Pair/fingerprint checks, static receive/error/backup guide and both native synthetic restoration drills pass. Independent nontechnical usability, operator's own backup/readiness and release verification remain. |
+| EN-04.1                | Done           | One fully bundled actual Svelte sender with local help and shared crypto/codecs/raw exports; direct file:// feasibility demonstrated.                                                                              |
+| EN-04                  | In progress    | Full glyph/artwork/recovery flows, remaining stable-platform matrix, independent boundary/hash-verification UX review and final delivery choice remain in EN-04.2/.3.                                              |
 
-| Milestone                   | Status             | Exit scope / remaining work                                                                                                                 |
-| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| M0 — Foundation             | Done               | Reviewed loader, real fixture matrix and independent harness; mandatory gates retained.                                                     |
-| M1 — Compatible encryption  | Done (development) | Crypto, strict key/fingerprint and default/custom paths pass with synthetic fixtures. Real production recipient remains a release gate.     |
-| M2 — Usable sender/receiver | In progress        | Core raw sender and Windows decrypt/private-output flow work. KEY-03/REC-03 guidance/readiness and UX-03 cross-milestone completion remain. |
-| M3 — Symbols/artifacts      | Pending            | Frozen glyphs, raw/transcription recovery/checks and full SVG/PNG/print.                                                                    |
-| M4 — Hardened candidate     | Pending            | Full offline delivery decision, integrated privacy/export/UX and independent QA-03.                                                         |
-| M5 — Release                | Pending            | Real recipient, signed receiver, reviewed sender artifact and trusted independent publisher channel.                                        |
+| Milestone                   | State              | Remaining scope                                                                                                          |
+| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| M0 — Foundation             | Done               | Reviewed loader and independent harness; retain mandatory gates.                                                         |
+| M1 — Compatible encryption  | Done (development) | Core acceptance and actual public recipient configuration pass. EN-04 retains its explicit M4 completion scope.          |
+| M2 — Usable sender/receiver | In progress        | Core sender/receiver and key guide work. Recipient usability/operational readiness and UX-03 artwork completion remain.  |
+| M3 — Symbols/artifacts      | Pending            | Frozen glyphs, raw/transcription recovery/checks and complete SVG/PNG/print. No E05 implementation started in this task. |
+| M4 — Hardened candidate     | Pending            | Full offline delivery decision, integrated privacy/export/UX and independent QA-03.                                      |
+| M5 — Release                | Pending            | Signed receiver, reviewed sender artifact, trusted independent publisher channel and operator readiness.                 |
 
-Current automated evidence:
+Current evidence:
 
-- Formatting, Astro/Svelte/strict TypeScript: zero errors/warnings; 14 unit tests.
-- 30 real Chromium/Firefox cases pass under production CSP, including both RSA
-  sizes, same-size wrong keys, all field tampering, exact UTF-8 boundaries,
-  operation/input/key/export/navigation/privacy and visual checks.
-- Separate fixture/custom static builds and artifact checks pass. Unconfigured
-  production builds fail intentionally. The offline probe remains synthetic.
-- Go 1.27.1 native suite and all six OpenSSL 3.0.22/3.5.9 LF fixture/oracle checks
-  pass. Native 3.0 eight-byte salts reject; 3.5 rewrap preserves public keys.
-- Latest recorded 30-second fuzz runs: 709,933 pre-KDF and 2,472 post-KDF
-  executions; refreshed totals are in the exact receiver snapshot. Resource
-  check: 136 allocations (limit 300). All 7,163 private-exponent bit mutations
-  reject. Full vendor tree/file set/modules.txt, module hashes/pins and offline
-  vendor tests/build pass.
-- Native Windows output tests exercise permissive inheritance, protected
-  current-user ACLs, UNC/device/stream/reserved aliases, final/parent junctions,
-  held-parent rename and actual reparse mutation, mapped local aliases/hardlinks,
-  bounds, exclusive overwrite, authentication-before-create and partial cleanup.
-- Actual unsigned executable runs with genuine hidden controlling-console
-  prompts decrypt synthetic RSA-3072 Chromium and RSA-4096 Firefox ciphertexts
-  byte-exact. No plaintext is printed. Owner-only output correctly denies a
-  restricted sandbox token; comparison uses the normal native user context.
+- Formatting, Astro/Svelte/strict TypeScript pass with zero errors/warnings;
+  18 unit tests and 32 Chromium/Firefox browser cases pass. Chromium's process
+  sandbox is enabled. Browser versions are recorded in the machine evidence.
+- Fixture, custom and configured production builds pass artifact/CSP checks.
+  Actual production default fingerprint and canonical public PEM export match
+  the separately confirmed local receiver/OpenSSL value. Invalid/missing/test
+  production defaults remain covered by isolated refusal tests.
+- EN-04's actual sender prototype is approximately 102 KiB. Direct file opens,
+  public imports, exact UTF-8/Go decryption, raw save/manual-copy fallback,
+  reset, no runtime requests/storage/styles and matching final-block CSP hashes
+  pass Chromium/Firefox and the installed stable Edge channel. Stable Chrome/
+  Firefox installations and full artwork/print/recovery review remain unclaimed.
+- Both real hidden-console OpenSSL key setup trials (3072/4096) and separate
+  encrypted-backup verification/decryption trials pass with exact synthetic
+  output bytes. No password/private/plaintext input is put in argv, environment
+  or piped password input. The random generator uses native GetInt32 where
+  available or unbiased byte rejection on Windows PowerShell 5.1; redirected
+  generation is refused and mapping/native-generator tests pass.
+- REC-01 source inputs are unchanged. Its latest recorded evidence includes
+  six OpenSSL 3.0.22/3.5.9 profiles, native/vendor/pin/offline tests, 709,933
+  pre-KDF and 2,472 post-KDF fuzz executions, 136 allocations and all 7,163
+  private-exponent bit mutations rejected. No new focused reviewer verdict is
+  inferred from unrelated UI/guidance changes.
 
 Evidence: [M1 packet](reviews/m1-review-packet.md),
 [M1 machine record](reviews/m1-evidence.json),
+[public recipient browser evidence](reviews/production-recipient-evidence.json),
+[native key setup/restoration evidence](reviews/key-setup-evidence.json),
+[EN-04 prototype scope](reviews/en04-prototype.md),
 [receiver machine record](reviews/rec01-evidence.json),
-[actual receiver console receipts](reviews/rec02-console-evidence.json),
-[earlier terminal evidence](reviews/rec01-console-evidence.json),
-[focused loader disposition](reviews/2026-10-03-rec01-followup.md),
-and [relayed repository feedback](reviews/2026-10-04-repository-feedback.md).
+[earlier receiver console receipts](reviews/rec02-console-evidence.json),
+and [focused loader disposition](reviews/2026-10-03-rec01-followup.md).
 
-The relayed reviewer has no supplied identity/tool/revision. Their conditional
-REC-01 approval and author-run fix verification do not constitute an integrated
-review of the new output code. QA-03, signing, independent publisher trust,
-full offline sender and production recipient remain open. Non-Windows receiver
-filesystem operations fail closed; Windows OpenSSL interactive non-ASCII
-passphrase compatibility remains unclaimed. Use synthetic data only.
+The relayed reviewer has no supplied identity/tool/revision. Conditional REC-01
+approval and author-run verification do not constitute an integrated system
+audit. The receiver remains unsigned development software. Non-Windows receiver
+filesystem operations fail closed. Unix permission trials, ARM64 and Windows
+OpenSSL interactive non-ASCII passphrase compatibility remain unclaimed.
 
 The workflow stays in `workflows/foundation.yml` as a template by user choice;
 GitHub Actions is not active. Local gates: `pnpm check:rec01`,
 `node scripts/snapshot-rec01.mjs`, then `pnpm check:m1`.
 
-Next order: KEY-03 → REC-03, then SYM-01/SYM-02 and raw recovery/export checks,
-complete artwork/UX-03, EN-04 full delivery choice and QA-03, then release gates.
+Next: finish recipient usability/readiness checks, then E05/E06 symbols/recovery/
+exports when authorized; complete UX-03 and EN-04 full delivery review, QA-03
+and release gates afterward. Keep the real encrypted intermediate until the
+operator's final-key/pair/encrypted-backup drill succeeds; do not regenerate the
+already verified key to repair a public configuration error.

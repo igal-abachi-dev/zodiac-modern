@@ -118,6 +118,9 @@ try {
     /^[a-f0-9]{64}$/.test(production.fingerprint ?? '');
   if (configured) {
     await check('configured-production-build', [...pnpm, 'build']);
+    await check('production-recipient-browser', [
+      'scripts/check-production-recipient.mjs',
+    ]);
     report.production =
       'Explicit public recipient validated; review/signing remain open.';
   } else {
