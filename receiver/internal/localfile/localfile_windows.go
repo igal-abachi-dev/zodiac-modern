@@ -111,11 +111,18 @@ func holdParents(path string) (*parents, error) {
 		return nil, ErrPath
 	}
 	root := filepath.VolumeName(absolute) + `\`
-	rootPtr, err := windows.UTF16PtrFromString(root)
-	if err != nil || windows.GetDriveType(rootPtr) != windows.DRIVE_FIXED {
+	// Query the local object-manager mapping before opening any filesystem path.
+	// Bind to its native disk target, avoiding drive-letter remapping races.
+	drive, _ := windows.UTF16PtrFromString(strings.TrimSuffix(root, `\`))
+	targetBuffer := make([]uint16, 512)
+	if _, err := windows.QueryDosDevice(drive, &targetBuffer[0], uint32(len(targetBuffer))); err != nil {
 		return nil, ErrPath
 	}
-	h, err := windows.CreateFile(rootPtr, windows.FILE_READ_ATTRIBUTES|windows.SYNCHRONIZE, windows.FILE_SHARE_READ, nil, windows.OPEN_EXISTING, windows.FILE_FLAG_BACKUP_SEMANTICS|windows.FILE_FLAG_OPEN_REPARSE_POINT, 0)
+	target := windows.UTF16ToString(targetBuffer)
+	if !localDiskTarget(target) {
+		return nil, ErrPath
+	}
+	h, err := relative(0, target+`\`, windows.FILE_READ_ATTRIBUTES|windows.SYNCHRONIZE, windows.FILE_OPEN, windows.FILE_DIRECTORY_FILE, nil, windows.FILE_SHARE_READ)
 	if err != nil {
 		return nil, ErrPath
 	}
@@ -136,6 +143,10 @@ func holdParents(path string) (*parents, error) {
 	if !strings.HasPrefix(name, `\\?\Volume{`) || !strings.HasSuffix(name, `}\`) {
 		return fail()
 	}
+	guidRoot, err := windows.UTF16PtrFromString(name)
+	if err != nil || windows.GetDriveType(guidRoot) != windows.DRIVE_FIXED {
+		return fail()
+	}
 	parts := strings.Split(strings.TrimPrefix(absolute, root), `\`)
 	p.leaf = parts[len(parts)-1]
 	for _, part := range parts[:len(parts)-1] {
@@ -150,6 +161,22 @@ func holdParents(path string) (*parents, error) {
 		}
 	}
 	return p, nil
+}
+func localDiskTarget(target string) bool {
+	const prefix = `\Device\HarddiskVolume`
+	if !strings.HasPrefix(target, prefix) {
+		return false
+	}
+	number := strings.TrimPrefix(target, prefix)
+	if len(number) == 0 || len(number) > 10 {
+		return false
+	}
+	for _, c := range number {
+		if c < '0' || c > '9' {
+			return false
+		}
+	}
+	return true
 }
 func openRead(path string) (*os.File, func(), error) {
 	p, err := holdParents(path)

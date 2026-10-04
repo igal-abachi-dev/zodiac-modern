@@ -31,7 +31,7 @@ The website accepts public keys only. The receiver handles private keys and pass
 
 ## Development
 
-The static scaffold, local public-key file/paste selection and fingerprint details, public-key/build validation, browser crypto library, independent Go test oracle and encrypted-key loader are implemented. The site currently shows disabled message controls; the unsigned receiver supports key verification only. Full sender UI, glyph/export/recovery flows and authenticated receiver decryption/output remain pending. No reviewed release is available. See [live task and milestone status](docs/status.md).
+The development sender now encrypts exact message bytes with default/custom public recipients and offers raw copy/download, immutable result details, retry, another-message and clear/navigation reset. The unsigned Windows receiver implements hidden-prompt key verification and authenticated decryption to exclusive private local-disk files. M0 is complete and M1 development acceptance passes. Glyph/artwork/recovery, final offline delivery, integrated QA-03 and release signing remain pending. Use synthetic data; no reviewed release is available. See [live task and milestone status](docs/status.md).
 
 Use Node.js 24.21.0 (the 24.x LTS line), pnpm 12.8.1 and the committed lockfile. Receiver checks require the pinned installed Go 1.27.1 toolchain; automatic toolchain downloads are disabled. OpenSSL is needed for key setup and interoperability fixtures, not for running browser encryption or the packaged receiver. Configure `ZODIAC_GO` when the pinned Go executable is outside PATH; the scripts also recognize the repository's ignored portable-toolchain cache.
 
@@ -67,6 +67,7 @@ pnpm test
 pnpm test:receiver
 pnpm verify:receiver-deps
 pnpm check:rec01
+pnpm check:m1
 pnpm build:custom
 pnpm build:test
 pnpm spike:offline-html
@@ -80,6 +81,8 @@ Install the pinned Playwright browsers with `pnpm exec playwright install chromi
 
 Use synthetic messages and labeled test keys. Receiver validation includes real OpenSSL 3.0/3.5 fixtures, independent OpenSSL oracle comparisons, strict profile/schema failures, pre-KDF stub fuzzing, bounded post-KDF fuzzing, and vendor integrity. For `pnpm test:receiver-oracle`, set `ZODIAC_OPENSSL30` and `ZODIAC_OPENSSL35` to the recorded executable versions in the fixture manifest. Testing an older generator does not broaden the accepted key-file profile. See [loader implementation and review limits](docs/decisions/rec01-fixed-loader.md).
 
+`pnpm check:m1` requires the current passing receiver snapshot (`pnpm check:rec01`, then `node scripts/snapshot-rec01.mjs`). It records formatting/types, unit tests, both static modes, the synthetic file probe, real Chromium/Firefox UI/WebCrypto/Go command checks and expected unconfigured-production refusal. Evidence is author-run, not an integrated audit. The workflow stays a template under `workflows/` by user choice.
+
 ## Recipient workflow
 
 Generate the key pair once using the [encrypted OpenSSL setup](plan.md#creating-ones-own-key-one-time-openssl-setup). Share only the public PEM and confirm its fingerprint through a trusted channel.
@@ -90,7 +93,9 @@ After a verified receiver release is available, save the sender's raw ciphertext
 .\zodiac-decrypt.exe decrypt --key ".\rsa-private-encrypted.pem" --in ".\ciphertext.txt" --out ".\message.txt"
 ```
 
-This is the planned REC-02 command, currently unavailable. Its contract requires a hidden local passphrase prompt, authentication before creation of a new private ordinary local-disk file, no overwrite and validated parent directories/Windows ACLs. The eventual executable will require neither Go nor OpenSSL installation. Verify its expected publisher and artifact hash through an independently trusted channel before execution. For Windows interactive OpenSSL key setup, use a strong ASCII-only passphrase until non-ASCII console encoding interoperability has been proven.
+This command is implemented in the **unsigned development receiver**, built locally with `pnpm build:receiver`; no signed release download is available. It accepts a strict raw file with no whitespace stripping, unlocks the encrypted key through the hidden controlling terminal and authenticates before creating a new owner-only private file. Windows fixed local disks with ordinary native volume mappings and persistent ACLs are supported. UNC/network, device/extended paths, drive aliases/streams, reserved names, symlink/reparse parents and overwrite are rejected; other OS filesystems currently fail closed. No Go/OpenSSL runtime is needed by the built executable. See [the filesystem decision and tests](docs/decisions/rec02-local-output.md).
+
+Verify any future release's expected publisher and artifact hash through an independently trusted channel before execution. For Windows OpenSSL setup, use an independent random **24–32 character ASCII** passphrase for each temporary/final key file; eight characters is too weak. See [entropy and unbiased offline generation](docs/passphrases.md). Windows OpenSSL interactive non-ASCII compatibility remains unclaimed.
 
 ## Message format
 

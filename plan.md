@@ -1,6 +1,6 @@
 # Zodiac Modern — implementation plan
 
-Planning baseline: 2026-10-03. Status: foundation implementation and verification underway; no completed focused review, integrated audit or release. Current task/milestone evidence: [docs/status.md](docs/status.md). Work tracking: [backlog.md](backlog.md). Contributor rules: [AGENTS.md](AGENTS.md).
+Planning baseline: 2026-10-03. M0 is complete; M1 development acceptance passes. REC-01 has focused conditional approval and author-verified fixes; integrated QA-03 and release remain open. Current task/milestone evidence: [docs/status.md](docs/status.md). Work tracking: [backlog.md](backlog.md). Contributor rules: [AGENTS.md](AGENTS.md).
 
 ## 1. Product and authoritative decisions
 
@@ -241,7 +241,7 @@ This is a planned command contract, not an existing executable. `--help`/`--vers
 
 Accept only the guide's encrypted PKCS#8 profile in v1: PBES2 with explicit PBKDF2-HMAC-SHA256, AES-256-CBC, 16–64-byte salt, 16-byte IV, optional derived-key length absent or 32, and iterations 600,000–2,000,000. Validate parameters/DER/file bounds before expensive work; reject duplicates, trailing content, unsafe/unknown algorithms, unencrypted/legacy/PKCS#1/public/certificate/multiple PEM blocks, and malformed padding. The upper bound prevents resource abuse and requires measured usability; future profiles require an explicit versioned policy change. The repository-owned loader, standard-library/toolchain updates, fuzzing, synthetic OpenSSL fixtures, and independent review are P0 implementation/release gates.
 
-For the documented interactive Windows setup, use a strong ASCII-only passphrase until OpenSSL console encoding and the Go UTF-8 prompt have been proven compatible on supported Windows configurations. Non-ASCII UTF-8 file-based synthetic fixture success does not establish interactive console compatibility. Do not normalize passwords or try fallback encodings.
+For the documented interactive Windows setup, generate an independent random 24–32 character ASCII passphrase with a trusted local cryptographic generator; eight characters is too weak. Length and complexity checklists do not establish entropy. Use separate temporary/final passphrases and protect recoverable backups. See [offline passphrase guidance and unbiased PowerShell sampling](docs/passphrases.md). Windows OpenSSL/receiver interactive non-ASCII compatibility remains unproven; UTF-8 file fixtures and Go console success do not establish OpenSSL prompt compatibility. Do not normalize passwords or try fallback encodings.
 
 ### Fixed-profile encrypted-PKCS#8 loader (REC-01)
 

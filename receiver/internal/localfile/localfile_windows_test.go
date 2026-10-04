@@ -15,6 +15,14 @@ import (
 )
 
 func TestDangerousWindowsNames(t *testing.T) {
+	for _, target := range []string{`\Device\Mup\server\share`, `\Device\LanmanRedirector\;X:123\server\share`, `\??\UNC\server\share`, `\??\C:\local`, `\Device\NamedPipe\x`, `\Device\HarddiskVolumeShadowCopy1`, `\Device\HarddiskVolume1\other`, `\Device\HarddiskVolume`, `\Device\HarddiskVolume1:stream`} {
+		if localDiskTarget(target) {
+			t.Fatal("nonlocal DOS target accepted")
+		}
+	}
+	if !localDiskTarget(`\Device\HarddiskVolume1`) {
+		t.Fatal("ordinary volume rejected")
+	}
 	for _, s := range []string{`\\server\share\a.txt`, `//server/share/a.txt`, `\\.\pipe\test`, `\\?\C:\x`, `\\?\UNC\server\x`, `\\?\GLOBALROOT\Device\x`, `C:a.txt`, `\root.txt`, `a.txt:hidden`, `NUL`, `NUL.txt`, `a\CON.txt`, `COM1`, `LPT9.x`, `COM¹.txt`, `LPT²`, `CONIN$`, `CLOCK$`, `a.\b`, `a \b`, `a\b.`, `a\b `, "a\x00b", "a\nb", `a?b`, `a:b`, `C:\NUL\x`, `a\..\AUX.txt`} {
 		if Validate(s) == nil {
 			t.Errorf("accepted dangerous name %q", s)
