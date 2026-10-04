@@ -10,7 +10,25 @@ const run = (script: string, ...args: string[]) =>
     { encoding: 'utf8', windowsHide: true },
   );
 it('readiness helper refuses captured execution before private file access or output creation', () => {
-  const result = run('scripts/test-recipient-readiness.ps1', '-Receiver', 'missing.exe', '-Key', 'missing-key.pem', '-EncryptedBackup', 'missing-backup.pem', '-PublicPEM', 'missing-public.pem', '-Ciphertext', 'missing.txt', '-Destination', '.cache/must-not-be-created', '-ExpectedFingerprint', 'a'.repeat(64), '-ExpectedToken', 'Zodiac readiness: ' + 'a'.repeat(32));
+  const result = run(
+    'scripts/test-recipient-readiness.ps1',
+    '-Receiver',
+    'missing.exe',
+    '-Key',
+    'missing-key.pem',
+    '-EncryptedBackup',
+    'missing-backup.pem',
+    '-PublicPEM',
+    'missing-public.pem',
+    '-Ciphertext',
+    'missing.txt',
+    '-Destination',
+    '.cache/must-not-be-created',
+    '-ExpectedFingerprint',
+    'a'.repeat(64),
+    '-ExpectedToken',
+    'Zodiac readiness: ' + 'a'.repeat(32),
+  );
   expect(result.status).not.toBe(0);
   expect(result.stderr).toContain('own interactive console');
 });

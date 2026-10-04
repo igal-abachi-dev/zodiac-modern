@@ -2,6 +2,7 @@
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 const alphabet =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 const names = (
@@ -124,10 +125,7 @@ if (process.argv.includes('--check')) {
   );
   if (JSON.stringify(stored) !== JSON.stringify(manifest))
     throw Error('Frozen map provenance changed.');
-  const source = await readFile(target, 'utf8');
-  const data = JSON.parse(
-    source.slice(source.indexOf('['), source.lastIndexOf(']') + 1),
-  );
+  const { frozenGlyphs: data } = await import(pathToFileURL(resolve(target)).href);
   if (JSON.stringify(data) !== canonical)
     throw Error('Frozen geometry changed.');
   console.log('S64L1: all 64 named exports, vectors and provenance match.');
