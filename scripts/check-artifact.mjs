@@ -26,7 +26,7 @@ export async function checkArtifact(root = 'dist', mode = 'production') {
         throw new Error('Inline style or event handler found.');
       if (
         /<[^>]*\s(?:src|srcset|poster)\s*=\s*["'][^"']*(?:https?:)?\/\//i.test(
-          markup,
+          text,
         ) ||
         /<(?!a\b)[^>]*\s(?:href|xlink:href)\s*=\s*["'](?:https?:)?\/\//i.test(
           markup,
