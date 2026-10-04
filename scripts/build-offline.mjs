@@ -28,7 +28,7 @@ const compiled = await build({
             css: 'external',
             dev: false,
           });
-        if (component.css) styles.push({ path, code: component.css.code });
+          if (component.css) styles.push({ path, code: component.css.code });
           return { contents: component.js.code, loader: 'js' };
         });
       },
@@ -45,7 +45,9 @@ const style = [
     '',
   ),
   ...styles.sort((a, b) => a.path.localeCompare(b.path)).map((s) => s.code),
-].join('\n').replace(/\r\n?/g, '\n');
+]
+  .join('\n')
+  .replace(/\r\n?/g, '\n');
 const hash = (body) => createHash('sha256').update(body).digest('base64');
 const csp = `default-src 'none'; script-src 'sha256-${hash(script)}'; script-src-attr 'none'; style-src 'sha256-${hash(style)}'; style-src-attr 'none'; img-src blob: data:; connect-src 'none'; worker-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'`;
 const shell = (await readFile('offline/shell.html', 'utf8'))
