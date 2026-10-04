@@ -97,9 +97,15 @@ test('guide-created encrypted keys import and recover exact nonsecret text after
         .update(createPublicKey(pem).export({ format: 'der', type: 'spki' }))
         .digest('hex');
       await page.getByLabel('Choose public PEM file').setInputFiles(publicPath);
-      await page
-        .getByRole('button', { name: 'Recipient details', exact: true })
-        .click();
+      await expect(
+        page.locator('.recipient-summary .fingerprint'),
+      ).toContainText(fingerprint.slice(0, 12));
+      const details = page.getByRole('button', {
+        name: 'Recipient details',
+        exact: true,
+      });
+      if ((await details.getAttribute('aria-expanded')) === 'false')
+        await details.click();
       await expect(page.locator('.full-fingerprint')).toContainText(
         fingerprint,
       );

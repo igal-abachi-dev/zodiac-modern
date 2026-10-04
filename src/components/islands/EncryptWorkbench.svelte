@@ -7,7 +7,11 @@
   import { encryptionAvailable } from '../../lib/crypto/hybrid';
   import { utf8ByteLength } from '../../lib/validation/input';
   import { downloadCiphertext } from '../../lib/exports/ciphertext';
-  let { recipient = null, displayContent, artworkActions }: {
+  let {
+    recipient = null,
+    displayContent,
+    artworkActions,
+  }: {
     recipient?: PublicRecipientData | null;
     displayContent?: Snippet<[MessageResult]>;
     artworkActions?: Snippet<[MessageResult]>;
@@ -169,10 +173,10 @@
         {#if displayContent}
           {@render displayContent(view.result)}
         {:else}<p>
-          The celestial glyph display will be available after the artwork and
-          recovery work is complete. Save the raw ciphertext to preserve this
-          message.
-        </p>{/if}
+            The celestial glyph display will be available after the artwork and
+            recovery work is complete. Save the raw ciphertext to preserve this
+            message.
+          </p>{/if}
       </section>
       <section
         id="result-raw"
@@ -208,11 +212,11 @@
         {#if artworkActions}
           {@render artworkActions(view.result)}
         {:else}<p>
-          Artwork exports are not available yet. Complete-image PNG,
-          archival-page PNG, one-line SVG and print actions will appear here
-          after validation. Send raw ciphertext alongside artwork: the v1
-          receiver reads raw text only and cannot import SVG or recover a PNG.
-        </p>{/if}
+            Artwork exports are not available yet. Complete-image PNG,
+            archival-page PNG, one-line SVG and print actions will appear here
+            after validation. Send raw ciphertext alongside artwork: the v1
+            receiver reads raw text only and cannot import SVG or recover a PNG.
+          </p>{/if}
       </section>
     </section>
   {:else}

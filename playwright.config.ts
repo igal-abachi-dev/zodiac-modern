@@ -12,10 +12,15 @@ export default defineConfig({
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
     { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    ...(process.env.ZODIAC_STABLE_EDGE === '1' ? [{
-      name: 'edge', testMatch: /offline\.spec\.ts/,
-      use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    }] : []),
+    ...(process.env.ZODIAC_STABLE_EDGE === '1'
+      ? [
+          {
+            name: 'edge',
+            testMatch: /offline\.spec\.ts/,
+            use: { ...devices['Desktop Edge'], channel: 'msedge' },
+          },
+        ]
+      : []),
   ],
   webServer: [
     {
