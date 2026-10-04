@@ -5,6 +5,7 @@ node_modules/
 dist/
 build/
 .cache/
+.local/
 /src/generated/default-recipient.ts
 /tmp-*.json
 /tmp-*.html

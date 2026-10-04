@@ -1,28 +1,207 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const windows = String.raw`$openssl = 'C:\Program Files\FireDaemon OpenSSL 3.5\bin\openssl.exe'
+& $openssl version
+if ($LASTEXITCODE -ne 0) { throw 'OpenSSL failed' }`;
+const folder = String.raw`$folder = 'D:\Private Zodiac Keys' # choose a new, nonsynced local NTFS folder
+if (Test-Path -LiteralPath $folder) { throw 'Choose a new folder; do not overwrite keys' }
+$owner = [Security.Principal.WindowsIdentity]::GetCurrent().User
+$acl = New-Object Security.AccessControl.DirectorySecurity
+$acl.SetOwner($owner)
+$acl.SetAccessRuleProtection($true, $false)
+$rule = New-Object Security.AccessControl.FileSystemAccessRule($owner, 'FullControl', 'ContainerInherit,ObjectInherit', 'None', 'Allow')
+$acl.AddAccessRule($rule)
+New-Item -ItemType Directory -Path $folder -ErrorAction Stop | Out-Null
+Set-Acl -LiteralPath $folder -AclObject $acl
+Get-Acl -LiteralPath $folder | Format-List Owner,AccessToString,AreAccessRulesProtected
+Set-Location -LiteralPath $folder`;
+const commands = String.raw`# Every destination must be absent. Stop after any failed command.
+if (Test-Path -LiteralPath '.\rsa-private-initial-encrypted.pem') { throw 'Already exists' }
+& $openssl genpkey -algorithm RSA -aes-256-cbc -pkeyopt rsa_keygen_bits:4096 -pkeyopt rsa_keygen_pubexp:65537 -out '.\rsa-private-initial-encrypted.pem'
+if ($LASTEXITCODE -ne 0) { throw 'Generation failed' }
+
+if (Test-Path -LiteralPath '.\rsa-private-encrypted.pem') { throw 'Already exists' }
+& $openssl pkcs8 -topk8 -in '.\rsa-private-initial-encrypted.pem' -out '.\rsa-private-encrypted.pem' -v2 aes-256-cbc -v2prf hmacWithSHA256 -iter 600000 -saltlen 16
+if ($LASTEXITCODE -ne 0) { throw 'Rewrap failed' }
+
+if (Test-Path -LiteralPath '.\rsa-public.pem') { throw 'Already exists' }
+& $openssl pkey -in '.\rsa-private-encrypted.pem' -pubout -out '.\rsa-public.pem'
+if ($LASTEXITCODE -ne 0) { throw 'Public extraction failed' }
+& $openssl pkey -in '.\rsa-private-encrypted.pem' -check -noout
+if ($LASTEXITCODE -ne 0) { throw 'Validation failed' }`;
+const fingerprint = String.raw`# This DER file contains PUBLIC data only. Never substitute a private-key command.
+if (Test-Path -LiteralPath '.\rsa-public.der') { throw 'Already exists' }
+& $openssl pkey -pubin -in '.\rsa-public.pem' -outform DER -out '.\rsa-public.der'
+if ($LASTEXITCODE -ne 0) { throw 'Public conversion failed' }
+(Get-FileHash -LiteralPath '.\rsa-public.der' -Algorithm SHA256).Hash.ToLowerInvariant()
+Remove-Item -LiteralPath '.\rsa-public.der'
+& 'C:\Verified Tools\zodiac-decrypt.exe' verify-key --key '.\rsa-private-encrypted.pem' --public '.\rsa-public.pem'`;
+const unix = String.raw`# Key creation only; the v1 receiver currently supports Windows.
+umask 077
+mkdir -m 700 ./private-zodiac-keys && cd ./private-zodiac-keys
+# Stop if mkdir fails. These outputs must not already exist.
+openssl genpkey -algorithm RSA -aes-256-cbc -pkeyopt rsa_keygen_bits:4096 -pkeyopt rsa_keygen_pubexp:65537 -out rsa-private-initial-encrypted.pem
+openssl pkcs8 -topk8 -in rsa-private-initial-encrypted.pem -out rsa-private-encrypted.pem -v2 aes-256-cbc -v2prf hmacWithSHA256 -iter 600000 -saltlen 16
+openssl pkey -in rsa-private-encrypted.pem -pubout -out rsa-public.pem
+openssl pkey -in rsa-private-encrypted.pem -check -noout
+# Stop on each failure; never reuse a partially completed folder.`;
 ---
 
 <Layout title="Keys">
-  <h1>Recipient keys</h1>
+  <h1>Create and keep recipient keys offline</h1>
   <p>
-    The sender will accept one RSA-3072 or RSA-4096 SPKI PUBLIC KEY PEM with
-    exponent 65537. Verify its full SHA-256 fingerprint through a trusted
-    channel.
+    Development software: use disposable test keys and nonsecret messages until
+    reviewed, verified releases exist. Create keys on a trusted local machine.
+    Only <strong>rsa-public.pem</strong> belongs in the sender. Private keys and
+    passphrases never belong in this website, chat, support tickets or the
+    repository.
+  </p>
+  <nav aria-label="Key setup steps">
+    <a href="#install">Install</a> · <a href="#custody">Private folder</a> ·{' '}
+    <a href="#generate">Create keys</a> · <a href="#verify">Verify</a> ·{' '}
+    <a href="#backup">Backup and rotation</a>
+  </nav>
+  <h2 id="install">1. Verify OpenSSL before running it</h2>
+  <p>
+    On Windows use the latest patched supported FireDaemon OpenSSL 3.5 LTS.
+    Checked 4 October 2026: upstream and vendor list 3.5.9; upstream supports
+    3.5 until 8 April 2030. Recheck the{' '}
+    <a href="https://openssl-library.org/source/">upstream releases</a>,{' '}
+    <a href="https://openssl-library.org/news/vulnerabilities/">
+      security advisories
+    </a>{' '}
+    and{' '}
+    <a href="https://www.firedaemon.com/download-firedaemon-openssl">
+      vendor downloads
+    </a>{' '}
+    when installing. Third-party packaging and version numbers alone do not
+    establish trust.
   </p>
   <p>
-    Never paste private keys or passphrases into the website. Encrypted private
-    keys belong only in the separately verified offline receiver. Key setup
-    instructions and receiver readiness checks are pending.
+    Use the{' '}
+    <a href="https://www.firedaemon.com/download-firedaemon-openssl-3-5-x64">
+      direct vendor x64 installer
+    </a>{' '}
+    for x64 Windows. Check Settings → System → About for your architecture.
+    ARM64 users need the vendor ARM64 ZIP and its documented layout; that setup
+    and native receiver are not validated here. Avoid search-ad downloads. Do
+    not enable a FIPS provider for this setup; this project makes no
+    certification claim.
   </p>
   <p>
-    For portable Windows key setup, generate a random 24–32 character ASCII
-    passphrase with a trusted local password manager or cryptographic random
-    generator. Eight characters is too weak. Length alone does not establish
-    entropy: predictable phrases and patterns remain guessable. Use independent
-    temporary and final passphrases and retain a protected backup outside the
-    key file. Non-ASCII bytes can differ between OpenSSL's interactive console
-    and the receiver; that interactive compatibility has not yet been tested.
-    UTF-8 synthetic file fixtures passing does not establish console
-    compatibility.
+    Before execution, use Get-FileHash -Algorithm SHA256 on the downloaded
+    installer and compare its full hash with trusted current vendor information.
+    The checked 3.5.9 x64 installer hash is{' '}
+    <code>
+      cecbaee4ae836693ae60e6e010fe374449fefde093b5dd8e93953b6657e4225d
+    </code>
+    . Use Get-AuthenticodeSignature: Status must be Valid and the publisher must
+    be FireDaemon Technologies Limited, confirmed through the vendor. A hash
+    copied from this site alone is not independent verification.
+  </p>
+  <p>
+    Follow the verified installer wizard. Keep the default path or record your
+    chosen path, then run the following in PowerShell. Expect OpenSSL 3.5.9 or
+    the newer patched 3.5 release you verified. The installer payload’s bin
+    executable and these commands were tested; a full system-wide wizard
+    installation was not performed.
+  </p>
+  <pre><code>{windows}</code></pre>
+  <h2 id="custody">2. Restrict access before creating keys</h2>
+  <p>
+    Choose a new folder on your local fixed NTFS disk, outside cloud sync,
+    shared folders and the repository. Use ordinary directories without
+    junctions, symlinks or mapped drives. Run the following in your own console
+    with transcripts, recording and screen sharing disabled. Check that access
+    is protected and only your current account has FullControl before
+    continuing. Administrators and malware running as you can still access the
+    files.
+  </p>
+  <pre><code>{folder}</code></pre>
+  <p>
+    Generate two independent random 24–32 character <strong>ASCII-only</strong>{' '}
+    passphrases in a trusted local password manager: one temporary and one
+    final. Eight characters is weak; predictable long phrases and complexity
+    checklists do not establish entropy. Keep a protected recoverable passphrase
+    backup separate from the encrypted file. Interactive Windows non-ASCII
+    OpenSSL/receiver compatibility remains untested. Never put passwords in
+    command arguments, environment variables, piped input or shell history.
+  </p>
+  <h2 id="generate">3. Create the encrypted pair once</h2>
+  <p>
+    The first command asks you to enter and confirm the temporary passphrase.
+    The second unlocks that intermediate with the temporary passphrase, then
+    asks you to enter and confirm the final passphrase. Public extraction and
+    validation each ask for the final passphrase. Prompts hide input; enter it
+    in the local console only. Substitute 3072 for 4096 if desired, keeping
+    exponent 65537.
+  </p>
+  <pre><code>{commands}</code></pre>
+  <p>
+    Both private files have the ENCRYPTED PRIVATE KEY PEM header. The final file
+    uses PBES2, PBKDF2 with explicit HMAC-SHA256, AES-256-CBC, 600,000
+    iterations and a 16-byte salt. No plaintext private file is created. The
+    intermediate has a weaker OpenSSL-default work factor: keep it out of sync
+    and backups. The work factor slows password guessing; it does not prevent
+    brute force or authenticate the encrypted key file. See the{' '}
+    <a href="https://docs.openssl.org/3.5/man1/openssl-pkcs8/">
+      OpenSSL conversion options
+    </a>
+    .
+  </p>
+  <details>
+    <summary>Unix-like key creation</summary>
+    <p>
+      Use a verified current OpenSSL 3.5 with -saltlen support, a nonsynced
+      private directory and umask 077 before generation. Stop after any failure.
+      These Unix commands are documented equivalents; this Windows development
+      environment has not run the Unix permission trial.
+    </p>
+    <pre><code>{unix}</code></pre>
+  </details>
+  <h2 id="verify">4. Verify the pair and recipient identity</h2>
+  <p>
+    rsa-public.pem must have the PUBLIC KEY header (SPKI), not RSA PUBLIC KEY or
+    a certificate. Compute SHA-256 over its DER SPKI bytes, not the PEM text.
+    The receiver’s verify-key command asks for the final passphrase, compares
+    the actual public half and reports only RSA size and fingerprint. Replace
+    its example path with the separately verified executable.
+  </p>
+  <pre><code>{fingerprint}</code></pre>
+  <p>
+    Compare the complete 64-character lowercase fingerprint with the browser’s
+    Recipient details and with the value exchanged through an independent
+    trusted recipient channel. Local filenames and names are unverified labels.
+    Select this public PEM in the sender, encrypt a nonsecret test message, and
+    have the recipient decrypt and confirm the exact text. See{' '}
+    <a href="/receive/">recipient readiness</a>. Encryption success alone does
+    not prove possession of the private key.
+  </p>
+  <h2 id="backup">5. Restore a backup before removing the intermediate</h2>
+  <p>
+    Back up only the final encrypted private PEM and public PEM to a protected
+    offline location. Keep the passphrase recoverable through a separate
+    protected backup. Restore the encrypted backup into a second private
+    nonsynced local folder, run verify-key against the original public PEM, and
+    decrypt the test ciphertext to a new output name. Compare the restored
+    fingerprint and exact test message. Check private-folder permissions on each
+    copy.
+  </p>
+  <p>
+    Only after final validation, pair verification and that backup drill pass,
+    remove the specific rsa-private-initial-encrypted.pem file. Never delete the
+    final key. Deletion cannot promise erasure of SSD history, snapshots or
+    retained copies; a recovered intermediate is still a way to attack the same
+    RSA key. Keep encrypted private material outside source control and ordinary
+    shared storage. Losing both the private key and its usable backup, or losing
+    the passphrase, makes old messages unrecoverable by the website.
+  </p>
+  <p>
+    For rotation, create a new pair in a new folder, verify its identity and
+    fingerprint through the trusted channel, and complete a new readiness drill
+    before distributing the replacement public key. Retain old encrypted private
+    keys and passphrases securely for old ciphertext; a new key cannot decrypt
+    old messages. Document which verified identity/fingerprint applies to each
+    key without storing message history in the sender.
   </p>
 </Layout>

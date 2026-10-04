@@ -25,9 +25,7 @@ test('file probe opens under default settings with no adjacent files or network'
       resolve('artifacts/offline probe שלום/zodiac-synthetic-probe.html'),
     ).href,
   );
-  await expect(page.getByRole('status')).toContainText(
-    'Native WebCrypto is available',
-  );
+  await expect(page.locator('.recipient-summary strong')).toBeVisible();
   for (const bits of [3072, 4096]) {
     const pem = readFileSync(
       `receiver/tests/fixtures/keys/openssl-3.5-${bits}-public.pem`,
@@ -35,16 +33,31 @@ test('file probe opens under default settings with no adjacent files or network'
     );
     const text = 'Synthetic exact UTF-8 שלום 🔑\r\n  ';
     // textarea normalizes CRLF by design; compare the actual original DOM string.
-    await page.getByLabel('Synthetic public SPKI PEM').fill(pem);
-    await page.getByLabel('Synthetic message', { exact: true }).fill(text);
+    if (bits === 3072) {
+      await page
+        .getByLabel('Choose public PEM file')
+        .setInputFiles({
+          name: 'synthetic-public.pem',
+          mimeType: 'text/plain',
+          buffer: Buffer.from(pem),
+        });
+    } else {
+      await page.getByLabel('Paste public PEM').fill(pem);
+      await page
+        .getByRole('button', { name: 'Use pasted public key', exact: true })
+        .click();
+    }
+    await page.getByLabel('Message', { exact: true }).fill(text);
     const original = await page
-      .getByLabel('Synthetic message', { exact: true })
+      .getByLabel('Message', { exact: true })
       .inputValue();
     await page
-      .getByRole('button', { name: 'Encrypt synthetic message' })
+      .getByRole('button', { name: 'Encrypt message', exact: true })
       .click();
-    await expect(page.getByRole('status')).toContainText(`RSA-${bits}`);
-    const raw = await page.getByLabel('Canonical raw ciphertext').inputValue();
+    await expect(
+      page.getByRole('heading', { name: 'Encrypted message', exact: true }),
+    ).toBeFocused();
+    const raw = await page.getByLabel('Raw ciphertext').inputValue();
     const openssl =
       process.env.ZODIAC_OPENSSL35 ??
       resolve('.cache/toolchains/openssl35/x64/bin/openssl.exe');
@@ -78,12 +91,40 @@ test('file probe opens under default settings with no adjacent files or network'
     } finally {
       key.fill(0);
     }
+    expect(await page.getByLabel('Message', { exact: true }).count()).toBe(0);
+    const pendingDownload = page.waitForEvent('download');
+    await page
+      .getByRole('button', { name: 'Download ciphertext (.txt)', exact: true })
+      .click();
+    const download = await pendingDownload;
+    expect(readFileSync((await download.path())!, 'utf8')).toBe(raw);
+    await page.evaluate(() =>
+      Object.defineProperty(navigator, 'clipboard', {
+        configurable: true,
+        value: {
+          writeText: async () => {
+            throw Error('synthetic denial');
+          },
+        },
+      }),
+    );
+    await page
+      .getByRole('button', { name: 'Display view', exact: true })
+      .click();
     await expect(
-      page.getByLabel('Synthetic message', { exact: true }),
-    ).toHaveValue('');
+      page.getByLabel('Raw ciphertext', { exact: false }),
+    ).toBeHidden();
+    await page.getByRole('button', { name: 'Copy raw', exact: true }).click();
+    await expect(page.getByLabel('Raw ciphertext')).toBeFocused();
+    await page
+      .getByRole('button', { name: 'Encrypt another message', exact: true })
+      .click();
+    await expect(page.getByLabel('Message', { exact: true })).toHaveValue('');
   }
-  await page.getByRole('button', { name: 'Clear all' }).click();
-  await expect(page.getByLabel('Canonical raw ciphertext')).toHaveValue('');
+  await page
+    .getByRole('button', { name: 'Clear everything', exact: true })
+    .click();
+  expect(await page.getByLabel('Raw ciphertext').count()).toBe(0);
   expect(network).toEqual([]);
   expect(csp).toEqual([]);
   expect(await page.locator('[style]').count()).toBe(0);

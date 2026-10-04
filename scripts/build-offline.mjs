@@ -2,7 +2,12 @@ import { build } from 'esbuild';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { prepareRecipient } from './prepare-recipient.mjs';
-await prepareRecipient('fixture');
+import { compile } from 'svelte/compiler';
+const mode = process.argv[2] ?? 'fixture';
+if (!['fixture', 'custom', 'production'].includes(mode))
+  throw Error('Invalid offline build mode.');
+await prepareRecipient(mode);
+const styles = [];
 const compiled = await build({
   entryPoints: ['offline/entry.ts'],
   bundle: true,
@@ -11,13 +16,37 @@ const compiled = await build({
   platform: 'browser',
   minify: true,
   target: ['chrome120', 'firefox120'],
+  conditions: ['browser'],
+  plugins: [
+    {
+      name: 'inline-svelte',
+      setup(builder) {
+        builder.onLoad({ filter: /\.svelte$/ }, async ({ path }) => {
+          const component = compile(await readFile(path, 'utf8'), {
+            filename: path,
+            generate: 'client',
+            css: 'external',
+            dev: false,
+          });
+          if (component.css) styles.push(component.css.code);
+          return { contents: component.js.code, loader: 'js' };
+        });
+      },
+    },
+  ],
 });
 const script = compiled.outputFiles[0].text.replaceAll(
   '</script',
   '<\\/script',
 );
-const style =
-  'body{background:#10141e;color:#f0eee8;font-family:system-ui;line-height:1.6;margin:0}main{max-width:65rem;padding:2rem;margin:auto}textarea{display:block;box-sizing:border-box;width:100%;min-height:7rem;margin:.5rem 0 1rem;font:inherit}button,input{font:inherit;margin:.5rem;padding:.5rem}:focus-visible{outline:3px solid #e2c48a;outline-offset:3px}p{overflow-wrap:anywhere}';
+const style = [
+  await readFile('src/styles/tokens.css', 'utf8'),
+  (await readFile('src/styles/global.css', 'utf8')).replace(
+    "@import './tokens.css';",
+    '',
+  ),
+  ...styles,
+].join('\n');
 const hash = (body) => createHash('sha256').update(body).digest('base64');
 const csp = `default-src 'none'; script-src 'sha256-${hash(script)}'; script-src-attr 'none'; style-src 'sha256-${hash(style)}'; style-src-attr 'none'; img-src blob: data:; connect-src 'none'; worker-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'`;
 const shell = (await readFile('offline/shell.html', 'utf8'))
@@ -41,5 +70,5 @@ await writeFile(
     '  zodiac-synthetic-probe.html\n',
 );
 console.log(
-  `Wrote fully bundled synthetic feasibility probe: ${filename}. Full-flow/review selection gate remains open.`,
+  `Wrote fully bundled ${mode} sender prototype: ${filename} (${Buffer.byteLength(shell)} bytes). Full-flow/review selection gate remains open.`,
 );

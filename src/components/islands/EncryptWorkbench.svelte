@@ -18,6 +18,7 @@
   let messageInput = $state<HTMLTextAreaElement>();
   let resultHeading = $state<HTMLHeadingElement>();
   let rawInput = $state<HTMLTextAreaElement>();
+  let resultView = $state<'display' | 'raw'>('raw');
   const busy = $derived(view.phase === 'encrypting');
   const byteCount = $derived.by(() => {
     try {
@@ -51,6 +52,7 @@
     const success = await workspace.submit();
     await tick();
     if (success && view.result) {
+      resultView = 'raw';
       notice = 'Message encrypted locally. The draft has been cleared.';
       resultHeading?.focus();
     } else if (view.phase === 'error') messageInput?.focus();
@@ -90,6 +92,8 @@
         'Raw ciphertext copied. The clipboard persists outside this tab.';
     } catch {
       if (view.result?.raw !== raw) return;
+      resultView = 'raw';
+      await tick();
       notice =
         'Clipboard unavailable. Select and copy the raw ciphertext manually.';
       rawInput?.focus();
@@ -140,13 +144,44 @@
         the raw text to the recipient's offline receiver.
       </p>
       <label for="raw-ciphertext">Raw ciphertext (canonical Base64URL)</label>
-      <textarea
-        id="raw-ciphertext"
-        bind:this={rawInput}
-        readonly
-        value={view.result.raw}
-        spellcheck="false"
-        autocomplete="off"></textarea>
+      <nav class="workspace-actions" aria-label="Encrypted result views">
+        <button
+          type="button"
+          aria-pressed={resultView === 'display'}
+          aria-controls="result-display"
+          onclick={() => (resultView = 'display')}>Display view</button
+        >
+        <button
+          type="button"
+          aria-pressed={resultView === 'raw'}
+          aria-controls="result-raw"
+          onclick={() => (resultView = 'raw')}>Raw view</button
+        >
+      </nav>
+      <section
+        id="result-display"
+        hidden={resultView !== 'display'}
+        aria-label="Ciphertext display"
+      >
+        <p>
+          The celestial glyph display will be available after the artwork and
+          recovery work is complete. Save the raw ciphertext to preserve this
+          message.
+        </p>
+      </section>
+      <section
+        id="result-raw"
+        hidden={resultView !== 'raw'}
+        aria-label="Raw ciphertext view"
+      >
+        <textarea
+          id="raw-ciphertext"
+          bind:this={rawInput}
+          readonly
+          value={view.result.raw}
+          spellcheck="false"
+          autocomplete="off"></textarea>
+      </section>
       <div class="workspace-actions">
         <button type="button" onclick={copyRaw}>Copy raw</button>
         <button
@@ -160,9 +195,17 @@
       </div>
       <p>
         Clipboard and downloaded files persist outside this tab. Another message
-        discards this result; save it first. Optional artwork is still in
-        development.
+        discards this result; save it first.
       </p>
+      <section aria-labelledby="artwork-title">
+        <h4 id="artwork-title">Artwork (optional)</h4>
+        <p>
+          Artwork exports are not available yet. Complete-image PNG,
+          archival-page PNG, one-line SVG and print actions will appear here
+          after validation. Send raw ciphertext alongside artwork: the v1
+          receiver reads raw text only and cannot import SVG or recover a PNG.
+        </p>
+      </section>
     </section>
   {:else}
     <label for="message">Message</label>

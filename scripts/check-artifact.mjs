@@ -25,8 +25,13 @@ export async function checkArtifact(root = 'dist', mode = 'production') {
       )
         throw new Error('Inline style or event handler found.');
       if (
-        /(?:src|href)=["']https?:\/\//.test(text) ||
-        /@import\s+.*https?:/.test(text)
+        /<[^>]*\s(?:src|srcset|poster)\s*=\s*["'][^"']*(?:https?:)?\/\//i.test(
+          markup,
+        ) ||
+        /<(?!a\b)[^>]*\s(?:href|xlink:href)\s*=\s*["'](?:https?:)?\/\//i.test(
+          markup,
+        ) ||
+        /(?:@import\s+|url\(\s*["']?)(?:[^;]*?)https?:/i.test(text)
       )
         throw new Error('Remote runtime resource found.');
     }

@@ -41,6 +41,48 @@ try {
 }
 ```
 
+```csharp
+     private const string ValidChars = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+
+        // Generates a password with symbols, numbers, upper, lower
+        public static string GeneratePassword(int length = 24)
+        {
+            if (length < 16) length = 16;//minimum
+            while (true)
+            {
+                //AES-256 (CTR_DRBG) ,uses GetInt32 call per each span char , handles modulo bias internally by discarding unfair results.
+                string pwd = RandomNumberGenerator.GetString(ValidChars, length);
+                if (MeetsPasswordComplexity(pwd))
+                {
+                    return pwd;
+                }
+            }
+        }
+
+        private static bool MeetsPasswordComplexity(string pwd)
+        {
+            bool hasLower = false;
+            bool hasUpper = false;
+            bool hasDigit = false;
+            bool hasSymbol = false;
+            foreach (char c in pwd)
+            {
+                if (char.IsAsciiLetterLower(c))
+                    hasLower = true;
+                else if (char.IsAsciiLetterUpper(c))
+                    hasUpper = true;
+                else if (char.IsAsciiDigit(c))
+                    hasDigit = true;
+                else
+                    hasSymbol = true;
+
+                if (hasLower && hasUpper && hasDigit && hasSymbol)
+                    return true;
+            }
+            return false;
+        }
+```
+
 Each accepted index has exactly two equally likely source bytes. Repeatedly
 filling the same array only overwrites prior draws; it does not increase the
 entropy of its final contents. No complexity retry loop is necessary for
