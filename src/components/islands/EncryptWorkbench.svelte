@@ -1,14 +1,17 @@
 <script lang="ts">
-  import { onMount, tick, flushSync } from 'svelte';
+  import { onMount, tick, flushSync, type Snippet } from 'svelte';
   import { ShieldCheck } from '@lucide/svelte';
   import RecipientSelector from './RecipientSelector.svelte';
   import type { PublicRecipientData } from '../../types/crypto';
-  import { Workspace } from '../../lib/crypto/workspace';
+  import { Workspace, type MessageResult } from '../../lib/crypto/workspace';
   import { encryptionAvailable } from '../../lib/crypto/hybrid';
   import { utf8ByteLength } from '../../lib/validation/input';
   import { downloadCiphertext } from '../../lib/exports/ciphertext';
-  let { recipient = null }: { recipient?: PublicRecipientData | null } =
-    $props();
+  let { recipient = null, displayContent, artworkActions }: {
+    recipient?: PublicRecipientData | null;
+    displayContent?: Snippet<[MessageResult]>;
+    artworkActions?: Snippet<[MessageResult]>;
+  } = $props();
   const workspace = new Workspace();
   let view = $state.raw(workspace.state);
   let available = $state(false);
@@ -94,6 +97,7 @@
       if (view.result?.raw !== raw) return;
       resultView = 'raw';
       await tick();
+      if (view.result?.raw !== raw) return;
       notice =
         'Clipboard unavailable. Select and copy the raw ciphertext manually.';
       rawInput?.focus();
@@ -162,11 +166,13 @@
         hidden={resultView !== 'display'}
         aria-label="Ciphertext display"
       >
-        <p>
+        {#if displayContent}
+          {@render displayContent(view.result)}
+        {:else}<p>
           The celestial glyph display will be available after the artwork and
           recovery work is complete. Save the raw ciphertext to preserve this
           message.
-        </p>
+        </p>{/if}
       </section>
       <section
         id="result-raw"
@@ -199,12 +205,14 @@
       </p>
       <section aria-labelledby="artwork-title">
         <h4 id="artwork-title">Artwork (optional)</h4>
-        <p>
+        {#if artworkActions}
+          {@render artworkActions(view.result)}
+        {:else}<p>
           Artwork exports are not available yet. Complete-image PNG,
           archival-page PNG, one-line SVG and print actions will appear here
           after validation. Send raw ciphertext alongside artwork: the v1
           receiver reads raw text only and cannot import SVG or recover a PNG.
-        </p>
+        </p>{/if}
       </section>
     </section>
   {:else}

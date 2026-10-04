@@ -3,9 +3,19 @@ import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 test('file probe opens under default settings with no adjacent files or network', async ({
   page,
-}) => {
+}, testInfo) => {
+  testInfo.annotations.push({type: 'browser-version', description: page.context().browser()!.version()});
+  const html = readFileSync(resolve('artifacts/offline probe שלום/zodiac-synthetic-probe.html'), 'utf8');
+  for (const tag of ['script', 'style']) {
+    const body = html.match(new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`))![1]!;
+    expect(html).toContain(`'sha256-${createHash('sha256').update(body).digest('base64')}'`);
+  }
+  expect(html.indexOf('http-equiv="Content-Security-Policy"')).toBeLessThan(html.indexOf('<script>'));
+  const errors: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
   const csp: string[] = [];
   const network: string[] = [];
   await page.route(/^https?:/, async (route) => {
@@ -126,4 +136,6 @@ test('file probe opens under default settings with no adjacent files or network'
   expect(network).toEqual([]);
   expect(csp).toEqual([]);
   expect(await page.locator('[style]').count()).toBe(0);
+  expect(errors).toEqual([]);
+  expect(await page.evaluate(() => [localStorage.length, sessionStorage.length])).toEqual([0,0]);
 });
