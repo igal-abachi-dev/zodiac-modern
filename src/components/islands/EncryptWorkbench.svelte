@@ -84,7 +84,8 @@
   }
   async function prepareReadiness() {
     workspace.setDraft(readinessMessage());
-    notice = 'Nonsecret readiness token prepared. Record its exact text locally, then encrypt and send the raw file. Compare the saved receiver output through your trusted channel.';
+    notice =
+      'Nonsecret readiness token prepared. Record its exact text locally, then encrypt and send the raw file. Compare the saved receiver output through your trusted channel.';
     await tick();
     messageInput?.focus();
   }
@@ -249,8 +250,16 @@
       encrypts; Enter adds a newline. Confirm the recipient's full fingerprint
       through an independent trusted channel.
     </p>
-    <button type="button" disabled={!available || busy || view.draft.length !== 0} onclick={prepareReadiness}>Prepare nonsecret readiness token</button>
-    <p class="muted">Start with an empty message. Compare this token after offline decryption and encrypted-backup restoration; encryption alone does not prove recipient readiness.</p>
+    <button
+      type="button"
+      disabled={!available || busy || view.draft.length !== 0}
+      onclick={prepareReadiness}>Prepare nonsecret readiness token</button
+    >
+    <p class="muted">
+      Start with an empty message. Compare this token after offline decryption
+      and encrypted-backup restoration; encryption alone does not prove
+      recipient readiness.
+    </p>
     {#if view.error}<p role="alert">{view.error}</p>{/if}
     <button
       type="button"

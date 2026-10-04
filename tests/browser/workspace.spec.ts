@@ -49,6 +49,26 @@ function command(raw: string, bits: number, plaintext: string, expected = 0) {
     rmSync(directory, { recursive: true, force: true });
   }
 }
+
+test('nonsecret readiness token follows the actual sender to the receiver command', async ({ page }) => {
+  await page.goto('/');
+  const prepare = page.getByRole('button', { name: 'Prepare nonsecret readiness token', exact: true });
+  await expect(prepare).toBeEnabled();
+  await prepare.click();
+  const message = page.getByLabel('Message', { exact: true });
+  const token = await message.inputValue();
+  expect(token).toMatch(/^Zodiac readiness: [a-f0-9]{32}$/);
+  await expect(prepare).toBeDisabled();
+  await page.getByRole('button', { name: 'Encrypt message', exact: true }).click();
+  const raw = await page.getByLabel('Raw ciphertext').inputValue();
+  command(raw, 3072, token);
+  await page.getByRole('button', { name: 'Encrypt another message', exact: true }).click();
+  await prepare.click();
+  expect(await message.inputValue()).not.toBe(token);
+  await page.goto('/receive/');
+  await expect(page.getByRole('heading', { name: 'First-time user trial', exact: true })).toBeVisible();
+  await expect(page.getByText('Prepare nonsecret readiness token', { exact: false })).toBeVisible();
+});
 test('sender exact bytes, command interoperability, exports, immutable recipient and reset', async ({
   page,
 }, testInfo) => {
