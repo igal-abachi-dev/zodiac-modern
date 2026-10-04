@@ -54,12 +54,13 @@ try {
      private const string ValidChars = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 
         // Generates a password with symbols, numbers, upper, lower
-        public static string GeneratePassword(int length = 24)
+        public static string GeneratePassword(int length = 32)
         {
-            if (length < 16) length = 16;//minimum
+            if (length < 24) throw new ArgumentOutOfRangeException(nameof(length));
             while (true)
             {
-                //AES-256 (CTR_DRBG) ,uses GetInt32 call per each span char , handles modulo bias internally by discarding unfair results.
+                // Native cryptographic randomness with unbiased alphabet selection.
+                // The API does not promise a specific DRBG on every platform.
                 string pwd = RandomNumberGenerator.GetString(ValidChars, length);
                 if (MeetsPasswordComplexity(pwd))
                 {
