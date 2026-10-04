@@ -1,5 +1,5 @@
 {
-  "name": "",
-  "publicKey": "public/keys/default-public.pem",
-  "fingerprint": ""
+  "name": "Zodiac Modern recipient",
+  "publicKey": "public/keys/recipient-public.pem",
+  "fingerprint": "c8f34bc8f9349c75b45dff501ebc3b3aac90d6487651834926212cc177481b34"
 }
