@@ -1,8 +1,7 @@
 # Live delivery status
 
 Updated 2026-10-04 (Asia/Jerusalem); evidence records UTC timestamps.
-M0 is complete and M1 development acceptance passes. The latest receiver
-path-mapping refinement is undergoing a refreshed gate before this turn closes.
+M0 is complete and M1 development acceptance passes. The final receiver path-mapping refinement passes the refreshed gate.
 Acceptance criteria remain in [the backlog](../backlog.md).
 Implementation, focused review, integrated review and release are distinct.
 
