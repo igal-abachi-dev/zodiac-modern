@@ -2,6 +2,7 @@
   import { onMount, tick, flushSync, type Snippet } from 'svelte';
   import { ShieldCheck } from '@lucide/svelte';
   import RecipientSelector from './RecipientSelector.svelte';
+  import SymbolPlate from '../ui/SymbolPlate.svelte';
   import type { PublicRecipientData } from '../../types/crypto';
   import { Workspace, type MessageResult } from '../../lib/crypto/workspace';
   import { encryptionAvailable } from '../../lib/crypto/hybrid';
@@ -179,11 +180,7 @@
       >
         {#if displayContent}
           {@render displayContent(view.result)}
-        {:else}<p>
-            The celestial glyph display will be available after the artwork and
-            recovery work is complete. Save the raw ciphertext to preserve this
-            message.
-          </p>{/if}
+        {:else}<SymbolPlate raw={view.result.raw} />{/if}
       </section>
       <section
         id="result-raw"
