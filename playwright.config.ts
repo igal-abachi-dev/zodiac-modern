@@ -8,6 +8,7 @@ export default defineConfig({
     trace: 'off',
     screenshot: 'off',
     video: 'off',
+    launchOptions: { chromiumSandbox: true },
   },
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },

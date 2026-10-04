@@ -77,6 +77,7 @@ if ($ConfigureRecipient) {
     Write-Host 'Confirm this identity and fingerprint in your trusted local console before enabling the hosted default. Never derive the expected value from a website claiming to verify itself.'
     $confirmation = Read-Host 'Re-enter the full locally verified public fingerprint'
     if ($confirmation -cne $fingerprint) { throw 'Fingerprint confirmation failed; public configuration was not written.' }
+    [IO.Directory]::CreateDirectory((Split-Path -Parent $publicDestination)) | Out-Null
     Copy-Item -LiteralPath $public -Destination $publicDestination
     $configuration = [ordered]@{ name = $RecipientName; publicKey = 'public/keys/recipient-public.pem'; fingerprint = $fingerprint }
     [IO.File]::WriteAllText((Join-Path $repositoryRoot 'config/recipient.json'), ($configuration | ConvertTo-Json) + "`n", (New-Object Text.UTF8Encoding($false)))
