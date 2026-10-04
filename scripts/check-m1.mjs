@@ -108,13 +108,28 @@ try {
     }
   };
   walk(browser.suites);
-  const negative = await check(
-    'unconfigured-production-refusal',
-    [...pnpm, 'build'],
-    1,
+  const production = JSON.parse(
+    await readFile('config/recipient.json', 'utf8'),
   );
-  if (!/recipient|fingerprint|public key/i.test(negative))
-    throw Error('Unexpected production refusal category.');
+  const configured =
+    typeof production.name === 'string' &&
+    production.name.trim() &&
+    typeof production.publicKey === 'string' &&
+    /^[a-f0-9]{64}$/.test(production.fingerprint ?? '');
+  if (configured) {
+    await check('configured-production-build', [...pnpm, 'build']);
+    report.production =
+      'Explicit public recipient validated; review/signing remain open.';
+  } else {
+    const negative = await check(
+      'unconfigured-production-refusal',
+      [...pnpm, 'build'],
+      1,
+    );
+    if (!/recipient|fingerprint|public key/i.test(negative))
+      throw Error('Unexpected production refusal category.');
+    report.production = 'Unconfigured production intentionally refused.';
+  }
   const sources = [
     '.node-version',
     '.go-version',
@@ -129,6 +144,7 @@ try {
     ...(await filesAt(resolve('scripts'))),
     ...(await filesAt(resolve('config'))),
     ...(await filesAt(resolve('offline'))),
+    ...(await filesAt(resolve('public/keys'))),
   ];
   for (const file of sources)
     report.hashes[
