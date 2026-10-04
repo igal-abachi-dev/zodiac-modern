@@ -5,6 +5,7 @@
     glyphSequence,
   } from '../../lib/symbols/manifest';
   import GlyphIcon from './GlyphIcon.svelte';
+  import GlyphLicense from './GlyphLicense.svelte';
   let { raw }: { raw: string } = $props();
   let page = $state(0);
   const pageCount = $derived(Math.ceil(raw.length / PREVIEW_CHARACTERS));
@@ -63,6 +64,7 @@
       raw rows and their checks rather than relying on icon recognition.
     </p>
   </details>
+  <GlyphLicense />
 </section>
 
 <style>
