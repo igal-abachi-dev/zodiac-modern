@@ -119,7 +119,10 @@ input {
 label {
   display: block;
 }
-pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

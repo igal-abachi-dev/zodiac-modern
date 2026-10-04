@@ -1,27 +1,27 @@
 {
-    "receiverSHA256":  "ae6597d38cd8080eb08a36022e5a763b8e4237b03b55fd605ff0d15b4bae72b4",
-    "results":  [
-                    {
-                        "ciphertextSHA256":  "476645b39152f9fe0266724a9782a7d58fc8da693d79c8018a2c8e1feeaba4c3",
-                        "exitCode":  0,
-                        "outputSHA256":  "ee6ae3f86ac0e7f2bf9241e6f5a38224f91b0a03aefef979a60ff03ce9dd5137",
-                        "browser":  "chromium",
-                        "exactBytes":  true,
-                        "plaintextBytes":  40,
-                        "rsaBits":  3072
-                    },
-                    {
-                        "ciphertextSHA256":  "4d9c74b81b3fd962ed991eff554c49bbf78049a8e78fb8bd04de765537e0257b",
-                        "exitCode":  0,
-                        "outputSHA256":  "ee6ae3f86ac0e7f2bf9241e6f5a38224f91b0a03aefef979a60ff03ce9dd5137",
-                        "browser":  "firefox",
-                        "exactBytes":  true,
-                        "plaintextBytes":  40,
-                        "rsaBits":  4096
-                    }
-                ],
-    "limits":  "Synthetic fixture passphrase entered only through the hidden controlling-terminal prompt; no stdout plaintext. Does not prove Windows OpenSSL interactive non-ASCII compatibility, signing or integrated independent review.",
-    "recorded":  "2026-10-03T23:53:56.6468362Z",
-    "type":  "author-run actual executable in native Windows controlling terminal",
-    "go":  "go1.27.1 windows/amd64"
+  "receiverSHA256": "ae6597d38cd8080eb08a36022e5a763b8e4237b03b55fd605ff0d15b4bae72b4",
+  "results": [
+    {
+      "ciphertextSHA256": "476645b39152f9fe0266724a9782a7d58fc8da693d79c8018a2c8e1feeaba4c3",
+      "exitCode": 0,
+      "outputSHA256": "ee6ae3f86ac0e7f2bf9241e6f5a38224f91b0a03aefef979a60ff03ce9dd5137",
+      "browser": "chromium",
+      "exactBytes": true,
+      "plaintextBytes": 40,
+      "rsaBits": 3072
+    },
+    {
+      "ciphertextSHA256": "4d9c74b81b3fd962ed991eff554c49bbf78049a8e78fb8bd04de765537e0257b",
+      "exitCode": 0,
+      "outputSHA256": "ee6ae3f86ac0e7f2bf9241e6f5a38224f91b0a03aefef979a60ff03ce9dd5137",
+      "browser": "firefox",
+      "exactBytes": true,
+      "plaintextBytes": 40,
+      "rsaBits": 4096
+    }
+  ],
+  "limits": "Synthetic fixture passphrase entered only through the hidden controlling-terminal prompt; no stdout plaintext. Does not prove Windows OpenSSL interactive non-ASCII compatibility, signing or integrated independent review.",
+  "recorded": "2026-10-03T23:53:56.6468362Z",
+  "type": "author-run actual executable in native Windows controlling terminal",
+  "go": "go1.27.1 windows/amd64"
 }

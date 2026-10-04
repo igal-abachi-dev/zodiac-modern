@@ -10,20 +10,27 @@ import Layout from '../layouts/Layout.astro';
   </p>
   <p>
     The development receiver reads raw ciphertext and a local encrypted private
-    PEM, prompts without echo, authenticates the message and saves exact plaintext
-    to a new private Windows file. It never asks you to upload private material
-    to this website. Use synthetic data until the release gates close.
+    PEM, prompts without echo, authenticates the message and saves exact
+    plaintext to a new private Windows file. It never asks you to upload private
+    material to this website. Use synthetic data until the release gates close.
   </p>
   <pre><code>.\zodiac-decrypt.exe decrypt --key ".\rsa-private-encrypted.pem" --in ".\ciphertext.txt" --out ".\message.txt"</code></pre>
-  <p>Choose a new output name in a private, nonsynced folder on a local fixed disk.
-    Existing files, network/device paths, drive aliases, streams and reparse
-    redirection are rejected. The receiver preserves exact authenticated UTF-8
-    bytes and never prints plaintext or opens an editor. Saved files persist.</p>
-  <p>Exit codes: 2 for usage/ciphertext format, 3 for key unlock, 4 for message
-    authentication, 5 for local filesystem errors and 130 for cancellation.
-    A failed authentication creates no output. Whitespace is not stripped from
-    the raw file. Other receiver platforms are currently unsupported.</p>
-  <p>Before any future release use, verify its publisher, signature and full file
+  <p>
+    Choose a new output name in a private, nonsynced folder on a local fixed
+    disk. Existing files, network/device paths, drive aliases, streams and
+    reparse redirection are rejected. The receiver preserves exact authenticated
+    UTF-8 bytes and never prints plaintext or opens an editor. Saved files
+    persist.
+  </p>
+  <p>
+    Exit codes: 2 for usage/ciphertext format, 3 for key unlock, 4 for message
+    authentication, 5 for local filesystem errors and 130 for cancellation. A
+    failed authentication creates no output. Whitespace is not stripped from the
+    raw file. Other receiver platforms are currently unsupported.
+  </p>
+  <p>
+    Before any future release use, verify its publisher, signature and full file
     hash through an independently trusted channel. These checks, release custody
-    guidance and integrated independent review are still pending.</p>
+    guidance and integrated independent review are still pending.
+  </p>
 </Layout>
