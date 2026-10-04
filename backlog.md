@@ -26,16 +26,16 @@ When changing status, append evidence using: `ID | date | status | source commit
 | --- | --- | --- | --- | --- | --- |
 | E00 | Planning | P0 | Done | M0 | Source review and planning documents |
 | E01 | Enablers | P0 | In progress | M0 | Scaffold verification, harness/build pipeline review, partial offline spike |
-| E02 | Crypto | P0 | Backlog | M1 | Exact compatible browser encryption and strict codecs |
+| E02 | Crypto | P0 | Done | M1 | Exact compatible browser encryption and strict codecs |
 | E03 | Key management | P0 | In progress | M1 | Safe default/custom public recipients and offline key guide |
-| E04 | Workspace | P1 | Backlog | M2 | Accessible edit/encrypt/result/reset flow |
+| E04 | Workspace | P1 | In progress | M2 | Accessible edit/encrypt/result/reset flow |
 | E05 | Symbols/recovery | P1 | Backlog | M3 | Frozen glyph mapping, export-only SVG, raw/transcription recovery |
 | E06 | Exports/sharing | P1 | Backlog | M3 | Complete copy/download/image/print artifacts |
 | E07 | Hardening | P0 | Backlog | M4 | CSP, local-only privacy behavior, clean static artifact |
 | E08 | Verification/review | P0 | Backlog | M4 | Browser/Go, UX/export QA, independent security assessment |
 | E09 | Release | P0 | Backlog | M5 | Real recipient, verified host/offline bundle, custody and rollback |
 | E10 | Later options | P2 | Deferred | Later | Explicitly separate future decisions |
-| E11 | Offline recipient | P0 | In progress | M0/M2/M4 | REC-01 Done; authenticated decryption/output still pending |
+| E11 | Offline recipient | P0 | In progress | M0/M2/M4 | REC-01/REC-02 Done for Windows; readiness and release review remain |
 
 Critical-path start: `DOC-01 → (EN-01 alongside REC-01) → EN-02 → E02/E03 → E04/REC-02 → E05/E06 → E07/E08 → E09`. REC-01 starts in M0 without frontend/public-key importer dependencies; its real OpenSSL 3.0/3.5 prototype, fuzz/resource/vendor evidence and focused independent review are foundation gates, not deferred M2/release tasks. E07 policy starts during scaffold; E08 tests grow with each story and QA-03 retains the later system review. EN-04 begins file:// feasibility early and completes its full-flow delivery decision before release/review scope is finalized; do not commit to a native sender launcher before that decision. E02/E03/E11 use synthetic fixtures. E09 requires real public configuration, receiver decryption, review, independently verified sender bytes, signed receiver/any selected native launcher and a trusted verification channel.
 
@@ -130,7 +130,7 @@ Subtasks:
 
 ### CRY-01 — implement the exact hybrid encryption profile
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M1 · Dependencies: EN-02, KEY-01, CRY-02.
+Type: story · Priority: P0 · Status: Done · Milestone: M1 · Dependencies: EN-02, KEY-01, CRY-02.
 
 As a sender, I can encrypt exact message bytes locally into an envelope decryptable by the independent receiver.
 
@@ -144,13 +144,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] CRY-01.1 — implement profile constants, typed input/output, CSPRNG and OAEP/AES operations.
-- [ ] CRY-01.2 — implement GCM split/reordering, AAD and envelope assertions, cleanup/error paths.
-- [ ] CRY-01.3 — add real WebCrypto/Go interop and field tamper/wrong-key tests.
+- [x] CRY-01.1 — implement profile constants, typed input/output, CSPRNG and OAEP/AES operations.
+- [x] CRY-01.2 — implement GCM split/reordering, AAD and envelope assertions, cleanup/error paths.
+- [x] CRY-01.3 — add real WebCrypto/Go interop and field tamper/wrong-key tests.
 
 ### CRY-02 — implement byte-safe canonical Base64URL and envelope codecs
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M1 · Dependencies: EN-02.
+Type: story · Priority: P0 · Status: Done · Milestone: M1 · Dependencies: EN-02.
 
 As a recipient using external tooling, I receive one canonical text encoding of the exact compatible bytes.
 
@@ -164,13 +164,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] CRY-02.1 — implement chunk-safe bytes/Base64URL transforms and strict canonical validation.
-- [ ] CRY-02.2 — implement envelope split/serialize helpers and length formulas.
-- [ ] CRY-02.3 — test all byte values, boundary lengths, malformed strings/pad-bit aliases, and reference offsets.
+- [x] CRY-02.1 — implement chunk-safe bytes/Base64URL transforms and strict canonical validation.
+- [x] CRY-02.2 — implement envelope split/serialize helpers and length formulas.
+- [x] CRY-02.3 — test all byte values, boundary lengths, malformed strings/pad-bit aliases, and reference offsets.
 
 ### CRY-03 — preserve exact input and local operation lifecycle
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M1/M2 · Dependencies: CRY-01.
+Type: story · Priority: P0 · Status: Done · Milestone: M1/M2 · Dependencies: CRY-01.
 
 As a sender, my exact text is encrypted once, and a canceled or cleared operation cannot restore discarded data.
 
@@ -183,9 +183,9 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] CRY-03.1 — implement UTF-8 byte count/validation and synthetic Unicode edge cases.
-- [ ] CRY-03.2 — implement explicit state transitions, immutable recipient snapshots, and generation IDs.
-- [ ] CRY-03.3 — test double-click, failed encryption, clear-in-flight, key-change, and delayed-resolution races.
+- [x] CRY-03.1 — implement UTF-8 byte count/validation and synthetic Unicode edge cases.
+- [x] CRY-03.2 — implement explicit state transitions, immutable recipient snapshots, and generation IDs.
+- [x] CRY-03.3 — test double-click, failed encryption, clear-in-flight, key-change, and delayed-resolution races.
 
 ## 6. E03 — recipient key handling
 
@@ -210,7 +210,7 @@ Subtasks:
 
 ### KEY-02 — implement default and custom recipient selection
 
-Type: story · Priority: P0 · Status: In progress · Milestone: M1/M2 · Dependencies: KEY-01, EN-03, UX-01.
+Type: story · Priority: P0 · Status: Done · Milestone: M1/M2 · Dependencies: KEY-01, EN-03, UX-01.
 
 As a sender, I can use the configured recipient or read/paste another recipient's public key locally.
 
@@ -225,8 +225,8 @@ Acceptance criteria:
 Subtasks:
 
 - [x] KEY-02.1 — recipient summary/details, explicit public PEM download and accessible file/paste controls pass real-browser keyboard, responsive and CSP checks.
-- [ ] KEY-02.2 — file/paste selection, custom-only missing default, rejected replacement, clear/reload and default restoration pass real-browser checks. Invalid configured default is handled; integrated encryption/result state remains pending.
-- [ ] KEY-02.3 — local-only behavior, size checking before reading, escaped filenames and input/focus cleanup pass Chromium/Firefox checks. Immutable result recipient snapshots and disabling/restarting key changes during/after encryption remain pending with UX/crypto integration.
+- [x] KEY-02.2 — file/paste selection, custom-only missing default, rejected replacement, clear/reload and default restoration pass real-browser checks. Invalid configured default is handled; encryption/result integration and explicit restart/reset pass.
+- [x] KEY-02.3 — local-only behavior, size checking before reading, escaped filenames and input/focus cleanup pass Chromium/Firefox checks. Immutable recipient snapshots, busy/result key locks, explicit new-message and default restoration pass with the integrated sender.
 
 ### KEY-03 — publish offline creation, custody, and rotation guidance
 
@@ -253,7 +253,7 @@ Subtasks:
 
 ### UX-01 — establish the trusted, responsive visual system
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M2 · Dependencies: EN-01.
+Type: story · Priority: P1 · Status: Done · Milestone: M2 · Dependencies: EN-01.
 
 As a sender, I get a readable, restrained security workbench with clear labels and recipient information.
 
@@ -266,13 +266,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] UX-01.1 — implement CSS tokens, layout shell, responsive surfaces, and utility icons.
-- [ ] UX-01.2 — build accessible button/notice/dialog/tab/pagination primitives as needed.
-- [ ] UX-01.3 — verify contrast, touch/zoom/reflow/focus, and restrained brand/security copy.
+- [x] UX-01.1 — implement CSS tokens, layout shell, responsive surfaces, and utility icons.
+- [x] UX-01.2 — build accessible button/notice/dialog/tab/pagination primitives as needed.
+- [x] UX-01.3 — verify contrast, touch/zoom/reflow/focus, and restrained brand/security copy.
 
 ### UX-02 — build message editing, encryption, and failure feedback
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M2 · Dependencies: UX-01, CRY-03, KEY-02.
+Type: story · Priority: P1 · Status: Done · Milestone: M2 · Dependencies: UX-01, CRY-03, KEY-02.
 
 As a sender, I can type, explicitly encrypt, and understand success or correctable local failure.
 
@@ -285,13 +285,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] UX-02.1 — wire composer, byte count, capability checks, keyboard shortcuts, and explicit states.
-- [ ] UX-02.2 — integrate local encrypt adapter and success/error/live-region feedback.
-- [ ] UX-02.3 — verify IME, multilingual directionality, errors, keyboard flow, and unsupported environment.
+- [x] UX-02.1 — wire composer, byte count, capability checks, keyboard shortcuts, and explicit states.
+- [x] UX-02.2 — integrate local encrypt adapter and success/error/live-region feedback.
+- [x] UX-02.3 — verify IME, multilingual directionality, errors, keyboard flow, and unsupported environment.
 
 ### UX-03 — build results, another-message, and clear-all flows
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M2 · Dependencies: UX-02.
+Type: story · Priority: P1 · Status: In progress · Milestone: M2 · Dependencies: UX-02.
 
 As a sender, I can save the current ciphertext and then begin a clean new message quickly.
 
@@ -306,8 +306,8 @@ Acceptance criteria:
 Subtasks:
 
 - [ ] UX-03.1 — implement result shell, accessible views/summary, and action slots.
-- [ ] UX-03.2 — implement repeat-message/clear-all/pageshow reset and focus handling.
-- [ ] UX-03.3 — test successive messages, busy clear/discard, reload, history navigation, and screen-reader summaries.
+- [x] UX-03.2 — implement repeat-message/clear-all/pageshow reset and focus handling.
+- [x] UX-03.3 — test successive messages, busy clear/discard, reload, history navigation, and screen-reader summaries.
 
 ## 8. E05 — glyphs and recovery
 
@@ -668,7 +668,7 @@ Subtasks:
 
 ### REC-02 — implement authenticated offline decryption and safe plaintext output
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M2 · Dependencies: REC-01, CRY-02, CRY-01.
+Type: story · Priority: P0 · Status: Done · Milestone: M2 · Dependencies: REC-01, CRY-02, CRY-01.
 
 As a recipient, I decrypt a received raw text file with one command, keeping my private key/passphrase local.
 
@@ -683,9 +683,9 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] REC-02.1 — extract corrected compatible Go decrypt core and CLI command/error contracts.
-- [ ] REC-02.2 — implement authenticated output creation, Windows permissions, safe paths/cancellation and cleanup.
-- [ ] REC-02.3 — run real browser/CLI and independent oracle regressions, tampering and output-lifecycle checks.
+- [x] REC-02.1 — extract corrected compatible Go decrypt core and CLI command/error contracts.
+- [x] REC-02.2 — implement authenticated output creation, Windows permissions, safe paths/cancellation and cleanup.
+- [x] REC-02.3 — run real browser/CLI and independent oracle regressions, tampering and output-lifecycle checks.
 
 ### REC-03 — document and prove recipient readiness
 
@@ -744,7 +744,7 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | --- | --- |
 | Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
 | Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. At the original planning baseline application checks had not run; subsequent implementation evidence is recorded below and in docs/status.md |
-| Engineering | EN-01/EN-02/KEY-01/REC-01 Done; EN-03 in Review; KEY-02 and EN-04 in progress. M0 foundation complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
+| Engineering | EN-01/EN-02/KEY-01/KEY-02/CRY-01/02/03/UX-01/02/REC-01/02 Done; EN-03 in Review; EN-04/UX-03 in progress. M0/M1 development gates complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; download every glyph in a reversible one-line SVG; Unicode symbol strings deferred |
 | Production recipient | Public PEM/name/full fingerprint needed for REL-01; fixture-based engineering can proceed |
 | Host/domain | Vercel primary; Cloudflare Pages/Netlify alternatives, Surge conditional on verified header support; exact domain/account pending (REL-04/REL-02) |
@@ -752,7 +752,7 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | Review feedback | EN-04 file:// spike/conditional launcher; raw-primary vs optional artwork/no v1 SVG consumer; complete compact PNG distinct from archival pages; REC-01 owned fixed-profile stdlib loader replaces third-party decoder selection, with youmark/pkcs8/.NET read-only references and strict parsing/fuzz/vendor gates |
 | Offline artifact trust | Independent artifact hash/reviewer channel needed for REL-03; hashing and locality do not by themselves establish code trust |
 | Receiver decision | Confirmed: browser encryption plus downloadable offline Go decrypt CLI, encrypted OpenSSL keys and hidden prompt; supersedes the earlier offline-browser selection |
-| Receiver/signing gates | REC-01 focused conditional approval and verified fixes, exact LF fixture/oracle, native boundary/mutation/prompt, fuzz/resource/latency and complete vendor evidence pass. Workflow remains a template. REC-02 output, QA-03, signing and independent release channel remain pending |
+| Receiver/signing gates | REC-01 focused conditional approval and verified fixes, exact LF fixture/oracle, native boundary/mutation/prompt, fuzz/resource/latency and complete vendor evidence pass. Workflow remains a template. REC-02 Windows output is implemented/tested; QA-03, signing and independent release channel remain pending |
 | Offline sender decision | EN-04 has a fully bundled synthetic crypto feasibility probe; full export/recovery/stable-browser/verification/review gates remain open. Native sender launcher/signing remains conditional |
 | Local repo use | pnpm dev/build/start:local/local and custom-only scripts implemented. Production builds require real public configuration; REL-04 final installation/hosting documentation gates remain open |
 | Security claim | Passing synthetic implementation tests and provisional external feedback; no proof/certification/completed audit/production validation claimed |
@@ -765,3 +765,8 @@ Status evidence:
 - EN-02 | 2026-10-03 | Done | tests/browser/interop.spec.ts and tests/interop/go | real Chromium/Firefox WebCrypto and independent Go oracle pass; REC-01 dependency gate satisfied | author verification | integrated system review pending.
 - KEY-01 | 2026-10-03 | Done | src/lib/crypto/public-key.ts and tests/browser/public-key.spec.ts | native SPKI/actual integer policy, cross-runtime fingerprints, strict negative corpus pass | author verification | release trust/custody remains separate.
 - KEY-02 | 2026-10-03 | In progress | RecipientSelector.svelte and tests/browser/recipient-selection.spec.ts | local file/paste, rejected replacement, clear/default/reload, public export, keyboard/privacy/CSP pass | author verification | encryption/result snapshots and new-message integration pending.
+
+- CRY-01/CRY-02/CRY-03 | 2026-10-04 | Done | src/lib/crypto, codecs, validation, workspace; tests/unit and tests/browser | 14 unit tests; 30 real Chromium/Firefox cases, independent Go/actual command, fresh values/nonextractable AES/cleanup, strict offsets/limits and lifecycle races | author-run; relayed compatibility feedback recorded separately | no formal proof/audit or release claim; docs/reviews/m1-review-packet.md.
+- KEY-02/UX-01/UX-02 | 2026-10-04 | Done | RecipientSelector/EncryptWorkbench, local CSS | default/custom/busy/result snapshots, exact composer, IME/keyboard/retry/reset, capability refusal, measured light/dark contrast, 320px/200% text zoom/print/CSP/privacy | author-run | independent AT/system review remains QA-03; production recipient remains a launch configuration gate.
+- UX-03 | 2026-10-04 | In progress | EncryptWorkbench, exports/ciphertext.ts | raw result/profile/checksum, exact copy/download/manual fallback, another-message/clear/navigation lifecycle pass | author-run | full display and SVG/PNG/print artwork actions depend on M3; do not mark entire story Done.
+- REC-02 | 2026-10-04 | Done (Windows scope) | receiver/internal/envelope, localfile, cmd/zodiac-decrypt | native RSA/GCM/UTF-8/tamper/unwrap tests; protected ACL/private exclusive output, actual parent mutation/swap/alias/link/cancel/failure tests; both actual browser/hidden-console command runs | author-run | unsigned; other OS filesystem operations fail closed; new integration awaits QA-03, not covered by prior REC-01 focused verdict.
