@@ -202,12 +202,10 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     .getByRole('button', { name: 'Small legend glyphs (16 px)', exact: true })
     .click();
   await page.emulateMedia({ media: 'print', colorScheme: 'light' });
-  await page.locator('.glyph-plate').screenshot({
-    path: `artifacts/mixed-grid-print-${info.project.name}.png`,
-  });
-  await page.locator('.glyph-legend').screenshot({
-    path: `artifacts/glyph-legend-print-${info.project.name}.png`,
-  });
+  // Only the explicitly requested archival document prints after E06.
+  await expect(page.locator('.glyph-plate')).toBeHidden();
+  await expect(page.locator('.glyph-legend')).toBeHidden();
+  await page.emulateMedia({ media: 'screen' });
 });
 
 test('maximum message preview reaches its last slice while exports retain the entire RSA-4096 envelope', async ({
