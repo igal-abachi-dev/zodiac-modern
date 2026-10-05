@@ -238,17 +238,38 @@ test('file probe opens under default settings with no adjacent files or network'
     .click();
   expect(recoveryData).not.toBeNull();
   await page.getByRole('button', { name: 'Printed rows', exact: true }).click();
-  await page.getByLabel('Printed whole-envelope SHA-256').fill(recoveryData!.context.envelopeSHA256);
-  await page.getByLabel('Printed recipient fingerprint').fill(recoveryData!.context.recipientFingerprint);
-  await page.getByLabel('Printed total raw characters').fill(String(recoveryRaw.length));
+  await page
+    .getByLabel('Printed whole-envelope SHA-256')
+    .fill(recoveryData!.context.envelopeSHA256);
+  await page
+    .getByLabel('Printed recipient fingerprint')
+    .fill(recoveryData!.context.recipientFingerprint);
+  await page
+    .getByLabel('Printed total raw characters')
+    .fill(String(recoveryRaw.length));
   for (const p of recoveryData!.pages) {
     await page.getByLabel('Printed page number').fill(String(p.pageIndex + 1));
-    await page.getByLabel('Printed page check').fill(p.digest.slice(0,12));
-    await page.getByLabel('Printed rows: row number').fill(p.rows.map(r => `${r.rowIndex + 1} ${r.raw} ${r.checkCode}`).join('\n'));
-    await page.getByRole('button',{name:'Check rows / add complete page',exact:true}).click();
+    await page.getByLabel('Printed page check').fill(p.digest.slice(0, 12));
+    await page
+      .getByLabel('Printed rows: row number')
+      .fill(
+        p.rows
+          .map((r) => `${r.rowIndex + 1} ${r.raw} ${r.checkCode}`)
+          .join('\n'),
+      );
+    await page
+      .getByRole('button', {
+        name: 'Check rows / add complete page',
+        exact: true,
+      })
+      .click();
   }
-  await expect(page.getByLabel('Recovered raw ciphertext',{exact:true})).toHaveValue(recoveryRaw);
-  await page.getByRole('button',{name:'Clear recovery',exact:true}).click();
+  await expect(
+    page.getByLabel('Recovered raw ciphertext', { exact: true }),
+  ).toHaveValue(recoveryRaw);
+  await page
+    .getByRole('button', { name: 'Clear recovery', exact: true })
+    .click();
   expect(network).toEqual([]);
   expect(csp).toEqual([]);
   expect(await page.locator('[style]').count()).toBe(0);

@@ -1,7 +1,6 @@
 import { readFile, readdir, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
-import { createRequire } from 'node:module';
 import { dirname, join, resolve } from 'node:path';
 import { filesAt } from './walk-files.mjs';
 
@@ -20,11 +19,10 @@ if (
   throw Error(
     'Runtime dependency scope changed; review and update the explicit allowlist.',
   );
-const require = createRequire(import.meta.url),
-  direct = [];
+const direct = [];
 for (const [name, version] of Object.entries(manifest.dependencies)) {
   const installed = JSON.parse(
-    await readFile(require.resolve(`${name}/package.json`), 'utf8'),
+    await readFile(resolve('node_modules', name, 'package.json'), 'utf8'),
   );
   if (
     installed.version !== version ||
