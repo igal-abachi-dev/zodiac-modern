@@ -94,10 +94,10 @@ const manifest = {
   rotate: { zeroBasedOffsetModulo: 56, equals: 52, degrees: 180 },
   nulls: {
     afterPayloadCharacters: 8,
-    rotation: ['CircleOff', 'Crosshair', 'Skull'],
+    rotation: ['CircleOff', 'CircleDashed', 'Skull'],
     incompleteGroup: 'no null',
   },
-  viewOverrides: { j: 'CircleDashed' },
+  viewOverrides: {},
   canonicalVectorsSHA256: hash(JSON.stringify(vectors)),
   vectors: provenance,
 };

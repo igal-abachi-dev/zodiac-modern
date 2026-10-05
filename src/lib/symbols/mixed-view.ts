@@ -23,15 +23,15 @@ const vectors: readonly Vector[] = Object.freeze(
     }),
   ),
 );
-export const NULL_GLYPHS = Object.freeze(vectors.slice(0, 3));
-export const MIXED_VIEW_GLYPHS: readonly Glyph[] = Object.freeze(
-  GLYPHS.map((g) =>
-    g.character === 'j' ? Object.freeze({ ...g, ...vectors[3]! }) : g,
-  ),
-);
+export const NULL_GLYPHS = Object.freeze([
+  vectors[0]!,
+  vectors[3]!,
+  vectors[2]!,
+]);
+export const MIXED_VIEW_GLYPHS: readonly Glyph[] = GLYPHS;
 if (
-  NULL_GLYPHS.map((g) => g.name).join(',') !== 'CircleOff,Crosshair,Skull' ||
-  MIXED_VIEW_GLYPHS[35]!.name !== 'CircleDashed' ||
+  NULL_GLYPHS.map((g) => g.name).join(',') !== 'CircleOff,CircleDashed,Skull' ||
+  MIXED_VIEW_GLYPHS[35]!.name !== 'Crosshair' ||
   new Set(MIXED_VIEW_GLYPHS.map((g) => JSON.stringify(g.nodes))).size !== 64 ||
   MIXED_VIEW_GLYPHS.some((g) =>
     NULL_GLYPHS.some(

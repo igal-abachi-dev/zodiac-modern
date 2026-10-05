@@ -357,7 +357,7 @@ Subtasks:
 
 ### EXP-01 — implement exact text copying/downloads and image clipboard support
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: UX-03, CRY-02, EXP-02.
+Type: story · Priority: P1 · Status: In progress · Milestone: M3 · Dependencies: UX-03, CRY-02, EXP-02.
 
 As a sender, I can copy exact recoverable ciphertext and share the glyph appearance through supported clipboard formats.
 
@@ -377,7 +377,7 @@ Subtasks:
 
 ### EXP-02 — generate ordered, recoverable SVG and bounded PNG artifacts
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: SYM-01, CRY-02, EXP-04.
+Type: story · Priority: P1 · Status: In progress · Milestone: M3 · Dependencies: SYM-01, CRY-02, EXP-04.
 
 As a sender, I can save the same glyph artwork while retaining an exact recovery path.
 
@@ -397,7 +397,7 @@ Subtasks:
 
 ### EXP-03 — print/save PDF with complete ciphertext recovery
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: EXP-02.
+Type: story · Priority: P1 · Status: In progress · Milestone: M3 · Dependencies: EXP-02.
 
 As a sender, I can print the plate or save a browser PDF without losing data or printing my message.
 

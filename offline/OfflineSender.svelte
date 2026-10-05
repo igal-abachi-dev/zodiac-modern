@@ -38,11 +38,12 @@
       adjacent files, server or network connection.
     </p>
     <p>
-      Glyph display and raw/transcribed-row recovery are included; SVG/PNG
-      exports and print remain pending. Meta-CSP cannot supply HTTP-only
-      frame-ancestors, HSTS or nosniff protections; the local file boundary
-      still requires independent review and stable-browser testing before sender
-      selection.
+      Glyph display, raw/transcribed-row recovery, local SVG/PNG exports and
+      request-only archival printing are included. Send ciphertext.txt alongside
+      artwork; the receiver consumes raw text only. Meta-CSP cannot supply
+      HTTP-only frame-ancestors, HSTS or nosniff protections; the local file
+      boundary still requires independent review and stable-browser testing
+      before sender selection.
     </p>
   </details>
   <EncryptWorkbench recipient={defaultRecipient} />

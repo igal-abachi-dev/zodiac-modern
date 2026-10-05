@@ -23,13 +23,13 @@ it('keeps payload characters distinct from reserved nulls and retains the origin
       .map((t) => [t.afterOffset, t.glyph.name]),
   ).toEqual([
     [7, 'CircleOff'],
-    [15, 'Crosshair'],
+    [15, 'CircleDashed'],
     [23, 'Skull'],
     [31, 'CircleOff'],
-    [39, 'Crosshair'],
+    [39, 'CircleDashed'],
     [47, 'Skull'],
     [55, 'CircleOff'],
-    [63, 'Crosshair'],
+    [63, 'CircleDashed'],
   ]);
   expect(payload[24]).toMatchObject({
     character: 'Y',
@@ -46,7 +46,7 @@ it('keeps payload characters distinct from reserved nulls and retains the origin
   ).toHaveLength(14);
   expect(payload[35]).toMatchObject({
     character: 'j',
-    glyph: { name: 'CircleDashed' },
+    glyph: { name: 'Crosshair' },
   });
   expect(glyphFor('j').name).toBe('Crosshair');
   expect(GLYPHS.map((g) => g.character).join('')).toBe(BASE64URL_ALPHABET);
@@ -86,7 +86,7 @@ it('continues rotation, orientations and exact raw order across every preview at
       if (token.kind === 'null') {
         expect(token.afterOffset % 8).toBe(7);
         expect(token.glyph.name).toBe(
-          ['CircleOff', 'Crosshair', 'Skull'][nullCount % 3],
+          ['CircleOff', 'CircleDashed', 'Skull'][nullCount % 3],
         );
         nullCount++;
       } else {
@@ -106,7 +106,7 @@ it('continues rotation, orientations and exact raw order across every preview at
   expect(mixedViewTokens(raw.slice(512, 520), 512).at(-1)).toMatchObject({
     kind: 'null',
     afterOffset: 519,
-    glyph: { name: 'Crosshair' },
+    glyph: { name: 'CircleDashed' },
   });
   expect(
     mixedViewTokens(raw.slice(-6), 88096).filter((t) => t.kind === 'null'),

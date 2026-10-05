@@ -121,6 +121,42 @@ test('file probe opens under default settings with no adjacent files or network'
       .click();
     const download = await pendingDownload;
     expect(readFileSync((await download.path())!, 'utf8')).toBe(raw);
+    for (const [name, extension] of [
+      ['Download full one-line SVG', 'svg'],
+      ['Download complete artwork PNG', 'png'],
+      ['Download metadata JSON', 'json'],
+    ]) {
+      const pending = page.waitForEvent('download');
+      await page.getByRole('button', { name, exact: true }).click();
+      const exported = await pending;
+      const bytes = readFileSync((await exported.path())!);
+      expect(exported.suggestedFilename()).toMatch(
+        new RegExp(`\\.${extension}$`),
+      );
+      if (extension === 'svg')
+        expect([...bytes.toString().matchAll(/<use /g)].length).toBe(
+          raw.length,
+        );
+      if (extension === 'json')
+        expect(JSON.parse(bytes.toString()).raw).toBe(raw);
+      if (extension === 'png') {
+        expect(bytes.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
+        expect(bytes.readUInt32BE(20)).toBeLessThanOrEqual(4096);
+      }
+    }
+    await page.getByText('Archival pages and print', { exact: true }).click();
+    await page.evaluate(() => {
+      window.print = () => {};
+    });
+    await page
+      .getByRole('button', { name: 'Print / Save as PDF', exact: true })
+      .click();
+    await expect(page.locator('.print-page')).toHaveCount(
+      Math.ceil(raw.length / 512),
+    );
+    expect(await page.locator('.print-page use').count()).toBe(raw.length);
+    await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
+    await expect(page.locator('.zodiac-print-root')).toHaveCount(0);
     await page.evaluate(() =>
       Object.defineProperty(navigator, 'clipboard', {
         configurable: true,

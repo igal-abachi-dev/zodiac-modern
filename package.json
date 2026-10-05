@@ -28,6 +28,7 @@
     "test:receiver": "node scripts/receiver.mjs test",
     "check:rec01": "node scripts/check-rec01.mjs",
     "check:m1": "node scripts/check-m1.mjs",
+    "check:m3": "node scripts/check-m3.mjs",
     "verify:receiver-deps": "node scripts/receiver.mjs verify",
     "build:receiver": "node scripts/receiver.mjs build",
     "spike:offline-html": "node scripts/build-offline.mjs",

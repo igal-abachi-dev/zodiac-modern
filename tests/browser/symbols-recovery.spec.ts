@@ -67,7 +67,7 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
       expect(token.character).toBeNull();
       expect(token.offset).toBeNull();
       expect(token.glyph).toBe(
-        ['CircleOff', 'Crosshair', 'Skull'][nullIndex++ % 3],
+        ['CircleOff', 'CircleDashed', 'Skull'][nullIndex++ % 3],
       );
     } else {
       expect(token.offset).toBe(String(payloadOffset));
@@ -75,7 +75,9 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
       expect(token.kind).toBe(payloadOffset % 4 === 0 ? 'literal' : 'glyph');
       if (token.kind === 'literal') expect(token.text).toBe(raw[payloadOffset]);
       else
-        expect(['CircleOff', 'Crosshair', 'Skull']).not.toContain(token.glyph);
+        expect(['CircleOff', 'CircleDashed', 'Skull']).not.toContain(
+          token.glyph,
+        );
       payloadOffset++;
     }
   }
@@ -135,7 +137,7 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
       .locator('.glyph-plate [data-kind="null"]')
       .first()
       .getAttribute('data-glyph'),
-  ).toBe('Crosshair');
+  ).toBe('CircleDashed');
   expect(
     await cells.evaluateAll((items) =>
       items.map((item) => item.getAttribute('data-character')).join(''),
@@ -163,9 +165,9 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     .click();
   await expect(page.locator('.glyph-legend li')).toHaveCount(64);
   await expect(page.locator('.null-legend li')).toHaveCount(3);
-  await expect(page.locator('.glyph-legend')).toContainText('CircleDashed');
+  await expect(page.locator('.glyph-legend')).toContainText('Crosshair');
   expect(await page.locator('.glyph-legend').textContent()).not.toContain(
-    'Crosshair',
+    'CircleDashed',
   );
   await page.setViewportSize({ width: 1100, height: 900 });
   await expect(page.locator('#result-display')).toBeVisible();

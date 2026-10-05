@@ -57,7 +57,8 @@ const shell = (await readFile('offline/shell.html', 'utf8'))
   )
   .replace('<!--STYLE-->', () => `<style>${style}</style>`)
   .replace('<!--SCRIPT-->', () => `<script>${script}</script>`);
-if (/\b(?:src|href)=["'](?!blob:)/.test(shell))
+// Generated SVG definitions use local fragment references; these are not files.
+if (/\b(?:src|href)=["'](?!blob:|data:|#)/.test(shell))
   throw new Error(
     'Offline probe must not reference adjacent or external files.',
   );

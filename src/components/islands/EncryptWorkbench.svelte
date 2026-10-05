@@ -3,6 +3,7 @@
   import { ShieldCheck } from '@lucide/svelte';
   import RecipientSelector from './RecipientSelector.svelte';
   import SymbolPlate from '../ui/SymbolPlate.svelte';
+  import ExportMenu from '../ui/ExportMenu.svelte';
   import type { PublicRecipientData } from '../../types/crypto';
   import { Workspace, type MessageResult } from '../../lib/crypto/workspace';
   import { encryptionAvailable } from '../../lib/crypto/hybrid';
@@ -171,11 +172,6 @@
           spellcheck="false"
           autocomplete="off"></textarea>
       </section>
-      <section id="result-display" aria-label="Ciphertext display">
-        {#if displayContent}
-          {@render displayContent(view.result)}
-        {:else}<SymbolPlate raw={view.result.raw} />{/if}
-      </section>
       <div class="workspace-actions">
         <button type="button" onclick={copyRaw}>Copy raw</button>
         <button
@@ -183,6 +179,13 @@
           onclick={() => downloadCiphertext(view.result!.raw)}
           >Download ciphertext (.txt)</button
         >
+      </div>
+      <section id="result-display" aria-label="Ciphertext display">
+        {#if displayContent}
+          {@render displayContent(view.result)}
+        {:else}<SymbolPlate raw={view.result.raw} />{/if}
+      </section>
+      <div class="workspace-actions">
         <button type="button" onclick={anotherMessage}
           >Encrypt another message</button
         >
@@ -198,12 +201,7 @@
         <h4 id="artwork-title">Artwork (optional)</h4>
         {#if artworkActions}
           {@render artworkActions(view.result)}
-        {:else}<p>
-            Artwork exports are not available yet. Complete-image PNG,
-            archival-page PNG, one-line SVG and print actions will appear here
-            after validation. Send raw ciphertext alongside artwork: the v1
-            receiver reads raw text only and cannot import SVG or recover a PNG.
-          </p>{/if}
+        {:else}<ExportMenu result={view.result} />{/if}
       </section>
     </section>
   {:else}

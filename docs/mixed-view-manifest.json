@@ -22,12 +22,10 @@
   },
   "nulls": {
     "afterPayloadCharacters": 8,
-    "rotation": ["CircleOff", "Crosshair", "Skull"],
+    "rotation": ["CircleOff", "CircleDashed", "Skull"],
     "incompleteGroup": "no null"
   },
-  "viewOverrides": {
-    "j": "CircleDashed"
-  },
+  "viewOverrides": {},
   "canonicalVectorsSHA256": "c64d466689bb5658689f451256f845a32d2c262eb751b59c50633ffd84c0130d",
   "vectors": [
     {

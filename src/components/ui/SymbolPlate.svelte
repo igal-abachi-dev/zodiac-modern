@@ -119,7 +119,7 @@
         </li>{/each}
     </ul>
     <p>
-      Crosshair is reserved for nulls in S64M1; j uses CircleDashed here. The
+      CircleDashed is a null in S64M1; j keeps its original Crosshair glyph. The
       original frozen S64L1 alphabet and raw recovery checks stay unchanged.
     </p>
     <p>
