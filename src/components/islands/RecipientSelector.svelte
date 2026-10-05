@@ -25,6 +25,7 @@
   let paste = $state('');
   let busy = $state(false);
   let showDetails = $state(false);
+  let showCustom = $state(false);
   let error = $state('');
   let notice = $state('Choose a public key to identify the recipient.');
   let fileInput: HTMLInputElement;
@@ -42,6 +43,7 @@
       paste = '';
       error = '';
       showDetails = false;
+      showCustom = false;
       if (fileInput) fileInput.value = '';
       selected = defaultSelection;
       onselection?.(selected);
@@ -160,9 +162,11 @@
   <h3 id="recipient-title">Choose a recipient</h3>
   <div class="recipient-summary" aria-live="polite">
     {#if selected}
-      <p><strong>{selected.name}</strong> · RSA-{selected.bits}</p>
-      <p class="fingerprint">
-        Fingerprint (abbreviated): {selected.fingerprint.slice(0, 12)}…
+      <p>
+        <strong>{selected.name}</strong> · RSA-{selected.bits}<br />
+        <span class="fingerprint">
+          Fingerprint (abbreviated): {selected.fingerprint.slice(0, 12)}…
+        </span>
       </p>
       {#if selected.filename}<p class="filename">
           Local filename (unverified label): {selected.filename}
@@ -171,6 +175,7 @@
           Synthetic test recipient only.
         </p>{/if}
       <button
+        class="secondary"
         type="button"
         onclick={() => (showDetails = !showDetails)}
         aria-expanded={showDetails}>Recipient details</button
@@ -194,12 +199,25 @@
         </p>{/if}
     {/if}
   </div>
-  <p>
-    Public key stays on this device. Choose only a SPKI PUBLIC KEY PEM, RSA-3072
-    or RSA-4096. Never select a private key.
-  </p>
-  <fieldset disabled={locked} aria-busy={busy}>
-    <legend>Use a custom public key</legend>
+  <button
+    class="secondary custom-toggle"
+    type="button"
+    disabled={locked}
+    aria-expanded={showCustom}
+    aria-controls="custom-public-key"
+    onclick={() => (showCustom = !showCustom)}>Use a custom public key</button
+  >
+  <fieldset
+    id="custom-public-key"
+    hidden={!showCustom}
+    disabled={locked}
+    aria-busy={busy}
+  >
+    <legend>Custom public key</legend>
+    <p>
+      Public key stays on this device. Choose only a SPKI PUBLIC KEY PEM,
+      RSA-3072 or RSA-4096. Never select a private key.
+    </p>
     <label for="public-key-file">Choose public PEM file (maximum 16 KiB)</label>
     <input
       bind:this={fileInput}
@@ -229,11 +247,31 @@
       >
     </div>
   </fieldset>
-  <p role="status">{busy ? 'Validating public key locally…' : notice}</p>
+  <p role="status">
+    {busy
+      ? 'Validating public key locally…'
+      : selected?.source === 'custom' || !selected
+        ? notice
+        : ''}
+  </p>
   {#if error}<p role="alert">{error}</p>{/if}
 </section>
 
 <style>
+  h3 {
+    margin-block: 0.75rem 0;
+  }
+  .custom-toggle {
+    margin-block: 0.5rem 1rem;
+  }
+  .recipient-summary > p {
+    margin-block: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  [role='status']:empty {
+    margin: 0;
+  }
   fieldset {
     border: 1px solid var(--color-border);
     border-radius: 0.5rem;

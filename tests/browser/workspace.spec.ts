@@ -9,12 +9,14 @@ import {
 import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { openCustomKey } from './sender-controls';
 const pem = (bits: number) =>
   readFileSync(
     `receiver/tests/fixtures/keys/openssl-3.5-${bits}-public.pem`,
     'utf8',
   );
 async function custom(page: Page, bits: number) {
+  await openCustomKey(page);
   await page.getByLabel('Paste public PEM').fill(pem(bits));
   await page
     .getByRole('button', { name: 'Use pasted public key', exact: true })
@@ -118,6 +120,8 @@ test('sender exact bytes, command interoperability, exports, immutable recipient
     await expect(
       page.getByRole('heading', { name: 'Encrypted message', exact: true }),
     ).toBeFocused();
+    await expect(page.locator('#result-display')).toBeVisible();
+    await expect(page.locator('#result-raw')).toBeHidden();
     expect(await message.count()).toBe(0);
     await expect(page.getByLabel('Paste public PEM')).toBeDisabled();
     const raw = await page.getByLabel('Raw ciphertext').inputValue();
@@ -188,6 +192,63 @@ test('sender exact bytes, command interoperability, exports, immutable recipient
       styles: document.querySelectorAll('[style]').length,
     })),
   ).toEqual({ local: 0, session: 0, history: null, violations: [], styles: 0 });
+});
+
+test('composer opens within the viewport, custom key accordion is keyboard accessible, and readiness follows main actions', async ({
+  page,
+}, testInfo) => {
+  for (const viewport of [
+    { width: 1366, height: 900 },
+    { width: 375, height: 812 },
+  ]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    const message = page.getByLabel('Message', { exact: true });
+    await expect(message).toBeEnabled();
+    await expect(page.locator('.recipient-summary strong')).toBeVisible();
+    await expect(page.locator('#custom-public-key')).toBeHidden();
+    const bounds = await message.boundingBox();
+    expect(bounds!.y).toBeGreaterThanOrEqual(0);
+    expect(bounds!.y + Math.min(bounds!.height, 80)).toBeLessThan(
+      viewport.height,
+    );
+    expect(await page.evaluate(() => scrollY)).toBe(0);
+    const encrypt = await page
+      .getByRole('button', { name: 'Encrypt message', exact: true })
+      .boundingBox();
+    const clear = await page
+      .getByRole('button', { name: 'Clear everything', exact: true })
+      .boundingBox();
+    const readiness = await page
+      .getByRole('button', {
+        name: 'Prepare nonsecret readiness token',
+        exact: true,
+      })
+      .boundingBox();
+    expect(readiness!.y).toBeGreaterThan(encrypt!.y + encrypt!.height);
+    expect(readiness!.y).toBeGreaterThan(clear!.y + clear!.height);
+    await page.screenshot({
+      path: `artifacts/sender-layout-${testInfo.project.name}-${viewport.width}.png`,
+      fullPage: true,
+    });
+    const toggle = page.getByRole('button', {
+      name: 'Use a custom public key',
+      exact: true,
+    });
+    await toggle.focus();
+    await toggle.press('Enter');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(page.getByLabel('Paste public PEM')).toBeVisible();
+    await toggle.press('Space');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(toggle).toBeFocused();
+    await expect(page.getByLabel('Paste public PEM')).toBeHidden();
+    await page
+      .getByRole('button', { name: 'Clear everything', exact: true })
+      .click();
+    await expect(message).toBeFocused();
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  }
 });
 
 test('input boundaries, IME, failures, clear while pending and navigation discard', async ({

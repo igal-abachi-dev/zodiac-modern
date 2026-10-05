@@ -7,11 +7,13 @@ custom recipient paths. Production recipient identity remains a launch gate.
 
 Implemented acceptance: CRY-01/02/03, KEY-02 and UX-01/02. UX-03's raw result,
 copy/download, immutable recipient/profile/checksum, repeat-message, clear and
-navigation lifecycle are working. Its full display/artwork action group remains
-dependent on M3 symbols/SVG/PNG/print and must not be marked entirely Done.
+navigation lifecycle and frozen glyph display are working. Its optional artwork
+action group remains dependent on M3 SVG/PNG/print and must not be marked entirely Done.
 REC-02 implements the Windows native authenticated command and private output;
-KEY-03 guidance and native synthetic backup drills now pass. REC-03's independent
-nontechnical usability/release steps and QA-03 remain separate work.
+KEY-03 guidance and native synthetic backup drills now pass. REC-03's readiness
+helper passes original/restored verification and exact nonsecret token decryption
+for both sizes. The operator's own backup drill, observed first-time user trial,
+release steps and QA-03 remain separate work.
 
 Reproduce with the pinned installed toolchains and already authenticated caches:
 
@@ -57,7 +59,7 @@ is explicitly synthetic. This does not prove interactive OpenSSL non-ASCII
 setup compatibility. See [output implementation](../decisions/rec02-local-output.md)
 for the native path/ACL/race/error boundary and evidence limits.
 
-Next review scope: key creation/custody/readiness, symbols/recovery/export,
+Next review scope: key creation/custody/readiness, implemented symbols/recovery and future exports,
 complete offline sender verification UX, native output and terminal integration,
 privacy/host trust, release packaging/publisher hashes/signatures and QA-03.
 
@@ -75,4 +77,21 @@ regenerating the key; the public-copy helper has a fresh-directory/overwrite
 regression. Windows PowerShell 5.1 native random-byte rejection and redirected
 output refusal are tested; modern GetInt32 availability is handled explicitly.
 Unix permissions, ARM64 and interactive non-ASCII OpenSSL compatibility remain
-unclaimed. EN-04's full artwork/recovery/platform/review gate remains open.
+unclaimed. EN-04's full artwork/platform/review gate remains open.
+
+[E05 evidence](e05-evidence.json) records 64 frozen glyph vectors/provenance,
+bounded pagination and legend, exact raw/transcribed-row recovery, independent
+S64CHECK1 vectors and whole-envelope checks, maximum-size behavior, synthetic
+24/16 px and print legend captures, and the expanded stable Edge file:// case.
+EXP-04 helpers and local form are implemented; generated print labels/metadata
+integration remains E06. [Readiness helper evidence](rec03-helper-evidence.json)
+and the [human trial record](rec03-readiness-trial.md) keep technical checks and
+pending participant outcomes distinct.
+
+The [S64M1 follow-up](mixed-view-evidence.json) supersedes the original screen
+baseline: 29 unit tests, 42 Chromium/Firefox cases and the expanded stable Edge
+file:// case pass. The screen mixes literal payload characters with glyphs,
+reserves CircleOff/Crosshair/Skull as nulls and uses a pinned view-only
+CircleDashed override for `j`. Global placement/orientation, raw exports,
+unchanged recovery, max-size pagination, CSP and mobile/print visual checks pass.
+All glyphs remain outlined by explicit user choice.

@@ -1,12 +1,28 @@
 import { createServer } from 'node:http';
 import { readFile, realpath, stat } from 'node:fs/promises';
 import { extname, relative, resolve, sep } from 'node:path';
-const root = await realpath(
-  resolve(process.argv.includes('--fixture') ? 'artifacts/test-site' : 'dist'),
-);
-const headers = JSON.parse(
-  await readFile(resolve(root, '.security-headers.json'), 'utf8'),
-);
+const preview = process.argv.includes('--preview');
+const confined = (root, path) => {
+  const rel = relative(root, path);
+  return (
+    rel === '' ||
+    (!rel.startsWith(`..${sep}`) && rel !== '..' && !rel.includes(':'))
+  );
+async function previewArtifact() {
+  const { build } = JSON.parse(await readFile('.cache/local-preview.json', 'utf8'));
+  if (typeof build !== 'string' || !/^[a-f0-9-]{36}$/.test(build))
+    throw Error('Invalid preview snapshot.');
+  const base = await realpath('.cache/preview-sites');
+  const root = await realpath(resolve(base, build));
+  if (!confined(base, root)) throw Error('Preview snapshot escapes its directory.');
+  const headers = JSON.parse(await readFile(resolve(root, '.security-headers.json'), 'utf8'));
+  return { root, headers };
+}
+const initial = preview ? await previewArtifact() : await (async () => {
+  const root = await realpath(resolve(process.argv.includes('--fixture') ? 'artifacts/test-site' : 'dist'));
+  const headers = JSON.parse(await readFile(resolve(root, '.security-headers.json'), 'utf8'));
+  return { root, headers };
+})();
 const port = Number(process.env.ZODIAC_PORT ?? 4321);
 if (!Number.isInteger(port) || port < 1024 || port > 65535)
   throw new Error('Invalid local port.');
@@ -19,17 +35,13 @@ const mime = {
   '.pem': 'application/x-pem-file',
   '.txt': 'text/plain; charset=utf-8',
 };
-const confined = (path) => {
-  const rel = relative(root, path);
-  return (
-    rel === '' ||
-    (!rel.startsWith(`..${sep}`) && rel !== '..' && !rel.includes(':'))
-  );
-};
 const server = createServer(async (req, res) => {
-  for (const [name, value] of Object.entries(headers))
-    res.setHeader(name, value);
   try {
+    // One snapshot supplies both files and CSP for this request. Refresh only
+    // changes a local public-file pointer; no upload, crypto or control API.
+    const { root, headers } = preview ? await previewArtifact() : initial;
+    for (const [name, value] of Object.entries(headers))
+      res.setHeader(name, value);
     if (
       !['GET', 'HEAD'].includes(req.method) ||
       ![`127.0.0.1:${port}`, `localhost:${port}`].includes(req.headers.host)
@@ -51,13 +63,13 @@ const server = createServer(async (req, res) => {
       return;
     }
     let path = resolve(root, `.${pathname}`);
-    if (!confined(path)) {
+    if (!confined(root, path)) {
       res.writeHead(404).end();
       return;
     }
     if ((await stat(path)).isDirectory()) path = resolve(path, 'index.html');
     path = await realpath(path);
-    if (!confined(path)) {
+    if (!confined(root, path)) {
       res.writeHead(404).end();
       return;
     }

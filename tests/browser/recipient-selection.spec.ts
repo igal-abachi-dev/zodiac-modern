@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 import { validatePublicPEM } from '../../scripts/public-recipient.mjs';
+import { openCustomKey } from './sender-controls';
 
 const publicPEM = (bits: number) =>
   readFileSync(
@@ -20,6 +21,7 @@ async function details(page: Page) {
   return page.locator('.full-fingerprint');
 }
 async function importPaste(page: Page, pem: string) {
+  await openCustomKey(page);
   await page.getByLabel('Paste public PEM').fill(pem);
   await page
     .getByRole('button', { name: 'Use pasted public key', exact: true })
@@ -46,6 +48,7 @@ test('local recipient file/paste selection preserves a rejected replacement, cle
   const requests: string[] = [];
   page.on('request', (request) => requests.push(request.url()));
   const input = page.getByLabel('Choose public PEM file');
+  await openCustomKey(page);
   const maliciousName = '<img src=x onerror=alert(1)>.pem';
   await input.setInputFiles({
     name: maliciousName,
@@ -142,6 +145,7 @@ test('local recipient file/paste selection preserves a rejected replacement, cle
   await expect(await details(page)).toContainText(fingerprint(3072));
   await expect(page.locator('.filename')).toHaveCount(0);
   await expect(page.getByLabel('Paste public PEM')).toHaveValue('');
+  await openCustomKey(page);
   await page
     .getByRole('button', { name: 'Clear recipient', exact: true })
     .click();
@@ -171,6 +175,7 @@ test('custom-only build has no fallback recipient and supports keyboard paste im
     page.getByRole('button', { name: 'Use default recipient', exact: true }),
   ).toHaveCount(0);
   const textarea = page.getByLabel('Paste public PEM');
+  await openCustomKey(page);
   await textarea.fill('synthetic-invalid-marker');
   await page.keyboard.press('Tab');
   await expect(

@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
+import { openCustomKey } from './sender-controls';
 test('file probe opens under default settings with no adjacent files or network', async ({
   page,
 }, testInfo) => {
@@ -54,6 +55,7 @@ test('file probe opens under default settings with no adjacent files or network'
     );
     const text = 'Synthetic exact UTF-8 שלום 🔑\r\n  ';
     // textarea normalizes CRLF by design; compare the actual original DOM string.
+    await openCustomKey(page);
     if (bits === 3072) {
       await page.getByLabel('Choose public PEM file').setInputFiles({
         name: 'synthetic-public.pem',
@@ -76,6 +78,7 @@ test('file probe opens under default settings with no adjacent files or network'
     await expect(
       page.getByRole('heading', { name: 'Encrypted message', exact: true }),
     ).toBeFocused();
+    await expect(page.locator('#result-display')).toBeVisible();
     const raw = await page.getByLabel('Raw ciphertext').inputValue();
     recoveryRaw = raw;
     const openssl =
@@ -134,6 +137,29 @@ test('file probe opens under default settings with no adjacent files or network'
     await expect(
       page.getByLabel('Raw ciphertext', { exact: false }),
     ).toBeHidden();
+    await expect(
+      page.locator('.glyph-plate .glyph-cell[data-character]'),
+    ).toHaveCount(512);
+    await expect(page.locator('.glyph-plate .glyph-cell')).toHaveCount(576);
+    expect(
+      await page
+        .locator('.glyph-plate .glyph-cell[data-character]')
+        .evaluateAll((nodes) =>
+          nodes.map((node) => node.getAttribute('data-character')).join(''),
+        ),
+    ).toBe(raw.slice(0, 512));
+    expect(
+      await page
+        .locator('.glyph-plate [data-kind="null"]')
+        .first()
+        .getAttribute('data-glyph'),
+    ).toBe('CircleOff');
+    expect(
+      await page.locator('.glyph-plate .payload-character.mirrored').count(),
+    ).toBe(9);
+    expect(
+      await page.locator('.glyph-plate .payload-character.rotated').count(),
+    ).toBe(9);
     await page.getByRole('button', { name: 'Copy raw', exact: true }).click();
     await expect(page.getByLabel('Raw ciphertext')).toBeFocused();
     await page

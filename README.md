@@ -62,7 +62,7 @@ The website accepts public keys only. The receiver handles private keys and pass
 
 ## Development
 
-The development sender now encrypts exact message bytes with default/custom public recipients and offers raw copy/download, immutable result details, retry, another-message and clear/navigation reset. The unsigned Windows receiver implements hidden-prompt key verification and authenticated decryption to exclusive private local-disk files. M0 is complete and M1 development acceptance passes. Glyph/artwork/recovery, final offline delivery, integrated QA-03 and release signing remain pending. Use synthetic data; no reviewed release is available. See [live task and milestone status](docs/status.md).
+The development sender now encrypts exact message bytes with default/custom public recipients and offers raw copy/download, immutable result details, retry, another-message and clear/navigation reset. E05 adds frozen celestial glyphs with bounded pagination and a legend, plus local raw/printed-row recovery with row/page and final envelope checks. The unsigned Windows receiver implements hidden-prompt key verification and authenticated decryption to exclusive private local-disk files. M0 is complete and M1 development acceptance passes. SVG/PNG/print exports, observed recipient readiness, final offline delivery, integrated QA-03 and release signing remain pending. Use synthetic data; no reviewed release is available. See [live task and milestone status](docs/status.md) and the [recipient readiness trial](docs/reviews/rec03-readiness-trial.md).
 
 Use Node.js 24.21.0 (the 24.x LTS line), pnpm 12.8.1 and the committed lockfile. Receiver checks require the pinned installed Go 1.27.1 toolchain; automatic toolchain downloads are disabled. OpenSSL is needed for key setup and interoperability fixtures, not for running browser encryption or the packaged receiver. Configure `ZODIAC_GO` when the pinned Go executable is outside PATH; the scripts also recognize the repository's ignored portable-toolchain cache.
 
@@ -81,6 +81,24 @@ pnpm start:local
 ```
 
 `pnpm local` combines building and local serving. `pnpm local:custom` runs the explicit custom-recipient-only mode when no default public key is configured. Local servers bind to loopback by default. Development HMR is separate from the production CSP.
+
+For the preview at **http://127.0.0.1:4324/**:
+
+```sh
+pnpm preview:local
+```
+
+Keep that terminal running. After source changes, run this in a second terminal:
+
+```sh
+pnpm preview:refresh
+```
+
+Then reload the browser tab (Ctrl+F5); reloading clears the in-memory workspace.
+Both commands build the configured public recipient with production security
+headers. Refresh publishes a complete immutable snapshot and matching CSP;
+a failed build leaves the previous preview available. Snapshots stay in ignored
+`.cache/preview-sites/`. Stop the preview terminal with Ctrl+C.
 
 ### Default recipient
 

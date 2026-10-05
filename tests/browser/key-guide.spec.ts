@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { openCustomKey } from './sender-controls';
 import { createHash, createPublicKey } from 'node:crypto';
 import { mkdtempSync, readFileSync, rmSync, copyFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
@@ -96,6 +97,7 @@ test('guide-created encrypted keys import and recover exact nonsecret text after
       const fingerprint = createHash('sha256')
         .update(createPublicKey(pem).export({ format: 'der', type: 'spki' }))
         .digest('hex');
+      await openCustomKey(page);
       await page.getByLabel('Choose public PEM file').setInputFiles(publicPath);
       await expect(
         page.locator('.recipient-summary .fingerprint:not(.full-fingerprint)'),
@@ -119,6 +121,8 @@ test('guide-created encrypted keys import and recover exact nonsecret text after
         .getByRole('button', { name: 'Encrypt message', exact: true })
         .click();
       const raw = page.getByLabel('Raw ciphertext');
+      await expect(page.locator('#result-display')).toBeVisible();
+      await page.getByRole('button', { name: 'Raw view', exact: true }).click();
       await expect(raw).toBeVisible();
       copyFileSync(final, backup);
       const privateDER = run([

@@ -1,0 +1,58 @@
+{
+  "presentation": "S64M1",
+  "baseMap": "S64L1",
+  "package": "@lucide/svelte",
+  "version": "1.51.0",
+  "packageIntegrity": "sha512-FNoBtfrnQS1LV7yRm8T8pF6OH72BzCyPOWrOmVcpqGGLFmQZndRB4h0qhzUKqPq2JNkSfF7f4tUaiCwdY4WFfg==",
+  "source": "https://github.com/lucide-icons/lucide/tree/1.51.0/packages/svelte",
+  "license": "docs/licenses/lucide-1.51.0.txt",
+  "licenseSHA256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+  "literal": {
+    "zeroBasedOffsetModulo": 4,
+    "equals": 0
+  },
+  "mirror": {
+    "zeroBasedOffsetModulo": 56,
+    "equals": 24
+  },
+  "rotate": {
+    "zeroBasedOffsetModulo": 56,
+    "equals": 52,
+    "degrees": 180
+  },
+  "nulls": {
+    "afterPayloadCharacters": 8,
+    "rotation": ["CircleOff", "Crosshair", "Skull"],
+    "incompleteGroup": "no null"
+  },
+  "viewOverrides": {
+    "j": "CircleDashed"
+  },
+  "canonicalVectorsSHA256": "c64d466689bb5658689f451256f845a32d2c262eb751b59c50633ffd84c0130d",
+  "vectors": [
+    {
+      "name": "CircleOff",
+      "file": "dist/icons/circle-off.svelte",
+      "sourceSHA256": "8e6394f62e052005b6951077baab6b5a95b65acb2574c57ad79b4a6905f468ad",
+      "vectorSHA256": "3045c864dc746637f13f228093d245611b7aefabac090a569ca6f1935994928d"
+    },
+    {
+      "name": "Crosshair",
+      "file": "dist/icons/crosshair.svelte",
+      "sourceSHA256": "bcfc65d6aabd139119fb38ee8861d4ef646420f341d4a148c3b1a355c450bf88",
+      "vectorSHA256": "0af02ad9f5514b112bbbfcadd80296f362fd1e2a2056fc5d492ac05ba21f27c4"
+    },
+    {
+      "name": "Skull",
+      "file": "dist/icons/skull.svelte",
+      "sourceSHA256": "8f111d916236a2965d89bf8cbf869ec95ac55bcd756c9d87c74562c1edccc374",
+      "vectorSHA256": "fd95bd59ca3c93c5dd8e6f24df8c91b2480e75e09f5ae204ddf626b510e140c2"
+    },
+    {
+      "name": "CircleDashed",
+      "file": "dist/icons/circle-dashed.svelte",
+      "sourceSHA256": "dd55d3a704cdd2d4c2701262451126d743a0c1f2f103f4358f74dd92558f4210",
+      "vectorSHA256": "fde8699d96de7738ddbd43962af78c4e678f4910a30d14c864663e977568cb60"
+    }
+  ]
+}

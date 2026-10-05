@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { PREVIEW_CHARACTERS } from '../../lib/symbols/manifest';
   import {
-    GLYPHS,
-    PREVIEW_CHARACTERS,
-    glyphSequence,
-  } from '../../lib/symbols/manifest';
+    MIXED_VIEW_PROFILE,
+    MIXED_VIEW_GLYPHS,
+    NULL_GLYPHS,
+    mixedViewTokens,
+  } from '../../lib/symbols/mixed-view';
   import GlyphIcon from './GlyphIcon.svelte';
   import GlyphLicense from './GlyphLicense.svelte';
   let { raw }: { raw: string } = $props();
@@ -12,25 +14,41 @@
   const pageCount = $derived(Math.ceil(raw.length / PREVIEW_CHARACTERS));
   const selected = $derived(Math.min(page, Math.max(0, pageCount - 1)));
   const offset = $derived(selected * PREVIEW_CHARACTERS);
-  const glyphs = $derived(
-    glyphSequence(raw.slice(offset, offset + PREVIEW_CHARACTERS)),
+  const payloadLength = $derived(
+    Math.min(PREVIEW_CHARACTERS, raw.length - offset),
+  );
+  const tokens = $derived(
+    mixedViewTokens(raw.slice(offset, offset + PREVIEW_CHARACTERS), offset),
   );
 </script>
 
 <section aria-label="Celestial glyph plate">
   <p>
-    Celestial map S64L1 · Characters {offset + 1}–{offset + glyphs.length} of {raw.length}
+    Celestial mixed view {MIXED_VIEW_PROFILE} · Characters {offset +
+      1}–{offset + payloadLength} of {raw.length}
     · Preview {selected + 1} of {pageCount}
   </p>
   <p>
-    Glyphs are reversible presentation, not extra security. Send the raw
-    ciphertext or .txt file too. The receiver cannot decrypt an image or SVG.
+    Symbols, letters and nulls are visual presentation, not extra security. Send
+    the raw ciphertext or .txt file too. The receiver cannot decrypt an image or
+    SVG.
   </p>
   <div class="glyph-plate" dir="ltr" aria-hidden="true">
-    {#each glyphs as glyph, index}<span
+    {#each tokens as token}<span
         class="glyph-cell"
-        data-character={glyph.character}
-        data-offset={offset + index}><GlyphIcon {glyph} /></span
+        data-kind={token.kind}
+        data-glyph={token.kind === 'literal' ? undefined : token.glyph.name}
+        data-character={token.kind === 'null' ? undefined : token.character}
+        data-offset={token.kind === 'null' ? undefined : token.offset}
+        data-after-offset={token.kind === 'null'
+          ? token.afterOffset
+          : undefined}
+        >{#if token.kind === 'literal'}<span
+            class="payload-character"
+            class:mirrored={token.orientation === 'mirrored'}
+            class:rotated={token.orientation === 'rotated'}
+            >{token.character}</span
+          >{:else}<GlyphIcon glyph={token.glyph} />{/if}</span
       >{/each}
   </div>
   <div class="plate-controls">
@@ -55,8 +73,9 @@
   </div>
   <p class="muted">
     Preview rows use 16 columns, or 8 on small screens. Global character offsets
-    stay fixed; archival recovery uses 512-character pages and 16-character
-    rows. Raw copy/download always includes the entire result.
+    stay fixed. Null cells do not count as payload; archival recovery uses
+    512-character pages and 16-character rows. Raw copy/download always includes
+    the entire result.
   </p>
   <details>
     <summary>Glyph legend: all 64 characters</summary>
@@ -67,12 +86,33 @@
       >Small legend glyphs (16 px)</button
     >
     <ul class="glyph-legend" dir="ltr">
-      {#each GLYPHS as glyph}<li>
+      {#each MIXED_VIEW_GLYPHS as glyph}<li>
           <GlyphIcon {glyph} size={compactLegend ? 16 : 24} /><code
             >{glyph.character}</code
           ><span>{glyph.name}</span>
         </li>{/each}
     </ul>
+    <p>
+      Raw characters appear at payload positions 1, 5, 9…; one in seven of those
+      literal slots is transformed, alternating mirrored and rotated 180°. Read
+      these characters normally; they carry payload and are not decoys. After
+      every eight payload characters, skip one null, rotating through the three
+      shapes below. Nulls encode nothing and are never copied into raw
+      ciphertext.
+    </p>
+    <ul
+      class="null-legend"
+      aria-label="Null symbols: skip these cells"
+      dir="ltr"
+    >
+      {#each NULL_GLYPHS as glyph}<li>
+          <GlyphIcon {glyph} /><span>{glyph.name} · null</span>
+        </li>{/each}
+    </ul>
+    <p>
+      Crosshair is reserved for nulls in S64M1; j uses CircleDashed here. The
+      original frozen S64L1 alphabet and raw recovery checks stay unchanged.
+    </p>
     <p>
       Similar outlines are intentional: Star/Sparkle, CircleDot/Target/Disc,
       Scan/Focus and Sparkles/MoonStar need care when transcribing. Use printed
@@ -95,6 +135,19 @@
     align-items: center;
     justify-content: center;
     min-height: 2.25rem;
+  }
+  .payload-character {
+    display: inline-block;
+    font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    font-size: 1.5rem;
+    line-height: 1;
+    font-weight: 500;
+  }
+  .payload-character.mirrored {
+    transform: scaleX(-1);
+  }
+  .payload-character.rotated {
+    transform: rotate(180deg);
   }
   .glyph-cell:nth-child(32n + 1),
   .glyph-cell:nth-child(32n + 2),
@@ -119,14 +172,16 @@
     flex-wrap: wrap;
     gap: 0.75rem;
   }
-  .glyph-legend {
+  .glyph-legend,
+  .null-legend {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
     list-style: none;
     padding: 0;
     gap: 0.75rem;
   }
-  .glyph-legend li {
+  .glyph-legend li,
+  .null-legend li {
     display: flex;
     align-items: center;
     gap: 0.6rem;

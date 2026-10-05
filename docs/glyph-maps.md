@@ -13,10 +13,11 @@ Fingerprint to FingerprintPattern. All other names retain the plan's taxonomy.
 geometry and delivered notices. A new package or geometry requires a deliberate
 map/version review; the script refuses overwriting an existing frozen map.
 
-Screen preview mounts one 512-character slice with 8/16 responsive columns,
-global offsets, first/previous/next/last controls and a complete accessible legend.
+Screen preview now uses the separate S64M1 mixed presentation profile. It mounts
+one 512-character payload slice with 8/16 responsive columns, global offsets,
+first/previous/next/last controls and a complete accessible legend.
 All glyph cells are decorative; canonical raw text remains accessible separately.
-The 64-entry legend keeps total mounted glyphs below 1,024 even for the maximum
+The 64-entry legend and three null shapes keep total mounted glyphs below 1,024 even for the maximum
 message. Preview rows never redefine the fixed archival 16-character rows.
 
 Author visual review checks the actual production-CSP legend at native 24 px,
@@ -34,6 +35,42 @@ page and row checks. It never parses or renders imported SVG/XML/HTML/images.
 Complete canonical assembly must match the full envelope SHA-256 after all
 contiguous page/row checks pass. Public checks detect accidental errors, not
 authenticity; the receiver's GCM authentication remains required.
+
+Comparison with [Lucide's icon gallery](https://lucide.dev/icons/): our grid
+already shares the 24 by 24 geometry, rounded strokes and centered cells. The
+user declined a larger reading view. Optional inspection with character/name/
+global position and legend search remain design follow-ups, not implemented controls.
+Legend search can help lookup
+without changing ciphertext order. Keep fixed preview pagination and immutable
+mapping; avoid popularity sorting, per-token keyboard stops, confetti and the
+inline positioning styles in the supplied gallery markup. Any density controls
+must use classes/SVG geometry attributes under the enforced CSP. Prioritize
+human recognition trials for CircleDot/Disc and other similar pairs before any
+future versioned alphabet change. [E05 evidence](reviews/e05-evidence.json)
+records current implementation and author-run checks; there is no human
+transcription error-rate measurement yet.
+
+S64M1 mixes actual payload characters with payload glyphs: positions 1, 5, 9…
+show literal Base64URL characters. Of those literal slots, one in seven is
+transformed, alternating horizontal mirroring and 180-degree rotation; six stay
+normal. These characters are payload, never decoys. Only the inserted CircleOff,
+Crosshair and Skull are nulls. After each complete eight payload characters,
+append one null in that repeating order. Positions and rotation remain global
+across previews; a short final group has no trailing null. A full preview has
+512 payload cells plus 64 nulls. Read transformed characters in their normal
+orientation and skip nulls. Exact raw copy/download and all recovery checks use
+only the original ciphertext.
+
+Crosshair remains `j` in the existing frozen S64L1 alphabet. It is exclusively a
+null in S64M1, whose explicit view-only `j` override is CircleDashed. The separate
+[mixed-view manifest](mixed-view-manifest.json) captures four additional vectors,
+source hashes, provenance and exact placement/orientation rules. Verify with
+`node scripts/freeze-mixed-view.mjs --check`. No original vector changed; nulls
+are visual misdirection, not additional encryption or interception protection.
+This implementation applies to the screen and shared bundled sender; E06 artwork
+must explicitly version any chosen mixed layout and preserve archival raw/check
+positions. [Mixed-view evidence](reviews/mixed-view-evidence.json) records the
+expanded checks and visual review.
 
 License notices are delivered in the hosted public license file and inline
 with the bundled sender's legend. The source notice includes ISC and the

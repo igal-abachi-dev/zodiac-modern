@@ -81,6 +81,8 @@ try {
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();
+  await expect(page.locator('#result-display')).toBeVisible();
+  await page.getByRole('button', { name: 'Raw view', exact: true }).click();
   await expect(page.getByLabel('Raw ciphertext')).toBeVisible();
   const raw = await page.getByLabel('Raw ciphertext').inputValue();
   if (raw.length !== (recipient.bits === 4096 ? 755 : 584))

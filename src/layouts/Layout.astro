@@ -5,8 +5,9 @@ import '../styles/global.css';
 import '../styles/print.css';
 interface Props {
   title: string;
+  compact?: boolean;
 }
-const { title } = Astro.props;
+const { title, compact = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,9 +27,15 @@ const { title } = Astro.props;
       Skip to content
     </a>
     <Header />
-    <main id="main">
+    <main id="main" class:list={{ 'sender-main': compact }}>
       <slot />
     </main>
     <Footer />
   </body>
 </html>
+
+<style>
+  .sender-main {
+    padding-block-start: 0.5rem;
+  }
+</style>

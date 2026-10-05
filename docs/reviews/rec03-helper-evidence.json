@@ -22,5 +22,12 @@
     }
   ],
   "operatorBackupTrial": "awaiting observed result",
-  "firstTimeUserTrial": "awaiting observed result"
+  "firstTimeUserTrial": "awaiting observed result",
+  "existingDestinationTrial": {
+    "exitCode": 1,
+    "beforePassphrasePrompt": true,
+    "noOverwrite": true,
+    "message": "Choose a new drill folder. Nothing is overwritten.",
+    "scope": "Author observed actual native controlling-console invocation against prior synthetic 3072 trial destination."
+  }
 }

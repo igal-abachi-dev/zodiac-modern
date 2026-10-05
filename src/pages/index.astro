@@ -4,17 +4,11 @@ import EncryptWorkbench from '../components/islands/EncryptWorkbench.svelte';
 import { defaultRecipient } from '../generated/default-recipient';
 ---
 
-<Layout title="Sender">
-  <p class="eyebrow">A message under your chosen stars</p>
-  <h1>
-    Private words.
-    <br />
-    Celestial form.
-  </h1>
-  <p>
-    Encrypt exact message bytes locally in your browser and download raw
-    ciphertext. The recipient decrypts with a separate offline tool. Optional
-    artwork is in development.
+<Layout title="Sender" compact>
+  <h1>Private words. Celestial form.</h1>
+  <p class="sender-intro">
+    Encrypt locally, view the glyphs, and send raw ciphertext to the recipient's
+    offline tool.
   </p>
   <EncryptWorkbench client:only="svelte" recipient={defaultRecipient}>
     <div slot="fallback" class="panel">
@@ -23,3 +17,13 @@ import { defaultRecipient } from '../generated/default-recipient';
     </div>
   </EncryptWorkbench>
 </Layout>
+
+<style>
+  h1 {
+    font-size: clamp(1.5rem, 4vw, 2.25rem);
+    margin-block: 0 0.5rem;
+  }
+  .sender-intro {
+    margin-block: 0;
+  }
+</style>

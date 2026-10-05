@@ -1,0 +1,235 @@
+{
+  "recorded": "2026-10-05T05:40:00.121Z",
+  "status": "S64M1 development acceptance passed",
+  "scope": "Author-run synthetic mixed-screen and shared bundled-sender validation. No fills, larger reading view, new crypto/wire/check grammar, imported SVG parser or E06 exports. Not human transcription error-rate measurement, independent audit or release.",
+  "rules": {
+    "profile": "S64M1",
+    "baseMap": "S64L1",
+    "literal": {
+      "zeroBasedOffsetModulo": 4,
+      "equals": 0
+    },
+    "mirror": {
+      "zeroBasedOffsetModulo": 56,
+      "equals": 24
+    },
+    "rotate": {
+      "zeroBasedOffsetModulo": 56,
+      "equals": 52,
+      "degrees": 180
+    },
+    "nulls": {
+      "afterPayloadCharacters": 8,
+      "rotation": ["CircleOff", "Crosshair", "Skull"],
+      "incompleteGroup": "no null"
+    },
+    "viewOverrides": {
+      "j": "CircleDashed"
+    },
+    "payloadMeaning": "Literal characters and glyphs both carry the exact original Base64URL character. Only inserted CircleOff/Crosshair/Skull encode nothing.",
+    "positionMeaning": "All rules use global payload offset; skip nulls when counting payload. Partial final groups have no added null."
+  },
+  "immutableGeometry": {
+    "baseManifestSHA256": "f325830389bf529355763034969aed3528db93fe7f98b4737938ba4fdf332e3a",
+    "baseVectorsSHA256": "4e1fe821f422f8bda07e40fe664294c9d1fa4f803482c5ec4d780cadcc0d19ab",
+    "mixedManifestSHA256": "c1e2c20c22e198138d1dd48356b4c25e04127a1e119d32e7ac7160572fb3f63b",
+    "mixedVectorsSHA256": "5205ee0c4c7c7b846f8f4f991ac66ff87ec4a92963de70c96fad6407ddfff364",
+    "package": "@lucide/svelte",
+    "version": "1.51.0",
+    "integrity": "sha512-FNoBtfrnQS1LV7yRm8T8pF6OH72BzCyPOWrOmVcpqGGLFmQZndRB4h0qhzUKqPq2JNkSfF7f4tUaiCwdY4WFfg==",
+    "source": "https://github.com/lucide-icons/lucide/tree/1.51.0/packages/svelte",
+    "canonicalAdditionalVectorsSHA256": "c64d466689bb5658689f451256f845a32d2c262eb751b59c50633ffd84c0130d",
+    "licenseSHA256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+    "originalS64L1Unchanged": true
+  },
+  "developmentGate": {
+    "path": "docs/reviews/m1-evidence.json",
+    "sha256": "a493d017b4189c7d2e83428b881172010bcdd0a05f89d772808cd77b5b749e6c",
+    "started": "2026-10-05T05:32:22.427Z",
+    "finished": "2026-10-05T05:33:56.228Z",
+    "node": "v24.21.0",
+    "go": "go version go1.27.1 windows/amd64",
+    "unitPassed": 29,
+    "unitFiles": 11,
+    "types": "81 files; zero errors, warnings and hints",
+    "browser": {
+      "startTime": "2026-10-05T05:32:59.226Z",
+      "duration": 50881.179,
+      "expected": 42,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": ["chromium", "firefox"],
+      "versions": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0"
+      }
+    },
+    "checks": [
+      {
+        "name": "type-format",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 21026,
+        "logSHA256": "ef5c5085affe3a2255093d8c826cc26c3bab4dcd5983259573dab55f5bdd1b22"
+      },
+      {
+        "name": "unit",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 3215,
+        "logSHA256": "2d670f9658f8f86e6742f763711abb503c46f60b9ba2838650ed4a9d8014c951"
+      },
+      {
+        "name": "fixture-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 4521,
+        "logSHA256": "c6da62d82d45dae5c7f3b3604f096d2f703ca88656c495938ba0f765c19e0b2d"
+      },
+      {
+        "name": "custom-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 4547,
+        "logSHA256": "68ec86f285ffe6f66883390a02debe2ec7f2bbc795d13cdb45d8772bf6c6e9d0"
+      },
+      {
+        "name": "offline-feasibility-probe",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 1800,
+        "logSHA256": "24485cc1b7fef9e6220c6afe951bc0c7a24cf5d41d5eeeb5019dfe3eccc88d6b"
+      },
+      {
+        "name": "browser",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 52541,
+        "logSHA256": "147fef77bab4ec166870c80ffec44e24eb39b763b0c8b352b17c2a74f8722b6a"
+      },
+      {
+        "name": "configured-production-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 5039,
+        "logSHA256": "42717f00da336ab7514368bb0a9ae9a8581ff8990cf943728feafdbc9481105a"
+      },
+      {
+        "name": "production-recipient-browser",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 1006,
+        "logSHA256": "2993d832c20105c3defb955a70d58d896130ead7a578ec6b9a9cb04d455ff82b"
+      }
+    ]
+  },
+  "stableEdge": {
+    "path": "artifacts/mixed-view-edge.json",
+    "sha256": "ebe85157c705fde6601c0885b5b73bfa0e8e76ae03ce38f73487ef1570cd2912",
+    "versions": ["154.0.4258.53"],
+    "stats": {
+      "startTime": "2026-10-05T05:35:40.196Z",
+      "duration": 9156.676000000001,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "Expanded file:// case checks literal/null counts and transforms, exact raw export/Go decryption, recovery, privacy and final CSP. Browser sandbox/default security enabled."
+  },
+  "checks": [
+    "All 64 payload meanings retained; Crosshair excluded from mixed payload glyphs and reserved solely for nulls.",
+    "Independent tests reconstruct the maximum 88102 raw characters across 173 previews; exactly floor(raw.length/8) nulls, global rotation and sparse orientations; no partial-group null.",
+    "Real DOM: 512 payload and 64 null cells; literal positions 1/5/9; exact CSS transform matrices; no decorative tab stops/style attributes; second preview starts with the continued Crosshair null.",
+    "Maximum final preview: 38 payload cells plus 4 nulls; raw download remains complete and byte exact.",
+    "Production fixture/custom/public builds pass static artifact/CSP checks; existing recovery and independent browser/Go envelope tests pass; receiver evidence inputs unchanged."
+  ],
+  "visual": {
+    "artifacts": [
+      {
+        "path": "artifacts/mixed-grid-chromium.png",
+        "sha256": "55d673181e48a4129968a9213a9b7c4a9fdebcc3736a96e9db379b728e08b607"
+      },
+      {
+        "path": "artifacts/mixed-grid-firefox.png",
+        "sha256": "58eac1251977a344c68c6ad0524e37ae26afe050d4dc82c91478dd7c9aac85f4"
+      },
+      {
+        "path": "artifacts/mixed-grid-mobile-chromium.png",
+        "sha256": "4fe255f0588beeb48c42528ac2c751508be3aa840b43087992a9d22f2fe4fe93"
+      },
+      {
+        "path": "artifacts/mixed-grid-mobile-firefox.png",
+        "sha256": "3d1b4396936809b14c7ae7a9478eb5f3a27a35f66193fc881e685201a12f3630"
+      },
+      {
+        "path": "artifacts/mixed-grid-print-chromium.png",
+        "sha256": "dc5a3fb4a43f8f0981262b1bddf38c5934d3b37ee59412d2067200deaccb628e"
+      },
+      {
+        "path": "artifacts/mixed-grid-print-firefox.png",
+        "sha256": "90da2888626efcc332cf332e82b26c93567e9b48da9347c82c1399f11a479c71"
+      }
+    ],
+    "authorInspected": [
+      "Chromium desktop mixed grid",
+      "Chromium 375px responsive mixed grid",
+      "Chromium print monochrome mixed grid"
+    ],
+    "findings": "Outlined glyphs, mixed literal orientation and three rotating nulls render in fixed LTR order with consistent cells. Existing similar-glyph recognition limits still apply.",
+    "limits": "Screenshots contain synthetic ciphertext only. Product DOM style checks precede screenshot-tool intervention. Browser print media capture is not E06 generated print/PDF/page-fit QA."
+  },
+  "bundledSender": {
+    "path": "artifacts/offline probe שלום/zodiac-synthetic-probe.html",
+    "bytes": 144995,
+    "sha256": "f29841520f30edd87df1fa45922d8c8f82e548db6f6a4c332eec73a82475872a",
+    "finalHashesChecked": true,
+    "scope": "Synthetic prototype only; final delivery decision/platform/review and SVG/PNG/print exports remain open."
+  },
+  "preview": {
+    "url": "http://127.0.0.1:4324/",
+    "productionHtmlSHA256": "6e107c3823e6739b8ef5a95a2b62ce40e67348a29cf668270cf26973d8729713",
+    "productionHeadersSHA256": "cb3e97cb72b96c5db5766d728a1a9d3feab8ad5e83568abfc6a6d33a2f170fc7",
+    "refreshedAndRestarted": true,
+    "servedHtmlAndHeadersExact": true,
+    "mixedModuleAvailable": true,
+    "scope": "Task-owned loopback static preview left running; nonsecret trial data only."
+  },
+  "lucideSourceInspection": {
+    "package": "@lucide/svelte 1.51.0",
+    "files": [
+      {
+        "path": "node_modules/@lucide/svelte/dist/Icon.svelte",
+        "sha256": "66a6f45edc1dc607cb27f745edf35f3a310a4ee888479bcad031fbf9df26490b"
+      },
+      {
+        "path": "node_modules/@lucide/svelte/dist/types.d.ts",
+        "sha256": "93f6a868a4069dc1c27f44b4d938e4b9a6e273b7ffc2a85f370b930fb12ff275"
+      },
+      {
+        "path": "node_modules/@lucide/svelte/dist/utils/buildLucideIconNode.js",
+        "sha256": "504e9d5b4905897eac6cc71a96560a2c78a5286bc0011799d2534cb0767c1844"
+      },
+      {
+        "path": "node_modules/@lucide/svelte/dist/utils/defaultAttributes.js",
+        "sha256": "d4b900317860f3a68c6f41d3fa18e078f812b9ea71753cb1386b17150a321154"
+      },
+      {
+        "path": "node_modules/@lucide/svelte/dist/utils/hasA11yProp.js",
+        "sha256": "1bdd9f3eb91bf51b88bcbc2186093b7a1344425dca5143f84930fa7ce576f244"
+      }
+    ],
+    "findings": [
+      "Default 24x24/no fill/currentColor/2-unit round strokes agree with current renderer.",
+      "Svelte renderer uses reactive SVG attributes and vector node tuples; decorative icons hidden unless explicit accessibility props/children are supplied.",
+      "nonScalingStroke adds vector-effect per geometry primitive; absoluteStrokeWidth is deprecated in types.",
+      "Blind whole-icon fill can hide detail/merge Circle, Disc and CircleDot silhouettes; official Svelte guide does not promise a filled set."
+    ],
+    "decision": "User selected no fills. Stroke scaling remains unchanged.",
+    "officialDocs": [
+      "https://lucide.dev/guide/svelte/advanced/filled-icons",
+      "https://lucide.dev/guide/svelte/basics/stroke-width"
+    ]
+  }
+}

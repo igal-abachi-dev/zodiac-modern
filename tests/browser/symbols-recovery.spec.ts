@@ -5,6 +5,7 @@ import { resolve, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { createCheckPages } from '../../src/lib/codecs/recovery';
+import { openCustomKey } from './sender-controls';
 const fingerprint = 'ab'.repeat(32);
 async function bundle(raw: string) {
   return createCheckPages(raw, fingerprint);
@@ -25,9 +26,73 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();
   const raw = await page.getByLabel('Raw ciphertext').inputValue();
-  await page.getByRole('button', { name: 'Display view', exact: true }).click();
-  const cells = page.locator('.glyph-plate .glyph-cell');
+  await expect(page.locator('#result-display')).toBeVisible();
+  const cells = page.locator('.glyph-plate .glyph-cell[data-character]');
   await expect(cells).toHaveCount(512);
+  await expect(page.locator('.glyph-plate .glyph-cell')).toHaveCount(576);
+  const presentation = await page
+    .locator('.glyph-plate .glyph-cell')
+    .evaluateAll((items) =>
+      items.map((item) => ({
+        kind: item.getAttribute('data-kind'),
+        character: item.getAttribute('data-character'),
+        offset: item.getAttribute('data-offset'),
+        after: item.getAttribute('data-after-offset'),
+        glyph: item.getAttribute('data-glyph'),
+        text: item.textContent,
+      })),
+    );
+  let payloadOffset = 0,
+    nullIndex = 0;
+  for (const token of presentation) {
+    if (token.kind === 'null') {
+      expect(payloadOffset % 8).toBe(0);
+      expect(token.after).toBe(String(payloadOffset - 1));
+      expect(token.character).toBeNull();
+      expect(token.offset).toBeNull();
+      expect(token.glyph).toBe(
+        ['CircleOff', 'Crosshair', 'Skull'][nullIndex++ % 3],
+      );
+    } else {
+      expect(token.offset).toBe(String(payloadOffset));
+      expect(token.character).toBe(raw[payloadOffset]);
+      expect(token.kind).toBe(payloadOffset % 4 === 0 ? 'literal' : 'glyph');
+      if (token.kind === 'literal') expect(token.text).toBe(raw[payloadOffset]);
+      else
+        expect(['CircleOff', 'Crosshair', 'Skull']).not.toContain(token.glyph);
+      payloadOffset++;
+    }
+  }
+  expect(payloadOffset).toBe(512);
+  expect(nullIndex).toBe(64);
+  expect(
+    await page.locator('.glyph-plate .payload-character.mirrored').count(),
+  ).toBe(9);
+  expect(
+    await page.locator('.glyph-plate .payload-character.rotated').count(),
+  ).toBe(9);
+  for (const [className, d] of [
+    ['mirrored', 1],
+    ['rotated', -1],
+  ] as const) {
+    expect(
+      await page
+        .locator(`.glyph-plate .payload-character.${className}`)
+        .first()
+        .evaluate((node) => {
+          const matrix = new DOMMatrixReadOnly(
+            getComputedStyle(node).transform,
+          );
+          return [Math.round(matrix.a), Math.round(matrix.d)];
+        }),
+    ).toEqual([-1, d]);
+  }
+  expect(
+    await page
+      .locator('.glyph-plate [tabindex], .glyph-plate button, .glyph-plate a')
+      .count(),
+  ).toBe(0);
+  expect(await page.locator('[style]').count()).toBe(0);
   expect(
     await cells.evaluateAll((items) =>
       items.map((item) => item.getAttribute('data-character')).join(''),
@@ -39,6 +104,12 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     .focus();
   await page.keyboard.press('Enter');
   await expect(cells).toHaveCount(raw.length - 512);
+  expect(
+    await page
+      .locator('.glyph-plate [data-kind="null"]')
+      .first()
+      .getAttribute('data-glyph'),
+  ).toBe('Crosshair');
   expect(
     await cells.evaluateAll((items) =>
       items.map((item) => item.getAttribute('data-character')).join(''),
@@ -65,6 +136,11 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     .getByText('Glyph legend: all 64 characters', { exact: true })
     .click();
   await expect(page.locator('.glyph-legend li')).toHaveCount(64);
+  await expect(page.locator('.null-legend li')).toHaveCount(3);
+  await expect(page.locator('.glyph-legend')).toContainText('CircleDashed');
+  expect(await page.locator('.glyph-legend').textContent()).not.toContain(
+    'Crosshair',
+  );
   await page.setViewportSize({ width: 1100, height: 900 });
   await page.getByRole('button', { name: 'Raw view', exact: true }).click();
   await expect(page.getByLabel('Raw ciphertext')).toHaveValue(raw);
@@ -74,6 +150,17 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
   // Only synthetic ciphertext/artwork; no plaintext composer or private input.
   // Playwright screenshots temporarily alter DOM styles. Product DOM assertions
   // above precede that test-tool intervention; screenshots are visual evidence.
+  await page
+    .getByRole('button', { name: 'First glyph page', exact: true })
+    .click();
+  await page
+    .locator('.glyph-plate')
+    .screenshot({ path: `artifacts/mixed-grid-${info.project.name}.png` });
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.locator('.glyph-plate').screenshot({
+    path: `artifacts/mixed-grid-mobile-${info.project.name}.png`,
+  });
+  await page.setViewportSize({ width: 1100, height: 900 });
   await page
     .locator('.glyph-legend')
     .screenshot({ path: `artifacts/glyph-legend-${info.project.name}.png` });
@@ -87,6 +174,9 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     .getByRole('button', { name: 'Small legend glyphs (16 px)', exact: true })
     .click();
   await page.emulateMedia({ media: 'print', colorScheme: 'light' });
+  await page.locator('.glyph-plate').screenshot({
+    path: `artifacts/mixed-grid-print-${info.project.name}.png`,
+  });
   await page.locator('.glyph-legend').screenshot({
     path: `artifacts/glyph-legend-print-${info.project.name}.png`,
   });
@@ -96,6 +186,7 @@ test('maximum message preview reaches its last slice while exports retain the en
   page,
 }) => {
   await page.goto('/');
+  await openCustomKey(page);
   await page
     .getByLabel('Choose public PEM file')
     .setInputFiles('receiver/tests/fixtures/keys/openssl-3.5-4096-public.pem');
@@ -106,15 +197,21 @@ test('maximum message preview reaches its last slice while exports retain the en
     .click();
   const raw = await page.getByLabel('Raw ciphertext').inputValue();
   expect(raw).toHaveLength(88102);
-  await page.getByRole('button', { name: 'Display view', exact: true }).click();
-  await expect(page.locator('.glyph-plate .glyph-cell')).toHaveCount(512);
+  await expect(page.locator('#result-display')).toBeVisible();
+  await expect(
+    page.locator('.glyph-plate .glyph-cell[data-character]'),
+  ).toHaveCount(512);
+  await expect(page.locator('.glyph-plate .glyph-cell')).toHaveCount(576);
   await page
     .getByRole('button', { name: 'Last glyph page', exact: true })
     .click();
-  await expect(page.locator('.glyph-plate .glyph-cell')).toHaveCount(38);
+  await expect(
+    page.locator('.glyph-plate .glyph-cell[data-character]'),
+  ).toHaveCount(38);
+  await expect(page.locator('.glyph-plate .glyph-cell')).toHaveCount(42);
   expect(
     await page
-      .locator('.glyph-plate .glyph-cell')
+      .locator('.glyph-plate .glyph-cell[data-character]')
       .evaluateAll((items) =>
         items.map((item) => item.getAttribute('data-character')).join(''),
       ),

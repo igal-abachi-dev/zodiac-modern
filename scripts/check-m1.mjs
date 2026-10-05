@@ -150,6 +150,7 @@ try {
     ...(await filesAt(resolve('public/keys'))),
     ...(await filesAt(resolve('public/licenses'))),
     'docs/glyph-map-manifest.json',
+    'docs/mixed-view-manifest.json',
     'docs/licenses/lucide-1.51.0.txt',
   ];
   for (const file of sources)

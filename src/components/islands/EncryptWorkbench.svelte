@@ -27,7 +27,7 @@
   let messageInput = $state<HTMLTextAreaElement>();
   let resultHeading = $state<HTMLHeadingElement>();
   let rawInput = $state<HTMLTextAreaElement>();
-  let resultView = $state<'display' | 'raw'>('raw');
+  let resultView = $state<'display' | 'raw'>('display');
   const busy = $derived(view.phase === 'encrypting');
   const byteCount = $derived.by(() => {
     try {
@@ -59,12 +59,15 @@
     if (!available || busy || view.result) return;
     notice = '';
     const success = await workspace.submit();
-    await tick();
     if (success && view.result) {
-      resultView = 'raw';
+      resultView = 'display';
       notice = 'Message encrypted locally. The draft has been cleared.';
+      await tick();
       resultHeading?.focus();
-    } else if (view.phase === 'error') messageInput?.focus();
+    } else if (view.phase === 'error') {
+      await tick();
+      messageInput?.focus();
+    }
   }
   function shortcut(event: KeyboardEvent) {
     if (
@@ -207,6 +210,9 @@
         <button type="button" onclick={anotherMessage}
           >Encrypt another message</button
         >
+        <button type="button" onclick={() => clearEverything()}
+          >Clear everything</button
+        >
       </div>
       <p>
         Clipboard and downloaded files persist outside this tab. Another message
@@ -250,33 +256,36 @@
       encrypts; Enter adds a newline. Confirm the recipient's full fingerprint
       through an independent trusted channel.
     </p>
-    <button
-      type="button"
-      disabled={!available || busy || view.draft.length !== 0}
-      onclick={prepareReadiness}>Prepare nonsecret readiness token</button
-    >
-    <p class="muted">
-      Start with an empty message. Compare this token after offline decryption
-      and encrypted-backup restoration; encryption alone does not prove
-      recipient readiness.
-    </p>
     {#if view.error}<p role="alert">{view.error}</p>{/if}
-    <button
-      type="button"
-      onclick={submit}
-      disabled={!initialized ||
-        !available ||
-        !view.recipient ||
-        busy ||
-        view.draft.length === 0}
-      >{busy ? 'Encrypting locally…' : 'Encrypt message'}</button
-    >
+    <div class="workspace-actions primary-actions">
+      <button
+        type="button"
+        onclick={submit}
+        disabled={!initialized ||
+          !available ||
+          !view.recipient ||
+          busy ||
+          view.draft.length === 0}
+        >{busy ? 'Encrypting locally…' : 'Encrypt message'}</button
+      >
+      <button class="secondary" type="button" onclick={() => clearEverything()}
+        >Clear everything</button
+      >
+    </div>
+    <section class="readiness" aria-label="Optional recipient readiness check">
+      <button
+        class="secondary"
+        type="button"
+        disabled={!available || busy || view.draft.length !== 0}
+        onclick={prepareReadiness}>Prepare nonsecret readiness token</button
+      >
+      <p class="muted">
+        Start with an empty message. Compare this token after offline decryption
+        and encrypted-backup restoration; encryption alone does not prove
+        recipient readiness.
+      </p>
+    </section>
   {/if}
-  <div class="workspace-actions">
-    <button type="button" onclick={() => clearEverything()}
-      >Clear everything</button
-    >
-  </div>
   <p role="status">{notice}</p>
   <p class="muted">
     Workspace state stays in memory and is cleared on navigation. This cannot
@@ -294,6 +303,19 @@
   .development-notice {
     border-inline-start: 3px solid var(--color-accent);
     padding-inline-start: 0.75rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  #workspace-title {
+    margin-block-start: 0;
+    margin-block-end: 0.75rem;
+  }
+  #message {
+    min-height: 240px;
+  }
+  .readiness {
+    border-block-start: 1px solid var(--color-border);
+    padding-block-start: 1rem;
   }
   #raw-ciphertext {
     font-family: ui-monospace, monospace;

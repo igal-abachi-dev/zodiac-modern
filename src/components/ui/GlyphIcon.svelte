@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Glyph } from '../../lib/symbols/manifest';
-  let { glyph, size = 24 }: { glyph: Glyph; size?: 16 | 24 } = $props();
+  let { glyph, size = 24 }: { glyph: Pick<Glyph, 'nodes'>; size?: 16 | 24 } =
+    $props();
 </script>
 
 <svg

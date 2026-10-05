@@ -29,7 +29,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E02 | Crypto | P0 | Done | M1 | Exact compatible browser encryption and strict codecs |
 | E03 | Key management | P0 | Done | M1 | Safe default/custom public recipients and tested offline key guide |
 | E04 | Workspace | P1 | In progress | M2 | Accessible edit/encrypt/result/reset flow |
-| E05 | Symbols/recovery | P1 | Backlog | M3 | Frozen glyph mapping, export-only SVG, raw/transcription recovery |
+| E05 | Symbols/recovery | P1 | Done | M3 | Mixed S64M1 view verified; frozen mapping/raw recovery complete; SVG exports remain E06 |
 | E06 | Exports/sharing | P1 | Backlog | M3 | Complete copy/download/image/print artifacts |
 | E07 | Hardening | P0 | Backlog | M4 | CSP, local-only privacy behavior, clean static artifact |
 | E08 | Verification/review | P0 | Backlog | M4 | Browser/Go, UX/export QA, independent security assessment |
@@ -122,8 +122,8 @@ Acceptance criteria:
 
 Subtasks:
 
-- [x] EN-04.1 — fully inline actual Svelte sender with shared workspace/crypto/codecs/raw exports and local help; file:// imports, exact text/reset/export/manual fallback pass Chromium/Firefox and installed stable Edge. Full artwork/recovery, remaining stable-browser matrix and independent delivery review stay in EN-04.2/.3.
-- [ ] EN-04.2 — in progress: shared sender packaging, meta-CSP, raw exports/privacy/manual-copy fallback and external hash-helper regression pass. Full glyph/SVG/PNG/print/recovery flows depend on E05/E06; remaining stable-browser, headed usability and independent boundary/hash-verification review are open.
+- [x] EN-04.1 — fully inline actual Svelte sender with shared workspace/crypto/codecs/raw exports and local help; file:// imports, exact text/reset/export/manual fallback pass Chromium/Firefox and installed stable Edge. Glyph display and raw recovery now pass too; remaining bundled recovery, artwork, stable-browser matrix and independent delivery review stay in EN-04.2/.3.
+- [ ] EN-04.2 — in progress: shared sender packaging, meta-CSP, glyph display, raw recovery/exports/privacy/manual-copy fallback and external hash-helper regression pass. SVG/PNG/print exports depend on E06; remaining bundled printed-row, stable-browser, headed usability and independent boundary/hash-verification review are open.
 - [ ] EN-04.3 — pending full-flow evidence: record measured selection/support matrix and revise conditional release implementation/review scope. The prototype does not select the release delivery method.
 
 ## 5. E02 — cryptography and canonical data
@@ -279,6 +279,7 @@ As a sender, I can type, explicitly encrypt, and understand success or correctab
 Acceptance criteria:
 
 - Exact message textarea, UTF-8 byte counter, recipient summary, input limits, and explicit encrypt action match the plan. Privacy-related input preferences and `dir="auto"` are set.
+- Initial message input is visible without scrolling at standard desktop/mobile sizes; custom public-key inputs start in a keyboard accessible accordion. Encrypt/Clear precede the optional readiness-token controls.
 - Ctrl/Cmd+Enter submits outside IME composition; Enter inserts a newline. Busy state prevents edits/key switches/duplicate submit without fake timings.
 - Initializing/missing key/unsupported HTTPS-WebCrypto states are actionable and do not offer alternate crypto or backend processing.
 - Success announces completion and focuses the result; crypto failure preserves the draft/key and exposes a retry path without secret logging.
@@ -298,6 +299,7 @@ As a sender, I can save the current ciphertext and then begin a clean new messag
 Acceptance criteria:
 
 - Result includes immutable recipient snapshot, profile, length/checksum, display/raw views, and clear sharing/export actions; the composer no longer displays the plaintext.
+- Successful encryption opens the glyph display automatically; switching to raw and clipboard denial still expose complete raw ciphertext.
 - Primary actions are Download ciphertext (.txt) and Copy raw; the Artwork (optional) group contains complete/page image, one-line SVG and print. Art-only files cannot be decrypted by the v1 CLI; explain accompanying raw delivery and the absence of an SVG importer.
 - “Encrypt another message” discards old result, retains current public recipient for this tab, focuses empty input, and explains result loss without repetitive modal prompts.
 - “Clear everything” discards sensitive workspace state and custom key, invalidates pending operations, clears inputs, and restores only a valid default.
@@ -313,7 +315,7 @@ Subtasks:
 
 ### SYM-01 — freeze and render the celestial glyph alphabet
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: CRY-02, UX-03.
+Type: story · Priority: P1 · Status: Done · Milestone: M3 · Dependencies: CRY-02, UX-03.
 
 As a sender, I see a celestial plate that deterministically represents every raw ciphertext character.
 
@@ -326,13 +328,14 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] SYM-01.1 — resolve the context icon list, freeze vectors/provenance, and add uniqueness/completeness checks.
-- [ ] SYM-01.2 — implement glyph plate, bounded preview pagination, row offsets, and legend.
-- [ ] SYM-01.3 — visually verify symbol distinctness, small-screen order, grayscale, print size, and maximum-result behavior.
+- [x] SYM-01.1 — all 64 pinned named exports/vectors/provenance/licenses checked; explicit pre-release WavesHorizontal/FingerprintPattern corrections recorded.
+- [x] SYM-01.2 — fixed-order 512-character preview, 8/16 columns, global offsets, complete pagination and accessible legend implemented.
+- [x] SYM-01.3 — actual 24/16 px and monochrome print legend reviewed, recognition limits documented; mobile order and maximum 88,102-character result pass. Print artifact/page-fit QA remains E06. Evidence: [E05 record](docs/reviews/e05-evidence.json).
+- [x] SYM-01.4 — user-requested S64M1 screen view: literals at positions 1/5/9…, sparse deterministic horizontal mirrors/180° rotations, CircleOff/Crosshair/Skull nulls after each eight payload characters; explicit pinned CircleDashed override for `j`. S64L1/raw/recovery unchanged. Cross-page ordering, null exclusion, responsive/CSP/offline/max-size checks pass; [refreshed evidence](docs/reviews/mixed-view-evidence.json). No larger reading view or fills.
 
 ### SYM-02 — implement raw and printed-row recovery
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: CRY-02, EXP-04.
+Type: story · Priority: P1 · Status: Done · Milestone: M3 · Dependencies: CRY-02, EXP-04 helpers/form (implemented; print integration remains E06).
 
 As a recipient, I can validate raw ciphertext or assemble printed raw chunks locally before decrypting.
 
@@ -345,9 +348,9 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] SYM-02.1 — implement bounded canonical raw and printed-chunk validation/reassembly.
-- [ ] SYM-02.2 — build the raw recovery island with explicit cleaning, row/page errors, copy/download, and unsupported-format guidance.
-- [ ] SYM-02.3 — test malformed raw, missing/duplicate/wrong rows/pages, checks, and maximum-size recovery without an SVG importer.
+- [x] SYM-02.1 — bounded canonical raw and exact ordered row/page reassembly with S64CHECK1 and final whole-envelope digest implemented.
+- [x] SYM-02.2 — /restore/ raw/transcription island with explicit ASCII cleaning, partial row/page feedback, raw copy/download and unsupported-format refusal implemented.
+- [x] SYM-02.3 — malformed/context/order/duplicate/missing/overlap/BOM/markup/max-size cases, actual browser/Go recovery and CSP/network/storage checks pass. Evidence: [E05 record](docs/reviews/e05-evidence.json). No SVG importer.
 
 ## 9. E06 — sharing, images, and print
 
@@ -413,7 +416,7 @@ Subtasks:
 
 ### EXP-04 — locate page and row transcription errors locally
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M3 · Dependencies: CRY-02.
+Type: story · Priority: P1 · Status: In progress · Milestone: M3 · Dependencies: CRY-02.
 
 As a recipient retyping a printed artifact, I can find an incorrect page or row before reassembling the whole envelope.
 
@@ -427,9 +430,9 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] EXP-04.1 — implement deterministic page/row digest helpers and nonsecret fixed encoding vectors.
-- [ ] EXP-04.2 — integrate metadata/print labels and local transcription-check form/feedback.
-- [ ] EXP-04.3 — test row/page error localization, final assembly digest, offsets, and exclusion of labels from ciphertext.
+- [x] EXP-04.1 — exact native SHA-256 helpers and independent compact JSON encoding vectors implemented and verified.
+- [ ] EXP-04.2 — external metadata helpers and local transcription form/feedback implemented; generated SVG/print metadata and labels await E06.
+- [x] EXP-04.3 — early row localization, wrong identity/page, partial final rows, offsets, complete ordered assembly and final digest pass. Labels stay outside raw. Evidence: [E05 record](docs/reviews/e05-evidence.json).
 
 ## 10. E07 — static security and privacy hardening
 
@@ -689,7 +692,7 @@ Subtasks:
 
 ### REC-03 — document and prove recipient readiness
 
-Type: story · Priority: P1 · Status: In progress · Milestone: M2/M4 · Dependencies: REC-02, KEY-03, UX-01.
+Type: story · Priority: P1 · Status: Review · Milestone: M2/M4 · Dependencies: REC-02, KEY-03, UX-01.
 
 As a nontechnical recipient, I know which verified executable/key/files to use and can recover a real test message.
 
@@ -704,7 +707,7 @@ Subtasks:
 
 - [x] REC-03.1 — verify-key pair/error/fingerprint tests and native restored-key verification pass for both supported sizes.
 - [x] REC-03.2 — static receive/setup/error/backup guide implemented; signed download/publisher links remain conditional release gates and are not fabricated.
-- [ ] REC-03.3 — perform synthetic readiness/restoration/usability trials and improve failed steps.
+- [ ] REC-03.3 — browser token/Go round trip and native original/restored encrypted-backup helper trials pass for both sizes. Operator's own backup drill and observed first-time user trial remain pending; [trial record](docs/reviews/rec03-readiness-trial.md), [native evidence](docs/reviews/rec03-helper-evidence.json). No participant outcome inferred.
 
 ## 14. E10 — explicitly deferred decisions
 
@@ -744,7 +747,7 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | --- | --- |
 | Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
 | Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. At the original planning baseline application checks had not run; subsequent implementation evidence is recorded below and in docs/status.md |
-| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1 and REC-01/02 Done; EN-04.1 Done; EN-04/UX-03/REC-03 in progress. M0/M1 development gates complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
+| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1, REC-01/02 and SYM-01/02 Done; EN-04.1 Done; EN-04/UX-03/EXP-04 in progress; REC-03 Review pending operator/novice evidence. M0/M1 development gates complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; download every glyph in a reversible one-line SVG; Unicode symbol strings deferred |
 | Production recipient | Operator-confirmed RSA-4096 public PEM/name/full fingerprint configured; production build/browser checks pass. Operator backup/readiness, independent integrated review and signed release remain open. |
 | Host/domain | Vercel primary; Cloudflare Pages/Netlify alternatives, Surge conditional on verified header support; exact domain/account pending (REL-04/REL-02) |
@@ -753,7 +756,7 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | Offline artifact trust | Independent artifact hash/reviewer channel needed for REL-03; hashing and locality do not by themselves establish code trust |
 | Receiver decision | Confirmed: browser encryption plus downloadable offline Go decrypt CLI, encrypted OpenSSL keys and hidden prompt; supersedes the earlier offline-browser selection |
 | Receiver/signing gates | REC-01 focused conditional approval and verified fixes, exact LF fixture/oracle, native boundary/mutation/prompt, fuzz/resource/latency and complete vendor evidence pass. Workflow remains a template. REC-02 Windows output is implemented/tested; QA-03, signing and independent release channel remain pending |
-| Offline sender decision | EN-04 has a fully bundled synthetic crypto feasibility probe; full export/recovery/stable-browser/verification/review gates remain open. Native sender launcher/signing remains conditional |
+| Offline sender decision | EN-04 has a fully bundled actual Svelte sender with shared glyph/raw recovery and synthetic file:// evidence; full SVG/PNG/print, remaining bundled recovery/stable-browser/verification/review gates remain open. Native sender launcher/signing remains conditional |
 | Local repo use | pnpm dev/build/start:local/local and custom-only scripts implemented. Production builds require real public configuration; REL-04 final installation/hosting documentation gates remain open |
 | Security claim | Passing synthetic implementation tests and provisional external feedback; no proof/certification/completed audit/production validation claimed |
 
@@ -770,3 +773,7 @@ Status evidence:
 - KEY-02/UX-01/UX-02 | 2026-10-04 | Done | RecipientSelector/EncryptWorkbench, local CSS | default/custom/busy/result snapshots, exact composer, IME/keyboard/retry/reset, capability refusal, measured light/dark contrast, 320px/200% text zoom/print/CSP/privacy | author-run | independent AT/system review remains QA-03; production recipient remains a launch configuration gate.
 - UX-03 | 2026-10-04 | In progress | EncryptWorkbench, exports/ciphertext.ts | raw result/profile/checksum, exact copy/download/manual fallback, another-message/clear/navigation lifecycle pass | author-run | full display and SVG/PNG/print artwork actions depend on M3; do not mark entire story Done.
 - REC-02 | 2026-10-04 | Done (Windows scope) | receiver/internal/envelope, localfile, cmd/zodiac-decrypt | native RSA/GCM/UTF-8/tamper/unwrap tests; protected ACL/private exclusive output, actual parent mutation/swap/alias/link/cancel/failure tests; both actual browser/hidden-console command runs | author-run | unsigned; other OS filesystem operations fail closed; new integration awaits QA-03, not covered by prior REC-01 focused verdict.
+- E05/SYM-01/SYM-02 | 2026-10-05 | Done (development) | src/lib/symbols, codecs/recovery.ts, SymbolPlate/RawRecovery and docs/glyph-map-manifest.json | 26 unit and 42 Chromium/Firefox cases; 64 pinned vectors/licenses, 512 preview/maximum result, native 24/16 px and print legend review, exact raw/transcribed rows/Go/CSP/privacy; stable Edge file:// case passes | author-run; docs/reviews/e05-evidence.json | no human transcription error-rate measurement, completed export/print artifact QA or integrated audit.
+- EXP-04 | 2026-10-05 | In progress | src/lib/export/checks.ts, codecs/recovery.ts and RawRecovery | independent S64CHECK1 vectors, external metadata helpers, early row localization/context/ordered assembly/final digest pass | author-run; E05 record | generated artwork/print labels and metadata integration remain E06.
+- REC-03 | 2026-10-05 | Review | receive guide, crypto/readiness.ts, scripts/test-recipient-readiness.ps1 | fresh browser token/native Go round trip plus both real hidden-console original/restored helper trials and existing-folder refusal pass | author-run; docs/reviews/rec03-helper-evidence.json | operator's real backup/readiness and observed first-time user outcomes pending; release signing/publisher/QA-03 remain separate.
+- SYM-01.4 | 2026-10-05 | Done | symbols/mixed-view.ts, s64m1-paths.ts, SymbolPlate and mixed-view-manifest.json | 29 unit/42 Chromium/Firefox cases, stable Edge file://, exact raw/null exclusion/global rotation/maximum preview and production artifact/CSP checks pass | author-run; docs/reviews/mixed-view-evidence.json | outline only by user choice; original S64L1/check/receiver contracts unchanged; SVG/PNG/print remain E06.

@@ -345,6 +345,12 @@ Check all 64 at normal size, grayscale, low resolution, and print size. Similar 
 
 Implementation record (2026-10-05): the pinned @lucide/svelte 1.51.0 named exports require two explicit pre-release corrections: Waves → WavesHorizontal and Fingerprint → FingerprintPattern. `docs/glyph-map-manifest.json` records every resolved name, source/vector hash, package integrity and license. Local immutable vector data powers the screen legend/plate; `scripts/freeze-glyphs.mjs --check` refuses drift rather than substituting icons. Live preview uses 512-character slices (below the 1,024-glyph bound), with 8/16 responsive columns independent of archival row positions. Delivered notices accompany the hosted and bundled sender vectors.
 
+User-directed mixed screen view (2026-10-05), presentation profile **S64M1**: keep native 24 px glyphs. With zero-based global payload offset `i`, positions `i % 4 === 0` show the exact raw Base64URL character; the other positions show its frozen vector. One of every seven literal slots is transformed, alternating horizontal mirror (`i % 56 === 24`) and 180-degree rotation (`i % 56 === 52`) using CSS classes; the other six literal slots stay normal. No content-dependent randomization. After every complete eight payload characters, append one non-payload null token, cycling CircleOff → Crosshair → Skull by `(floor((i + 1) / 8) - 1) % 3`. Rotation and mirroring continue across 512-character preview boundaries; incomplete final groups receive no decoy. A full preview contains 512 payload cells and 64 decoys, bounded below 1,024 even with the legend. Range/offset/page labels count payload characters only. Literal letters/digits/minus/underscore always carry their exact raw payload, including when transformed; only the three null shapes are decoys. Decoration never enters raw copy/download, envelope/AAD, S64CHECK1 identity/chunks/digests, storage or network state.
+
+S64L1 remains frozen, including its existing Crosshair mapping for `j`. In S64M1 only, reserve all three null shapes exclusively for decoys and show `j` using separately pinned CircleDashed geometry. This explicit versioned view override does not reinterpret existing S64L1 artwork or change its recovery grammar. Capture the four additional vectors with source/license hashes in `docs/mixed-view-manifest.json`; do not load a runtime icon catalog. Show a legend explaining literal/mirror/null positions and the view-only override. Nulls are visual misdirection, not encryption, extra entropy or a claimed defense against interception. Raw remains the v1 receiver input. The current request changes the screen view only; E06 generated artifact layout must explicitly carry any selected mixed presentation version without silently changing S64SVG1 or archival raw/check positions.
+
+The user reviewed the filled/half-filled possibility and selected **outline only** on 2026-10-05. Do not add fills or change stroke scaling as part of S64M1. Inspected Lucide Svelte 1.51.0 defaults/renderer agree with the existing 24×24 viewBox, currentColor, width-2 rounded strokes and decorative accessibility policy. Selective fills and non-scaling strokes require a future explicit visual-profile decision; neither is enabled here.
+
 ### Reversible one-line SVG specification
 
 Generate one complete SVG with fixed `S64SVG1` metadata, SVG namespace, `viewBox`, trusted vector `<defs>`, and one `<use>` instance per raw character. Definitions have IDs `s64l1-00` through `s64l1-63` in exact Base64URL order. Every glyph instance references one of those local IDs and has a deterministic x position `index * cellWidth`, y = 0. The cipher artwork is **one line, no grid or inserted data glyphs**, in left-to-right document order. The complete SVG is available even when the screen previews only a slice.
@@ -435,6 +441,15 @@ These are starting tokens, not measured contrast approval. Check actual color co
 Light-first appearance creates a readable document/secure-workbench feel. Use OS color preference for a restrained optional dark palette; no localStorage preference is needed. Print always uses white paper and dark strokes. Icons support labels and never replace important text. A short opacity transition may acknowledge completion; respect reduced motion and avoid fake progress percentages or forced waits.
 
 ### Page composition
+
+The initial sender uses a short intro and compact recipient summary so the
+message textarea is available without scrolling at standard desktop/mobile
+viewports. The "Use a custom public key" button opens a collapsed, keyboard
+accessible accordion containing file/paste controls; clear-all closes it.
+Encrypt and Clear are grouped before the optional nonsecret readiness token.
+Each successful encryption selects the glyph display automatically, including
+after a previous raw view. Raw view, raw copy/download and the manual clipboard
+fallback remain accessible.
 
 ```text
 Header: Zodiac Modern                         How it works · Keys · Privacy
@@ -730,6 +745,8 @@ pnpm dev               # loopback development/HMR only
 pnpm start:local       # serve existing built site with production headers
 pnpm local             # build + start:local
 pnpm local:custom      # explicit custom-recipient-only local build/serve
+pnpm preview:local     # build configured sender + loopback preview at 4324
+pnpm preview:refresh   # rebuild/publish snapshot while that preview runs
 pnpm test:e2e           # production preview with enforced headers; browser matrix
 pnpm check:artifact     # hosted dist has no backend, private/test keys, remote runtime URLs
 pnpm test:receiver      # Go CLI/parser/output/terminal integration and OpenSSL fixture tests

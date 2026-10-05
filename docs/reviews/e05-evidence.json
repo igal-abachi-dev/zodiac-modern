@@ -1,0 +1,165 @@
+{
+  "recorded": "2026-10-05T05:22:26.190Z",
+  "status": "E05 development acceptance passed",
+  "scope": "Author-run synthetic glyph/raw recovery evidence. Not human transcription/usability measurement, E06 artwork/print export completion, independent system review or release.",
+  "baseline": {
+    "path": "docs/reviews/m1-evidence.json",
+    "sha256": "7413098e7caa8280e992e291cc08d55760987dc0522c497dda2956fece521f2a",
+    "started": "2026-10-05T04:52:56.675Z",
+    "finished": "2026-10-05T04:56:38.211Z",
+    "node": "v24.21.0",
+    "go": "go version go1.27.1 windows/amd64",
+    "unitFiles": 10,
+    "unitPassed": 26,
+    "browser": {
+      "startTime": "2026-10-05T04:55:34.014Z",
+      "duration": 56573.21,
+      "expected": 42,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": ["chromium", "firefox"],
+      "versions": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0"
+      }
+    },
+    "checks": [
+      {
+        "name": "type-format",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 100291,
+        "logSHA256": "f0ff1204db4591f66166bfd3a1a6eef6e2f28a237b416573d4999f7ea008dff1"
+      },
+      {
+        "name": "unit",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 4980,
+        "logSHA256": "02a20024beebc15b26bd59976114c7818e27fce64ff7ea2d449db8181bbc4357"
+      },
+      {
+        "name": "fixture-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 9956,
+        "logSHA256": "81c6837682e07cd900176f8399c25a22643b7c8e62f05f41d3e13a343d7a9f00"
+      },
+      {
+        "name": "custom-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 6187,
+        "logSHA256": "c0cf9cc62df245243ef68e888d22337c5a6c22b272e8d4163169e5466a4b0383"
+      },
+      {
+        "name": "offline-feasibility-probe",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 2208,
+        "logSHA256": "15447d8d8644ed5b16c1f2cae62a00202989ea04b35f409110b7a52320014d79"
+      },
+      {
+        "name": "browser",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 90225,
+        "logSHA256": "75d0377cb8a5f8d4ac9476d6d1cc91443474b98bb4bf28dbf4a3b9e9e61087ac"
+      },
+      {
+        "name": "configured-production-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 5210,
+        "logSHA256": "30b7b3d3662407b90002d1601e04c1027ec7124d9c740e9044cf2c39f99922c9"
+      },
+      {
+        "name": "production-recipient-browser",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 1106,
+        "logSHA256": "2993d832c20105c3defb955a70d58d896130ead7a578ec6b9a9cb04d455ff82b"
+      }
+    ]
+  },
+  "stableEdge": {
+    "path": "artifacts/e05-edge.json",
+    "sha256": "fffb88ba497af09034fda4b61e94b6cd8719074583d1e916b1db8295a227f970",
+    "versions": ["154.0.4258.53"],
+    "stats": {
+      "startTime": "2026-10-05T05:13:04.025Z",
+      "duration": 10840.553,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "Expanded fully bundled file:// sender/raw recovery case with browser security and CSP enforced; stable Chrome/Firefox installations and headed human usability not measured."
+  },
+  "frozenMap": {
+    "map": "S64L1",
+    "package": "@lucide/svelte",
+    "version": "1.51.0",
+    "packageIntegrity": "sha512-FNoBtfrnQS1LV7yRm8T8pF6OH72BzCyPOWrOmVcpqGGLFmQZndRB4h0qhzUKqPq2JNkSfF7f4tUaiCwdY4WFfg==",
+    "source": "https://github.com/lucide-icons/lucide/tree/1.51.0/packages/svelte",
+    "entries": 64,
+    "manifestSHA256": "f325830389bf529355763034969aed3528db93fe7f98b4737938ba4fdf332e3a",
+    "canonicalVectorsSHA256": "d192f5f1904667e5550c4b6c789580d8cf86aca66074af685717f59e9854cd6d",
+    "sourceSHA256": "4e1fe821f422f8bda07e40fe664294c9d1fa4f803482c5ec4d780cadcc0d19ab",
+    "licenseSHA256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+    "publicLicenseSHA256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57",
+    "check": "64 complete distinct canonical vector hashes, pinned actual named exports and local immutable geometry; no fallback or package-update remapping."
+  },
+  "bundledSender": {
+    "path": "artifacts/offline probe שלום/zodiac-synthetic-probe.html",
+    "sha256": "63e6ac45b6cc564799ec1eb7a5a077924751c56a2409fd0a6f283ef037b828e9",
+    "bytes": 140888,
+    "scope": "Synthetic feasibility artifact only; shared glyph legend and raw recovery included. Final embedded script/style CSP hashes independently recomputed by browser tests. SVG/PNG/print, remaining platform/bundled printed-row trials and independent delivery choice remain open."
+  },
+  "visual": {
+    "artifacts": [
+      {
+        "path": "artifacts/glyph-legend-chromium.png",
+        "sha256": "6aa43389a0d6859130e3d3625d8075dc9723a1b920126af348a36662775332b1"
+      },
+      {
+        "path": "artifacts/glyph-legend-firefox.png",
+        "sha256": "ba15068a5d5ef220bc119f5a4839993c2093fecba87bff30a7c41c96609fb36e"
+      },
+      {
+        "path": "artifacts/glyph-legend-print-chromium.png",
+        "sha256": "6efc9c5c9138ecd6cdd60898813496784bb665da24756314087fffb6664a3109"
+      },
+      {
+        "path": "artifacts/glyph-legend-print-firefox.png",
+        "sha256": "8b76c8fc9f394460785071ce19d552fc83b1681ae142f895cde97645ca8dc7a1"
+      },
+      {
+        "path": "artifacts/glyph-legend-small-chromium.png",
+        "sha256": "bf77ee487cf801d148c3a74390ec7a8a93b11adbe87dd47493a6ea33964c4dca"
+      },
+      {
+        "path": "artifacts/glyph-legend-small-firefox.png",
+        "sha256": "8b365c7d0c216c5849e41abb0d188998834e25711de8c1ff932cf88175d3f4b5"
+      }
+    ],
+    "reviewed": "Author inspected Chromium native 24 px, compact 16 px and browser print monochrome legend images. Browser cases also verify mobile order/reflow and maximum-result pagination.",
+    "findings": [
+      "CircleDot and Disc are particularly similar at small sizes; center radii differ.",
+      "Star has five points and Sparkle four; companion marks distinguish Sparkles/MoonStar.",
+      "Scan/Focus central-circle and polygon-outline differences can be confused at low resolution."
+    ],
+    "limits": "No human recognition error-rate measurement. Print export artifact legibility/page fit is E06/QA scope. Product DOM style assertions precede Playwright screenshot intervention."
+  },
+  "recovery": {
+    "boundRawCharacters": 88102,
+    "previewCharacters": 512,
+    "maximumPages": 173,
+    "checks": "Independent Node SHA-256 oracle vectors for exact S64CHECK1 JSON-array context. Early row localization; missing/duplicate/reordered/overlapping rows/pages and wrong context/code rejection; partial final rows; mandatory canonical full-envelope digest after complete assembly. Native browser/independent Go decryption of recovered Unicode bytes.",
+    "privacy": "Explicit ASCII presentation-whitespace cleaning only; strict BOM/alias/padding/markup/size rejection. No XML/SVG/image importer, private key, browser decryption, runtime requests, storage or inline style attributes.",
+    "remaining": "EXP-04 generated artwork/print metadata and labels integration remains E06."
+  },
+  "supersededBy": "docs/reviews/mixed-view-evidence.json",
+  "historicalArtifactNotice": "Original E05 baseline receipt retained. M1 evidence and reusable screenshot/artifact paths have since been refreshed by the S64M1 follow-up; original hashes describe the historical run, not current files. Use mixed-view-evidence.json for current source and artifact checks."
+}

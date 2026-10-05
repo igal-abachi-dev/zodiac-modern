@@ -13,6 +13,8 @@
     "build:custom": "node scripts/build.mjs custom",
     "build:vercel": "node scripts/build.mjs production --vercel",
     "start:local": "node scripts/serve-local.mjs",
+    "preview:local": "node scripts/preview-local.mjs",
+    "preview:refresh": "node scripts/preview-local.mjs --refresh",
     "local": "pnpm build && pnpm start:local",
     "local:custom": "pnpm build:custom && pnpm start:local",
     "format": "prettier --write .",
