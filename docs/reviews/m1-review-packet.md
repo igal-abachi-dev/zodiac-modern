@@ -95,3 +95,10 @@ reserves CircleOff/Crosshair/Skull as nulls and uses a pinned view-only
 CircleDashed override for `j`. Global placement/orientation, raw exports,
 unchanged recovery, max-size pagination, CSP and mobile/print visual checks pass.
 All glyphs remain outlined by explicit user choice.
+
+The [sender layout/paging follow-up](sender-layout-evidence.json) records the
+current source/build validation: 29 unit tests, 44 Chromium/Firefox cases and
+the stable Edge file:// case. Encryption selects the glyph display, custom
+public-key controls start collapsed, Encrypt/Clear precede readiness, and
+paging scrolls to the first row. Initial desktop/mobile visibility, keyboard
+accordion, production CSP and pnpm 4324 start/refresh checks pass.

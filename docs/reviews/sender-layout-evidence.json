@@ -1,0 +1,192 @@
+{
+  "recorded": "2026-10-05T06:04:38.884Z",
+  "status": "sender layout and preview development acceptance passed",
+  "scope": "Author-run synthetic UI/loopback/file prototype checks. No crypto, wire, glyph-map, recovery or export grammar change. Not recipient readiness, independent review, signed delivery or E06 completion.",
+  "behavior": [
+    "Each successful encryption automatically opens the mixed glyph display, including after a previous Raw view/manual clipboard fallback.",
+    "Short sender intro and collapsed custom-public-key accordion keep initial message input visible at 1366x900 and 375x812 with no scrolling.",
+    "Custom import file/paste, rejection retention, default restoration, Enter/Space toggle, disabled/result states and clear-all focus remain covered.",
+    "Encrypt/Clear are grouped above the optional nonsecret readiness token.",
+    "Next/Previous/First/Last scroll to the first row after the updated grid is rendered; browser scroll limits are respected without animation.",
+    "pnpm preview:local builds the configured public recipient and serves immutable public snapshots at 4324; pnpm preview:refresh publishes a complete new snapshot plus matched CSP without restarting that server."
+  ],
+  "developmentGate": {
+    "path": "docs/reviews/m1-evidence.json",
+    "sha256": "9e12ca50110456e0a72e1dacf2305c0fc1f3cef9c57fb5c46aced69eb41932f5",
+    "started": "2026-10-05T06:00:36.368Z",
+    "finished": "2026-10-05T06:02:21.701Z",
+    "checks": [
+      {
+        "name": "type-format",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 22817,
+        "logSHA256": "2652cd727dd86c358f2d90a3c449457010aa5eab7bfcbaa01bab6daf7c06bae1"
+      },
+      {
+        "name": "unit",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 3303,
+        "logSHA256": "688752dc1847b99aa1735a462ec59c7b33e42965c274401f2f2501b40650654d"
+      },
+      {
+        "name": "fixture-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 5153,
+        "logSHA256": "6639083db827b56b8e00c48ec409803cd5c02f4388d7d2ef23a0da81ad57535e"
+      },
+      {
+        "name": "custom-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 5288,
+        "logSHA256": "439b7d0c3226ede2ff87e9c9834f5955e2c546ccf8e0442f116217da6eee0750"
+      },
+      {
+        "name": "offline-feasibility-probe",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 2450,
+        "logSHA256": "013010a2a75dc00c150b15ee71eb1e76774b4ce9ac7fc0b99bd612b3f34a2a93"
+      },
+      {
+        "name": "browser",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 59715,
+        "logSHA256": "457ffd899ee32089b0b51049185cc3311664c646fcc952ec6bde1e58b7c57c9f"
+      },
+      {
+        "name": "configured-production-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 5401,
+        "logSHA256": "8d4e80910e5bd15a6d4873e16409fe0afba0d17bff2736cd061567f349ce4f88"
+      },
+      {
+        "name": "production-recipient-browser",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 1106,
+        "logSHA256": "2993d832c20105c3defb955a70d58d896130ead7a578ec6b9a9cb04d455ff82b"
+      }
+    ],
+    "types": "83 files, no errors/warnings/hints",
+    "unitPassed": 29,
+    "unitFiles": 11,
+    "browser": {
+      "startTime": "2026-10-05T06:01:18.398Z",
+      "duration": 56719.989,
+      "expected": 44,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": ["chromium", "firefox"],
+      "versions": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0"
+      }
+    }
+  },
+  "stableEdge": {
+    "path": "artifacts/sender-layout-edge.json",
+    "sha256": "5bb4b718b67f1442f695ddd8212908d332d8043098c21b518c5bd8b2ab91681f",
+    "stats": {
+      "startTime": "2026-10-05T06:02:58.637Z",
+      "duration": 9524.899000000001,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "scope": "Actual fully bundled file:// sender with collapsed import controls, automatic glyph display, exact raw/Go recovery and production meta-CSP."
+  },
+  "preview": {
+    "path": "artifacts/sender-preview-check.json",
+    "sha256": "3aa92e840ca7a0bfe87a0e149ddd76e1a025005bdd7cb4fd5c4552c238bf7ec7",
+    "url": "http://127.0.0.1:4324/",
+    "recorded": "2026-10-05T06:04:23.048Z",
+    "snapshot": "1fa4c409-54a8-46d8-b09c-e085cb9367eb",
+    "browser": "153.0.8010.12",
+    "htmlSHA256": "9fe7c532595899c1ef42b8f240a39648243403cbc37741d877fe0690bdf43741",
+    "headersSHA256": "97d9386aef196c772aabe6fe5392dda34648b6c9021e8f1d945e81e374617fdd",
+    "headersExact": true,
+    "staticRefusals": true,
+    "metrics": [
+      {
+        "viewport": {
+          "width": 1366,
+          "height": 900
+        },
+        "messageBounds": {
+          "x": 196,
+          "y": 558.78125,
+          "width": 974,
+          "height": 240
+        }
+      },
+      {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "messageBounds": {
+          "x": 33,
+          "y": 618.765625,
+          "width": 309,
+          "height": 240
+        }
+      }
+    ],
+    "automaticDisplay": true,
+    "pagingScroll": true,
+    "errors": [],
+    "pnpmStartAndRefreshExecuted": true,
+    "serverRetainedAcrossRefresh": true,
+    "loopbackOnly": true
+  },
+  "visual": {
+    "artifacts": [
+      {
+        "path": "artifacts/sender-layout-chromium-1366.png",
+        "sha256": "5d0636051f7ae97f8495859f3b66a6bb22798547e3c79f4b0a15e06b39ce1de3"
+      },
+      {
+        "path": "artifacts/sender-layout-chromium-375.png",
+        "sha256": "5411ac6373ffdab95950e2d83245745ebdc8d092787a11fd37a5618f257c25c2"
+      },
+      {
+        "path": "artifacts/sender-layout-firefox-1366.png",
+        "sha256": "05fdd75f5554722aa09f59be95af6a4a5f7028615ec5d9e9eb883908404ed9cb"
+      },
+      {
+        "path": "artifacts/sender-layout-firefox-375.png",
+        "sha256": "efcf0658a5c0e314c92adf0f050d26c04e5fb9379585d3b7f37d0729ac003a10"
+      },
+      {
+        "path": "artifacts/sender-preview-1366.png",
+        "sha256": "8a7e2470662ee63f51189aa8542bef6d861b6fb06541018a6206bb30c2ba6e3d"
+      },
+      {
+        "path": "artifacts/sender-preview-375.png",
+        "sha256": "a5caf6c38399e2d86001edd439a1d281ca63b8e1b17a1d50cb48c9b0169efe34"
+      }
+    ],
+    "authorInspected": [
+      "Chromium fixture desktop/mobile initial composer",
+      "Chromium configured-public preview desktop/mobile"
+    ],
+    "limits": "Initial page contains public configuration only; screenshots/crypto checks use synthetic data. No independent assistive-technology or E06 print artifact review."
+  },
+  "bundledSender": {
+    "path": "artifacts/offline probe שלום/zodiac-synthetic-probe.html",
+    "bytes": 146693,
+    "sha256": "4cfbe1fa3a4f9faf955f8df88b794dac8b26f9b5e6020dd019325674d31ba24c"
+  },
+  "limits": [
+    "Preview snapshots are ignored local build files; refresh requires reloading the tab and reload clears workspace memory.",
+    "REC-03 operator backup and observed novice trial, E06 exports, QA-03 and signed release remain open."
+  ]
+}

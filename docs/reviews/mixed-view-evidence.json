@@ -231,5 +231,7 @@
       "https://lucide.dev/guide/svelte/advanced/filled-icons",
       "https://lucide.dev/guide/svelte/basics/stroke-width"
     ]
-  }
+  },
+  "supersededBy": "docs/reviews/sender-layout-evidence.json",
+  "historicalArtifactNotice": "This records the earlier S64M1 run. Shared M1 evidence, offline bundle and capture paths were refreshed for the sender layout/paging follow-up; original hashes remain historical. Use sender-layout-evidence.json for current code/build validation."
 }

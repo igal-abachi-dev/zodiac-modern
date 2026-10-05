@@ -35,14 +35,14 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 Current evidence:
 
 - Formatting, Astro/Svelte/strict TypeScript pass with zero errors/warnings;
-  29 unit tests and 42 Chromium/Firefox browser cases pass for the S64M1 follow-up.
+  29 unit tests and 44 Chromium/Firefox browser cases pass for the sender layout/paging follow-up.
   Chromium's process
   sandbox is enabled. Browser versions are recorded in the machine evidence.
 - Fixture, custom and configured production builds pass artifact/CSP checks.
   Actual production default fingerprint and canonical public PEM export match
   the separately confirmed local receiver/OpenSSL value. Invalid/missing/test
   production defaults remain covered by isolated refusal tests.
-- EN-04's actual sender prototype is 144,995 bytes (about 142 KiB). Direct file opens,
+- EN-04's actual sender prototype is 146,693 bytes (about 143 KiB). Direct file opens,
   public imports, exact UTF-8/Go decryption, raw save/manual-copy fallback,
   glyph display/raw recovery, reset, no runtime requests/storage/styles and matching final-block CSP hashes
   pass Chromium/Firefox and the installed stable Edge 154.0.4258.53 channel (one
@@ -60,6 +60,12 @@ Current evidence:
   receiver and transcription checks remain unchanged. All affected browser,
   offline, max-size, production/CSP and visual evidence has been refreshed.
   No fills or larger reading view were added, by user choice.
+- Encryption opens the glyph display automatically. Custom public-key fields
+  start collapsed, the initial message is visible at standard desktop/mobile
+  sizes, and Encrypt/Clear precede readiness controls. Glyph paging returns to
+  the top of the updated grid. `pnpm preview:local` serves the configured sender
+  at 4324; `pnpm preview:refresh` publishes a complete snapshot with matching
+  production CSP while that server runs, followed by a browser reload.
 - REC-03's optional one-command helper passes actual hidden-console original/
   restored key verification and exact nonsecret token decryption for both sizes.
   Existing destinations are refused before a passphrase prompt. Participant
@@ -84,6 +90,7 @@ Evidence: [M1 packet](reviews/m1-review-packet.md),
 [pending human readiness trial](reviews/rec03-readiness-trial.md),
 [E05 evidence](reviews/e05-evidence.json),
 [current mixed-view evidence](reviews/mixed-view-evidence.json),
+[current sender layout/preview evidence](reviews/sender-layout-evidence.json),
 [glyph mapping and recognition limits](glyph-maps.md),
 [EN-04 prototype scope](reviews/en04-prototype.md),
 [receiver machine record](reviews/rec01-evidence.json),
