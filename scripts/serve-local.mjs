@@ -8,21 +8,35 @@ const confined = (root, path) => {
     rel === '' ||
     (!rel.startsWith(`..${sep}`) && rel !== '..' && !rel.includes(':'))
   );
+};
 async function previewArtifact() {
-  const { build } = JSON.parse(await readFile('.cache/local-preview.json', 'utf8'));
+  const { build } = JSON.parse(
+    await readFile('.cache/local-preview.json', 'utf8'),
+  );
   if (typeof build !== 'string' || !/^[a-f0-9-]{36}$/.test(build))
     throw Error('Invalid preview snapshot.');
   const base = await realpath('.cache/preview-sites');
   const root = await realpath(resolve(base, build));
-  if (!confined(base, root)) throw Error('Preview snapshot escapes its directory.');
-  const headers = JSON.parse(await readFile(resolve(root, '.security-headers.json'), 'utf8'));
+  if (!confined(base, root))
+    throw Error('Preview snapshot escapes its directory.');
+  const headers = JSON.parse(
+    await readFile(resolve(root, '.security-headers.json'), 'utf8'),
+  );
   return { root, headers };
 }
-const initial = preview ? await previewArtifact() : await (async () => {
-  const root = await realpath(resolve(process.argv.includes('--fixture') ? 'artifacts/test-site' : 'dist'));
-  const headers = JSON.parse(await readFile(resolve(root, '.security-headers.json'), 'utf8'));
-  return { root, headers };
-})();
+const initial = preview
+  ? await previewArtifact()
+  : await (async () => {
+      const root = await realpath(
+        resolve(
+          process.argv.includes('--fixture') ? 'artifacts/test-site' : 'dist',
+        ),
+      );
+      const headers = JSON.parse(
+        await readFile(resolve(root, '.security-headers.json'), 'utf8'),
+      );
+      return { root, headers };
+    })();
 const port = Number(process.env.ZODIAC_PORT ?? 4321);
 if (!Number.isInteger(port) || port < 1024 || port > 65535)
   throw new Error('Invalid local port.');
