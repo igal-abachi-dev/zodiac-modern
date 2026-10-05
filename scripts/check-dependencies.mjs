@@ -45,7 +45,7 @@ for (const input of inputs.filter((p) => p.includes('node_modules/'))) {
   }
   const pkg = JSON.parse(await readFile(join(root, 'package.json'), 'utf8'));
   if (
-    !['svelte', '@lucide/svelte', 'clsx'].includes(pkg.name) ||
+    !['svelte', '@lucide/svelte', 'clsx', 'esm-env'].includes(pkg.name) ||
     !['MIT', 'ISC'].includes(pkg.license)
   )
     throw Error(`Unreviewed shipped browser package: ${pkg.name}`);

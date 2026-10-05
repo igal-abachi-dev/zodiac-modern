@@ -1,4 +1,4 @@
-import { cp, mkdir, mkdtemp, readFile, rename, rm } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, readFile, rename, rm, realpath, lstat } from 'node:fs/promises';
 import { resolve, join, relative, sep } from 'node:path';
 import { checkPolicy } from './check-policy.mjs';
 import { filesAt } from './walk-files.mjs';
@@ -19,6 +19,14 @@ export async function buildVercelOutput(root, destination = '.vercel/output') {
   )
     throw Error('Unsafe generated Vercel output path.');
   await mkdir(resolve('.vercel'), { recursive: true });
+  if ((await realpath('.vercel')).toLowerCase() !== resolve('.vercel').toLowerCase())
+    throw Error('Vercel output parent must be an ordinary workspace directory.');
+  const current = await lstat(target).catch((error) => {
+    if (error.code !== 'ENOENT') throw error;
+    return null;
+  });
+  if (current?.isSymbolicLink())
+    throw Error('Vercel output must not be a link or junction.');
   const staging = await mkdtemp(resolve('.vercel/output-staging-'));
   try {
     await cp(root, join(staging, 'static'), {
