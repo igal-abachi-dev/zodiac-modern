@@ -1,12 +1,12 @@
 <script lang="ts">
   import type { Glyph } from '../../lib/symbols/manifest';
-  let { glyph }: { glyph: Glyph } = $props();
+  let { glyph, size = 24 }: { glyph: Glyph; size?: 16 | 24 } = $props();
 </script>
 
 <svg
   viewBox="0 0 24 24"
-  width="24"
-  height="24"
+  width={size}
+  height={size}
   fill="none"
   stroke="currentColor"
   stroke-width="2"

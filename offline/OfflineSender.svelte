@@ -1,6 +1,8 @@
 <script lang="ts">
   import EncryptWorkbench from '../src/components/islands/EncryptWorkbench.svelte';
+  import RawRecovery from '../src/components/islands/RawRecovery.svelte';
   import { defaultRecipient } from '../src/generated/default-recipient';
+  let restoreOpen = $state(false);
 </script>
 
 <main>
@@ -36,11 +38,16 @@
       adjacent files, server or network connection.
     </p>
     <p>
-      Glyphs, SVG/PNG exports and raw recovery remain pending. Meta-CSP cannot
-      supply HTTP-only frame-ancestors, HSTS or nosniff protections; the local
-      file boundary still requires independent review and stable-browser testing
-      before sender selection.
+      Glyph display and raw/transcribed-row recovery are included; SVG/PNG
+      exports and print remain pending. Meta-CSP cannot supply HTTP-only
+      frame-ancestors, HSTS or nosniff protections; the local file boundary
+      still requires independent review and stable-browser testing before sender
+      selection.
     </p>
   </details>
   <EncryptWorkbench recipient={defaultRecipient} />
+  <details ontoggle={(event) => (restoreOpen = event.currentTarget.open)}>
+    <summary>Recover raw ciphertext locally</summary
+    >{#if restoreOpen}<RawRecovery />{/if}
+  </details>
 </main>

@@ -77,10 +77,70 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
   await page
     .locator('.glyph-legend')
     .screenshot({ path: `artifacts/glyph-legend-${info.project.name}.png` });
+  await page
+    .getByRole('button', { name: 'Small legend glyphs (16 px)', exact: true })
+    .click();
+  await page.locator('.glyph-legend').screenshot({
+    path: `artifacts/glyph-legend-small-${info.project.name}.png`,
+  });
+  await page
+    .getByRole('button', { name: 'Small legend glyphs (16 px)', exact: true })
+    .click();
   await page.emulateMedia({ media: 'print', colorScheme: 'light' });
   await page.locator('.glyph-legend').screenshot({
     path: `artifacts/glyph-legend-print-${info.project.name}.png`,
   });
+});
+
+test('maximum message preview reaches its last slice while exports retain the entire RSA-4096 envelope', async ({
+  page,
+}) => {
+  await page.goto('/');
+  await page
+    .getByLabel('Choose public PEM file')
+    .setInputFiles('receiver/tests/fixtures/keys/openssl-3.5-4096-public.pem');
+  await expect(page.locator('.recipient-summary')).toContainText('RSA-4096');
+  await page.getByLabel('Message', { exact: true }).fill('x'.repeat(65536));
+  await page
+    .getByRole('button', { name: 'Encrypt message', exact: true })
+    .click();
+  const raw = await page.getByLabel('Raw ciphertext').inputValue();
+  expect(raw).toHaveLength(88102);
+  await page.getByRole('button', { name: 'Display view', exact: true }).click();
+  await expect(page.locator('.glyph-plate .glyph-cell')).toHaveCount(512);
+  await page
+    .getByRole('button', { name: 'Last glyph page', exact: true })
+    .click();
+  await expect(page.locator('.glyph-plate .glyph-cell')).toHaveCount(38);
+  expect(
+    await page
+      .locator('.glyph-plate .glyph-cell')
+      .evaluateAll((items) =>
+        items.map((item) => item.getAttribute('data-character')).join(''),
+      ),
+  ).toBe(raw.slice(88064));
+  await expect(
+    page.getByText('Preview 173 of 173', { exact: false }),
+  ).toBeVisible();
+  expect(
+    await page.locator('.glyph-plate svg, .glyph-legend svg').count(),
+  ).toBeLessThanOrEqual(1024);
+  const event = page.waitForEvent('download');
+  await page
+    .getByRole('button', { name: 'Download ciphertext (.txt)', exact: true })
+    .click();
+  const file = await event,
+    path = await file.path();
+  expect(readFileSync(path!, 'utf8')).toBe(raw);
+  await page
+    .getByRole('button', { name: 'First glyph page', exact: true })
+    .click();
+  expect(
+    await page
+      .locator('.glyph-plate .glyph-cell')
+      .first()
+      .getAttribute('data-offset'),
+  ).toBe('0');
 });
 
 test('raw recovery cleans only by explicit choice, refuses imports and interoperates with native receiver', async ({
@@ -195,7 +255,9 @@ test('printed rows localize errors, require complete ordered pages and verify fi
   });
   await page.goto('/restore/');
   // The production island must finish hydration before runtime network denial.
-  await expect(page.getByRole('button', { name: 'Printed rows', exact: true })).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Printed rows', exact: true }),
+  ).toBeVisible();
   const requests: string[] = [],
     errors: string[] = [];
   page.on('request', (r) => requests.push(r.url()));

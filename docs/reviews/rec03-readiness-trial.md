@@ -31,3 +31,19 @@ supported RSA sizes can restore and decrypt exact synthetic bytes. Browser/CLI
 tests cover exact text, wrong pairs, tampering, output refusal and cancellation.
 These are author-run, not independent novice trials, production readiness,
 publisher verification or QA-03. Participant outcomes have not yet been supplied.
+
+The optional `scripts/test-recipient-readiness.ps1` helper takes only local paths,
+the independently confirmed PUBLIC fingerprint and an explicitly nonsecret
+`Zodiac readiness: <32 lowercase hex>` token. Run it in your own controlling
+console. It refuses captured execution, an existing destination, the working key
+as its own backup and reparse/network/device/stream paths. It creates a protected
+current-user-only NTFS restore folder before copying the encrypted backup, then
+runs actual pair verification/decryption for original and restored keys. It
+compares output bytes locally without printing them, opening an editor or deleting
+key material. Persisted encrypted/output files are explicitly disclosed. This is
+setup convenience; hostile concurrent filesystem changes remain the receiver's
+separately tested output boundary, not a guarantee added by this PowerShell helper.
+
+[Native helper evidence](rec03-helper-evidence.json) records successful hidden
+console trials for both synthetic RSA sizes. No production private-key read or
+independent participant verdict is implied.

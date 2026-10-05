@@ -46,6 +46,7 @@ test('file probe opens under default settings with no adjacent files or network'
     ).href,
   );
   await expect(page.locator('.recipient-summary strong')).toBeVisible();
+  let recoveryRaw = '';
   for (const bits of [3072, 4096]) {
     const pem = readFileSync(
       `receiver/tests/fixtures/keys/openssl-3.5-${bits}-public.pem`,
@@ -76,6 +77,7 @@ test('file probe opens under default settings with no adjacent files or network'
       page.getByRole('heading', { name: 'Encrypted message', exact: true }),
     ).toBeFocused();
     const raw = await page.getByLabel('Raw ciphertext').inputValue();
+    recoveryRaw = raw;
     const openssl =
       process.env.ZODIAC_OPENSSL35 ??
       resolve('.cache/toolchains/openssl35/x64/bin/openssl.exe');
@@ -143,6 +145,27 @@ test('file probe opens under default settings with no adjacent files or network'
     .getByRole('button', { name: 'Clear everything', exact: true })
     .click();
   expect(await page.getByLabel('Raw ciphertext').count()).toBe(0);
+  await page
+    .getByText('Recover raw ciphertext locally', { exact: true })
+    .click();
+  await page
+    .getByLabel('Paste raw ciphertext', { exact: true })
+    .fill(recoveryRaw);
+  await page
+    .getByRole('button', { name: 'Validate raw ciphertext', exact: true })
+    .click();
+  await expect(
+    page.getByLabel('Recovered raw ciphertext', { exact: true }),
+  ).toHaveValue(recoveryRaw);
+  await page
+    .getByRole('button', { name: 'Copy recovered raw', exact: true })
+    .click();
+  await expect(
+    page.getByLabel('Recovered raw ciphertext', { exact: true }),
+  ).toBeFocused();
+  await page
+    .getByRole('button', { name: 'Clear recovery', exact: true })
+    .click();
   expect(network).toEqual([]);
   expect(csp).toEqual([]);
   expect(await page.locator('[style]').count()).toBe(0);

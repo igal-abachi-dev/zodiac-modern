@@ -8,6 +8,7 @@
   import GlyphLicense from './GlyphLicense.svelte';
   let { raw }: { raw: string } = $props();
   let page = $state(0);
+  let compactLegend = $state(false);
   const pageCount = $derived(Math.ceil(raw.length / PREVIEW_CHARACTERS));
   const selected = $derived(Math.min(page, Math.max(0, pageCount - 1)));
   const offset = $derived(selected * PREVIEW_CHARACTERS);
@@ -33,6 +34,9 @@
       >{/each}
   </div>
   <div class="plate-controls">
+    <button type="button" disabled={selected === 0} onclick={() => (page = 0)}
+      >First glyph page</button
+    >
     <button
       type="button"
       disabled={selected === 0}
@@ -43,6 +47,11 @@
       disabled={selected + 1 >= pageCount}
       onclick={() => (page = selected + 1)}>Next glyph page</button
     >
+    <button
+      type="button"
+      disabled={selected + 1 >= pageCount}
+      onclick={() => (page = pageCount - 1)}>Last glyph page</button
+    >
   </div>
   <p class="muted">
     Preview rows use 16 columns, or 8 on small screens. Global character offsets
@@ -51,11 +60,17 @@
   </p>
   <details>
     <summary>Glyph legend: all 64 characters</summary>
+    <button
+      type="button"
+      aria-pressed={compactLegend}
+      onclick={() => (compactLegend = !compactLegend)}
+      >Small legend glyphs (16 px)</button
+    >
     <ul class="glyph-legend" dir="ltr">
       {#each GLYPHS as glyph}<li>
-          <GlyphIcon {glyph} /><code>{glyph.character}</code><span
-            >{glyph.name}</span
-          >
+          <GlyphIcon {glyph} size={compactLegend ? 16 : 24} /><code
+            >{glyph.character}</code
+          ><span>{glyph.name}</span>
         </li>{/each}
     </ul>
     <p>
