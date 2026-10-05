@@ -450,6 +450,8 @@ Encrypt and Clear are grouped before the optional nonsecret readiness token.
 Each successful encryption selects the glyph display automatically, including
 after a previous raw view. Raw view, raw copy/download and the manual clipboard
 fallback remain accessible.
+Glyph preview paging scrolls to the first row of the newly rendered grid (as far
+as the document's scroll limit permits), without animated scrolling.
 
 ```text
 Header: Zodiac Modern                         How it works · Keys · Privacy

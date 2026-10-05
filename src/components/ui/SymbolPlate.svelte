@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from 'svelte';
   import { PREVIEW_CHARACTERS } from '../../lib/symbols/manifest';
   import {
     MIXED_VIEW_PROFILE,
@@ -11,6 +12,7 @@
   let { raw }: { raw: string } = $props();
   let page = $state(0);
   let compactLegend = $state(false);
+  let plate = $state<HTMLDivElement>();
   const pageCount = $derived(Math.ceil(raw.length / PREVIEW_CHARACTERS));
   const selected = $derived(Math.min(page, Math.max(0, pageCount - 1)));
   const offset = $derived(selected * PREVIEW_CHARACTERS);
@@ -20,6 +22,11 @@
   const tokens = $derived(
     mixedViewTokens(raw.slice(offset, offset + PREVIEW_CHARACTERS), offset),
   );
+  async function changePage(next: number) {
+    page = next;
+    await tick();
+    plate?.scrollIntoView({ block: 'start', behavior: 'instant' });
+  }
 </script>
 
 <section aria-label="Celestial glyph plate">
@@ -33,7 +40,7 @@
     the raw ciphertext or .txt file too. The receiver cannot decrypt an image or
     SVG.
   </p>
-  <div class="glyph-plate" dir="ltr" aria-hidden="true">
+  <div class="glyph-plate" bind:this={plate} dir="ltr" aria-hidden="true">
     {#each tokens as token}<span
         class="glyph-cell"
         data-kind={token.kind}
@@ -52,23 +59,25 @@
       >{/each}
   </div>
   <div class="plate-controls">
-    <button type="button" disabled={selected === 0} onclick={() => (page = 0)}
-      >First glyph page</button
+    <button
+      type="button"
+      disabled={selected === 0}
+      onclick={() => changePage(0)}>First glyph page</button
     >
     <button
       type="button"
       disabled={selected === 0}
-      onclick={() => (page = selected - 1)}>Previous glyph page</button
+      onclick={() => changePage(selected - 1)}>Previous glyph page</button
     >
     <button
       type="button"
       disabled={selected + 1 >= pageCount}
-      onclick={() => (page = selected + 1)}>Next glyph page</button
+      onclick={() => changePage(selected + 1)}>Next glyph page</button
     >
     <button
       type="button"
       disabled={selected + 1 >= pageCount}
-      onclick={() => (page = pageCount - 1)}>Last glyph page</button
+      onclick={() => changePage(pageCount - 1)}>Last glyph page</button
     >
   </div>
   <p class="muted">

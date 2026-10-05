@@ -330,6 +330,7 @@ Subtasks:
 
 - [x] SYM-01.1 — all 64 pinned named exports/vectors/provenance/licenses checked; explicit pre-release WavesHorizontal/FingerprintPattern corrections recorded.
 - [x] SYM-01.2 — fixed-order 512-character preview, 8/16 columns, global offsets, complete pagination and accessible legend implemented.
+- Glyph paging returns to the top of the updated grid; verify Next/Previous/First/Last with mouse and keyboard at the final short page as well.
 - [x] SYM-01.3 — actual 24/16 px and monochrome print legend reviewed, recognition limits documented; mobile order and maximum 88,102-character result pass. Print artifact/page-fit QA remains E06. Evidence: [E05 record](docs/reviews/e05-evidence.json).
 - [x] SYM-01.4 — user-requested S64M1 screen view: literals at positions 1/5/9…, sparse deterministic horizontal mirrors/180° rotations, CircleOff/Crosshair/Skull nulls after each eight payload characters; explicit pinned CircleDashed override for `j`. S64L1/raw/recovery unchanged. Cross-page ordering, null exclusion, responsive/CSP/offline/max-size checks pass; [refreshed evidence](docs/reviews/mixed-view-evidence.json). No larger reading view or fills.
 

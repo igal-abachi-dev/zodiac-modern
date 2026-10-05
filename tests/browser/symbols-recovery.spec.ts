@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve, join } from 'node:path';
@@ -6,6 +6,22 @@ import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { createCheckPages } from '../../src/lib/codecs/recovery';
 import { openCustomKey } from './sender-controls';
+async function expectGridStart(page: Page) {
+  await expect
+    .poll(() =>
+      page.locator('.glyph-plate').evaluate((grid) => {
+        const target = Math.max(
+          0,
+          Math.min(
+            scrollY + grid.getBoundingClientRect().top,
+            document.documentElement.scrollHeight - innerHeight,
+          ),
+        );
+        return Math.abs(scrollY - target);
+      }),
+    )
+    .toBeLessThan(2);
+}
 const fingerprint = 'ab'.repeat(32);
 async function bundle(raw: string) {
   return createCheckPages(raw, fingerprint);
@@ -103,7 +119,17 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     .getByRole('button', { name: 'Next glyph page', exact: true })
     .focus();
   await page.keyboard.press('Enter');
+  await expectGridStart(page);
   await expect(cells).toHaveCount(raw.length - 512);
+  await page
+    .getByRole('button', { name: 'Previous glyph page', exact: true })
+    .click();
+  await expectGridStart(page);
+  await expect(cells).toHaveCount(512);
+  await page
+    .getByRole('button', { name: 'Next glyph page', exact: true })
+    .click();
+  await expectGridStart(page);
   expect(
     await page
       .locator('.glyph-plate [data-kind="null"]')
@@ -153,6 +179,7 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
   await page
     .getByRole('button', { name: 'First glyph page', exact: true })
     .click();
+  await expectGridStart(page);
   await page
     .locator('.glyph-plate')
     .screenshot({ path: `artifacts/mixed-grid-${info.project.name}.png` });
@@ -205,6 +232,7 @@ test('maximum message preview reaches its last slice while exports retain the en
   await page
     .getByRole('button', { name: 'Last glyph page', exact: true })
     .click();
+  await expectGridStart(page);
   await expect(
     page.locator('.glyph-plate .glyph-cell[data-character]'),
   ).toHaveCount(38);
