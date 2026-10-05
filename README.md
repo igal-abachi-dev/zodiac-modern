@@ -62,7 +62,7 @@ The website accepts public keys only. The receiver handles private keys and pass
 
 ## Development
 
-The development sender now encrypts exact message bytes with default/custom public recipients and offers raw copy/download, immutable result details, retry, another-message and clear/navigation reset. E05 adds frozen celestial glyphs with bounded pagination and a legend, plus local raw/printed-row recovery with row/page and final envelope checks. The unsigned Windows receiver implements hidden-prompt key verification and authenticated decryption to exclusive private local-disk files. M0 is complete and M1 development acceptance passes. SVG/PNG/print exports, observed recipient readiness, final offline delivery, integrated QA-03 and release signing remain pending. Use synthetic data; no reviewed release is available. See [live task and milestone status](docs/status.md) and the [recipient readiness trial](docs/reviews/rec03-readiness-trial.md).
+The development sender now encrypts exact message bytes with default/custom public recipients and offers raw copy/download, immutable result details, retry, another-message and clear/navigation reset. E05 adds frozen celestial glyphs with bounded pagination and a legend, plus local raw/printed-row recovery with row/page and final envelope checks. The unsigned Windows receiver implements hidden-prompt key verification and authenticated decryption to exclusive private local-disk files. M0 is complete and M1 development acceptance passes. E06 SVG/PNG/print exports are implemented with exact raw delivery and checked archival recovery. Actual Gmail (primary)/Outlook (secondary) draft paste, observed recipient readiness, final offline delivery, integrated QA-03 and release signing remain pending. See [sharing and print checks](docs/exports.md). Use synthetic data; no reviewed release is available. See [live task and milestone status](docs/status.md) and the [recipient readiness trial](docs/reviews/rec03-readiness-trial.md).
 
 Use Node.js 24.21.0 (the 24.x LTS line), pnpm 12.8.1 and the committed lockfile. Receiver checks require the pinned installed Go 1.27.1 toolchain; automatic toolchain downloads are disabled. OpenSSL is needed for key setup and interoperability fixtures, not for running browser encryption or the packaged receiver. Configure `ZODIAC_GO` when the pinned Go executable is outside PATH; the scripts also recognize the repository's ignored portable-toolchain cache.
 
@@ -117,6 +117,8 @@ pnpm test:receiver
 pnpm verify:receiver-deps
 pnpm check:rec01
 pnpm check:m1
+# Complete export/PDF/Go + stable Edge evidence (pinned PDF QA renderer required)
+pnpm check:m3
 pnpm build:custom
 pnpm build:test
 pnpm spike:offline-html

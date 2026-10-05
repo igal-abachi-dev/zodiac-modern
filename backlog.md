@@ -30,7 +30,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E03 | Key management | P0 | Done | M1 | Safe default/custom public recipients and tested offline key guide |
 | E04 | Workspace | P1 | In progress | M2 | Accessible edit/encrypt/result/reset flow |
 | E05 | Symbols/recovery | P1 | Done | M3 | Mixed S64M1 view verified; frozen mapping/raw recovery complete; SVG exports remain E06 |
-| E06 | Exports/sharing | P1 | Backlog | M3 | Complete copy/download/image/print artifacts |
+| E06 | Exports/sharing | P1 | Review | M3 | Copy/download/image/print implemented and automated checks pass; Gmail-primary/Outlook-secondary paste pending |
 | E07 | Hardening | P0 | Backlog | M4 | CSP, local-only privacy behavior, clean static artifact |
 | E08 | Verification/review | P0 | Backlog | M4 | Browser/Go, UX/export QA, independent security assessment |
 | E09 | Release | P0 | Backlog | M5 | Real recipient, verified host/offline bundle, custody and rollback |
@@ -292,7 +292,7 @@ Subtasks:
 
 ### UX-03 — build results, another-message, and clear-all flows
 
-Type: story · Priority: P1 · Status: In progress · Milestone: M2 · Dependencies: UX-02.
+Type: story · Priority: P1 · Status: Done · Milestone: M2 · Dependencies: UX-02.
 
 As a sender, I can save the current ciphertext and then begin a clean new message quickly.
 
@@ -307,7 +307,7 @@ Acceptance criteria:
 
 Subtasks:
 
-- [x] UX-03.1 — immutable result shell, accessible raw ciphertext above the always-visible glyph grid and typed Svelte display/artwork action slots; primary raw exports work. Optional artwork actions remain unavailable until M3 validates them.
+- [x] UX-03.1 — immutable result shell, accessible raw ciphertext above the always-visible glyph grid and typed Svelte display/artwork action slots; primary raw exports work. Optional complete/page PNG, one-line SVG, metadata and archival print actions pass automated E06 validation; email-client checks remain EXP-01.3.
 - [x] UX-03.2 — implement repeat-message/clear-all/pageshow reset and focus handling.
 - [x] UX-03.3 — test successive messages, busy clear/discard, reload, history navigation, and screen-reader summaries.
 
@@ -332,11 +332,11 @@ Subtasks:
 - [x] SYM-01.2 — fixed-order 512-character preview, 8/16 columns, global offsets, complete pagination and accessible legend implemented.
 - Glyph paging returns to the top of the updated grid; verify Next/Previous/First/Last with mouse and keyboard at the final short page as well.
 - [x] SYM-01.3 — actual 24/16 px and monochrome print legend reviewed, recognition limits documented; mobile order and maximum 88,102-character result pass. Print artifact/page-fit QA remains E06. Evidence: [E05 record](docs/reviews/e05-evidence.json).
-- [x] SYM-01.4 — user-requested S64M1 screen view: literals at positions 1/5/9…, sparse deterministic horizontal mirrors/180° rotations, CircleOff/Crosshair/Skull nulls after each eight payload characters; explicit pinned CircleDashed override for `j`. S64L1/raw/recovery unchanged. Cross-page ordering, null exclusion, responsive/CSP/offline/max-size checks pass; [refreshed evidence](docs/reviews/mixed-view-evidence.json). No larger reading view or fills.
+- [x] SYM-01.4 — user-requested S64M1 screen view: literals at positions 1/5/9…, sparse deterministic horizontal mirrors/180° rotations, CircleOff/CircleDashed/Skull nulls after each eight payload characters; original Crosshair payload for `j`. S64L1/raw/recovery unchanged. Cross-page ordering, null exclusion, responsive/CSP/offline/max-size checks pass; [current evidence](docs/reviews/e06-evidence.json) supersedes the earlier development mapping. No larger reading view or fills.
 
 ### SYM-02 — implement raw and printed-row recovery
 
-Type: story · Priority: P1 · Status: Done · Milestone: M3 · Dependencies: CRY-02, EXP-04 helpers/form (implemented; print integration remains E06).
+Type: story · Priority: P1 · Status: Done · Milestone: M3 · Dependencies: CRY-02, EXP-04 helpers/form and generated print integration (implemented).
 
 As a recipient, I can validate raw ciphertext or assemble printed raw chunks locally before decrypting.
 
@@ -357,7 +357,7 @@ Subtasks:
 
 ### EXP-01 — implement exact text copying/downloads and image clipboard support
 
-Type: story · Priority: P1 · Status: In progress · Milestone: M3 · Dependencies: UX-03, CRY-02, EXP-02.
+Type: story · Priority: P1 · Status: Review · Milestone: M3 · Dependencies: UX-03, CRY-02, EXP-02.
 
 As a sender, I can copy exact recoverable ciphertext and share the glyph appearance through supported clipboard formats.
 
@@ -371,13 +371,15 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] EXP-01.1 — implement raw/metadata Blob downloads and neutral filenames.
-- [ ] EXP-01.2 — implement `ClipboardItem` capability detection, text/PNG copy, feedback, and denial fallbacks.
+- [x] EXP-01.1 — implement raw/metadata Blob downloads and neutral filenames.
+- [x] EXP-01.2 — implement `ClipboardItem` capability detection, text/PNG copy, feedback, and denial fallbacks.
 - [ ] EXP-01.3 — verify complete payload, user-gesture/permissions behavior, and actual paste outcomes in the chosen browser/email matrix.
+
+Browser checks pass; actual Gmail (primary) and Outlook (secondary) unsent draft paste remains in Review because no connected browser session is available. [Evidence](docs/reviews/e06-evidence.json) and [sharing matrix](docs/exports.md).
 
 ### EXP-02 — generate ordered, recoverable SVG and bounded PNG artifacts
 
-Type: story · Priority: P1 · Status: In progress · Milestone: M3 · Dependencies: SYM-01, CRY-02, EXP-04.
+Type: story · Priority: P1 · Status: Done · Milestone: M3 · Dependencies: SYM-01, CRY-02, EXP-04.
 
 As a sender, I can save the same glyph artwork while retaining an exact recovery path.
 
@@ -386,18 +388,18 @@ Acceptance criteria:
 - Trusted vector serializer preserves every raw character exactly once, in order; one-line SVG strip and paged plate exports are separate clearly labeled layouts.
 - Complete one-line `S64SVG1` uses frozen local definitions and one deterministic-position `<use>` per raw character, versioned raw metadata and checksum. Serializer tests compare emitted order/metadata to original raw without adding a runtime XML importer. Raw wire bytes remain unchanged; maximum export fits the future 16 MiB cap.
 - Archival pages contain at most 512 symbols with global offsets, page count, profile/key/map/whole-envelope identity, per-page 12-hex check codes, per-row 8-hex check codes, and readable raw chunk recovery text. Final blank cells are not payload; check labels do not enter copied raw.
-- PNG rasterization is local and limited to 4,096 px per dimension/16 megapixels including margins/labels. A complete 32-column compact layout is independent of 512-character archival pagination; 584 glyphs require 19 rows/768×456 px glyph area at 24 px cells. It includes all raw tokens in order/blank final cells, and the artwork/raw-file reminder. Large outputs use truthful selected-page fallback, never clipping or unreadable strip shrinking; the one-line SVG remains one line.
+- PNG rasterization is local and limited to 4,096 px per dimension/16 megapixels including margins/labels. A complete 32-column compact layout is independent of 512-character archival pagination; 584 payload tokens plus 73 S64M1 nulls require 21 rows/768×504 px artwork area at 24 px cells. It includes all raw tokens in order/blank final cells, and the artwork/raw-file reminder. Large outputs use truthful selected-page fallback, never clipping or unreadable strip shrinking; the one-line SVG remains one line.
 - Only trusted pinned paths generate output; no untrusted SVG rendering/HTML/`foreignObject`, remote assets, plaintext, or hidden composer state reaches output. URLs/canvases are cleaned up; errors keep raw/SVG save available.
 
 Subtasks:
 
-- [ ] EXP-02.1 — implement shared complete/paged layout, token positions, recovery metadata, and full-envelope/page/row check formatting.
-- [ ] EXP-02.2 — serialize self-contained SVGs and rasterize bounded PNGs from pinned paths.
-- [ ] EXP-02.3 — test strip/page inverse ordering, long-output limits, cleanup/failure, no plaintext, and image visual QA.
+- [x] EXP-02.1 — implement shared complete/paged layout, token positions, recovery metadata, and full-envelope/page/row check formatting.
+- [x] EXP-02.2 — serialize self-contained SVGs and rasterize bounded PNGs from pinned paths.
+- [x] EXP-02.3 — test strip/page inverse ordering, long-output limits, cleanup/failure, no plaintext, and image visual QA.
 
 ### EXP-03 — print/save PDF with complete ciphertext recovery
 
-Type: story · Priority: P1 · Status: In progress · Milestone: M3 · Dependencies: EXP-02.
+Type: story · Priority: P1 · Status: Done · Milestone: M3 · Dependencies: EXP-02.
 
 As a sender, I can print the plate or save a browser PDF without losing data or printing my message.
 
@@ -411,13 +413,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] EXP-03.1 — build print document/scope controls and request-only print lifecycle.
-- [ ] EXP-03.2 — create A4/Letter print CSS and safe page breaks/headers.
-- [ ] EXP-03.3 — render real browser PDFs, inspect representative pages, and verify raw recovery plus cancel/retry behavior.
+- [x] EXP-03.1 — build print document/scope controls and request-only print lifecycle.
+- [x] EXP-03.2 — create A4/Letter print CSS and safe page breaks/headers.
+- [x] EXP-03.3 — render real browser PDFs, inspect representative pages, and verify raw recovery plus cancel/retry behavior.
 
 ### EXP-04 — locate page and row transcription errors locally
 
-Type: story · Priority: P1 · Status: In progress · Milestone: M3 · Dependencies: CRY-02.
+Type: story · Priority: P1 · Status: Done · Milestone: M3 · Dependencies: CRY-02.
 
 As a recipient retyping a printed artifact, I can find an incorrect page or row before reassembling the whole envelope.
 
@@ -432,7 +434,7 @@ Acceptance criteria:
 Subtasks:
 
 - [x] EXP-04.1 — exact native SHA-256 helpers and independent compact JSON encoding vectors implemented and verified.
-- [ ] EXP-04.2 — external metadata helpers and local transcription form/feedback implemented; generated SVG/print metadata and labels await E06.
+- [x] EXP-04.2 — full SVG/JSON page/row metadata and printed 12/8-hex labels integrated; PDF-extracted checks/hash and independent Go recovery pass. [E06 evidence](docs/reviews/e06-evidence.json).
 - [x] EXP-04.3 — early row localization, wrong identity/page, partial final rows, offsets, complete ordered assembly and final digest pass. Labels stay outside raw. Evidence: [E05 record](docs/reviews/e05-evidence.json).
 
 ## 10. E07 — static security and privacy hardening
@@ -748,7 +750,7 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | --- | --- |
 | Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
 | Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. At the original planning baseline application checks had not run; subsequent implementation evidence is recorded below and in docs/status.md |
-| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1, REC-01/02 and SYM-01/02 Done; EN-04.1 Done; EN-04/UX-03/EXP-04 in progress; REC-03 Review pending operator/novice evidence. M0/M1 development gates complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
+| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1, REC-01/02 and SYM-01/02 Done; EN-04.1 Done; EN-04 in progress; UX-03/EXP-02/03/04 Done; E06/M3 and EXP-01 Review pending actual Gmail/Outlook paste; REC-03 Review pending operator/novice evidence. M0/M1 development gates complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; download every glyph in a reversible one-line SVG; Unicode symbol strings deferred |
 | Production recipient | Operator-confirmed RSA-4096 public PEM/name/full fingerprint configured; production build/browser checks pass. Operator backup/readiness, independent integrated review and signed release remain open. |
 | Host/domain | Vercel primary; Cloudflare Pages/Netlify alternatives, Surge conditional on verified header support; exact domain/account pending (REL-04/REL-02) |
@@ -779,3 +781,6 @@ Status evidence:
 - EXP-04 | 2026-10-05 | In progress | src/lib/export/checks.ts, codecs/recovery.ts and RawRecovery | independent S64CHECK1 vectors, external metadata helpers, early row localization/context/ordered assembly/final digest pass | author-run; E05 record | generated artwork/print labels and metadata integration remain E06.
 - REC-03 | 2026-10-05 | Review | receive guide, crypto/readiness.ts, scripts/test-recipient-readiness.ps1 | fresh browser token/native Go round trip plus both real hidden-console original/restored helper trials and existing-folder refusal pass | author-run; docs/reviews/rec03-helper-evidence.json | operator's real backup/readiness and observed first-time user outcomes pending; release signing/publisher/QA-03 remain separate.
 - SYM-01.4 | 2026-10-05 | Done | symbols/mixed-view.ts, s64m1-paths.ts, SymbolPlate and mixed-view-manifest.json | 29 unit/42 Chromium/Firefox cases, stable Edge file://, exact raw/null exclusion/global rotation/maximum preview and production artifact/CSP checks pass | author-run; docs/reviews/mixed-view-evidence.json | outline only by user choice; original S64L1/check/receiver contracts unchanged; SVG/PNG/print remain E06.
+
+- E06 / M3 | 2026-10-06 | Review | complete/page PNG, full S64SVG1 strip, metadata, request-only checked archival A4/Letter print and offline exports | 34 unit tests/54 Chromium-Firefox cases, stable Edge file://, production CSP and exact PDF-row/Go recovery pass | author-run; docs/reviews/e06-evidence.json | actual Gmail-primary/Outlook-secondary unsent draft paste remains EXP-01.3; independent QA-03/signing remain separate.
+- S64M1 correction | 2026-10-06 | Done | null rotation corrected to CircleOff/CircleDashed/Skull; original Crosshair payload for j restored in the mixed view | full M3 regression and frozen provenance pass | author-run | earlier development mapping was contrary to user correction; no released S64L1/envelope/check geometry changed.

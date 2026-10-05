@@ -13,50 +13,52 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 | EN-03                  | Done               | Operator-confirmed RSA-4096 public PEM/name/fingerprint; production build, actual default browser import and canonical public export pass. Private files remain ignored and outside build inputs.                                |
 | UX-01, UX-02           | Done               | Accessible responsive visual system and exact message/encrypt/error/IME/focus flow.                                                                                                                                              |
 | UX-03.1                | Done               | Immutable result summary, complete raw ciphertext above the always-visible glyph grid, typed display/artwork action slots and working primary raw exports.                                                                       |
-| UX-03                  | In progress        | Repeat/reset/navigation and actual frozen glyph display pass. Optional SVG/PNG/print actions remain E06.                                                                                                                         |
+| UX-03                  | Done               | Full/selected PNG, one-line SVG, public metadata and archival print integrated; raw delivery remains primary.                                                                                                                    |
 | REC-01                 | Done               | Focused conditional loader approval and verified fixes; mandatory fixture/native/vendor/resource/fuzz gates retained.                                                                                                            |
 | REC-02                 | Done (Windows)     | Authenticated offline command, exclusive private output and native path/mapping/reparse/race/ACL/cancel/cleanup tests. QA-03 remains separate.                                                                                   |
 | KEY-03                 | Done               | Tested encrypted generation for both sizes, current vendor verification, custody/fingerprint/backup/rotation guide and secure local passphrase generator. Public-folder failure fixed and regression-tested.                     |
 | REC-03                 | Review             | Guide, fresh nonsecret browser token and actual native original/restored helper trials pass for both sizes. Operator's own backup/readiness and observed first-time user trial remain pending; release verification is separate. |
 | E05, SYM-01, SYM-02    | Done (development) | 64 frozen vectors/provenance/license, bounded glyph plate/legend and raw/transcribed-row recovery pass. Similar-glyph recognition limits documented; no human error-rate measurement or SVG importer.                            |
-| EXP-04                 | In progress        | Exact S64CHECK1 helpers, external typed metadata, early row/page errors and final assembly checks pass. Generated artwork/print metadata and labels remain E06.                                                                  |
+| EXP-04                 | Done               | S64CHECK1 SVG/JSON/print integration; independent PDF raw/check/hash/Go recovery passes.                                                                                                                                         |
 | EN-04.1                | Done               | One fully bundled actual Svelte sender with local help and shared crypto/codecs/raw exports; direct file:// feasibility demonstrated.                                                                                            |
-| EN-04                  | In progress        | Glyph display and bundled raw recovery pass. SVG/PNG/print, remaining bundled printed-row/platform matrix, independent boundary/hash-verification UX review and final delivery choice remain in EN-04.2/.3.                      |
+| EN-04                  | In progress        | Bundled raw/SVG/PNG/JSON export and print preparation/cleanup pass; remaining platform, bundled printed-row trial, independent boundary/verification UX review and final delivery choice stay open.                              |
+| E06, EXP-01            | Review             | Exact raw delivery, native PNG clipboard/fallback and exports implemented. Actual Gmail-primary/Outlook-secondary draft paste pending; no connected browser session available.                                                   |
+| EXP-02, EXP-03         | Done               | Trusted bounded SVG/PNG, all-page/partial print, 9 pt raw rows, cleanup and A4/Letter PDF/Go recovery pass.                                                                                                                      |
 
-| Milestone                   | State              | Remaining scope                                                                                                           |
-| --------------------------- | ------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| M0 — Foundation             | Done               | Reviewed loader and independent harness; retain mandatory gates.                                                          |
-| M1 — Compatible encryption  | Done (development) | Core acceptance and actual public recipient configuration pass. EN-04 retains its explicit M4 completion scope.           |
-| M2 — Usable sender/receiver | In progress        | Core sender/receiver and key guide work. Recipient usability/operational readiness and UX-03 artwork completion remain.   |
-| M3 — Symbols/artifacts      | In progress        | E05 frozen glyphs and raw/transcription recovery complete; E06 SVG/PNG/print exports and EXP-04 print integration remain. |
-| M4 — Hardened candidate     | Pending            | Full offline delivery decision, integrated privacy/export/UX and independent QA-03.                                       |
-| M5 — Release                | Pending            | Signed receiver, reviewed sender artifact, trusted independent publisher channel and operator readiness.                  |
+| Milestone                   | State              | Remaining scope                                                                                                  |
+| --------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| M0 — Foundation             | Done               | Reviewed loader and independent harness; retain mandatory gates.                                                 |
+| M1 — Compatible encryption  | Done (development) | Core acceptance and actual public recipient configuration pass. EN-04 retains its explicit M4 completion scope.  |
+| M2 - Usable sender/receiver | Review             | Sender/receiver and result/artifact flows pass; observed recipient readiness/usability remains.                  |
+| M3 - Symbols/artifacts      | Review             | E05 and E06 implementation/automated checks pass. Actual Gmail-primary/Outlook-secondary paste remains EXP-01.3. |
+| M4 — Hardened candidate     | Pending            | Full offline delivery decision, integrated privacy/export/UX and independent QA-03.                              |
+| M5 — Release                | Pending            | Signed receiver, reviewed sender artifact, trusted independent publisher channel and operator readiness.         |
 
 Current evidence:
 
 - Formatting, Astro/Svelte/strict TypeScript pass with zero errors/warnings;
-  29 unit tests and 44 Chromium/Firefox browser cases pass for the simultaneous raw/glyph results follow-up.
+  34 unit tests and 54 Chromium/Firefox browser cases pass for the E06/M3 implementation; 92 type-check files have zero diagnostics.
   Chromium's process
   sandbox is enabled. Browser versions are recorded in the machine evidence.
 - Fixture, custom and configured production builds pass artifact/CSP checks.
   Actual production default fingerprint and canonical public PEM export match
   the separately confirmed local receiver/OpenSSL value. Invalid/missing/test
   production defaults remain covered by isolated refusal tests.
-- EN-04's actual sender prototype is 146,235 bytes (about 143 KiB). Direct file opens,
+- EN-04's actual sender prototype is 165,062 bytes (about 161 KiB). Direct file opens,
   public imports, exact UTF-8/Go decryption, raw save/manual-copy fallback,
-  glyph display/raw recovery, reset, no runtime requests/storage/styles and matching final-block CSP hashes
+  glyph display/raw recovery, SVG/PNG/JSON save, request-only print, reset, no runtime requests/storage/styles and matching final-block CSP hashes
   pass Chromium/Firefox and the installed stable Edge 154.0.4258.53 channel (one
   expanded file:// case passes). Stable Chrome/Firefox installations, bundled
-  printed-row trials and full SVG/PNG/print review remain unclaimed.
+  printed-row trials, actual email-client paste and independent review remain unclaimed.
 - E05 checks cover 512-character fixed-order previews at 8/16 columns, native
   24/16 px and monochrome print legend captures, the maximum 88,102-character
   result, exact raw recovery with explicit ASCII whitespace cleaning, independent
   S64CHECK1 vectors, early row errors and complete ordered reassembly requiring
-  the full envelope digest. Generated print artifacts are outside these checks.
+  the full envelope digest. E06 adds generated archival print artifacts with exact row/page checks, full hash and independent Go recovery from PDF-extracted raw.
 - S64M1 mixes actual raw payload characters at positions 1/5/9… with outlined
-  glyphs. Sparse literal mirrors/180° rotations and CircleOff/Crosshair/Skull nulls
+  glyphs. Sparse literal mirrors/180° rotations and CircleOff/CircleDashed/Skull nulls
   after each complete eight payload characters remain consistent across previews.
-  CircleDashed is the mixed-view `j` glyph; the original S64L1 map, ciphertext,
+  The earlier development null/`j` swap is corrected to the user's request; Crosshair remains `j` in both views; the original S64L1 map, ciphertext,
   receiver and transcription checks remain unchanged. All affected browser,
   offline, max-size, production/CSP and visual evidence has been refreshed.
   No fills or larger reading view were added, by user choice.
@@ -83,16 +85,18 @@ Current evidence:
   private-exponent bit mutations rejected. No new focused reviewer verdict is
   inferred from unrelated UI/guidance changes.
 
-Evidence: [M1 packet](reviews/m1-review-packet.md),
+Evidence: [current E06/M3 export/PDF record](reviews/e06-evidence.json),
+[Gmail-first sharing matrix](exports.md),
+[M1 packet](reviews/m1-review-packet.md),
 [M1 machine record](reviews/m1-evidence.json),
 [public recipient browser evidence](reviews/production-recipient-evidence.json),
 [native key setup/restoration evidence](reviews/key-setup-evidence.json),
 [readiness helper evidence](reviews/rec03-helper-evidence.json),
 [pending human readiness trial](reviews/rec03-readiness-trial.md),
 [E05 evidence](reviews/e05-evidence.json),
-[current mixed-view evidence](reviews/mixed-view-evidence.json),
+[earlier mixed-view evidence](reviews/mixed-view-evidence.json),
 [earlier sender layout/preview evidence](reviews/sender-layout-evidence.json),
-[current simultaneous results evidence](reviews/simultaneous-results-evidence.json),
+[earlier simultaneous results evidence](reviews/simultaneous-results-evidence.json),
 [glyph mapping and recognition limits](glyph-maps.md),
 [EN-04 prototype scope](reviews/en04-prototype.md),
 [receiver machine record](reviews/rec01-evidence.json),

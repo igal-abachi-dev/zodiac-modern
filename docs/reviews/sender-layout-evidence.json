@@ -189,6 +189,6 @@
     "Preview snapshots are ignored local build files; refresh requires reloading the tab and reload clears workspace memory.",
     "REC-03 operator backup and observed novice trial, E06 exports, QA-03 and signed release remain open."
   ],
-  "supersededBy": "docs/reviews/simultaneous-results-evidence.json",
-  "historicalArtifactNotice": "Earlier exclusive display/raw UI validation. Shared machine evidence, bundle and preview capture paths have since been refreshed; original hashes are historical. Use simultaneous-results-evidence.json for current validation."
+  "supersededBy": "docs/reviews/e06-evidence.json",
+  "historicalArtifactNotice": "Earlier author-run development snapshot; original hashes and claims remain historical. E06 corrects the mixed-view null set to CircleOff/CircleDashed/Skull with Crosshair as j and adds exports/print. Shared generated artifacts/captures have been refreshed. Use e06-evidence.json and its M1 source/build hashes for current validation."
 }

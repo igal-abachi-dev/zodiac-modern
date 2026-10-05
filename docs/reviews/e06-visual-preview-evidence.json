@@ -1,0 +1,104 @@
+{
+  "recorded": "2026-10-05T22:19:33.951711+00:00",
+  "scope": "Author-run visual and live preview evidence; synthetic content only; not an independent review or email-client compatibility claim.",
+  "automatedEvidenceSHA256": "74aab9fe8e9a7f19a625670e4adcc49f2d7606fcc2cbf130159c296a02e8bccf",
+  "unchangedSourceFiles": 122,
+  "pdfVisualInspection": [
+    {
+      "format": "A4",
+      "pdfSHA256": "299bf763a888a8f246c9463cf8f872e6578b1f3e7dd483a1b15d144de88f6561",
+      "inspected": [
+        {
+          "file": "artifacts/exports/print-A4-first.png",
+          "sha256": "ed899b9dbd865a83a0fc8eba517d248493d33d63944a946746b3b61dca45d81f"
+        },
+        {
+          "file": "artifacts/exports/print-A4-middle.png",
+          "sha256": "144da7439cd6fef7817d20833d36a56701883182e302e634cad6e39a987675d6"
+        },
+        {
+          "file": "artifacts/exports/print-A4-final.png",
+          "sha256": "12ab640004c7a58a74587c7b467c816cc1b1a696d2de6b5d247fc943ae56eb57"
+        },
+        {
+          "file": "artifacts/exports/print-A4-license.png",
+          "sha256": "298a12817dc6347c4e238792718b95799d928ef3e6517067d41834d567116a6e"
+        }
+      ]
+    },
+    {
+      "format": "Letter",
+      "pdfSHA256": "5d51d8f2c2d46d416d18368e7e3baf53a8f6ed1787be26a0727dd3ec286aad56",
+      "inspected": [
+        {
+          "file": "artifacts/exports/print-Letter-first.png",
+          "sha256": "f532683e0a6a37c5c200283a4e8904c910908100ab24154d06e967892c2f8d23"
+        },
+        {
+          "file": "artifacts/exports/print-Letter-middle.png",
+          "sha256": "45369f310d7b29970fdab346fcb78b651d7ed2b565a34ce2ad2b14f8356ae482"
+        },
+        {
+          "file": "artifacts/exports/print-Letter-final.png",
+          "sha256": "cd047206b12c7203456cc0861e24fa433a45d563b980118cd019c7c2a6ffafd9"
+        },
+        {
+          "file": "artifacts/exports/print-Letter-license.png",
+          "sha256": "e294d63fddf0f057690bb9d8a9c82fcc10313ddd52fcaab1e02c0bde60354a36"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "First, middle, final and license pages inspected in A4 and Letter.",
+    "Glyphs, 9 pt raw rows and check labels are aligned, legible and within margins with no clipping or overlap.",
+    "Partial final rows leave unused cells blank; license text fits its separate sheet.",
+    "Mobile preview shows raw above the mixed glyph grid, primary raw actions before optional artwork, and no horizontal overflow."
+  ],
+  "preview": {
+    "url": "http://127.0.0.1:4324/",
+    "evidenceSHA256": "64d8fb0105cdfd2e4919ac0b4f8b145a658896ff838db0ae4fec42e0cbb1db67",
+    "checks": {
+      "recorded": "2026-10-05T22:15:40.315Z",
+      "snapshot": "33ec8579-2a4f-42c5-81e8-d4aafd05ad4d",
+      "browser": "153.0.8010.12",
+      "htmlSHA256": "b19bc31eac70aa094b609bbeb512e97305d3b7fed3a0984a8b753562c8a01fea",
+      "headersSHA256": "b0ae2ba1a92d380bd8d2bfc4f92b622b50dd13a7692969c706a10d1676e267df",
+      "headersExact": true,
+      "staticRefusals": true,
+      "metrics": [
+        {
+          "viewport": {
+            "width": 1366,
+            "height": 900
+          },
+          "messageBounds": {
+            "x": 196,
+            "y": 558.78125,
+            "width": 974,
+            "height": 240
+          }
+        },
+        {
+          "viewport": {
+            "width": 375,
+            "height": 812
+          },
+          "messageBounds": {
+            "x": 33,
+            "y": 618.765625,
+            "width": 309,
+            "height": 240
+          }
+        }
+      ],
+      "automaticDisplay": true,
+      "simultaneousResults": true,
+      "rawAboveGrid": true,
+      "pagingScroll": true,
+      "exportsAndPrint": true,
+      "errors": []
+    }
+  },
+  "emailClientChecks": "Gmail primary and Outlook secondary pending; connected browser list was empty."
+}

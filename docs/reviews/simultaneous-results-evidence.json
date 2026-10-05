@@ -158,5 +158,7 @@
     "bytes": 146235,
     "sha256": "ea151f6f21f58b65c5beec40f1f30c99749f781044ee5c511255ef6f06a810a6"
   },
-  "limits": "Recipient human readiness, E06 artwork exports, independent QA-03, signing and release remain open."
+  "limits": "Recipient human readiness, E06 artwork exports, independent QA-03, signing and release remain open.",
+  "supersededBy": "docs/reviews/e06-evidence.json",
+  "historicalArtifactNotice": "Earlier author-run development snapshot; original hashes and claims remain historical. E06 corrects the mixed-view null set to CircleOff/CircleDashed/Skull with Crosshair as j and adds exports/print. Shared generated artifacts/captures have been refreshed. Use e06-evidence.json and its M1 source/build hashes for current validation."
 }

@@ -8,7 +8,9 @@ custom recipient paths. Production recipient identity remains a launch gate.
 Implemented acceptance: CRY-01/02/03, KEY-02 and UX-01/02. UX-03's raw result,
 copy/download, immutable recipient/profile/checksum, repeat-message, clear and
 navigation lifecycle and frozen glyph display are working. Its optional artwork
-action group remains dependent on M3 SVG/PNG/print and must not be marked entirely Done.
+action group now provides full/paged SVG/PNG, separate metadata and request-only
+archival print. M3 automated evidence is in [E06](e06-evidence.json); actual Gmail
+(primary)/Outlook (secondary) draft paste remains in review.
 REC-02 implements the Windows native authenticated command and private output;
 KEY-03 guidance and native synthetic backup drills now pass. REC-03's readiness
 helper passes original/restored verification and exact nonsecret token decryption
@@ -49,8 +51,9 @@ only in separate synthetic test cases; interop uses unmodified native crypto.
 
 Visual evidence covers light/dark measured AA text/button/link/muted contrast,
 control-border contrast, native labeled focus/touch targets, 320px reflow,
-synthetic 200% text zoom, reduced motion and print. It does not claim a full
-assistive-technology audit or completed artwork/print export QA.
+synthetic 200% text zoom, reduced motion and print. Actual export/PDF QA now covers every raw/check row, independent Go recovery,
+first/middle/final A4/Letter boundaries and cancellation/cleanup. It does not
+claim a full assistive-technology audit or actual email-client compatibility.
 
 [Actual receiver console receipts](rec02-console-evidence.json) separately
 record real executable runs on browser ciphertext, genuine hidden local prompt,

@@ -232,6 +232,6 @@
       "https://lucide.dev/guide/svelte/basics/stroke-width"
     ]
   },
-  "supersededBy": "docs/reviews/sender-layout-evidence.json",
-  "historicalArtifactNotice": "This records the earlier S64M1 run. Shared M1 evidence, offline bundle and capture paths were refreshed for the sender layout/paging follow-up; original hashes remain historical. Use sender-layout-evidence.json for current code/build validation."
+  "supersededBy": "docs/reviews/e06-evidence.json",
+  "historicalArtifactNotice": "Earlier author-run development snapshot; original hashes and claims remain historical. E06 corrects the mixed-view null set to CircleOff/CircleDashed/Skull with Crosshair as j and adds exports/print. Shared generated artifacts/captures have been refreshed. Use e06-evidence.json and its M1 source/build hashes for current validation."
 }

@@ -160,6 +160,6 @@
     "privacy": "Explicit ASCII presentation-whitespace cleaning only; strict BOM/alias/padding/markup/size rejection. No XML/SVG/image importer, private key, browser decryption, runtime requests, storage or inline style attributes.",
     "remaining": "EXP-04 generated artwork/print metadata and labels integration remains E06."
   },
-  "supersededBy": "docs/reviews/mixed-view-evidence.json",
-  "historicalArtifactNotice": "Original E05 baseline receipt retained. M1 evidence and reusable screenshot/artifact paths have since been refreshed by the S64M1 follow-up; original hashes describe the historical run, not current files. Use mixed-view-evidence.json for current source and artifact checks."
+  "supersededBy": "docs/reviews/e06-evidence.json",
+  "historicalArtifactNotice": "Earlier author-run development snapshot; original hashes and claims remain historical. E06 corrects the mixed-view null set to CircleOff/CircleDashed/Skull with Crosshair as j and adds exports/print. Shared generated artifacts/captures have been refreshed. Use e06-evidence.json and its M1 source/build hashes for current validation."
 }

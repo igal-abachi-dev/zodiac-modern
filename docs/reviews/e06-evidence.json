@@ -1,0 +1,97 @@
+{
+  "recorded": "2026-10-05T22:13:35.270Z",
+  "status": "automated export and PDF checks passed; email-client review pending",
+  "milestone": "M3 Review",
+  "scope": "Author-run synthetic evidence, not an independent audit or release approval.",
+  "m1EvidenceSHA256": "bf87876e3867cc2efa718672b2c021760eaa2568c9f5abf40b12058c2685e18a",
+  "pdf": {
+    "renderer": "PyMuPDF 1.28.2",
+    "formats": [
+      {
+        "format": "A4",
+        "pages": 5,
+        "ciphertextPages": 4,
+        "pdfSHA256": "299bf763a888a8f246c9463cf8f872e6578b1f3e7dd483a1b15d144de88f6561",
+        "rawRecovery": "all rows/page codes/whole envelope match",
+        "renders": [
+          {
+            "file": "artifacts/exports/print-A4-first.png",
+            "sha256": "ed899b9dbd865a83a0fc8eba517d248493d33d63944a946746b3b61dca45d81f"
+          },
+          {
+            "file": "artifacts/exports/print-A4-middle.png",
+            "sha256": "144da7439cd6fef7817d20833d36a56701883182e302e634cad6e39a987675d6"
+          },
+          {
+            "file": "artifacts/exports/print-A4-final.png",
+            "sha256": "12ab640004c7a58a74587c7b467c816cc1b1a696d2de6b5d247fc943ae56eb57"
+          },
+          {
+            "file": "artifacts/exports/print-A4-license.png",
+            "sha256": "298a12817dc6347c4e238792718b95799d928ef3e6517067d41834d567116a6e"
+          }
+        ]
+      },
+      {
+        "format": "Letter",
+        "pages": 5,
+        "ciphertextPages": 4,
+        "pdfSHA256": "5d51d8f2c2d46d416d18368e7e3baf53a8f6ed1787be26a0727dd3ec286aad56",
+        "rawRecovery": "all rows/page codes/whole envelope match",
+        "renders": [
+          {
+            "file": "artifacts/exports/print-Letter-first.png",
+            "sha256": "f532683e0a6a37c5c200283a4e8904c910908100ab24154d06e967892c2f8d23"
+          },
+          {
+            "file": "artifacts/exports/print-Letter-middle.png",
+            "sha256": "45369f310d7b29970fdab346fcb78b651d7ed2b565a34ce2ad2b14f8356ae482"
+          },
+          {
+            "file": "artifacts/exports/print-Letter-final.png",
+            "sha256": "cd047206b12c7203456cc0861e24fa433a45d563b980118cd019c7c2a6ffafd9"
+          },
+          {
+            "file": "artifacts/exports/print-Letter-license.png",
+            "sha256": "e294d63fddf0f057690bb9d8a9c82fcc10313ddd52fcaab1e02c0bde60354a36"
+          }
+        ]
+      }
+    ],
+    "independentGoRecovery": "Exact synthetic UTF-8 plaintext from PDF-extracted raw"
+  },
+  "edge": {
+    "startTime": "2026-10-05T22:13:24.879Z",
+    "duration": 10365.713,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "offline": {
+    "bytes": 165062,
+    "sha256": "5476ddc58f8a5a8530bfeb283123a169af2d1ec742f6a4bf4ddaa8555b301e69"
+  },
+  "clipboard": {
+    "chromium": "Native image/png write and paste; exact text write and paste; denial fallback passed.",
+    "firefox": "Native image/png write resolves; headless Windows native image paste is empty. Exact text paste and save/denial fallback pass. No image paste support claim.",
+    "clients": [
+      {
+        "client": "Gmail",
+        "priority": "primary",
+        "status": "actual unsent draft paste not yet observed"
+      },
+      {
+        "client": "Outlook",
+        "priority": "secondary",
+        "status": "actual unsent draft paste not yet observed"
+      }
+    ]
+  },
+  "boundaries": [
+    "Raw .txt required by v1 receiver",
+    "Generated SVG only; no SVG/XML importer",
+    "Public checks are not authentication",
+    "EN-04 platform/review/delivery and QA-03/signing remain separate"
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "recorded": "2026-10-05T21:33:54.530Z",
+  "recorded": "2026-10-05T22:13:21.919Z",
   "scope": "Author-run public configuration/browser check, synthetic 26-byte message only. No private-key access; not audit or release verification.",
   "fingerprint": "c8f34bc8f9349c75b45dff501ebc3b3aac90d6487651834926212cc177481b34",
   "recipientName": "Zodiac Modern recipient",
@@ -10,8 +10,8 @@
   "hashes": {
     "public/keys/recipient-public.pem": "f6931dfb8679fa9871351d7ce9e8ee5e7c0cc65a2dfa8f181e5fb163fcea5090",
     "config/recipient.json": "125a40fc70baf60e6a2caa8df68e946f5a90e5c2678a6198dd4e21797d1a61e7",
-    "dist/index.html": "44b66d9d992f48bfa582cd885783949054a5789398e9f40e6b4e556552b98267",
-    "dist/.security-headers.json": "97d9386aef196c772aabe6fe5392dda34648b6c9021e8f1d945e81e374617fdd"
+    "dist/index.html": "b19bc31eac70aa094b609bbeb512e97305d3b7fed3a0984a8b753562c8a01fea",
+    "dist/.security-headers.json": "b0ae2ba1a92d380bd8d2bfc4f92b622b50dd13a7692969c706a10d1676e267df"
   },
   "publicPEMExportCanonicalExact": true,
   "runtimeRequests": [],

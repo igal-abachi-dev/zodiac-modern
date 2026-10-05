@@ -27,8 +27,7 @@ are particularly similar at this size (center radii differ); Target has multiple
 rings. Scan/Focus differ by the central circle, and polygon outlines can be
 confused at low resolution. These are documented recognition limits, not a
 promise of error-free icon transcription. Use exact raw text or printed raw rows
-and S64CHECK1 checks; the v1 receiver cannot decrypt artwork. Print artifact
-legibility/page fit remains E06/QA scope.
+and S64CHECK1 checks; the v1 receiver cannot decrypt artwork. Actual A4/Letter archival PDFs now pass E06 fit, 9 pt raw rows, exact public checks and independent Go recovery; human recognition trials remain QA scope.
 
 Recovery accepts bounded raw `.txt`/paste and manually entered printed identity,
 page and row checks. It never parses or renders imported SVG/XML/HTML/images.
@@ -54,23 +53,14 @@ S64M1 mixes actual payload characters with payload glyphs: positions 1, 5, 9…
 show literal Base64URL characters. Of those literal slots, one in seven is
 transformed, alternating horizontal mirroring and 180-degree rotation; six stay
 normal. These characters are payload, never decoys. Only the inserted CircleOff,
-Crosshair and Skull are nulls. After each complete eight payload characters,
+CircleDashed and Skull are nulls. After each complete eight payload characters,
 append one null in that repeating order. Positions and rotation remain global
 across previews; a short final group has no trailing null. A full preview has
 512 payload cells plus 64 nulls. Read transformed characters in their normal
 orientation and skip nulls. Exact raw copy/download and all recovery checks use
 only the original ciphertext.
 
-Crosshair remains `j` in the existing frozen S64L1 alphabet. It is exclusively a
-null in S64M1, whose explicit view-only `j` override is CircleDashed. The separate
-[mixed-view manifest](mixed-view-manifest.json) captures four additional vectors,
-source hashes, provenance and exact placement/orientation rules. Verify with
-`node scripts/freeze-mixed-view.mjs --check`. No original vector changed; nulls
-are visual misdirection, not additional encryption or interception protection.
-This implementation applies to the screen and shared bundled sender; E06 artwork
-must explicitly version any chosen mixed layout and preserve archival raw/check
-positions. [Mixed-view evidence](reviews/mixed-view-evidence.json) records the
-expanded checks and visual review.
+Crosshair remains `j` in S64L1 and S64M1. CircleDashed is the second null. The earlier development null/`j` swap was corrected before release to match the user's request. The [mixed-view manifest](mixed-view-manifest.json) retains four unchanged captured vectors/source hashes, with no payload override. Verify with `node scripts/freeze-mixed-view.mjs --check`. No original vector changed; nulls are visual misdirection, not additional encryption or interception protection. Screen and complete compact PNG use S64M1; S64SVG1 strips and archival pages retain S64L1 and fixed raw/check positions. [E06 evidence](reviews/e06-evidence.json) supersedes earlier development mapping/captures.
 
 License notices are delivered in the hosted public license file and inline
 with the bundled sender's legend. The source notice includes ISC and the
