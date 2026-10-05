@@ -9,6 +9,59 @@ const run = (script: string, ...args: string[]) =>
     ['-NoProfile', '-File', resolve(script), ...args],
     { encoding: 'utf8', windowsHide: true },
   );
+it('receiver verifier rejects an unsigned executable and wrong hash without executing it', () => {
+  const directory = mkdtempSync(resolve('.cache/receiver-verification-'));
+  try {
+    const path = resolve(directory, 'synthetic-unsigned.exe');
+    const bytes = Buffer.from('Synthetic nonexecutable verification fixture.');
+    writeFileSync(path, bytes);
+    const hash = createHash('sha256').update(bytes).digest('hex');
+    const unsigned = run(
+      'scripts/verify-receiver.ps1',
+      '-Path',
+      path,
+      '-ExpectedSHA256',
+      hash,
+      '-ExpectedPublisher',
+      'CN=Synthetic expected publisher',
+    );
+    expect(unsigned.status).not.toBe(0);
+    expect(unsigned.stderr).toContain(
+      'signature or expected publisher mismatch',
+    );
+    const mismatch = run(
+      'scripts/verify-receiver.ps1',
+      '-Path',
+      path,
+      '-ExpectedSHA256',
+      '0'.repeat(64),
+      '-ExpectedPublisher',
+      'CN=Synthetic expected publisher',
+    );
+    expect(mismatch.status).not.toBe(0);
+    expect(mismatch.stderr).toContain('Receiver hash mismatch');
+    // The installed Node executable is not a Zodiac release. If Authenticode is
+    // valid, its real Subject must still fail an unrelated expected publisher.
+    const nodeHash = createHash('sha256')
+      .update(readFileSync(process.execPath))
+      .digest('hex');
+    const wrongPublisher = run(
+      'scripts/verify-receiver.ps1',
+      '-Path',
+      process.execPath,
+      '-ExpectedSHA256',
+      nodeHash,
+      '-ExpectedPublisher',
+      'CN=Synthetic unrelated publisher',
+    );
+    expect(wrongPublisher.status).not.toBe(0);
+    expect(wrongPublisher.stderr).toContain(
+      'signature or expected publisher mismatch',
+    );
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
+});
 it('readiness helper refuses captured execution before private file access or output creation', () => {
   const result = run(
     'scripts/test-recipient-readiness.ps1',

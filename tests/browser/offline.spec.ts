@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { openCustomKey } from './sender-controls';
+import type { ExportBundle } from '../../src/lib/export/layout';
 test('file probe opens under default settings with no adjacent files or network', async ({
   page,
 }, testInfo) => {
@@ -48,6 +49,7 @@ test('file probe opens under default settings with no adjacent files or network'
   );
   await expect(page.locator('.recipient-summary strong')).toBeVisible();
   let recoveryRaw = '';
+  let recoveryData: ExportBundle | null = null;
   for (const bits of [3072, 4096]) {
     const pem = readFileSync(
       `receiver/tests/fixtures/keys/openssl-3.5-${bits}-public.pem`,
@@ -137,8 +139,10 @@ test('file probe opens under default settings with no adjacent files or network'
         expect([...bytes.toString().matchAll(/<use /g)].length).toBe(
           raw.length,
         );
-      if (extension === 'json')
+      if (extension === 'json') {
+        recoveryData = JSON.parse(bytes.toString()) as ExportBundle;
         expect(JSON.parse(bytes.toString()).raw).toBe(raw);
+      }
       if (extension === 'png') {
         expect(bytes.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
         expect(bytes.readUInt32BE(20)).toBeLessThanOrEqual(4096);
@@ -232,6 +236,19 @@ test('file probe opens under default settings with no adjacent files or network'
   await page
     .getByRole('button', { name: 'Clear recovery', exact: true })
     .click();
+  expect(recoveryData).not.toBeNull();
+  await page.getByRole('button', { name: 'Printed rows', exact: true }).click();
+  await page.getByLabel('Printed whole-envelope SHA-256').fill(recoveryData!.context.envelopeSHA256);
+  await page.getByLabel('Printed recipient fingerprint').fill(recoveryData!.context.recipientFingerprint);
+  await page.getByLabel('Printed total raw characters').fill(String(recoveryRaw.length));
+  for (const p of recoveryData!.pages) {
+    await page.getByLabel('Printed page number').fill(String(p.pageIndex + 1));
+    await page.getByLabel('Printed page check').fill(p.digest.slice(0,12));
+    await page.getByLabel('Printed rows: row number').fill(p.rows.map(r => `${r.rowIndex + 1} ${r.raw} ${r.checkCode}`).join('\n'));
+    await page.getByRole('button',{name:'Check rows / add complete page',exact:true}).click();
+  }
+  await expect(page.getByLabel('Recovered raw ciphertext',{exact:true})).toHaveValue(recoveryRaw);
+  await page.getByRole('button',{name:'Clear recovery',exact:true}).click();
   expect(network).toEqual([]);
   expect(csp).toEqual([]);
   expect(await page.locator('[style]').count()).toBe(0);
