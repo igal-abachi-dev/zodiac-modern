@@ -1,6 +1,7 @@
 import { createServer } from 'node:http';
 import { readFile, realpath, stat } from 'node:fs/promises';
 import { extname, relative, resolve, sep } from 'node:path';
+import { checkPolicy } from './check-policy.mjs';
 const preview = process.argv.includes('--preview');
 const confined = (root, path) => {
   const rel = relative(root, path);
@@ -37,6 +38,7 @@ const initial = preview
       );
       return { root, headers };
     })();
+await checkPolicy(initial.root);
 const port = Number(process.env.ZODIAC_PORT ?? 4321);
 if (!Number.isInteger(port) || port < 1024 || port > 65535)
   throw new Error('Invalid local port.');

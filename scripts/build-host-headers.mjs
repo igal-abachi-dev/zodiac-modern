@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { securityHeaders } from '../config/security-policy.ts';
 import { filesAt } from './walk-files.mjs';
-export async function buildHeaders(root) {
+export async function expectedHeaders(root) {
   const scripts = new Set();
   const styles = new Set();
   const hash = (body) =>
@@ -19,7 +19,10 @@ export async function buildHeaders(root) {
     for (const match of html.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi))
       styles.add(hash(match[1]));
   }
-  const headers = securityHeaders([...scripts].sort(), [...styles].sort());
+  return securityHeaders([...scripts].sort(), [...styles].sort());
+}
+export async function buildHeaders(root) {
+  const headers = await expectedHeaders(root);
   await writeFile(
     join(root, '.security-headers.json'),
     JSON.stringify(headers, null, 2) + '\n',

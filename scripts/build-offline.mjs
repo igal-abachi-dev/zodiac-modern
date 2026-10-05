@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { prepareRecipient } from './prepare-recipient.mjs';
 import { compile } from 'svelte/compiler';
+import { contentSecurityPolicy } from '../config/security-policy.ts';
 const mode = process.argv[2] ?? 'fixture';
 if (!['fixture', 'custom', 'production'].includes(mode))
   throw Error('Invalid offline build mode.');
@@ -12,6 +13,7 @@ const compiled = await build({
   entryPoints: ['offline/entry.ts'],
   bundle: true,
   write: false,
+  metafile: true,
   format: 'iife',
   platform: 'browser',
   minify: true,
@@ -49,7 +51,11 @@ const style = [
   .join('\n')
   .replace(/\r\n?/g, '\n');
 const hash = (body) => createHash('sha256').update(body).digest('base64');
-const csp = `default-src 'none'; script-src 'sha256-${hash(script)}'; script-src-attr 'none'; style-src 'sha256-${hash(style)}'; style-src-attr 'none'; img-src blob: data:; connect-src 'none'; worker-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'`;
+const csp = contentSecurityPolicy(
+  [`'sha256-${hash(script)}'`],
+  [`'sha256-${hash(style)}'`],
+  true,
+);
 const shell = (await readFile('offline/shell.html', 'utf8'))
   .replace(
     '<!--CSP-->',
@@ -65,6 +71,10 @@ if (/\b(?:src|href)=["'](?!blob:|data:|#)/.test(shell))
 const root = 'artifacts/offline probe שלום';
 await mkdir(root, { recursive: true });
 const filename = `${root}/zodiac-synthetic-probe.html`;
+await writeFile(
+  'artifacts/offline-build-inputs.json',
+  JSON.stringify(compiled.metafile, null, 2) + '\n',
+);
 await writeFile(filename, shell);
 await writeFile(
   filename + '.sha256',

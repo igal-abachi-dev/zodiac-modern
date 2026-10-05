@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import trust from '../../config/release-trust.json';
+import { defaultRecipient } from '../generated/default-recipient';
 ---
 
 <Layout title="Security">
@@ -13,9 +15,88 @@ import Layout from '../layouts/Layout.astro';
     verify a pinned local sender through an independently trusted channel. A
     same-site hash or badge does not establish trust.
   </p>
+  <h2>Confirm the recipient</h2>
+  <p>
+    Check the complete SHA-256 public-key fingerprint with the recipient using
+    an existing trusted contact. A filename, badge or value shown by this site
+    cannot establish identity on its own. If the operator holds the default
+    recipient's private key, the operator can decrypt ciphertext you choose to
+    share with them; messages are not automatically delivered to them.
+  </p>
+  {defaultRecipient && (
+    <p class="fingerprint">
+      Configured public recipient: {defaultRecipient.name} · RSA-
+      {defaultRecipient.bits}
+      <br />
+      SHA-256: {defaultRecipient.fingerprint}
+    </p>
+  )}
+  <h2>Verify code before sensitive typing</h2>
+  <ol>
+    <li>
+      Obtain the exact official origin and reviewed release hashes through an
+      independently trusted publisher channel. Bookmark that origin; avoid
+      search ads and unsolicited download links.
+    </li>
+    <li>
+      For a local HTML sender, compare the complete file's SHA-256 outside the
+      file before opening it. The page cannot verify itself.
+    </li>
+    <li>
+      For the Windows receiver, require the expected full hash, a Valid
+      Authenticode signature and the exact expected certificate Subject. Any
+      signature alone is insufficient. Stop on mismatch or missing evidence; do
+      not bypass operating-system warnings.
+    </li>
+    <li>
+      Confirm the recipient separately. Release-signing credentials and
+      recipient RSA keys serve different purposes.
+    </li>
+  </ol>
+  <p>
+    A valid signature proves provenance relative to the trusted publisher;
+    review still matters. TLS authenticates domain control, and a clone can copy
+    all visible text, logos and hashes. There is no automatic clone detector.
+  </p>
+  <dl>
+    <dt>Official HTTPS origin</dt>
+    <dd>
+      {trust.officialOrigin ??
+        'Pending operator confirmation; no official release origin established.'}
+    </dd>
+    <dt>Proposed Vercel address</dt>
+    <dd>
+      {trust.proposedOrigin} — pending availability, deployment and
+      response-header verification.
+    </dd>
+    <dt>Expected Windows signing publisher</dt>
+    <dd>
+      {trust.expectedAuthenticodePublisher ??
+        'Pending; no signed receiver release available.'}
+    </dd>
+    <dt>Independent release-verification channel</dt>
+    <dd>
+      {trust.independentVerificationChannel ??
+        'Pending; same-site downloads and hashes do not close this gap.'}
+    </dd>
+    <dt>Reviewed release</dt>
+    <dd>
+      {trust.reviewedRelease ??
+        'Pending integrated independent review and final artifact hashes.'}
+    </dd>
+  </dl>
+  <h2>Cryptographic and device limits</h2>
   <p>
     RSA provides neither forward secrecy nor post-quantum security. Browser
     strings, extensions, operating systems and exported files remain outside
     guaranteed erasure.
+  </p>
+  <p>
+    The envelope reveals approximate plaintext byte length. Public-key
+    encryption supplies no sender authentication. This implementation has no
+    formal IND-CCA2 proof, FIPS certification or government approval, and makes
+    no constant-time JavaScript claim. Public transcription checks are not
+    authentication. Read{' '}
+    <a href="/privacy/">what stays in memory and what exports persist</a>.
   </p>
 </Layout>

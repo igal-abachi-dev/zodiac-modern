@@ -4,14 +4,48 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Privacy">
   <h1>Privacy</h1>
+  <h2>Your workspace stays in this tab</h2>
   <p>
-    This static scaffold has no message input, analytics, remote fonts or
-    message-processing API. Static asset requests can appear in the host's
-    ordinary access logs.
+    The sender imports public keys and encrypts messages locally with native
+    WebCrypto. After the static page and its local assets load, typing, key
+    import, encryption, raw recovery and artwork exports make no application
+    network requests. Private keys and their passphrases belong only in the
+    separate offline receiver.
   </p>
   <p>
-    The planned sender keeps message state in tab memory. Explicit downloads,
-    clipboard copies and printing persist outside the application; their storage
-    cannot be securely erased by the website.
+    There is no message history, autosave, account, analytics, remote font,
+    tracking widget, error collector or service worker. Drafts, custom public
+    keys, ciphertext and recovery inputs remain in memory. Clear everything,
+    reload and leaving the workspace discard its state; returning through
+    browser history resets it too. Encryption clears the draft after success.
+  </p>
+  <h2>What persists outside the application</h2>
+  <p>
+    Copy, download and print are explicit exports. Clipboard managers, saved
+    ciphertext/artwork, print spools and PDFs can retain copies after this tab
+    closes. The receiver deliberately saves authenticated plaintext to a new
+    private local file; it does not keep an application history or automatically
+    open an editor. You control who can access those files.
+  </p>
+  <p>
+    Owned temporary byte buffers are cleared where possible. JavaScript strings,
+    browser undo/restoration buffers, extensions, keyboards, the operating
+    system and garbage collection cannot provide guaranteed secure erasure.
+    Clearing the page does not wipe exported files or the clipboard.
+  </p>
+  <h2>Static hosting and delivered code</h2>
+  <p>
+    Loading a hosted page sends ordinary IP, path and browser metadata to its
+    hosting provider; static access logs and normal asset caching may exist.
+    Browser or operating-system traffic is outside this application's control.
+    Reloading a hosted page while offline is not promised.
+  </p>
+  <p>
+    These properties describe the intended build. A compromised host, extension
+    or device can capture plaintext or replace the recipient key. Before typing
+    sensitive content when you do not trust the host, use a reviewed local
+    sender whose complete file was verified through an independent trusted
+    channel. No reviewed release is available yet. Read the
+    <a href="/security/">security and verification guidance</a>.
   </p>
 </Layout>

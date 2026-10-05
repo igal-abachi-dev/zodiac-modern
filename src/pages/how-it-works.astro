@@ -5,13 +5,88 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="How it works">
   <h1>How it works</h1>
   <p>
-    The planned sender uses native WebCrypto to wrap a fresh AES-256 key with
-    RSA-OAEP SHA-256, then encrypt exact UTF-8 message bytes with AES-GCM.
-    Celestial glyphs present ciphertext reversibly; they do not add security.
+    The website sends static application files to your browser. Your message is
+    encrypted in that browser; no encryption or decryption server processes it.
+    Confirm the recipient's full public-key fingerprint through your existing
+    trusted contact before encrypting.
+  </p>
+  <figure aria-labelledby="flow-caption">
+    <figcaption id="flow-caption">Local sender to offline recipient</figcaption>
+    <ol class="flow">
+      <li>
+        <strong>Your browser</strong>
+        <span>
+          Message + confirmed public key → native WebCrypto encryption
+        </span>
+      </li>
+      <li>
+        <strong>Your explicit export</strong>
+        <span>Copy raw or download ciphertext.txt; artwork is optional</span>
+      </li>
+      <li>
+        <strong>Recipient's offline Go tool</strong>
+        <span>
+          Encrypted private key + hidden local passphrase → authenticate → new
+          private plaintext file
+        </span>
+      </li>
+    </ol>
+  </figure>
+  <h2>Encryption and transport</h2>
+  <p>
+    Each message uses a fresh 32-byte AES key and 12-byte nonce. RSA-OAEP with
+    SHA-256 wraps that key using the selected RSA-3072 or RSA-4096 public key.
+    AES-256-GCM encrypts exact UTF-8 bytes with a 128-bit authentication tag;
+    the wrapped key and nonce are associated data. The compatible envelope is
+    wrapped key, nonce, tag, ciphertext, encoded as unpadded canonical
+    Base64URL.
+  </p>
+  <p>
+    Send the complete raw ciphertext.txt to the recipient. The Go receiver
+    unlocks the encrypted private PEM locally, unwraps the AES key and checks
+    authentication before creating a new plaintext file. It never listens for
+    connections, prints plaintext, or uploads private material. Ordinary use
+    needs one command; <a href="/receive/">see the receiving guide</a>.
+  </p>
+  <h2>Glyphs and checks</h2>
+  <p>
+    The mixed display shows ciphertext characters and outlined symbols, with
+    three null shapes that carry no payload. This is reversible presentation,
+    not extra security. PNG and SVG artwork are optional; the v1 receiver reads
+    raw text and cannot decrypt artwork. Printed raw rows and public check codes
+    help locate transcription mistakes; they do not authenticate a sender.
   </p>
   <p>
     Send raw ciphertext with the artwork. Only the matching private key can
     normally decrypt it. Public-key encryption does not identify the sender.
   </p>
-  <p>The application and independent security review are in development.</p>
+  <p>
+    Encryption does not hide message length, provide forward secrecy or resist a
+    future quantum attack on RSA. Integrated independent review and signed
+    release verification remain pending.
+  </p>
 </Layout>
+
+<style>
+  figure {
+    margin: 1.5rem 0;
+  }
+  figcaption {
+    font-weight: 600;
+  }
+  .flow {
+    display: grid;
+    gap: 0.75rem;
+    padding-inline-start: 1.5rem;
+    max-width: 70ch;
+  }
+  .flow li {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+    background: var(--color-panel);
+  }
+  .flow span {
+    display: block;
+  }
+</style>
