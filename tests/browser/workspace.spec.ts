@@ -121,7 +121,13 @@ test('sender exact bytes, command interoperability, exports, immutable recipient
       page.getByRole('heading', { name: 'Encrypted message', exact: true }),
     ).toBeFocused();
     await expect(page.locator('#result-display')).toBeVisible();
-    await expect(page.locator('#result-raw')).toBeHidden();
+    await expect(page.locator('#result-raw')).toBeVisible();
+    await expect(page.getByLabel('Raw ciphertext')).toBeVisible();
+    await expect(page.getByLabel('Raw ciphertext')).toHaveAttribute('readonly', '');
+    const rawBounds = await page.locator('#result-raw').boundingBox();
+    const displayBounds = await page.locator('#result-display').boundingBox();
+    expect(rawBounds!.y + rawBounds!.height).toBeLessThanOrEqual(displayBounds!.y);
+    await expect(page.getByRole('navigation', { name: 'Encrypted result views' })).toHaveCount(0);
     expect(await message.count()).toBe(0);
     await expect(page.getByLabel('Paste public PEM')).toBeDisabled();
     const raw = await page.getByLabel('Raw ciphertext').inputValue();
@@ -159,6 +165,7 @@ test('sender exact bytes, command interoperability, exports, immutable recipient
     });
     await page.getByRole('button', { name: 'Copy raw', exact: true }).click();
     await expect(page.getByLabel('Raw ciphertext')).toBeFocused();
+    await expect(page.locator('#result-display')).toBeVisible();
     expect(
       await page
         .getByLabel('Raw ciphertext')

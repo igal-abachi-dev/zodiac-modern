@@ -122,7 +122,6 @@ test('guide-created encrypted keys import and recover exact nonsecret text after
         .click();
       const raw = page.getByLabel('Raw ciphertext');
       await expect(page.locator('#result-display')).toBeVisible();
-      await page.getByRole('button', { name: 'Raw view', exact: true }).click();
       await expect(raw).toBeVisible();
       copyFileSync(final, backup);
       const privateDER = run([

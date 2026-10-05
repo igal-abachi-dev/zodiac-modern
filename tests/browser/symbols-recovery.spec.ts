@@ -168,11 +168,10 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
     'Crosshair',
   );
   await page.setViewportSize({ width: 1100, height: 900 });
-  await page.getByRole('button', { name: 'Raw view', exact: true }).click();
+  await expect(page.locator('#result-display')).toBeVisible();
   await expect(page.getByLabel('Raw ciphertext')).toHaveValue(raw);
   expect(await page.locator('[style]').count()).toBe(0);
   expect(errors).toEqual([]);
-  await page.getByRole('button', { name: 'Display view', exact: true }).click();
   // Only synthetic ciphertext/artwork; no plaintext composer or private input.
   // Playwright screenshots temporarily alter DOM styles. Product DOM assertions
   // above precede that test-tool intervention; screenshots are visual evidence.

@@ -27,7 +27,6 @@
   let messageInput = $state<HTMLTextAreaElement>();
   let resultHeading = $state<HTMLHeadingElement>();
   let rawInput = $state<HTMLTextAreaElement>();
-  let resultView = $state<'display' | 'raw'>('display');
   const busy = $derived(view.phase === 'encrypting');
   const byteCount = $derived.by(() => {
     try {
@@ -60,7 +59,6 @@
     notice = '';
     const success = await workspace.submit();
     if (success && view.result) {
-      resultView = 'display';
       notice = 'Message encrypted locally. The draft has been cleared.';
       await tick();
       resultHeading?.focus();
@@ -111,7 +109,6 @@
         'Raw ciphertext copied. The clipboard persists outside this tab.';
     } catch {
       if (view.result?.raw !== raw) return;
-      resultView = 'raw';
       await tick();
       if (view.result?.raw !== raw) return;
       notice =
@@ -163,42 +160,21 @@
         The checksum is a public transcription check, not authentication. Send
         the raw text to the recipient's offline receiver.
       </p>
-      <nav class="workspace-actions" aria-label="Encrypted result views">
-        <button
-          type="button"
-          aria-pressed={resultView === 'display'}
-          aria-controls="result-display"
-          onclick={() => (resultView = 'display')}>Display view</button
-        >
-        <button
-          type="button"
-          aria-pressed={resultView === 'raw'}
-          aria-controls="result-raw"
-          onclick={() => (resultView = 'raw')}>Raw view</button
-        >
-      </nav>
-      <section
-        id="result-display"
-        hidden={resultView !== 'display'}
-        aria-label="Ciphertext display"
-      >
-        {#if displayContent}
-          {@render displayContent(view.result)}
-        {:else}<SymbolPlate raw={view.result.raw} />{/if}
-      </section>
-      <section
-        id="result-raw"
-        hidden={resultView !== 'raw'}
-        aria-label="Canonical transport view"
-      >
+      <section id="result-raw" aria-label="Canonical transport view">
         <label for="raw-ciphertext">Raw ciphertext (canonical Base64URL)</label>
         <textarea
           id="raw-ciphertext"
           bind:this={rawInput}
           readonly
+          dir="ltr"
           value={view.result.raw}
           spellcheck="false"
           autocomplete="off"></textarea>
+      </section>
+      <section id="result-display" aria-label="Ciphertext display">
+        {#if displayContent}
+          {@render displayContent(view.result)}
+        {:else}<SymbolPlate raw={view.result.raw} />{/if}
       </section>
       <div class="workspace-actions">
         <button type="button" onclick={copyRaw}>Copy raw</button>
