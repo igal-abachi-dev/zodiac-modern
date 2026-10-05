@@ -447,9 +447,9 @@ message textarea is available without scrolling at standard desktop/mobile
 viewports. The "Use a custom public key" button opens a collapsed, keyboard
 accessible accordion containing file/paste controls; clear-all closes it.
 Encrypt and Clear are grouped before the optional nonsecret readiness token.
-Each successful encryption selects the glyph display automatically, including
-after a previous raw view. Raw view, raw copy/download and the manual clipboard
-fallback remain accessible.
+Each successful encryption automatically displays complete raw ciphertext above
+the glyph grid. Both remain visible together without a view toggle. Raw
+copy/download and the manual clipboard fallback remain accessible.
 Glyph preview paging scrolls to the first row of the newly rendered grid (as far
 as the document's scroll limit permits), without animated scrolling.
 
@@ -466,8 +466,8 @@ Encrypted in your browser. Your message is not sent to a server.
 
 After encryption:
 Message encrypted · Recipient snapshot · ciphertext length
-[ Celestial plate | Raw ciphertext ]
-[ plate / text view with pagination                              ]
+[ Raw ciphertext (complete Base64URL)                            ]
+[ Celestial glyph grid with pagination                           ]
 [ Download ciphertext (.txt) ] [ Copy raw ]
 Artwork (optional): [ Copy artwork image ] [ Download one-line SVG ] [ Save / Print ]
 
@@ -486,7 +486,7 @@ Keep key loading and editor state explicit rather than deriving everything from 
 | Key unavailable | Clear missing/invalid default explanation; local key import available | Valid custom key → ready |
 | Ready/editing | Recipient details, draft, byte count; button enabled only for valid nonempty input | Encrypting / import / clear |
 | Encrypting | Disable editing, key switch, and duplicate submit; announce “Encrypting on this device” | Complete / failure / explicit discard |
-| Complete | Clear draft; result with recipient snapshot and save actions; focus result heading | Another message / clear / export |
+| Complete | Clear draft; recipient snapshot, complete raw ciphertext above glyph grid and save actions; focus result heading | Another message / clear / export |
 | Failure | Generic local crypto error; retain draft/key; no partial ciphertext | Retry / edit / clear |
 | Unsupported browser | Explain HTTPS/WebCrypto requirement; no fallback cryptography | Retry capability check after environment correction |
 

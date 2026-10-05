@@ -1,6 +1,6 @@
 # Live delivery status
 
-Updated 2026-10-05 (Asia/Jerusalem); evidence records UTC timestamps.
+Updated 2026-10-06 (Asia/Jerusalem); evidence records UTC timestamps.
 M0 and M1 development acceptance pass. The operator-confirmed production public
 recipient is configured; integrated review, signing and release remain open.
 Acceptance criteria remain in [the backlog](../backlog.md).
@@ -12,7 +12,7 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 | KEY-01, KEY-02         | Done               | Strict SPKI import, fingerprints, default/custom file/paste/details/export and recipient snapshots.                                                                                                                              |
 | EN-03                  | Done               | Operator-confirmed RSA-4096 public PEM/name/fingerprint; production build, actual default browser import and canonical public export pass. Private files remain ignored and outside build inputs.                                |
 | UX-01, UX-02           | Done               | Accessible responsive visual system and exact message/encrypt/error/IME/focus flow.                                                                                                                                              |
-| UX-03.1                | Done               | Immutable result summary, native display/raw view controls, typed display/artwork action slots and working primary raw exports.                                                                                                  |
+| UX-03.1                | Done               | Immutable result summary, complete raw ciphertext above the always-visible glyph grid, typed display/artwork action slots and working primary raw exports.                                                                       |
 | UX-03                  | In progress        | Repeat/reset/navigation and actual frozen glyph display pass. Optional SVG/PNG/print actions remain E06.                                                                                                                         |
 | REC-01                 | Done               | Focused conditional loader approval and verified fixes; mandatory fixture/native/vendor/resource/fuzz gates retained.                                                                                                            |
 | REC-02                 | Done (Windows)     | Authenticated offline command, exclusive private output and native path/mapping/reparse/race/ACL/cancel/cleanup tests. QA-03 remains separate.                                                                                   |
@@ -35,14 +35,14 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 Current evidence:
 
 - Formatting, Astro/Svelte/strict TypeScript pass with zero errors/warnings;
-  29 unit tests and 44 Chromium/Firefox browser cases pass for the sender layout/paging follow-up.
+  29 unit tests and 44 Chromium/Firefox browser cases pass for the simultaneous raw/glyph results follow-up.
   Chromium's process
   sandbox is enabled. Browser versions are recorded in the machine evidence.
 - Fixture, custom and configured production builds pass artifact/CSP checks.
   Actual production default fingerprint and canonical public PEM export match
   the separately confirmed local receiver/OpenSSL value. Invalid/missing/test
   production defaults remain covered by isolated refusal tests.
-- EN-04's actual sender prototype is 146,693 bytes (about 143 KiB). Direct file opens,
+- EN-04's actual sender prototype is 146,235 bytes (about 143 KiB). Direct file opens,
   public imports, exact UTF-8/Go decryption, raw save/manual-copy fallback,
   glyph display/raw recovery, reset, no runtime requests/storage/styles and matching final-block CSP hashes
   pass Chromium/Firefox and the installed stable Edge 154.0.4258.53 channel (one
@@ -60,7 +60,8 @@ Current evidence:
   receiver and transcription checks remain unchanged. All affected browser,
   offline, max-size, production/CSP and visual evidence has been refreshed.
   No fills or larger reading view were added, by user choice.
-- Encryption opens the glyph display automatically. Custom public-key fields
+- Encryption automatically shows complete raw ciphertext above the glyph grid,
+  with both visible together and no view toggle. Custom public-key fields
   start collapsed, the initial message is visible at standard desktop/mobile
   sizes, and Encrypt/Clear precede readiness controls. Glyph paging returns to
   the top of the updated grid. `pnpm preview:local` serves the configured sender
@@ -90,7 +91,8 @@ Evidence: [M1 packet](reviews/m1-review-packet.md),
 [pending human readiness trial](reviews/rec03-readiness-trial.md),
 [E05 evidence](reviews/e05-evidence.json),
 [current mixed-view evidence](reviews/mixed-view-evidence.json),
-[current sender layout/preview evidence](reviews/sender-layout-evidence.json),
+[earlier sender layout/preview evidence](reviews/sender-layout-evidence.json),
+[current simultaneous results evidence](reviews/simultaneous-results-evidence.json),
 [glyph mapping and recognition limits](glyph-maps.md),
 [EN-04 prototype scope](reviews/en04-prototype.md),
 [receiver machine record](reviews/rec01-evidence.json),

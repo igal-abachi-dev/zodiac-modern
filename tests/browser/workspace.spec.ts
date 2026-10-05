@@ -123,11 +123,18 @@ test('sender exact bytes, command interoperability, exports, immutable recipient
     await expect(page.locator('#result-display')).toBeVisible();
     await expect(page.locator('#result-raw')).toBeVisible();
     await expect(page.getByLabel('Raw ciphertext')).toBeVisible();
-    await expect(page.getByLabel('Raw ciphertext')).toHaveAttribute('readonly', '');
+    await expect(page.getByLabel('Raw ciphertext')).toHaveAttribute(
+      'readonly',
+      '',
+    );
     const rawBounds = await page.locator('#result-raw').boundingBox();
     const displayBounds = await page.locator('#result-display').boundingBox();
-    expect(rawBounds!.y + rawBounds!.height).toBeLessThanOrEqual(displayBounds!.y);
-    await expect(page.getByRole('navigation', { name: 'Encrypted result views' })).toHaveCount(0);
+    expect(rawBounds!.y + rawBounds!.height).toBeLessThanOrEqual(
+      displayBounds!.y,
+    );
+    await expect(
+      page.getByRole('navigation', { name: 'Encrypted result views' }),
+    ).toHaveCount(0);
     expect(await message.count()).toBe(0);
     await expect(page.getByLabel('Paste public PEM')).toBeDisabled();
     const raw = await page.getByLabel('Raw ciphertext').inputValue();

@@ -298,8 +298,8 @@ As a sender, I can save the current ciphertext and then begin a clean new messag
 
 Acceptance criteria:
 
-- Result includes immutable recipient snapshot, profile, length/checksum, display/raw views, and clear sharing/export actions; the composer no longer displays the plaintext.
-- Successful encryption opens the glyph display automatically; switching to raw and clipboard denial still expose complete raw ciphertext.
+- Result includes immutable recipient snapshot, profile, length/checksum, raw ciphertext above the glyph grid, and clear sharing/export actions; the composer no longer displays the plaintext.
+- Successful encryption automatically shows complete raw ciphertext and the glyph grid together without view toggles; clipboard denial focuses/selects raw text while keeping glyphs visible.
 - Primary actions are Download ciphertext (.txt) and Copy raw; the Artwork (optional) group contains complete/page image, one-line SVG and print. Art-only files cannot be decrypted by the v1 CLI; explain accompanying raw delivery and the absence of an SVG importer.
 - “Encrypt another message” discards old result, retains current public recipient for this tab, focuses empty input, and explains result loss without repetitive modal prompts.
 - “Clear everything” discards sensitive workspace state and custom key, invalidates pending operations, clears inputs, and restores only a valid default.
@@ -307,7 +307,7 @@ Acceptance criteria:
 
 Subtasks:
 
-- [x] UX-03.1 — immutable result shell, native accessible display/raw view controls and typed Svelte display/artwork action slots; primary raw exports work. Optional artwork actions remain unavailable until M3 validates them.
+- [x] UX-03.1 — immutable result shell, accessible raw ciphertext above the always-visible glyph grid and typed Svelte display/artwork action slots; primary raw exports work. Optional artwork actions remain unavailable until M3 validates them.
 - [x] UX-03.2 — implement repeat-message/clear-all/pageshow reset and focus handling.
 - [x] UX-03.3 — test successive messages, busy clear/discard, reload, history navigation, and screen-reader summaries.
 

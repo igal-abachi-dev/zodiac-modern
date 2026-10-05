@@ -131,12 +131,15 @@ test('file probe opens under default settings with no adjacent files or network'
         },
       }),
     );
-    await page
-      .getByRole('button', { name: 'Display view', exact: true })
-      .click();
     await expect(
       page.getByLabel('Raw ciphertext', { exact: false }),
-    ).toBeHidden();
+    ).toBeVisible();
+    await expect(page.locator('#result-display')).toBeVisible();
+    const rawBounds = await page.locator('#result-raw').boundingBox();
+    const displayBounds = await page.locator('#result-display').boundingBox();
+    expect(rawBounds!.y + rawBounds!.height).toBeLessThanOrEqual(
+      displayBounds!.y,
+    );
     await expect(
       page.locator('.glyph-plate .glyph-cell[data-character]'),
     ).toHaveCount(512);
@@ -162,6 +165,7 @@ test('file probe opens under default settings with no adjacent files or network'
     ).toBe(9);
     await page.getByRole('button', { name: 'Copy raw', exact: true }).click();
     await expect(page.getByLabel('Raw ciphertext')).toBeFocused();
+    await expect(page.locator('#result-display')).toBeVisible();
     await page
       .getByRole('button', { name: 'Encrypt another message', exact: true })
       .click();

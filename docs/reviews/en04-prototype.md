@@ -8,7 +8,7 @@ adjacent-file, runtime import, remote font or network dependency. Frozen glyph
 display, its legend and local raw recovery are included. SVG/PNG/print exports
 remain pending E06.
 
-The measured fixture artifact is 146,693 bytes (about 143 KiB). Chromium and Firefox open it
+The measured fixture artifact is 146,235 bytes (about 143 KiB). Chromium and Firefox open it
 directly through file:// from a path containing spaces and Hebrew characters.
 Tests exercise both sizes, configured key initialization, public file/paste
 replacement, exact UTF-8, independent Go decryption, raw download/manual-copy

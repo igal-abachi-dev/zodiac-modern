@@ -1,0 +1,162 @@
+{
+  "recorded": "2026-10-05T21:37:10.346Z",
+  "status": "simultaneous results development acceptance passed",
+  "scope": "Shared hosted and bundled sender UI. Author-run synthetic checks; no cryptographic envelope, glyph grammar or export changes. Independent review and release gates remain separate.",
+  "behavior": [
+    "Every successful encryption automatically displays complete canonical raw ciphertext above the glyph grid; both remain visible with no view switch.",
+    "Denied clipboard access focuses and selects complete raw text while glyphs remain visible.",
+    "Successive messages, both RSA sizes, mobile/desktop, maximum-size results, grid paging and bundled file:// use remain covered."
+  ],
+  "developmentGate": {
+    "path": "docs/reviews/m1-evidence.json",
+    "sha256": "f67058ab2fb283517567a6be158f46bf665a3486c403495731cfabf195b91699",
+    "started": "2026-10-05T21:31:44.142Z",
+    "finished": "2026-10-05T21:33:54.611Z",
+    "checks": [
+      {
+        "name": "type-format",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 46956,
+        "logSHA256": "1e32b92354ae73d7d65e5ed4b633372acc83e37eaa644c986efd447a3ecf9760"
+      },
+      {
+        "name": "unit",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 3737,
+        "logSHA256": "798b358782a178e82b5138e7db1ea17596e753972662e04b4ce7c4b05f556b28"
+      },
+      {
+        "name": "fixture-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 5630,
+        "logSHA256": "8af100c2ea126e6fcab7fa9d2de0439f8108a90b3eb6b1da20d379b77e2dbced"
+      },
+      {
+        "name": "custom-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 4101,
+        "logSHA256": "95e122a3a5d4069d6d2151d9fcb5359b4338c836c41f9880e326d7efb165b6b4"
+      },
+      {
+        "name": "offline-feasibility-probe",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 1795,
+        "logSHA256": "0d92ae7864ae0ed2b0f0e8c68b4174d29f223690c6a64fc9c45e7d62fa86ca83"
+      },
+      {
+        "name": "browser",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 62910,
+        "logSHA256": "7f70e5541cfdd0a40e45acccdf2a633a9d2acb186fc68c87ebb1974ac66d82a6"
+      },
+      {
+        "name": "configured-production-build",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 4229,
+        "logSHA256": "3e9af71bff481b41c07a9c030ad594730f937eebd857d98aee0154cdf5d1c796"
+      },
+      {
+        "name": "production-recipient-browser",
+        "exitCode": 0,
+        "expectedExit": 0,
+        "milliseconds": 949,
+        "logSHA256": "2993d832c20105c3defb955a70d58d896130ead7a578ec6b9a9cb04d455ff82b"
+      }
+    ],
+    "browser": {
+      "startTime": "2026-10-05T21:33:00.590Z",
+      "duration": 48785.355,
+      "expected": 44,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "projects": ["chromium", "firefox"],
+      "versions": {
+        "chromium": "153.0.8010.12",
+        "firefox": "155.0"
+      }
+    }
+  },
+  "stableEdge": {
+    "path": "artifacts/simultaneous-results-edge.json",
+    "sha256": "03c0a3b06f2d0a34ceecf121cc4d66b0177bea2e2ce8892084de676d8249da79",
+    "stats": {
+      "startTime": "2026-10-05T21:36:17.382Z",
+      "duration": 9155.483,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "preview": {
+    "path": "artifacts/sender-preview-check.json",
+    "sha256": "00a201a88d03b133b680133d05662e5b45c475d3cac2f88e5da61e334eadecca",
+    "url": "http://127.0.0.1:4324/",
+    "recorded": "2026-10-05T21:36:57.855Z",
+    "snapshot": "ebc8c92a-0cc1-4e33-b340-c7b976dddb37",
+    "browser": "153.0.8010.12",
+    "htmlSHA256": "44b66d9d992f48bfa582cd885783949054a5789398e9f40e6b4e556552b98267",
+    "headersSHA256": "97d9386aef196c772aabe6fe5392dda34648b6c9021e8f1d945e81e374617fdd",
+    "headersExact": true,
+    "staticRefusals": true,
+    "metrics": [
+      {
+        "viewport": {
+          "width": 1366,
+          "height": 900
+        },
+        "messageBounds": {
+          "x": 196,
+          "y": 558.78125,
+          "width": 974,
+          "height": 240
+        }
+      },
+      {
+        "viewport": {
+          "width": 375,
+          "height": 812
+        },
+        "messageBounds": {
+          "x": 33,
+          "y": 618.765625,
+          "width": 309,
+          "height": 240
+        }
+      }
+    ],
+    "automaticDisplay": true,
+    "simultaneousResults": true,
+    "rawAboveGrid": true,
+    "pagingScroll": true,
+    "errors": []
+  },
+  "visual": {
+    "captures": [
+      {
+        "path": "artifacts/simultaneous-preview-1366.png",
+        "sha256": "2fadcbe7cb14ecce32673467cedda8087ecd08b7f06a39438bc938b938e1e0b4"
+      },
+      {
+        "path": "artifacts/simultaneous-preview-375.png",
+        "sha256": "f6ccbf2ad2f4d8fb0d6f08e899ade7d63d4bb74e09537b73fee04ae75f2d92a7"
+      }
+    ],
+    "authorInspected": true,
+    "data": "Synthetic message and public recipient only; no plaintext/private key captures."
+  },
+  "bundledSender": {
+    "path": "artifacts/offline probe שלום/zodiac-synthetic-probe.html",
+    "bytes": 146235,
+    "sha256": "ea151f6f21f58b65c5beec40f1f30c99749f781044ee5c511255ef6f06a810a6"
+  },
+  "limits": "Recipient human readiness, E06 artwork exports, independent QA-03, signing and release remain open."
+}

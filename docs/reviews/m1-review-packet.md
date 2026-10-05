@@ -97,8 +97,15 @@ unchanged recovery, max-size pagination, CSP and mobile/print visual checks pass
 All glyphs remain outlined by explicit user choice.
 
 The [sender layout/paging follow-up](sender-layout-evidence.json) records the
-current source/build validation: 29 unit tests, 44 Chromium/Firefox cases and
+earlier source/build validation: 29 unit tests, 44 Chromium/Firefox cases and
 the stable Edge file:// case. Encryption selects the glyph display, custom
 public-key controls start collapsed, Encrypt/Clear precede readiness, and
 paging scrolls to the first row. Initial desktop/mobile visibility, keyboard
 accordion, production CSP and pnpm 4324 start/refresh checks pass.
+
+The [simultaneous results follow-up](simultaneous-results-evidence.json) replaces
+the exclusive view controls: complete canonical raw ciphertext appears above
+the glyph grid automatically after every successful encryption. Both remain
+visible together, including during manual clipboard fallback. The refreshed M1
+gate and stable Edge file:// case cover the shared hosted/offline component;
+configured-public preview captures check desktop/mobile order and production CSP.
