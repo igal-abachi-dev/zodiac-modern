@@ -16,7 +16,11 @@ const fixtures = JSON.parse(
 for (const bits of [3072, 4096]) {
   test(`real WebCrypto/independent Go envelope, RSA-${bits}`, async ({
     page,
-  }) => {
+  }, testInfo) => {
+    testInfo.annotations.push({
+      type: 'browser-version',
+      description: page.context().browser()!.version(),
+    });
     const remoteRequests: string[] = [];
     await page.route('**/*', async (route) => {
       if (!route.request().url().startsWith('http://127.0.0.1:4321/')) {
@@ -45,6 +49,23 @@ for (const bits of [3072, 4096]) {
     );
     expect(result.status).toBe(0);
     const privateDER = result.stdout;
+    const pkcs8 = spawnSync(
+      openssl,
+      [
+        'pkcs8',
+        '-topk8',
+        '-nocrypt',
+        '-in',
+        resolve(`receiver/tests/fixtures/keys/openssl-3.5-${bits}.pem`),
+        '-passin',
+        `file:${syntheticPassword}`,
+        '-outform',
+        'DER',
+      ],
+      { windowsHide: true },
+    );
+    expect(pkcs8.status).toBe(0);
+    const browserPrivateKey = pkcs8.stdout;
     const other = spawnSync(
       openssl,
       [
@@ -103,6 +124,25 @@ for (const bits of [3072, 4096]) {
         expect(
           Buffer.from(JSON.parse(decrypted.stdout).result, 'base64'),
         ).toEqual(Buffer.from(text));
+        const fromGo = spawnSync(oracle, [], {
+          input: JSON.stringify({
+            Mode: 'encrypt',
+            PrivateDER: privateDER.toString('base64'),
+            Plaintext: Buffer.from(text).toString('base64'),
+          }),
+          encoding: 'utf8',
+          windowsHide: true,
+        });
+        expect(fromGo.status).toBe(0);
+        const browserPlaintext = await page.evaluate(
+          ({ privateKey, raw }) =>
+            window.zodiacTest.decryptEnvelopeForTest(privateKey, raw),
+          {
+            privateKey: Array.from(browserPrivateKey),
+            raw: JSON.parse(fromGo.stdout).result,
+          },
+        );
+        expect(Buffer.from(browserPlaintext)).toEqual(Buffer.from(text));
         if (text.length === 26)
           expect(output.raw).toHaveLength(bits === 3072 ? 584 : 755);
         for (const offset of [0, bits / 8, bits / 8 + 12, bits / 8 + 28]) {
@@ -145,6 +185,7 @@ for (const bits of [3072, 4096]) {
     } finally {
       privateDER.fill(0);
       wrongDER.fill(0);
+      browserPrivateKey.fill(0);
     }
   });
 }

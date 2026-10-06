@@ -13,6 +13,15 @@ export default defineConfig({
   projects: [
     { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
     { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    ...(process.env.ZODIAC_WEBKIT === '1'
+      ? [
+          {
+            name: 'webkit',
+            testMatch: /interop\.spec\.ts/,
+            use: { ...devices['Desktop Safari'] },
+          },
+        ]
+      : []),
     ...(process.env.ZODIAC_STABLE_EDGE === '1'
       ? [
           {

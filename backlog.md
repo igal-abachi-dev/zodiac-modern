@@ -32,7 +32,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E05 | Symbols/recovery | P1 | Done | M3 | Mixed S64M1 view verified; frozen mapping/raw recovery complete; SVG exports remain E06 |
 | E06 | Exports/sharing | P1 | Review | M3 | Copy/download/image/print implemented and automated checks pass; Gmail-primary/Outlook-secondary paste pending |
 | E07 | Hardening | P0 | Review | M4 | Automated CSP/privacy/artifact/dependency gates pass; operational trust anchors and receiver network-denial trial pending |
-| E08 | Verification/review | P0 | In progress | M4 | Chromium/Firefox/Go/export evidence and review packet prepared; WebKit/human trials/independent review pending |
+| E08 | Verification/review | P0 | In progress | M4 | Bidirectional Go/WebCrypto cases pass for both RSA sizes in Chromium/Firefox/WebKit; shipping CLI WebKit, human/platform trials and independent review pending |
 | E09 | Release | P0 | Backlog | M5 | Real recipient, verified host/offline bundle, custody and rollback |
 | E10 | Later options | P2 | Deferred | Later | Explicitly separate future decisions |
 | E11 | Offline recipient | P0 | In progress | M0/M2/M4 | REC-01/REC-02 Done for Windows; readiness and release review remain |
@@ -562,7 +562,7 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] QA-03.1 — profile/threat boundaries/source hashes/test evidence and review scope prepared in docs/reviews/m4-review-packet.md; qualified reviewer selection pending.
+- [x] QA-03.1 — profile/threat boundaries/source hashes/test evidence and review scope prepared in docs/reviews/m4-review-packet.md and docs/reviews/e08-qa-matrix.md; qualified reviewer selection remains pending.
 - [ ] QA-03.2 — record assessment/findings and create linked fix tasks for every required remediation.
 - [ ] QA-03.3 — verify remediations, review permitted claims, and publish an accurate review status.
 
@@ -786,3 +786,4 @@ Status evidence:
 - S64M1 correction | 2026-10-06 | Done | null rotation corrected to CircleOff/CircleDashed/Skull; original Crosshair payload for j restored in the mixed view | full M3 regression and frozen provenance pass | author-run | earlier development mapping was contrary to user correction; no released S64L1/envelope/check geometry changed.
 
 - E07 / M4 | 2026-10-06 | Review | config/security-policy.ts, release-trust.json, artifact/dependency/provider/external verification scripts, public guidance and hardening/privacy browser tests | pnpm check:m4: frozen installation, real OpenSSL/Go/vendor/fuzz, 37 units/62 Chromium-Firefox cases plus stable Edge, exact PDF/Go recovery and clean Vercel static output; docs/reviews/e07-evidence.json | author-run; integrated reviewer pending | SEC-02 receiver OS network-denial trial, SEC-04 undecided trust anchors, QA-01 WebKit/CI, QA-02 human/device/email trials, EN-04 final delivery selection and QA-03/release stay open. No deployment or signing performed.
+- E08 / M4 | 2026-10-06 | In progress | tests/browser/bridge.ts and interop.spec.ts, optional Playwright WebKit project, inactive workflow template | Six targeted Chromium/Firefox/WebKit 26.6 cases pass; Go/WebCrypto envelopes agree both directions for both RSA sizes; docs/reviews/e08-qa-matrix.md | author-run only | Shipping CLI WebKit coverage, published CI (template remains inactive by user choice), assistive-technology/reference-device/five novice/Gmail-Outlook trials and integrated independent review remain.

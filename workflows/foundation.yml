@@ -15,6 +15,7 @@ jobs:
     env:
       GOTOOLCHAIN: local
       GOSUMDB: sum.golang.org
+      ZODIAC_WEBKIT: '1'
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
@@ -61,7 +62,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Real browser crypto, production CSP and file probe
         run: |
-          pnpm exec playwright install chromium firefox
+          pnpm exec playwright install chromium firefox webkit
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           pnpm test:e2e
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }

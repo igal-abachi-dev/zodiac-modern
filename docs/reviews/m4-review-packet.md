@@ -4,6 +4,8 @@ Status: prepared for independent assessment; no integrated verdict or release.
 The exact automated record is [e07-evidence.json](e07-evidence.json), referring
 to source hashes in [m1-evidence.json](m1-evidence.json), refreshed
 [REC-01 evidence](rec01-evidence.json) and [PDF/export evidence](e06-evidence.json).
+The author-run additions and E08 completion gaps are listed in
+[the E08 QA matrix](e08-qa-matrix.md).
 All tests use designated synthetic keys/messages. The production build imports
 only the separately confirmed public recipient. Never request production private
 keys or real messages for this review.
@@ -69,7 +71,7 @@ critical/high remediations independently rechecked. Author tests are not a
 reviewer verdict; earlier focused REC-01 approval does not cover the full app.
 Do not add formal IND-CCA2/FIPS/government/zero-knowledge/constant-time claims.
 
-M4 also needs WebKit, real assistive technology, measured reference-device costs,
+M4 also needs shipping-CLI coverage in WebKit, real assistive technology, measured reference-device costs,
 five novice receiver trials and Gmail-first/Outlook-secondary actual draft paste.
 CI remains a template by user choice. Automated checks cannot approve these
 human/provider/release gates. Current implementation and public wording remain
