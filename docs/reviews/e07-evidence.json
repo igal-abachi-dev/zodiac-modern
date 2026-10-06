@@ -1,0 +1,339 @@
+{
+  "started": "2026-10-06T19:36:06.450Z",
+  "status": "automated hardening passed; independent review and release gates pending",
+  "milestone": "M4 Review",
+  "scope": "Author-run synthetic development hardening; no integrated independent audit, signing, deployment or human client trial.",
+  "system": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+    "node": "v24.21.0"
+  },
+  "checks": [
+    {
+      "name": "frozen-offline-install",
+      "code": 0,
+      "milliseconds": 147,
+      "logSHA256": "c701419c51be8afdb8bbc9c40bf9f890d1241cdaf34c008565d5c8b244799afd"
+    },
+    {
+      "name": "receiver-integrated-gates",
+      "code": 0,
+      "milliseconds": 76015,
+      "logSHA256": "3551320016066f19948dc44fcdacc81d9570cbbf279a5ab4a20f3ef119946ae9"
+    },
+    {
+      "name": "receiver-snapshot",
+      "code": 0,
+      "milliseconds": 171,
+      "logSHA256": "1c0e3bda35f23ad48c10a4b860a386b36257bd328e3ec8123f9236a91be3eff4"
+    },
+    {
+      "name": "full-browser-unit-build-pdf",
+      "code": 0,
+      "milliseconds": 123914,
+      "logSHA256": "8d5699c1833a5765a17d1f06fd05169bfdff906bdf35b602c99a97c9456d1b38"
+    },
+    {
+      "name": "dependencies-provenance-notices",
+      "code": 0,
+      "milliseconds": 2342,
+      "logSHA256": "00db66ddbcc12f3a7243f42dce268d02ec0c75f7d22a11a57fdbab106c536c2d"
+    },
+    {
+      "name": "static-host-output",
+      "code": 0,
+      "milliseconds": 182,
+      "logSHA256": "9ee076bc382a792dca534b80e45813cdebe80ec12e6157a0081b5a900aba8fcb"
+    }
+  ],
+  "sourceEvidence": {
+    "path": "docs/reviews/m1-evidence.json",
+    "sha256": "724acc836aa308255e700dc3031620e0f8679e64f29e0871d1d6005668d0a294"
+  },
+  "exportsEvidenceSHA256": "402ed193b2451b3b581f9ccc6de19800083cdef11a8c7206fd92cc743809fe7f",
+  "receiverEvidenceSHA256": "f5e57b0a138f8c2f76ff527d0b418e1b8a0955c96b9919fbea0cd7d27b60f6ff",
+  "browser": {
+    "startTime": "2026-10-06T19:38:00.416Z",
+    "duration": 68173.68,
+    "expected": 62,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "projects": [
+      "chromium",
+      "firefox"
+    ],
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0"
+    }
+  },
+  "details": {
+    "dependencies": {
+      "recorded": "2026-10-06T19:39:29.032Z",
+      "status": "direct pins/licenses and shipped browser provenance passed",
+      "direct": [
+        {
+          "name": "@astrojs/svelte",
+          "version": "9.0.1",
+          "license": "MIT"
+        },
+        {
+          "name": "@lucide/svelte",
+          "version": "1.51.0",
+          "license": "ISC"
+        },
+        {
+          "name": "astro",
+          "version": "7.3.5",
+          "license": "MIT"
+        },
+        {
+          "name": "svelte",
+          "version": "5.57.1",
+          "license": "MIT"
+        },
+        {
+          "name": "typescript",
+          "version": "6.0.3",
+          "license": "Apache-2.0"
+        }
+      ],
+      "shippedBrowser": [
+        {
+          "name": "@lucide/svelte",
+          "version": "1.51.0",
+          "license": "ISC",
+          "licenseSHA256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+        },
+        {
+          "name": "clsx",
+          "version": "2.1.1",
+          "license": "MIT",
+          "licenseSHA256": "9a9edad7baae52622bddf3c15b2ef8a33d2c89f2d25408ad13e8a7481c6b0c97"
+        },
+        {
+          "name": "esm-env",
+          "version": "1.2.2",
+          "license": "MIT",
+          "licenseSHA256": "6df5276ee7531fcc5446f19082c12e77bb6c5f081fd2b6d6cf88180a5ee36acd"
+        },
+        {
+          "name": "svelte",
+          "version": "5.57.1",
+          "license": "MIT",
+          "licenseSHA256": "06257f4847b13a49a039efb17b944c141e71b12fd8d231b362d86919067d77a3"
+        }
+      ],
+      "receiver": "Go-maintained x/term and x/sys; module/vendor/native verification is a separate mandatory gate",
+      "inputs": 4145
+    },
+    "host-output": {
+      "recorded": "2026-10-06T19:39:29.215Z",
+      "status": "static prebuilt serialization/regeneration passed",
+      "files": [
+        {
+          "path": "404.html",
+          "sha256": "69f04246d5859c25e366afe536964189c1cecdd0a7134ba4ef3f1bd4cabf8c93"
+        },
+        {
+          "path": "_astro/EncryptWorkbench.CbceOwa7.js",
+          "sha256": "a3189290c68bad4e6ea54497d3d45870973d6aca324d42f3d8d88f2dc060de66"
+        },
+        {
+          "path": "_astro/RawRecovery.BtOXTmwY.js",
+          "sha256": "36791aceddafddd132952c723ce0467ba46b17202e8bf8d54ddb6d1883853204"
+        },
+        {
+          "path": "_astro/ciphertext.DS14LjxQ.js",
+          "sha256": "7531b0314d6b5296478346d13c81d14316e8bbdb96dff1a0946b1f674700063e"
+        },
+        {
+          "path": "_astro/client.CS25CUk1.js",
+          "sha256": "ac302dad93def9101c384c88060683b797fd669d4603523bf0167d1631f24018"
+        },
+        {
+          "path": "_astro/client.svelte.BS7rc8a-.js",
+          "sha256": "8180400bb2ece74d6cf8990e21532b2a3a70c90cbc38d5b233bcc08299f5e4a4"
+        },
+        {
+          "path": "favicon.ico",
+          "sha256": "09d2ac08d8cca9b6e1f90221f345a8c4dd0371c64a0dc52b6f96fc589b1e3d67"
+        },
+        {
+          "path": "favicon.svg",
+          "sha256": "2d7a310283d6f9cc753210d83224cd6db6348cb82a5536348884e5831d46203f"
+        },
+        {
+          "path": "how-it-works/index.html",
+          "sha256": "d0f40c6a9e1fdc505260d68ed19912a4c45174aa82a5033ebb3cb26ef9560b1e"
+        },
+        {
+          "path": "index.html",
+          "sha256": "4373cf4faba453f142fca9cd67c3bf0aad7e847d830603021be6df77f8e1b9f2"
+        },
+        {
+          "path": "keys/index.html",
+          "sha256": "50bef0e612959ee08227e891fea636112baaa135fe1435c1f1466f08f593c171"
+        },
+        {
+          "path": "keys/recipient-public.pem",
+          "sha256": "f6931dfb8679fa9871351d7ce9e8ee5e7c0cc65a2dfa8f181e5fb163fcea5090"
+        },
+        {
+          "path": "licenses/browser-runtime.txt",
+          "sha256": "c58611146936806b8e2df74eda61725216f709bc1fe366fdc59fc7beb2c830b7"
+        },
+        {
+          "path": "licenses/lucide-1.51.0.txt",
+          "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+        },
+        {
+          "path": "privacy/index.html",
+          "sha256": "99aafdd6804be62d974fd51e91890356dc487f268090752f1f7981a2837e2705"
+        },
+        {
+          "path": "receive/index.html",
+          "sha256": "995b7ffe69fe2c1ba4b7b84a914c0fd0b59b28f00bc587f200b7c2325167fb50"
+        },
+        {
+          "path": "restore/index.html",
+          "sha256": "ad297ff38594a17bcf8c0175ff486fae4a172786666267dcbf03926ff15a4c35"
+        },
+        {
+          "path": "robots.txt",
+          "sha256": "e5c4b84484ee4216e9373be99380320c25dd94805f99f0a805846f087636553f"
+        },
+        {
+          "path": "security/index.html",
+          "sha256": "86f2907815cbcebf1f0d0ad481f93027e3c4cf75b3a7440752f51d194b5453af"
+        }
+      ],
+      "headers": {
+        "Content-Security-Policy": "default-src 'none'; script-src 'self' 'sha256-Ya0pUYrC7nM5Cn/056TyVuEiz6dFGrzmkWzgON0pF0U=' 'sha256-eIXWvAmxkr251LJZkjniEK5LcPF3NkapbJepohwYRIc='; script-src-attr 'none'; style-src 'self' 'sha256-JmQEh+HAu26jrPLCj667oVwEmCQbT7j5JwCyVY3rCgk=' 'sha256-TXE6GFoDBz5GmBBpQZFD1Vm5V3xEkOLR+aM+CfdWFXM=' 'sha256-XqWsLpHscdDJf9+P8+NA20X6r6xHC5Frcoy8s3lNolc=' 'sha256-jwEYsaMGvuM1DaQnLRGvBuKF58RyyxJzYc/iCWgHiCI=' 'sha256-vv9IoKo7BSLbWcUHr3tNmfNVmm5L/9Cfn2H6LMk7/ow='; style-src-attr 'none'; img-src 'self' blob: data:; font-src 'self'; connect-src 'none'; worker-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "DENY",
+        "Referrer-Policy": "no-referrer",
+        "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()",
+        "Cache-Control": "no-store"
+      },
+      "configSHA256": "5c2183afeb4b91008de99a46ada0b25270f0fba13f29e72dc4ef10a387193192",
+      "originVerification": "Not deployed; final Vercel, Cloudflare and Netlify response checks remain pending."
+    },
+    "privacy-chromium": {
+      "browser": "153.0.8010.12",
+      "initialStaticRequests": 10,
+      "runtimeRequests": 0,
+      "storage": "empty",
+      "logs": "no synthetic inputs",
+      "allWarmActions": "passed",
+      "network": "HTTP blocked and context offline"
+    },
+    "privacy-firefox": {
+      "browser": "155.0",
+      "initialStaticRequests": 12,
+      "runtimeRequests": 0,
+      "storage": "empty",
+      "logs": "no synthetic inputs",
+      "allWarmActions": "passed",
+      "network": "HTTP blocked and context offline"
+    },
+    "navigation-chromium": {
+      "realNavigationPassed": true,
+      "closeAndReopenPassed": true,
+      "observedPageShowPersisted": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "explicitPersistedEventPassed": true,
+      "claim": "Actual history/reload reset plus explicit cached-restore branch; no claim that automation forced real BFCache."
+    },
+    "navigation-firefox": {
+      "realNavigationPassed": true,
+      "closeAndReopenPassed": true,
+      "observedPageShowPersisted": [
+        false,
+        false,
+        false,
+        true,
+        false,
+        false,
+        false,
+        false
+      ],
+      "explicitPersistedEventPassed": true,
+      "claim": "Actual history/reload reset plus explicit cached-restore branch; no claim that automation forced real BFCache."
+    }
+  },
+  "javascript": {
+    "assets": [
+      {
+        "file": "dist/_astro/EncryptWorkbench.CbceOwa7.js",
+        "bytes": 63560,
+        "gzipBytes": 23030
+      },
+      {
+        "file": "dist/_astro/RawRecovery.BtOXTmwY.js",
+        "bytes": 9486,
+        "gzipBytes": 3963
+      },
+      {
+        "file": "dist/_astro/ciphertext.DS14LjxQ.js",
+        "bytes": 5997,
+        "gzipBytes": 2456
+      },
+      {
+        "file": "dist/_astro/client.CS25CUk1.js",
+        "bytes": 50261,
+        "gzipBytes": 19093
+      },
+      {
+        "file": "dist/_astro/client.svelte.BS7rc8a-.js",
+        "bytes": 889,
+        "gzipBytes": 501
+      }
+    ],
+    "allStaticGzipBytes": 49043,
+    "budgetBytes": 204800,
+    "claim": "Conservative sum of all static JS, including routes not initially requested; desktop only. No mobile latency or long-task qualification claimed."
+  },
+  "releaseTrust": {
+    "officialOrigin": null,
+    "proposedOrigin": "https://zodiac-modern.vercel.app",
+    "expectedAuthenticodePublisher": null,
+    "independentVerificationChannel": null,
+    "domainOwner": null,
+    "signingOwner": null,
+    "incidentOwner": null,
+    "reviewedRelease": null
+  },
+  "documentationSHA256": {
+    ".prettierignore": "09bfaea4dd8930857c425258d862e6625bb6ebc20406b6f7e506fdaf595ac94e",
+    "AGENTS.md": "5f47d02d2b74060d26c882d6e12255d12349275de678c392940c3acca6cbdaf0",
+    "plan.md": "edc851eb72c2cc2760b15ed5f35c8b1ed6d531ff0fa1d623dd342c3a4d4a4387",
+    "backlog.md": "35fb155cb20b83b60fc6454ab274d75c8cc2cc7ff2fc9f3f15c60fa849d8e488",
+    "README.md": "be01cf01cdd4ccb106bfa3d36838760da2d88b6bf5039470bd56f3d8baedaac6",
+    "docs/status.md": "8ceadef5d42c011aae2acd6bb4f0433b434c93107fec701559b1f0c13038ba6d",
+    "docs/hardening.md": "8cc4ac524b06cbf6d71409bd46d83823acd1c5eb1f4e64ec557ebce08d6e8a61",
+    "docs/deployment.md": "19cf8b12cf69ff2b66f068ec9aad16a4eb3e56563ea0b5a583759c26d9cbf40a",
+    "docs/reviews/m4-review-packet.md": "3e0017b96602322d98b8b8b492cd48b78b4d2d21f069541eb896e1562f590954",
+    "docs/reviews/en04-prototype.md": "8ea24c10381b75de5dad528508aa905b1b7fda5e5bc7d9cd3d063fbee4556845"
+  },
+  "openGates": [
+    "SEC-04 confirmed origin/publisher/independent release channel and operational owners; proposed zodiac-modern.vercel.app is unclaimed.",
+    "QA-03 integrated independent security review, critical/high disposition and independently rechecked fixes.",
+    "EN-04 stable Chrome/Firefox and headed external verification usability; final reviewed delivery selection.",
+    "QA-01 WebKit and published CI (workflow stays a template by user instruction).",
+    "QA-02 real assistive technology, recorded latency/long tasks and five novice recipients; Gmail-primary/Outlook-secondary actual draft paste.",
+    "Receiver network-denial observation at OS level; source excludes network/listener imports and offline vendor checks pass.",
+    "Final-origin response/privacy checks and signed receiver/reviewed sender hashes before release."
+  ],
+  "finished": "2026-10-06T19:39:29.278Z"
+}

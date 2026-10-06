@@ -119,6 +119,7 @@ pnpm check:rec01
 pnpm check:m1
 # Complete export/PDF/Go + stable Edge evidence (pinned PDF QA renderer required)
 pnpm check:m3
+pnpm check:m4
 pnpm build:custom
 pnpm build:test
 pnpm spike:offline-html
@@ -163,6 +164,14 @@ The private-key file uses a separate fixed PBES2/PBKDF2-HMAC-SHA256/AES-256-CBC 
 ## Deployment and offline use
 
 Build static assets with `pnpm build`. Vercel deployment uses `pnpm build:vercel` to generate static Build Output configuration and headers from the exact built artifact. No Astro runtime adapter, serverless functions, or message API is required. Alternative hosts must pass the same final-origin header and privacy checks; Surge support is conditional on enforceable headers.
+
+The proposed free Vercel address is `zodiac-modern.vercel.app`; it has not been
+claimed or verified here. See [static host instructions](docs/deployment.md),
+[E07 hardening](docs/hardening.md) and the [M4 review packet](docs/reviews/m4-review-packet.md).
+`pnpm check:m4` includes frozen offline installation, fresh REC-01/vendor/fuzz
+gates, all M3 browser/unit/build/PDF checks and hardening/output/provenance checks.
+Configure both recorded OpenSSL oracle paths as above. Signing, independent
+release trust and integrated review remain pending; the command does not deploy.
 
 Local source use is supported separately from a downloadable offline sender. A self-contained HTML sender must pass the browser/export/CSP verification spike before release; a native localhost launcher is the conditional fallback. Independently trusted release hashes are required for either artifact.
 

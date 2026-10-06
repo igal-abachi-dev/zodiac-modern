@@ -2,6 +2,16 @@
 
 Planning baseline: 2026-10-03. M0 is complete; M1 development acceptance passes. REC-01 has focused conditional approval and author-verified fixes; integrated QA-03 and release remain open. Current task/milestone evidence: [docs/status.md](docs/status.md). Work tracking: [backlog.md](backlog.md). Contributor rules: [AGENTS.md](AGENTS.md).
 
+E07 implementation (2026-10-06): one shared restrictive exact-hash policy,
+artifact/provider synchronization, fresh adapter-free Vercel output, actual
+network-disabled browser recovery/export checks, dependency/license provenance
+and external sender/receiver verification helpers. No crypto/envelope/key policy
+or released glyph grammar change. The user's proposed free Vercel origin is
+`https://zodiac-modern.vercel.app`; official origin/publisher/channel/operational
+owners remain undecided in `config/release-trust.json`. E07/M4 retain review and
+release gates; [hardening scope](docs/hardening.md) and
+[independent review packet](docs/reviews/m4-review-packet.md) define the remaining work.
+
 ## 1. Product and authoritative decisions
 
 Create a professional, calm website where someone chooses a recipient public key, types a message, encrypts entirely in their browser, and saves or shares ciphertext as raw text, a celestial image, or a data-preserving SVG. Ship a **signed downloadable offline Go decrypt CLI** so recipients decrypt using a local passphrase-encrypted private PEM. OpenSSL is used once for key creation; normal encryption uses the website and normal decryption uses one CLI command. The sender can immediately start another message. This receiver choice supersedes the earlier offline-browser proposal.

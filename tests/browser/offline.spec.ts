@@ -26,6 +26,13 @@ test('file probe opens under default settings with no adjacent files or network'
   expect(html.indexOf('http-equiv="Content-Security-Policy"')).toBeLessThan(
     html.indexOf('<script>'),
   );
+  for (const name of [
+    '@lucide/svelte 1.51.0',
+    'svelte 5.57.1',
+    'clsx 2.1.1',
+    'esm-env 1.2.2',
+  ])
+    expect(html).toContain(name);
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
   const csp: string[] = [];

@@ -218,6 +218,7 @@ test('all warm sender and recovery actions work with HTTP offline and leave no b
 
 test('real navigation and persisted pageshow reset draft, custom recipient, result, recovery and print state', async ({
   page,
+  context,
 }, info) => {
   const persisted: boolean[] = [];
   await page.addInitScript(() =>
@@ -288,12 +289,21 @@ test('real navigation and persisted pageshow reset draft, custom recipient, resu
   await expect(
     page.getByLabel('Paste raw ciphertext', { exact: true }),
   ).toHaveValue('');
+  await page.close();
+  const reopened = await context.newPage();
+  await reopened.goto('/');
+  await expect(reopened.getByLabel('Message', { exact: true })).toHaveValue('');
+  await expect(reopened.getByLabel('Raw ciphertext')).toHaveCount(0);
+  await expect(reopened.locator('.recipient-summary')).toContainText(
+    'RSA-3072',
+  );
   mkdirSync('artifacts/m4', { recursive: true });
   writeFileSync(
     `artifacts/m4/navigation-${info.project.name}.json`,
     JSON.stringify(
       {
         realNavigationPassed: true,
+        closeAndReopenPassed: true,
         observedPageShowPersisted: persisted,
         explicitPersistedEventPassed: true,
         claim:

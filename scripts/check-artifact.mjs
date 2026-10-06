@@ -2,8 +2,35 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { filesAt } from './walk-files.mjs';
 
+export function rejectFixtureMaterial(text, fingerprints, publicBodies) {
+  if (fingerprints.some((fingerprint) => text.includes(fingerprint)))
+    throw new Error('Fixture fingerprint leaked into production.');
+  // Handles PEM files, inline JSON strings and whitespace-escaped JS literals.
+  const compact = text.replace(/\\[rnt]/g, '').replace(/\s/g, '');
+  if (publicBodies.some((body) => compact.includes(body)))
+    throw new Error('Fixture public key leaked into production.');
+}
+
 export async function checkArtifact(root = 'dist', mode = 'production') {
   const files = await filesAt(root);
+  let fixtureFingerprints = [],
+    fixtureBodies = [];
+  if (mode === 'production') {
+    const manifest = JSON.parse(
+      await readFile('receiver/tests/fixtures/manifest.json', 'utf8'),
+    );
+    fixtureFingerprints = manifest.fixtures.map(
+      (fixture) => fixture.fingerprint,
+    );
+    for (const path of (await filesAt('receiver/tests/fixtures/keys')).filter(
+      (p) => p.endsWith('-public.pem'),
+    )) {
+      const pem = await readFile(path, 'utf8');
+      fixtureBodies.push(
+        pem.replace(/-----[^\n]+-----/g, '').replace(/\s/g, ''),
+      );
+    }
+  }
   for (const path of files) {
     if (
       /\.(?:go|zip|exe|dll|pk8|key|der|map|env)$/i.test(path) ||
@@ -18,6 +45,8 @@ export async function checkArtifact(root = 'dist', mode = 'production') {
       throw new Error('Private key material found in hosted output.');
     if (/\.(?:html|js|css|svg|pem)$/.test(path)) {
       const text = bytes.toString('utf8');
+      if (mode === 'production')
+        rejectFixtureMaterial(text, fixtureFingerprints, fixtureBodies);
       // Inspect markup, not property assignments in generated script bodies.
       const markup = text
         .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
@@ -57,11 +86,6 @@ export async function checkArtifact(root = 'dist', mode = 'production') {
           'Receiver, test, secret environment or source-map code found.',
         );
       if (
-        /<[^>]*\s(?:style|on[a-z]+)\s*=/i.test(markup) &&
-        path.endsWith('.html')
-      )
-        throw new Error('Inline style or event handler found.');
-      if (
         /<[^>]*\s(?:src|srcset|poster)\s*=\s*["'][^"']*(?:https?:)?\/\//i.test(
           text,
         ) ||
@@ -83,15 +107,6 @@ export async function checkArtifact(root = 'dist', mode = 'production') {
       generated.includes('= null')
     )
       throw new Error('Production recipient required.');
-    const manifest = JSON.parse(
-      await readFile('receiver/tests/fixtures/manifest.json', 'utf8'),
-    );
-    for (const fixture of manifest.fixtures) {
-      for (const path of files.filter((p) => /\.(html|js|pem)$/.test(p))) {
-        if ((await readFile(path, 'utf8')).includes(fixture.fingerprint))
-          throw new Error('Fixture fingerprint leaked into production.');
-      }
-    }
   }
   console.log(`Artifact checked: ${files.length} static files, mode ${mode}.`);
 }

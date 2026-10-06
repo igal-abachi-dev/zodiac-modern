@@ -3,7 +3,10 @@ import { resolve, join } from 'node:path';
 import { expect, it } from 'vitest';
 import { buildHeaders } from '../../scripts/build-host-headers.mjs';
 import { checkPolicy } from '../../scripts/check-policy.mjs';
-import { checkArtifact } from '../../scripts/check-artifact.mjs';
+import {
+  checkArtifact,
+  rejectFixtureMaterial,
+} from '../../scripts/check-artifact.mjs';
 import { contentSecurityPolicy } from '../../config/security-policy';
 
 it('detects stale built hashes and provider policy divergence, with a shared restrictive file policy', async () => {
@@ -49,6 +52,24 @@ it('detects stale built hashes and provider policy divergence, with a shared res
 });
 
 it('refuses hosted receiver, test, source-map, persistence and speculative-resource artifacts', async () => {
+  const pem = await readFile(
+    'receiver/tests/fixtures/keys/openssl-3.5-3072-public.pem',
+    'utf8',
+  );
+  const body = pem.replace(/-----[^\n]+-----/g, '').replace(/\s/g, '');
+  expect(() =>
+    rejectFixtureMaterial(JSON.stringify({ key: pem }), [], [body]),
+  ).toThrow('Fixture public key');
+  expect(() => rejectFixtureMaterial(pem, [], [body])).toThrow(
+    'Fixture public key',
+  );
+  expect(() =>
+    rejectFixtureMaterial(
+      'public release copy',
+      ['synthetic-fingerprint'],
+      [body],
+    ),
+  ).not.toThrow();
   const root = await mkdtemp(resolve('.cache/hardening-artifact-'));
   try {
     for (const [file, text] of [

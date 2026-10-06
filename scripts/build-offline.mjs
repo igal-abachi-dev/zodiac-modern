@@ -56,12 +56,22 @@ const csp = contentSecurityPolicy(
   [`'sha256-${hash(style)}'`],
   true,
 );
+const notices = await readFile('public/licenses/browser-runtime.txt', 'utf8');
+const escapedNotices = notices
+  .replaceAll('&', '&amp;')
+  .replaceAll('<', '&lt;')
+  .replaceAll('>', '&gt;');
 const shell = (await readFile('offline/shell.html', 'utf8'))
   .replace(
     '<!--CSP-->',
     () => `<meta http-equiv="Content-Security-Policy" content="${csp}">`,
   )
   .replace('<!--STYLE-->', () => `<style>${style}</style>`)
+  .replace(
+    '<!--LICENSES-->',
+    () =>
+      `<details><summary>Browser runtime licenses</summary><pre>${escapedNotices}</pre></details>`,
+  )
   .replace('<!--SCRIPT-->', () => `<script>${script}</script>`);
 // Generated SVG definitions use local fragment references; these are not files.
 if (/\b(?:src|href)=["'](?!blob:|data:|#)/.test(shell))

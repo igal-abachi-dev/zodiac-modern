@@ -31,8 +31,8 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E04 | Workspace | P1 | In progress | M2 | Accessible edit/encrypt/result/reset flow |
 | E05 | Symbols/recovery | P1 | Done | M3 | Mixed S64M1 view verified; frozen mapping/raw recovery complete; SVG exports remain E06 |
 | E06 | Exports/sharing | P1 | Review | M3 | Copy/download/image/print implemented and automated checks pass; Gmail-primary/Outlook-secondary paste pending |
-| E07 | Hardening | P0 | Backlog | M4 | CSP, local-only privacy behavior, clean static artifact |
-| E08 | Verification/review | P0 | Backlog | M4 | Browser/Go, UX/export QA, independent security assessment |
+| E07 | Hardening | P0 | Review | M4 | Automated CSP/privacy/artifact/dependency gates pass; operational trust anchors and receiver network-denial trial pending |
+| E08 | Verification/review | P0 | In progress | M4 | Chromium/Firefox/Go/export evidence and review packet prepared; WebKit/human trials/independent review pending |
 | E09 | Release | P0 | Backlog | M5 | Real recipient, verified host/offline bundle, custody and rollback |
 | E10 | Later options | P2 | Deferred | Later | Explicitly separate future decisions |
 | E11 | Offline recipient | P0 | In progress | M0/M2/M4 | REC-01/REC-02 Done for Windows; readiness and release review remain |
@@ -123,7 +123,7 @@ Acceptance criteria:
 Subtasks:
 
 - [x] EN-04.1 — fully inline actual Svelte sender with shared workspace/crypto/codecs/raw exports and local help; file:// imports, exact text/reset/export/manual fallback pass Chromium/Firefox and installed stable Edge. Glyph display and raw recovery now pass too; remaining bundled recovery, artwork, stable-browser matrix and independent delivery review stay in EN-04.2/.3.
-- [ ] EN-04.2 — in progress: shared sender packaging, meta-CSP, glyph display, raw recovery/exports/privacy/manual-copy fallback and external hash-helper regression pass. SVG/PNG/print exports depend on E06; remaining bundled printed-row, stable-browser, headed usability and independent boundary/hash-verification review are open.
+- [ ] EN-04.2 — shared packaging, meta-CSP, glyph/raw/printed-row recovery, SVG/PNG/JSON/print, privacy/manual-copy fallback, runtime notices and external hash-helper regression pass in Chromium/Firefox and stable Edge. Remaining stable Chrome/Firefox, headed usability and independent boundary/hash-verification review are open.
 - [ ] EN-04.3 — pending full-flow evidence: record measured selection/support matrix and revise conditional release implementation/review scope. The prototype does not select the release delivery method.
 
 ## 5. E02 — cryptography and canonical data
@@ -441,7 +441,7 @@ Subtasks:
 
 ### SEC-01 — enforce production CSP and host headers
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4 · Dependencies: EN-01, EXP-01, EXP-03.
+Type: enabler · Priority: P0 · Status: Done · Milestone: M4 · Dependencies: EN-01, EXP-01, EXP-03.
 
 Acceptance criteria:
 
@@ -453,13 +453,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] SEC-01.1 — configure version-appropriate Astro CSP and production header generation.
-- [ ] SEC-01.2 — implement a local production preview that serves actual headers for tests.
-- [ ] SEC-01.3 — verify full workflows and artifact/policy synchronization; document host-specific adapter-free settings.
+- [x] SEC-01.1 — shared exact-hash HTTP/file policy and production/provider generation; attributes/workers/connections remain blocked.
+- [x] SEC-01.2 — actual local production headers, startup stale-policy refusal and immutable 4324 snapshots.
+- [x] SEC-01.3 — full browser/export flows, deliberate CSP refusal probes, stale-hash/header tests and fresh Vercel serialization pass. Adapter-free instructions in docs/deployment.md; final deployed responses remain REL-04.
 
 ### SEC-02 — prove intended local-only data flow and memory-state behavior
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M4 · Dependencies: UX-03, EXP-01, SYM-02, SEC-01, REC-02.
+Type: story · Priority: P0 · Status: Review · Milestone: M4 · Dependencies: UX-03, EXP-01, SYM-02, SEC-01, REC-02.
 
 Acceptance criteria:
 
@@ -471,13 +471,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] SEC-02.1 — instrument synthetic browser flows for network/storage/log/URL leakage checks.
-- [ ] SEC-02.2 — test offline-after-load and navigation/reset memory lifecycle.
-- [ ] SEC-02.3 — review delivered bundle/runtime integrations and revise privacy disclosures against observed behavior.
+- [x] SEC-02.1 — complete warmed browser actions with HTTP blocked/context offline; logs/URLs/title/history/cookies/local/session/IndexedDB/CacheStorage/service workers remain empty of inputs.
+- [x] SEC-02.2 — reload/history/close-reopen and explicit persisted-pageshow reset draft/custom recipient/result/recovery/print.
+- [x] SEC-02.3 — author bundle/source audit and privacy disclosure updated; native receiver/private-output tests pass without browser/network code. OS-enforced receiver network-denial observation remains an acceptance dependency; story stays Review.
 
 ### SEC-03 — verify dependencies, static artifact, and trust copy
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4 · Dependencies: EN-03, SEC-01, KEY-03.
+Type: enabler · Priority: P0 · Status: Done · Milestone: M4 · Dependencies: EN-03, SEC-01, KEY-03.
 
 Acceptance criteria:
 
@@ -489,13 +489,13 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] SEC-03.1 — implement artifact/dependency/license checks and release input/output separation.
-- [ ] SEC-03.2 — write security/privacy/how-it-works pages and visible recipient/trust facts.
-- [ ] SEC-03.3 — audit generated HTML/bundles/copy for leaks, overstated claims, and stale backend instructions.
+- [x] SEC-03.1 — frozen offline install, actual browser-bundle pins/notices, production fixture/public/private/source-map/API/persistence exclusions, full Go module/vendor/offline gates and separate receiver artifacts pass.
+- [x] SEC-03.2 — current privacy/security/how-it-works with code-native browser/export/offline-Go flow, public recipient facts and pending trust anchors.
+- [x] SEC-03.3 — author output/copy audit, public-route 320px/style checks and negative artifact mutations pass; no integrated independent audit or release claim.
 
 ### SEC-04 — establish lookalike and delivered-code trust controls
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4/M5 · Dependencies: KEY-03, SEC-03.
+Type: enabler · Priority: P0 · Status: Review · Milestone: M4/M5 · Dependencies: KEY-03, SEC-03.
 
 Acceptance criteria:
 
@@ -506,15 +506,15 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] SEC-04.1 — specify domain/publisher/hash trust anchors, independent publication and incident ownership.
-- [ ] SEC-04.2 — implement clear verification/download/recipient guidance without fake verified badges.
-- [ ] SEC-04.3 — test substitution/failure paths and record the remaining hosted-plaintext trust gap.
+- [ ] SEC-04.1 — user is undecided; proposed free https://zodiac-modern.vercel.app only. Confirm origin/control, publisher, reviewed final hashes, independent channel and operational owners before release; config/release-trust.json records pending fields.
+- [x] SEC-04.2 — recipient/bookmark/lookalike/externally verified local sender guidance; no fake badges or signed download. External helpers never start files.
+- [x] SEC-04.3 — altered key/input/HTML/CSP/header, fixture leak, unsigned receiver/wrong hash/publisher refusal paths pass; full signed positive release/novice verification trials remain release gates. docs/hardening.md records the hosted plaintext trust gap.
 
 ## 11. E08 — integrated quality and independent review
 
 ### QA-01 — run the full browser/Go compatibility and attack-regression matrix
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4 · Dependencies: CRY-01, CRY-02, CRY-03, KEY-01, SYM-02, REC-02.
+Type: enabler · Priority: P0 · Status: In progress · Milestone: M4 · Dependencies: CRY-01, CRY-02, CRY-03, KEY-01, SYM-02, REC-02.
 
 Acceptance criteria:
 
@@ -532,7 +532,7 @@ Subtasks:
 
 ### QA-02 — verify accessibility, exports, performance, and email paste behavior
 
-Type: enabler · Priority: P1 · Status: Backlog · Milestone: M4 · Dependencies: UX-03, SYM-01, EXP-01, EXP-02, EXP-03, SEC-02, REC-03.
+Type: enabler · Priority: P1 · Status: In progress · Milestone: M4 · Dependencies: UX-03, SYM-01, EXP-01, EXP-02, EXP-03, SEC-02, REC-03.
 
 Acceptance criteria:
 
@@ -551,7 +551,7 @@ Subtasks:
 
 ### QA-03 — obtain and disposition an independent security review
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M4/M5 · Dependencies: QA-01, SEC-01, SEC-02, SEC-03, SEC-04, REC-01, EN-04.
+Type: enabler · Priority: P0 · Status: In progress · Milestone: M4/M5 · Dependencies: QA-01, SEC-01, SEC-02, SEC-03, SEC-04, REC-01, EN-04.
 
 Acceptance criteria:
 
@@ -562,7 +562,7 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] QA-03.1 — prepare profile/threat model/test evidence/source package and choose a reviewer with appropriate scope.
+- [ ] QA-03.1 — profile/threat boundaries/source hashes/test evidence and review scope prepared in docs/reviews/m4-review-packet.md; qualified reviewer selection pending.
 - [ ] QA-03.2 — record assessment/findings and create linked fix tasks for every required remediation.
 - [ ] QA-03.3 — verify remediations, review permitted claims, and publish an accurate review status.
 
@@ -753,13 +753,13 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1, REC-01/02 and SYM-01/02 Done; EN-04.1 Done; EN-04 in progress; UX-03/EXP-02/03/04 Done; E06/M3 and EXP-01 Review pending actual Gmail/Outlook paste; REC-03 Review pending operator/novice evidence. M0/M1 development gates complete. Current evidence and later gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; download every glyph in a reversible one-line SVG; Unicode symbol strings deferred |
 | Production recipient | Operator-confirmed RSA-4096 public PEM/name/full fingerprint configured; production build/browser checks pass. Operator backup/readiness, independent integrated review and signed release remain open. |
-| Host/domain | Vercel primary; Cloudflare Pages/Netlify alternatives, Surge conditional on verified header support; exact domain/account pending (REL-04/REL-02) |
+| Host/domain | Vercel primary; user proposes free zodiac-modern.vercel.app and will not buy a domain. Origin availability/control/deployment and publisher/channel/owners remain pending. Fresh generated static output tested; no deployment. Alternatives in docs/deployment.md |
 | Independent review | User-supplied REC-01 conditional approval recorded; specified fixes pass native/synthetic verification and all mandatory evidence gates. Reviewer identity/tool was not supplied and no external post-fix execution is claimed. QA-03 integrated review remains open. See docs/reviews/2026-10-03-rec01-followup.md |
 | Review feedback | EN-04 file:// spike/conditional launcher; raw-primary vs optional artwork/no v1 SVG consumer; complete compact PNG distinct from archival pages; REC-01 owned fixed-profile stdlib loader replaces third-party decoder selection, with youmark/pkcs8/.NET read-only references and strict parsing/fuzz/vendor gates |
 | Offline artifact trust | Independent artifact hash/reviewer channel needed for REL-03; hashing and locality do not by themselves establish code trust |
 | Receiver decision | Confirmed: browser encryption plus downloadable offline Go decrypt CLI, encrypted OpenSSL keys and hidden prompt; supersedes the earlier offline-browser selection |
 | Receiver/signing gates | REC-01 focused conditional approval and verified fixes, exact LF fixture/oracle, native boundary/mutation/prompt, fuzz/resource/latency and complete vendor evidence pass. Workflow remains a template. REC-02 Windows output is implemented/tested; QA-03, signing and independent release channel remain pending |
-| Offline sender decision | EN-04 has a fully bundled actual Svelte sender with shared glyph/raw recovery and synthetic file:// evidence; full SVG/PNG/print, remaining bundled recovery/stable-browser/verification/review gates remain open. Native sender launcher/signing remains conditional |
+| Offline sender decision | EN-04 bundled sender/glyph/raw/printed-row recovery/SVG/PNG/JSON/print/runtime notices pass Chromium/Firefox and stable Edge; stable Chrome/Firefox/headed independent verification/review and release selection remain open. Native sender launcher/signing remains conditional |
 | Local repo use | pnpm dev/build/start:local/local and custom-only scripts implemented. Production builds require real public configuration; REL-04 final installation/hosting documentation gates remain open |
 | Security claim | Passing synthetic implementation tests and provisional external feedback; no proof/certification/completed audit/production validation claimed |
 
@@ -784,3 +784,5 @@ Status evidence:
 
 - E06 / M3 | 2026-10-06 | Review | complete/page PNG, full S64SVG1 strip, metadata, request-only checked archival A4/Letter print and offline exports | 34 unit tests/54 Chromium-Firefox cases, stable Edge file://, production CSP and exact PDF-row/Go recovery pass | author-run; docs/reviews/e06-evidence.json | actual Gmail-primary/Outlook-secondary unsent draft paste remains EXP-01.3; independent QA-03/signing remain separate.
 - S64M1 correction | 2026-10-06 | Done | null rotation corrected to CircleOff/CircleDashed/Skull; original Crosshair payload for j restored in the mixed view | full M3 regression and frozen provenance pass | author-run | earlier development mapping was contrary to user correction; no released S64L1/envelope/check geometry changed.
+
+- E07 / M4 | 2026-10-06 | Review | config/security-policy.ts, release-trust.json, artifact/dependency/provider/external verification scripts, public guidance and hardening/privacy browser tests | pnpm check:m4: frozen installation, real OpenSSL/Go/vendor/fuzz, 37 units/62 Chromium-Firefox cases plus stable Edge, exact PDF/Go recovery and clean Vercel static output; docs/reviews/e07-evidence.json | author-run; integrated reviewer pending | SEC-02 receiver OS network-denial trial, SEC-04 undecided trust anchors, QA-01 WebKit/CI, QA-02 human/device/email trials, EN-04 final delivery selection and QA-03/release stay open. No deployment or signing performed.

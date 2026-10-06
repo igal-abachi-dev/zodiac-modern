@@ -21,35 +21,39 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 | E05, SYM-01, SYM-02    | Done (development) | 64 frozen vectors/provenance/license, bounded glyph plate/legend and raw/transcribed-row recovery pass. Similar-glyph recognition limits documented; no human error-rate measurement or SVG importer.                            |
 | EXP-04                 | Done               | S64CHECK1 SVG/JSON/print integration; independent PDF raw/check/hash/Go recovery passes.                                                                                                                                         |
 | EN-04.1                | Done               | One fully bundled actual Svelte sender with local help and shared crypto/codecs/raw exports; direct file:// feasibility demonstrated.                                                                                            |
-| EN-04                  | In progress        | Bundled raw/SVG/PNG/JSON export and print preparation/cleanup pass; remaining platform, bundled printed-row trial, independent boundary/verification UX review and final delivery choice stay open.                              |
+| EN-04                  | In progress        | Bundled raw/printed-row recovery, SVG/PNG/JSON/print and runtime notices pass; remaining stable-browser/headed independent verification review and final delivery selection stay open.                                           |
 | E06, EXP-01            | Review             | Exact raw delivery, native PNG clipboard/fallback and exports implemented. Actual Gmail-primary/Outlook-secondary draft paste pending; no connected browser session available.                                                   |
 | EXP-02, EXP-03         | Done               | Trusted bounded SVG/PNG, all-page/partial print, 9 pt raw rows, cleanup and A4/Letter PDF/Go recovery pass.                                                                                                                      |
+| SEC-01, SEC-03         | Done (development) | Shared exact-hash CSP, artifact/provider synchronization, fresh Vercel output, frozen installs, browser provenance/notices, Go vendor gates and accurate public guidance pass.                                                   |
+| SEC-02                 | Review             | All warm browser actions with HTTP disabled, storage/log checks and reset lifecycle pass. Receiver source excludes network APIs and native output tests pass; OS-enforced network-denial receiver trial remains.                 |
+| SEC-04, E07            | Review             | External hash/publisher refusal helpers and trust guidance implemented; proposed Vercel origin only. Official origin, publisher, independent channel and operational owners are undecided.                                       |
+| QA-01/02/03, E08       | In progress        | Current Chromium/Firefox/Go/export evidence and integrated review packet prepared. WebKit/CI, real AT/device/recipient/email trials and independent assessment remain.                                                           |
 
-| Milestone                   | State              | Remaining scope                                                                                                  |
-| --------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------------- |
-| M0 — Foundation             | Done               | Reviewed loader and independent harness; retain mandatory gates.                                                 |
-| M1 — Compatible encryption  | Done (development) | Core acceptance and actual public recipient configuration pass. EN-04 retains its explicit M4 completion scope.  |
-| M2 - Usable sender/receiver | Review             | Sender/receiver and result/artifact flows pass; observed recipient readiness/usability remains.                  |
-| M3 - Symbols/artifacts      | Review             | E05 and E06 implementation/automated checks pass. Actual Gmail-primary/Outlook-secondary paste remains EXP-01.3. |
-| M4 — Hardened candidate     | Pending            | Full offline delivery decision, integrated privacy/export/UX and independent QA-03.                              |
-| M5 — Release                | Pending            | Signed receiver, reviewed sender artifact, trusted independent publisher channel and operator readiness.         |
+| Milestone                   | State              | Remaining scope                                                                                                                                                       |
+| --------------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| M0 — Foundation             | Done               | Reviewed loader and independent harness; retain mandatory gates.                                                                                                      |
+| M1 — Compatible encryption  | Done (development) | Core acceptance and actual public recipient configuration pass. EN-04 retains its explicit M4 completion scope.                                                       |
+| M2 - Usable sender/receiver | Review             | Sender/receiver and result/artifact flows pass; observed recipient readiness/usability remains.                                                                       |
+| M3 - Symbols/artifacts      | Review             | E05 and E06 implementation/automated checks pass. Actual Gmail-primary/Outlook-secondary paste remains EXP-01.3.                                                      |
+| M4 — Hardened candidate     | Review             | Automated hardening passes; operational trust anchors, receiver network-denial observation, offline selection and E08 human/platform/independent review gates remain. |
+| M5 — Release                | Pending            | Signed receiver, reviewed sender artifact, trusted independent publisher channel and operator readiness.                                                              |
 
 Current evidence:
 
 - Formatting, Astro/Svelte/strict TypeScript pass with zero errors/warnings;
-  34 unit tests and 54 Chromium/Firefox browser cases pass for the E06/M3 implementation; 92 type-check files have zero diagnostics.
+  37 unit tests and 62 Chromium/Firefox browser cases pass for integrated E07/M4; 100 type-check files have zero diagnostics.
   Chromium's process
   sandbox is enabled. Browser versions are recorded in the machine evidence.
 - Fixture, custom and configured production builds pass artifact/CSP checks.
   Actual production default fingerprint and canonical public PEM export match
   the separately confirmed local receiver/OpenSSL value. Invalid/missing/test
   production defaults remain covered by isolated refusal tests.
-- EN-04's actual sender prototype is 165,062 bytes (about 161 KiB). Direct file opens,
+- EN-04's actual sender prototype size/hash is recorded in the current E06/E07 machine evidence. Direct file opens,
   public imports, exact UTF-8/Go decryption, raw save/manual-copy fallback,
   glyph display/raw recovery, SVG/PNG/JSON save, request-only print, reset, no runtime requests/storage/styles and matching final-block CSP hashes
   pass Chromium/Firefox and the installed stable Edge 154.0.4258.53 channel (one
-  expanded file:// case passes). Stable Chrome/Firefox installations, bundled
-  printed-row trials, actual email-client paste and independent review remain unclaimed.
+  expanded file:// case passes). Bundled printed-row recovery and full runtime notices are included. Stable Chrome/Firefox installations, headed independent verification UX,
+  actual email-client paste and integrated review remain unclaimed.
 - E05 checks cover 512-character fixed-order previews at 8/16 columns, native
   24/16 px and monochrome print legend captures, the maximum 88,102-character
   result, exact raw recovery with explicit ASCII whitespace cleaning, independent
@@ -79,13 +83,37 @@ Current evidence:
   or piped password input. The random generator uses native GetInt32 where
   available or unbiased byte rejection on Windows PowerShell 5.1; redirected
   generation is refused and mapping/native-generator tests pass.
-- REC-01 source inputs are unchanged. Its latest recorded evidence includes
-  six OpenSSL 3.0.22/3.5.9 profiles, native/vendor/pin/offline tests, 709,933
-  pre-KDF and 2,472 post-KDF fuzz executions, 136 allocations and all 7,163
+- REC-01 source inputs are unchanged. Its refreshed recorded evidence includes
+  six OpenSSL 3.0.22/3.5.9 profiles, native/vendor/pin/offline tests, complete
+  30-second pre/post-KDF fuzz runs with exact execution counts in the machine record, 136 allocations and all 7,163
   private-exponent bit mutations rejected. No new focused reviewer verdict is
   inferred from unrelated UI/guidance changes.
+- E07 adds real network-disabled encryption/recovery/raw/artwork/print actions,
+  empty storage/cookies/CacheStorage/IndexedDB/worker registrations and input-free
+  logs/URLs/title/history, close/reopen/history/reload reset and explicit persisted
+  pageshow reset. Deliberate script/connect/worker CSP probes are refused in both
+  browsers. Public guidance fits 320px with no style attributes. Exact provider
+  headers and Vercel copied bytes/stale-function removal pass; no deployment.
+  All static JS totals about 48 KiB gzip against a 200 KiB budget, a conservative
+  sum including other routes. Device latency/long-task qualification remains QA-02.
+- Frozen offline pnpm installation and actual bundled dependency/license checks
+  pass. The hosted tree and self-contained candidate carry the runtime notices;
+  production artifact refusal tests cover private/fixture keys, network/storage,
+  test decrypt, API/functions, source maps and remote integration. External HTML
+  hash and receiver signature/hash/publisher refusal helpers never execute files.
+  No signed Zodiac release or positive Zodiac signing check is claimed.
+- The user proposes the free `https://zodiac-modern.vercel.app` origin and will
+  not buy a domain. Availability/control/deployment, official origin, publisher,
+  independent release channel and domain/signing/incident owners are pending in
+  `config/release-trust.json`. Same-site hashes/TLS do not establish honest code.
+  SEC-02's OS-enforced receiver network-denial observation is also pending;
+  offline vendor tests and absence of receiver network imports are narrower evidence.
 
-Evidence: [current E06/M3 export/PDF record](reviews/e06-evidence.json),
+Evidence: [current E07/M4 hardening record](reviews/e07-evidence.json),
+[hardening scope and trust gates](hardening.md),
+[integrated independent review packet](reviews/m4-review-packet.md),
+[static host instructions](deployment.md),
+[current E06/M3 export/PDF record](reviews/e06-evidence.json),
 [Gmail-first sharing matrix](exports.md),
 [M1 packet](reviews/m1-review-packet.md),
 [M1 machine record](reviews/m1-evidence.json),
@@ -111,10 +139,12 @@ OpenSSL interactive non-ASCII passphrase compatibility remain unclaimed.
 
 The workflow stays in `workflows/foundation.yml` as a template by user choice;
 GitHub Actions is not active. Local gates: `pnpm check:rec01`,
-`node scripts/snapshot-rec01.mjs`, then `pnpm check:m1`.
+`node scripts/snapshot-rec01.mjs`, then `pnpm check:m1`; `pnpm check:m4` runs
+the complete integrated gate including receiver/export/hardening evidence.
 
-Next: record recipient usability/readiness outcomes; E06 artwork/print exports
-follow when authorized. Complete UX-03 and EN-04 full delivery review, QA-03
-and release gates afterward. Keep the real encrypted intermediate until the
+Next: resolve the undecided operational trust anchors and receiver network-denial
+trial, complete EN-04's stable-browser/headed verification decision and E08's
+human/platform/independent review gates. E06 actual Gmail-first/Outlook-secondary
+paste and recipient readiness trials remain open. Keep the real encrypted intermediate until the
 operator's final-key/pair/encrypted-backup drill succeeds; do not regenerate the
 already verified key to repair a public configuration error.

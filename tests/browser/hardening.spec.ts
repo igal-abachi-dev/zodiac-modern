@@ -11,6 +11,7 @@ test('security policy actively blocks injected script, connection and worker wit
     const state = window as unknown as {
       blockedDirectives: string[];
       injected?: boolean;
+      workerExecuted?: boolean;
     };
     state.blockedDirectives = [];
     document.addEventListener('securitypolicyviolation', (e) =>
@@ -22,10 +23,25 @@ test('security policy actively blocks injected script, connection and worker wit
     script.remove();
     await fetch('https://synthetic-blocked.invalid/').catch(() => {});
     const url = URL.createObjectURL(
-      new Blob(['self.close()'], { type: 'text/javascript' }),
+      new Blob(['self.postMessage("unexpected worker execution")'], {
+        type: 'text/javascript',
+      }),
     );
     try {
       const worker = new Worker(url);
+      await new Promise<void>((done) => {
+        const timeout = setTimeout(done, 1000);
+        worker.onmessage = () => {
+          state.workerExecuted = true;
+          clearTimeout(timeout);
+          done();
+        };
+        worker.onerror = (event) => {
+          event.preventDefault();
+          clearTimeout(timeout);
+          done();
+        };
+      });
       worker.terminate();
     } catch {
       /* Expected policy refusal. */
@@ -47,6 +63,11 @@ test('security policy actively blocks injected script, connection and worker wit
   expect(
     await page.evaluate(
       () => (window as unknown as { injected?: boolean }).injected,
+    ),
+  ).toBeUndefined();
+  expect(
+    await page.evaluate(
+      () => (window as unknown as { workerExecuted?: boolean }).workerExecuted,
     ),
   ).toBeUndefined();
   expect(requests).toEqual([]);

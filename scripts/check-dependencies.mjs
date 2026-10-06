@@ -36,6 +36,7 @@ const inputs = Object.keys(
     .inputs,
 );
 const packages = new Map();
+const notices = new Map();
 for (const input of inputs.filter((p) => p.includes('node_modules/'))) {
   let root = dirname(resolve(input));
   while (!existsSync(join(root, 'package.json'))) {
@@ -54,6 +55,10 @@ for (const input of inputs.filter((p) => p.includes('node_modules/'))) {
   );
   if (!licenseFile) throw Error(`Missing license notice: ${pkg.name}`);
   const notice = await readFile(join(root, licenseFile));
+  notices.set(
+    pkg.name,
+    `${pkg.name} ${pkg.version}\n${notice.toString('utf8').replace(/\r\n/g, '\n').trim()}\n`,
+  );
   packages.set(pkg.name, {
     name: pkg.name,
     version: pkg.version,
@@ -61,6 +66,17 @@ for (const input of inputs.filter((p) => p.includes('node_modules/'))) {
     licenseSHA256: createHash('sha256').update(notice).digest('hex'),
   });
 }
+const browserNotices = [...notices.entries()]
+  .sort(([a], [b]) => a.localeCompare(b))
+  .map(([, text]) => text)
+  .join('\n');
+if (process.argv.includes('--write-notices'))
+  await writeFile('public/licenses/browser-runtime.txt', browserNotices);
+else if (
+  (await readFile('public/licenses/browser-runtime.txt', 'utf8')) !==
+  browserNotices
+)
+  throw Error('Shipped browser license notices differ from the actual bundle.');
 const receiverModule = await readFile('receiver/go.mod', 'utf8');
 if (
   !/golang\.org\/x\/term/.test(receiverModule) ||
@@ -72,7 +88,7 @@ for (const path of (await filesAt('receiver')).filter(
     p.endsWith('.go') && !p.endsWith('_test.go') && !/[\\/]vendor[\\/]/.test(p),
 )) {
   const source = await readFile(path, 'utf8');
-  if (/"(?:net(?:\/http)?|os\/exec|github\.com\/[^\"]+)"/.test(source))
+  if (/"(?:net(?:\/[^\"]+)?|os\/exec|github\.com\/[^\"]+)"/.test(source))
     throw Error(
       `Unexpected receiver network/subprocess/dependency surface: ${path}`,
     );
