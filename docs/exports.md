@@ -19,10 +19,11 @@ guidance and local attribution/license notices. Canvases never exceed 4,096 px
 per dimension or 16 megapixels. Larger results explicitly offer only the selected
 numbered archival page; the full raw text and full SVG remain available.
 
-**Download full one-line SVG** includes every raw character in deterministic
-left-to-right S64SVG1 order with frozen S64L1 definitions and escaped public
-metadata. It remains one line even for long output. Downloaded metadata JSON
-contains exact raw text and all page/row checks separately from the `.txt`.
+**Download full SVG** includes the complete S64M1 mixed grid in the same 32-column
+presentation as the screen and complete PNG, including literals, sparse
+mirrors/rotations and nulls. Embedded metadata contains exact raw text and all
+page/row checks separately from the `.txt`. It is artwork, not an SVG/XML
+importer or a promise of inline-SVG email support.
 There is no SVG/XML importer, image machine recovery or inline-SVG email promise.
 
 ## Gmail first, Outlook second
@@ -54,25 +55,30 @@ sent, email APIs invoked or remote artwork hosted by this application.
 ## Archival pages and PDF
 
 Open **Archival pages and print** for numbered SVG/PNG pages or Print / Save as
-PDF. Archival pages use S64L1, 512 raw characters per page, sixteen columns and
-32 rows. Printed raw/check rows align beside the glyphs. Page headers include
-the full recipient and envelope identity; page checks show twelve hex characters
-and row checks eight. These public checks detect accidental transcription errors,
+PDF. Each archival page presents its 512 raw characters in the S64M1 mixed grid.
+The mixed token sequence wraps continuously in a 16-cell-wide layout, matching
+the main grid. Checked raw rows remain beside the corresponding grid positions,
+with sixteen raw characters per checked row and 32 rows per full page. Inserted
+nulls remain visible in sequence. Printed headers show a recipient
+fingerprint masked to its first 12 and final 3 characters, the envelope identity
+and a 12-hex page check; row checks show eight. These public checks detect accidental transcription errors,
 not sender authenticity. Recover raw/transcribed rows locally; all chunks and
 the final envelope checksum must match.
 
 Default print scope includes every ciphertext page, independently of screen
-paging, plus one disclosed attribution/license sheet. Selected-page scope is
-labeled partial. Choose A4 or Letter with 20 mm margins and disable browser
-headers/footers. Raw/check text is at least 9 pt. Print content is created only
+paging. The print pages omit the product title, attribution sheet, protocol and key-size names,
+recovery notes and full recipient fingerprint; the visible fingerprint keeps its
+first 12 and final 3 characters. A small page number appears at the bottom.
+Selected-page scope is labeled partial. Choose A4 or Letter with 20 mm margins
+and disable browser headers/footers. Raw/check text is at least 9 pt. Print content is created only
 on request from the immutable result, and removed after print/cancellation or
 clear. Composer and key-entry controls are excluded. If a browser misses its
 afterprint event, **Close print document** removes the temporary content.
 
 Actual Chromium PDFs are extracted independently, every row/page check and final
 envelope hash recomputed, and recovered raw independently decrypted using the
-synthetic Go oracle. First/middle/final ciphertext pages and the license sheet
-are rendered for visual inspection. This is author-run evidence, not an
+synthetic Go oracle. First/middle/final ciphertext pages are rendered for visual
+inspection. This is author-run evidence, not an
 independent review or release approval.
 
 ## Repeat the development checks

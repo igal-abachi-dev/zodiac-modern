@@ -1,7 +1,6 @@
 import {
   BASE64URL_ALPHABET,
   GLYPHS,
-  glyphFor,
   type GlyphNode,
 } from '../symbols/manifest';
 import { MIXED_VIEW_GLYPHS, NULL_GLYPHS } from '../symbols/mixed-view';
@@ -54,7 +53,7 @@ function root(
   content: string,
   mixed = false,
 ): string {
-  const text = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><title>Zodiac Modern ciphertext artwork</title><metadata id="zodiac-metadata">${escapeXML(JSON.stringify({ ...data, attribution: '@lucide/svelte 1.51.0; frozen local vectors', license: glyphLicense }))}</metadata>${definitions(mixed)}${content}</svg>`;
+  const text = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><title>Symbols artwork</title><metadata id="zodiac-metadata">${escapeXML(JSON.stringify({ ...data, attribution: '@lucide/svelte 1.51.0; frozen local vectors', license: glyphLicense }))}</metadata>${definitions(mixed)}${content}</svg>`;
   if (new TextEncoder().encode(text).length > 16 * 1024 * 1024)
     throw Error('SVG exceeds its file limit.');
   return text;
@@ -62,16 +61,69 @@ function root(
 function text(x: number, y: number, value: string, size = 12): string {
   return `<text x="${x}" y="${y}" font-family="monospace" font-size="${size}" fill="#202938">${escapeXML(value)}</text>`;
 }
-function use(character: string, offset: number, x: number, y: number): string {
-  glyphFor(character);
-  return `<use href="#s64l1-${String(BASE64URL_ALPHABET.indexOf(character)).padStart(2, '0')}" x="${x}" y="${y}" width="24" height="24" data-offset="${offset}"/>`;
+function maskFingerprint(fingerprint: string): string {
+  return `${fingerprint.slice(0, 12)}${'*'.repeat(Math.max(0, fingerprint.length - 15))}${fingerprint.slice(-3)}`;
+}
+function renderMixedTokens(
+  tokens: ReturnType<typeof mixedSequence>,
+  left: number,
+  top: number,
+  columns = 32,
+  cell = CELL,
+): string {
+  return tokens
+    .map((token, index) => {
+      const x = left + (index % columns) * cell;
+      const y = top + Math.floor(index / columns) * cell;
+      if (token.kind === 'literal') {
+        const value = text(-5, 6, token.character, cell * 0.9);
+        return `<g data-offset="${token.offset}" transform="translate(${x + cell / 2} ${y + cell / 2})${token.orientation === 'mirrored' ? ' scale(-1 1)' : token.orientation === 'rotated' ? ' rotate(180)' : ''}">${value}</g>`;
+      }
+      const id =
+        token.kind === 'null'
+          ? 64 + NULL_GLYPHS.indexOf(token.glyph)
+          : BASE64URL_ALPHABET.indexOf(token.character);
+      return `<use href="#s64m1-${String(id).padStart(2, '0')}" x="${x}" y="${y}" width="${cell}" height="${cell}"${token.kind === 'null' ? ` data-after-offset="${token.afterOffset}"` : ` data-offset="${token.offset}"`}/>`;
+    })
+    .join('');
 }
 export function oneLineSVG(bundle: ExportBundle): string {
+  const tokens = mixedSequence(bundle.raw);
+  const rows = Math.ceil(tokens.length / 32);
+  const width = 816;
+  const height = 128 + rows * CELL;
   return root(
-    bundle.raw.length * CELL,
-    CELL,
-    { ...metadata(bundle), layout: 'strip', cellWidth: CELL },
-    Array.from(bundle.raw, (c, i) => use(c, i, i * CELL, 0)).join(''),
+    width,
+    height,
+    {
+      ...metadata(bundle),
+      layout: 'mixed-grid',
+      presentation: 'S64M1',
+      columns: 32,
+      tokenCount: tokens.length,
+    },
+    text(
+      24,
+      24,
+      `Zodiac Modern - complete artwork | ${bundle.raw.length} raw characters | S64M1`,
+      13,
+    ) +
+      text(
+        24,
+        44,
+        'Attach ciphertext.txt too; the receiver cannot decrypt this artwork.',
+        12,
+      ) +
+      text(24, 64, `Recipient: ${bundle.context.recipientFingerprint}`, 10) +
+      text(24, 82, `Envelope:  ${bundle.context.envelopeSHA256}`, 10) +
+      text(
+        24,
+        100,
+        'Letters carry payload; CircleOff / CircleDashed / Skull are skipped nulls.',
+        11,
+      ) +
+      renderMixedTokens(tokens, 24, 120),
+    true,
   );
 }
 export function pageSVG(
@@ -81,67 +133,73 @@ export function pageSVG(
 ): string {
   integer(pageIndex, bundle.pages.length - 1);
   const page = bundle.pages[pageIndex]!;
+  const tokens = mixedSequence(page.raw, page.startOffset);
+  const artworkRows =
+    renderMixedTokens(tokens, 24, 76, 16, 20) +
+    page.rows
+      .map((row) => {
+        const start = page.startOffset + row.rowIndex * 16;
+        const priorTokens = row.rowIndex * 18;
+        const rowTokenCount =
+          row.raw.length +
+          Math.floor((start + row.raw.length) / 8) -
+          Math.floor(start / 8);
+        const baseline = 76 + ((priorTokens + rowTokenCount / 2) / 16) * 20 + 5;
+        return text(
+          400,
+          baseline,
+          `${String(row.rowIndex + 1).padStart(2, '0')} ${row.raw.padEnd(16, ' ')} ${row.checkCode}`,
+          16,
+        );
+      })
+      .join('');
   const content =
-    `<rect width="680" height="944" fill="#fff"/>` +
+    `<rect width="816" height="1133" fill="#fff"/>` +
     text(
-      0,
+      24,
       20,
-      `${partial ? 'PARTIAL - ' : ''}Zodiac Modern - page ${pageIndex + 1} of ${bundle.pages.length}`,
-      16,
+      `Recipient: ${maskFingerprint(bundle.context.recipientFingerprint)}`,
+      11,
     ) +
-    text(0, 40, `${bundle.context.profile} | RSA-${bundle.rsaBits}`, 11) +
-    text(0, 56, `Recipient: ${bundle.context.recipientFingerprint}`, 11) +
-    text(0, 72, `Envelope:  ${bundle.context.envelopeSHA256}`, 11) +
+    text(24, 36, `Envelope:  ${bundle.context.envelopeSHA256}`, 11) +
     text(
-      0,
-      88,
-      `S64CHECK1 page check: ${page.digest.slice(0, 12)} | raw total ${bundle.raw.length}`,
+      24,
+      52,
+      `Page check: ${page.digest.slice(0, 12)} | raw total ${bundle.raw.length}`,
       12,
     ) +
     text(
-      0,
-      104,
-      `S64L1 | characters ${page.startOffset + 1}-${page.startOffset + page.raw.length} | row raw / check`,
+      24,
+      68,
+      `Symbols | characters ${page.startOffset + 1}-${page.startOffset + page.raw.length}`,
       11,
     ) +
-    page.rows
-      .map(
-        (row) =>
-          Array.from(row.raw, (c, i) =>
-            use(c, row.startOffset + i, i * CELL, 120 + row.rowIndex * CELL),
-          ).join('') +
-          text(
-            400,
-            136 + row.rowIndex * CELL,
-            `${String(row.rowIndex + 1).padStart(2, '0')} ${row.raw.padEnd(16, ' ')} ${row.checkCode}`,
-            12.7,
-          ),
-      )
-      .join('') +
+    artworkRows +
     text(
-      0,
-      908,
-      'Recover using all raw rows in order. Checks are public, not authentication.',
-      11,
-    ) +
-    text(
-      0,
-      924,
-      'Attach ciphertext.txt too. The receiver cannot decrypt image/SVG artwork.',
-      11,
+      700,
+      1121,
+      `${partial ? 'PARTIAL · ' : ''}Page ${pageIndex + 1} of ${bundle.pages.length}`,
+      9,
     );
   return root(
-    680,
-    944,
+    816,
+    1133,
     {
       transport: TRANSPORT,
       layout: 'page',
+      presentation: 'S64M1',
+      columns: 16,
+      tokenCount: tokens.length,
       partial,
-      rsaBits: bundle.rsaBits,
-      ...bundle.context,
+      check: bundle.context.check,
+      envelopeSHA256: bundle.context.envelopeSHA256,
+      recipientFingerprint: bundle.context.recipientFingerprint,
+      totalRawCharacters: bundle.context.totalRawCharacters,
+      pageCount: bundle.context.pageCount,
       ...page,
     },
     content,
+    true,
   );
 }
 export function licenseLines(columns = 110): readonly string[] {
@@ -186,21 +244,7 @@ export function compactSVG(
       'Letters carry payload; CircleOff / CircleDashed / Skull are skipped nulls.',
       11,
     ) +
-    tokens
-      .map((token, index) => {
-        const x = 24 + (index % 32) * CELL,
-          y = 120 + Math.floor(index / 32) * CELL;
-        if (token.kind === 'literal') {
-          const value = text(-7, 8, token.character, 22);
-          return `<g data-offset="${token.offset}" transform="translate(${x + 12} ${y + 12})${token.orientation === 'mirrored' ? ' scale(-1 1)' : token.orientation === 'rotated' ? ' rotate(180)' : ''}">${value}</g>`;
-        }
-        const id =
-          token.kind === 'null'
-            ? 64 + NULL_GLYPHS.indexOf(token.glyph)
-            : BASE64URL_ALPHABET.indexOf(token.character);
-        return `<use href="#s64m1-${String(id).padStart(2, '0')}" x="${x}" y="${y}" width="24" height="24"${token.kind === 'null' ? ` data-after-offset="${token.afterOffset}"` : ` data-offset="${token.offset}"`}/>`;
-      })
-      .join('') +
+    renderMixedTokens(tokens, 24, 120) +
     licenseLines(100)
       .map((line, i) => text(24, 148 + layout.rows * CELL + i * 11, line, 10))
       .join('');
@@ -227,17 +271,17 @@ export function archivalPNGSource(
 ): { svg: string; width: number; height: number } {
   const base = pageSVG(bundle, pageIndex),
     lines = licenseLines(90),
-    height = 976 + lines.length * 11;
+    height = 1165 + lines.length * 11;
   const footer = lines
-    .map((line, i) => text(0, 960 + i * 11, line, 10))
+    .map((line, i) => text(0, 1149 + i * 11, line, 10))
     .join('');
   return {
-    width: 680,
+    width: 816,
     height,
     svg: base
       .replace(
-        'height="944" viewBox="0 0 680 944"',
-        `height="${height}" viewBox="0 0 680 ${height}"`,
+        'height="1133" viewBox="0 0 816 1133"',
+        `height="${height}" viewBox="0 0 816 ${height}"`,
       )
       .replace('</svg>', `${footer}</svg>`),
   };

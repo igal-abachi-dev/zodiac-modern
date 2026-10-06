@@ -92,8 +92,11 @@ test('all warm sender and recovery actions work with HTTP offline and leave no b
   expect((await exported(page, 'Download ciphertext (.txt)')).toString()).toBe(
     raw,
   );
-  const svg = await exported(page, 'Download full one-line SVG');
-  expect([...svg.toString().matchAll(/<use /g)]).toHaveLength(raw.length);
+  const svg = await exported(page, 'Download full SVG');
+  expect([...svg.toString().matchAll(/data-offset="\d+"/g)]).toHaveLength(
+    raw.length,
+  );
+  expect(svg.toString()).toContain('presentation&quot;:&quot;S64M1');
   expect(svg.toString()).not.toContain(message);
   const png = await exported(page, 'Download complete artwork PNG');
   expect(png.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');

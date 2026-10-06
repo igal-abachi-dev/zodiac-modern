@@ -47,11 +47,12 @@ test('full SVG, complete mixed PNG, selected archival exports and metadata recov
       ),
     );
   });
-  const strip = await download(page, 'Download full one-line SVG');
+  const strip = await download(page, 'Download full SVG');
   expect(strip.filename).toBe('ciphertext-strip.svg');
-  expect([...strip.bytes.toString().matchAll(/<use /g)].length).toBe(
-    raw.length,
-  );
+  expect(
+    [...strip.bytes.toString().matchAll(/data-offset="\d+"/g)].length,
+  ).toBe(raw.length);
+  expect(strip.bytes.toString()).toContain('presentation&quot;:&quot;S64M1');
   expect(strip.bytes.toString()).not.toContain(plaintext);
   const compact = await download(page, 'Download complete artwork PNG'),
     size = pngSize(compact.bytes);
@@ -103,15 +104,28 @@ test('full SVG, complete mixed PNG, selected archival exports and metadata recov
   } finally {
     key.stdout.fill(0);
   }
-  await page.getByText('Archival pages and print', { exact: true }).click();
+  await expect(
+    page.getByText('Archival pages and print', { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.locator('details').filter({ hasText: 'Archival pages and print' }),
+  ).toHaveAttribute('open', '');
   await page.getByLabel('Archival page (').fill('2');
   const final = await download(page, 'Download archival page SVG');
   expect(final.filename).toBe('ciphertext-page-2-of-2.svg');
-  expect([...final.bytes.toString().matchAll(/<use /g)].length).toBe(
-    raw.length - 512,
+  expect(
+    [...final.bytes.toString().matchAll(/data-offset="\d+"/g)].length,
+  ).toBe(raw.length - 512);
+  expect(final.bytes.toString()).toContain('S64M1');
+  expect(final.bytes.toString()).toContain('Symbols');
+  expect(final.bytes.toString()).toContain(
+    `Recipient: ${data.context.recipientFingerprint.slice(0, 12)}${'*'.repeat(data.context.recipientFingerprint.length - 15)}${data.context.recipientFingerprint.slice(-3)}`,
   );
+  expect(final.bytes.toString()).not.toContain('Zodiac Modern - page');
+  expect(final.bytes.toString()).not.toContain('S64CHECK1 page check');
+  expect(final.bytes.toString()).not.toContain('Recover using all raw rows');
   const pagePNG = await download(page, 'Download archival page PNG');
-  expect(pngSize(pagePNG.bytes).width).toBe(680);
+  expect(pngSize(pagePNG.bytes).width).toBe(816);
   writeFileSync(
     `artifacts/exports/page-final-${info.project.name}.png`,
     pagePNG.bytes,
@@ -135,7 +149,7 @@ test('full SVG, complete mixed PNG, selected archival exports and metadata recov
   expect(requests).toEqual([]);
 });
 
-test('maximum output offers explicitly partial PNG pages and a complete bounded one-line SVG', async ({
+test('maximum output offers explicitly partial PNG pages and a complete bounded mixed-grid SVG', async ({
   page,
 }) => {
   const raw = await encrypt(page, 'x'.repeat(65536));
@@ -145,12 +159,14 @@ test('maximum output offers explicitly partial PNG pages and a complete bounded 
       exact: true,
     }),
   ).toBeVisible();
-  await page.getByText('Archival pages and print', { exact: true }).click();
   await page.getByLabel('Archival page (').fill('172');
   const image = await download(page, 'Download artwork page 172 of 172 PNG');
   expect(pngSize(image.bytes).height).toBeLessThanOrEqual(4096);
-  const svg = await download(page, 'Download full one-line SVG');
-  expect([...svg.bytes.toString().matchAll(/<use /g)].length).toBe(raw.length);
+  const svg = await download(page, 'Download full SVG');
+  expect([...svg.bytes.toString().matchAll(/data-offset="\d+"/g)].length).toBe(
+    raw.length,
+  );
+  expect(svg.bytes.toString()).toContain('presentation&quot;:&quot;S64M1');
   expect(svg.bytes.length).toBeLessThan(16 * 1024 * 1024);
   await page.getByLabel('Print scope').selectOption('selected');
   await expect(
@@ -267,11 +283,14 @@ test('request-only print uses all immutable pages, A4/Letter fit, partial scope 
 }, info) => {
   const message = 'Synthetic print recovery '.repeat(35),
     raw = await encrypt(page, message);
+  const metadataFile = await download(page, 'Download metadata JSON');
+  const recipientFingerprint = (
+    JSON.parse(metadataFile.bytes.toString()) as ExportBundle
+  ).context.recipientFingerprint;
   await expect(page.locator('.zodiac-print-root')).toHaveCount(0);
   await page
     .getByRole('button', { name: 'Last glyph page', exact: true })
     .click();
-  await page.getByText('Archival pages and print', { exact: true }).click();
   await page.evaluate(() => {
     window.print = () => {};
   });
@@ -281,7 +300,12 @@ test('request-only print uses all immutable pages, A4/Letter fit, partial scope 
       .getByRole('button', { name: 'Print / Save as PDF', exact: true })
       .click();
     await expect(page.locator('.print-page')).toHaveCount(pageCount);
-    expect(await page.locator('.print-page use').count()).toBe(raw.length);
+    expect(await page.locator('.print-page [data-offset]').count()).toBe(
+      raw.length,
+    );
+    expect(await page.locator('.print-page [data-after-offset]').count()).toBe(
+      Math.floor(raw.length / 8),
+    );
     const xml = await page
       .locator('.print-page svg')
       .evaluateAll((nodes) => nodes.map((node) => node.outerHTML).join(''));
@@ -298,7 +322,12 @@ test('request-only print uses all immutable pages, A4/Letter fit, partial scope 
       });
       writeFileSync(
         'artifacts/exports/print-expected.json',
-        JSON.stringify({ raw, pageCount, plaintext: message }),
+        JSON.stringify({
+          raw,
+          pageCount,
+          plaintext: message,
+          recipientFingerprint,
+        }),
       );
     } else
       await page
@@ -370,7 +399,6 @@ test('PNG failure and clear during encoding release resources without stale down
       };
     }),
   ).toEqual({ urls: 0, sizes: [[0, 0]] });
-  await page.getByText('Archival pages and print', { exact: true }).click();
   await page.getByLabel('Archival page (').fill('1.5');
   await expect(
     page.getByRole('button', {

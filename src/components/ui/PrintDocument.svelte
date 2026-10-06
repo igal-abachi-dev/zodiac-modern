@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { ExportBundle } from '../../lib/export/layout';
-  import { pageSVG, exportLicense } from '../../lib/export/svg';
+  import { pageSVG } from '../../lib/export/svg';
   let { bundle, pages }: { bundle: ExportBundle; pages: readonly number[] } =
     $props();
 </script>
@@ -11,10 +11,6 @@
       {@html pageSVG(bundle, page, pages.length !== bundle.pages.length)}
     </section>
   {/each}
-  <section class="print-license">
-    <h2>Artwork attribution and licenses</h2>
-    <pre>{exportLicense}</pre>
-  </section>
 </div>
 
 <style>
@@ -50,18 +46,6 @@
       display: block;
       width: 170mm;
       height: 236mm;
-    }
-    .print-license {
-      break-inside: avoid;
-      color: #000;
-    }
-    .print-license h2 {
-      font: bold 12pt sans-serif;
-    }
-    .print-license pre {
-      font: 7pt/1.15 monospace;
-      white-space: pre-wrap;
-      overflow-wrap: anywhere;
     }
   }
 </style>

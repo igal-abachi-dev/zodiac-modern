@@ -54,10 +54,15 @@ export async function exportBundle(
     ...checked,
   });
 }
-export function mixedSequence(raw: string): readonly MixedViewToken[] {
+export function mixedSequence(
+  raw: string,
+  startOffset = 0,
+): readonly MixedViewToken[] {
   const tokens: MixedViewToken[] = [];
   for (let offset = 0; offset < raw.length; offset += 512)
-    tokens.push(...mixedViewTokens(raw.slice(offset, offset + 512), offset));
+    tokens.push(
+      ...mixedViewTokens(raw.slice(offset, offset + 512), startOffset + offset),
+    );
   return tokens;
 }
 export function compactLayout(

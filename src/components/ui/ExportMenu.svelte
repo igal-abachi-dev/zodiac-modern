@@ -169,8 +169,8 @@
   <p>
     {#if complete}The complete mixed artwork fits one PNG.{:else}The complete
       artwork exceeds image bounds. PNG exports contain only the selected
-      archival page.{/if} The full one-line SVG always includes all {result.raw
-      .length} characters.
+      archival page.{/if} The full mixed-view SVG always includes all {result
+      .raw.length} characters.
   </p>
   <div class="export-actions">
     <button
@@ -195,7 +195,7 @@
       type="button"
       class="secondary"
       disabled={!ready || busy}
-      onclick={() => saveSVG(true)}>Download full one-line SVG</button
+      onclick={() => saveSVG(true)}>Download full SVG</button
     >
     <button
       type="button"
@@ -229,7 +229,7 @@
         attach ciphertext.txt separately.
       </figcaption>
     </figure>{/if}
-  <details>
+  <details open>
     <summary>Archival pages and print</summary>
     <p>
       Archival pages use the original frozen symbol alphabet, with 512 payload

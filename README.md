@@ -61,7 +61,7 @@ development receiver; use synthetic data.
 - Native WebCrypto: RSA-OAEP-SHA256 and AES-256-GCM.
 - Default and custom recipient public keys with full SHA-256 fingerprints.
 - Canonical Base64URL ciphertext, available through copy and `.txt` download.
-- Deterministic celestial glyphs, complete one-line SVG export, PNG artwork, and paginated printing.
+- Deterministic celestial glyphs, matching mixed-view SVG/PNG artwork, and paginated archival printing with checked raw recovery rows.
 - Offline Go decryption with an encrypted private key and hidden passphrase prompt.
 - Static hosting, local source builds, and no message-processing backend, accounts, analytics, or message history.
 

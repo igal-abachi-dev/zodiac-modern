@@ -19,15 +19,21 @@ check = lambda values: digest(json.dumps(values, separators=(',', ':'), ensure_a
 for format_name in ('A4', 'Letter'):
     path = root / f'print-{format_name}.pdf'
     pdf = pymupdf.open(path)
-    assert len(pdf) == expected['pageCount'] + 1, 'Unexpected blank/overflow page'
+    assert len(pdf) == expected['pageCount'], 'Unexpected blank/overflow page'
     recovered = ''
     for index in range(expected['pageCount']):
         page = pdf[index]
         text = page.get_text()
-        assert f'page {index + 1} of {expected["pageCount"]}' in text
-        fingerprint = re.search(r'Recipient: ([a-f0-9]{64})', text)[1]
+        assert f'Page {index + 1} of {expected["pageCount"]}' in text
+        fingerprint = expected['recipientFingerprint']
+        masked = fingerprint[:12] + '*' * (len(fingerprint) - 15) + fingerprint[-3:]
+        assert f'Recipient: {masked}' in text
         envelope = re.search(r'Envelope:\s+([a-f0-9]{64})', text)[1]
-        code, count = re.search(r'S64CHECK1 page check: ([a-f0-9]{12}) \| raw total (\d+)', text).groups()
+        assert all(value not in text for value in (
+            'Zodiac Modern', 'License', 'Attribution', 'Recover using',
+            'http', '127.0.0.1', 'S64L1', 'S64M1', 'S64CHECK1',
+        ))
+        code, count = re.search(r'Page check: ([a-f0-9]{12}) \| raw total (\d+)', text).groups()
         count = int(count)
         assert count == len(expected['raw'])
         rows = re.findall(r'^(\d{2}) ([A-Za-z0-9_-]{1,16}) +([a-f0-9]{8})$', text, re.M)
@@ -50,9 +56,8 @@ for format_name in ('A4', 'Letter'):
                         assert span['size'] >= 8.99, 'Raw recovery text smaller than 9pt'
     assert recovered == expected['raw']
     assert digest(base64.urlsafe_b64decode(recovered + '=' * (-len(recovered) % 4))) == envelope
-    assert 'The MIT License' in pdf[-1].get_text() and 'Permission to use' in pdf[-1].get_text()
     renders = []
-    for label, index in [('first', 0), ('middle', expected['pageCount'] // 2), ('final', expected['pageCount'] - 1), ('license', expected['pageCount'])]:
+    for label, index in [('first', 0), ('middle', expected['pageCount'] // 2), ('final', expected['pageCount'] - 1)]:
         output = root / f'print-{format_name}-{label}.png'
         pdf[index].get_pixmap(matrix=pymupdf.Matrix(1.5, 1.5)).save(output)
         renders.append({'file': output.as_posix(), 'sha256': digest(output.read_bytes())})

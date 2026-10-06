@@ -131,7 +131,7 @@ test('file probe opens under default settings with no adjacent files or network'
     const download = await pendingDownload;
     expect(readFileSync((await download.path())!, 'utf8')).toBe(raw);
     for (const [name, extension] of [
-      ['Download full one-line SVG', 'svg'],
+      ['Download full SVG', 'svg'],
       ['Download complete artwork PNG', 'png'],
       ['Download metadata JSON', 'json'],
     ]) {
@@ -143,9 +143,9 @@ test('file probe opens under default settings with no adjacent files or network'
         new RegExp(`\\.${extension}$`),
       );
       if (extension === 'svg')
-        expect([...bytes.toString().matchAll(/<use /g)].length).toBe(
-          raw.length,
-        );
+        expect(
+          [...bytes.toString().matchAll(/data-offset="\d+"/g)].length,
+        ).toBe(raw.length);
       if (extension === 'json') {
         recoveryData = JSON.parse(bytes.toString()) as ExportBundle;
         expect(JSON.parse(bytes.toString()).raw).toBe(raw);

@@ -9,7 +9,6 @@ import {
   PNG_NOTICE_HEIGHT,
   archivalPNGSource,
 } from '../../src/lib/export/svg';
-import { BASE64URL_ALPHABET } from '../../src/lib/symbols/manifest';
 import { assemblePages } from '../../src/lib/codecs/recovery';
 
 function fixture(size = 438, bits: 3072 | 4096 = 3072) {
@@ -26,23 +25,16 @@ function fixture(size = 438, bits: 3072 | 4096 = 3072) {
   };
 }
 describe('trusted exports, exact ordering and raster bounds', () => {
-  it('retains all characters in the complete strip and all checked pages, independently of the preview', async () => {
+  it('retains the complete S64M1 artwork and all checked raw pages, independently of the preview', async () => {
     const result = fixture(),
       bundle = await exportBundle(result),
       svg = oneLineSVG(bundle);
-    const emitted = [
-      ...svg.matchAll(
-        /<use href="#s64l1-(\d+)" x="(\d+)" y="0" width="24" height="24" data-offset="(\d+)"\/>/g,
-      ),
-    ];
-    expect(emitted).toHaveLength(584);
-    expect(emitted.map((m) => BASE64URL_ALPHABET[Number(m[1])]).join('')).toBe(
-      result.raw,
-    );
-    emitted.forEach((m, i) => {
-      expect(Number(m[2])).toBe(i * 24);
-      expect(Number(m[3])).toBe(i);
-    });
+    expect(svg).toContain('presentation&quot;:&quot;S64M1');
+    expect([...svg.matchAll(/data-offset="\d+"/g)]).toHaveLength(584);
+    expect([...svg.matchAll(/data-after-offset="\d+"/g)]).toHaveLength(73);
+    expect(svg).toContain('scale(-1 1)');
+    expect(svg).toContain('rotate(180)');
+    expect(svg).toContain('layout&quot;:&quot;mixed-grid');
     expect(bundle.pages.map((p) => p.raw).join('')).toBe(result.raw);
     expect(
       await assemblePages(
@@ -51,7 +43,22 @@ describe('trusted exports, exact ordering and raster bounds', () => {
       ),
     ).toEqual({ raw: result.raw, checksum: result.checksum });
     const last = pageSVG(bundle, 1);
-    expect([...last.matchAll(/<use /g)].length).toBe(72);
+    expect(last).toContain('S64M1');
+    expect([...last.matchAll(/data-after-offset="\d+"/g)].length).toBe(9);
+    expect([
+      ...last.matchAll(/href="#s64m1-6[456]"[^>]*data-after-offset="\d+"/g),
+    ]).toHaveLength(9);
+    expect([...last.matchAll(/data-offset="\d+"/g)].length).toBe(72);
+    expect(last).not.toContain('rsa-oaep-sha256-aes256gcm-v1');
+    expect(last).not.toContain('RSA-4096');
+    expect(last).not.toContain('text rows below');
+    expect(last).toContain('columns&quot;:16');
+    expect(last).toContain('scale(-1 1)');
+    expect(last).toContain('Symbols');
+    expect(last).toContain('Recipient: abababababab');
+    expect(last).not.toContain('Zodiac Modern - page');
+    expect(last).not.toContain('S64CHECK1 page check');
+    expect(last).not.toContain('Recover using all raw rows');
     expect(last).toContain(bundle.pages[1]!.digest.slice(0, 12));
     for (const row of bundle.pages[1]!.rows)
       expect(last).toContain(row.checkCode);
@@ -91,7 +98,8 @@ describe('trusted exports, exact ordering and raster bounds', () => {
     expect(result.raw.length).toBe(88102);
     expect(bundle.pages).toHaveLength(173);
     expect(Buffer.byteLength(svg)).toBeLessThan(16 * 1024 * 1024);
-    expect([...svg.matchAll(/<use /g)].length).toBe(88102);
+    expect([...svg.matchAll(/data-offset="\d+"/g)].length).toBe(88102);
+    expect([...svg.matchAll(/data-after-offset="\d+"/g)].length).toBe(11012);
     expect(svg).toContain('data-offset="88101"');
     expect(pageSVG(bundle, 172)).toContain('characters 88065-88102');
     expect(compactSVG(bundle)).toBeNull();
