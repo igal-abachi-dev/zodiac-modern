@@ -27,7 +27,7 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 | SEC-01, SEC-03         | Done (development) | Shared exact-hash CSP, artifact/provider synchronization, fresh Vercel output, frozen installs, browser provenance/notices, Go vendor gates and accurate public guidance pass.                                                   |
 | SEC-02                 | Review             | All warm browser actions with HTTP disabled, storage/log checks and reset lifecycle pass. Receiver source excludes network APIs and native output tests pass; OS-enforced network-denial receiver trial remains.                 |
 | SEC-04, E07            | Review             | External hash/publisher refusal helpers and trust guidance implemented; proposed Vercel origin only. Official origin, publisher, independent channel and operational owners are undecided.                                       |
-| QA-01/02/03, E08       | In progress        | Reverse Go-to-WebCrypto envelope cases pass for both RSA sizes in Chromium/Firefox/WebKit; inactive workflow template includes WebKit. Shipping CLI WebKit coverage, published CI, human/device/email trials and independent assessment remain. |
+| QA-01/02/03, E08       | In progress        | Chromium/Firefox required; both RSA sizes pass bidirectionally. WebKit optional. CLI/attack matrix, CI, human/device/email trials and independent assessment remain.                                                             |
 
 | Milestone                   | State              | Remaining scope                                                                                                                                                       |
 | --------------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -41,7 +41,7 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 Current evidence:
 
 - Formatting, Astro/Svelte/strict TypeScript pass with zero errors/warnings;
-  37 unit tests and 62 Chromium/Firefox browser cases pass for integrated E07/M4; 100 type-check files have zero diagnostics.
+  37 unit tests and 64 Chromium/Firefox/WebKit browser cases pass for integrated E07/M4; 100 type-check files have zero diagnostics.
   Chromium's process
   sandbox is enabled. Browser versions are recorded in the machine evidence.
 - Fixture, custom and configured production builds pass artifact/CSP checks.
@@ -133,9 +133,10 @@ Evidence: [current E07/M4 hardening record](reviews/e07-evidence.json),
 and [focused loader disposition](reviews/2026-10-03-rec01-followup.md).
 
 The E08 addition passed six targeted RSA-3072/4096 interoperability cases in
-Chromium, Firefox and WebKit 26.6, including independent Go-to-WebCrypto
+Chromium, Firefox and optional WebKit 26.6, including independent Go-to-WebCrypto
 decryption. The inactive CI template includes WebKit but remains unpublished
-by user choice. Actual shipping CLI coverage in WebKit remains open. See the
+by user choice. Shipping CLI coverage remains open for the required Chromium
+and Firefox targets. See the
 [E08 QA matrix](reviews/e08-qa-matrix.md).
 
 The relayed reviewer has no supplied identity/tool/revision. Conditional REC-01

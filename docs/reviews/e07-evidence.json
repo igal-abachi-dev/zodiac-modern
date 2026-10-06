@@ -1,5 +1,5 @@
 {
-  "started": "2026-10-06T19:36:06.450Z",
+  "started": "2026-10-06T19:59:49.701Z",
   "status": "automated hardening passed; independent review and release gates pending",
   "milestone": "M4 Review",
   "scope": "Author-run synthetic development hardening; no integrated independent audit, signing, deployment or human client trial.",
@@ -13,65 +13,67 @@
     {
       "name": "frozen-offline-install",
       "code": 0,
-      "milliseconds": 147,
+      "milliseconds": 146,
       "logSHA256": "c701419c51be8afdb8bbc9c40bf9f890d1241cdaf34c008565d5c8b244799afd"
     },
     {
       "name": "receiver-integrated-gates",
       "code": 0,
-      "milliseconds": 76015,
-      "logSHA256": "3551320016066f19948dc44fcdacc81d9570cbbf279a5ab4a20f3ef119946ae9"
+      "milliseconds": 75961,
+      "logSHA256": "2f1feddba8e995bbcfb92b9a47edfbf3d184f06d0b1540b8235d852ca487e976"
     },
     {
       "name": "receiver-snapshot",
       "code": 0,
-      "milliseconds": 171,
+      "milliseconds": 166,
       "logSHA256": "1c0e3bda35f23ad48c10a4b860a386b36257bd328e3ec8123f9236a91be3eff4"
     },
     {
       "name": "full-browser-unit-build-pdf",
       "code": 0,
-      "milliseconds": 123914,
-      "logSHA256": "8d5699c1833a5765a17d1f06fd05169bfdff906bdf35b602c99a97c9456d1b38"
+      "milliseconds": 127911,
+      "logSHA256": "dd68cfb31d39dde6f1f56675b72c1476def8430b5268dd2e5735a15dc92772fe"
     },
     {
       "name": "dependencies-provenance-notices",
       "code": 0,
-      "milliseconds": 2342,
+      "milliseconds": 2359,
       "logSHA256": "00db66ddbcc12f3a7243f42dce268d02ec0c75f7d22a11a57fdbab106c536c2d"
     },
     {
       "name": "static-host-output",
       "code": 0,
-      "milliseconds": 182,
+      "milliseconds": 183,
       "logSHA256": "9ee076bc382a792dca534b80e45813cdebe80ec12e6157a0081b5a900aba8fcb"
     }
   ],
   "sourceEvidence": {
     "path": "docs/reviews/m1-evidence.json",
-    "sha256": "724acc836aa308255e700dc3031620e0f8679e64f29e0871d1d6005668d0a294"
+    "sha256": "6949e84f1232c417b404dc40b57b4866fdd20b9dede8fd649b72073556d47cb1"
   },
-  "exportsEvidenceSHA256": "402ed193b2451b3b581f9ccc6de19800083cdef11a8c7206fd92cc743809fe7f",
-  "receiverEvidenceSHA256": "f5e57b0a138f8c2f76ff527d0b418e1b8a0955c96b9919fbea0cd7d27b60f6ff",
+  "exportsEvidenceSHA256": "e176d66179781abedc69d61fa345da15882266286ca1270e80986159609e291f",
+  "receiverEvidenceSHA256": "1b9621334cbc3a7bd492b5b6778e90fb4d95d354dfd286c3cac281d81e3acfc8",
   "browser": {
-    "startTime": "2026-10-06T19:38:00.416Z",
-    "duration": 68173.68,
-    "expected": 62,
+    "startTime": "2026-10-06T20:01:41.289Z",
+    "duration": 74967.14799999999,
+    "expected": 64,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0,
     "projects": [
       "chromium",
-      "firefox"
+      "firefox",
+      "webkit"
     ],
     "versions": {
       "chromium": "153.0.8010.12",
-      "firefox": "155.0"
+      "firefox": "155.0",
+      "webkit": "26.6"
     }
   },
   "details": {
     "dependencies": {
-      "recorded": "2026-10-06T19:39:29.032Z",
+      "recorded": "2026-10-06T20:03:16.236Z",
       "status": "direct pins/licenses and shipped browser provenance passed",
       "direct": [
         {
@@ -130,7 +132,7 @@
       "inputs": 4145
     },
     "host-output": {
-      "recorded": "2026-10-06T19:39:29.215Z",
+      "recorded": "2026-10-06T20:03:16.422Z",
       "status": "static prebuilt serialization/regeneration passed",
       "files": [
         {
@@ -317,23 +319,23 @@
   "documentationSHA256": {
     ".prettierignore": "09bfaea4dd8930857c425258d862e6625bb6ebc20406b6f7e506fdaf595ac94e",
     "AGENTS.md": "5f47d02d2b74060d26c882d6e12255d12349275de678c392940c3acca6cbdaf0",
-    "plan.md": "edc851eb72c2cc2760b15ed5f35c8b1ed6d531ff0fa1d623dd342c3a4d4a4387",
-    "backlog.md": "35fb155cb20b83b60fc6454ab274d75c8cc2cc7ff2fc9f3f15c60fa849d8e488",
-    "README.md": "be01cf01cdd4ccb106bfa3d36838760da2d88b6bf5039470bd56f3d8baedaac6",
-    "docs/status.md": "8ceadef5d42c011aae2acd6bb4f0433b434c93107fec701559b1f0c13038ba6d",
+    "plan.md": "17ed0829b77ee8661b8815ff88d59cca062089dbaf523725bf23fb03696e3bb2",
+    "backlog.md": "0d5829ea17c0fac1bda0c64a36ce2d7989dd795d7b48cb504cc2e30d7243f95f",
+    "README.md": "3a7535c1a907772ed8bb3f6b37ecfde2c97bbe679b19c2e33fd1534a8a45cc78",
+    "docs/status.md": "1d49b649628d3e55e1250bc8f785b2f146fc0f208c9c1e575e955fc1c5475bc4",
     "docs/hardening.md": "8cc4ac524b06cbf6d71409bd46d83823acd1c5eb1f4e64ec557ebce08d6e8a61",
     "docs/deployment.md": "19cf8b12cf69ff2b66f068ec9aad16a4eb3e56563ea0b5a583759c26d9cbf40a",
-    "docs/reviews/m4-review-packet.md": "3e0017b96602322d98b8b8b492cd48b78b4d2d21f069541eb896e1562f590954",
+    "docs/reviews/m4-review-packet.md": "a5ccab9ff7c1d6fc004f77a052f143edc094edea452ce8adb23be6c6944a0df1",
     "docs/reviews/en04-prototype.md": "8ea24c10381b75de5dad528508aa905b1b7fda5e5bc7d9cd3d063fbee4556845"
   },
   "openGates": [
     "SEC-04 confirmed origin/publisher/independent release channel and operational owners; proposed zodiac-modern.vercel.app is unclaimed.",
     "QA-03 integrated independent security review, critical/high disposition and independently rechecked fixes.",
     "EN-04 stable Chrome/Firefox and headed external verification usability; final reviewed delivery selection.",
-    "QA-01 WebKit and published CI (workflow stays a template by user instruction).",
+    "QA-01 required Chromium/Firefox shipping CLI coverage/complete attack matrix and published CI (workflow stays a template by user instruction); WebKit coverage is optional.",
     "QA-02 real assistive technology, recorded latency/long tasks and five novice recipients; Gmail-primary/Outlook-secondary actual draft paste.",
     "Receiver network-denial observation at OS level; source excludes network/listener imports and offline vendor checks pass.",
     "Final-origin response/privacy checks and signed receiver/reviewed sender hashes before release."
   ],
-  "finished": "2026-10-06T19:39:29.278Z"
+  "finished": "2026-10-06T20:03:16.470Z"
 }

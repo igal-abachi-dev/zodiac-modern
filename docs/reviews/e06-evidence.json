@@ -1,9 +1,9 @@
 {
-  "recorded": "2026-10-06T19:39:26.690Z",
+  "recorded": "2026-10-06T20:03:13.880Z",
   "status": "automated export and PDF checks passed; email-client review pending",
   "milestone": "M3 Review",
   "scope": "Author-run synthetic evidence, not an independent audit or release approval.",
-  "m1EvidenceSHA256": "724acc836aa308255e700dc3031620e0f8679e64f29e0871d1d6005668d0a294",
+  "m1EvidenceSHA256": "6949e84f1232c417b404dc40b57b4866fdd20b9dede8fd649b72073556d47cb1",
   "pdf": {
     "renderer": "PyMuPDF 1.28.2",
     "formats": [
@@ -11,20 +11,20 @@
         "format": "A4",
         "pages": 5,
         "ciphertextPages": 4,
-        "pdfSHA256": "16c5a66a94206fcb40878261b7741a4e8bd3aef70dec33c2b0b83ebcdc08f016",
+        "pdfSHA256": "417d542acff3b45ced820ef8fa392b8ceac9189338c7d8ee8b05275e1b1b64df",
         "rawRecovery": "all rows/page codes/whole envelope match",
         "renders": [
           {
             "file": "artifacts/exports/print-A4-first.png",
-            "sha256": "93b042c28dd517b35a9b2195c67b0b9c8d15118d0b15ae9fe86fdd6650be93ac"
+            "sha256": "b11deaa46ca01e2ec4e4438eda86e0463109b83f296727eab481c51891f90524"
           },
           {
             "file": "artifacts/exports/print-A4-middle.png",
-            "sha256": "8d4976ca160240b0bb2888ba96bb45c1160fa8c43948d460dace11caa178c2f0"
+            "sha256": "82ddc42b67e7f69f632b46342b2791b750174f2645b6ac620ce3adb6832c5706"
           },
           {
             "file": "artifacts/exports/print-A4-final.png",
-            "sha256": "0902dd8dbc070d878847bd7a43d32550ba0ec6f2c6d7168d07362132aa0f1fe3"
+            "sha256": "466b1eee6d73073ec987aa86ee8ed344e9a060db5e633eaee70939260b8ef905"
           },
           {
             "file": "artifacts/exports/print-A4-license.png",
@@ -36,20 +36,20 @@
         "format": "Letter",
         "pages": 5,
         "ciphertextPages": 4,
-        "pdfSHA256": "bf13c92fda23f74e1f769fbeaf14f454bcce29efe52dd9a9a26a0503a165f5b6",
+        "pdfSHA256": "b57147c49ae8de7c15e17a355b697e5c535a6034e698fc0222fc0c91e2abccdf",
         "rawRecovery": "all rows/page codes/whole envelope match",
         "renders": [
           {
             "file": "artifacts/exports/print-Letter-first.png",
-            "sha256": "4ac080fad1b728cf3b28a7356a167fe8e588e2fa1b6fa593971be5f9f714c31e"
+            "sha256": "ba3809a6fe489613affb4cc49aa6eafe777b2df3cd6828736c27ba65d53537ae"
           },
           {
             "file": "artifacts/exports/print-Letter-middle.png",
-            "sha256": "b74cd54c82ad82564b3800992f9184363b64635cc71e69e60921c3a638a6fc5c"
+            "sha256": "959b099f09b70373bf91c7c0f7ed7e56fba1ffaa9c40859996dd4df2a2c2506c"
           },
           {
             "file": "artifacts/exports/print-Letter-final.png",
-            "sha256": "b5cd580c2af41f8c39a0cb231e5d5b42aa6c0f13d9adfa2ef6a22a0c5424363e"
+            "sha256": "e2f3ad99918fbeaae638d7aac2222d9d9d22dd9263f38e148f1146a372a5c767"
           },
           {
             "file": "artifacts/exports/print-Letter-license.png",
@@ -61,8 +61,8 @@
     "independentGoRecovery": "Exact synthetic UTF-8 plaintext from PDF-extracted raw"
   },
   "edge": {
-    "startTime": "2026-10-06T19:39:16.194Z",
-    "duration": 10472.319,
+    "startTime": "2026-10-06T20:03:03.632Z",
+    "duration": 10225.848999999998,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,

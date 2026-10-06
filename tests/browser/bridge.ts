@@ -24,8 +24,8 @@ window.zodiacTest = {
   async decryptEnvelopeForTest(privatePkcs8, raw) {
     const keyBytes = Uint8Array.from(privatePkcs8);
     const envelope = decodeBase64URL(raw);
-    let aesBytes: Uint8Array | undefined;
-    let plaintext: Uint8Array | undefined;
+    let aesBytes: Uint8Array<ArrayBuffer> | undefined;
+    let plaintext: Uint8Array<ArrayBuffer> | undefined;
     try {
       const rsa = await crypto.subtle.importKey(
         'pkcs8',
@@ -37,8 +37,14 @@ window.zodiacTest = {
       const modulusBytes =
         (rsa.algorithm as RsaHashedKeyAlgorithm).modulusLength / 8;
       const wrappedKey = envelope.subarray(0, modulusBytes);
-      const nonce = envelope.subarray(wrappedKey.length, wrappedKey.length + 12);
-      const tag = envelope.subarray(wrappedKey.length + 12, wrappedKey.length + 28);
+      const nonce = envelope.subarray(
+        wrappedKey.length,
+        wrappedKey.length + 12,
+      );
+      const tag = envelope.subarray(
+        wrappedKey.length + 12,
+        wrappedKey.length + 28,
+      );
       const ciphertext = envelope.subarray(wrappedKey.length + 28);
       const aad = new Uint8Array(wrappedKey.length + nonce.length);
       aad.set(wrappedKey);
@@ -56,7 +62,9 @@ window.zodiacTest = {
         false,
         ['decrypt'],
       );
-      const webCryptoCiphertext = new Uint8Array(ciphertext.length + tag.length);
+      const webCryptoCiphertext = new Uint8Array(
+        ciphertext.length + tag.length,
+      );
       webCryptoCiphertext.set(ciphertext);
       webCryptoCiphertext.set(tag, ciphertext.length);
       plaintext = new Uint8Array(

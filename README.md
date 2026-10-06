@@ -1,41 +1,62 @@
 # Zodiac Modern
 
-Local recipient setup is available in [scripts/create-recipient.ps1](scripts/create-recipient.ps1).
-Run it only in your own trusted interactive PowerShell console. Generate two
-independent random ASCII passphrases using
-[scripts/New-ZodiacPassphrase.ps1](scripts/New-ZodiacPassphrase.ps1) or your trusted
-password manager; the default generator length is 32. Never run production
-password generation in an assistant/captured terminal, transcript or recording.
-
-```powershell
-& .\scripts\New-ZodiacPassphrase.ps1
-# Repeat independently for the final passphrase; store both securely.
-```
-
-Use a new private nonsynced folder outside this repository by default. At the
-user's explicit request, this checkout also ignores `.local/` for local custody;
-ignoring a file does not protect it from sync, other programs or disk loss.
-Create the empty parent with `New-Item -ItemType Directory -Path .\.local -Force`,
-then use a new `.local\recipient` destination:
-
-```powershell
-& .\scripts\create-recipient.ps1 -Destination .\.local\recipient -OpenSSL 'C:\Program Files\FireDaemon OpenSSL 3.5\bin\openssl.exe' -Receiver .\receiver\bin\zodiac-decrypt.exe -Bits 4096 -RecipientName 'Zodiac Modern recipient' -ConfigureRecipient
-```
-
-The script verifies the FireDaemon signature, installs a protected current-user
-folder ACL before key generation, refuses existing destinations, runs hidden
-OpenSSL/receiver prompts, and requires local full-fingerprint confirmation before
-copying only public PEM/config into build inputs. The current development receiver
-is unsigned: this setup does not close integrated review or signing gates. Keep
-the weaker encrypted intermediate until final-pair and encrypted-backup readiness
-checks pass. See [key guidance](src/pages/keys.astro) and
-[passphrase guidance](docs/passphrases.md).
-
 Local-first message encryption with a browser sender, celestial glyph artwork, and an offline Go recipient tool.
 
 Choose a recipient public key, encrypt a message locally, and share the ciphertext. Keep private keys and decryption on the recipient's device.
 
-## Planned first-release features
+## Using Zodiac Modern
+
+**Availability:** this is a development project. There is no reviewed website
+origin or signed receiver download yet. Use synthetic messages and test keys
+until an independently verified release is announced. The proposed
+`zodiac-modern.vercel.app` address is not verified or claimed here.
+
+### Encrypt and share
+
+1. Open the verified sender site. Type the message and choose **Encrypt
+   message**. Encryption runs in the browser; the site accepts public keys only.
+2. To address a different recipient, ask them for their `rsa-public.pem` and
+   the complete SHA-256 fingerprint through a trusted channel. Choose **Use a
+   custom public key**, paste the PEM or select its file, and compare the full
+   fingerprint in **Recipient details** with the value you verified. The key
+   stays in this tab's memory and is cleared on reload.
+3. After encryption, the raw Base64URL ciphertext and glyph artwork appear
+   together. **Copy raw** or **Download ciphertext (.txt)** for delivery; the
+   receiver needs the exact raw text. The glyph grid and exported PNG/SVG are
+   visual presentation and cannot be decrypted by the v1 receiver.
+4. For archival use, open **Archival pages and print** to save pages or print / save
+   as PDF. Full print includes every page; selected-page output is partial.
+   Printed row recovery and page checks help detect transcription mistakes.
+   See [sharing, exports and print](docs/exports.md) for clipboard limits,
+   supported browser evidence and recovery instructions.
+
+### Receive and decrypt
+
+The recipient creates an encrypted RSA key pair once, keeps
+`rsa-private-encrypted.pem` and its passphrase private, and shares only
+`rsa-public.pem` plus its independently checked fingerprint. Follow the
+[offline key setup guide](src/pages/keys.astro) for OpenSSL installation,
+generation, verification, backup and rotation.
+
+When a signed receiver release is available, verify its signature, expected
+publisher and full SHA-256 through an independent trusted channel before use.
+Save the sender's raw `.txt` file, then run the receiver with the encrypted key
+and a new output filename:
+
+```powershell
+.\zodiac-decrypt.exe decrypt --key ".\rsa-private-encrypted.pem" --in ".\ciphertext.txt" --out ".\message.txt"
+```
+
+The receiver asks for the passphrase at a hidden local terminal prompt and
+saves authenticated plaintext to a new private local file. It does not print
+the message or open an editor. The file persists until you manage it. Keep the
+receiver separate from the private key; never upload private keys or
+passphrases. See the [recipient guide](src/pages/receive.astro) for exact
+setup, readiness, backup, supported Windows paths and troubleshooting. Until a
+verified release exists, this command is available only in the unsigned
+development receiver; use synthetic data.
+
+## Implemented in development
 
 - Native WebCrypto: RSA-OAEP-SHA256 and AES-256-GCM.
 - Default and custom recipient public keys with full SHA-256 fingerprints.
@@ -58,7 +79,9 @@ Choose a recipient public key, encrypt a message locally, and share the cipherte
 | Platform support | Go-maintained x/term and x/sys for terminal/platform handling |
 | Hosting | Vercel primary; Cloudflare Pages and Netlify alternatives |
 
-The website accepts public keys only. The receiver handles private keys and passphrases locally, without a listener, API, or network lookup.
+The website accepts public keys only. Custom public keys stay in tab memory;
+there is no upload to a backend. The receiver handles private keys and
+passphrases locally, without a listener, API, or network lookup.
 
 ## Development
 
@@ -108,6 +131,31 @@ a failed build leaves the previous preview available. Snapshots stay in ignored
 
 The operator-confirmed Zodiac Modern recipient is configured; its public fingerprint and browser evidence are recorded in [the status report](docs/status.md). Private keys and release-signing credentials belong outside the repository by default; the explicitly authorized `.local/recipient` custody folder is ignored and excluded from build inputs. Custom recipient keys stay in tab memory; reloading clears them. Never use a throwaway generated key as a production default.
 
+### Provisioning the repository's default recipient (operators only)
+
+This is for the project operator configuring the website's default recipient,
+not for ordinary senders choosing a custom recipient. Use the local setup
+script only in your own trusted interactive PowerShell console. Generate two
+independent random ASCII passphrases with
+[New-ZodiacPassphrase.ps1](scripts/New-ZodiacPassphrase.ps1) or a trusted
+password manager. Never run production passphrase generation in an assistant or
+captured terminal, transcript or recording.
+
+```powershell
+& .\scripts\New-ZodiacPassphrase.ps1
+# Repeat independently for the final passphrase; store both securely.
+New-Item -ItemType Directory -Path .\.local -Force
+& .\scripts\create-recipient.ps1 -Destination .\.local\recipient -OpenSSL 'C:\Program Files\FireDaemon OpenSSL 3.5\bin\openssl.exe' -Receiver .\receiver\bin\zodiac-decrypt.exe -Bits 4096 -RecipientName 'Zodiac Modern recipient' -ConfigureRecipient
+```
+
+The setup script verifies the FireDaemon signature, installs a protected
+current-user folder ACL before key generation, refuses existing destinations,
+runs hidden OpenSSL/receiver prompts, and requires local full-fingerprint
+confirmation before copying only public PEM/config into build inputs. The
+development receiver is unsigned. Keep the weaker encrypted intermediate until
+final-pair and encrypted-backup readiness checks pass. See the [offline key
+setup guide](src/pages/keys.astro) and [passphrase guidance](docs/passphrases.md).
+
 ### Checks
 
 ```sh
@@ -139,13 +187,19 @@ Use synthetic messages and labeled test keys. Receiver validation includes real 
 
 Generate the key pair once using the [encrypted OpenSSL setup](plan.md#creating-ones-own-key-one-time-openssl-setup). Share only the public PEM and confirm its fingerprint through a trusted channel.
 
-After a verified receiver release is available, save the sender's raw ciphertext and run the executable from a private folder outside the checkout:
+There is no signed receiver download yet. For development-only tests, build the
+unsigned receiver from the repository with `pnpm build:receiver`; it creates
+`receiver/bin/zodiac-decrypt.exe`. Use only synthetic keys/messages until the
+release is signed, independently reviewed and its trust channel is published.
+Keep all recipient private files outside the checkout. Once a verified release
+is available, save the sender's raw ciphertext and run the executable with the
+new output path:
 
 ```powershell
 .\zodiac-decrypt.exe decrypt --key ".\rsa-private-encrypted.pem" --in ".\ciphertext.txt" --out ".\message.txt"
 ```
 
-This command is implemented in the **unsigned development receiver**, built locally with `pnpm build:receiver`; no signed release download is available. It accepts a strict raw file with no whitespace stripping, unlocks the encrypted key through the hidden controlling terminal and authenticates before creating a new owner-only private file. Windows fixed local disks with ordinary native volume mappings and persistent ACLs are supported. UNC/network, device/extended paths, drive aliases/streams, reserved names, symlink/reparse parents and overwrite are rejected; other OS filesystems currently fail closed. No Go/OpenSSL runtime is needed by the built executable. See [the filesystem decision and tests](docs/decisions/rec02-local-output.md).
+It accepts a strict raw file with no whitespace stripping, unlocks the encrypted key through the hidden controlling terminal and authenticates before creating a new owner-only private file. Windows fixed local disks with ordinary native volume mappings and persistent ACLs are supported. UNC/network, device/extended paths, drive aliases/streams, reserved names, symlink/reparse parents and overwrite are rejected; other OS filesystems currently fail closed. No Go/OpenSSL runtime is needed by the built executable. See [the filesystem decision and tests](docs/decisions/rec02-local-output.md).
 
 Verify any future release's expected publisher and artifact hash through an independently trusted channel before execution. For Windows OpenSSL setup, use an independent random **24–32 character ASCII** passphrase for each temporary/final key file; eight characters is too weak. See [entropy and unbiased offline generation](docs/passphrases.md). Windows OpenSSL interactive non-ASCII compatibility remains unclaimed.
 

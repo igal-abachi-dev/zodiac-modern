@@ -18,20 +18,24 @@ With Playwright's pinned WebKit 26.6 (revision 2359) installed, the targeted
 for RSA-3072 and RSA-4096: six cases total. These cases also exercise wrong-key,
 envelope mutation, truncation, canonical Base64URL, size boundaries and
 surrogate rejection in each browser. The existing M4 record continues to
-capture the wider 62 Chromium/Firefox cases, receiver/OpenSSL/fuzz/vendor gates,
-PDF-to-Go checks and Vercel output checks.
+capture 64 Chromium/Firefox/WebKit cases, receiver/OpenSSL/fuzz/vendor gates,
+PDF-to-Go checks and Vercel output checks. Recorded browser versions are
+Chromium 153.0.8010.12, Firefox 155.0 and WebKit 26.6.
 
-The optional Playwright WebKit project is enabled with `ZODIAC_WEBKIT=1` and is
-limited to the two full interoperability cases. The inactive Windows workflow
-template now installs Chromium, Firefox and WebKit and enables that project.
+Chromium and Firefox are the required browser targets for QA-01. The optional
+Playwright WebKit project is enabled with `ZODIAC_WEBKIT=1` and is limited to
+the two full interoperability cases; WebKit coverage does not block E08. The
+inactive Windows workflow template now installs Chromium, Firefox and WebKit
+and enables that project.
 The template remains inactive by user choice, so this does not create published
 CI evidence.
 
 ## Still required for E08 completion
 
 - QA-01 must exercise the shipping receiver command as well as the independent
-  oracle in WebKit, complete any remaining parser/key-validation regressions,
-  and publish CI evidence if the workflow is activated by the operator.
+  oracle in Chromium and Firefox, complete any remaining parser/key-validation
+  regressions, and publish CI evidence if the workflow is activated by the
+  operator. WebKit CLI coverage is optional.
 - QA-02 still needs manual assistive-technology checks, recorded reference
   device timing/long-task measurements, actual synthetic Gmail-first and
   Outlook-secondary draft paste checks, and five novice recipient trials.

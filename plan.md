@@ -715,7 +715,7 @@ If the host/operator is part of the threat model, recommend the pinned independe
 
 ### Cryptographic and codec tests
 
-- Real Chromium/Firefox/WebKit WebCrypto encryption → both supported Go CLI and independent Go OAEP/GCM oracle for RSA-3072/4096; compare exact UTF-8 bytes. Go encryption → test-only browser decrypt confirms reverse ordering. Browser private-key code exists only in tests, never site imports; the separate Go CLI is supported shipping code.
+- Required Chromium/Firefox WebCrypto encryption → both supported Go CLI and independent Go OAEP/GCM oracle for RSA-3072/4096; compare exact UTF-8 bytes. Go encryption → test-only browser decrypt confirms reverse ordering. WebKit coverage is optional and does not block QA-01. Browser private-key code exists only in tests, never site imports; the separate Go CLI is supported shipping code.
 - Randomized full envelopes must not be expected to match byte-for-byte across runs. Use independent decrypt/parse checks, fixed nonsecret serialization vectors, and AES-GCM known-answer tests in addition to randomized tests.
 - Corpus: empty bytes at library level, one byte, 26 ASCII bytes, multi-line text, all-space text, Hebrew/Arabic, combining accents, emoji, CRLF as entered, 65,536-byte boundary, 65,537-byte rejection, and unpaired-surrogate rejection.
 - Flip bits independently in wrapped key, nonce, tag, and ciphertext; also swap wrapped keys/nonces across messages, use the wrong RSA key, and truncate each field. Every negative decrypt releases no plaintext.
