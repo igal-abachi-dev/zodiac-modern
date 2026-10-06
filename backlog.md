@@ -526,8 +526,8 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] QA-01.1 — complete Chromium/Firefox browser/Go positive and reverse-direction matrix; WebKit is optional.
-- [ ] QA-01.2 — complete tampering/canonicalization/input/key-validation matrix and isolate cleanup/error-path checks.
+- [x] QA-01.1 — Chromium/Firefox browser/Go positive and reverse-direction matrix passes for both RSA sizes; WebKit remains optional.
+- [x] QA-01.2 — tampering/canonicalization/input/key-validation, cleanup/error-path, field-splice and receiver-command regression cases pass. Native hidden-terminal receipts cover Chromium/RSA-3072 and Firefox/RSA-4096; this is author-run evidence.
 - [ ] QA-01.3 — publish CI evidence, tool versions, fixture designation, and unresolved compatibility limits.
 
 ### QA-02 — verify accessibility, exports, performance, and email paste behavior
@@ -786,4 +786,4 @@ Status evidence:
 - S64M1 correction | 2026-10-06 | Done | null rotation corrected to CircleOff/CircleDashed/Skull; original Crosshair payload for j restored in the mixed view | full M3 regression and frozen provenance pass | author-run | earlier development mapping was contrary to user correction; no released S64L1/envelope/check geometry changed.
 
 - E07 / M4 | 2026-10-06 | Review | config/security-policy.ts, release-trust.json, artifact/dependency/provider/external verification scripts, public guidance and hardening/privacy browser tests | pnpm check:m4: frozen installation, real OpenSSL/Go/vendor/fuzz, 37 units/64 Chromium-Firefox-WebKit cases plus stable Edge, exact PDF/Go recovery and clean Vercel static output; docs/reviews/e07-evidence.json | author-run; integrated reviewer pending | SEC-02 receiver OS network-denial trial, SEC-04 undecided trust anchors, QA-01 full shipping CLI/attack matrix and CI publication, QA-02 human/device/email trials, EN-04 final delivery selection and QA-03/release stay open. No deployment or signing performed.
-- E08 / M4 | 2026-10-06 | In progress | tests/browser/bridge.ts and interop.spec.ts, optional Playwright WebKit project, inactive workflow template | Six targeted Chromium/Firefox/WebKit 26.6 cases pass; Go/WebCrypto envelopes agree both directions for both RSA sizes; docs/reviews/e08-qa-matrix.md | author-run only | Chromium/Firefox shipping CLI/attack-matrix completion, published CI (template remains inactive by user choice), assistive-technology/reference-device/five novice/Gmail-Outlook trials and integrated independent review remain. WebKit is optional.
+- E08 / M4 | 2026-10-06 | In progress | tests/browser/bridge.ts and interop.spec.ts, optional Playwright WebKit project, inactive workflow template | Full M4 check passes 37 unit/62 Chromium-Firefox cases; focused post-splice interop passes four cases across both browsers/sizes; Go/WebCrypto directions, receiver-command test seam, OpenSSL/vendor/fuzz/build/PDF/host checks pass; docs/reviews/e08-qa-matrix.md | author-run only | QA-01 local matrix complete; published CI stays open by operator choice. Assistive-technology/reference-device/five novice/Gmail-Outlook trials and integrated independent review remain. Hidden-terminal receipts cover Chromium/RSA-3072 and Firefox/RSA-4096 only. WebKit is optional.

@@ -143,6 +143,31 @@ for (const bits of [3072, 4096]) {
           },
         );
         expect(Buffer.from(browserPlaintext)).toEqual(Buffer.from(text));
+        if (text === '') {
+          const second = await page.evaluate(
+            async ({ pem }) => {
+              const recipient = await window.zodiacTest.importPublicKey(pem);
+              return (await window.zodiacTest.encryptMessage('', recipient))
+                .raw;
+            },
+            { pem },
+          );
+          const firstEnvelope = Buffer.from(output.raw, 'base64url');
+          const secondEnvelope = Buffer.from(second, 'base64url');
+          for (const [start, end] of [
+            [0, bits / 8],
+            [bits / 8, bits / 8 + 12],
+          ]) {
+            const spliced = Buffer.from(firstEnvelope);
+            secondEnvelope.copy(spliced, start, start, end);
+            expect(
+              decrypt(spliced.toString('base64url')).status,
+              `spliced envelope bytes ${start}..${end}`,
+            ).toBe(4);
+          }
+          firstEnvelope.fill(0);
+          secondEnvelope.fill(0);
+        }
         if (text.length === 26)
           expect(output.raw).toHaveLength(bits === 3072 ? 584 : 755);
         for (const offset of [0, bits / 8, bits / 8 + 12, bits / 8 + 28]) {

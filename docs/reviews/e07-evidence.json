@@ -1,5 +1,5 @@
 {
-  "started": "2026-10-06T19:59:49.701Z",
+  "started": "2026-10-06T20:41:54.831Z",
   "status": "automated hardening passed; independent review and release gates pending",
   "milestone": "M4 Review",
   "scope": "Author-run synthetic development hardening; no integrated independent audit, signing, deployment or human client trial.",
@@ -19,25 +19,25 @@
     {
       "name": "receiver-integrated-gates",
       "code": 0,
-      "milliseconds": 75961,
-      "logSHA256": "2f1feddba8e995bbcfb92b9a47edfbf3d184f06d0b1540b8235d852ca487e976"
+      "milliseconds": 76061,
+      "logSHA256": "c3456e60ddf95c2326acba2aa391313c1a45253280db3c2b5a9025365bde6040"
     },
     {
       "name": "receiver-snapshot",
       "code": 0,
-      "milliseconds": 166,
+      "milliseconds": 167,
       "logSHA256": "1c0e3bda35f23ad48c10a4b860a386b36257bd328e3ec8123f9236a91be3eff4"
     },
     {
       "name": "full-browser-unit-build-pdf",
       "code": 0,
-      "milliseconds": 127911,
-      "logSHA256": "dd68cfb31d39dde6f1f56675b72c1476def8430b5268dd2e5735a15dc92772fe"
+      "milliseconds": 123345,
+      "logSHA256": "4c2387dfea694508aeae2702a6becb42c41fc6d4f9176d22501eb71fb7062aa9"
     },
     {
       "name": "dependencies-provenance-notices",
       "code": 0,
-      "milliseconds": 2359,
+      "milliseconds": 2365,
       "logSHA256": "00db66ddbcc12f3a7243f42dce268d02ec0c75f7d22a11a57fdbab106c536c2d"
     },
     {
@@ -49,31 +49,29 @@
   ],
   "sourceEvidence": {
     "path": "docs/reviews/m1-evidence.json",
-    "sha256": "6949e84f1232c417b404dc40b57b4866fdd20b9dede8fd649b72073556d47cb1"
+    "sha256": "0dce58c9a427174bb87ac233423ba2f6588f16c953f65f1fbcea42f553898958"
   },
-  "exportsEvidenceSHA256": "e176d66179781abedc69d61fa345da15882266286ca1270e80986159609e291f",
-  "receiverEvidenceSHA256": "1b9621334cbc3a7bd492b5b6778e90fb4d95d354dfd286c3cac281d81e3acfc8",
+  "exportsEvidenceSHA256": "895d00d585799b85ee44ebd896c544f3940ff54f73526999acb30151e2314146",
+  "receiverEvidenceSHA256": "8e1d8b78dc3072fdbc32ffbc3d8f74bdb965dc87e3365541c1e6081020be2bc5",
   "browser": {
-    "startTime": "2026-10-06T20:01:41.289Z",
-    "duration": 74967.14799999999,
-    "expected": 64,
+    "startTime": "2026-10-06T20:43:46.236Z",
+    "duration": 70124.881,
+    "expected": 62,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0,
     "projects": [
       "chromium",
-      "firefox",
-      "webkit"
+      "firefox"
     ],
     "versions": {
       "chromium": "153.0.8010.12",
-      "firefox": "155.0",
-      "webkit": "26.6"
+      "firefox": "155.0"
     }
   },
   "details": {
     "dependencies": {
-      "recorded": "2026-10-06T20:03:16.236Z",
+      "recorded": "2026-10-06T20:45:16.907Z",
       "status": "direct pins/licenses and shipped browser provenance passed",
       "direct": [
         {
@@ -132,7 +130,7 @@
       "inputs": 4145
     },
     "host-output": {
-      "recorded": "2026-10-06T20:03:16.422Z",
+      "recorded": "2026-10-06T20:45:17.092Z",
       "status": "static prebuilt serialization/regeneration passed",
       "files": [
         {
@@ -320,9 +318,9 @@
     ".prettierignore": "09bfaea4dd8930857c425258d862e6625bb6ebc20406b6f7e506fdaf595ac94e",
     "AGENTS.md": "5f47d02d2b74060d26c882d6e12255d12349275de678c392940c3acca6cbdaf0",
     "plan.md": "17ed0829b77ee8661b8815ff88d59cca062089dbaf523725bf23fb03696e3bb2",
-    "backlog.md": "0d5829ea17c0fac1bda0c64a36ce2d7989dd795d7b48cb504cc2e30d7243f95f",
+    "backlog.md": "9c8e48fbe8f08a880540d48a88f5b6445317eba91e4c4a50c5dfacd8ca90313a",
     "README.md": "3a7535c1a907772ed8bb3f6b37ecfde2c97bbe679b19c2e33fd1534a8a45cc78",
-    "docs/status.md": "1d49b649628d3e55e1250bc8f785b2f146fc0f208c9c1e575e955fc1c5475bc4",
+    "docs/status.md": "d6ac4eb65b786949358fdacfdea7dbd7410e6475e210157c132a547188a66a74",
     "docs/hardening.md": "8cc4ac524b06cbf6d71409bd46d83823acd1c5eb1f4e64ec557ebce08d6e8a61",
     "docs/deployment.md": "19cf8b12cf69ff2b66f068ec9aad16a4eb3e56563ea0b5a583759c26d9cbf40a",
     "docs/reviews/m4-review-packet.md": "a5ccab9ff7c1d6fc004f77a052f143edc094edea452ce8adb23be6c6944a0df1",
@@ -337,5 +335,5 @@
     "Receiver network-denial observation at OS level; source excludes network/listener imports and offline vendor checks pass.",
     "Final-origin response/privacy checks and signed receiver/reviewed sender hashes before release."
   ],
-  "finished": "2026-10-06T20:03:16.470Z"
+  "finished": "2026-10-06T20:45:17.152Z"
 }

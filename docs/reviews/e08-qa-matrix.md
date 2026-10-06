@@ -1,41 +1,43 @@
 # E08 quality evidence and remaining gates
 
-Status: implementation in progress. This record separates automated evidence
-from CI, hardware, assistive technology and independent-review acceptance.
+Status: required local regression matrix passes. E08 remains open for
+operator-controlled CI publication, human trials and independent review.
 Synthetic keys and messages only; no release or security-review verdict.
 
-## Completed locally in this pass
+## Completed locally
 
-The browser-to-Go interoperability test now also asks the independent Go oracle
-to create envelopes and decrypts them in test-only WebCrypto code. The test
-imports synthetic PKCS#8 material only inside the isolated browser test page,
-checks exact UTF-8 bytes for the existing multilingual and boundary corpus, and
-clears its owned byte buffers. The test-only bridge is not imported by the site
-or receiver.
+For each RSA size, Chromium and Firefox exercise real WebCrypto encryption
+against the independent Go decrypt oracle and Go encryption against test-only
+WebCrypto decryption. Tests compare exact UTF-8 bytes across empty, whitespace,
+multilingual, binary-like string, and 64 KiB inputs. They reject wrong keys,
+each envelope-field mutation, truncation, noncanonical Base64URL, lone
+surrogates, oversized text, and a wrapped key or nonce spliced from a second
+valid envelope. Synthetic PKCS#8 is imported only in the isolated browser test
+page, with owned buffers cleared. The test-only bridge is not imported by the
+site or receiver.
 
-With Playwright's pinned WebKit 26.6 (revision 2359) installed, the targeted
-`real WebCrypto` interoperability cases passed in Chromium, Firefox and WebKit
-for RSA-3072 and RSA-4096: six cases total. These cases also exercise wrong-key,
-envelope mutation, truncation, canonical Base64URL, size boundaries and
-surrogate rejection in each browser. The existing M4 record continues to
-capture 64 Chromium/Firefox/WebKit cases, receiver/OpenSSL/fuzz/vendor gates,
-PDF-to-Go checks and Vercel output checks. Recorded browser versions are
-Chromium 153.0.8010.12, Firefox 155.0 and WebKit 26.6.
+The full `pnpm check:m4` run passed: frozen offline install, OpenSSL 3.0/3.5
+fixtures and oracles, Go native/vendor/fuzz/resource gates, 37 unit tests, 62
+Chromium/Firefox browser cases, configured production build/CSP, PDF-to-Go
+recovery, dependency/license/provenance checks and fresh Vercel static output.
+After adding splice checks, the focused interop rerun passed all four cases
+(Chromium and Firefox, RSA-3072 and RSA-4096). Browser versions were Chromium
+153.0.8010.12 and Firefox 155.0. The browser suite's receiver-command test seam
+and the separately recorded hidden-controlling-terminal receipts are author-run
+evidence, not independent assessment or release CI.
 
-Chromium and Firefox are the required browser targets for QA-01. The optional
-Playwright WebKit project is enabled with `ZODIAC_WEBKIT=1` and is limited to
-the two full interoperability cases; WebKit coverage does not block E08. The
-inactive Windows workflow template now installs Chromium, Firefox and WebKit
-and enables that project.
-The template remains inactive by user choice, so this does not create published
-CI evidence.
+The native hidden-terminal receipts cover Chromium/RSA-3072 and Firefox/
+RSA-4096, not every browser/size combination. The receiver-command test seam
+covers the full browser/size matrix. Targeted interoperability cases also
+passed with pinned Playwright WebKit 26.6 (revision 2359); WebKit is optional and
+excluded from the required 62-case Chromium/Firefox gate.
 
 ## Still required for E08 completion
 
-- QA-01 must exercise the shipping receiver command as well as the independent
-  oracle in Chromium and Firefox, complete any remaining parser/key-validation
-  regressions, and publish CI evidence if the workflow is activated by the
-  operator. WebKit CLI coverage is optional.
+- QA-01's local Chromium/Firefox matrix, both RSA sizes, independent oracle,
+  receiver-command seam, parser/key-validation, tampering and splice cases
+  pass. QA-01.3 remains open because the Windows workflow stays an inactive
+  template by operator choice; no published CI evidence is claimed.
 - QA-02 still needs manual assistive-technology checks, recorded reference
   device timing/long-task measurements, actual synthetic Gmail-first and
   Outlook-secondary draft paste checks, and five novice recipient trials.

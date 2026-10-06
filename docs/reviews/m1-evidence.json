@@ -1,65 +1,65 @@
 {
-  "started": "2026-10-06T20:01:06.257Z",
+  "started": "2026-10-06T20:43:11.484Z",
   "status": "development acceptance passed",
   "scope": "M1 development acceptance; synthetic data only; author-run. Production identity/signing, EN-04 full delivery and QA-03 remain separate gates.",
   "node": "v24.21.0",
   "go": "go version go1.27.1 windows/amd64",
-  "receiverEvidenceSHA256": "1b9621334cbc3a7bd492b5b6778e90fb4d95d354dfd286c3cac281d81e3acfc8",
+  "receiverEvidenceSHA256": "8e1d8b78dc3072fdbc32ffbc3d8f74bdb965dc87e3365541c1e6081020be2bc5",
   "checks": [
     {
       "name": "type-format",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 18707,
-      "logSHA256": "7bac04ee91086c7392c36f6932c756706b862ee1151f9d4e0005934b81c53dae"
+      "milliseconds": 18930,
+      "logSHA256": "aaf5caac5a4c320056cf07f529e27ad59723127b08a463ee8f9e8470c01feb27"
     },
     {
       "name": "unit",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4506,
-      "logSHA256": "d3843390bd78867071144e6d18318ac6ef41bb961f0a3e7d8704afb63a2bb68f"
+      "milliseconds": 4529,
+      "logSHA256": "92aff1d63cf21d2a8a2d97d75e560f02da92ee020b94d36f6db91ccf70e258f6"
     },
     {
       "name": "fixture-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4159,
-      "logSHA256": "4a919e8e161bbdbd70ced3b1cd145b87a49dc309020c4a99ee6d324a292a6926"
+      "milliseconds": 4066,
+      "logSHA256": "4e37661f87100d3f690b072d358d82df367b4dc19e8bdf6c39cbf2819845da9b"
     },
     {
       "name": "custom-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4097,
-      "logSHA256": "98d35602ba3fff50d4979affd225a2e8c3242379494b4fbba3f2534850949eb8"
+      "milliseconds": 4091,
+      "logSHA256": "1ca4a73dcb72be0b600b602f512538a1252422fd2df5da1d671267e8c7dc5df4"
     },
     {
       "name": "offline-feasibility-probe",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 1821,
+      "milliseconds": 1743,
       "logSHA256": "6eb036c17b164d70800cc8c8d1ade5cd463c89056cd45f3f745529b52f8d6b6c"
     },
     {
       "name": "browser",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 76682,
-      "logSHA256": "dca402b6e40963b0a2799c8c01888cfb7c374c204f2c5049fa60eb022cb25ec5"
+      "milliseconds": 71493,
+      "logSHA256": "2ac209afca66ab8a7c0fc7fdb70d33da89c2653dfb0ac98491594abf8680e3d9"
     },
     {
       "name": "configured-production-build",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 4103,
-      "logSHA256": "93b6b0ad4d2ba27e503a0cbec467952a11f72e1539defdbd2d6baa01e169ef93"
+      "milliseconds": 4139,
+      "logSHA256": "889eb6f64b8e8030e3d5299046f0d5997f27e260b4b69ebe30918ea19981bb97"
     },
     {
       "name": "production-recipient-browser",
       "exitCode": 0,
       "expectedExit": 0,
-      "milliseconds": 985,
+      "milliseconds": 986,
       "logSHA256": "2993d832c20105c3defb955a70d58d896130ead7a578ec6b9a9cb04d455ff82b"
     }
   ],
@@ -121,7 +121,7 @@
     "tests/browser/crypto-cleanup.spec.ts": "99e05e17152286136e810b0a64c3af812d3f2440646e3c53e9b1fe7d8937b9b5",
     "tests/browser/exports.spec.ts": "a6c861c8acf928ab07ede6c55e399f8bdc04f176df1a064b4c2c9cddde7d1606",
     "tests/browser/hardening.spec.ts": "b51ec152e8c68a80ccec17cf09e6f581928395a8e8455661f877bd2ba2b8881f",
-    "tests/browser/interop.spec.ts": "d7f9340abb40994ffc66c8e6a1ba90ed7c85a85c843edea39a054d1b54e9f278",
+    "tests/browser/interop.spec.ts": "b34ddfad248124436512dd559f5638e39de3e2cfd8365d3e72b3bb506ed5177f",
     "tests/browser/key-guide.spec.ts": "36db019bfba108e933420b316d8e9eb0b8e60cf6441272b088c5ebcc68afe4eb",
     "tests/browser/local-server.spec.ts": "f814c3c42306f5f2db5f2729c93d6b0188dd66e4d138827d4ffed55808d64dee",
     "tests/browser/offline.spec.ts": "11093f544e90400a62976ffde04e532c13052dfb2ff66660308694f33812a24d",
@@ -158,7 +158,7 @@
     "scripts/check-host-output.mjs": "dce9b222ffb624a2101f1c807b6ddc50da5484f4f5bcc128ce84be2d10b68a36",
     "scripts/check-m1.mjs": "5cde3bf342b4230acbb5cf20edd09155c9432520d3171a60a6013fe9d5ee2461",
     "scripts/check-m3.mjs": "265969d0119ecca3e41df3c5d42f7758d5cde28735ebb30e00316f2c76429828",
-    "scripts/check-m4.mjs": "5835b5b38b3b0ea68a58ab8dc358700cb60285b13e3c5132c35d41caf3dd8b01",
+    "scripts/check-m4.mjs": "7d35398a1a844c55add86f00ba1e433ae09b35c9ce1e82fcf1ebc16061897cee",
     "scripts/check-policy.mjs": "16d9f1f4e229534c25f5e7177f59f0ea01ba0792f39de8f0db4a81e25610378e",
     "scripts/check-production-recipient.mjs": "a27d509d378da61f9364943c6ad148ea7ed366a07db17339d3a8e03edf896ef0",
     "scripts/check-rec01.mjs": "ecbec9de894218d2cf2e69cf31502c5b64f297bfe763df25eb755b157ffaf0b7",
@@ -199,23 +199,21 @@
     "docs/licenses/lucide-1.51.0.txt": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
   },
   "browser": {
-    "startTime": "2026-10-06T20:01:41.289Z",
-    "duration": 74967.14799999999,
-    "expected": 64,
+    "startTime": "2026-10-06T20:43:46.236Z",
+    "duration": 70124.881,
+    "expected": 62,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0,
     "projects": [
       "chromium",
-      "firefox",
-      "webkit"
+      "firefox"
     ],
     "versions": {
       "chromium": "153.0.8010.12",
-      "firefox": "155.0",
-      "webkit": "26.6"
+      "firefox": "155.0"
     }
   },
   "production": "Explicit public recipient validated; review/signing remain open.",
-  "finished": "2026-10-06T20:03:01.408Z"
+  "finished": "2026-10-06T20:45:01.551Z"
 }
