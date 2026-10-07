@@ -502,6 +502,7 @@ Acceptance criteria:
 - Document independently trusted official origin, expected Authenticode publisher, exact reviewed artifact hashes and default recipient fingerprint. Same-site hashes/badges/TLS are not described as proof of honest code or recipient identity.
 - Public guidance covers bookmarks, search ads/unsolicited links, expected-publisher verification, recipient confirmation and use of a pinned local sender before sensitive typing when the host is untrusted. Private keys/passphrases never go to the hosted website.
 - Establish operational owners for domain/signing identity, independent verification channel, incident/rotation notice and reviewed-release hashes. A clone can copy all visible page content; controls do not claim to detect every clone automatically.
+- Publish a private vulnerability-reporting route and triage owner before public release. State what versions are supported and how to report safely; do not promise a response SLA until an owner accepts it. Never ask reporters to send secrets or production private keys.
 - Test altered keys/assets/manifests, wrong publisher/hash, cancel/error paths and instructions with synthetic data. A signed binary proves provenance relative to a trusted identity, not safe code; it needs review too.
 
 Subtasks:
@@ -509,6 +510,7 @@ Subtasks:
 - [ ] SEC-04.1 — user is undecided; proposed free https://zodiac-modern.vercel.app only. Confirm origin/control, publisher, reviewed final hashes, independent channel and operational owners before release; config/release-trust.json records pending fields.
 - [x] SEC-04.2 — recipient/bookmark/lookalike/externally verified local sender guidance; no fake badges or signed download. External helpers never start files.
 - [x] SEC-04.3 — altered key/input/HTML/CSP/header, fixture leak, unsigned receiver/wrong hash/publisher refusal paths pass; full signed positive release/novice verification trials remain release gates. docs/hardening.md records the hosted plaintext trust gap.
+- [ ] SEC-04.4 — select and publish a private vulnerability-reporting route, triage owner, scope, and supported-version policy before release; do not invent a security contact or response-time commitment.
 
 ## 11. E08 — integrated quality and independent review
 

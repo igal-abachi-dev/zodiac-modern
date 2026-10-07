@@ -67,6 +67,20 @@ development receiver; use synthetic data.
 
 **Send the raw ciphertext with the artwork.** The v1 recipient consumes Base64URL text, not PNG or SVG. Artwork is presentation; SVG import is outside v1.
 
+### Security practices and limits
+
+Each message uses a fresh AES key and authenticated encryption. The browser and
+offline Go receiver enforce bounded, strict input parsing, and interoperability
+tests check that they exchange the same ciphertext format. Zodiac clears
+owned plaintext and key byte buffers on a best-effort basis; JavaScript strings,
+browser internals, Go key objects, and operating-system copies cannot be
+guaranteed erased. The format reveals message length and does not provide sender
+authentication, forward secrecy, or post-quantum security. A hosted site can
+also serve changed code, so browser encryption alone does not prove the deployed
+site is trustworthy. These safeguards and limits do not replace an independent
+integrated security review; that review and signed, independently verifiable
+releases remain pending.
+
 ## Architecture
 
 | Component | Stack |
