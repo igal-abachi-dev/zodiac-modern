@@ -106,3 +106,4 @@ Desktop.ini
 # Keep pnpm-lock.yaml, Go module files, vendor source and reference assets tracked.
 # Do not add blanket ZIP/PNG/SVG/TXT ignores: this repo contains reference assets.
 tamar-recipes-main.zip
+research/
