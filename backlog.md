@@ -512,6 +512,21 @@ Subtasks:
 - [x] SEC-04.3 — altered key/input/HTML/CSP/header, fixture leak, unsigned receiver/wrong hash/publisher refusal paths pass; full signed positive release/novice verification trials remain release gates. docs/hardening.md records the hosted plaintext trust gap.
 - [ ] SEC-04.4 — select and publish a private vulnerability-reporting route, triage owner, scope, and supported-version policy before release; do not invent a security contact or response-time commitment.
 
+### SEC-05 — make recipient-key identity verification explicit for sensitive use
+
+Type: story · Priority: P0 · Status: Backlog · Milestone: M4/M5 · Dependencies: KEY-02, KEY-03, QA-03.
+
+As a sender, I can confirm that the public key selected for a sensitive message matches the intended recipient through a trusted channel separate from the website/email carrying the ciphertext.
+
+Acceptance criteria:
+
+- Display the full canonical SHA-256 SPKI fingerprint and recipient label in the review/confirmation step for both configured-default and custom public keys; do not rely only on abbreviated fingerprints.
+- Explain how to compare the fingerprint through a previously trusted, separate channel. A copied/pasted PEM, TLS page, same-site badge, email carrying the ciphertext, or embedded key alone does not establish recipient identity.
+- Provide a clear user confirmation that they performed the independent comparison before sensitive encryption. Do not label a key “verified” based only on local parsing or the user's acknowledgement; distinguish configured/parsed from independently checked.
+- Do not transmit fingerprints or message/key data to a verification service. No automatic key-directory lookup or public-key substitution. Keep public-key import local and memory-only.
+- Test default/custom flows, mismatches, cancel/back, key replacement, keyboard/screen-reader use, responsive layout, CSP and zero sensitive persistence. Update security/privacy/recipient guidance. QA-03 reviews the workflow and claims before release.
+
+
 ## 11. E08 — integrated quality and independent review
 
 ### QA-01 — run the full browser/Go compatibility and attack-regression matrix
@@ -719,13 +734,14 @@ Subtasks:
 | ID | Type | Priority | Status | Scope and entry condition |
 | --- | --- | --- | --- | --- |
 | FUT-01 | Enabler | P2 | Deferred | Browser RSA generation/private export: separate explicit request, custody/erasure review, user-controlled backup UX; never silently add to import flow |
-| FUT-02 | Enabler | P2 | Deferred | HPKE/post-quantum/signatures/padding/commitment: separately versioned protocol and receiver/interoperability/security assessment |
+| FUT-02 | Enabler | P2 | Deferred | Separately versioned protocol assessment for HPKE, post-quantum key establishment, signatures, padding and commitment. Compare a reviewed hybrid ML-KEM key-establishment profile with conventional RSA/ECC while retaining AES-GCM if appropriate; assess browser-native WebCrypto support and Go interoperability under the no-external-browser-crypto-library constraint, downgrade/compatibility policy, and independent review. Include harvest-now-decrypt-later exposure against confidentiality lifetime and define review/migration triggers before RSA becomes practically breakable; do not wait for a break or silently change v1. No v2 timing or algorithm is committed. |
 | FUT-03 | Story | P2 | Deferred | Image OCR/QR recovery: validated error handling/capacity; existing raw recovery stays available |
 | FUT-04 | Enabler | P2 | Deferred | Worker/PWA/service-worker installation: separate from the required verified localhost ZIP; justify from measured performance or new requirements and update policy/privacy tests |
 | FUT-05 | Story | P2 | Deferred | Additional languages, broader RSA sizes, custom glyph skins: validate accessibility/key performance and preserve released map/profile semantics |
 | FUT-06 | Story | P2 | Deferred | Rich inline SVG/HTML email copy: enable only for tested client combinations; never replace a recoverable raw/SVG attachment path |
 | FUT-07 | Story | P2 | Deferred | Unicode symbol-string sharing: only on later request; explain changed font appearance and define a separately frozen reversible alphabet |
 | FUT-09 | Enabler | P2 | Deferred | Browser receiver/encrypted-PEM import or native receiver GUI: new explicit scope and importer/key-custody/security assessment; v1 receiver is the confirmed Go CLI |
+| FUT-10 | Story | P2 | Deferred | Optional per-message Ed25519 sign-then-encrypt profile: sender UI, trusted signer-key verification, native WebCrypto + Go stdlib receiver support, separately specified encoding and independent review; v1 unsigned flow/envelope remain unchanged |
 
 ### REC-04 — add optional single-use recipient-key and cleanup workflow
 
@@ -744,6 +760,24 @@ Acceptance criteria:
 - Review the user's `securefiledelete.png` routine and its reported production/raw-hex testing as user-provided evidence. Port or adapt only after code review; test overwrite/write-through behavior on documented Windows configurations, preserving safe path, reparse, ACL, and race protections. Any `FILE_FLAG_NO_BUFFERING` use must honor documented alignment constraints. Do not treat `FILE_FLAG_OPEN_REPARSE_POINT` as an erasure control.
 - An optional VSS/snapshot probe is advisory only: report detected supported snapshots, state that no detected snapshot is not proof of absence, and do not require elevation or fail decryption solely because snapshot status cannot be determined. Document that third-party snapshots, backups, sync, paging, SSD remapping, and copies outside the receiver are not verified.
 - Update `plan.md`, receiver/privacy documentation, and meaningful tests before implementation/release. Exercise cleanup success/failure/cancel/timeout, wrong-key/tampered input, read/output failure, static-key preservation, explicitly selected one-time-key cleanup, and file-format preservation. Independent review assesses the cleanup claim and actual OS calls; passing tests do not establish universal sanitization.
+
+### FUT-10 — add optional Ed25519 signed-message profile
+
+Type: story · Priority: P2 · Status: Deferred · Milestone: later · Dependencies: QA-03, EN-04, REC-02.
+
+As a sender of a confidential one-off message, I can optionally sign the message before encryption so the recipient can verify the sender after decrypting, without exposing the signer identity in the email ciphertext.
+
+Acceptance criteria:
+
+- Preserve the current unsigned v1 flow and envelope bytes. Signing is an explicit per-message choice; it is never silently enabled, and unsigned messages continue to decrypt as today.
+- Specify a separate, strictly bounded signed-plaintext profile with an unambiguous marker/version, canonical encoding, domain-separated signature input, exact UTF-8 byte preservation, signer-key format, and generic malformed/invalid-signature handling. Do not infer trust from an embedded signer public key or a valid signature alone.
+- Use Ed25519 through native WebCrypto in the sender and Go standard-library Ed25519 in the receiver; no external crypto libraries. Pin key and signature encodings and verify cross-implementation vectors in Chromium, Firefox, and Go. Unsupported browser crypto fails closed with a clear explanation.
+- Sender page exposes the optional signing choice and its privacy effect. Signature material is inside the encrypted plaintext, so the mail provider does not see the signer identity; the recipient sees it after decrypting. Explain that a signature creates durable evidence for the recipient and may reduce deniability.
+- Sender signing public-key identity must be verified through a trusted separate channel. Recipient identity verification remains an explicit prerequisite for sensitive encryption. Never trust a signer key solely because it is bundled with the message.
+- Define private signing-key custody before enabling the sender UI. Do not import a long-term signing private key into mutable hosted JavaScript for sensitive signing; require the independently verified local sender or another reviewed custody design. Keep signing keys distinct from recipient encryption and release-signing keys.
+- Go receiver authenticates the encrypted payload first, strictly parses signed/unsigned profiles, verifies signed messages against a separately supplied/previously trusted signer public key, and clearly distinguishes verified identity-key match, invalid signature, unknown/untrusted key, and unsigned plaintext without leaking secret data. No plaintext output before authentication and signature policy handling.
+- Add tamper, wrong/unknown signer, signature stripping/downgrade, malformed/bounds, UTF-8, key-substitution, and sender/Go interoperability tests; assess disclosure, custody, parser, and signed-plaintext composition in independent review before release.
+- Update plan.md, sender/receiver UX, privacy and recovery guidance; keep encryption usable without signatures for users who do not need sender authentication.
 
 ### FUT-08 — restore app-produced SVG only after fuzzing and review
 

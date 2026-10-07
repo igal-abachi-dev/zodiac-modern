@@ -30,13 +30,38 @@ until an independently verified release is announced. The proposed
    See [sharing, exports and print](docs/exports.md) for clipboard limits,
    supported browser evidence and recovery instructions.
 
+**Recommended delivery options (no Tor/qBittorrent install for the recipient):**
+
+1. **Proton Drive link — default when you want expiry/revocation controls.** Use viewer-only access, a short expiry, and optionally a strong link password sent separately. The recipient can download in a browser. Proton Drive sharing is tied to the sharer's account and exposes link activity metadata; revocation cannot erase a file already downloaded.
+2. **Proton Mail attachment — convenient if both parties already use Proton Mail.** The attachment is Zodiac ciphertext, so the recipient's private key is still required to read it.
+3. **Gmail attachment — convenient fallback.** It carries the Zodiac-encrypted ciphertext, while ordinary email metadata (sender, recipient, time, subject and file size) remains visible to the mail service.
+4. **Wormhole link — convenient expiring browser transfer.** Treat the entire link as a secret because it contains the Wormhole file-transfer key. Anyone who gets the link can retrieve the transferred file, but Zodiac ciphertext still requires the recipient's private key to decrypt.
+
+For the simplest route, send the raw ciphertext as a Proton Mail or Gmail attachment. For a browser-download link with expiry, Proton Drive is the default recommendation. Use a neutral filename and subject; send any separate link password through a different end-to-end encrypted channel. A VPN is optional and does not add confidentiality to the Zodiac ciphertext or hide your account from a service where you are signed in.
+
 ### Receive and decrypt
 
-The recipient creates an encrypted RSA key pair once, keeps
-`rsa-private-encrypted.pem` and its passphrase private, and shares only
-`rsa-public.pem` plus its independently checked fingerprint. Follow the
-[offline key setup guide](src/pages/keys.astro) for OpenSSL installation,
-generation, verification, backup and rotation.
+The recipient creates and verifies an encrypted RSA key pair using the
+[offline key setup guide](src/pages/keys.astro). They keep
+`rsa-private-encrypted.pem` and its passphrase private, then shares only the contents of
+`rsa-public.pem` (SPKI PEM) and its full SHA-256 fingerprint with the sender.
+They can attach the PEM in email or Proton Mail, send it as a WhatsApp personal
+message, or paste the full PEM block into a message. If an email system blocks
+the `.pem` extension, rename the public-key file to `rsa-public.txt`; the
+file contents stay exactly the same. The extension does not change the key.
+
+Keep both PEM boundary lines and the complete Base64 body intact:
+
+```text
+-----BEGIN PUBLIC KEY-----
+...Base64-encoded SPKI data...
+-----END PUBLIC KEY-----
+```
+
+If a mail client strips only the boundary lines, restore those exact lines
+around the complete, unchanged Base64 body before saving it as `rsa-public.pem`.
+Do this only when the recipient confirms the body came from Zodiac's SPKI public
+PEM; do not wrap an OpenPGP `PUBLIC KEY BLOCK`, certificate, or private key.
 
 When a signed receiver release is available, verify its signature, expected
 publisher and full SHA-256 through an independent trusted channel before use.
@@ -199,7 +224,9 @@ Use synthetic messages and labeled test keys. Receiver validation includes real 
 
 ## Recipient workflow
 
-Generate the key pair once using the [encrypted OpenSSL setup](plan.md#creating-ones-own-key-one-time-openssl-setup). Share only the public PEM and confirm its fingerprint through a trusted channel.
+The recipient generates the key pair once using the [encrypted OpenSSL setup](plan.md#creating-ones-own-key-one-time-openssl-setup), then sends the sender only `rsa-public.pem` (SPKI PEM) and its full SHA-256 fingerprint. Attach the PEM to an email/Proton Mail message, send it as a WhatsApp personal message, or paste the complete PEM block into a message. If `.pem` attachments are blocked, rename the public file to `.txt`; do not change its contents.
+
+The key must retain the exact `-----BEGIN PUBLIC KEY-----` and `-----END PUBLIC KEY-----` lines and the complete Base64 body. If a mail client strips only those lines, they can be restored around the intact body before saving as `rsa-public.pem`, provided the recipient confirms it came from Zodiac's SPKI public-key file. Do not add these lines to an OpenPGP `PUBLIC KEY BLOCK`, certificate, or private key. Never send `rsa-private-encrypted.pem` or its passphrase.
 
 There is no signed receiver download yet. For development-only tests, build the
 unsigned receiver from the repository with `pnpm build:receiver`; it creates
@@ -225,7 +252,11 @@ The compatible envelope is:
 RSA-wrapped AES key || nonce (12 bytes) || GCM tag (16 bytes) || ciphertext
 ```
 
-Each message uses a fresh 32-byte AES key, RSA-OAEP with SHA-256/MGF1-SHA-256 and an empty label, and AES-256-GCM. Additional authenticated data is `wrappedKey || nonce`. The envelope is encoded as canonical Base64URL without padding. Glyph data, fingerprints, and export labels remain outside it.
+Each message uses a fresh random 32-byte AES key. RSA-OAEP with SHA-256/MGF1-SHA-256 and an empty label wraps that key; AES-256-GCM encrypts the message with a 12-byte nonce and a 128-bit tag. The GCM additional authenticated data is `wrappedKey || nonce`. WebCrypto returns `ciphertext || tag`, which Zodiac splits and reorders into the envelope shown above. The envelope is encoded as canonical Base64URL without padding. Glyph data, fingerprints, and export labels remain outside it.
+
+This is a sound hybrid-encryption construction for its conventional threat model: RSA-OAEP protects the small random message key, while AES-GCM provides message confidentiality and detects ciphertext tampering. The choices follow the [W3C WebCrypto](https://www.w3.org/TR/webcrypto/) RSA-OAEP/AES-GCM definitions, [RFC 8017](https://www.rfc-editor.org/rfc/rfc8017/) RSAES-OAEP, and [NIST SP 800-38D](https://csrc.nist.gov/pubs/sp/800/38/d/final) GCM design. This construction assessment is not an independent audit or proof of the complete product.
+
+Successful authentication does **not** identify the sender: anyone with the recipient's public key can create a valid encrypted message. The format is also not post-quantum. If a reused RSA private key is later compromised, retained ciphertext addressed to it may be exposed. A dedicated, independently verified one-time RSA key could compartmentalize messages if it is not copied or reused and is later made unavailable; deletion is best effort, not guaranteed erasure. Zodiac's integrated create/verify/use/retire workflow for one-time keys is not implemented, so do not assume that workflow is available today.
 
 The private-key file uses a separate fixed PBES2/PBKDF2-HMAC-SHA256/AES-256-CBC profile. CBC key-file encryption has no authentication tag; its parser and unlock policy require independent review. See the [cryptographic specification](plan.md) for exact bounds, offsets, and failure behavior.
 
