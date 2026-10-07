@@ -66,9 +66,10 @@ not sender authenticity. Recover raw/transcribed rows locally; all chunks and
 the final envelope checksum must match.
 
 Default print scope includes every ciphertext page, independently of screen
-paging. The print pages omit the product title, attribution sheet, protocol and key-size names,
-recovery notes and full recipient fingerprint; the visible fingerprint keeps its
-first 12 and final 3 characters. A small page number appears at the bottom.
+paging. The print pages omit the product title, attribution sheet, recovery notes
+and full recipient fingerprint; the visible fingerprint keeps its first 12 and
+final 3 characters. A small encryption-profile/key-size label sits in the footer
+to the left of the page number.
 Selected-page scope is labeled partial. Choose A4 or Letter with 20 mm margins
 and disable browser headers/footers. Raw/check text is at least 9 pt. Print content is created only
 on request from the immutable result, and removed after print/cancellation or

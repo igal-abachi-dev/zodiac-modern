@@ -176,6 +176,12 @@ export function pageSVG(
     ) +
     artworkRows +
     text(
+      440,
+      1121,
+      `${bundle.context.profile} | RSA-${bundle.rsaBits}`,
+      9,
+    ) +
+    text(
       700,
       1121,
       `${partial ? 'PARTIAL · ' : ''}Page ${pageIndex + 1} of ${bundle.pages.length}`,

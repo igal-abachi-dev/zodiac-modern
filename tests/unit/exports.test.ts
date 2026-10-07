@@ -49,8 +49,8 @@ describe('trusted exports, exact ordering and raster bounds', () => {
       ...last.matchAll(/href="#s64m1-6[456]"[^>]*data-after-offset="\d+"/g),
     ]).toHaveLength(9);
     expect([...last.matchAll(/data-offset="\d+"/g)].length).toBe(72);
-    expect(last).not.toContain('rsa-oaep-sha256-aes256gcm-v1');
-    expect(last).not.toContain('RSA-4096');
+    expect(last).toContain('rsa-oaep-sha256-aes256gcm-v1 | RSA-3072');
+    expect(last).toContain('x="440" y="1121"');
     expect(last).not.toContain('text rows below');
     expect(last).toContain('columns&quot;:16');
     expect(last).toContain('scale(-1 1)');
