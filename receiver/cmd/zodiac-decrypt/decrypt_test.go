@@ -186,11 +186,15 @@ func TestOptInBestEffortCleanupLifecycle(t *testing.T) {
 		wantCode      int
 		outputRemains bool
 		keyRemains    bool
+		linkOutput    bool
+		linkKey       bool
 	}{
 		{name: "output-only", flags: []string{"--cleanup-output"}, wantCode: 0, outputRemains: false, keyRemains: true},
 		{name: "explicit-single-use-key", flags: []string{"--single-use-key"}, wantCode: 0, outputRemains: true, keyRemains: false},
 		{name: "both-on-cancel", flags: []string{"--cleanup-output", "--single-use-key"}, finishErr: context.Canceled, wantCode: 130, outputRemains: false, keyRemains: false},
 		{name: "terminal-failure-preserves-files", flags: []string{"--cleanup-output", "--single-use-key"}, finishErr: errors.New("synthetic terminal failure"), wantCode: 5, outputRemains: true, keyRemains: true},
+		{name: "output-hardlink-cleanup-failure", flags: []string{"--cleanup-output"}, wantCode: 5, outputRemains: true, keyRemains: true, linkOutput: true},
+		{name: "key-hardlink-cleanup-failure", flags: []string{"--single-use-key"}, wantCode: 5, outputRemains: true, keyRemains: true, linkKey: true},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			root := t.TempDir()
@@ -209,7 +213,19 @@ func TestOptInBestEffortCleanupLifecycle(t *testing.T) {
 			}
 			args := append([]string{"decrypt", "--key", keyPath, "--in", input, "--out", output}, tc.flags...)
 			prompt := func(context.Context) ([]byte, error) { return []byte("Zodiac fixture only — never production"), nil }
-			finish := func(context.Context) error { return tc.finishErr }
+			finish := func(context.Context) error {
+				if tc.linkOutput {
+					if err := os.Link(output, output+".alias"); err != nil {
+						t.Fatal(err)
+					}
+				}
+				if tc.linkKey {
+					if err := os.Link(keyPath, keyPath+".alias"); err != nil {
+						t.Fatal(err)
+					}
+				}
+				return tc.finishErr
+			}
 			if code := runWithPromptAndFinish(args, prompt, finish); code != tc.wantCode {
 				t.Fatalf("exit=%d want=%d", code, tc.wantCode)
 			}

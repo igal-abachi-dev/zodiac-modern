@@ -81,6 +81,24 @@ setup, readiness, backup, supported Windows paths and troubleshooting. Until a
 verified release exists, this command is available only in the unsigned
 development receiver; use synthetic data.
 
+For a key pair dedicated to one message, the receiver also offers opt-in,
+Windows-only best-effort cleanup after you open/read the output and press
+Enter:
+
+```powershell
+.\zodiac-decrypt.exe decrypt --key ".\one-time-private.pem" --in ".\ciphertext.txt" --out ".\message.txt" --cleanup-output --single-use-key
+```
+
+`--cleanup-output` selects the plaintext file for cleanup;
+`--single-use-key` separately selects the encrypted private-key file. Without
+those flags, files are preserved. The routine uses seven overwrite passes,
+aligned no-buffering/write-through I/O, three randomized same-directory name
+changes, and handle-based deletion. This is best effort: successful completion
+does not prove that NTFS journal/MFT history, snapshots, SSD-remapped blocks,
+backups, paging, or other copies were erased. The flags do not provide
+ratcheting or protocol forward secrecy; see the [recipient guide](src/pages/receive.astro)
+for limits and the independent-review status.
+
 ## Implemented in development
 
 - Native WebCrypto: RSA-OAEP-SHA256 and AES-256-GCM.
