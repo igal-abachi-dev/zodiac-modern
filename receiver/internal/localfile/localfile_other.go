@@ -9,5 +9,6 @@ import (
 )
 
 func Validate(string) error                                                          { return ErrPath }
+func secureDelete(string) error                                                      { return ErrPath }
 func openRead(string) (*os.File, func(), error)                                      { return nil, nil, ErrPath }
 func writeWith(context.Context, string, []byte, func(io.Writer, []byte) error) error { return ErrPath }

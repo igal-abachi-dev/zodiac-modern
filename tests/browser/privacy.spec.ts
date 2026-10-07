@@ -83,6 +83,7 @@ test('all warm sender and recovery actions work with HTTP offline and leave no b
   });
   await expect(page.locator('.recipient-summary')).toContainText('RSA-4096');
   await page.getByLabel('Message', { exact: true }).fill(message);
+  await page.locator('.compare-confirmation input').check();
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();
@@ -256,6 +257,7 @@ test('real navigation and persisted pageshow reset draft, custom recipient, resu
   await page
     .getByLabel('Message', { exact: true })
     .fill('Synthetic navigation encrypted result');
+  await page.locator('.compare-confirmation input').check();
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();

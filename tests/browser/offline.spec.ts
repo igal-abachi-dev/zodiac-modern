@@ -81,6 +81,7 @@ test('file probe opens under default settings with no adjacent files or network'
     const original = await page
       .getByLabel('Message', { exact: true })
       .inputValue();
+    await page.locator('.compare-confirmation input').check();
     await page
       .getByRole('button', { name: 'Encrypt message', exact: true })
       .click();

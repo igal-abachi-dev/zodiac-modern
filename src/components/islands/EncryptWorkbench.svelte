@@ -25,6 +25,7 @@
   let initialized = $state(false);
   let resetVersion = $state(0);
   let notice = $state('');
+  let comparedFingerprint = $state<string | null>(null);
   let messageInput = $state<HTMLTextAreaElement>();
   let resultHeading = $state<HTMLHeadingElement>();
   let rawInput = $state<HTMLTextAreaElement>();
@@ -56,7 +57,14 @@
     };
   });
   async function submit() {
-    if (!available || busy || view.result) return;
+    if (
+      !available ||
+      busy ||
+      view.result ||
+      !view.recipient ||
+      comparedFingerprint !== view.recipient.fingerprint
+    )
+      return;
     notice = '';
     const success = await workspace.submit();
     if (success && view.result) {
@@ -93,6 +101,7 @@
   }
   function clearEverything(focus = true) {
     workspace.clear();
+    comparedFingerprint = null;
     resetVersion++;
     notice =
       'Workspace cleared. Only a validated default recipient may be restored.';
@@ -132,7 +141,11 @@
     {recipient}
     {resetVersion}
     disabled={busy || !!view.result}
-    onselection={(value) => workspace.selectRecipient(value)}
+    onselection={(value) => {
+      comparedFingerprint = null;
+      workspace.selectRecipient(value);
+    }}
+    onverification={(fingerprint) => (comparedFingerprint = fingerprint)}
   />
   {#if initialized && !available}
     <p role="alert">
@@ -238,6 +251,7 @@
         disabled={!initialized ||
           !available ||
           !view.recipient ||
+          comparedFingerprint !== view.recipient?.fingerprint ||
           busy ||
           view.draft.length === 0}
         >{busy ? 'Encrypting locally…' : 'Encrypt message'}</button

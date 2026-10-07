@@ -14,11 +14,13 @@
     disabled = false,
     resetVersion = 0,
     onselection,
+    onverification,
   }: {
     recipient?: PublicRecipientData | null;
     disabled?: boolean;
     resetVersion?: number;
     onselection?: (value: SelectedRecipient | null) => void;
+    onverification?: (fingerprint: string | null) => void;
   } = $props();
   let selected = $state<SelectedRecipient | null>(null);
   let defaultSelection = $state<SelectedRecipient | null>(null);
@@ -26,6 +28,7 @@
   let busy = $state(false);
   let showDetails = $state(false);
   let showCustom = $state(false);
+  let fingerprintConfirmed = $state(false);
   let error = $state('');
   let notice = $state('Choose a public key to identify the recipient.');
   let fileInput: HTMLInputElement;
@@ -46,6 +49,8 @@
       showCustom = false;
       if (fileInput) fileInput.value = '';
       selected = defaultSelection;
+      onverification?.(null);
+      fingerprintConfirmed = false;
       onselection?.(selected);
       notice = selected
         ? 'Configured recipient restored.'
@@ -89,6 +94,8 @@
       if (id !== generation || disabled) return;
       const value = Object.freeze({ ...key, ...metadata, pem });
       selected = value;
+      onverification?.(null);
+      fingerprintConfirmed = false;
       if (metadata.source !== 'custom') defaultSelection = value;
       onselection?.(value);
       notice =
@@ -140,6 +147,8 @@
   function useDefault() {
     if (locked || !defaultSelection) return;
     selected = defaultSelection;
+    onverification?.(null);
+    fingerprintConfirmed = false;
     paste = '';
     error = '';
     notice = 'Configured recipient selected.';
@@ -149,6 +158,8 @@
     if (locked) return;
     generation++;
     selected = null;
+    onverification?.(null);
+    fingerprintConfirmed = false;
     paste = '';
     error = '';
     showDetails = false;
@@ -174,6 +185,34 @@
       {#if selected.source === 'fixture'}<p>
           Synthetic test recipient only.
         </p>{/if}
+      <div class="verification" aria-labelledby="recipient-fingerprint-title">
+        <p id="recipient-fingerprint-title" class="full-fingerprint">
+          Full SHA-256 SPKI fingerprint: <span class="fingerprint"
+            >{selected.fingerprint}</span
+          >
+        </p>
+        <p>
+          This key is locally parsed. Compare this full fingerprint with the
+          intended recipient through a trusted, separate channel before
+          encrypting sensitive content. The website cannot perform that identity
+          check for you.
+        </p>
+        <label class="compare-confirmation">
+          <input
+            type="checkbox"
+            checked={fingerprintConfirmed}
+            disabled={locked}
+            onchange={(event) => {
+              fingerprintConfirmed = event.currentTarget.checked;
+              onverification?.(
+                fingerprintConfirmed ? selected!.fingerprint : null,
+              );
+            }}
+          />
+          I compared this full fingerprint with the intended recipient through a trusted,
+          separate channel.
+        </label>
+      </div>
       <button
         class="secondary"
         type="button"
@@ -293,6 +332,20 @@
   }
   .filename {
     overflow-wrap: anywhere;
+  }
+  .verification {
+    border-inline-start: 3px solid var(--color-accent);
+    padding-inline-start: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+  .compare-confirmation {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .compare-confirmation input {
+    flex: 0 0 auto;
+    margin-block-start: 0.25rem;
   }
   [role='alert'] {
     border-inline-start: 3px solid var(--color-accent);

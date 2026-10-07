@@ -52,3 +52,12 @@ func Write(ctx context.Context, path string, plain []byte) error {
 		return nil
 	})
 }
+
+// SecureDelete performs bounded best-effort in-place overwrite and deletion.
+// It cannot erase snapshots, copies, SSD remapped blocks, caches or backups.
+func SecureDelete(path string) error {
+	if err := Validate(path); err != nil {
+		return err
+	}
+	return secureDelete(path)
+}

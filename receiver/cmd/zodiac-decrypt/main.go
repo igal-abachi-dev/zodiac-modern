@@ -26,8 +26,11 @@ func run(args []string) int {
 	return runWithPrompt(args, cli.Prompt)
 }
 func runWithPrompt(args []string, prompt func(context.Context) ([]byte, error)) int {
+	return runWithPromptAndFinish(args, prompt, cli.WaitForFinish)
+}
+func runWithPromptAndFinish(args []string, prompt func(context.Context) ([]byte, error), finish func(context.Context) error) int {
 	if len(args) == 1 && (args[0] == "--help" || args[0] == "help") {
-		fmt.Println("zodiac-decrypt verify-key --key encrypted.pem --public public.pem\nzodiac-decrypt decrypt --key encrypted.pem --in ciphertext.txt --out new-message.txt\nUnsigned development build; Windows local fixed-disk files only. Passphrases use a hidden controlling-terminal prompt. Plaintext files persist; no overwrite. Exits: input/usage 2, key unlock 3, message failure 4, local I/O 5, cancel 130.")
+		fmt.Println("zodiac-decrypt verify-key --key encrypted.pem --public public.pem\nzodiac-decrypt decrypt --key encrypted.pem --in ciphertext.txt --out new-message.txt [--cleanup-output] [--single-use-key]\nUnsigned development build; Windows local fixed-disk files only. Passphrases use a hidden controlling-terminal prompt. Plaintext files persist unless best-effort cleanup is explicitly requested. --single-use-key explicitly opts in to best-effort deletion of this private-key file after successful decryption and a finish prompt. No erasure guarantee. Exits: input/usage 2, key unlock 3, message failure 4, local I/O/cleanup 5, cancel 130.")
 		return 0
 	}
 	if len(args) == 1 && args[0] == "--version" {
@@ -35,7 +38,7 @@ func runWithPrompt(args []string, prompt func(context.Context) ([]byte, error)) 
 		return 0
 	}
 	if len(args) > 0 && args[0] == "decrypt" {
-		return runDecrypt(args[1:], prompt)
+		return runDecrypt(args[1:], prompt, finish)
 	}
 	if len(args) == 0 || args[0] != "verify-key" {
 		fmt.Fprintln(os.Stderr, "expected verify-key or decrypt; use --help")
@@ -125,12 +128,14 @@ func readKey(path string, password []byte) (*rsa.PrivateKey, string, error) {
 	return keyfile.Load(encoded, password)
 }
 
-func runDecrypt(args []string, prompt func(context.Context) ([]byte, error)) int {
+func runDecrypt(args []string, prompt func(context.Context) ([]byte, error), finish func(context.Context) error) int {
 	flags := flag.NewFlagSet("decrypt", flag.ContinueOnError)
 	flags.SetOutput(io.Discard)
 	keyPath := flags.String("key", "", "encrypted private PEM path")
 	inPath := flags.String("in", "", "canonical ciphertext file")
 	outPath := flags.String("out", "", "new private plaintext file")
+	cleanupOutput := flags.Bool("cleanup-output", false, "after a finish prompt, best-effort overwrite and delete the output file")
+	singleUseKey := flags.Bool("single-use-key", false, "explicitly mark this key file single-use and best-effort overwrite/delete it after decryption")
 	if flags.Parse(args) != nil || flags.NArg() != 0 || *keyPath == "" || *inPath == "" || *outPath == "" {
 		fmt.Fprintln(os.Stderr, "decrypt requires --key, --in and --out paths")
 		return 2
@@ -200,5 +205,40 @@ func runDecrypt(args []string, prompt func(context.Context) ([]byte, error)) int
 		return 5
 	}
 	fmt.Println("Authenticated message written to the requested new private file.")
+	clear(plain)
+	runtime.KeepAlive(plain)
+	plain = nil
+	if !*cleanupOutput && !*singleUseKey {
+		return 0
+	}
+	finishErr := finish(ctx)
+	if finishErr != nil && !errors.Is(finishErr, cli.ErrCanceled) && !errors.Is(finishErr, context.Canceled) {
+		fmt.Fprintln(os.Stderr, "cleanup skipped: unable to wait safely on the controlling terminal; files remain")
+		return 5
+	}
+	finishCanceled := errors.Is(finishErr, cli.ErrCanceled) || errors.Is(finishErr, context.Canceled)
+	cleanupFailed := false
+	if *cleanupOutput {
+		if err := localfile.SecureDelete(*outPath); err != nil {
+			fmt.Fprintln(os.Stderr, "plaintext output cleanup failed; file may remain")
+			cleanupFailed = true
+		} else {
+			fmt.Println("Plaintext output best-effort overwrite/delete completed; physical erasure is not guaranteed.")
+		}
+	}
+	if *singleUseKey {
+		if err := localfile.SecureDelete(*keyPath); err != nil {
+			fmt.Fprintln(os.Stderr, "single-use private-key cleanup failed; file may remain")
+			cleanupFailed = true
+		} else {
+			fmt.Println("Selected private-key file best-effort overwrite/delete completed; other copies are not checked.")
+		}
+	}
+	if cleanupFailed {
+		return 5
+	}
+	if finishCanceled || ctx.Err() != nil {
+		return 130
+	}
 	return 0
 }

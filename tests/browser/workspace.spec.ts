@@ -66,6 +66,7 @@ test('nonsecret readiness token follows the actual sender to the receiver comman
   const token = await message.inputValue();
   expect(token).toMatch(/^Zodiac readiness: [a-f0-9]{32}$/);
   await expect(prepare).toBeDisabled();
+  await page.locator('.compare-confirmation input').check();
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();

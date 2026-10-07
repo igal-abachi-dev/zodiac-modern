@@ -74,6 +74,7 @@ test('security policy actively blocks injected script, connection and worker wit
   await page
     .getByLabel('Message', { exact: true })
     .fill('Synthetic still-functional sender');
+  await page.locator('.compare-confirmation input').check();
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();

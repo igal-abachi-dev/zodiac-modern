@@ -18,6 +18,19 @@ var ErrPassword = errors.New("passphrase must be at most 1024 bytes")
 // Prompt never reads a password from argv, environment or piped stdin.
 // Raw mode lets the owned byte buffer remain bounded before accepting input.
 func Prompt(ctx context.Context) (password []byte, err error) {
+	return readTerminalInput(ctx, "Private key passphrase (hidden): ")
+}
+
+// WaitForFinish blocks on the controlling terminal, never piped stdin, until
+// the recipient confirms they are done reading the authenticated output file.
+func WaitForFinish(ctx context.Context) error {
+	input, err := readTerminalInput(ctx, "Press Enter after you finish reading the output file (input hidden): ")
+	clear(input)
+	runtime.KeepAlive(input)
+	return err
+}
+
+func readTerminalInput(ctx context.Context, message string) (password []byte, err error) {
 	input, output, err := openTerminal()
 	if err != nil {
 		return nil, ErrTerminal
@@ -45,7 +58,7 @@ func Prompt(ctx context.Context) (password []byte, err error) {
 	if configureTerminalInput(input) != nil {
 		return nil, ErrTerminalIO
 	}
-	if _, err := io.WriteString(output, "Private key passphrase (hidden): "); err != nil {
+	if _, err := io.WriteString(output, message); err != nil {
 		return nil, ErrTerminal
 	}
 	defer io.WriteString(output, "\r\n")

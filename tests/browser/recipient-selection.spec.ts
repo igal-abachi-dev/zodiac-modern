@@ -158,6 +158,42 @@ test('local recipient file/paste selection preserves a rejected replacement, cle
   await expect(await details(page)).toContainText(fingerprint(3072));
 });
 
+test('encryption requires explicit per-selection independent fingerprint comparison', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const encrypt = page.getByRole('button', {
+    name: 'Encrypt message',
+    exact: true,
+  });
+  const confirmation = page.getByRole('checkbox', {
+    name: /I compared this full fingerprint with the intended recipient/,
+  });
+  await expect(page.locator('.verification')).toContainText(fingerprint(3072));
+  await expect(page.locator('.verification')).toContainText('locally parsed');
+  await expect(encrypt).toBeDisabled();
+  await confirmation.check();
+  await expect(encrypt).toBeEnabled();
+  await confirmation.uncheck();
+  await expect(encrypt).toBeDisabled();
+  await confirmation.check();
+  await openCustomKey(page);
+  await page.getByLabel('Paste public PEM').fill(publicPEM(4096));
+  await page
+    .getByRole('button', { name: 'Use pasted public key', exact: true })
+    .click();
+  await expect(page.locator('.verification')).toContainText(fingerprint(4096));
+  await expect(confirmation).not.toBeChecked();
+  await expect(encrypt).toBeDisabled();
+  await confirmation.check();
+  await page
+    .getByRole('button', { name: 'Use default recipient', exact: true })
+    .click();
+  await expect(confirmation).not.toBeChecked();
+  await expect(encrypt).toBeDisabled();
+  await expect(page.locator('.verification')).toContainText(fingerprint(3072));
+});
+
 test('custom-only build has no fallback recipient and supports keyboard paste import without remembered selection', async ({
   page,
 }) => {

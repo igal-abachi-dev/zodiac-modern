@@ -81,6 +81,45 @@ func TestPrivateOutputAndExclusiveRead(t *testing.T) {
 		t.Fatal("unbounded input read")
 	}
 }
+
+func TestBestEffortSecureDeleteIsBoundedAndHandleConfined(t *testing.T) {
+	root := t.TempDir()
+	path := filepath.Join(root, "synthetic.txt")
+	if err := os.WriteFile(path, []byte("synthetic secret bytes"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := SecureDelete(path); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := os.Stat(path); !os.IsNotExist(err) {
+		t.Fatal("best-effort delete left path")
+	}
+	large := filepath.Join(root, "large.txt")
+	if err := os.WriteFile(large, make([]byte, maxBestEffortDeleteBytes+1), 0600); err != nil {
+		t.Fatal(err)
+	}
+	if err := SecureDelete(large); err == nil {
+		t.Fatal("oversized cleanup accepted")
+	}
+	if _, err := os.Stat(large); err != nil {
+		t.Fatal("oversized cleanup modified file")
+	}
+	hardTarget := filepath.Join(root, "hard-target.txt")
+	if err := os.WriteFile(hardTarget, []byte("synthetic hardlink target"), 0600); err != nil {
+		t.Fatal(err)
+	}
+	link := filepath.Join(root, "hardlink.txt")
+	if err := os.Link(hardTarget, link); err != nil {
+		t.Fatal(err)
+	}
+	if err := SecureDelete(link); err == nil {
+		t.Fatal("hardlink cleanup accepted")
+	}
+	if _, err := os.Stat(hardTarget); err != nil {
+		t.Fatal("hardlink cleanup affected target")
+	}
+}
+
 func TestCancelAndFailedWriteRemoveByHandle(t *testing.T) {
 	for _, mode := range []string{"failure", "cancel", "empty"} {
 		t.Run(mode, func(t *testing.T) {

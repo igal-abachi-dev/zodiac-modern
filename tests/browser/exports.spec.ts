@@ -8,6 +8,7 @@ import type { ExportBundle } from '../../src/lib/export/layout';
 async function encrypt(page: Page, message: string) {
   await page.goto('/');
   await page.getByLabel('Message', { exact: true }).fill(message);
+  await page.locator('.compare-confirmation input').check();
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();

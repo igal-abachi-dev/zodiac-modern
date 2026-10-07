@@ -28,6 +28,16 @@ import Layout from '../layouts/Layout.astro';
     open an editor. You control who can access those files.
   </p>
   <p>
+    The Windows receiver has opt-in <code>--cleanup-output</code> and
+    <code>--single-use-key</code> options. They run a bounded seven-pass
+    overwrite and handle-based deletion only after successful authentication,
+    output flush/close and a local finish prompt. This is best effort, not
+    guaranteed sanitization: the receiver does not check VSS snapshots and
+    cannot verify backups, sync copies, paging, SSD remapping, OS copies or
+    copies outside its selected paths. Static private keys are preserved unless
+    the user explicitly marks that key file single-use.
+  </p>
+  <p>
     Owned temporary byte buffers are cleared where possible. JavaScript strings,
     browser undo/restoration buffers, extensions, keyboards, the operating
     system and garbage collection cannot provide guaranteed secure erasure.

@@ -39,6 +39,20 @@ When changing status, append evidence using: `ID | date | status | source commit
 
 Critical-path start: `DOC-01 → (EN-01 alongside REC-01) → EN-02 → E02/E03 → E04/REC-02 → E05/E06 → E07/E08 → E09`. REC-01 starts in M0 without frontend/public-key importer dependencies; its real OpenSSL 3.0/3.5 prototype, fuzz/resource/vendor evidence and focused independent review are foundation gates, not deferred M2/release tasks. E07 policy starts during scaffold; E08 tests grow with each story and QA-03 retains the later system review. EN-04 begins file:// feasibility early and completes its full-flow delivery decision before release/review scope is finalized; do not commit to a native sender launcher before that decision. E02/E03/E11 use synthetic fixtures. E09 requires real public configuration, receiver decryption, review, independently verified sender bytes, signed receiver/any selected native launcher and a trusted verification channel.
 
+### Agreed remaining work order before continuing E08
+
+E08 is already **In progress**; this order defines the next implementation/review work and does not imply that open items are complete. Implement SEC-05 and REC-04 first, then finish the following predecessor evidence before treating the integrated review/release scope as ready:
+
+1. **SEC-05** explicit recipient fingerprint comparison and truthful user-confirmation state.
+2. **REC-04** optional one-message key lifecycle and opt-in best-effort output/key cleanup.
+3. **EN-04.2 / EN-04.3** stable Chrome/Firefox and headed usability, independent file-boundary/hash-instruction review, full-flow measurements, supported-browser scope, and final sender delivery/review decision.
+4. **EXP-01.3** actual synthetic clipboard/email paste checks, Gmail primary and Outlook secondary.
+5. **SEC-02.3** OS-enforced network-denial check for the receiver.
+6. **SEC-04.1 / SEC-04.4** decide/publish official origin, expected publisher, independent verification channel, reviewed hashes, owners, and vulnerability-reporting/triage/support policy.
+7. **REC-03.3** operator encrypted-backup restore drill and observed first-time recipient trial.
+
+Then continue E08 with the remaining QA-01/QA-02 evidence and the separate independent integrated QA-03 review. Do not mark the sequence or any child complete until its acceptance criteria and evidence are satisfied.
+
 ## 3. Completed planning
 
 ### DOC-01 — establish the implementation baseline
@@ -514,7 +528,7 @@ Subtasks:
 
 ### SEC-05 — make recipient-key identity verification explicit for sensitive use
 
-Type: story · Priority: P0 · Status: Backlog · Milestone: M4/M5 · Dependencies: KEY-02, KEY-03, QA-03.
+Type: story · Priority: P0 · Status: In progress · Milestone: M4/M5 · Dependencies: KEY-02, KEY-03, QA-03.
 
 As a sender, I can confirm that the public key selected for a sensitive message matches the intended recipient through a trusted channel separate from the website/email carrying the ciphertext.
 
@@ -745,7 +759,7 @@ Subtasks:
 
 ### REC-04 — add optional single-use recipient-key and cleanup workflow
 
-Type: story · Priority: P1 · Status: Backlog · Milestone: M4 · Dependencies: REC-02, REC-03.
+Type: story · Priority: P1 · Status: In progress · Milestone: M4 · Dependencies: REC-02, REC-03.
 
 As a sender and recipient of a one-off confidential message, I can use a dedicated recipient RSA keypair for that message, verify and share its public half, decrypt with the existing envelope, then optionally attempt best-effort cleanup of the plaintext output and one-time private-key file.
 
@@ -757,7 +771,7 @@ Acceptance criteria:
 - Cleanup is opt-in, best effort, and reports separate outcomes for plaintext output and private-key cleanup. Never claim that bytes are physically erased or that snapshots/copies do not exist. A cleanup failure must not be reported as success.
 - Private-key deletion is permitted only when the user explicitly marks/selects a single-use key for this operation. Preserve static-key files by default; static keys remain supported and documentation warns that later compromise can expose retained ciphertext. Explain that deleting a single-use key can reduce later cross-message exposure but cannot guarantee all copies are gone or provide ratcheting.
 - Write plaintext only after GCM authentication and successful exclusive output creation. Only attempt private-key cleanup after authenticated output has been fully written, flushed, and closed successfully. Do not leave partial plaintext on any failure path. Specify and test whether a timed wait holds the receiver process open and how the user safely reads the file during that interval.
-- Review the user's `securefiledelete.png` routine and its reported production/raw-hex testing as user-provided evidence. Port or adapt only after code review; test overwrite/write-through behavior on documented Windows configurations, preserving safe path, reparse, ACL, and race protections. Any `FILE_FLAG_NO_BUFFERING` use must honor documented alignment constraints. Do not treat `FILE_FLAG_OPEN_REPARSE_POINT` as an erasure control.
+- Inspected the supplied `securefiledelete.png` C# routine: it has zero, `0xFF`, and five random passes, then three `File.Move` random-name changes and delete retries. Its shown `systemWriteCacheEnabled = true` selects `FileOptions.None`, so the screenshot itself does not enable write-through or no-buffering. The user reports separate production/raw-hex testing; retain that as user-reported, configuration-specific evidence. The current Windows Go implementation adapts the same seven-pass/three-rename pattern with bounded aligned buffers, `FILE_NO_INTERMEDIATE_BUFFERING`, write-through, and handle-based renames/deletion while preserving path/ACL/reparse checks. The local Windows runtime tests pass on the tested workspace volume (`go test -mod=vendor ./...` with a workspace-local temp directory). Three renames do not prove prior NTFS MFT names or journal records are erased. Independent review and additional documented-platform validation remain open; do not treat `FILE_FLAG_OPEN_REPARSE_POINT` as an erasure control.
 - An optional VSS/snapshot probe is advisory only: report detected supported snapshots, state that no detected snapshot is not proof of absence, and do not require elevation or fail decryption solely because snapshot status cannot be determined. Document that third-party snapshots, backups, sync, paging, SSD remapping, and copies outside the receiver are not verified.
 - Update `plan.md`, receiver/privacy documentation, and meaningful tests before implementation/release. Exercise cleanup success/failure/cancel/timeout, wrong-key/tampered input, read/output failure, static-key preservation, explicitly selected one-time-key cleanup, and file-format preservation. Independent review assesses the cleanup claim and actual OS calls; passing tests do not establish universal sanitization.
 
@@ -804,7 +818,7 @@ Deferred items do not block M5 and have no implied authorization to change the c
 | --- | --- |
 | Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
 | Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. At the original planning baseline application checks had not run; subsequent implementation evidence is recorded below and in docs/status.md |
-| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1, REC-01/02 and SYM-01/02 Done; EN-04.1 Done; EN-04 in progress; UX-03/EXP-02/03/04 Done; E06/M3 and EXP-01 Review pending actual Gmail/Outlook paste; REC-03 Review pending operator/novice evidence. M0/M1 development gates complete. REC-04 optional one-message key lifecycle and best-effort output/key cleanup is in the backlog and is not implemented. Current evidence and later gates: [docs/status.md](docs/status.md) |
+| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1, REC-01/02 and SYM-01/02 Done; EN-04.1 Done; EN-04 in progress; UX-03/EXP-02/03/04 Done; E06/M3 and EXP-01 Review pending actual Gmail/Outlook paste; REC-03 Review pending operator/novice evidence. M0/M1 development gates complete. REC-04 optional one-message key lifecycle and opt-in output/key cleanup implementation is in progress; the Windows routine now follows the seven-pass, aligned no-buffering, three-rename best-effort sequence. Windows path-confined runtime verification and independent review remain open. Current evidence and later gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; full SVG/PNG/print all use the S64M1 mixed view; Unicode symbol strings deferred |
 | Production recipient | Operator-confirmed RSA-4096 public PEM/name/full fingerprint configured; production build/browser checks pass. Operator backup/readiness, independent integrated review and signed release remain open. |
 | Host/domain | Vercel primary; user proposes free zodiac-modern.vercel.app and will not buy a domain. Origin availability/control/deployment and publisher/channel/owners remain pending. Fresh generated static output tested; no deployment. Alternatives in docs/deployment.md |

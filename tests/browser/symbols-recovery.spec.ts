@@ -38,6 +38,7 @@ test('glyph preview is ordered, bounded, responsive and keeps full raw accessibl
   await page
     .getByLabel('Message', { exact: true })
     .fill('Synthetic glyph preview: שלום 🔑');
+  await page.locator('.compare-confirmation input').check();
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();
@@ -218,6 +219,7 @@ test('maximum message preview reaches its last slice while exports retain the en
     .setInputFiles('receiver/tests/fixtures/keys/openssl-3.5-4096-public.pem');
   await expect(page.locator('.recipient-summary')).toContainText('RSA-4096');
   await page.getByLabel('Message', { exact: true }).fill('x'.repeat(65536));
+  await page.locator('.compare-confirmation input').check();
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();
@@ -273,6 +275,7 @@ test('raw recovery cleans only by explicit choice, refuses imports and interoper
   await page.goto('/');
   const plaintext = 'Nonsecret recovery: שלום 🔑  ';
   await page.getByLabel('Message', { exact: true }).fill(plaintext);
+  await page.locator('.compare-confirmation input').check();
   await page
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();

@@ -117,6 +117,7 @@ test('guide-created encrypted keys import and recover exact nonsecret text after
       const exact = await page
         .getByLabel('Message', { exact: true })
         .inputValue();
+      await page.locator('.compare-confirmation input').check();
       await page
         .getByRole('button', { name: 'Encrypt message', exact: true })
         .click();

@@ -23,6 +23,12 @@ import { defaultRecipient } from '../generated/default-recipient';
     recipient's private key, the operator can decrypt ciphertext you choose to
     share with them; messages are not automatically delivered to them.
   </p>
+  <p>
+    The sender displays the full fingerprint and requires an explicit checkbox
+    before encryption. That checkbox records your confirmation that you made the
+    comparison; it is not an automated identity check, and the site does not
+    label a key verified based on parsing or your acknowledgment.
+  </p>
   {defaultRecipient && (
     <p class="fingerprint">
       Configured public recipient: {defaultRecipient.name} · RSA-

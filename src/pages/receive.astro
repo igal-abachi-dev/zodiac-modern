@@ -22,6 +22,32 @@ import Layout from '../layouts/Layout.astro';
     UTF-8 bytes and never prints plaintext or opens an editor. Saved files
     persist.
   </p>
+  <h2>Optional one-time-key cleanup</h2>
+  <p>
+    For a dedicated key used for one message, first verify that its encrypted
+    private PEM matches the public PEM and compare the full fingerprint through
+    your trusted separate channel. After the message is authenticated and
+    written, these explicit options wait for you to open/read the output and
+    press Enter. Cleanup is best effort; no physical erasure is guaranteed.
+    Without these flags, the output and key files are preserved.
+  </p>
+  <pre><code>.\zodiac-decrypt.exe decrypt --key ".\one-time-private.pem" --in ".\ciphertext.txt" --out ".\message.txt" --cleanup-output --single-use-key</code></pre>
+  <p>
+    <code>--cleanup-output</code> requests overwrite/delete of only the selected
+    output; <code>--single-use-key</code> explicitly selects the supplied
+    private-key file for its own overwrite/delete. Results are reported
+    separately. A failed or canceled wait attempts the requested cleanup, but a
+    terminal setup failure skips cleanup and exits with an error. The seven-pass
+    sequence (zero, `0xFF`, five fresh-random writes) uses sector-aligned
+    no-buffering/write-through I/O, then three random same-directory
+    handle-based renames and handle-based deletion. It is bounded and
+    handle-confined; it cannot verify or erase snapshots, backups, sync copies,
+    paging, SSD-remapped blocks, or copies elsewhere. No VSS snapshot check is
+    performed. Do not use these options for a retained/static key. A fresh
+    per-message RSA key can limit cross-message exposure if that private key is
+    later compromised; it does not provide ratcheting or protocol forward
+    secrecy.
+  </p>
   <p>
     Exit codes: 2 for usage/ciphertext format, 3 for key unlock, 4 for message
     authentication, 5 for local filesystem errors and 130 for cancellation. A
