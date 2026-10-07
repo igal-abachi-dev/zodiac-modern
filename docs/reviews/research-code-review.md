@@ -50,6 +50,21 @@ A ratchet addresses a different problem: a multi-message session evolves chain s
 - Age/SOPS/PGP are not forward-secrecy solutions for this static-envelope use case. Their code, test, parser, release, and operational practices remain useful research references, but maturity alone does not mean they meet this particular property. Signal's ratchet is a distinct stateful messaging protocol; storing ciphertext on disk does not itself negate ratchet-derived forward secrecy.
 - Follow-up: REC-04 now tracks the unimplemented single-use-key lifecycle, best-effort plaintext/key-file cleanup, and optional snapshot warnings. Before implementation, update the receiver plan/privacy wording and define cancellation, timeout, success/failure reporting, and the rule that key deletion occurs only after authenticated output is successfully written. No existing REC-02 cleanup or output test is evidence that secure deletion is implemented.
 
+## One-off use-case lessons and disposition (2026-10-07)
+
+Use these projects as sources of specific implementation and review practices, not as templates to transplant wholesale. The one-off model already generates an independent random AES-256 key per message and authenticates the complete bounded envelope before releasing plaintext. It does not need a conversation ratchet.
+
+| Reference | Useful practice for Zodiac’s one-off flow | Disposition / tracked work |
+| --- | --- | --- |
+| age | Small recipient-oriented encryption model, explicit format behavior, strict decoding, interoperability tests | Retain the fixed recipient-key model; continue independent browser/Go vectors and strict decoding under QA-01/QA-03. Age does not supply a ratchet for this use case. |
+| SOPS | Authenticated structured data and signed release/checksum/provenance practices | Release-signing and independent verification remain SEC-04/REL-03 gates. SOPS document structure is not a reason to change the v1 message envelope. |
+| GnuPG / OpenPGP | Key identity, fingerprints, verification, custody, rotation, and mature operational guidance | Continue full fingerprint confirmation and private-key custody/backup guidance under KEY-03/REC-03. Avoid importing broad packet compatibility or algorithm negotiation into the fixed profile. |
+| encryptor.app | Bounded parsing, explicit test vectors, and best-effort cleanup discipline | Preserve parser bounds and independent vectors; cleanup limits and the optional one-time key lifecycle are captured in REC-04. Its password-derived file format is a different key-establishment model. |
+| hat.sh | Concrete browser flow and disclosure of worker/service state | Use as a comparison for user-flow and trust-boundary review. Keep Zodiac’s no-service-worker, no-network, no-storage browser boundary. |
+| PrivateBin | Explicit explanation of what a hosted service can and cannot validate or protect | Keep the delivered-JavaScript and host-trust disclosure; do not add a paste server or imply that hosting verifies ciphertext. |
+
+Across these references, the highest-value transferable practices are explicit key identity and custody, narrow/bounded input handling, independent cross-implementation tests, honest residual-risk disclosures, and verifiable releases. These are assurance and operational improvements around Zodiac’s one-off envelope; they do not require changing the v1 bytes or adding ratcheting. Existing acceptance criteria remain the source of implementation status; this review records research disposition only and does not mark pending work complete.
+
 ## Archive coverage
 
 | Archive | Code/spec areas inspected | Main relevance to Zodiac |
