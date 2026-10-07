@@ -47,3 +47,16 @@ Reviewed 2026-10-07. This is an author-run, targeted source review of the resear
 | `yopass-master.zip` | browser `crypto.ts`, `SECURITY.md` | Client-side encryption with a service backend; explicit limit on what a server can validate. |
 
 The inspected upstream snapshots may change and were not independently authenticated as the latest upstream revisions. This review uses them as local research material, not as endorsements or security certifications.
+
+
+
+
+Zodiac’s static RSA format has no forward secrecy: if the recipient’s private key is later compromised, saved ciphertext could be exposed. For those files, I’d use a mature offline workflow such as age or SOPS, or a secrets manager. Age is specifically designed for file encryption and has a published format and established tooling.[age project (https://github.com/FiloSottile/age)](<https://github.com/FiloSottile/age>)
+
+Email would carry the ciphertext, but still exposes message metadata. Gmail’s own client-side encryption, for example, leaves the subject, timestamps, and recipients outside that additional encryption.[Gmail CSE details](<https://support.google.com/mail/answer/13317990?hl=en>)
+
+
+We could improve the lifecycle without changing Zodiac’s RSA and AES algorithms: use a **single-use RSA recipient keypair for each message**, generated and kept by the recipient, and encrypt to that key with the existing envelope. After successful decryption, the recipient discards the private key. That could protect already-decrypted messages from a later compromise of their regular key, **if the one-time private key was truly removed**. 
+so
+decide whether to accept the static-key tradeoff or design a single-use-key workflow. If forward secrecy is a must-have today, use a ratcheting maybe
+
