@@ -13,6 +13,7 @@ if (-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administra
 $root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $go = Join-Path $root '.cache\toolchains\go\go\bin\go.exe'
 $temp = Join-Path $root '.cache\zodiac-decrypt-network-deny-tests.exe'
+$goTemp = Join-Path $root '.cache\go-test-temp'
 $ruleName = 'Zodiac SEC-02 test block ' + [guid]::NewGuid().ToString('N')
 
 if (-not (Test-Path -LiteralPath $go -PathType Leaf)) {
@@ -25,9 +26,15 @@ if ($profiles.Count -eq 0 -or @($profiles | Where-Object { -not $_.Enabled }).Co
 }
 
 $env:GOTOOLCHAIN = 'local'
-Push-Location $root
+New-Item -ItemType Directory -Force -Path $goTemp, (Join-Path $root '.cache\go-build-cache'), (Join-Path $root '.cache\go-mod-cache'), (Join-Path $root '.cache\go-path') | Out-Null
+$env:GOCACHE = Join-Path $root '.cache\go-build-cache'
+$env:GOMODCACHE = Join-Path $root '.cache\go-mod-cache'
+$env:GOPATH = Join-Path $root '.cache\go-path'
+$env:TMP = $goTemp
+$env:TEMP = $goTemp
+Push-Location (Join-Path $root 'receiver')
 try {
-  & $go test -mod=vendor -c -o $temp ./receiver/cmd/zodiac-decrypt
+  & $go test -mod=vendor -c -o $temp ./cmd/zodiac-decrypt
   if ($LASTEXITCODE -ne 0) {
     throw "Compiling the isolated receiver test executable failed with exit code $LASTEXITCODE."
   }

@@ -488,6 +488,7 @@ Subtasks:
 - [x] SEC-02.1 — complete warmed browser actions with HTTP blocked/context offline; logs/URLs/title/history/cookies/local/session/IndexedDB/CacheStorage/service workers remain empty of inputs.
 - [x] SEC-02.2 — reload/history/close-reopen and explicit persisted-pageshow reset draft/custom recipient/result/recovery/print.
 - [x] SEC-02.3 — author bundle/source audit and privacy disclosure updated; native receiver/private-output tests pass without browser/network code. OS-enforced receiver network-denial observation remains an acceptance dependency; story stays Review.
+- [ ] SEC-02.4 — run `scripts/check-receiver-network-deny.ps1` from an elevated Windows PowerShell session; on 2026-10-09 Windows returned Access Denied for firewall profile inspection/rule creation, so this gate remains open. The script blocks only the compiled synthetic receiver test executable and removes its temporary outbound rule in `finally`.
 
 ### SEC-03 — verify dependencies, static artifact, and trust copy
 
