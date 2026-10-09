@@ -6,6 +6,29 @@ Synthetic keys and messages only; no release or security-review verdict.
 
 ## Completed locally
 
+### 2026-10-09 predecessor follow-up
+
+- REC-04: `go test -mod=vendor ./...` passed on the Windows workspace with the
+  pinned local Go 1.27.1 toolchain and workspace-local `TMP`/`TEMP`. This run
+  includes the receiver cleanup lifecycle and output/private-key hard-link
+  refusal cases. It is author-run implementation evidence; it does not review
+  the OS calls or establish physical erasure.
+- SEC-05: the recorded 2026-10-06 M4 run already passed 62 Chromium/Firefox
+  browser cases, including the new per-selection full-fingerprint comparison
+  flow. A focused Chromium retest on 2026-10-09 timed out during Playwright page
+  setup before any test body ran. This setup failure does not replace or extend
+  the earlier passing evidence. QA-03 and manual assistive-technology review
+  remain open.
+- SEC-02: an OS-enforced retry could not be performed here. Querying firewall
+  profiles and creating the temporary per-executable outbound block both
+  returned Windows Access Denied. No rule was left behind. The receiver's
+  ordinary offline tests are not OS-enforced network-denial evidence.
+- EN-04.2: the usual stable Chrome/Firefox installation paths were absent in
+  this Windows account. Existing Playwright Chromium/Firefox and stable Edge
+  evidence remains as previously recorded; stable installed Chrome/Firefox,
+  headed-user checks and independent file-boundary/hash-instruction review are
+  still open.
+
 For each RSA size, Chromium and Firefox exercise real WebCrypto encryption
 against the independent Go decrypt oracle and Go encryption against test-only
 WebCrypto decryption. Tests compare exact UTF-8 bytes across empty, whitespace,

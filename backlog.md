@@ -540,6 +540,12 @@ Acceptance criteria:
 - Do not transmit fingerprints or message/key data to a verification service. No automatic key-directory lookup or public-key substitution. Keep public-key import local and memory-only.
 - Test default/custom flows, mismatches, cancel/back, key replacement, keyboard/screen-reader use, responsive layout, CSP and zero sensitive persistence. Update security/privacy/recipient guidance. QA-03 reviews the workflow and claims before release.
 
+Subtasks:
+
+- [x] SEC-05.1 — show the full fingerprint and locally parsed/configured state; require a separate, per-selected-key acknowledgement before encryption and reset it on replacement.
+- [x] SEC-05.2 — automated default/custom/replacement/keyboard/privacy regressions pass in the 2026-10-06 M4 browser run (62 Chromium/Firefox cases; author-run evidence in `docs/reviews/e07-evidence.json`).
+- [ ] SEC-05.3 — manual assistive-technology trial and QA-03 independent review of identity guidance/claims remain open; acknowledgement is not independent verification evidence.
+
 
 ## 11. E08 — integrated quality and independent review
 
@@ -774,6 +780,12 @@ Acceptance criteria:
 - Inspected the supplied `securefiledelete.png` C# routine: it has zero, `0xFF`, and five random passes, then three `File.Move` random-name changes and delete retries. Its shown `systemWriteCacheEnabled = true` selects `FileOptions.None`, so the screenshot itself does not enable write-through or no-buffering. The user reports separate production/raw-hex testing; retain that as user-reported, configuration-specific evidence. The current Windows Go implementation adapts the same seven-pass/three-rename pattern with bounded aligned buffers, `FILE_NO_INTERMEDIATE_BUFFERING`, write-through, and handle-based renames/deletion while preserving path/ACL/reparse checks. The local Windows runtime tests pass on the tested workspace volume (`go test -mod=vendor ./...` with a workspace-local temp directory). Three renames do not prove prior NTFS MFT names or journal records are erased. Independent review and additional documented-platform validation remain open; do not treat `FILE_FLAG_OPEN_REPARSE_POINT` as an erasure control.
 - An optional VSS/snapshot probe is advisory only: report detected supported snapshots, state that no detected snapshot is not proof of absence, and do not require elevation or fail decryption solely because snapshot status cannot be determined. Document that third-party snapshots, backups, sync, paging, SSD remapping, and copies outside the receiver are not verified.
 - Update `plan.md`, receiver/privacy documentation, and meaningful tests before implementation/release. Exercise cleanup success/failure/cancel/timeout, wrong-key/tampered input, read/output failure, static-key preservation, explicitly selected one-time-key cleanup, and file-format preservation. Independent review assesses the cleanup claim and actual OS calls; passing tests do not establish universal sanitization.
+
+Subtasks:
+
+- [x] REC-04.1 — document dedicated one-message RSA-3072/4096 key generation, public-key matching/fingerprint comparison, key sharing, static-key warning, and the difference from ratcheting; keep the v1 envelope unchanged.
+- [x] REC-04.2 — implement opt-in Windows output/key cleanup with authenticated file output, a controlling-terminal finish/cancel flow, separate outcomes, bounded aligned seven-pass overwrite, write-through/no-buffering, three random handle-based renames, and handle deletion. The full vendored Go receiver suite passed on 2026-10-09 with the workspace-local test temp directory; includes success/cancel/terminal-error/hardlink/path/size cases.
+- [ ] REC-04.3 — independent review of the Windows OS-call/cleanup claim and further documented-platform validation remain open. Successful tests and the operator-reported raw-drive checks do not establish universal erasure. No VSS snapshot probe is implemented; the plan documents this limitation.
 
 ### FUT-10 — add optional Ed25519 signed-message profile
 
