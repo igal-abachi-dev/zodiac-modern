@@ -41,9 +41,11 @@ import Layout from '../layouts/Layout.astro';
     sequence (zero, `0xFF`, five fresh-random writes) uses sector-aligned
     no-buffering/write-through I/O, then three random same-directory
     handle-based renames and handle-based deletion. It is bounded and
-    handle-confined; it cannot verify or erase snapshots, backups, sync copies,
-    paging, SSD-remapped blocks, or copies elsewhere. No VSS snapshot check is
-    performed. Do not use these options for a retained/static key. A fresh
+    handle-confined. When cleanup is requested, the receiver makes a best-effort
+    check for shadow-copy device names visible to the process; it may miss
+    snapshots and cannot prove they are absent. It cannot verify or erase
+    snapshots, backups, sync copies, paging, SSD-remapped blocks, or copies
+    elsewhere. Do not use these options for a retained/static key. A fresh
     per-message RSA key can limit cross-message exposure if that private key is
     later compromised; it does not provide ratcheting or protocol forward
     secrecy.

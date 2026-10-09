@@ -12,6 +12,11 @@ import (
 var ErrPath = errors.New("path must name an ordinary local disk file without aliases or redirection")
 var ErrLimit = errors.New("file exceeds input limit")
 
+// SnapshotAdvisory reports a best-effort check of Windows shadow-copy device
+// names visible to this process. It never treats an empty result as proof that
+// snapshots or other copies are absent.
+func SnapshotAdvisory() string { return snapshotAdvisory() }
+
 func Read(path string, limit int) ([]byte, error) {
 	f, release, err := openRead(path)
 	if err != nil {

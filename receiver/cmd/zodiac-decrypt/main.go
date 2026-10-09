@@ -146,6 +146,9 @@ func runDecrypt(args []string, prompt func(context.Context) ([]byte, error), fin
 			return 5
 		}
 	}
+	if *cleanupOutput || *singleUseKey {
+		fmt.Fprintln(os.Stderr, localfile.SnapshotAdvisory())
+	}
 	raw, err := localfile.Read(*inPath, envelope.MaxRaw)
 	if errors.Is(err, localfile.ErrLimit) {
 		fmt.Fprintln(os.Stderr, envelope.ErrInput)

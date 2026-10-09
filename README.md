@@ -98,6 +98,9 @@ does not prove that NTFS journal/MFT history, snapshots, SSD-remapped blocks,
 backups, paging, or other copies were erased. The flags do not provide
 ratcheting or protocol forward secrecy; see the [recipient guide](src/pages/receive.astro)
 for limits and the independent-review status.
+When cleanup is requested, the receiver also checks for Windows shadow-copy
+device names visible to its process. This advisory can miss snapshots; an empty
+result does not establish that snapshots or other copies are absent.
 
 ## Implemented in development
 

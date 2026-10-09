@@ -32,8 +32,10 @@ import Layout from '../layouts/Layout.astro';
     <code>--single-use-key</code> options. They run a bounded seven-pass
     overwrite and handle-based deletion only after successful authentication,
     output flush/close and a local finish prompt. This is best effort, not
-    guaranteed sanitization: the receiver does not check VSS snapshots and
-    cannot verify backups, sync copies, paging, SSD remapping, OS copies or
+    guaranteed sanitization: when cleanup is requested, the receiver makes a
+    best-effort check for Windows shadow-copy device names visible to the
+    process. The check may miss snapshots and does not establish their absence;
+    it cannot verify backups, sync copies, paging, SSD remapping, OS copies or
     copies outside its selected paths. Static private keys are preserved unless
     the user explicitly marks that key file single-use.
   </p>

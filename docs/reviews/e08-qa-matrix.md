@@ -11,8 +11,11 @@ Synthetic keys and messages only; no release or security-review verdict.
 - REC-04: `go test -mod=vendor ./...` passed on the Windows workspace with the
   pinned local Go 1.27.1 toolchain and workspace-local `TMP`/`TEMP`. This run
   includes the receiver cleanup lifecycle and output/private-key hard-link
-  refusal cases. It is author-run implementation evidence; it does not review
-  the OS calls or establish physical erasure.
+  refusal cases and the new non-elevated shadow-copy device-name advisory. The
+  local `QueryDosDevice` query detected three exposed shadow-copy device names;
+  it cannot determine whether they contain these selected files. This is
+  author-run implementation evidence; it does not review the OS calls or
+  establish physical erasure.
 - SEC-05: the recorded 2026-10-06 M4 run already passed 62 Chromium/Firefox
   browser cases, including the new per-selection full-fingerprint comparison
   flow. A focused Chromium retest on 2026-10-09 timed out during Playwright page
