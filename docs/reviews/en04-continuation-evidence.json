@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-11",
+  "scope": "Author-run synthetic headless predecessor checks; not independent review, human usability, actual provider paste or administrator network denial.",
+  "candidate": {
+    "path": "artifacts/offline probe שלום/zodiac-synthetic-probe.html",
+    "bytes": 173379,
+    "sha256": "a87bfc16e561bb94a74839f51831c1d9b5eb37e59be0763991a9a09497f84284"
+  },
+  "qualificationSourceSha256": "f17335e3718b545b6488f5b3334f72332b70b770e73327a9c831af7265687ca7",
+  "runs": [
+    {
+      "report": "artifacts/en04/pre-e08-continuation-results.json",
+      "sha256": "0505325a6d49c9651b684eb6ee7218c9dfaeedef6960a8958581251aee1bd90c",
+      "stats": {
+        "startTime": "2026-10-10T22:44:47.928Z",
+        "duration": 31882.77,
+        "expected": 8,
+        "skipped": 4,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "note": "Full ordinary suite before addition of opt-in synthetic DOM isolation branch; 8 passed, 4 explicitly skipped native-input diagnostics."
+    },
+    {
+      "report": "artifacts/en04/pre-e08-qualification-followup.json",
+      "sha256": "c30e9fed547a64e8c1ea4d75347dfce1b14266b9a0e4bd3ecc7a4e57f9cc930d",
+      "stats": {
+        "startTime": "2026-10-10T23:02:25.827Z",
+        "duration": 18532.127999999997,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "note": "Current-source normal native-input single-line 64 KiB qualification; Chromium, Firefox, Chrome for Testing and Edge."
+    }
+  ],
+  "typeChecks": {
+    "astro": {
+      "files": 105,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "svelte": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "multilineEvidence": "en04-input-investigation.json",
+  "remaining": [
+    "Native Chrome multiline input/paste qualification",
+    "Normal installed-browser headed UX, reference-device and assistive-technology trials",
+    "Actual Gmail, Outlook/Microsoft 365, Proton Mail and iCloud Mail trials",
+    "Independent security/file-boundary/hash-instruction/cleanup review",
+    "Administrator-enforced receiver network-denial evidence",
+    "Operator restore/novice recipient trials",
+    "Origin/publisher/independent verification/owner/vulnerability-policy decisions and final sender delivery selection"
+  ]
+}

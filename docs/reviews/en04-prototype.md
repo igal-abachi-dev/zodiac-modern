@@ -193,3 +193,9 @@ not resolve the initial-fill case. The opt-in native control is skipped during
 the ordinary regression suite and must not be counted as a passing check.
 Real paste/installed-browser usability and the exact browser/automation cause
 remain unverified. No product text-direction or Unicode changes were made.
+
+The same multiline input also passes stable Chrome encryption and exact Go recovery
+with both RSA sizes through the explicitly synthetic DOM-input isolation mode
+(`ZODIAC_QUALIFICATION_INPUT=dom`). This bypasses native editing and is not
+clipboard/paste or human-usability evidence. Keep the native-input investigation
+and real provider trials open; see [recorded diagnostics](en04-input-investigation.json).

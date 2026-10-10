@@ -191,3 +191,13 @@ independent-review, release-selection and OS network-denial gates remain open.
 2026-10-10 machine follow-up: [maximum-size qualification evidence](reviews/en04-qualification-evidence.json) records four passing browser projects for single-line 64 KiB input, keyboard controls and responsive paging, plus fresh offline receiver tests. Reference-device/human qualification remains open, including the multiline native-fill timeout investigation. No independent review or administrator network-denial gate was closed.
 
 2026-10-11 input investigation: [diagnostic evidence](reviews/en04-input-investigation.json) records passing 64 KiB multiline Firefox/Go recovery and stable-Chrome timeouts in both Zodiac and plain native textareas. Fixed LTR direction did not resolve the native timeout. Ordinary-input checks remain separate; large-multiline and real-paste qualification stay open.
+
+2026-10-11 continuation: the ordinary offline suite passes eight cases across
+Chromium, Firefox, Chrome for Testing and Edge; four opt-in native-input
+diagnostics are explicitly skipped. A fresh current-source rerun passes all four
+64 KiB ordinary-input qualification cases. Astro (105 files) and Svelte checks
+report zero errors/warnings. Chrome multiline encryption/Go recovery passes
+through synthetic DOM input, while native-input usability remains open. See
+[continuation evidence](reviews/en04-continuation-evidence.json). Human,
+independent-review, administrator network-denial and release decisions remain
+required.

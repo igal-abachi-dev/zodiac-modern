@@ -111,3 +111,12 @@ sources/hashes, observed publisher status and timings. The print dialog is stubb
 and clipboard denial is simulated. This supplements automated compatibility;
 normal installed-browser headed UX, real provider/user/AT trials, independent
 review and final release/delivery decisions remain open.
+
+### Predecessor follow-up (2026-10-11)
+
+Firefox passes exact 64 KiB multiline encryption/Go recovery. Stable Chrome
+passes the same crypto flow via synthetic DOM input, while native automated
+filling also times out in a plain textarea. The cause and real paste behavior
+remain unverified. [Diagnostic evidence](en04-input-investigation.json) separates
+these outcomes; no human, independent-review or release gate is closed. Priority
+mail trials cover Gmail, Outlook/Microsoft 365, Proton Mail and iCloud Mail.

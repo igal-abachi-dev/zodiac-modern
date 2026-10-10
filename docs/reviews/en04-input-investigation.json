@@ -7,7 +7,7 @@
     "construction": "'שלום🔑\\n'.repeat(5041) + 'abc'"
   },
   "candidateSha256": "a87bfc16e561bb94a74839f51831c1d9b5eb37e59be0763991a9a09497f84284",
-  "currentReproducerSha256": "72f77ab7410b03de19bdcb168bd6280864581dbcaf9d9770ae31b12f9f62d813",
+  "currentReproducerSha256": "f17335e3718b545b6488f5b3334f72332b70b770e73327a9c831af7265687ca7",
   "runs": [
     {
       "report": "multiline-chrome-failure.json",
@@ -91,6 +91,23 @@
           ]
         }
       ]
+    },
+    {
+      "report": "multiline-dom-chrome-results.json",
+      "sha256": "d0b466ee4b86d053668402cd41286221ce138b5dcc59011180ff246c30956905",
+      "tests": [
+        {
+          "project": "stable-chrome",
+          "title": "maximum-size offline encryption, keyboard gate and responsive paging",
+          "outcome": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "durationMilliseconds": 2639
+            }
+          ]
+        }
+      ]
     }
   ],
   "firefoxMultilineMeasurement": {
@@ -153,16 +170,78 @@
     "Stable Chrome for Testing 155.0.8059.39 timed out during native fill before encryption, including a plain textarea with no application code.",
     "Both automatic and fixed left-to-right directions timed out in the native control; text direction is not a demonstrated fix.",
     "Timeout location varied between initial fill and replacement. Changing the boundary assertion to append/backspace did not resolve initial-fill timeout.",
-    "The ordinary single-line control remains separate; full large-multiline input qualification remains open. No cryptographic failure or guaranteed browser-root-cause diagnosis is inferred."
+    "The ordinary single-line control remains separate; full large-multiline input qualification remains open. No cryptographic failure or guaranteed browser-root-cause diagnosis is inferred.",
+    "Stable Chrome completed the same 64 KiB/5,042-line input with both RSA sizes and exact Go recovery when entered using synthetic DOM input events. This isolates application encryption from native editing, and does not establish paste/input usability."
   ],
   "reproduce": [
     "ZODIAC_QUALIFICATION_MULTILINE=1: full application multiline case",
     "ZODIAC_INPUT_CONTROL=1: plain native textarea control",
-    "ZODIAC_INPUT_DIRECTION=ltr: fixed-direction native control"
+    "ZODIAC_INPUT_DIRECTION=ltr: fixed-direction native control",
+    "ZODIAC_QUALIFICATION_MULTILINE=1 and ZODIAC_QUALIFICATION_INPUT=dom: synthetic application/crypto isolation only"
   ],
   "remaining": [
     "Investigate real paste versus automation behavior and browser version changes.",
     "Observe installed-browser headed workflow with synthetic input.",
     "Do not remove Unicode/newlines or change multilingual semantics to make this test pass."
-  ]
+  ],
+  "chromeSyntheticDomMeasurement": {
+    "recorded": "2026-10-10T23:00:48.642Z",
+    "browser": "155.0.8059.39",
+    "project": "stable-chrome",
+    "system": {
+      "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+      "memoryBytes": 34280431616,
+      "release": "10.0.26200"
+    },
+    "scope": "Author-run desktop headless keyboard/responsive/max-byte checks. Not human accessibility, actual mobile, reference-device qualification or independent review. Long Task API availability recorded; unsupported is not zero long tasks. Timings include automation/paint waiting.",
+    "input": {
+      "utf8Bytes": 65536,
+      "lines": 5042,
+      "boundaryEditing": "synthetic DOM input events"
+    },
+    "timings": [
+      {
+        "phase": "64KiB-encrypt-and-first-page",
+        "rsaBits": 3072,
+        "milliseconds": 84.5,
+        "longTaskAPI": true,
+        "longTasks": [67]
+      },
+      {
+        "phase": "next-page-1280px",
+        "rsaBits": 3072,
+        "milliseconds": 49.90000009536743,
+        "longTaskAPI": true,
+        "longTasks": []
+      },
+      {
+        "phase": "next-page-390px",
+        "rsaBits": 3072,
+        "milliseconds": 42.09999990463257,
+        "longTaskAPI": true,
+        "longTasks": []
+      },
+      {
+        "phase": "64KiB-encrypt-and-first-page",
+        "rsaBits": 4096,
+        "milliseconds": 51.59999990463257,
+        "longTaskAPI": true,
+        "longTasks": []
+      },
+      {
+        "phase": "next-page-1280px",
+        "rsaBits": 4096,
+        "milliseconds": 38.59999990463257,
+        "longTaskAPI": true,
+        "longTasks": []
+      },
+      {
+        "phase": "next-page-390px",
+        "rsaBits": 4096,
+        "milliseconds": 38.69999980926514,
+        "longTaskAPI": true,
+        "longTasks": []
+      }
+    ]
+  }
 }

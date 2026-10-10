@@ -50,6 +50,18 @@ test('maximum-size offline encryption, keyboard gate and responsive paging', asy
       ? 'שלום🔑\n'.repeat(5041) + 'abc'
       : 'שלום🔑' + 'A'.repeat(65524);
   expect(Buffer.byteLength(text, 'utf8')).toBe(65536);
+  const syntheticInput = process.env.ZODIAC_QUALIFICATION_INPUT === 'dom';
+  async function setMessage(value: string) {
+    const input = page.getByLabel('Message', { exact: true });
+    if (syntheticInput) {
+      // Isolates application/crypto from the separately failing native fill path.
+      // This is not clipboard, paste or human input-usability evidence.
+      await input.evaluate((node, content) => {
+        (node as HTMLTextAreaElement).value = content;
+        node.dispatchEvent(new Event('input', { bubbles: true }));
+      }, value);
+    } else await input.fill(value);
+  }
   for (const bits of [3072, 4096]) {
     await page.setViewportSize({ width: 1280, height: 800 });
     const toggle = page.getByRole('button', {
@@ -76,7 +88,7 @@ test('maximum-size offline encryption, keyboard gate and responsive paging', asy
     );
     const confirmation = page.locator('.compare-confirmation input');
     await expect(confirmation).not.toBeChecked();
-    await page.getByLabel('Message', { exact: true }).fill(text);
+    await setMessage(text);
     const encrypt = page.getByRole('button', {
       name: 'Encrypt message',
       exact: true,
@@ -87,17 +99,23 @@ test('maximum-size offline encryption, keyboard gate and responsive paging', asy
     await expect(confirmation).toBeChecked();
     // Exercise ordinary editing; bulk replacement has a separate native control.
     const message = page.getByLabel('Message', { exact: true });
-    await message.focus();
-    await page.keyboard.press('ControlOrMeta+End');
-    await page.keyboard.insertText('x');
+    if (syntheticInput) await setMessage(text + 'x');
+    else {
+      await message.focus();
+      await page.keyboard.press('ControlOrMeta+End');
+      await page.keyboard.insertText('x');
+    }
     await expect(message).toHaveValue(text + 'x');
     await encrypt.focus();
     await page.keyboard.press('Enter');
     await expect(page.getByRole('alert')).toContainText('65,536');
     await expect(page.locator('#raw-ciphertext')).toHaveCount(0);
-    await message.focus();
-    await page.keyboard.press('ControlOrMeta+End');
-    await page.keyboard.press('Backspace');
+    if (syntheticInput) await setMessage(text);
+    else {
+      await message.focus();
+      await page.keyboard.press('ControlOrMeta+End');
+      await page.keyboard.press('Backspace');
+    }
     await expect(message).toHaveValue(text);
     await expect(encrypt).toBeEnabled();
     await encrypt.focus();
@@ -246,7 +264,9 @@ test('maximum-size offline encryption, keyboard gate and responsive paging', asy
         input: {
           utf8Bytes: Buffer.byteLength(text, 'utf8'),
           lines: text.split('\n').length,
-          boundaryEditing: 'append/backspace',
+          boundaryEditing: syntheticInput
+            ? 'synthetic DOM input events'
+            : 'append/backspace',
         },
         timings,
       },
