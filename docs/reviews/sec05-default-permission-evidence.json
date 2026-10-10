@@ -1,0 +1,39 @@
+{
+  "date": "2026-10-11",
+  "decision": "User-directed default-enabled encryption permission; checkbox does not claim independent fingerprint comparison.",
+  "scope": "Author-run synthetic tests, not human or independent review.",
+  "browserRegressions": {
+    "passed": 22,
+    "projects": [
+      "chromium",
+      "firefox"
+    ],
+    "files": [
+      "recipient-selection.spec.ts",
+      "workspace.spec.ts",
+      "privacy.spec.ts"
+    ]
+  },
+  "offline": {
+    "report": "artifacts/en04/permission-offline-results.json",
+    "sha256": "198604a9ae94919c4e3aacdd807fd7fdf51d3b9e391ebded699a81891076fb5c",
+    "stats": {
+      "startTime": "2026-10-10T23:32:04.957Z",
+      "duration": 30231.579999999998,
+      "expected": 8,
+      "skipped": 4,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "artifactBytes": 173411,
+    "artifactSha256": "13732342abeb66395ab201ab0360ee1f277f9ba20fb497105e799ef5c19a7787"
+  },
+  "typeChecks": "Astro 105 files: 0 errors/warnings/hints; Svelte 0 errors/warnings",
+  "preview": "Production build/artifact policy checked and loopback snapshot refreshed on port 4324",
+  "sourceHashes": {
+    "src/components/islands/RecipientSelector.svelte": "a03d7d1b3b0bfcd0c9353966bed1c690dd610b345731c57516a55ca7a9355f8b",
+    "src/components/islands/EncryptWorkbench.svelte": "52115d5c99377cb169706732943443146c5fbf794bb48bc806660d2246f76bf9",
+    "tests/browser/recipient-selection.spec.ts": "19185540163fd5bef564670526f2233d3904e650e027db943d39a489c7d5f5b1",
+    "tests/browser/offline-qualification.spec.ts": "74bd5d812747a32ff85a39c0319ac4b5d74e558d7a3bf0771970156a84d93226"
+  }
+}

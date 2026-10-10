@@ -201,3 +201,10 @@ through synthetic DOM input, while native-input usability remains open. See
 [continuation evidence](reviews/en04-continuation-evidence.json). Human,
 independent-review, administrator network-denial and release decisions remain
 required.
+
+2026-10-11 default-permission validation: 22 Chromium/Firefox recipient/workspace/
+privacy cases and eight offline cases across Chromium, Firefox, Chrome for Testing
+and Edge pass; four opt-in native diagnostics skipped. Type checks are clean.
+[Exact candidate and source evidence](reviews/sec05-default-permission-evidence.json).
+The production preview on port 4324 was refreshed. Identity comparison remains
+the sender’s responsibility; default-enabled permission is not verification.
