@@ -554,7 +554,7 @@ Acceptance criteria:
 Subtasks:
 
 - [x] SEC-05.1 — show the full fingerprint and locally parsed/configured state; default permission to enabled per selected key, with an explicit opt-out; retain independent comparison guidance without claiming a completed identity check (2026-10-11 user override).
-- [ ] SEC-05.2 — reopen affected default/custom/replacement/keyboard/privacy regressions after the 2026-10-11 default-permission change. Historical regressions pass in the 2026-10-06 M4 browser run (62 Chromium/Firefox cases; author-run evidence in `docs/reviews/e07-evidence.json`).
+- [x] SEC-05.2 — revised 2026-10-11 default/custom/replacement/keyboard/privacy regressions pass (22 Chromium/Firefox cases), including mixed print and first-screen composer; historical regressions pass in the 2026-10-06 M4 browser run (62 Chromium/Firefox cases; author-run evidence in `docs/reviews/e07-evidence.json`).
 - [ ] SEC-05.3 — manual assistive-technology trial and QA-03 independent review of identity guidance/claims remain open; acknowledgement is not independent verification evidence.
 
 

@@ -194,7 +194,9 @@ test('sender exact bytes, command interoperability, exports, immutable recipient
   await page
     .getByRole('button', { name: 'Recipient details', exact: true })
     .click();
-  await expect(page.locator('.full-fingerprint')).toContainText('RSA-3072');
+  await expect(page.locator('.fingerprint.full-fingerprint')).toContainText(
+    'RSA-3072',
+  );
   await expect(page.getByLabel('Message', { exact: true })).toHaveValue('');
   expect(requests).toEqual([]);
   expect(errors).toEqual(failures);

@@ -104,14 +104,18 @@ test('all warm sender and recovery actions work with HTTP offline and leave no b
   const data = JSON.parse(
     (await exported(page, 'Download metadata JSON')).toString(),
   ) as ExportBundle;
-  await page.getByText('Archival pages and print', { exact: true }).click();
+  await expect(
+    page.getByRole('button', { name: 'Print / Save as PDF', exact: true }),
+  ).toBeVisible();
   await page.evaluate(() => {
     window.print = () => {};
   });
   await page
     .getByRole('button', { name: 'Print / Save as PDF', exact: true })
     .click();
-  expect(await page.locator('.print-page use').count()).toBe(raw.length);
+  expect(await page.locator('.print-page [data-offset]').count()).toBe(
+    raw.length,
+  );
   await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
   await expect(page.locator('.zodiac-print-root')).toHaveCount(0);
   await recovery.getByLabel('Choose raw ciphertext .txt').setInputFiles({
@@ -262,7 +266,9 @@ test('real navigation and persisted pageshow reset draft, custom recipient, resu
     .getByRole('button', { name: 'Encrypt message', exact: true })
     .click();
   const raw = await page.getByLabel('Raw ciphertext').inputValue();
-  await page.getByText('Archival pages and print', { exact: true }).click();
+  await expect(
+    page.getByRole('button', { name: 'Print / Save as PDF', exact: true }),
+  ).toBeVisible();
   await page.evaluate(() => {
     window.print = () => {};
   });

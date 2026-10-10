@@ -137,6 +137,23 @@
     Development build: use synthetic messages only. Integrated review, signed
     releases and publisher verification are pending.
   </p>
+  {#if !view.result}
+    <label for="message">Message</label>
+    <textarea
+      id="message"
+      bind:this={messageInput}
+      value={view.draft}
+      oninput={(event) => workspace.setDraft(event.currentTarget.value)}
+      onkeydown={shortcut}
+      disabled={busy || !available}
+      dir="auto"
+      spellcheck="false"
+      autocomplete="off"
+      maxlength="65537"
+      autocapitalize="off"
+      {...{ autocorrect: 'off' }}
+      aria-describedby="message-count message-help"></textarea>
+  {/if}
   <RecipientSelector
     {recipient}
     {resetVersion}
@@ -218,21 +235,6 @@
       </section>
     </section>
   {:else}
-    <label for="message">Message</label>
-    <textarea
-      id="message"
-      bind:this={messageInput}
-      value={view.draft}
-      oninput={(event) => workspace.setDraft(event.currentTarget.value)}
-      onkeydown={shortcut}
-      disabled={busy || !available}
-      dir="auto"
-      spellcheck="false"
-      autocomplete="off"
-      maxlength="65537"
-      autocapitalize="off"
-      {...{ autocorrect: 'off' }}
-      aria-describedby="message-count message-help"></textarea>
     <p id="message-count" aria-live="polite">
       {byteCount === null
         ? 'Invalid Unicode: remove the unpaired surrogate.'

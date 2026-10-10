@@ -18,7 +18,7 @@ async function details(page: Page) {
   await expect(button).toBeVisible();
   if ((await button.getAttribute('aria-expanded')) === 'false')
     await button.click();
-  return page.locator('.full-fingerprint');
+  return page.locator('.fingerprint.full-fingerprint');
 }
 async function importPaste(page: Page, pem: string) {
   await openCustomKey(page);
@@ -55,7 +55,7 @@ test('local recipient file/paste selection preserves a rejected replacement, cle
     mimeType: 'application/x-pem-file',
     buffer: Buffer.from(publicPEM(4096)),
   });
-  await expect(page.locator('.full-fingerprint')).toContainText(
+  await expect(page.locator('#recipient-fingerprint-title')).toContainText(
     fingerprint(4096),
   );
   await expect(page.locator('.filename')).toHaveText(
@@ -73,7 +73,7 @@ test('local recipient file/paste selection preserves a rejected replacement, cle
     'previously selected recipient remains selected',
   );
   await expect(page.getByRole('alert')).not.toContainText('-----BEGIN');
-  await expect(page.locator('.full-fingerprint')).toContainText(
+  await expect(page.locator('#recipient-fingerprint-title')).toContainText(
     fingerprint(4096),
   );
   // Oversized files must be rejected before invoking their read method.
@@ -88,18 +88,18 @@ test('local recipient file/paste selection preserves a rejected replacement, cle
     buffer: Buffer.alloc(16385, 32),
   });
   await expect(page.getByRole('alert')).toContainText('no larger than 16 KiB');
-  await expect(page.locator('.full-fingerprint')).toContainText(
+  await expect(page.locator('#recipient-fingerprint-title')).toContainText(
     fingerprint(4096),
   );
   await expect(input).toHaveValue('');
   await page
     .getByRole('button', { name: 'Use default recipient', exact: true })
     .click();
-  await expect(page.locator('.full-fingerprint')).toContainText(
+  await expect(page.locator('#recipient-fingerprint-title')).toContainText(
     fingerprint(3072),
   );
   await importPaste(page, publicPEM(4096).replaceAll('\n', '\r\n'));
-  await expect(page.locator('.full-fingerprint')).toContainText(
+  await expect(page.locator('#recipient-fingerprint-title')).toContainText(
     fingerprint(4096),
   );
   await expect(page.getByRole('alert')).toHaveCount(0);
@@ -162,6 +162,9 @@ test('encryption permission defaults on and can be disabled for each selected ke
   page,
 }) => {
   await page.goto('/');
+  await page
+    .getByLabel('Message', { exact: true })
+    .fill('Synthetic permission test');
   const encrypt = page.getByRole('button', {
     name: 'Encrypt message',
     exact: true,

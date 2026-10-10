@@ -295,3 +295,10 @@ This choice can increase the chance of proceeding without recipient identity
 verification; QA-03 must review the revised workflow and claims. Historical
 SEC-05 gate evidence does not establish the new behavior. Cryptographic key
 validation, local-only handling and the envelope are unchanged.
+
+Validation for the revised default-permission workflow: 22 Chromium/Firefox
+recipient/workspace/privacy cases pass, including keyboard opt-out/re-enable,
+custom/default replacement, clear/navigation, exact Go recovery, zero browser
+persistence, mixed print cleanup and visible desktop/phone-width message entry.
+The composer is now above recipient controls. Astro and Svelte checks are clean.
+These are author-run synthetic checks, not human or independent-review evidence.

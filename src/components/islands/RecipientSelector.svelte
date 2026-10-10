@@ -192,10 +192,8 @@
           >
         </p>
         <p>
-          This key is locally parsed. Compare this full fingerprint with the
-          intended recipient through a trusted, separate channel before
-          encrypting sensitive content. The website cannot perform that identity
-          check for you.
+          This key is locally parsed. Compare the full fingerprint through a
+          trusted, separate channel before sensitive use.
         </p>
         <label class="compare-confirmation">
           <input
@@ -209,10 +207,7 @@
           />
           Allow encryption with this selected public key.
         </label>
-        <p>
-          Enabled by default. This does not mean the recipient identity was
-          verified.
-        </p>
+        <p>Enabled by default; recipient identity is not verified.</p>
       </div>
       <button
         class="secondary"
