@@ -1,0 +1,253 @@
+{
+  "recorded": "2026-10-10T15:05:24.712Z",
+  "scope": "Author-run, synthetic, headless native-crypto offline-sender compatibility. No independent review, release trust, human usability, real email-provider or OS network-denial verdict.",
+  "packages": [
+    {
+      "file": "chrome-win64.zip",
+      "url": "https://storage.googleapis.com/chrome-for-testing-public/155.0.8059.39/win64/chrome-win64.zip",
+      "version": "155.0.8059.39",
+      "sha256": "59ab2a6e99bde9c0bc180414988394f9f5355a0d3764c704151ee8ecea235c7e"
+    },
+    {
+      "file": "firefox-setup.exe",
+      "url": "https://archive.mozilla.org/pub/firefox/releases/157.0.1/win64/en-US/Firefox%20Setup%20157.0.1.exe",
+      "version": "157.0.1",
+      "sha256": "71dc620e7749bb65be6df67b99261a303805a804f9c787b76b81c095cfa7d9ca"
+    },
+    {
+      "file": "geckodriver.zip",
+      "url": "https://github.com/mozilla/geckodriver/releases/download/v0.37.1/geckodriver-v0.37.1-win64.zip",
+      "version": "0.37.1",
+      "sha256": "dfed9315abe8d2fbc1b6161a2ee8002452e79cf05ee92fdc653a4e26bc35edd8"
+    },
+    {
+      "file": "7zr.exe",
+      "url": "https://www.7-zip.org/a/7zr.exe",
+      "version": "26.04",
+      "sha256": "256feca8e274e5da655e2a284fabafd9f554365eb164862089dacd4e8276d282"
+    }
+  ],
+  "authenticode": {
+    "firefox": {
+      "status": "Valid",
+      "publisher": "Mozilla Corporation"
+    },
+    "chromeForTesting": {
+      "status": "NotSigned",
+      "publisher": null
+    }
+  },
+  "chrome": {
+    "recorded": "2026-10-10T14:45:40.779Z",
+    "browser": "155.0.8059.39",
+    "project": "stable-chrome",
+    "system": {
+      "platform": "win32",
+      "release": "10.0.26200",
+      "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+      "memoryBytes": 34280431616
+    },
+    "viewport": {
+      "width": 1280,
+      "height": 720
+    },
+    "scope": "Single synthetic automated sample per phase, including Playwright wait/IPC/download costs. Print dialog is stubbed. Not human usability or reference-device qualification.",
+    "timings": [
+      {
+        "phase": "file-open-and-initial-render",
+        "milliseconds": 103.41240000000016
+      },
+      {
+        "phase": "custom-public-key-import",
+        "milliseconds": 145.37999999999988,
+        "rsaBits": 3072
+      },
+      {
+        "phase": "encrypt-and-result-render",
+        "milliseconds": 104.0344,
+        "rsaBits": 3072
+      },
+      {
+        "phase": "raw-download",
+        "milliseconds": 263.50970000000007,
+        "rsaBits": 3072
+      },
+      {
+        "phase": "svg-export",
+        "milliseconds": 144.4387999999999,
+        "rsaBits": 3072
+      },
+      {
+        "phase": "png-export",
+        "milliseconds": 275.40880000000016,
+        "rsaBits": 3072
+      },
+      {
+        "phase": "json-export",
+        "milliseconds": 146.82720000000018,
+        "rsaBits": 3072
+      },
+      {
+        "phase": "print-page-preparation",
+        "milliseconds": 48.63779999999997,
+        "rsaBits": 3072
+      },
+      {
+        "phase": "custom-public-key-import",
+        "milliseconds": 41.77109999999993,
+        "rsaBits": 4096
+      },
+      {
+        "phase": "encrypt-and-result-render",
+        "milliseconds": 80.44389999999976,
+        "rsaBits": 4096
+      },
+      {
+        "phase": "raw-download",
+        "milliseconds": 175.0554000000002,
+        "rsaBits": 4096
+      },
+      {
+        "phase": "svg-export",
+        "milliseconds": 133.31150000000025,
+        "rsaBits": 4096
+      },
+      {
+        "phase": "png-export",
+        "milliseconds": 200.32120000000032,
+        "rsaBits": 4096
+      },
+      {
+        "phase": "json-export",
+        "milliseconds": 141.2854000000002,
+        "rsaBits": 4096
+      },
+      {
+        "phase": "print-page-preparation",
+        "milliseconds": 45.29340000000002,
+        "rsaBits": 4096
+      },
+      {
+        "phase": "raw-recovery",
+        "milliseconds": 100.76880000000028
+      },
+      {
+        "phase": "printed-row-reassembly",
+        "milliseconds": 183.19869999999946
+      }
+    ]
+  },
+  "firefox": {
+    "recorded": "2026-10-10T15:05:06.539Z",
+    "scope": "Stock stable Firefox, synthetic file:// workflow using Mozilla WebDriver. Headless automated compatibility, not human usability, real email paste, OS network denial, independent review or a release verdict.",
+    "checks": [
+      {
+        "rsaBits": 3072,
+        "passed": true,
+        "scope": "custom key, fingerprint gate, native crypto/independent Go, exact raw/SVG/PNG/JSON, print payload/nulls, copy fallback and reset"
+      },
+      {
+        "rsaBits": 4096,
+        "passed": true,
+        "scope": "custom key, fingerprint gate, native crypto/independent Go, exact raw/SVG/PNG/JSON, print payload/nulls, copy fallback and reset"
+      },
+      {
+        "passed": true,
+        "scope": "raw and printed-row recovery; no page HTTP requests, runtime errors, CSP violations, style attributes or local/session storage"
+      }
+    ],
+    "timings": [
+      {
+        "phase": "file-open-and-initial-render",
+        "milliseconds": 145.53139999999985
+      },
+      {
+        "phase": "public-key-import",
+        "rsaBits": 3072,
+        "milliseconds": 15.832000000000335
+      },
+      {
+        "phase": "encrypt-and-result-render",
+        "rsaBits": 3072,
+        "milliseconds": 103.50690000000031
+      },
+      {
+        "phase": "txt-export",
+        "rsaBits": 3072,
+        "milliseconds": 77.40020000000004
+      },
+      {
+        "phase": "svg-export",
+        "rsaBits": 3072,
+        "milliseconds": 82.07650000000012
+      },
+      {
+        "phase": "png-export",
+        "rsaBits": 3072,
+        "milliseconds": 132.83510000000024
+      },
+      {
+        "phase": "json-export",
+        "rsaBits": 3072,
+        "milliseconds": 82.00920000000042
+      },
+      {
+        "phase": "print-page-preparation",
+        "rsaBits": 3072,
+        "milliseconds": 136.73049999999967
+      },
+      {
+        "phase": "public-key-import",
+        "rsaBits": 4096,
+        "milliseconds": 87.32600000000002
+      },
+      {
+        "phase": "encrypt-and-result-render",
+        "rsaBits": 4096,
+        "milliseconds": 61.9376000000002
+      },
+      {
+        "phase": "txt-export",
+        "rsaBits": 4096,
+        "milliseconds": 62.13799999999992
+      },
+      {
+        "phase": "svg-export",
+        "rsaBits": 4096,
+        "milliseconds": 63.11660000000029
+      },
+      {
+        "phase": "png-export",
+        "rsaBits": 4096,
+        "milliseconds": 89.69459999999981
+      },
+      {
+        "phase": "json-export",
+        "rsaBits": 4096,
+        "milliseconds": 66.6878999999999
+      },
+      {
+        "phase": "print-page-preparation",
+        "rsaBits": 4096,
+        "milliseconds": 84.89499999999953
+      }
+    ],
+    "candidate": {
+      "bytes": 173379,
+      "sha256": "a87bfc16e561bb94a74839f51831c1d9b5eb37e59be0763991a9a09497f84284"
+    },
+    "tools": {
+      "browserExecutableSHA256": "f029827ec8841dfd36e75acb95343f2669eb86c296eedd49f0e48d80c2a7d514",
+      "driverExecutableSHA256": "e95b4eac7960ffcd5acbfd92bb7d49d48f99c1d01a20ddd297fef8c80821020d"
+    },
+    "browserVersion": "157.0.1",
+    "platform": "windows",
+    "passed": true
+  },
+  "sourceHashes": {
+    "scripts/test-stable-firefox.mjs": "2e3e8145dc69cb50241ff8a7d1e24b731cedc2d76fbbae381adf9a49dd333b55",
+    "scripts/test-offline-sender.mjs": "a8466cfdd23b6b98106902bbafe5dd830fe068e6ded7fc7b7fe6124edc6d2447",
+    "playwright.offline.config.ts": "81eac80faf9d935ee25dc338ebac1c910e50f94839d0a12b437ec6c712e2e714",
+    "tests/browser/offline.spec.ts": "16fb7cb810c8870f0abeb949f655fa693a34cffd961645acfdc5f7d2ff306d59"
+  }
+}

@@ -12,6 +12,13 @@ owners remain undecided in `config/release-trust.json`. E07/M4 retain review and
 release gates; [hardening scope](docs/hardening.md) and
 [independent review packet](docs/reviews/m4-review-packet.md) define the remaining work.
 
+2026-10-10 sharing scope: manual ciphertext transport supports mail body/`.txt`
+attachments and browser-download links via Proton Drive, Google Drive, Wormhole
+and MEGA. Priority provider trials are Gmail, Outlook/Microsoft 365, Proton Mail
+and iCloud Mail; other MIME providers receive the same raw-file guidance without
+implied paste validation. No upload/email API or service integration is added.
+See [sharing scope and evidence](docs/exports.md).
+
 ## 1. Product and authoritative decisions
 
 Create a professional, calm website where someone chooses a recipient public key, types a message, encrypts entirely in their browser, and saves or shares ciphertext as raw text, a celestial image, or a data-preserving SVG. Ship a **signed downloadable offline Go decrypt CLI** so recipients decrypt using a local passphrase-encrypted private PEM. OpenSSL is used once for key creation; normal encryption uses the website and normal decryption uses one CLI command. The sender can immediately start another message. This receiver choice supersedes the earlier offline-browser proposal.
@@ -692,6 +699,13 @@ Audit generated HTML, Svelte components, print documents, and SVGs for **every `
 Privacy tests inspect network, browser storage, URLs, title, logs, artifact contents, and back-forward navigation. No localStorage, sessionStorage, IndexedDB, CacheStorage, or cookies for workspace state. Initial local assets may be browser-cached. No service worker is installed; reloading offline is not promised. Closing/reloading clears the app's live state, subject to browser restoration behavior explicitly tested and documented.
 
 ### Verified local release bundle
+
+Repository organization decision (2026-10-10): keep one public source/release
+repository, build hosted static Vercel output and the separate offline HTML from
+the same source, and keep generated artifacts out of Git. Public release assets
+exclude private keys, passphrases, signing credentials and private reports.
+Ordinary minification is supported; do not add deliberate obfuscation. This
+does not close artifact review, signing or independent verification gates.
 
 Do not commit to a native sender launcher before **EN-04** evaluates a self-contained offline HTML release. `file://` can be a secure context: the standard recommends trusting file URLs but permits browsers to exclude them. External ES modules can fail under file-origin/CORS rules, so an ordinary Astro `dist/index.html` is not a self-contained candidate. A fully bundled inline build is plausible; actual browser behavior must decide support. [W3C secure contexts](https://www.w3.org/TR/secure-contexts/#is-origin-trustworthy), [MDN module loading](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules#other_differences_between_modules_and_classic_scripts)
 

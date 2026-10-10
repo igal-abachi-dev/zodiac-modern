@@ -1,0 +1,168 @@
+{
+  "date": "2026-10-11",
+  "scope": "Author-run synthetic input investigation; not a manual paste trial or independent assessment.",
+  "input": {
+    "utf8Bytes": 65536,
+    "lines": 5042,
+    "construction": "'שלום🔑\\n'.repeat(5041) + 'abc'"
+  },
+  "candidateSha256": "a87bfc16e561bb94a74839f51831c1d9b5eb37e59be0763991a9a09497f84284",
+  "currentReproducerSha256": "72f77ab7410b03de19bdcb168bd6280864581dbcaf9d9770ae31b12f9f62d813",
+  "runs": [
+    {
+      "report": "multiline-chrome-failure.json",
+      "sha256": "3f7c4f2b3b160a39ab6722798b4ffc56ea04bc524d31fada052b3659daaaa0b9",
+      "tests": [
+        {
+          "project": "stable-chrome",
+          "title": "maximum-size offline encryption, keyboard gate and responsive paging",
+          "outcome": "unexpected",
+          "results": [
+            {
+              "status": "timedOut",
+              "durationMilliseconds": 35526,
+              "errorSummary": "\u001b[31mTest timeout of 30000ms exceeded.\u001b[39m"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "native-input-chrome-failure.json",
+      "sha256": "119285f2e844c96d5e1a33ef04ef246bf0c74b532d78223e80c38c4d29726d7b",
+      "tests": [
+        {
+          "project": "stable-chrome",
+          "title": "native textarea multiline replacement control",
+          "outcome": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "durationMilliseconds": 18409,
+              "errorSummary": "TimeoutError: locator.fill: Timeout 15000ms exceeded."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "native-input-chrome-ltr-failure.json",
+      "sha256": "62dae88d12eca3cab3daaf25a2dc85c4b494a6204c58dbb36ab7d888c235a1c4",
+      "tests": [
+        {
+          "project": "stable-chrome",
+          "title": "native textarea multiline replacement control",
+          "outcome": "unexpected",
+          "results": [
+            {
+              "status": "failed",
+              "durationMilliseconds": 17020,
+              "errorSummary": "TimeoutError: locator.fill: Timeout 15000ms exceeded."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "multiline-editing-results.json",
+      "sha256": "9b615a96e8c7d280def19ec983a40426394666d16aa32410cbde310e5c474040",
+      "tests": [
+        {
+          "project": "firefox",
+          "title": "maximum-size offline encryption, keyboard gate and responsive paging",
+          "outcome": "expected",
+          "results": [
+            {
+              "status": "passed",
+              "durationMilliseconds": 3698
+            }
+          ]
+        },
+        {
+          "project": "stable-chrome",
+          "title": "maximum-size offline encryption, keyboard gate and responsive paging",
+          "outcome": "unexpected",
+          "results": [
+            {
+              "status": "timedOut",
+              "durationMilliseconds": 50542,
+              "errorSummary": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "firefoxMultilineMeasurement": {
+    "recorded": "2026-10-10T22:12:20.826Z",
+    "browser": "155.0",
+    "project": "firefox",
+    "system": {
+      "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+      "memoryBytes": 34280431616,
+      "release": "10.0.26200"
+    },
+    "scope": "Author-run desktop headless keyboard/responsive/max-byte checks. Not human accessibility, actual mobile, reference-device qualification or independent review. Long Task API availability recorded; unsupported is not zero long tasks. Timings include automation/paint waiting.",
+    "timings": [
+      {
+        "phase": "64KiB-encrypt-and-first-page",
+        "rsaBits": 3072,
+        "milliseconds": 184,
+        "longTaskAPI": false,
+        "longTasks": []
+      },
+      {
+        "phase": "next-page-1280px",
+        "rsaBits": 3072,
+        "milliseconds": 98,
+        "longTaskAPI": false,
+        "longTasks": []
+      },
+      {
+        "phase": "next-page-390px",
+        "rsaBits": 3072,
+        "milliseconds": 74,
+        "longTaskAPI": false,
+        "longTasks": []
+      },
+      {
+        "phase": "64KiB-encrypt-and-first-page",
+        "rsaBits": 4096,
+        "milliseconds": 108,
+        "longTaskAPI": false,
+        "longTasks": []
+      },
+      {
+        "phase": "next-page-1280px",
+        "rsaBits": 4096,
+        "milliseconds": 86,
+        "longTaskAPI": false,
+        "longTasks": []
+      },
+      {
+        "phase": "next-page-390px",
+        "rsaBits": 4096,
+        "milliseconds": 79,
+        "longTaskAPI": false,
+        "longTasks": []
+      }
+    ]
+  },
+  "conclusions": [
+    "Firefox completed multiline encryption with both RSA sizes and exact independent Go recovery.",
+    "Stable Chrome for Testing 155.0.8059.39 timed out during native fill before encryption, including a plain textarea with no application code.",
+    "Both automatic and fixed left-to-right directions timed out in the native control; text direction is not a demonstrated fix.",
+    "Timeout location varied between initial fill and replacement. Changing the boundary assertion to append/backspace did not resolve initial-fill timeout.",
+    "The ordinary single-line control remains separate; full large-multiline input qualification remains open. No cryptographic failure or guaranteed browser-root-cause diagnosis is inferred."
+  ],
+  "reproduce": [
+    "ZODIAC_QUALIFICATION_MULTILINE=1: full application multiline case",
+    "ZODIAC_INPUT_CONTROL=1: plain native textarea control",
+    "ZODIAC_INPUT_DIRECTION=ltr: fixed-direction native control"
+  ],
+  "remaining": [
+    "Investigate real paste versus automation behavior and browser version changes.",
+    "Observe installed-browser headed workflow with synthetic input.",
+    "Do not remove Unicode/newlines or change multilingual semantics to make this test pass."
+  ]
+}

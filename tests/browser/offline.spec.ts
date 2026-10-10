@@ -5,10 +5,23 @@ import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { openCustomKey } from './sender-controls';
+import { performance } from 'node:perf_hooks';
+import { cpus, platform, release, totalmem } from 'node:os';
 import type { ExportBundle } from '../../src/lib/export/layout';
 test('file probe opens under default settings with no adjacent files or network', async ({
   page,
 }, testInfo) => {
+  const timings: { phase: string; milliseconds: number; rsaBits?: number }[] =
+    [];
+  let phaseStarted = performance.now();
+  const record = (phase: string, rsaBits?: number) => {
+    timings.push({
+      phase,
+      milliseconds: performance.now() - phaseStarted,
+      rsaBits,
+    });
+    phaseStarted = performance.now();
+  };
   testInfo.annotations.push({
     type: 'browser-version',
     description: page.context().browser()!.version(),
@@ -49,12 +62,14 @@ test('file probe opens under default settings with no adjacent files or network'
   page.on('console', (message) => {
     if (message.text().startsWith('CSP:')) csp.push(message.text());
   });
+  phaseStarted = performance.now();
   await page.goto(
     pathToFileURL(
       resolve('artifacts/offline probe שלום/zodiac-synthetic-probe.html'),
     ).href,
   );
   await expect(page.locator('.recipient-summary strong')).toBeVisible();
+  record('file-open-and-initial-render');
   let recoveryRaw = '';
   let recoveryData: ExportBundle | null = null;
   for (const bits of [3072, 4096]) {
@@ -64,6 +79,7 @@ test('file probe opens under default settings with no adjacent files or network'
     );
     const text = 'Synthetic exact UTF-8 שלום 🔑\r\n  ';
     // textarea normalizes CRLF by design; compare the actual original DOM string.
+    phaseStarted = performance.now();
     await openCustomKey(page);
     if (bits === 3072) {
       await page.getByLabel('Choose public PEM file').setInputFiles({
@@ -77,11 +93,13 @@ test('file probe opens under default settings with no adjacent files or network'
         .getByRole('button', { name: 'Use pasted public key', exact: true })
         .click();
     }
+    record('custom-public-key-import', bits);
     await page.getByLabel('Message', { exact: true }).fill(text);
     const original = await page
       .getByLabel('Message', { exact: true })
       .inputValue();
     await page.locator('.compare-confirmation input').check();
+    phaseStarted = performance.now();
     await page
       .getByRole('button', { name: 'Encrypt message', exact: true })
       .click();
@@ -89,6 +107,7 @@ test('file probe opens under default settings with no adjacent files or network'
       page.getByRole('heading', { name: 'Encrypted message', exact: true }),
     ).toBeFocused();
     await expect(page.locator('#result-display')).toBeVisible();
+    record('encrypt-and-result-render', bits);
     const raw = await page.getByLabel('Raw ciphertext').inputValue();
     recoveryRaw = raw;
     const openssl =
@@ -125,17 +144,20 @@ test('file probe opens under default settings with no adjacent files or network'
       key.fill(0);
     }
     expect(await page.getByLabel('Message', { exact: true }).count()).toBe(0);
+    phaseStarted = performance.now();
     const pendingDownload = page.waitForEvent('download');
     await page
       .getByRole('button', { name: 'Download ciphertext (.txt)', exact: true })
       .click();
     const download = await pendingDownload;
     expect(readFileSync((await download.path())!, 'utf8')).toBe(raw);
+    record('raw-download', bits);
     for (const [name, extension] of [
       ['Download full SVG', 'svg'],
       ['Download complete artwork PNG', 'png'],
       ['Download metadata JSON', 'json'],
     ]) {
+      phaseStarted = performance.now();
       const pending = page.waitForEvent('download');
       await page.getByRole('button', { name, exact: true }).click();
       const exported = await pending;
@@ -155,8 +177,18 @@ test('file probe opens under default settings with no adjacent files or network'
         expect(bytes.subarray(0, 8).toString('hex')).toBe('89504e470d0a1a0a');
         expect(bytes.readUInt32BE(20)).toBeLessThanOrEqual(4096);
       }
+      record(`${extension}-export`, bits);
     }
-    await page.getByText('Archival pages and print', { exact: true }).click();
+    const archival = page.getByText('Archival pages and print', {
+      exact: true,
+    });
+    if (
+      !(await archival.evaluate((node) =>
+        node.parentElement!.hasAttribute('open'),
+      ))
+    )
+      await archival.click();
+    phaseStarted = performance.now();
     await page.evaluate(() => {
       window.print = () => {};
     });
@@ -166,7 +198,13 @@ test('file probe opens under default settings with no adjacent files or network'
     await expect(page.locator('.print-page')).toHaveCount(
       Math.ceil(raw.length / 512),
     );
-    expect(await page.locator('.print-page use').count()).toBe(raw.length);
+    expect(await page.locator('.print-page [data-offset]').count()).toBe(
+      raw.length,
+    );
+    expect(await page.locator('.print-page [data-after-offset]').count()).toBe(
+      Math.floor(raw.length / 8),
+    );
+    record('print-page-preparation', bits);
     await page.evaluate(() => window.dispatchEvent(new Event('afterprint')));
     await expect(page.locator('.zodiac-print-root')).toHaveCount(0);
     await page.evaluate(() =>
@@ -223,6 +261,7 @@ test('file probe opens under default settings with no adjacent files or network'
     .getByRole('button', { name: 'Clear everything', exact: true })
     .click();
   expect(await page.getByLabel('Raw ciphertext').count()).toBe(0);
+  phaseStarted = performance.now();
   await page
     .getByText('Recover raw ciphertext locally', { exact: true })
     .click();
@@ -235,6 +274,7 @@ test('file probe opens under default settings with no adjacent files or network'
   await expect(
     page.getByLabel('Recovered raw ciphertext', { exact: true }),
   ).toHaveValue(recoveryRaw);
+  record('raw-recovery');
   await page
     .getByRole('button', { name: 'Copy recovered raw', exact: true })
     .click();
@@ -245,6 +285,7 @@ test('file probe opens under default settings with no adjacent files or network'
     .getByRole('button', { name: 'Clear recovery', exact: true })
     .click();
   expect(recoveryData).not.toBeNull();
+  phaseStarted = performance.now();
   await page.getByRole('button', { name: 'Printed rows', exact: true }).click();
   await page
     .getByLabel('Printed whole-envelope SHA-256')
@@ -278,6 +319,29 @@ test('file probe opens under default settings with no adjacent files or network'
   await page
     .getByRole('button', { name: 'Clear recovery', exact: true })
     .click();
+  record('printed-row-reassembly');
+  await testInfo.attach('offline-flow-measurements', {
+    contentType: 'application/json',
+    body: JSON.stringify(
+      {
+        recorded: new Date().toISOString(),
+        browser: page.context().browser()!.version(),
+        project: testInfo.project.name,
+        system: {
+          platform: platform(),
+          release: release(),
+          cpu: cpus()[0]?.model,
+          memoryBytes: totalmem(),
+        },
+        viewport: page.viewportSize(),
+        scope:
+          'Single synthetic automated sample per phase, including Playwright wait/IPC/download costs. Print dialog is stubbed. Not human usability or reference-device qualification.',
+        timings,
+      },
+      null,
+      2,
+    ),
+  });
   expect(network).toEqual([]);
   expect(csp).toEqual([]);
   expect(await page.locator('[style]').count()).toBe(0);

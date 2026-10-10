@@ -33,7 +33,10 @@
     "verify:receiver-deps": "node scripts/receiver.mjs verify",
     "build:receiver": "node scripts/receiver.mjs build",
     "spike:offline-html": "node scripts/build-offline.mjs",
-    "astro": "astro"
+    "astro": "astro",
+    "check:offline": "node scripts/check-offline-sender.mjs",
+    "test:offline": "node scripts/test-offline-sender.mjs",
+    "test:offline:firefox": "node scripts/test-stable-firefox.mjs"
   },
   "packageManager": "pnpm@12.8.1",
   "dependencies": {

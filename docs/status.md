@@ -1,6 +1,6 @@
 # Live delivery status
 
-Updated 2026-10-09 (Asia/Jerusalem); evidence records UTC timestamps.
+Updated 2026-10-10 (Asia/Jerusalem); evidence records UTC timestamps.
 M0 and M1 development acceptance pass. The operator-confirmed production public
 recipient is configured; integrated review, signing and release remain open.
 Acceptance criteria remain in [the backlog](../backlog.md).
@@ -18,12 +18,12 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 | REC-02                 | Done (Windows)                     | Authenticated offline command, exclusive private output and native path/mapping/reparse/race/ACL/cancel/cleanup tests. QA-03 remains separate.                                                                                                                                                                                                                                                                          |
 | KEY-03                 | Done                               | Tested encrypted generation for both sizes, current vendor verification, custody/fingerprint/backup/rotation guide and secure local passphrase generator. Public-folder failure fixed and regression-tested.                                                                                                                                                                                                            |
 | REC-03                 | Review                             | Guide, fresh nonsecret browser token and actual native original/restored helper trials pass for both sizes. Operator's own backup/readiness and observed first-time user trial remain pending; release verification is separate.                                                                                                                                                                                        |
-| SEC-05                 | In progress                        | Full fingerprint confirmation and key-replacement reset are implemented; the 2026-10-06 E07 Chromium/Firefox browser run includes these flows. Focused 2026-10-09 retest timed out before page setup completed. Manual assistive-technology and QA-03 independent review remain open.                                                                                                                                   |
+| SEC-05                 | In progress                        | Full fingerprint confirmation and key-replacement reset are implemented; the 2026-10-06 E07 Chromium/Firefox browser run includes these flows. Fresh 2026-10-10 offline qualification checks confirm the keyboard gate and per-key reset with both RSA sizes. Manual assistive-technology and QA-03 independent review remain open.                                                                                     |
 | REC-04                 | In progress                        | One-message key guidance and opt-in Windows output/key cleanup are implemented. Seven aligned overwrite writes, write-through/no-buffering, three handle-based random renames/delete, plus a non-elevated advisory check for exposed shadow-copy device names. Full vendored Go receiver tests pass 2026-10-09; independent OS-call review and broader platform evidence remain open. This is best-effort cleanup only. |
 | E05, SYM-01, SYM-02    | Done (development)                 | 64 frozen vectors/provenance/license, bounded glyph plate/legend and raw/transcribed-row recovery pass. Similar-glyph recognition limits documented; no human error-rate measurement or SVG importer.                                                                                                                                                                                                                   |
 | EXP-04                 | Done                               | S64CHECK1 SVG/JSON/print integration; independent PDF raw/check/hash/Go recovery passes.                                                                                                                                                                                                                                                                                                                                |
 | EN-04.1                | Done                               | One fully bundled actual Svelte sender with local help and shared crypto/codecs/raw exports; direct file:// feasibility demonstrated.                                                                                                                                                                                                                                                                                   |
-| EN-04                  | In progress                        | Bundled raw/printed-row recovery, SVG/PNG/JSON/print and runtime notices pass; stable installed Chrome/Firefox were not found in the usual Windows paths. Headed usability, independent file-boundary/hash-instruction review and final delivery selection stay open.                                                                                                                                                   |
+| EN-04                  | In progress                        | Bundled raw/printed-row recovery, SVG/PNG/JSON/print and runtime notices pass; official stable Chrome for Testing and stock stable Firefox also pass headless full-flow checks. Normal installed-browser headed usability, independent file-boundary/hash-instruction review and final delivery selection stay open.                                                                                                    |
 | E06, EXP-01            | Review                             | Exact raw delivery, native PNG clipboard/fallback and exports implemented. Actual Gmail-primary/Outlook-secondary draft paste pending; no connected browser session available.                                                                                                                                                                                                                                          |
 | EXP-02, EXP-03         | Done                               | Trusted bounded SVG/PNG, all-page/partial print, 9 pt raw rows, cleanup and A4/Letter PDF/Go recovery pass.                                                                                                                                                                                                                                                                                                             |
 | SEC-01, SEC-03         | Done (development)                 | Shared exact-hash CSP, artifact/provider synchronization, fresh Vercel output, frozen installs, browser provenance/notices, Go vendor gates and accurate public guidance pass.                                                                                                                                                                                                                                          |
@@ -159,3 +159,35 @@ human/platform/independent review gates. E06 actual Gmail-first/Outlook-secondar
 paste and recipient readiness trials remain open. Keep the real encrypted intermediate until the
 operator's final-key/pair/encrypted-backup drill succeeds; do not regenerate the
 already verified key to repair a public configuration error.
+
+## 2026-10-10 automated predecessor evidence
+
+Three fresh file:// flow cases (Chromium, Firefox, stable Edge) passed, each
+covering both RSA sizes and independent Go decryption, exports, mixed print
+payload/null offsets and recovery. The candidate is 173,379 bytes; external
+hash-helper acceptance and altered/wrong/invalid-hash refusal passed.
+Short-message phase timings and exact source/artifact hashes are recorded in
+[EN-04 machine evidence](reviews/en04-automated-evidence.json). Reproducible
+commands: `pnpm check:offline` and `pnpm test:offline --stable-edge`.
+
+Stable installed Chrome/Firefox, human/AT/reference-device trials, integrated
+independent review and final delivery selection remain open. The current
+session is non-administrative, so SEC-02 firewall evidence still needs an
+administrator-enabled context. No release trust/contact decisions or actual
+recipient/mail-provider trials were inferred. Priority mail providers are
+Gmail, Outlook/Microsoft 365, Proton Mail and iCloud Mail; manual ciphertext
+file links include Proton Drive, Google Drive, Wormhole and MEGA.
+
+### Additional stable-channel evidence
+
+The same offline candidate now passes headless full-flow checks in official
+stable Chrome for Testing 155.0.8059.39 and stock stable Firefox 157.0.1, both RSA
+sizes, with exact independent Go recovery and exports. Firefox uses native
+Mozilla WebDriver/BiDi. See [versioned evidence](reviews/en04-stable-browser-evidence.json)
+and [rerun instructions](reviews/en04-prototype.md). This supplements the earlier
+engine/Edge results; normal installed-browser headed UX and all human,
+independent-review, release-selection and OS network-denial gates remain open.
+
+2026-10-10 machine follow-up: [maximum-size qualification evidence](reviews/en04-qualification-evidence.json) records four passing browser projects for single-line 64 KiB input, keyboard controls and responsive paging, plus fresh offline receiver tests. Reference-device/human qualification remains open, including the multiline native-fill timeout investigation. No independent review or administrator network-denial gate was closed.
+
+2026-10-11 input investigation: [diagnostic evidence](reviews/en04-input-investigation.json) records passing 64 KiB multiline Firefox/Go recovery and stable-Chrome timeouts in both Zodiac and plain native textareas. Fixed LTR direction did not resolve the native timeout. Ordinary-input checks remain separate; large-multiline and real-paste qualification stay open.

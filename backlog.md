@@ -41,6 +41,15 @@ Critical-path start: `DOC-01 → (EN-01 alongside REC-01) → EN-02 → E02/E03 
 
 ### Agreed remaining work order before continuing E08
 
+2026-10-10 operator decision: use one public GitHub repository for source and
+public release artifacts, with hosted static Vercel output and a separately
+generated self-contained offline HTML from the same source. Keep generated
+outputs out of Git and secrets/signing credentials/private reports outside the
+public repository. Ordinary build minification is supported; deliberate
+obfuscation is not recommended. This selects repository organization, not the
+final reviewed sender format, official origin, signing identity or release
+verification channel. No remote visibility change or publication was performed.
+
 E08 is already **In progress**; this order defines the next implementation/review work and does not imply that open items are complete. Implement SEC-05 and REC-04 first, then finish the following predecessor evidence before treating the integrated review/release scope as ready:
 
 1. **SEC-05** explicit recipient fingerprint comparison and truthful user-confirmation state.
@@ -137,8 +146,9 @@ Acceptance criteria:
 Subtasks:
 
 - [x] EN-04.1 — fully inline actual Svelte sender with shared workspace/crypto/codecs/raw exports and local help; file:// imports, exact text/reset/export/manual fallback pass Chromium/Firefox and installed stable Edge. Glyph display and raw recovery now pass too; remaining bundled recovery, artwork, stable-browser matrix and independent delivery review stay in EN-04.2/.3.
-- [ ] EN-04.2 — shared packaging, meta-CSP, glyph/raw/printed-row recovery, SVG/PNG/JSON/print, privacy/manual-copy fallback, runtime notices and external hash-helper regression pass in Chromium/Firefox and stable Edge. Remaining stable Chrome/Firefox, headed usability and independent boundary/hash-verification review are open.
-- [ ] EN-04.3 — pending full-flow evidence: record measured selection/support matrix and revise conditional release implementation/review scope. The prototype does not select the release delivery method.
+- [ ] EN-04.2 — shared packaging, meta-CSP, glyph/raw/printed-row recovery, SVG/PNG/JSON/print, privacy/manual-copy fallback, runtime notices and external hash-helper regression pass in Chromium/Firefox and stable Edge; fresh 2026-10-10 full-flow run covers both RSA sizes and mixed-print payload/null offsets. Official stable Chrome for Testing 155.0.8059.39 and stock Firefox 157.0.1 now also pass headless full-flow checks (en04-stable-browser-evidence.json). Normal installed-browser headed UX, human usability, OS-denied networking and independent boundary/hash-verification review are open.
+- [ ] EN-04.3 — automated short-message full-flow timings and exact fixture size/hash are now recorded in docs/reviews/en04-automated-evidence.json (2026-10-10; Chromium, Firefox, stable Edge). Additional stable Chrome for Testing/stock Firefox measurements are in en04-stable-browser-evidence.json. Reference-device/long-task qualification, normal installed-browser headed usability, independent review and final delivery selection remain open; the HTML is a candidate, not a reviewed release.
+- EN-04.3 follow-up (2026-10-10): 64 KiB single-line mixed-UTF-8 input, exact independent Go recovery, oversized rejection, keyboard fingerprint/focus/reset and 1280/390 px paging pass in Chromium, bundled Firefox, stable Edge and Chrome for Testing. Measurements and limits are in en04-qualification-evidence.json. The 2026-10-11 follow-up (en04-input-investigation.json) records passing 64 KiB multiline Firefox/Go recovery and reproduces Chrome fill timeouts in a plain native textarea, with both automatic and fixed LTR directions. Keep actual paste/large-multiline qualification open; use ZODIAC_QUALIFICATION_MULTILINE and ZODIAC_INPUT_CONTROL reproducers; do not infer a crypto failure or complete input-usability qualification from the passing single-line control. No reference laptop/mobile or human/AT qualification is claimed.
 
 ## 5. E02 — cryptography and canonical data
 
@@ -387,9 +397,9 @@ Subtasks:
 
 - [x] EXP-01.1 — implement raw/metadata Blob downloads and neutral filenames.
 - [x] EXP-01.2 — implement `ClipboardItem` capability detection, text/PNG copy, feedback, and denial fallbacks.
-- [ ] EXP-01.3 — verify complete payload, user-gesture/permissions behavior, and actual paste outcomes in the chosen browser/email matrix.
+- [ ] EXP-01.3 — verify complete payload, user-gesture/permissions behavior, and actual paste/attachment outcomes in Gmail (primary), Outlook/Microsoft 365, Proton Mail, and iCloud Mail; common MIME transport does not establish identical editor/clipboard behavior.
 
-Browser checks pass; actual Gmail (primary) and Outlook (secondary) unsent draft paste remains in Review because no connected browser session is available. [Evidence](docs/reviews/e06-evidence.json) and [sharing matrix](docs/exports.md).
+Browser checks pass; actual Gmail (primary), Outlook/Microsoft 365, Proton Mail, and iCloud Mail unsent draft paste/attachment checks remain in Review because no connected mail sessions are available. Other MIME providers share the raw-text/`.txt` guidance without implied paste validation. Manual `.txt` sharing via Proton Drive, Google Drive, Wormhole and MEGA is documented; no service integration or provider-specific upload/download trial is claimed. [Evidence](docs/reviews/e06-evidence.json) and [sharing matrix](docs/exports.md).
 
 ### EXP-02 — generate ordered, recoverable SVG and bounded PNG artifacts
 
@@ -577,7 +587,7 @@ Acceptance criteria:
 - Keyboard/manual screen reader and automated accessibility checks cover forms/views/dialogs/live regions/focus; contrast/reflow/RTL/plaintext/LTR ciphertext/reduced motion pass.
 - SVG/PNG/PDF visual QA covers short, partial-final, and long paginated outputs. Every exported raw chunk round-trips; page/row check codes identify synthetic transcription mistakes before full reassembly; no plaintext/clipping/omission exists.
 - Recorded hardware/browser measurements assess ≤200 KiB initial compressed JS, encryption/result targets, ≤1,024 mounted glyphs, canvas limits, and UI long tasks; misses are resolved or explicitly reviewed before release.
-- Actual email paste tests cover supported browser targets and selected Gmail/Outlook/Apple Mail clients using disposable synthetic data only. Record whether image/source/HTML/plain-text representations survive; unsupported SVG/email cases have explicit fallback guidance.
+- Actual email paste tests cover supported browser targets and selected Gmail (primary), Outlook/Microsoft 365, Proton Mail and iCloud Mail clients using disposable synthetic data only. Record whether image/source/HTML/plain-text representations survive; unsupported SVG/email cases have explicit fallback guidance.
 - Any rich-email convenience feature is not marked supported merely because its HTML renders in a local browser. No live email is sent through agent tools without explicit authorization.
 - Five representative nontechnical recipients trial the supported Windows guide; after setup at least four decrypt one synthetic message with one copied command without assistance. Paths with spaces, wrong key/password, tampering and existing output files produce corrective guidance; no private key is uploaded. Record failures and improve UX before release.
 
@@ -594,6 +604,7 @@ Type: enabler · Priority: P0 · Status: In progress · Milestone: M4/M5 · Depe
 Acceptance criteria:
 
 - Qualified review includes composition/IND-CCA2 objective, encodings, Go receiver/terminal/output/keyfile/KDF bounds, custody/identity, delivered-JS trust, independent release verification and signing, plus the EN-04 selected file:// CSP/runtime boundary or native launcher. If REC-04 is implemented before review, include its cleanup routine, one-time-key lifecycle, and user-facing erasure claims. SVG import is excluded from v1 and receives a separate FUT-08 review.
+- Explicitly assess the exact OAEP-plus-GCM composition and AAD binding, fixed 32-byte unwrap, canonical/bounded parsing, uniform envelope cryptographic error reporting, relevant timing/side-channel exposure, and authentication before plaintext return/output. Distinguish public syntax rejection from secret-dependent failures; matching messages and an offline CLI do not prove constant-time behavior or IND-CCA2. Record assumptions, residual limits and any required remediation rather than claiming a formal proof from tests.
 - Reviewer findings/severity/scope/limitations are recorded; all critical/high findings are fixed and independently rechecked. Tests and implementation self-review are not relabeled as independent review.
 - Formal security wording follows the actual assessment; absence of review prevents reviewed/verified IND-CCA2 marketing claims and keeps the public release gate open.
 - No real production private key or user plaintext is given to the reviewer through this project.
@@ -755,7 +766,7 @@ Subtasks:
 | ID | Type | Priority | Status | Scope and entry condition |
 | --- | --- | --- | --- | --- |
 | FUT-01 | Enabler | P2 | Deferred | Browser RSA generation/private export: separate explicit request, custody/erasure review, user-controlled backup UX; never silently add to import flow |
-| FUT-02 | Enabler | P2 | Deferred | Separately versioned protocol assessment for HPKE, post-quantum key establishment, signatures, padding and commitment. Compare a reviewed hybrid ML-KEM key-establishment profile with conventional RSA/ECC while retaining AES-GCM if appropriate; assess browser-native WebCrypto support and Go interoperability under the no-external-browser-crypto-library constraint, downgrade/compatibility policy, and independent review. Include harvest-now-decrypt-later exposure against confidentiality lifetime and define review/migration triggers before RSA becomes practically breakable; do not wait for a break or silently change v1. No v2 timing or algorithm is committed. |
+| FUT-02 | Enabler | P2 | Deferred | Separately versioned protocol assessment for HPKE, post-quantum key establishment, signatures, padding and commitment. Compare the current RSA-OAEP profile with native X25519/HKDF and exact RFC 9180 suites using specified domain separation, context/key schedule and independent published vectors; distinguish size/performance benefits from security guarantees. Record minimum supported browser versions and fail-closed capabilities. AAD binding alone is not HPKE/JWE compliance, and X25519 alone supplies neither sender identity nor post-quantum protection. Compare a reviewed hybrid ML-KEM key-establishment profile with conventional RSA/ECC while retaining AES-GCM if appropriate; assess browser-native WebCrypto support and Go interoperability under the no-external-browser-crypto-library constraint, downgrade/compatibility policy, and independent review. Include harvest-now-decrypt-later exposure against confidentiality lifetime and define review/migration triggers before RSA becomes practically breakable; do not wait for a break or silently change v1. No v2 timing or algorithm is committed. |
 | FUT-03 | Story | P2 | Deferred | Image OCR/QR recovery: validated error handling/capacity; existing raw recovery stays available |
 | FUT-04 | Enabler | P2 | Deferred | Worker/PWA/service-worker installation: separate from the required verified localhost ZIP; justify from measured performance or new requirements and update policy/privacy tests |
 | FUT-05 | Story | P2 | Deferred | Additional languages, broader RSA sizes, custom glyph skins: validate accessibility/key performance and preserve released map/profile semantics |
@@ -763,6 +774,7 @@ Subtasks:
 | FUT-07 | Story | P2 | Deferred | Unicode symbol-string sharing: only on later request; explain changed font appearance and define a separately frozen reversible alphabet |
 | FUT-09 | Enabler | P2 | Deferred | Browser receiver/encrypted-PEM import or native receiver GUI: new explicit scope and importer/key-custody/security assessment; v1 receiver is the confirmed Go CLI |
 | FUT-10 | Story | P2 | Deferred | Optional per-message Ed25519 sign-then-encrypt profile: sender UI, trusted signer-key verification, native WebCrypto + Go stdlib receiver support, separately specified encoding and independent review; v1 unsigned flow/envelope remain unchanged |
+| FUT-11 | Story | P2 | Deferred | Optional offline Go encryption command using the unchanged v1 profile and public SPKI keys only; requires explicit implementation selection, safe input/output, independent interoperability and expanded artifact/review scope. Not a v1 security or E08 prerequisite. |
 
 ### REC-04 — add optional single-use recipient-key and cleanup workflow
 
@@ -787,6 +799,7 @@ Subtasks:
 - [x] REC-04.1 — document dedicated one-message RSA-3072/4096 key generation, public-key matching/fingerprint comparison, key sharing, static-key warning, and the difference from ratcheting; keep the v1 envelope unchanged.
 - [x] REC-04.2 — implement opt-in Windows output/key cleanup with authenticated file output, a controlling-terminal finish/cancel flow, separate outcomes, bounded aligned seven-pass overwrite, write-through/no-buffering, three random handle-based renames, handle deletion, and a non-elevated advisory enumeration of exposed shadow-copy device names. The full vendored Go receiver suite passed on 2026-10-09 with the workspace-local test temp directory; includes success/cancel/terminal-error/hardlink/path/size and snapshot-advisory cases.
 - [ ] REC-04.3 — independent review of the Windows OS-call/cleanup claim and further documented-platform validation remain open. Successful tests and the operator-reported raw-drive checks do not establish universal erasure. The new `QueryDosDevice` snapshot-name probe is advisory only; it does not establish snapshot absence or inspect backups/other copies.
+- [ ] REC-04.4 — optional follow-up, not an E08 prerequisite: design a bounded local PowerShell batch-generation helper using the existing verified OpenSSL/encrypted-key/ACL profile, independent fresh key pairs and passphrases, unique non-overwriting folders, per-key public matching/full fingerprints and public-only handoff. Document assignment, exhaustion, delivery/retry, retirement and temporary/backup-copy handling. Preserve completed keys on partial failure and report their state without secret logs or secret argv/environment. Manual selection remains the baseline; automatic browser consumption requires a separate reservation/concurrency/acknowledgement design and review, with no new persistence or envelope identifiers assumed. README now documents the manual dedicated-key flow and these limits; the batch helper is not implemented.
 
 ### FUT-10 — add optional Ed25519 signed-message profile
 
@@ -798,6 +811,7 @@ Acceptance criteria:
 
 - Preserve the current unsigned v1 flow and envelope bytes. Signing is an explicit per-message choice; it is never silently enabled, and unsigned messages continue to decrypt as today.
 - Specify a separate, strictly bounded signed-plaintext profile with an unambiguous marker/version, canonical encoding, domain-separated signature input, exact UTF-8 byte preservation, signer-key format, and generic malformed/invalid-signature handling. Do not infer trust from an embedded signer public key or a valid signature alone.
+- Define the exact signed context, including intended recipient-key binding and application/profile purpose, and test cross-recipient forwarding/substitution and replay semantics. Specify what a verified signature proves and what freshness or replay protection it does not provide; do not leave signed contents implicit.
 - Use Ed25519 through native WebCrypto in the sender and Go standard-library Ed25519 in the receiver; no external crypto libraries. Pin key and signature encodings and verify cross-implementation vectors in Chromium, Firefox, and Go. Unsupported browser crypto fails closed with a clear explanation.
 - Sender page exposes the optional signing choice and its privacy effect. Signature material is inside the encrypted plaintext, so the mail provider does not see the signer identity; the recipient sees it after decrypting. Explain that a signature creates durable evidence for the recipient and may reduce deniability.
 - Sender signing public-key identity must be verified through a trusted separate channel. Recipient identity verification remains an explicit prerequisite for sensitive encryption. Never trust a signer key solely because it is bundled with the message.
@@ -805,6 +819,42 @@ Acceptance criteria:
 - Go receiver authenticates the encrypted payload first, strictly parses signed/unsigned profiles, verifies signed messages against a separately supplied/previously trusted signer public key, and clearly distinguishes verified identity-key match, invalid signature, unknown/untrusted key, and unsigned plaintext without leaking secret data. No plaintext output before authentication and signature policy handling.
 - Add tamper, wrong/unknown signer, signature stripping/downgrade, malformed/bounds, UTF-8, key-substitution, and sender/Go interoperability tests; assess disclosure, custody, parser, and signed-plaintext composition in independent review before release.
 - Update plan.md, sender/receiver UX, privacy and recovery guidance; keep encryption usable without signatures for users who do not need sender authentication.
+
+### FUT-11 — evaluate an optional offline Go encryption command
+
+Type: story · Priority: P2 · Status: Deferred · Milestone: later · Dependencies: CRY-01, KEY-01, REC-02, QA-03, SEC-04.
+
+As a CLI user, I can optionally encrypt a bounded message locally to a verified
+recipient public key without opening a browser. This is a delivery/usability
+alternative, not stronger encryption or a required fix to the existing sender.
+Implementation requires a later explicit selection; preserve the browser sender
+and receiver's no-listener design.
+
+Acceptance criteria:
+
+- Accept one strict RSA-3072/4096/e=65537 SPKI public PEM and require explicit
+  recipient fingerprint comparison through an independently trusted channel.
+  Encryption never requires a recipient private key or passphrase.
+- Use Go standard-library primitives and checked OS randomness with the exact
+  fresh 32-byte AES key, fresh 12-byte nonce, OAEP SHA-256/MGF1-SHA-256/empty
+  label, GCM 128-bit tag, AAD `wrappedKey || nonce`, unchanged envelope and
+  canonical unpadded Base64URL. No algorithm registry or implicit fallback.
+- Bound input and preserve exact valid UTF-8 bytes within the current message
+  profile. Binary-file support or streaming is separate scope; do not silently
+  expand the v1 protocol. Never accept plaintext through secret argv/environment
+  values. Specify and review the local input method and disclose persistence of
+  any input file, terminal buffers and output.
+- Require explicit output paths and reviewed overwrite/path protections; no
+  network, secret logging, automatic clipboard/editor behavior or hidden secret
+  temporary files. Clear owned secret buffers best effort on all paths; no
+  guaranteed-erasure claims or weakening of the decrypt command's safeguards.
+- Independent WebCrypto/Go vectors and exact-byte round trips cover both RSA
+  sizes, bounds, UTF-8, wrong/malformed keys and envelope mutations. Add CLI
+  input/output/privacy/error regression evidence and preserve implementation
+  independence of the test oracle.
+- Update the plan, user guidance, CLI compatibility, hashes/signing and review
+  scope before release. A native executable still needs independently verified
+  delivery; being an EXE does not establish honest code.
 
 ### FUT-08 — restore app-produced SVG only after fuzzing and review
 
@@ -825,13 +875,27 @@ Subtasks:
 
 Deferred items do not block M5 and have no implied authorization to change the compatible envelope, private-key policy, or message persistence.
 
+### Security-insight disposition (2026-10-10)
+
+Latest assessment: [native cryptography, delivery trust and optional Go sender](docs/reviews/research-code-review.md#native-cryptography-delivery-trust-and-an-optional-go-sender-2026-10-10).
+Keep the current v1 algorithms/envelope: no algorithm-choice defect requiring a
+redesign was identified by the targeted author inspection. This does not close
+independent review or release gates. Existing EN-04/SEC-04/REL-03 cover exact
+artifact delivery; QA-01/QA-03 cover interoperability and composition/failure
+review; SEC-05/REC-03/REC-04/QA-02 cover identity, recipient lifecycle and human
+validation. FUT-02 and FUT-10 retain future protocol/PQ and signature work.
+FUT-11 records the new optional Go sender idea as deferred; it does not block
+E08. GitHub protection, native crypto and passing tests are not substitutes for
+verifying delivered bytes or reviewing the complete system. No implementation,
+protocol change or additional completion claim is made by this update.
+
 ## 15. Current evidence and open gates
 
 | Item | Current evidence / next action |
 | --- | --- |
 | Planning and repository docs | `plan.md`, `backlog.md`, `AGENTS.md` maintained from references and linked primary documentation; GitHub README and .gitignore added; source assets preserved |
 | Documentation validation | 2026-10-03: four Markdown documents, local links/anchors/fences, 35 story/enabler definitions with AC/priorities/statuses, revised dependency existence/acyclicity, five envelope size formulas and two artwork-layout calculations checked; 52 .gitignore cases checked with Git in an isolated temporary test repository; zero issues. At the original planning baseline application checks had not run; subsequent implementation evidence is recorded below and in docs/status.md |
-| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1, REC-01/02 and SYM-01/02 Done; EN-04.1 Done; EN-04 in progress; UX-03/EXP-02/03/04 Done; E06/M3 and EXP-01 Review pending actual Gmail/Outlook paste; REC-03 Review pending operator/novice evidence. M0/M1 development gates complete. REC-04 optional one-message key lifecycle and opt-in output/key cleanup implementation is in progress; the Windows routine now follows the seven-pass, aligned no-buffering, three-rename best-effort sequence. Windows path-confined runtime verification and independent review remain open. Current evidence and later gates: [docs/status.md](docs/status.md) |
+| Engineering | EN-01/02/03, KEY-01/02/03, CRY-01/02/03, UX-01/02/03.1, REC-01/02 and SYM-01/02 Done; EN-04.1 Done; EN-04 in progress; UX-03/EXP-02/03/04 Done; E06/M3 and EXP-01 Review pending actual Gmail/Outlook paste; REC-03 Review pending operator/novice evidence. M0/M1 development gates complete. REC-04 optional one-message key lifecycle and opt-in output/key cleanup implementation/tests are complete; the Windows routine follows the seven-pass, aligned no-buffering, three-rename best-effort sequence. Windows path-confined synthetic runtime checks pass; independent review and broader platform validation remain open. Current evidence and later gates: [docs/status.md](docs/status.md) |
 | Sharing decision | Confirmed: copy/save PNG artwork for email plus raw ciphertext; full SVG/PNG/print all use the S64M1 mixed view; Unicode symbol strings deferred |
 | Production recipient | Operator-confirmed RSA-4096 public PEM/name/full fingerprint configured; production build/browser checks pass. Operator backup/readiness, independent integrated review and signed release remain open. |
 | Host/domain | Vercel primary; user proposes free zodiac-modern.vercel.app and will not buy a domain. Origin availability/control/deployment and publisher/channel/owners remain pending. Fresh generated static output tested; no deployment. Alternatives in docs/deployment.md |

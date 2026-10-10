@@ -1,0 +1,387 @@
+{
+  "recorded": "2026-10-10T13:50:26.985Z",
+  "scope": "Author-run synthetic candidate integrity and external verification helper checks. No independent trust, browser compatibility or release decision established.",
+  "system": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+    "memoryBytes": 34280431616,
+    "node": "v24.21.0"
+  },
+  "checks": [
+    {
+      "name": "self-contained-final-block-hashes-policy-and-artifact",
+      "status": "passed"
+    },
+    {
+      "name": "matching-html-with-spaces-and-unicode",
+      "status": "passed",
+      "expectedAcceptance": true,
+      "exitCode": 0
+    },
+    {
+      "name": "altered-html",
+      "status": "passed",
+      "expectedAcceptance": false,
+      "exitCode": 1
+    },
+    {
+      "name": "wrong-hash",
+      "status": "passed",
+      "expectedAcceptance": false,
+      "exitCode": 1
+    },
+    {
+      "name": "invalid-hash",
+      "status": "passed",
+      "expectedAcceptance": false,
+      "exitCode": 1
+    }
+  ],
+  "buildMilliseconds": 1671.8935,
+  "candidate": {
+    "path": "D:\\Libraries\\Repositories\\zodiac-modern\\artifacts\\offline probe שלום\\zodiac-synthetic-probe.html",
+    "bytes": 173379,
+    "sha256": "a87bfc16e561bb94a74839f51831c1d9b5eb37e59be0763991a9a09497f84284"
+  },
+  "status": "passed",
+  "browserStatus": "3 automated full-flow cases passed",
+  "browserMeasurements": [
+    {
+      "recorded": "2026-10-10T13:50:37.836Z",
+      "browser": "153.0.8010.12",
+      "project": "chromium",
+      "system": {
+        "platform": "win32",
+        "release": "10.0.26200",
+        "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+        "memoryBytes": 34280431616
+      },
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "scope": "Single synthetic automated sample per phase, including Playwright wait/IPC/download costs. Print dialog is stubbed. Not human usability or reference-device qualification.",
+      "timings": [
+        {
+          "phase": "file-open-and-initial-render",
+          "milliseconds": 68.76310000000001
+        },
+        {
+          "phase": "custom-public-key-import",
+          "milliseconds": 36.052200000000084,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "encrypt-and-result-render",
+          "milliseconds": 102.26879999999994,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "raw-download",
+          "milliseconds": 169.2563,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "svg-export",
+          "milliseconds": 100.47750000000019,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "png-export",
+          "milliseconds": 175.02870000000007,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "json-export",
+          "milliseconds": 108.79290000000015,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "print-page-preparation",
+          "milliseconds": 49.27710000000002,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "custom-public-key-import",
+          "milliseconds": 43.497699999999895,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "encrypt-and-result-render",
+          "milliseconds": 83.24459999999999,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "raw-download",
+          "milliseconds": 120.87530000000015,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "svg-export",
+          "milliseconds": 108.4393,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "png-export",
+          "milliseconds": 158.94830000000002,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "json-export",
+          "milliseconds": 107.8103000000001,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "print-page-preparation",
+          "milliseconds": 44.89539999999988,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "raw-recovery",
+          "milliseconds": 100.33069999999998
+        },
+        {
+          "phase": "printed-row-reassembly",
+          "milliseconds": 184.69730000000027
+        }
+      ]
+    },
+    {
+      "recorded": "2026-10-10T13:50:42.795Z",
+      "browser": "155.0",
+      "project": "firefox",
+      "system": {
+        "platform": "win32",
+        "release": "10.0.26200",
+        "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+        "memoryBytes": 34280431616
+      },
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "scope": "Single synthetic automated sample per phase, including Playwright wait/IPC/download costs. Print dialog is stubbed. Not human usability or reference-device qualification.",
+      "timings": [
+        {
+          "phase": "file-open-and-initial-render",
+          "milliseconds": 222.3945000000001
+        },
+        {
+          "phase": "custom-public-key-import",
+          "milliseconds": 100.59370000000013,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "encrypt-and-result-render",
+          "milliseconds": 361.5535,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "raw-download",
+          "milliseconds": 63.1262999999999,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "svg-export",
+          "milliseconds": 99.57000000000016,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "png-export",
+          "milliseconds": 156.9045000000001,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "json-export",
+          "milliseconds": 61.47240000000011,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "print-page-preparation",
+          "milliseconds": 92.10490000000027,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "custom-public-key-import",
+          "milliseconds": 63.03870000000006,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "encrypt-and-result-render",
+          "milliseconds": 142.22209999999995,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "raw-download",
+          "milliseconds": 75.0344,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "svg-export",
+          "milliseconds": 68.30830000000014,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "png-export",
+          "milliseconds": 166.22820000000002,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "json-export",
+          "milliseconds": 62.102800000000116,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "print-page-preparation",
+          "milliseconds": 90.74569999999994,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "raw-recovery",
+          "milliseconds": 104.17460000000028
+        },
+        {
+          "phase": "printed-row-reassembly",
+          "milliseconds": 282.8198000000002
+        }
+      ]
+    },
+    {
+      "recorded": "2026-10-10T13:50:46.912Z",
+      "browser": "155.0.4283.45",
+      "project": "stable-edge",
+      "system": {
+        "platform": "win32",
+        "release": "10.0.26200",
+        "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+        "memoryBytes": 34280431616
+      },
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "scope": "Single synthetic automated sample per phase, including Playwright wait/IPC/download costs. Print dialog is stubbed. Not human usability or reference-device qualification.",
+      "timings": [
+        {
+          "phase": "file-open-and-initial-render",
+          "milliseconds": 97.55769999999995
+        },
+        {
+          "phase": "custom-public-key-import",
+          "milliseconds": 133.79920000000004,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "encrypt-and-result-render",
+          "milliseconds": 105.49109999999996,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "raw-download",
+          "milliseconds": 209.6322,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "svg-export",
+          "milliseconds": 171.28750000000014,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "png-export",
+          "milliseconds": 266.2137,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "json-export",
+          "milliseconds": 142.11230000000023,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "print-page-preparation",
+          "milliseconds": 46.36160000000018,
+          "rsaBits": 3072
+        },
+        {
+          "phase": "custom-public-key-import",
+          "milliseconds": 43.24440000000004,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "encrypt-and-result-render",
+          "milliseconds": 79.21119999999974,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "raw-download",
+          "milliseconds": 139.52840000000015,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "svg-export",
+          "milliseconds": 167.07809999999972,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "png-export",
+          "milliseconds": 216.60950000000003,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "json-export",
+          "milliseconds": 133.06230000000005,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "print-page-preparation",
+          "milliseconds": 57.99209999999994,
+          "rsaBits": 4096
+        },
+        {
+          "phase": "raw-recovery",
+          "milliseconds": 101.23369999999977
+        },
+        {
+          "phase": "printed-row-reassembly",
+          "milliseconds": 182.3411000000001
+        }
+      ]
+    }
+  ],
+  "buildInputModules": 4145,
+  "validationSourceSHA256": {
+    "scripts/check-offline-sender.mjs": "3fae6dfe9d6b313c6402b34f5936f7bb694fd8f6964fa665b0d5dd2de9d154f7",
+    "scripts/test-offline-sender.mjs": "a8466cfdd23b6b98106902bbafe5dd830fe068e6ded7fc7b7fe6124edc6d2447",
+    "playwright.offline.config.ts": "87915788975927ad8d4491ea4c524ad972c450155eeb291fc30c0a51dcdefaf3",
+    "tests/browser/offline.spec.ts": "16fb7cb810c8870f0abeb949f655fa693a34cffd961645acfdc5f7d2ff306d59",
+    "scripts/verify-sender.ps1": "e0997877bb1069e0490fdfb63904c928fccc896fe9ed6ad902d5a89a3bb6020c"
+  },
+  "openGates": [
+    "Stable installed Chrome and Firefox; bundled Playwright engines do not close this gate.",
+    "Headed human usability and assistive technology; timing samples are not user trials.",
+    "Independent review of file boundary, meta CSP and external verification instructions.",
+    "Final reviewed delivery selection and non-synthetic reviewed release hashes.",
+    "OS-enforced receiver network denial needs an administrator-enabled session.",
+    "Actual Gmail, Outlook/Microsoft 365, Proton Mail and iCloud Mail draft paste/attachment checks.",
+    "Release-trust and reporting-owner decisions; operator restore and novice recipient trial."
+  ],
+  "unitRegression": {
+    "testFilesPassed": 13,
+    "testsPassed": 37
+  },
+  "typeChecks": {
+    "astro": {
+      "files": 103,
+      "errors": 0,
+      "warnings": 0,
+      "hints": 0
+    },
+    "svelte": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "validationNotes": [
+    "Following the passing run, the unused stable-Firefox executablePath project was removed because stock Firefox is not supported by Playwright. The tested Chromium/Firefox/stable-Edge project definitions are unchanged."
+  ]
+}

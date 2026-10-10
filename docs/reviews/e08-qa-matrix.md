@@ -6,6 +6,28 @@ Synthetic keys and messages only; no release or security-review verdict.
 
 ## Completed locally
 
+### 2026-10-10 automated predecessor work
+
+Fresh offline sender cases passed in Chromium, Firefox and installed stable
+Edge, each covering both RSA sizes and independent Go recovery. Earlier page
+setup timeouts were confined to the sandbox; outside-sandbox execution worked.
+The obsolete print test now checks mixed payload offsets and separate null
+counts, and respects the expanded-by-default archival section. Candidate
+integrity/CSP/resource checks and external hash-helper positive/negative trials
+passed. Short-message phase timings, exact synthetic HTML hash/size, browser
+versions and validation source hashes are in
+[EN-04 machine evidence](en04-automated-evidence.json); limits and rerun commands
+are in [offline candidate notes](en04-prototype.md). EN-04.2/.3 remain open for
+normal installed-browser headed UX, human usability, reference-device/long-task qualification,
+independent review and final delivery selection.
+
+Mail scope now prioritizes Gmail, Outlook/Microsoft 365, Proton Mail and iCloud
+Mail, with other MIME providers covered by raw-text/`.txt` guidance. Manual
+file-link transport includes Proton Drive, Google Drive, Wormhole and MEGA;
+no service API, authenticated mail session, email sending, or provider trial
+was used. SEC-02 still requires an administrator-enabled session. SEC-04
+identity/owner decisions and REC-03 operator/novice trials remain open.
+
 ### 2026-10-09 predecessor follow-up
 
 - REC-04: `go test -mod=vendor ./...` passed on the Windows workspace with the
@@ -78,3 +100,14 @@ excluded from the required 62-case Chromium/Firefox gate.
 
 No actual Gmail/Outlook draft was opened, no CI workflow was activated, and no
 deployment or signing was performed in this work.
+
+### Stable-channel supplementation (2026-10-10)
+
+Official stable Chrome for Testing 155.0.8059.39 and stock stable Firefox 157.0.1
+passed the same synthetic offline flow for both RSA sizes, exact Go recovery,
+exports and privacy checks. Firefox uses Mozilla WebDriver/BiDi, not Playwright's
+patched Firefox. [Exact evidence](en04-stable-browser-evidence.json) records package
+sources/hashes, observed publisher status and timings. The print dialog is stubbed
+and clipboard denial is simulated. This supplements automated compatibility;
+normal installed-browser headed UX, real provider/user/AT trials, independent
+review and final release/delivery decisions remain open.

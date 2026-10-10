@@ -26,13 +26,16 @@ page/row checks separately from the `.txt`. It is artwork, not an SVG/XML
 importer or a promise of inline-SVG email support.
 There is no SVG/XML importer, image machine recovery or inline-SVG email promise.
 
-## Gmail first, Outlook second
+## Email providers and MIME delivery
+
+The priority client matrix is **Gmail (primary), Outlook/Microsoft 365, Proton Mail, and iCloud Mail**. General sharing guidance also applies to Yahoo Mail, Zoho Mail, QQ Mail, NetEase Mail, Mail.ru, Yandex Mail, AOL Mail, and GMX Mail.
+
+These services carry MIME messages, but MIME does not make their editors, clipboard handling, attachment filters, or rendered artwork identical. Raw Base64URL text and the downloaded `.txt` attachment are the portable baseline. A downloaded attachment should be compared byte-for-byte with the original raw export; if using body text, preserve the complete raw sequence and account for presentation line wrapping when restoring locally. PNG is optional artwork; SVG is an optional file attachment, never required for recovery. No provider is claimed tested solely because it uses MIME.
 
 Use synthetic content for client checks. In Gmail, open an unsent draft, click
 Copy artwork image on the sender, focus the draft body, and paste. Include the
 separately copied raw text or attach `ciphertext.txt`. If image copy/paste is
-unavailable, download PNG and attach it. Repeat in Outlook as the secondary
-client. Attach SVG as a file only when vector artwork is wanted.
+unavailable, download PNG and attach it. Repeat in Outlook/Microsoft 365, Proton Mail, and iCloud Mail. Attach SVG as a file only when vector artwork is wanted.
 
 Check that the image is complete, inspect the first/last rows, and compare
 downloaded or pasted raw text exactly. Image and raw clipboard representations
@@ -47,14 +50,23 @@ Saved files, email drafts, clipboard managers and printers persist outside this 
 | Firefox on Windows                     | Native PNG write resolves, but image paste is empty in the headless local target. Exact raw text paste and PNG save/denial fallbacks tested; image paste compatibility is unclaimed. |
 | Stable Edge on Windows, file:// sender | Synthetic imports/encryption, raw/SVG/PNG/JSON save and print preparation/cleanup tested. Native email draft paste is unclaimed.                                                     |
 | Gmail web, primary                     | Actual unsent draft paste and attachment evidence pending.                                                                                                                           |
-| Outlook web, secondary                 | Actual unsent draft paste and attachment evidence pending.                                                                                                                           |
+| Outlook / Microsoft 365 web            | Actual unsent draft paste and attachment evidence pending.                                                                                                                           |
+| Proton Mail web                        | Actual unsent draft paste and attachment evidence pending.                                                                                                                           |
+| iCloud Mail web                        | Actual unsent draft paste and attachment evidence pending.                                                                                                                           |
+| Other listed providers                 | Raw-text / `.txt` delivery guidance only; provider-specific paste and attachment behavior unverified.                                                                                |
 
 The browser clipboard checks are not email-client evidence. No messages are
 sent, email APIs invoked or remote artwork hosted by this application.
 
+## Browser-download links
+
+The exported ciphertext `.txt` can also be uploaded to Proton Drive, Google Drive, Wormhole, or MEGA (mega.nz), then shared as a browser-download link. This is a manual transport workflow; Zodiac has no upload API, service integration, or account access. Download the `.txt` and compare it exactly with the source export before decryption. Always include the raw `.txt`; PNG/SVG may be accompanying artwork. Anyone who obtains the ciphertext still needs the matching private key to decrypt it. Link services can retain account, file-size, and transfer metadata; Zodiac encryption does not hide those. These routes are supported by the raw-file contract, with provider-specific upload/download results unverified.
+
+Additional manual ciphertext carriers include OneDrive, iCloud Drive, Dropbox, WeTransfer, MediaFire, TeraBox, Box, and Sync.com. Proton Drive remains the preferred route in this guide. This list describes delivery options, not a provider-security ranking or completed compatibility trials. Zodiac encryption protects the ciphertext contents; provider account security, metadata, link permissions and retention need their own assessment.
+
 ## Archival pages and PDF
 
-Open **Archival pages and print** for numbered SVG/PNG pages or Print / Save as
+**Archival pages and print** is expanded by default for numbered SVG/PNG pages or Print / Save as
 PDF. Each archival page presents its 512 raw characters in the S64M1 mixed grid.
 The mixed token sequence wraps continuously in a 16-cell-wide layout, matching
 the main grid. Checked raw rows remain beside the corresponding grid positions,
@@ -97,5 +109,5 @@ pnpm preview:refresh
 `check:m3` runs the complete M1 regression/build/CSP suite, export/browser tests,
 PDF row/check/Go recovery, and stable Edge offline export case. Evidence is in
 `docs/reviews/e06-evidence.json`; synthetic PDFs and rendered pages are under
-`artifacts/exports/`. Actual Gmail/Outlook paste remains an explicit review gate.
+`artifacts/exports/`. Actual priority-provider paste remains an explicit review gate.
 Reload <http://127.0.0.1:4324> after refreshing the preview.

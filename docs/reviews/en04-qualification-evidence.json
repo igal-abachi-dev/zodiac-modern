@@ -1,0 +1,262 @@
+{
+  "date": "2026-10-10",
+  "status": "author-run development evidence; release qualification remains open",
+  "candidate": {
+    "path": "artifacts/offline probe שלום/zodiac-synthetic-probe.html",
+    "sha256": "a87bfc16e561bb94a74839f51831c1d9b5eb37e59be0763991a9a09497f84284"
+  },
+  "sourceSha256": {
+    "tests/browser/offline-qualification.spec.ts": "c658d01380b9f1db30195d4c0531a2e4ef02ac1c385c278597f451a1da9cb929",
+    "playwright.offline.config.ts": "85f34ec94f224ba00fe21ba173cbb1e9d0e8de8ee69d8bcb9b096f87891c89c2",
+    "scripts/test-offline-sender.mjs": "a8466cfdd23b6b98106902bbafe5dd830fe068e6ded7fc7b7fe6124edc6d2447"
+  },
+  "results": [
+    {
+      "recorded": "2026-10-10T15:22:00.764Z",
+      "browser": "155.0.8059.39",
+      "project": "stable-chrome",
+      "system": {
+        "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+        "memoryBytes": 34280431616,
+        "release": "10.0.26200"
+      },
+      "scope": "Author-run desktop headless keyboard/responsive/max-byte checks. Not human accessibility, actual mobile, reference-device qualification or independent review. Long Task API availability recorded; unsupported is not zero long tasks. Timings include automation/paint waiting.",
+      "timings": [
+        {
+          "phase": "64KiB-encrypt-and-first-page",
+          "rsaBits": 3072,
+          "milliseconds": 81.80000019073486,
+          "longTaskAPI": true,
+          "longTasks": [63]
+        },
+        {
+          "phase": "next-page-1280px",
+          "rsaBits": 3072,
+          "milliseconds": 55.200000286102295,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-390px",
+          "rsaBits": 3072,
+          "milliseconds": 42.30000019073486,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "64KiB-encrypt-and-first-page",
+          "rsaBits": 4096,
+          "milliseconds": 49.5,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-1280px",
+          "rsaBits": 4096,
+          "milliseconds": 38.799999713897705,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-390px",
+          "rsaBits": 4096,
+          "milliseconds": 41.09999990463257,
+          "longTaskAPI": true,
+          "longTasks": []
+        }
+      ]
+    },
+    {
+      "recorded": "2026-10-10T15:25:29.832Z",
+      "browser": "153.0.8010.12",
+      "project": "chromium",
+      "system": {
+        "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+        "memoryBytes": 34280431616,
+        "release": "10.0.26200"
+      },
+      "scope": "Author-run desktop headless keyboard/responsive/max-byte checks. Not human accessibility, actual mobile, reference-device qualification or independent review. Long Task API availability recorded; unsupported is not zero long tasks. Timings include automation/paint waiting.",
+      "timings": [
+        {
+          "phase": "64KiB-encrypt-and-first-page",
+          "rsaBits": 3072,
+          "milliseconds": 79.30000019073486,
+          "longTaskAPI": true,
+          "longTasks": [62]
+        },
+        {
+          "phase": "next-page-1280px",
+          "rsaBits": 3072,
+          "milliseconds": 58.59999990463257,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-390px",
+          "rsaBits": 3072,
+          "milliseconds": 44.10000038146973,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "64KiB-encrypt-and-first-page",
+          "rsaBits": 4096,
+          "milliseconds": 49.90000009536743,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-1280px",
+          "rsaBits": 4096,
+          "milliseconds": 47.09999990463257,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-390px",
+          "rsaBits": 4096,
+          "milliseconds": 44.09999990463257,
+          "longTaskAPI": true,
+          "longTasks": []
+        }
+      ]
+    },
+    {
+      "recorded": "2026-10-10T15:25:34.351Z",
+      "browser": "155.0",
+      "project": "firefox",
+      "system": {
+        "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+        "memoryBytes": 34280431616,
+        "release": "10.0.26200"
+      },
+      "scope": "Author-run desktop headless keyboard/responsive/max-byte checks. Not human accessibility, actual mobile, reference-device qualification or independent review. Long Task API availability recorded; unsupported is not zero long tasks. Timings include automation/paint waiting.",
+      "timings": [
+        {
+          "phase": "64KiB-encrypt-and-first-page",
+          "rsaBits": 3072,
+          "milliseconds": 172,
+          "longTaskAPI": false,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-1280px",
+          "rsaBits": 3072,
+          "milliseconds": 103,
+          "longTaskAPI": false,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-390px",
+          "rsaBits": 3072,
+          "milliseconds": 84,
+          "longTaskAPI": false,
+          "longTasks": []
+        },
+        {
+          "phase": "64KiB-encrypt-and-first-page",
+          "rsaBits": 4096,
+          "milliseconds": 101,
+          "longTaskAPI": false,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-1280px",
+          "rsaBits": 4096,
+          "milliseconds": 69,
+          "longTaskAPI": false,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-390px",
+          "rsaBits": 4096,
+          "milliseconds": 68,
+          "longTaskAPI": false,
+          "longTasks": []
+        }
+      ]
+    },
+    {
+      "recorded": "2026-10-10T15:25:37.184Z",
+      "browser": "155.0.4283.45",
+      "project": "stable-edge",
+      "system": {
+        "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+        "memoryBytes": 34280431616,
+        "release": "10.0.26200"
+      },
+      "scope": "Author-run desktop headless keyboard/responsive/max-byte checks. Not human accessibility, actual mobile, reference-device qualification or independent review. Long Task API availability recorded; unsupported is not zero long tasks. Timings include automation/paint waiting.",
+      "timings": [
+        {
+          "phase": "64KiB-encrypt-and-first-page",
+          "rsaBits": 3072,
+          "milliseconds": 92.40000009536743,
+          "longTaskAPI": true,
+          "longTasks": [69]
+        },
+        {
+          "phase": "next-page-1280px",
+          "rsaBits": 3072,
+          "milliseconds": 66.89999961853027,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-390px",
+          "rsaBits": 3072,
+          "milliseconds": 43.40000009536743,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "64KiB-encrypt-and-first-page",
+          "rsaBits": 4096,
+          "milliseconds": 51.5,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-1280px",
+          "rsaBits": 4096,
+          "milliseconds": 44.90000009536743,
+          "longTaskAPI": true,
+          "longTasks": []
+        },
+        {
+          "phase": "next-page-390px",
+          "rsaBits": 4096,
+          "milliseconds": 40.10000038146973,
+          "longTaskAPI": true,
+          "longTasks": []
+        }
+      ]
+    }
+  ],
+  "passedChecks": [
+    "Both RSA sizes: exact 65,536-byte mixed UTF-8 single-line message recovered by independent Go oracle",
+    "Oversize rejection; keyboard fingerprint confirmation, result focus and reset",
+    "1280/390 px viewport paging without horizontal overflow; next/first page offsets and scroll position",
+    "No observed application HTTP requests, runtime/CSP errors, style attributes or local/session storage"
+  ],
+  "openFinding": {
+    "reproducer": "ZODIAC_QUALIFICATION_MULTILINE=1",
+    "input": "5,041 lines of bidirectional mixed UTF-8 text, totaling 65,536 bytes",
+    "observed": "Native Playwright fill timed out before encryption; root cause unconfirmed.",
+    "interpretation": "Passing single-line control does not close multiline input usability. No crypto failure inferred."
+  },
+  "receiverFollowup": {
+    "toolchain": "Go 1.27.1, GOTOOLCHAIN=local, GOPROXY=off, -mod=vendor",
+    "result": "Full receiver test suite passed; browser-native adapter-only test skipped as expected.",
+    "platform": "Windows 10.0.26200, workspace D: NTFS only",
+    "cleanup": "Synthetic seven-pass/three-rename, confined paths, cancellation/failure preservation and hardlink rejection checks passed. Three exposed shadow-copy device names detected by advisory; no erasure guarantee.",
+    "networkDenial": "Not run: process is not an administrator. No firewall rules created."
+  },
+  "remaining": [
+    "Reference laptop/mobile measurements",
+    "Human accessibility and installed-browser headed usability",
+    "Actual email provider trials",
+    "OS-enforced network denial",
+    "Independent integrated and file-boundary review",
+    "Final delivery, trusted publisher/channel/owners decisions"
+  ]
+}

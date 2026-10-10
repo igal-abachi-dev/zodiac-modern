@@ -172,3 +172,84 @@ For an exceptionally confidential one-off message, the recommendation is conditi
 Zodiac's public-key delivery has a concrete advantage over a password archive: the sender can encrypt to the recipient's public key without sending a shared message password. Zodiac uses a fresh random 32-byte AES key and AES-256-GCM authentication, with RSA-OAEP wrapping. For a verified recipient key and conventional near-term attacker, this is a strong, appropriate construction. The present reason not to prefer Zodiac for a very high-consequence secret is the assurance around the complete system and release (independent review, externally verifiable artifacts/origin, key-identity workflow, and operational trials), plus RSA's harvest-now/decrypt-later exposure for long-lived secrets—not a weakness in AES-256-GCM. A 4096-bit RSA modulus is not 4096-bit security. No available option protects a compromised endpoint or prevents all email metadata leakage.
 
 Improvement disposition: keep v1 and its exact envelope unchanged. Close QA-03 independent system review and SEC-04 release-trust gates; make out-of-band recipient fingerprint verification explicit for sensitive custom-key use; complete REC-04's optional genuinely single-use RSA lifecycle with honestly limited best-effort cleanup claims; and retain FUT-10 as deferred optional sign-then-encrypt, with separately verified signer identity and reviewed key custody. FUT-02 already covers the required separately versioned future protocol/PQ assessment; refine its acceptance scope to compare hybrid ML-KEM key establishment with conventional RSA/ECC, retain AES-GCM if appropriate, evaluate browser-native WebCrypto and Go interoperability under the no-external-browser-crypto-library constraint, assess downgrade/compatibility policy, and define migration triggers against confidentiality lifetime. Do not treat a one-time RSA pair as post-quantum protection, forward secrecy, or guaranteed erasure, and do not commit a v2 date.
+
+## Native cryptography, delivery trust and an optional Go sender (2026-10-10)
+
+The current browser-encryption/offline-Go-decryption architecture is appropriate
+for native WebCrypto, OpenSSL-generated encrypted PKCS#8 private keys and bounded
+one-off messages. The inspected RSA-OAEP/SHA-256 + AES-256-GCM parameters and
+browser/Go envelope handling match the intended profile. No algorithm-choice
+defect requiring a redesign has been identified by this inspection. This is an
+author assessment of the checked design, not a claim of uniquely optimal
+algorithms, formal IND-CCA2 proof, completed integrated audit or release readiness.
+SPKI PEM is the public-key format; the password-protected private file is encrypted
+PKCS#8, whose fixed-profile loader remains part of the review boundary.
+
+Native browser cryptography is not inherently less trustworthy than Go
+cryptography. Distinguish correctness of reviewed source from delivery of the
+exact reviewed bytes. Protecting GitHub helps repository integrity but does not
+independently verify deployed assets, the build/dependency chain, hosting accounts
+or code served on a particular visit. An offline executable also needs verified
+provenance; being an EXE is not a security endorsement. CSP constrains behavior
+but cannot establish that a compromised host served honest JavaScript or the
+correct recipient key.
+
+An independently verified, fully bundled offline HTML sender can retain native
+WebCrypto while reducing exposure to replaceable hosted code before secrets are
+entered. Verify its complete bytes against an independently trusted expected
+hash before opening; same-site hashes or an in-page badge are insufficient.
+EN-04's candidate has author-run evidence, but delivery selection, remaining
+browser/human checks and independent file-boundary/instruction review remain
+open. Go WASM is not required for the existing algorithm suite.
+
+### Optional Go encryption command: proposed, not implemented
+
+A local Go encryption command/subcommand could be a useful alternative for users
+who already use the CLI. It would offer an offline sender without a browser,
+using standard-library [RSA-OAEP](https://pkg.go.dev/crypto/rsa#EncryptOAEP) and
+[AES-GCM](https://pkg.go.dev/crypto/cipher#NewGCM). It would not strengthen the
+cipher suite or be necessary for v1 confidentiality. It adds another user flow
+and implementation/review scope; preserve the browser sender and the receiver's
+no-listener architecture. No CLI encryption flag is introduced by this note.
+
+If selected later, require:
+
+- The same RSA-3072/4096, e=65537, strict single SPKI public PEM policy and explicit
+  independently compared recipient fingerprint; never request a private key to encrypt.
+- OS cryptographic randomness with checked errors, a fresh 32-byte AES key and
+  12-byte nonce, OAEP SHA-256/MGF1-SHA-256 with empty label, a 128-bit GCM tag,
+  AAD `wrappedKey || nonce` and the unchanged canonical v1 envelope.
+- Bounded input, valid UTF-8 and exact byte preservation for the current message
+  profile; arbitrary binary files or streaming would need separate approved scope.
+- Plaintext input from an explicit local file or a separately reviewed input
+  method, never secret argv/environment values; disclose existing input-file
+  persistence. Keep the receiver's hidden terminal and output protections.
+- Explicit output paths, safe overwrite/path behavior, no secret logging or
+  automatic network/clipboard/editor behavior, and best-effort owned-buffer cleanup.
+- Independent WebCrypto/Go vectors for both RSA sizes, tampering and malformed-key
+  cases, CLI privacy/output tests, and updated review/artifact scope before release.
+
+### Important remaining gaps and disposition
+
+Keep the current v1 cipher/envelope while closing QA-03 integrated review,
+SEC-04/release trust and EN-04 sender delivery gates. The review must include
+exact composition, parser/key-loader behavior, cryptographic failure/timing
+boundaries and authenticate-before-output. Identical OAEP/GCM failure messages
+and bounded parsing support the chosen-ciphertext objective but do not prove
+constant-time behavior or formal IND-CCA2 security. The README now explains these
+safeguards and their limits.
+
+Complete recipient verification/readiness and lifecycle validation, real-user
+and accessibility trials, supported stable-browser checks, real mail/paste
+checks, and the pending OS-enforced receiver network-denial test. A user
+acknowledgement is not proof that the recipient identity was independently
+verified. Author-run tests do not close the independent-review gates.
+
+FUT-10 remains the separate optional sender-signature design for cases where
+identity matters, including verified signer keys, custody, signed-context and
+signature-stripping/downgrade rules. FUT-02 remains the future reviewed protocol
+and post-quantum migration assessment against confidentiality lifetime. Neither
+X25519 alone nor a one-time RSA key provides post-quantum protection. Cleanup is
+best effort. These are explicit threat-model and assurance limits, not evidence
+of a newly discovered break in AES-GCM/RSA-OAEP. A Go encrypt option is a proposed
+usability/delivery alternative, not a missing security prerequisite.
