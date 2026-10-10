@@ -547,14 +547,14 @@ Acceptance criteria:
 
 - Display the full canonical SHA-256 SPKI fingerprint and recipient label in the review/confirmation step for both configured-default and custom public keys; do not rely only on abbreviated fingerprints.
 - Explain how to compare the fingerprint through a previously trusted, separate channel. A copied/pasted PEM, TLS page, same-site badge, email carrying the ciphertext, or embedded key alone does not establish recipient identity.
-- Provide a clear user confirmation that they performed the independent comparison before sensitive encryption. Do not label a key “verified” based only on local parsing or the user's acknowledgement; distinguish configured/parsed from independently checked.
+- User decision (2026-10-11): default encryption permission to enabled on each successful selection. Do not present this default as confirmation that an independent comparison occurred. Keep full-fingerprint comparison guidance visible; unchecking pauses encryption. Do not label a key “verified” based only on local parsing or the user's acknowledgement; distinguish configured/parsed from independently checked.
 - Do not transmit fingerprints or message/key data to a verification service. No automatic key-directory lookup or public-key substitution. Keep public-key import local and memory-only.
 - Test default/custom flows, mismatches, cancel/back, key replacement, keyboard/screen-reader use, responsive layout, CSP and zero sensitive persistence. Update security/privacy/recipient guidance. QA-03 reviews the workflow and claims before release.
 
 Subtasks:
 
-- [x] SEC-05.1 — show the full fingerprint and locally parsed/configured state; require a separate, per-selected-key acknowledgement before encryption and reset it on replacement.
-- [x] SEC-05.2 — automated default/custom/replacement/keyboard/privacy regressions pass in the 2026-10-06 M4 browser run (62 Chromium/Firefox cases; author-run evidence in `docs/reviews/e07-evidence.json`).
+- [x] SEC-05.1 — show the full fingerprint and locally parsed/configured state; default permission to enabled per selected key, with an explicit opt-out; retain independent comparison guidance without claiming a completed identity check (2026-10-11 user override).
+- [ ] SEC-05.2 — reopen affected default/custom/replacement/keyboard/privacy regressions after the 2026-10-11 default-permission change. Historical regressions pass in the 2026-10-06 M4 browser run (62 Chromium/Firefox cases; author-run evidence in `docs/reviews/e07-evidence.json`).
 - [ ] SEC-05.3 — manual assistive-technology trial and QA-03 independent review of identity guidance/claims remain open; acknowledgement is not independent verification evidence.
 
 

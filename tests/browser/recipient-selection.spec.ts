@@ -158,7 +158,7 @@ test('local recipient file/paste selection preserves a rejected replacement, cle
   await expect(await details(page)).toContainText(fingerprint(3072));
 });
 
-test('encryption requires explicit per-selection independent fingerprint comparison', async ({
+test('encryption permission defaults on and can be disabled for each selected key', async ({
   page,
 }) => {
   await page.goto('/');
@@ -167,10 +167,13 @@ test('encryption requires explicit per-selection independent fingerprint compari
     exact: true,
   });
   const confirmation = page.getByRole('checkbox', {
-    name: /I compared this full fingerprint with the intended recipient/,
+    name: /Allow encryption with this selected public key/,
   });
   await expect(page.locator('.verification')).toContainText(fingerprint(3072));
   await expect(page.locator('.verification')).toContainText('locally parsed');
+  await expect(confirmation).toBeChecked();
+  await expect(encrypt).toBeEnabled();
+  await confirmation.uncheck();
   await expect(encrypt).toBeDisabled();
   await confirmation.check();
   await expect(encrypt).toBeEnabled();
@@ -183,14 +186,15 @@ test('encryption requires explicit per-selection independent fingerprint compari
     .getByRole('button', { name: 'Use pasted public key', exact: true })
     .click();
   await expect(page.locator('.verification')).toContainText(fingerprint(4096));
-  await expect(confirmation).not.toBeChecked();
+  await expect(confirmation).toBeChecked();
+  await expect(encrypt).toBeEnabled();
+  await confirmation.uncheck();
   await expect(encrypt).toBeDisabled();
-  await confirmation.check();
   await page
     .getByRole('button', { name: 'Use default recipient', exact: true })
     .click();
-  await expect(confirmation).not.toBeChecked();
-  await expect(encrypt).toBeDisabled();
+  await expect(confirmation).toBeChecked();
+  await expect(encrypt).toBeEnabled();
   await expect(page.locator('.verification')).toContainText(fingerprint(3072));
 });
 

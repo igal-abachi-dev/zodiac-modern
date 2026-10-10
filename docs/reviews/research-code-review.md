@@ -283,3 +283,15 @@ The design does not meet requirements for ongoing ratcheted messaging, sender si
 The broad hybrid pattern—public-key establishment/protection of a symmetric key followed by symmetric encryption—is shared by many tools. That does not mean age uses RSA-OAEP/AES-GCM, or that age, age-plugin-yubikey and OpenPGP share Zodiac's wire format, identity model or assurance. The supplied “same rough security class” wording is not evidence of equal trust or a proven ranking.
 
 Retain v1's primitives and sender/recipient boundary while completing exact-artifact independent review and fixes (QA-03), trusted release delivery/signing (SEC-04/EN-04), recipient readiness/identity and real browser/provider/accessibility trials. A reviewed release could be useful for real confidential one-off messages within its documented scope; the development candidate has not crossed those gates. Favorable feedback does not complete a backlog task.
+
+## Default encryption permission (2026-10-11 user decision)
+
+To reduce friction, the sender now defaults its encryption-permission checkbox
+to enabled for each valid recipient selection. Its label grants permission to
+encrypt; it does not assert the user compared a fingerprint. This removes the
+previous explicit comparison-acknowledgement gate. Full fingerprint and separate
+trusted-channel guidance remain visible, and unchecking blocks encryption.
+This choice can increase the chance of proceeding without recipient identity
+verification; QA-03 must review the revised workflow and claims. Historical
+SEC-05 gate evidence does not establish the new behavior. Cryptographic key
+validation, local-only handling and the envelope are unchanged.

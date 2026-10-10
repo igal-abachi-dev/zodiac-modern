@@ -87,14 +87,16 @@ test('maximum-size offline encryption, keyboard gate and responsive paging', asy
       `RSA-${bits}`,
     );
     const confirmation = page.locator('.compare-confirmation input');
-    await expect(confirmation).not.toBeChecked();
+    await expect(confirmation).toBeChecked();
     await setMessage(text);
     const encrypt = page.getByRole('button', {
       name: 'Encrypt message',
       exact: true,
     });
-    await expect(encrypt).toBeDisabled();
+    await expect(encrypt).toBeEnabled();
     await confirmation.focus();
+    await page.keyboard.press('Space');
+    await expect(encrypt).toBeDisabled();
     await page.keyboard.press('Space');
     await expect(confirmation).toBeChecked();
     // Exercise ordinary editing; bulk replacement has a separate native control.

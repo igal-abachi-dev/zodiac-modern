@@ -14,13 +14,13 @@
     disabled = false,
     resetVersion = 0,
     onselection,
-    onverification,
+    onpermission,
   }: {
     recipient?: PublicRecipientData | null;
     disabled?: boolean;
     resetVersion?: number;
     onselection?: (value: SelectedRecipient | null) => void;
-    onverification?: (fingerprint: string | null) => void;
+    onpermission?: (fingerprint: string | null) => void;
   } = $props();
   let selected = $state<SelectedRecipient | null>(null);
   let defaultSelection = $state<SelectedRecipient | null>(null);
@@ -28,7 +28,7 @@
   let busy = $state(false);
   let showDetails = $state(false);
   let showCustom = $state(false);
-  let fingerprintConfirmed = $state(false);
+  let encryptionAllowed = $state(true);
   let error = $state('');
   let notice = $state('Choose a public key to identify the recipient.');
   let fileInput: HTMLInputElement;
@@ -49,9 +49,9 @@
       showCustom = false;
       if (fileInput) fileInput.value = '';
       selected = defaultSelection;
-      onverification?.(null);
-      fingerprintConfirmed = false;
+      encryptionAllowed = true;
       onselection?.(selected);
+      onpermission?.(selected?.fingerprint ?? null);
       notice = selected
         ? 'Configured recipient restored.'
         : 'Recipient cleared. Choose a public key.';
@@ -94,10 +94,10 @@
       if (id !== generation || disabled) return;
       const value = Object.freeze({ ...key, ...metadata, pem });
       selected = value;
-      onverification?.(null);
-      fingerprintConfirmed = false;
+      encryptionAllowed = true;
       if (metadata.source !== 'custom') defaultSelection = value;
       onselection?.(value);
+      onpermission?.(value.fingerprint);
       notice =
         metadata.source === 'custom'
           ? 'Custom public key selected. It stays in this tab.'
@@ -147,19 +147,19 @@
   function useDefault() {
     if (locked || !defaultSelection) return;
     selected = defaultSelection;
-    onverification?.(null);
-    fingerprintConfirmed = false;
+    encryptionAllowed = true;
     paste = '';
     error = '';
     notice = 'Configured recipient selected.';
     onselection?.(selected);
+    onpermission?.(selected.fingerprint);
   }
   function clearRecipient() {
     if (locked) return;
     generation++;
     selected = null;
-    onverification?.(null);
-    fingerprintConfirmed = false;
+    onpermission?.(null);
+    encryptionAllowed = false;
     paste = '';
     error = '';
     showDetails = false;
@@ -200,18 +200,19 @@
         <label class="compare-confirmation">
           <input
             type="checkbox"
-            checked={fingerprintConfirmed}
+            checked={encryptionAllowed}
             disabled={locked}
             onchange={(event) => {
-              fingerprintConfirmed = event.currentTarget.checked;
-              onverification?.(
-                fingerprintConfirmed ? selected!.fingerprint : null,
-              );
+              encryptionAllowed = event.currentTarget.checked;
+              onpermission?.(encryptionAllowed ? selected!.fingerprint : null);
             }}
           />
-          I compared this full fingerprint with the intended recipient through a trusted,
-          separate channel.
+          Allow encryption with this selected public key.
         </label>
+        <p>
+          Enabled by default. This does not mean the recipient identity was
+          verified.
+        </p>
       </div>
       <button
         class="secondary"

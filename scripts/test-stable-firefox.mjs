@@ -233,12 +233,6 @@ try {
     (await request('POST', base + '/element', { using, value }))[
       'element-6066-11e4-a52e-4f735466cecf'
     ];
-  const click = async (selector) =>
-    request(
-      'POST',
-      base + '/element/' + (await element('css selector', selector)) + '/click',
-      {},
-    );
   const button = async (text) =>
     request(
       'POST',
@@ -328,10 +322,14 @@ try {
         () =>
           [...document.querySelectorAll('button')].find(
             (b) => b.textContent.trim() === 'Encrypt message',
-          ).disabled,
+          ).disabled === false,
       ),
     );
-    await click('.compare-confirmation input');
+    assert(
+      await js(
+        () => document.querySelector('.compare-confirmation input').checked,
+      ),
+    );
     started = performance.now();
     await button('Encrypt message');
     await wait(() => !!document.querySelector('#raw-ciphertext'));

@@ -153,8 +153,9 @@ verified release delivery and human usability validation remain required.
 ### Encrypt and share
 
 1. Open the verified sender. Compare the complete recipient fingerprint with
-   the value you verified through a trusted separate channel, then check the
-   comparison confirmation. Type the message and choose **Encrypt message**.
+   the value you verified through a trusted separate channel. Encryption permission
+   is enabled by default; the checkbox does not prove that comparison happened.
+   Type the message and choose **Encrypt message**.
    Encryption runs in the browser; the site accepts public keys only.
 2. To address a different recipient, ask them for their `rsa-public.pem` and
    the complete SHA-256 fingerprint through a trusted channel. Choose **Use a

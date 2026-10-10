@@ -826,3 +826,11 @@ retained while shutdown waits for the reader; restoration never races a blocked
 read. Synthetic PEMs use LF before exact byte hashes are recorded. These details
 preserve the key profile, envelope, absence of persistence/networking and later
 integrated review/release gates.
+
+2026-10-11 user-directed SEC-05 workflow change: encryption permission defaults
+to enabled for each successfully selected recipient, including configured/default
+restoration and custom-key replacement. The checkbox states permission to encrypt,
+not a completed fingerprint comparison. Unchecking blocks encryption with that
+selected key; clearing the recipient still blocks encryption. Keep the full
+fingerprint and independent-comparison guidance visible. This supersedes the
+previous explicit acknowledgement gate; no identity verification is inferred.
