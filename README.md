@@ -12,6 +12,29 @@ until an independently verified release is announced. The proposed
 `zodiac-modern.vercel.app` address is not verified or claimed here.
 
 
+## Conditional security assessment
+
+**If finished and independently reviewed, Zodiac's core design looks solid for
+sharing secrets under the right threat model.** Its conventional hybrid combines
+a fresh random 256-bit AES key with RSA-OAEP/SHA-256 and AES-256-GCM. Restricted
+RSA parameters, authenticated envelope fields, canonical public-key validation,
+bounded parsing and best-effort secret-buffer cleanup support that design.
+
+The browser accepts public keys only; private keys and passphrases stay with the
+offline Go receiver. This is a reasonable usability/security trade-off for
+one-off or occasional confidential messages between people who independently
+verify the recipient's key and trust their devices. The message limit is
+65,536 UTF-8 bytes (64 KiB).
+
+This assessment is conditional: it does not establish equal trust with age or
+GnuPG, a completed audit, certification or release readiness. The current
+envelope does not authenticate senders or provide post-quantum protection;
+reused private-key compromise can expose saved messages. Browser memory and
+delivered-page integrity remain security boundaries, and encrypted private-key
+files need strong passphrases and careful custody. Independent integrated review,
+trusted signed releases and remaining user/platform trials are still required.
+See the [recorded feedback and qualifications](docs/reviews/research-code-review.md).
+
 ## Architecture
 
 | Component | Stack |

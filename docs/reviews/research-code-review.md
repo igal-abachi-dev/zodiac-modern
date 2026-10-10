@@ -253,3 +253,33 @@ X25519 alone nor a one-time RSA key provides post-quantum protection. Cleanup is
 best effort. These are explicit threat-model and assurance limits, not evidence
 of a newly discovered break in AES-GCM/RSA-OAEP. A Go encrypt option is a proposed
 usability/delivery alternative, not a missing security prerequisite.
+## Conditional assessment from supplied feedback (2026-10-11)
+
+The supplied feedback concludes: **if finished and independently reviewed, the core design looks solid for sharing secrets under the right threat model.** This is a conditional assessment, not a completed audit, formal proof, certification or present release endorsement.
+
+| Aspect | Implemented design | Assessment and limits |
+| --- | --- | --- |
+| Hybrid encryption | Fresh random 32-byte AES key wrapped with RSA-OAEP/SHA-256, MGF1-SHA-256 and an empty label; AES-256-GCM encrypts the message | Conventional hybrid construction appropriate for one-off confidentiality; integrated composition still requires QA-03 review. |
+| RSA parameters | RSA-3072 or RSA-4096, exponent 65537 | Conservative allowed parameters; modulus length is not equivalent to security strength. |
+| Authenticated encryption | Fresh 12-byte nonce, 16-byte tag, AAD `wrappedKey || nonce` | Authenticates ciphertext and bound envelope fields before plaintext release; does not authenticate a sender. |
+| Public keys | Strict single SPKI PUBLIC KEY PEM, canonical DER re-export equality, SHA-256 fingerprint of canonical SPKI | Careful validation; identity still requires a trusted independent comparison. |
+| Receiver cryptography | Go standard-library RSA/AES/GCM/PBKDF2 and repository-owned fixed-profile PKCS#8/PBES2 loader | Avoids third-party cryptographic primitives; owned loader/glue and Go-maintained terminal/platform dependencies remain in the review boundary. |
+| Private-key files | Fixed PBES2/PBKDF2-HMAC-SHA256/AES-256-CBC profile; 600,000–2,000,000 accepted iterations and bounded salt/IV/schema | Slows offline guessing; CBC key files are unauthenticated. Strong passphrases, custody and strict unlock handling matter. |
+| Memory hygiene | Explicit cleanup of owned secret byte buffers on relevant paths | Best effort; strings, browser internals, Go key integers, OS copies and paging cannot be guaranteed erased or locked. |
+| Bounds and encoding | Maximum plaintext **65,536 bytes (64 KiB)**; bounded envelope/key parsing, canonical unpadded Base64URL, original-string surrogate checks | Reduces resource/parsing exposure and preserves valid UTF-8; not universal denial-of-service protection. |
+
+Corrections to the supplied feedback: the input limit is 64 KiB, not 65 KiB. The passphrase helper defaults to 32 random characters and accepts 24–128; the receiver cannot infer entropy from a successfully unlocked file. Length alone is insufficient. Both custody of the encrypted key file and its passphrase matter; the passphrase is not the sole long-term secret.
+
+### Suitable use and enduring boundaries
+
+A plausible reviewed-release fit is one-off or occasional confidential messages between people who independently verify the recipient public key, trust their current devices, and accept an offline private-key receiver. The public-key-only browser sender plus local Go receiver is a reasonable usability/security trade-off: private keys and passphrases stay outside the sender page, and the sender avoids installing a CLI. This does not establish an impossible-to-misuse interface or comparative superiority.
+
+Even after successful review, the current envelope has no sender authentication or post-quantum protection. Later compromise of a reused RSA private key can expose saved messages. The existing REC-04 dedicated-key/retirement assessment remains applicable. Browser memory is not locked; malicious extensions or compromised endpoints can observe plaintext. Delivered-code integrity matters: a compromised host can replace JavaScript, recipient keys and CSP together. Verify the whole offline HTML against an independently trusted value before entering secrets.
+
+The design does not meet requirements for ongoing ratcheted messaging, sender signatures, post-quantum resistance, untrusted sender devices or formal certification. Optional signatures (FUT-10) and future protocol/PQ assessment (FUT-02) require separate design and review.
+
+### Comparison and readiness disposition
+
+The broad hybrid pattern—public-key establishment/protection of a symmetric key followed by symmetric encryption—is shared by many tools. That does not mean age uses RSA-OAEP/AES-GCM, or that age, age-plugin-yubikey and OpenPGP share Zodiac's wire format, identity model or assurance. The supplied “same rough security class” wording is not evidence of equal trust or a proven ranking.
+
+Retain v1's primitives and sender/recipient boundary while completing exact-artifact independent review and fixes (QA-03), trusted release delivery/signing (SEC-04/EN-04), recipient readiness/identity and real browser/provider/accessibility trials. A reviewed release could be useful for real confidential one-off messages within its documented scope; the development candidate has not crossed those gates. Favorable feedback does not complete a backlog task.
