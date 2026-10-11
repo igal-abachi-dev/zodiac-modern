@@ -1,5 +1,41 @@
 # Research ZIP review: implementation techniques and Zodiac follow-ups
 
+## Optional architecture direction recorded 2026-10-11
+
+The user selected continued no-history operation and sharing through existing
+providers. Providers host deliberately exported ciphertext; Zodiac needs no
+IndexedDB shelf, paste server or Neon database for that workflow. FUT-13 is not
+selected; FUT-14 tracks optional explicit export/provider-handoff guidance.
+No automatic upload, provider credentials or secret-bearing URLs are authorized.
+Link expiry/revocation cannot recall copies already downloaded.
+
+Two additional ideas remain optional research, not implemented improvements:
+
+- **FUT-02: assess a specified HPKE profile for smaller keys/envelopes.**
+  Follow the exact KEM/KDF/AEAD context and key schedule, independent vectors,
+  native WebCrypto/Go compatibility and an explicit migration design. Existing
+  AAD binding is not HPKE conformance. Base-mode HPKE does not authenticate the
+  sender, and switching to static-recipient X25519 HPKE does not automatically
+  add forward secrecy or post-quantum protection. See
+  [RFC 9180](https://www.rfc-editor.org/rfc/rfc9180.html).
+- **FUT-09: assess a signed portable Windows 11 desktop GUI wrapping Go.**
+  Retain the Go parser/crypto/output boundary rather than porting the encrypted
+  PKCS#8 loader to browser JavaScript. Tauri supports external binary sidecars,
+  but packaging capability alone does not establish a secure wrapper; pin the
+  executable, restrict native permissions and review passphrase IPC, file-picker,
+  cancellation and secret-copy behavior. The current hidden terminal prompt
+  cannot simply become password arguments or piped stdin. Compare framework,
+  runtime, accessibility and licensing choices before selecting one. See
+  [Tauri sidecar documentation](https://v2.tauri.app/develop/sidecar/).
+
+The GUI would be additional to the hosted sender for on-the-go mobile/desktop
+encryption, independently verified offline HTML and the offline Go CLI. Optional
+Go encryption remains FUT-11. No framework, cipher migration or new private-key
+boundary is selected now; none of these tasks is an E08 prerequisite or closes
+the independent-review/release gates. A simpler GUI can reduce user mistakes,
+but its security benefit must be demonstrated rather than inferred from its
+language, framework or appearance.
+
 Reviewed 2026-10-07. This is an author-run, targeted source review of the research archives, not a line-by-line audit of those projects and not an independent review of Zodiac. The archives contain complete upstream repositories at the revisions bundled here; references below name the inspected member paths. No research archive was modified.
 
 ## Findings that match Zodiac's current design
@@ -253,20 +289,21 @@ X25519 alone nor a one-time RSA key provides post-quantum protection. Cleanup is
 best effort. These are explicit threat-model and assurance limits, not evidence
 of a newly discovered break in AES-GCM/RSA-OAEP. A Go encrypt option is a proposed
 usability/delivery alternative, not a missing security prerequisite.
+
 ## Conditional assessment from supplied feedback (2026-10-11)
 
 The supplied feedback concludes: **if finished and independently reviewed, the core design looks solid for sharing secrets under the right threat model.** This is a conditional assessment, not a completed audit, formal proof, certification or present release endorsement.
 
-| Aspect | Implemented design | Assessment and limits |
-| --- | --- | --- |
-| Hybrid encryption | Fresh random 32-byte AES key wrapped with RSA-OAEP/SHA-256, MGF1-SHA-256 and an empty label; AES-256-GCM encrypts the message | Conventional hybrid construction appropriate for one-off confidentiality; integrated composition still requires QA-03 review. |
-| RSA parameters | RSA-3072 or RSA-4096, exponent 65537 | Conservative allowed parameters; modulus length is not equivalent to security strength. |
-| Authenticated encryption | Fresh 12-byte nonce, 16-byte tag, AAD `wrappedKey || nonce` | Authenticates ciphertext and bound envelope fields before plaintext release; does not authenticate a sender. |
-| Public keys | Strict single SPKI PUBLIC KEY PEM, canonical DER re-export equality, SHA-256 fingerprint of canonical SPKI | Careful validation; identity still requires a trusted independent comparison. |
-| Receiver cryptography | Go standard-library RSA/AES/GCM/PBKDF2 and repository-owned fixed-profile PKCS#8/PBES2 loader | Avoids third-party cryptographic primitives; owned loader/glue and Go-maintained terminal/platform dependencies remain in the review boundary. |
-| Private-key files | Fixed PBES2/PBKDF2-HMAC-SHA256/AES-256-CBC profile; 600,000–2,000,000 accepted iterations and bounded salt/IV/schema | Slows offline guessing; CBC key files are unauthenticated. Strong passphrases, custody and strict unlock handling matter. |
-| Memory hygiene | Explicit cleanup of owned secret byte buffers on relevant paths | Best effort; strings, browser internals, Go key integers, OS copies and paging cannot be guaranteed erased or locked. |
-| Bounds and encoding | Maximum plaintext **65,536 bytes (64 KiB)**; bounded envelope/key parsing, canonical unpadded Base64URL, original-string surrogate checks | Reduces resource/parsing exposure and preserves valid UTF-8; not universal denial-of-service protection. |
+| Aspect                   | Implemented design                                                                                                                        | Assessment and limits                                                                                                                          |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hybrid encryption        | Fresh random 32-byte AES key wrapped with RSA-OAEP/SHA-256, MGF1-SHA-256 and an empty label; AES-256-GCM encrypts the message             | Conventional hybrid construction appropriate for one-off confidentiality; integrated composition still requires QA-03 review.                  |
+| RSA parameters           | RSA-3072 or RSA-4096, exponent 65537                                                                                                      | Conservative allowed parameters; modulus length is not equivalent to security strength.                                                        |
+| Authenticated encryption | Fresh 12-byte nonce, 16-byte tag, AAD `wrappedKey                                                                                         |                                                                                                                                                | nonce` | Authenticates ciphertext and bound envelope fields before plaintext release; does not authenticate a sender. |
+| Public keys              | Strict single SPKI PUBLIC KEY PEM, canonical DER re-export equality, SHA-256 fingerprint of canonical SPKI                                | Careful validation; identity still requires a trusted independent comparison.                                                                  |
+| Receiver cryptography    | Go standard-library RSA/AES/GCM/PBKDF2 and repository-owned fixed-profile PKCS#8/PBES2 loader                                             | Avoids third-party cryptographic primitives; owned loader/glue and Go-maintained terminal/platform dependencies remain in the review boundary. |
+| Private-key files        | Fixed PBES2/PBKDF2-HMAC-SHA256/AES-256-CBC profile; 600,000–2,000,000 accepted iterations and bounded salt/IV/schema                      | Slows offline guessing; CBC key files are unauthenticated. Strong passphrases, custody and strict unlock handling matter.                      |
+| Memory hygiene           | Explicit cleanup of owned secret byte buffers on relevant paths                                                                           | Best effort; strings, browser internals, Go key integers, OS copies and paging cannot be guaranteed erased or locked.                          |
+| Bounds and encoding      | Maximum plaintext **65,536 bytes (64 KiB)**; bounded envelope/key parsing, canonical unpadded Base64URL, original-string surrogate checks | Reduces resource/parsing exposure and preserves valid UTF-8; not universal denial-of-service protection.                                       |
 
 Corrections to the supplied feedback: the input limit is 64 KiB, not 65 KiB. The passphrase helper defaults to 32 random characters and accepts 24–128; the receiver cannot infer entropy from a successfully unlocked file. Length alone is insufficient. Both custody of the encrypted key file and its passphrase matter; the passphrase is not the sole long-term secret.
 

@@ -23,7 +23,8 @@ const pdf = JSON.parse(
   run(process.env.ZODIAC_PDF_PYTHON ?? 'python', ['scripts/pdf-qa.py']),
 );
 const key = spawnSync(
-  resolve('.cache/toolchains/openssl35/x64/bin/openssl.exe'),
+  process.env.ZODIAC_OPENSSL35 ??
+    resolve('.cache/toolchains/openssl35/x64/bin/openssl.exe'),
   [
     'pkcs8',
     '-in',
@@ -96,6 +97,16 @@ const evidence = {
       {
         client: 'Outlook',
         priority: 'secondary',
+        status: 'actual unsent draft paste not yet observed',
+      },
+      {
+        client: 'Proton Mail',
+        priority: 'main provider',
+        status: 'actual unsent draft paste not yet observed',
+      },
+      {
+        client: 'iCloud Mail',
+        priority: 'main provider',
         status: 'actual unsent draft paste not yet observed',
       },
     ],

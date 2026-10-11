@@ -1,6 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests/browser',
+  // File:// maximum-size qualification and opt-in input diagnostics use their
+  // own runner/config; skipped diagnostics are not part of the required matrix.
+  testIgnore: '**/offline-qualification.spec.ts',
   fullyParallel: false,
   workers: 1,
   use: {

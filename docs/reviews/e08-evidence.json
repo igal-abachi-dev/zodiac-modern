@@ -1,0 +1,227 @@
+{
+  "recorded": "2026-10-11T19:36:46.945Z",
+  "status": "local automated E08 work passed; human, independent review and release gates open",
+  "scope": "Author-run synthetic development evidence only. No independent audit, published CI, provider trial, signing or deployment.",
+  "system": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+    "node": "v24.21.0"
+  },
+  "checks": [
+    {
+      "name": "frozen-offline-install",
+      "code": 0,
+      "milliseconds": 191,
+      "logSHA256": "05f931dd82a52b4b55af6474a243628e6f87eb4a4021a9a4dfbd210466a86920"
+    },
+    {
+      "name": "receiver-integrated-gates",
+      "code": 0,
+      "milliseconds": 77499,
+      "logSHA256": "de610e6f4a56a31d24ff6fe1e4fb879e94ee0597791ee636f03801b0c0f4e398"
+    },
+    {
+      "name": "receiver-snapshot",
+      "code": 0,
+      "milliseconds": 167,
+      "logSHA256": "1c0e3bda35f23ad48c10a4b860a386b36257bd328e3ec8123f9236a91be3eff4"
+    },
+    {
+      "name": "full-browser-unit-build-pdf",
+      "code": 0,
+      "milliseconds": 139046,
+      "logSHA256": "1a500c21fa2078eb232640aa124a74026906f3d4e7aefddb6e67a3d0677108d3"
+    },
+    {
+      "name": "offline-artifact-integrity",
+      "code": 0,
+      "milliseconds": 2850,
+      "logSHA256": "7f9f03589205c59b75ff6bfffe0e5f0f2381d64ed731553e733e0486195624ab"
+    },
+    {
+      "name": "offline-maximum-size-keyboard",
+      "code": 0,
+      "milliseconds": 19699,
+      "logSHA256": "979539b75d09bd0850d0e0a069dd76b1d8db1e22ed6461902000ac219c2d2705"
+    },
+    {
+      "name": "dependencies-provenance-notices",
+      "code": 0,
+      "milliseconds": 2442,
+      "logSHA256": "00db66ddbcc12f3a7243f42dce268d02ec0c75f7d22a11a57fdbab106c536c2d"
+    },
+    {
+      "name": "static-host-output",
+      "code": 0,
+      "milliseconds": 192,
+      "logSHA256": "9ee076bc382a792dca534b80e45813cdebe80ec12e6157a0081b5a900aba8fcb"
+    }
+  ],
+  "browser": {
+    "startTime": "2026-10-11T19:32:38.965Z",
+    "duration": 76796.632,
+    "expected": 64,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "projects": ["chromium", "firefox"],
+    "versions": {
+      "chromium": "153.0.8010.12",
+      "firefox": "155.0"
+    }
+  },
+  "unit": {
+    "tests": 37,
+    "files": 13,
+    "status": "passed"
+  },
+  "offline": {
+    "stats": {
+      "startTime": "2026-10-11T19:34:28.310Z",
+      "duration": 16550.281,
+      "expected": 4,
+      "skipped": 2,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "skips": "Two opt-in native-input diagnostics; not part of the mandatory Chromium/Firefox matrix",
+    "integrityStatus": "passed"
+  },
+  "pdf": {
+    "renderer": "PyMuPDF 1.28.2",
+    "formats": [
+      {
+        "format": "A4",
+        "pages": 4,
+        "ciphertextPages": 4,
+        "pdfSHA256": "2bd25f528d634b180a9696400f4b8c18fef0843ed86714fb7ee7b7ec2a602ed6",
+        "rawRecovery": "all rows/page codes/whole envelope match",
+        "renders": [
+          {
+            "file": "artifacts/exports/print-A4-first.png",
+            "sha256": "489bd7140e6f53e9d513511739814d9b4f807a9a8f66a8111b4397719c1f0dd5"
+          },
+          {
+            "file": "artifacts/exports/print-A4-middle.png",
+            "sha256": "4b139bcf0248b945a5fbb819239dddf05d3d63bce854ebf4d03fd712ac72cad4"
+          },
+          {
+            "file": "artifacts/exports/print-A4-final.png",
+            "sha256": "97448f043444604e4b9af4f2a3fe46b7ef3a8608f985d26903dc5ac5f8128282"
+          }
+        ]
+      },
+      {
+        "format": "Letter",
+        "pages": 4,
+        "ciphertextPages": 4,
+        "pdfSHA256": "296993ab7be827d61bd3969b6c3152d0af61d77a92a704281d26a781fab9c8b5",
+        "rawRecovery": "all rows/page codes/whole envelope match",
+        "renders": [
+          {
+            "file": "artifacts/exports/print-Letter-first.png",
+            "sha256": "50497e453e8f31f7cb507b4f14efbc2d5203655a4c12ec5e69f0b19dbf12924d"
+          },
+          {
+            "file": "artifacts/exports/print-Letter-middle.png",
+            "sha256": "17e5c8f711b396b2a1eb80f4b07f49dd87e7c89a4cef15b2e23cb59c6367716b"
+          },
+          {
+            "file": "artifacts/exports/print-Letter-final.png",
+            "sha256": "a43a67dccffbcf8c7f71a7181ab8c63c4eccbe9f8177c47438adb550e0df57ca"
+          }
+        ]
+      }
+    ],
+    "independentGoRecovery": "Exact synthetic UTF-8 plaintext from PDF-extracted raw"
+  },
+  "javascript": {
+    "assets": [
+      {
+        "file": "dist/_astro/EncryptWorkbench.DxYc15P3.js",
+        "bytes": 65077,
+        "gzipBytes": 23428
+      },
+      {
+        "file": "dist/_astro/RawRecovery.DyIhnGdq.js",
+        "bytes": 9495,
+        "gzipBytes": 3953
+      },
+      {
+        "file": "dist/_astro/ciphertext.DS14LjxQ.js",
+        "bytes": 5997,
+        "gzipBytes": 2456
+      },
+      {
+        "file": "dist/_astro/client.Dn00sV55.js",
+        "bytes": 50348,
+        "gzipBytes": 19116
+      },
+      {
+        "file": "dist/_astro/client.svelte.DgBUb_oG.js",
+        "bytes": 889,
+        "gzipBytes": 500
+      }
+    ],
+    "allStaticGzipBytes": 49453,
+    "budgetBytes": 204800,
+    "claim": "Conservative sum of all static JS, including routes not initially requested; desktop only. No mobile latency or long-task qualification claimed."
+  },
+  "evidenceSHA256": {
+    "docs/reviews/e07-evidence.json": "a5c827b499fec304f122bad6f3cd6695e8cd6c54555ac14f181f67724cf10155",
+    "docs/reviews/m1-evidence.json": "1c7c844649734a63639614c72c7d63710bb0be1aeeb0c060ef4d36f86623c0f8",
+    "docs/reviews/rec01-evidence.json": "35f711a955efa24ca78251a5f07f49724b87aa0d6cab39a113ad728a6561d37a",
+    "docs/reviews/e06-evidence.json": "3342f17d855884f3038f281c8424b8aeab850b938ce364bdd982f7c8dc2f2966",
+    "artifacts/en04/candidate-checks.json": "db0b1514ed55ae034034d277cab22160a6532ee90c6e03f33884d1306fffb29f",
+    "artifacts/en04/browser-results.json": "a45ecb2e173d8d4921a8e3202b98e3797b7d68fe58a1d0364f15eb69b3a19bdb"
+  },
+  "documentationSHA256": {
+    "README.md": "934958696399ae86decc615f81d0283965a05ffb6436207bcf1f8e027a7d2e34",
+    "backlog.md": "df8e895d7b70b2906f97151d828072d11b7e90334891c4571c1519deceeb4810",
+    "docs/status.md": "185e0f8297ef2f842874702ab0a9d8c6a1b93d515dc51fdfbfecd4f933943565",
+    "docs/reviews/e08-qa-matrix.md": "4351bc1f2a78dc1da257fe09324bcd0872f13139d1d86756b4dd8f94793a9ced",
+    "docs/reviews/e08-manual-validation.md": "e47d59a973b9be3372ccf23b970aa0bc09f90593f1bb18a1d2f255768015a548",
+    "docs/reviews/m4-review-packet.md": "04ba62df731ee06141d4a55963f93fe37bb059a20c011cee41266ebff67506d3"
+  },
+  "remaining": [
+    "QA-01.3: published CI remains inactive by operator instruction",
+    "QA-02: manual assistive technology, reference-device/long-task qualification, five novice recipient trials and actual Gmail/Outlook-Microsoft365/ProtonMail/iCloudMail paste and attachment trials",
+    "QA-03: qualified independent assessment, findings, fixes and independent critical/high rechecks",
+    "EN-04: normal installed-browser headed usability, native Chrome multiline/paste qualification and final reviewed delivery selection",
+    "SEC-02.4: administrator-enforced receiver network denial",
+    "SEC-04.1/.4: confirmed origin, publisher, independent verification channel, owners, vulnerability route and supported-version policy",
+    "REC-03.3: operator encrypted-backup restore drill and observed first-time recipient trial",
+    "SEC-05/REC-04: human accessibility/independent cleanup assessment and additional supported-platform validation"
+  ],
+  "visualInspection": {
+    "status": "author inspected fresh synthetic PNG renders",
+    "assessment": "A4/Letter first, middle and partial-final pages: no visible clipping or overlap; mixed payload/null presentation, side-by-side raw/check rows, masked recipient and small cipher/paging footer retained",
+    "renders": [
+      {
+        "file": "artifacts/exports/print-A4-first.png",
+        "sha256": "489bd7140e6f53e9d513511739814d9b4f807a9a8f66a8111b4397719c1f0dd5"
+      },
+      {
+        "file": "artifacts/exports/print-A4-middle.png",
+        "sha256": "4b139bcf0248b945a5fbb819239dddf05d3d63bce854ebf4d03fd712ac72cad4"
+      },
+      {
+        "file": "artifacts/exports/print-A4-final.png",
+        "sha256": "97448f043444604e4b9af4f2a3fe46b7ef3a8608f985d26903dc5ac5f8128282"
+      },
+      {
+        "file": "artifacts/exports/print-Letter-first.png",
+        "sha256": "50497e453e8f31f7cb507b4f14efbc2d5203655a4c12ec5e69f0b19dbf12924d"
+      },
+      {
+        "file": "artifacts/exports/print-Letter-middle.png",
+        "sha256": "17e5c8f711b396b2a1eb80f4b07f49dd87e7c89a4cef15b2e23cb59c6367716b"
+      },
+      {
+        "file": "artifacts/exports/print-Letter-final.png",
+        "sha256": "a43a67dccffbcf8c7f71a7181ab8c63c4eccbe9f8177c47438adb550e0df57ca"
+      }
+    ]
+  }
+}

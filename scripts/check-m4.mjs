@@ -65,6 +65,12 @@ try {
   await check('receiver-integrated-gates', ['scripts/check-rec01.mjs']);
   await check('receiver-snapshot', ['scripts/snapshot-rec01.mjs']);
   await check('full-browser-unit-build-pdf', ['scripts/check-m3.mjs']);
+  await check('offline-artifact-integrity', [
+    'scripts/check-offline-sender.mjs',
+  ]);
+  await check('offline-maximum-size-keyboard', [
+    'scripts/test-offline-sender.mjs',
+  ]);
   await check('dependencies-provenance-notices', [
     'scripts/check-dependencies.mjs',
   ]);
@@ -139,9 +145,9 @@ try {
   report.openGates = [
     'SEC-04 confirmed origin/publisher/independent release channel and operational owners; proposed zodiac-modern.vercel.app is unclaimed.',
     'QA-03 integrated independent security review, critical/high disposition and independently rechecked fixes.',
-    'EN-04 stable Chrome/Firefox and headed external verification usability; final reviewed delivery selection.',
+    'EN-04 current stable-channel/installed-browser headed verification usability, native multiline input qualification and final reviewed delivery selection.',
     'QA-01 required Chromium/Firefox shipping CLI coverage/complete attack matrix and published CI (workflow stays a template by user instruction); WebKit coverage is optional.',
-    'QA-02 real assistive technology, recorded latency/long tasks and five novice recipients; Gmail-primary/Outlook-secondary actual draft paste.',
+    'QA-02 real assistive technology, reference-device latency/long tasks and five novice recipients; actual Gmail, Outlook/Microsoft 365, Proton Mail and iCloud Mail trials.',
     'Receiver network-denial observation at OS level; source excludes network/listener imports and offline vendor checks pass.',
     'Final-origin response/privacy checks and signed receiver/reviewed sender hashes before release.',
   ];

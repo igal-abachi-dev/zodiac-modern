@@ -697,6 +697,103 @@ The v1 recommendation is to keep the current hybrid and prioritize independent
 review, recipient identity verification, independently verifiable artifacts
 and separately designed optional sender signatures.
 
+### What we borrow from other tools, and why this architecture?
+
+Good usability matters for technical users too. Clear recipient selection,
+visible fingerprints, safe defaults and recoverable errors can reduce mistakes
+for everyone. Zodiac's browser sender requires no installation or administrator
+access; the recipient uses a separate local tool. This is a useful division of
+responsibility, not a claim that a website is inherently safer than a CLI or that
+the interface prevents every mistake.
+
+**Public keys and password derivation solve different problems.** Zodiac creates
+a fresh random AES key for each message and wraps it for the recipient's RSA
+public key. The sender does not need a shared message password. Argon2id makes
+guessing a password-derived key more expensive through memory and computation;
+it does not add entropy to a weak password or authenticate the recipient. A
+high-entropy generated password can also support strong symmetric encryption.
+Do not compare a 4,096-bit RSA modulus directly with a password's length or AES
+key size. See [Argon2's specification](https://www.rfc-editor.org/rfc/rfc9106.html).
+
+Zodiac's private key still has a separate password-protection boundary: the
+supported OpenSSL encrypted-PKCS#8 profile uses PBKDF2-HMAC-SHA256. Its security
+depends on the generated passphrase, custody and work factor. Argon2id could be
+evaluated for a future key container, but it is not a drop-in replacement for
+the current fixed OpenSSL profile or a required change to message encryption.
+
+[hat.sh](https://github.com/sh-dv/hat.sh) offers password and public-key file
+encryption, using libsodium for Argon2id, X25519 and XChaCha20-Poly1305. Useful
+lessons include bounded file processing and understandable key/password flows.
+Zodiac keeps native WebCrypto RSA-OAEP/AES-GCM and Go's standard cryptographic
+primitives because they already provide its required algorithms. Adding
+libsodium would add packaging and dependency review without an identified need
+in this message-only profile. Native primitives do not automatically validate
+our surrounding protocol, parsers or application. Large-file streaming would
+need a separate design for chunk ordering, truncation and authentication.
+
+[encryptor.app's current source](https://github.com/georgerauscher/encryptor-app)
+documents a bundled offline HTML, generated passwords, independent vectors and
+a reproducible build. Zodiac already has a self-contained HTML **development
+candidate** built from the same sender code; see the commands below. Final
+versioned packaging, independently trusted hashes and release qualification
+remain pending. Borrow its emphasis on readable source, exact build provenance
+and test vectors, rather than treating single-file packaging as proof of safety.
+
+[PrivateBin](https://github.com/PrivateBin/PrivateBin/wiki/Encryption-format)
+stores encrypted pastes on a server and carries the paste key in the URL
+fragment, with optional passwords and expiration/burn-after-reading behavior.
+Zodiac deliberately has no storage backend. For its current use case, export
+the ciphertext `.txt` and share it through an existing service such as Proton
+Drive, which supports [passwords, expiration and revoked links](https://proton.me/support/drive-shareable-link).
+This recommendation keeps storage, account security and operational maintenance
+outside Zodiac; it is not a claim that one provider is universally safer.
+Expiration or revocation stops future retrieval through the service; it cannot
+erase already downloaded ciphertext or plaintext. Adding a paste server would
+require a separate operational, retention, abuse and privacy threat model.
+
+Keep Zodiac's no-history design: a local IndexedDB ciphertext shelf was
+considered but is not selected. Improve explicit export and sharing guidance
+instead, for Proton Drive, MEGA, Google Drive, Wormhole and mail providers.
+Provider handoff must be user initiated and retain download/copy fallbacks;
+one-click export does not imply automatic upload or a guaranteed provider share
+link. Neither a paste server nor a database such as Neon is selected. Storage,
+accounts and retention remain outside Zodiac.
+
+A browser decryption page would bring private keys and passphrases into its
+execution environment and require an encrypted-PKCS#8 importer. That changes
+the current boundary. A future **offline receiver GUI** can improve usability
+without making the hosted page a private-key tool. Electron or Tauri is an
+optional packaging choice, not a cryptographic upgrade: both introduce native
+capabilities and delivery/update boundaries to constrain and review. See
+[Electron security guidance](https://www.electronjs.org/docs/latest/tutorial/security)
+and [Tauri's security model](https://v2.tauri.app/security/).
+For v1, keep the static website plus verified offline HTML option and the
+separate Go receiver; prioritize review, trusted releases and real-user trials
+before expanding the architecture. Neither these comparisons nor external
+marketing establish that Zodiac or another browser tool has passed a system
+audit. The [backlog](backlog.md) tracks the outstanding gates and future scope.
+
+Optional future research would assess an exact [RFC 9180 HPKE profile](https://www.rfc-editor.org/rfc/rfc9180.html)
+for smaller recipient keys and envelopes, and a signed portable Windows 11 GUI
+that wraps the existing Go executable rather than ports its crypto or PKCS#8
+loader to JavaScript. HPKE requires a separately reviewed protocol and migration
+design; it does not automatically provide sender identity, forward secrecy or
+post-quantum protection. A GUI requires its own native-boundary and delivery
+review. Neither change is selected for implementation or an E08 prerequisite.
+
+These would be **additional options**: retain the hosted browser sender for
+mobile and desktop use on the go, the independently verified offline HTML sender,
+and the offline Go CLI. A future desktop GUI would sit on top of Go; the optional
+Go encryption command is tracked separately. No desktop installation would be
+required to use the browser sender. GUI framework research will compare Tauri v2,
+Wails/WebView2, WinUI 3/C#, Electron, Flutter, Avalonia/C# with
+CommunityToolkit.Mvvm, Qt and wxWidgets, including portable runtime requirements
+and accessibility. Avalonia with the MVVM Community Toolkit is the user's
+preferred candidate to evaluate; WPF is excluded by preference. No framework
+has been selected for implementation. See
+[Avalonia MVVM guidance](https://docs.avaloniaui.net/docs/fundamentals/the-mvvm-pattern)
+and [CommunityToolkit.Mvvm](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/).
+
 ## Deployment and offline use
 
 Build static assets with `pnpm build`. Vercel deployment uses `pnpm build:vercel` to generate static Build Output configuration and headers from the exact built artifact. No Astro runtime adapter, serverless functions, or message API is required. Alternative hosts must pass the same final-origin header and privacy checks; Surge support is conditional on enforceable headers.
@@ -705,7 +802,8 @@ The proposed free Vercel address is `zodiac-modern.vercel.app`; it has not been
 claimed or verified here. See [static host instructions](docs/deployment.md),
 [E07 hardening](docs/hardening.md) and the [M4 review packet](docs/reviews/m4-review-packet.md).
 `pnpm check:m4` includes frozen offline installation, fresh REC-01/vendor/fuzz
-gates, all M3 browser/unit/build/PDF checks and hardening/output/provenance checks.
+gates, all M3 browser/unit/build/PDF checks, offline HTML integrity and
+maximum-size/keyboard checks, and hardening/output/provenance checks.
 Configure both recorded OpenSSL oracle paths as above. Signing, independent
 release trust and integrated review remain pending; the command does not deploy.
 

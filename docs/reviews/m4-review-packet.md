@@ -6,6 +6,8 @@ to source hashes in [m1-evidence.json](m1-evidence.json), refreshed
 [REC-01 evidence](rec01-evidence.json) and [PDF/export evidence](e06-evidence.json).
 The author-run additions and E08 completion gaps are listed in
 [the E08 QA matrix](e08-qa-matrix.md).
+The [manual-validation procedures](e08-manual-validation.md) separate the
+remaining human, provider, administrator and independent assessment gates.
 All tests use designated synthetic keys/messages. The production build imports
 only the separately confirmed public recipient. Never request production private
 keys or real messages for this review.
@@ -71,8 +73,28 @@ critical/high remediations independently rechecked. Author tests are not a
 reviewer verdict; earlier focused REC-01 approval does not cover the full app.
 Do not add formal IND-CCA2/FIPS/government/zero-knowledge/constant-time claims.
 
-M4 also needs shipping-CLI coverage in WebKit, real assistive technology, measured reference-device costs,
-five novice receiver trials and Gmail-first/Outlook-secondary actual draft paste.
+M4 requires Chromium/Firefox coverage; WebKit is optional. It also needs real
+assistive technology, measured reference-device costs, five novice receiver trials
+and actual Gmail, Outlook/Microsoft 365, Proton Mail and iCloud Mail trials.
 CI remains a template by user choice. Automated checks cannot approve these
 human/provider/release gates. Current implementation and public wording remain
 reviewable while those dependencies are pending.
+
+## Revised workflow and cleanup scope (2026-10-11)
+
+Review the current SEC-05 default-enabled encryption-permission checkbox. It does
+not record a completed fingerprint comparison; full fingerprint and independent
+comparison guidance remain available. Assess key replacement, opt-out, clear/
+navigation and the composer placement against identity-confusion and usability
+risks. Earlier explicit-acknowledgement evidence describes an older workflow.
+
+REC-04's implemented opt-in Windows cleanup is inside this assessment: seven
+aligned overwrite passes with no-buffering/write-through, three handle-based
+random renames and deletion, controlling-terminal completion/cancellation and
+separate output/key outcomes. Review confinement, reparse/hardlink/race behavior,
+failure preservation and the advisory shadow-copy name probe. No claim of physical
+erasure, snapshot absence or removal of backups/other private-key copies is made.
+
+Use the exact refreshed source, receiver, fixture, offline HTML and built-asset
+hashes. The browser sender and Go receiver together require integrated review;
+focused REC-01 approval and favorable supplied feedback are not that verdict.

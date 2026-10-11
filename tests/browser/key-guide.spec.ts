@@ -100,15 +100,15 @@ test('guide-created encrypted keys import and recover exact nonsecret text after
       await openCustomKey(page);
       await page.getByLabel('Choose public PEM file').setInputFiles(publicPath);
       await expect(
-        page.locator('.recipient-summary .fingerprint:not(.full-fingerprint)'),
-      ).toContainText(fingerprint.slice(0, 12));
+        page.locator('#recipient-fingerprint-title .fingerprint'),
+      ).toHaveText(fingerprint);
       const details = page.getByRole('button', {
         name: 'Recipient details',
         exact: true,
       });
       if ((await details.getAttribute('aria-expanded')) === 'false')
         await details.click();
-      await expect(page.locator('.full-fingerprint')).toContainText(
+      await expect(page.locator('.fingerprint.full-fingerprint')).toContainText(
         fingerprint,
       );
       await page

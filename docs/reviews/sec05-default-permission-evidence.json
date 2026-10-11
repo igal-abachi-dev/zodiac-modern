@@ -4,10 +4,7 @@
   "scope": "Author-run synthetic tests, not human or independent review.",
   "browserRegressions": {
     "passed": 22,
-    "projects": [
-      "chromium",
-      "firefox"
-    ],
+    "projects": ["chromium", "firefox"],
     "files": [
       "recipient-selection.spec.ts",
       "workspace.spec.ts",

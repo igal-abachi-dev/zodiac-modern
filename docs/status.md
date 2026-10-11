@@ -1,6 +1,6 @@
 # Live delivery status
 
-Updated 2026-10-10 (Asia/Jerusalem); evidence records UTC timestamps.
+Updated 2026-10-11 (Asia/Jerusalem); evidence records UTC timestamps.
 M0 and M1 development acceptance pass. The operator-confirmed production public
 recipient is configured; integrated review, signing and release remain open.
 Acceptance criteria remain in [the backlog](../backlog.md).
@@ -13,12 +13,12 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 | EN-03                  | Done                               | Operator-confirmed RSA-4096 public PEM/name/fingerprint; production build, actual default browser import and canonical public export pass. Private files remain ignored and outside build inputs.                                                                                                                                                                                                                       |
 | UX-01, UX-02           | Done                               | Accessible responsive visual system and exact message/encrypt/error/IME/focus flow.                                                                                                                                                                                                                                                                                                                                     |
 | UX-03.1                | Done                               | Immutable result summary, complete raw ciphertext above the always-visible glyph grid, typed display/artwork action slots and working primary raw exports.                                                                                                                                                                                                                                                              |
-| UX-03                  | Done (focused export verification) | Full/selected PNG, S64M1 SVG and archival print use the mixed view; archival raw/check rows remain separate, with the requested print redaction. Full M3 gate remains to be rerun.                                                                                                                                                                                                                                      |
+| UX-03                  | Done (focused export verification) | Full/selected PNG, S64M1 SVG and archival print use the mixed view; archival raw/check rows remain separate, with the requested print redaction. Current full M3/M4 gate passes; human/provider/review gates remain.                                                                                                                                                                                                    |
 | REC-01                 | Done                               | Focused conditional loader approval and verified fixes; mandatory fixture/native/vendor/resource/fuzz gates retained.                                                                                                                                                                                                                                                                                                   |
 | REC-02                 | Done (Windows)                     | Authenticated offline command, exclusive private output and native path/mapping/reparse/race/ACL/cancel/cleanup tests. QA-03 remains separate.                                                                                                                                                                                                                                                                          |
 | KEY-03                 | Done                               | Tested encrypted generation for both sizes, current vendor verification, custody/fingerprint/backup/rotation guide and secure local passphrase generator. Public-folder failure fixed and regression-tested.                                                                                                                                                                                                            |
 | REC-03                 | Review                             | Guide, fresh nonsecret browser token and actual native original/restored helper trials pass for both sizes. Operator's own backup/readiness and observed first-time user trial remain pending; release verification is separate.                                                                                                                                                                                        |
-| SEC-05                 | In progress                        | Full fingerprint and comparison guidance remain visible. User-directed 2026-10-11 change defaults encryption permission to enabled per selected key; the checkbox no longer asserts a completed comparison. Revised 22-case Chromium/Firefox recipient/workspace/privacy checks pass; human/AT and QA-03 review remain open. |
+| SEC-05                 | In progress                        | Full fingerprint and comparison guidance remain visible. User-directed 2026-10-11 change defaults encryption permission to enabled per selected key; the checkbox no longer asserts a completed comparison. Revised 22-case Chromium/Firefox recipient/workspace/privacy checks pass; human/AT and QA-03 review remain open.                                                                                            |
 | REC-04                 | In progress                        | One-message key guidance and opt-in Windows output/key cleanup are implemented. Seven aligned overwrite writes, write-through/no-buffering, three handle-based random renames/delete, plus a non-elevated advisory check for exposed shadow-copy device names. Full vendored Go receiver tests pass 2026-10-09; independent OS-call review and broader platform evidence remain open. This is best-effort cleanup only. |
 | E05, SYM-01, SYM-02    | Done (development)                 | 64 frozen vectors/provenance/license, bounded glyph plate/legend and raw/transcribed-row recovery pass. Similar-glyph recognition limits documented; no human error-rate measurement or SVG importer.                                                                                                                                                                                                                   |
 | EXP-04                 | Done                               | S64CHECK1 SVG/JSON/print integration; independent PDF raw/check/hash/Go recovery passes.                                                                                                                                                                                                                                                                                                                                |
@@ -43,7 +43,7 @@ Acceptance criteria remain in [the backlog](../backlog.md).
 Current evidence:
 
 - Formatting, Astro/Svelte/strict TypeScript pass with zero errors/warnings;
-  37 unit tests and 62 required Chromium/Firefox browser cases pass for integrated E07/M4; 100 type-check files have zero diagnostics. Optional WebKit interop cases passed separately.
+  37 unit tests and 64 required Chromium/Firefox browser cases pass for integrated E08/M4; 105 type-check files have zero diagnostics. Optional WebKit interop cases passed separately.
   Chromium's process
   sandbox is enabled. Browser versions are recorded in the machine evidence.
 - Fixture, custom and configured production builds pass artifact/CSP checks.
@@ -208,3 +208,26 @@ and Edge pass; four opt-in native diagnostics skipped. Type checks are clean.
 [Exact candidate and source evidence](reviews/sec05-default-permission-evidence.json).
 The production preview on port 4324 was refreshed. Identity comparison remains
 the sender’s responsibility; default-enabled permission is not verification.
+
+## 2026-10-11 integrated E08 continuation
+
+The current `pnpm check:m4` passes all local stages: OpenSSL/native Go/vendor/
+fuzz gates, 37 unit tests, 64 Chromium/Firefox cases with zero skips, production
+public-recipient/build/CSP, exact A4/Letter PDF-to-Go recovery, offline integrity
+and external hash-helper tests, four file:// maximum-size/keyboard cases,
+dependency provenance and Vercel static output. Two opt-in offline input
+diagnostics are skipped separately. First/middle/final A4/Letter renders were
+visually inspected by the author; no visible clipping or row overlap was found.
+
+[Exact E08 evidence](reviews/e08-evidence.json) and [manual handoff procedures](reviews/e08-manual-validation.md) separate local work from remaining gates.
+E08 stays in progress for published CI, manual assistive technology, reference
+devices/long tasks, actual Gmail/Outlook-Microsoft365/ProtonMail/iCloudMail trials,
+five novice recipients and integrated independent assessment. Administrator
+network denial, operator backup restoration, offline delivery selection and
+release identity/owner/reporting decisions also remain open. No signing,
+deployment or external human verdict is claimed.
+
+The README records the browser/public-key/offline-receiver design rationale.
+FUT-09 expands offline GUI assessment; FUT-12 assesses future key-container/KDF
+protection and FUT-13 optional local ciphertext storage. These are deferred
+features, not changes to v1 or new E08 prerequisites.

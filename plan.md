@@ -21,6 +21,17 @@ See [sharing scope and evidence](docs/exports.md).
 
 ## 1. Product and authoritative decisions
 
+2026-10-11 optional architecture direction: retain all three delivery paths:
+hosted mobile/desktop public-key sender, independently verified self-contained
+offline HTML sender, and offline Go CLI. FUT-09 evaluates an additional signed,
+portable Windows 11 GUI around the Go executable; it does not replace these
+paths or port private-key handling into hosted JavaScript. FUT-11 separately
+evaluates Go encryption. FUT-02 evaluates an exact RFC 9180 HPKE profile and
+explicit migration without changing the current envelope. These are optional
+future assessments, not selected implementation or E08 prerequisites. Preserve
+no automatic history/storage; FUT-13 is not selected and FUT-14 evaluates explicit
+export/provider handoff UX without uploads, databases or paste hosting in v1.
+
 Create a professional, calm website where someone chooses a recipient public key, types a message, encrypts entirely in their browser, and saves or shares ciphertext as raw text, a celestial image, or a data-preserving SVG. Ship a **signed downloadable offline Go decrypt CLI** so recipients decrypt using a local passphrase-encrypted private PEM. OpenSSL is used once for key creation; normal encryption uses the website and normal decryption uses one CLI command. The sender can immediately start another message. This receiver choice supersedes the earlier offline-browser proposal.
 
 The current request overrides the historical backend proposals in [context.md](context.md). Preserve the encryption contract in [reference_impl.go.md](reference_impl.go.md), but remove its HTTP service, CORS configuration, server environment, health checks, and throwaway-key behavior from the product architecture. `tamar-recipes-main.zip` supplies Astro layouts, Svelte runes, island organization, CSS tokens, and print conventions; its Sanity, React, video, preview functions, hosting adapter, and recipe content are irrelevant here. The existing `encrypt_flow.png` and `decrypt_flow.png` are historical reference assets: the former depicts backend processing, and the latter contains the inaccurate `rand.Reader` blinding label. Preserve them as references, exclude them from public product documentation, and produce corrected code-native diagrams during implementation.

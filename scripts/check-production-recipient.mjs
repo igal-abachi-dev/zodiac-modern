@@ -61,7 +61,7 @@ try {
   await page
     .getByRole('button', { name: 'Recipient details', exact: true })
     .click();
-  await expect(page.locator('.full-fingerprint')).toContainText(
+  await expect(page.locator('.fingerprint.full-fingerprint')).toContainText(
     config.fingerprint,
   );
   const pending = page.waitForEvent('download');

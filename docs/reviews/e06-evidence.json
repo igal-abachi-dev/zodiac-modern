@@ -1,59 +1,51 @@
 {
-  "recorded": "2026-10-06T20:45:14.545Z",
+  "recorded": "2026-10-11T19:34:22.327Z",
   "status": "automated export and PDF checks passed; email-client review pending",
   "milestone": "M3 Review",
   "scope": "Author-run synthetic evidence, not an independent audit or release approval.",
-  "m1EvidenceSHA256": "0dce58c9a427174bb87ac233423ba2f6588f16c953f65f1fbcea42f553898958",
+  "m1EvidenceSHA256": "1c7c844649734a63639614c72c7d63710bb0be1aeeb0c060ef4d36f86623c0f8",
   "pdf": {
     "renderer": "PyMuPDF 1.28.2",
     "formats": [
       {
         "format": "A4",
-        "pages": 5,
+        "pages": 4,
         "ciphertextPages": 4,
-        "pdfSHA256": "f00dca16565750bece0691e9d5f4ccaa09cb606452f03119bcdce890296c6eca",
+        "pdfSHA256": "2bd25f528d634b180a9696400f4b8c18fef0843ed86714fb7ee7b7ec2a602ed6",
         "rawRecovery": "all rows/page codes/whole envelope match",
         "renders": [
           {
             "file": "artifacts/exports/print-A4-first.png",
-            "sha256": "0e72f3e173579bd5e7f5df1fd63a6d9a0855c1e4d7f4c5f8314b919854648f4f"
+            "sha256": "489bd7140e6f53e9d513511739814d9b4f807a9a8f66a8111b4397719c1f0dd5"
           },
           {
             "file": "artifacts/exports/print-A4-middle.png",
-            "sha256": "f820af5e1a484f03e51e8ddd00f709cb1f64f1dcefa87f4003aab2080ffffbd4"
+            "sha256": "4b139bcf0248b945a5fbb819239dddf05d3d63bce854ebf4d03fd712ac72cad4"
           },
           {
             "file": "artifacts/exports/print-A4-final.png",
-            "sha256": "a8064a338c550c406175d9c157e3bb468c7501f208b7adfe97ab3980defd95c0"
-          },
-          {
-            "file": "artifacts/exports/print-A4-license.png",
-            "sha256": "298a12817dc6347c4e238792718b95799d928ef3e6517067d41834d567116a6e"
+            "sha256": "97448f043444604e4b9af4f2a3fe46b7ef3a8608f985d26903dc5ac5f8128282"
           }
         ]
       },
       {
         "format": "Letter",
-        "pages": 5,
+        "pages": 4,
         "ciphertextPages": 4,
-        "pdfSHA256": "d96623dca105986ad3bfbd7f4cd0ada84f85168bb3f69bbb440678a27d1bcc54",
+        "pdfSHA256": "296993ab7be827d61bd3969b6c3152d0af61d77a92a704281d26a781fab9c8b5",
         "rawRecovery": "all rows/page codes/whole envelope match",
         "renders": [
           {
             "file": "artifacts/exports/print-Letter-first.png",
-            "sha256": "8a8d236d9863e999ea1df6ca76e1a4fc3eecc3a12b257ca173e0e6e15af57e6b"
+            "sha256": "50497e453e8f31f7cb507b4f14efbc2d5203655a4c12ec5e69f0b19dbf12924d"
           },
           {
             "file": "artifacts/exports/print-Letter-middle.png",
-            "sha256": "cf66028478d520be7d10d0c59401b4ff81fbc8d977d459d22b5cfb2061f563f3"
+            "sha256": "17e5c8f711b396b2a1eb80f4b07f49dd87e7c89a4cef15b2e23cb59c6367716b"
           },
           {
             "file": "artifacts/exports/print-Letter-final.png",
-            "sha256": "698c2e3f0040e3ca3d9c044b0f46d7c601a4df7fb096fb8fa7ce3adaafc77d65"
-          },
-          {
-            "file": "artifacts/exports/print-Letter-license.png",
-            "sha256": "e294d63fddf0f057690bb9d8a9c82fcc10313ddd52fcaab1e02c0bde60354a36"
+            "sha256": "a43a67dccffbcf8c7f71a7181ab8c63c4eccbe9f8177c47438adb550e0df57ca"
           }
         ]
       }
@@ -61,16 +53,16 @@
     "independentGoRecovery": "Exact synthetic UTF-8 plaintext from PDF-extracted raw"
   },
   "edge": {
-    "startTime": "2026-10-06T20:45:03.735Z",
-    "duration": 10784.944000000001,
+    "startTime": "2026-10-11T19:34:04.813Z",
+    "duration": 17490.41,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
   },
   "offline": {
-    "bytes": 171728,
-    "sha256": "f68539deaf1811e197c577dc718520e56e720af06e84c30bfebfd04446716369"
+    "bytes": 173411,
+    "sha256": "13732342abeb66395ab201ab0360ee1f277f9ba20fb497105e799ef5c19a7787"
   },
   "clipboard": {
     "chromium": "Native image/png write and paste; exact text write and paste; denial fallback passed.",
@@ -84,6 +76,16 @@
       {
         "client": "Outlook",
         "priority": "secondary",
+        "status": "actual unsent draft paste not yet observed"
+      },
+      {
+        "client": "Proton Mail",
+        "priority": "main provider",
+        "status": "actual unsent draft paste not yet observed"
+      },
+      {
+        "client": "iCloud Mail",
+        "priority": "main provider",
         "status": "actual unsent draft paste not yet observed"
       }
     ]

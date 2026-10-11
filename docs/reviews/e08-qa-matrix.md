@@ -6,6 +6,34 @@ Synthetic keys and messages only; no release or security-review verdict.
 
 ## Completed locally
 
+### 2026-10-11 current integrated E08 gate
+
+`pnpm check:m4` passes against the current source: 37 unit tests, 64 required
+Chromium/Firefox cases with zero failures or skips, both RSA sizes and both
+browser/Go directions, native receiver/OpenSSL/vendor/pre- and post-KDF fuzz
+checks, production recipient/build/CSP, dependency provenance and Vercel static
+output. Astro checks 105 files with zero diagnostics; Svelte reports no errors
+or warnings. Stale fingerprint selectors in the key-guide, scaffold and
+production helper were corrected to select the intended current full value.
+
+The integrated runner now includes offline HTML integrity/external-hash-helper
+checks and the separate maximum-size/keyboard file:// suite. That suite passes
+four Chromium/Firefox cases; two explicitly opt-in native-input diagnostics are
+skipped and do not count as required-suite coverage. The mandatory web suite
+does not include these diagnostic cases. Native Chrome multiline/paste
+qualification remains open as documented in the prior investigation.
+
+Both A4 and Letter exports contain four ciphertext pages, with exact row/page
+checks and whole-envelope recovery through the independent Go oracle. Author
+visual inspection of first, middle and partial-final renders found no visible
+clipping or row overlap; mixed payload/null glyphs, side-by-side raw rows,
+recipient masking and the small algorithm/paging footer remain intact. This is
+artifact QA, not an accessibility trial or independent security assessment.
+
+See [the exact E08 snapshot](e08-evidence.json) and
+[prepared manual-validation procedures](e08-manual-validation.md). CI publication
+remains inactive by operator instruction. E08 is **in progress**, not complete.
+
 ### 2026-10-10 automated predecessor work
 
 Fresh offline sender cases passed in Chromium, Firefox and installed stable
@@ -87,8 +115,9 @@ excluded from the required 62-case Chromium/Firefox gate.
   pass. QA-01.3 remains open because the Windows workflow stays an inactive
   template by operator choice; no published CI evidence is claimed.
 - QA-02 still needs manual assistive-technology checks, recorded reference
-  device timing/long-task measurements, actual synthetic Gmail-first and
-  Outlook-secondary draft paste checks, and five novice recipient trials.
+  device timing/long-task measurements, actual synthetic Gmail-first,
+  Outlook/Microsoft 365, Proton Mail and iCloud Mail draft paste/attachment checks,
+  and five novice recipient trials.
   Existing keyboard, contrast, responsive, print/PDF and automated export checks
   are author-run evidence only.
 - QA-03 still needs a qualified independent reviewer, findings and severity

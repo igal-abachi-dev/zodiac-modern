@@ -578,6 +578,15 @@ Subtasks:
 - [x] QA-01.2 — tampering/canonicalization/input/key-validation, cleanup/error-path, field-splice and receiver-command regression cases pass. Native hidden-terminal receipts cover Chromium/RSA-3072 and Firefox/RSA-4096; this is author-run evidence.
 - [ ] QA-01.3 — publish CI evidence, tool versions, fixture designation, and unresolved compatibility limits.
 
+2026-10-11 E08 local refresh: the current `pnpm check:m4` passes 37 unit tests,
+64 required Chromium/Firefox cases (zero skipped), real OpenSSL/native Go/vendor/
+pre- and post-KDF fuzz gates, production public recipient/build/CSP, exact A4/
+Letter PDF-to-Go recovery, dependency provenance and Vercel static output.
+Offline integrity and the separate file:// maximum-size/keyboard suite are now
+part of the runner: four cases pass and two opt-in input diagnostics are skipped.
+See [E08 evidence](docs/reviews/e08-evidence.json). QA-01.3 stays open because
+published CI remains an inactive template by operator choice.
+
 ### QA-02 — verify accessibility, exports, performance, and email paste behavior
 
 Type: enabler · Priority: P1 · Status: In progress · Milestone: M4 · Dependencies: UX-03, SYM-01, EXP-01, EXP-02, EXP-03, SEC-02, REC-03.
@@ -596,6 +605,15 @@ Subtasks:
 - [ ] QA-02.1 — conduct a11y/responsive/manual focus and assistive-technology checks.
 - [ ] QA-02.2 — render/inspect export artifacts and measure performance on recorded reference devices.
 - [ ] QA-02.3 — perform synthetic clipboard/email-client compatibility checks and document supported/fallback sharing paths.
+
+2026-10-11 local subset: automated keyboard/contrast/reflow, native clipboard
+behavior and current mixed PNG/SVG/print checks pass. Author inspection of A4/
+Letter first, middle and partial-final pages found no visible clipping/overlap;
+all exported PDF rows/checks recover the exact synthetic envelope and Go message.
+QA-02 remains open for manual AT, reference-device/long-task qualification, actual
+four-provider paste/attachment trials and five novice recipients. Prepared
+procedures are in [the manual handoff](docs/reviews/e08-manual-validation.md);
+no participant/provider result is inferred from local tests.
 
 ### QA-03 — obtain and disposition an independent security review
 
@@ -772,9 +790,64 @@ Subtasks:
 | FUT-05 | Story | P2 | Deferred | Additional languages, broader RSA sizes, custom glyph skins: validate accessibility/key performance and preserve released map/profile semantics |
 | FUT-06 | Story | P2 | Deferred | Rich inline SVG/HTML email copy: enable only for tested client combinations; never replace a recoverable raw/SVG attachment path |
 | FUT-07 | Story | P2 | Deferred | Unicode symbol-string sharing: only on later request; explain changed font appearance and define a separately frozen reversible alphabet |
-| FUT-09 | Enabler | P2 | Deferred | Browser receiver/encrypted-PEM import or native receiver GUI: new explicit scope and importer/key-custody/security assessment; v1 receiver is the confirmed Go CLI |
+| FUT-09 | Enabler | P2 | Deferred (optional) | Evaluate a signed portable Windows 11 desktop GUI wrapping the existing Go executable, preserving its key validation, authenticated output and cleanup policies. Compare Tauri v2, Wails/WebView2, WinUI 3/C#, Electron, Flutter, Avalonia/C# with CommunityToolkit.Mvvm, Qt and wxWidgets against no-install/no-admin/offline runtime, accessibility, licensing and delivery requirements. Avalonia is the user's preferred candidate to evaluate; WPF is excluded by preference. Pin the exact sidecar path/artifact; review narrow IPC, file-picker and passphrase boundaries without secret argv/env, piped stdin, logs or temporary key files. No hosted private-key form, remote UI, arbitrary shell, listener or automatic updater. Require independent boundary review and keyboard/AT/novice trials. This is additional to the hosted mobile/desktop sender, offline HTML and Go CLI; Go encryption is separately FUT-11. No framework or implementation is selected. |
 | FUT-10 | Story | P2 | Deferred | Optional per-message Ed25519 sign-then-encrypt profile: sender UI, trusted signer-key verification, native WebCrypto + Go stdlib receiver support, separately specified encoding and independent review; v1 unsigned flow/envelope remain unchanged |
 | FUT-11 | Story | P2 | Deferred | Optional offline Go encryption command using the unchanged v1 profile and public SPKI keys only; requires explicit implementation selection, safe input/output, independent interoperability and expanded artifact/review scope. Not a v1 security or E08 prerequisite. |
+| FUT-12 | Enabler | P3 | Deferred | Evaluate future private-key container protection, including authenticated encryption and a memory-hard KDF such as Argon2id, only after defining a compatibility need and independently reviewed format/migration policy. Compare the fixed OpenSSL PBES2 profile, generated-passphrase entropy, offline guessing cost and resource bounds. No silent PBKDF2 replacement, external browser crypto dependency or v1 key-policy relaxation; RSA wrapping and password derivation solve different problems. |
+| FUT-13 | Story | P3 | Not selected | Local IndexedDB ciphertext shelf was considered and declined for the current direction. Preserve no application history/storage; sharing providers host explicitly exported content instead. Reopening persistence requires a separate user decision and privacy review. Local storage is not needed for sharing and creates no recipient-download link. |
+| FUT-14 | Story | P3 | Deferred (optional) | Improve explicit export-and-share guidance for Proton Drive, MEGA, Google Drive, Wormhole, Gmail, Outlook/Microsoft 365, Proton Mail and iCloud Mail. Keep raw download/copy primary and artwork secondary; explain provider upload/link/revoke steps and retained-copy limits. Assess capability-gated OS/browser file sharing only with user action, cancellation/error handling and copy/download fallback. Never promise automatic provider uploads or universal one-click links. No ciphertext/secret URL parameters, message persistence, IndexedDB shelf, provider credentials, upload API, Neon database or paste-hosting backend. Provider-account compatibility evidence remains separate from synthetic checks. |
+
+2026-10-11 architecture follow-up: retain native WebCrypto, the offline Go receiver
+and the existing EN-04/REL-03 self-contained HTML delivery work. REL-03 packaging
+must record exact source/tool provenance and compare two clean same-input builds
+before making any reproducibility claim. FUT-09/FUT-12 are optional future
+assessments, not E08 prerequisites. Existing provider-link sharing stays manual;
+do not add a paste-hosting backend, password-message mode or large-file streaming
+without a separately requested threat model/protocol. Link expiration/revocation
+does not delete recipients' downloaded copies. See the README design rationale.
+
+2026-10-11 user-confirmed future direction: FUT-02's HPKE assessment and FUT-09's
+signed Go-wrapper GUI are optional research, not a commitment to change ciphers,
+keys, formats or delivery. The hosted sender remains available for mobile and
+desktop encryption from anywhere; offline HTML and the CLI remain supported.
+The desktop GUI is an additional future option. FUT-13 is not selected: provider
+storage needs no local history. FUT-14 tracks sharing UX instead. No libsodium
+dependency, browser PKCS#8 port, database or desktop framework is added now.
+
+#### FUT-02 / FUT-09 research acceptance before implementation selection
+
+FUT-09 framework comparison list: **Tauri v2; Electron; WinUI 3 / C#;
+Flutter; standalone WebView2 / C# and Wails / Go;
+Avalonia / C# with CommunityToolkit.Mvvm; Qt / C++; wxWidgets / C++**.
+Avalonia with the MVVM Community Toolkit is the user's preferred candidate for
+evaluation, not a proven winner or implementation selection. Compare it with
+WinUI 3 against this project's requirements; .NET MAUI is not added to the
+shortlist. WPF is excluded by user preference, not recorded as deprecated.
+Assess both direct native UI and webview-based wrappers around the Go executable.
+See [Avalonia MVVM guidance](https://docs.avaloniaui.net/docs/fundamentals/the-mvvm-pattern)
+and [CommunityToolkit.Mvvm](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/).
+
+- HPKE: specify an exact RFC 9180 KEM/KDF/AEAD/mode and application context;
+  quantify key/envelope size and performance against current RSA-3072/4096.
+  Verify native WebCrypto support on supported browsers and Go interoperability,
+  published vectors, malformed-input/error handling and independent review.
+  Define explicit version/migration/downgrade rules outside the frozen v1 format.
+  Smaller keys do not imply stronger confidentiality; base mode supplies no
+  sender identity, and static-recipient HPKE does not automatically supply forward
+  secrecy or post-quantum protection. No handwritten substitute primitives or
+  external browser crypto library is authorized by this research task.
+- GUI: compare framework/runtime dependencies and signed artifact verification
+  on a clean supported Windows 11 account without admin, installation or runtime
+  download. A portable folder/ZIP may qualify; do not promise one standalone EXE
+  before testing. Preserve Go-owned parsing/crypto/output policy. The current
+  controlling-terminal prompt is not a GUI IPC API: design and review a bounded
+  native passphrase handoff rather than bypassing the ban on piped stdin.
+  Constrain webview assets/navigation/native capabilities, test cancellation,
+  errors and cleanup, and assess UI-process secret copies honestly. No automatic
+  editor/clipboard, plaintext terminal output or networking is introduced.
+- Deliver a comparison and recommendation, then seek implementation selection.
+  Signing and independent review remain release gates. These future assessments
+  do not close any outstanding E08 gate or replace the present sender options.
 
 ### REC-04 — add optional single-use recipient-key and cleanup workflow
 
