@@ -1,10 +1,23 @@
 {
   "officialOrigin": null,
   "proposedOrigin": "https://zodiac-modern.vercel.app",
-  "expectedAuthenticodePublisher": null,
-  "independentVerificationChannel": null,
-  "domainOwner": null,
-  "signingOwner": null,
-  "incidentOwner": null,
+  "originDecision": "Use the free Vercel project URL; exact ownership and final deployed responses are not yet verified.",
+  "repositoryURL": "https://github.com/igal-abachi-dev/zodiac-modern",
+  "expectedAuthenticodePublisher": "CN=Zodiac Modern",
+  "signingDecision": "Self-signed code signing selected for now with intended subject CN=Zodiac Modern. Certificate provisioning, actual-subject confirmation, SHA-256 certificate pin and verification workflow remain pending. This label does not establish CA-verified identity or reviewed/stable release status. Unsigned candidates and a future publicly trusted CA certificate are alternative delivery choices.",
+  "signingCertificateSHA256": null,
+  "independentVerificationChannel": "https://github.com/igal-abachi-dev/zodiac-modern/releases — full SHA-256 checksums; publication and account/channel verification pending.",
+  "hashAlgorithm": "SHA-256",
+  "vulnerabilityReporting": {
+    "method": "GitHub private vulnerability reporting",
+    "repositoryURL": "https://github.com/igal-abachi-dev/zodiac-modern",
+    "enabledAndVerified": false,
+    "triageOwner": "igal-abachi-dev (project owner, user-confirmed)",
+    "supportedVersionPolicy": "Latest stable release only; development candidates and prereleases are not stable supported releases."
+  },
+  "domainOwner": "igal-abachi-dev (project owner, user-confirmed)",
+  "signingOwner": "igal-abachi-dev (project owner, user-confirmed)",
+  "incidentOwner": "igal-abachi-dev (project owner, user-confirmed)",
+  "independentReviewer": null,
   "reviewedRelease": null
 }

@@ -33,7 +33,7 @@ When changing status, append evidence using: `ID | date | status | source commit
 | E06 | Exports/sharing | P1 | Review | M3 | Copy/download/image/print implemented and automated checks pass; Gmail-primary/Outlook-secondary paste pending |
 | E07 | Hardening | P0 | Review | M4 | Automated CSP/privacy/artifact/dependency gates pass; operational trust anchors and receiver network-denial trial pending |
 | E08 | Verification/review | P0 | In progress | M4 | Chromium/Firefox are required targets; bidirectional Go/WebCrypto cases pass for both RSA sizes. WebKit is optional; human/platform trials and independent review remain |
-| E09 | Release | P0 | Backlog | M5 | Real recipient, verified host/offline bundle, custody and rollback |
+| E09 | Release | P0 | In progress | M5 | Candidate packaging implemented; signing, independent review, verified host/offline delivery, custody and rollback remain gated |
 | E10 | Later options | P2 | Deferred | Later | Explicitly separate future decisions |
 | E11 | Offline recipient | P0 | In progress | M0/M2/M4 | REC-01/REC-02 Done for Windows; readiness and release review remain |
 
@@ -532,10 +532,10 @@ Acceptance criteria:
 
 Subtasks:
 
-- [ ] SEC-04.1 — user is undecided; proposed free https://zodiac-modern.vercel.app only. Confirm origin/control, publisher, reviewed final hashes, independent channel and operational owners before release; config/release-trust.json records pending fields.
+- [ ] SEC-04.1 — desired free https://zodiac-modern.vercel.app; self-signed code signing with intended subject `CN=Zodiac Modern`; GitHub Releases at https://github.com/igal-abachi-dev/zodiac-modern/releases with full SHA-256 checksums; project owner igal-abachi-dev responsible for hosting/signing/incidents. Decisions confirmed 2026-10-11. Verify actual origin/control, provision and confirm certificate subject/public SHA-256 pin, verify channel ownership and publish reviewed final hashes before release. Self-signing alone is not Windows publisher trust; unsigned candidates and future public-CA signing remain alternatives.
 - [x] SEC-04.2 — recipient/bookmark/lookalike/externally verified local sender guidance; no fake badges or signed download. External helpers never start files.
 - [x] SEC-04.3 — altered key/input/HTML/CSP/header, fixture leak, unsigned receiver/wrong hash/publisher refusal paths pass; full signed positive release/novice verification trials remain release gates. docs/hardening.md records the hosted plaintext trust gap.
-- [ ] SEC-04.4 — select and publish a private vulnerability-reporting route, triage owner, scope, and supported-version policy before release; do not invent a security contact or response-time commitment.
+- [ ] SEC-04.4 — GitHub private vulnerability reporting for https://github.com/igal-abachi-dev/zodiac-modern; owner igal-abachi-dev handles triage; only latest stable release supported. Decisions confirmed 2026-10-11 and recorded in SECURITY.md. Enable and verify the reporting route before release; no activation result or response-time commitment is invented. Development candidates/prereleases are not stable supported releases.
 
 ### SEC-05 — make recipient-key identity verification explicit for sensitive use
 
@@ -635,6 +635,16 @@ Subtasks:
 
 ## 12. E09 — production release and operations
 
+2026-10-11 E09 preparation is authorized and underway. Local candidate packaging
+is implemented as `pnpm release:package --candidate`: versioned standalone HTML,
+unsigned Go EXE, static hosted/Vercel output, public key, licenses, per-file
+manifest and separate final SHA-256 checksums. Repeated same-input local HTML/
+receiver builds and ZIP entry readback pass; this is not clean-room reproducibility,
+signing, deployment, independent review or recipient identity confirmation.
+Selected self-signing still requires certificate provisioning and a reviewed
+verification design; no certificate or trusted publisher was created by recording
+the decision. Preserve all E08 and release gates rather than marking E09 done.
+
 ### REL-01 — provision the real public recipient and complete custody verification
 
 Type: enabler · Priority: P0 · Status: Backlog · Milestone: M5 · Dependencies: KEY-03, EN-03, QA-01, REC-03.
@@ -675,7 +685,7 @@ Subtasks:
 
 ### REL-03 — verify and distribute the selected offline sender and signed Go decrypt CLI
 
-Type: enabler · Priority: P0 · Status: Backlog · Milestone: M5 · Dependencies: REL-01, QA-03, SEC-03, SEC-04, REC-02, EN-04.
+Type: enabler · Priority: P0 · Status: In progress · Milestone: M5 · Dependencies: REL-01, QA-03, SEC-03, SEC-04, REC-02, EN-04.
 
 As a user concerned about mutable hosted code, I can independently verify a pinned release and run its reviewed assets locally without automatic updates.
 
@@ -692,6 +702,18 @@ Subtasks:
 - [ ] REL-03.1 — package/sign controlled binaries, manifests and separate hashes; establish expected publisher and trusted review channel.
 - [ ] REL-03.2 — productionize the EN-04 selected sender; implement/sign a confined static launcher only if that path is selected. Otherwise record the native-launcher subtask as not applicable with decision evidence.
 - [ ] REL-03.3 — test fresh offline sender/CLI flows, signature/tamper checks and rollback; publish accurate versioned evidence.
+
+Self-signing follow-up for REL-03.1/.3: provision a dedicated protected signing
+key separately from message-recipient keys; specify code-signing usage,
+SHA-256, validity and rotation/revocation records. Keep private signing material
+outside Git, hosted builds and release bundles. Record exact certificate subject
+and full SHA-256 public-certificate pin through the selected trusted channel.
+Document Windows' lack of automatic trust for self-signed publishers. Define and
+independently review any explicit pinned-certificate verification path; do not
+silently accept `NotTrusted`, alter the existing `Valid`-signature helper, install
+unverified roots or recommend OS-warning bypass. Sign before final hashing.
+Unsigned candidates and a future public-CA certificate remain options, with their
+different verification guarantees stated accurately.
 
 ### REL-04 — support Vercel deployment, alternative hosts and pnpm local use
 
@@ -796,6 +818,53 @@ Subtasks:
 | FUT-12 | Enabler | P3 | Deferred | Evaluate future private-key container protection, including authenticated encryption and a memory-hard KDF such as Argon2id, only after defining a compatibility need and independently reviewed format/migration policy. Compare the fixed OpenSSL PBES2 profile, generated-passphrase entropy, offline guessing cost and resource bounds. No silent PBKDF2 replacement, external browser crypto dependency or v1 key-policy relaxation; RSA wrapping and password derivation solve different problems. |
 | FUT-13 | Story | P3 | Not selected | Local IndexedDB ciphertext shelf was considered and declined for the current direction. Preserve no application history/storage; sharing providers host explicitly exported content instead. Reopening persistence requires a separate user decision and privacy review. Local storage is not needed for sharing and creates no recipient-download link. |
 | FUT-14 | Story | P3 | Deferred (optional) | Improve explicit export-and-share guidance for Proton Drive, MEGA, Google Drive, Wormhole, Gmail, Outlook/Microsoft 365, Proton Mail and iCloud Mail. Keep raw download/copy primary and artwork secondary; explain provider upload/link/revoke steps and retained-copy limits. Assess capability-gated OS/browser file sharing only with user action, cancellation/error handling and copy/download fallback. Never promise automatic provider uploads or universal one-click links. No ciphertext/secret URL parameters, message persistence, IndexedDB shelf, provider credentials, upload API, Neon database or paste-hosting backend. Provider-account compatibility evidence remains separate from synthetic checks. |
+| FUT-15 | Story | P2 | Deferred (optional) | Assess local arbitrary-file encryption as an additional mode after the text-message release. Proposed initial maximum: 30 MiB (31,457,280 input bytes), subject to desktop/mobile memory and latency evidence. Design and review a bounded binary payload/transport and matching offline Go recovery before implementation selection; do not silently increase the v1 text/envelope limits. Preserve exact file bytes, authenticate before private output creation, and specify filename/metadata handling. Native accessible file input plus optional drag-and-drop is the preferred starting point; evaluate Uppy Svelte 5 only for demonstrated benefit under the existing CSP, offline and no-history requirements. No upload, preview execution, automatic persistence or new crypto library. |
+| FUT-16 | Enabler | P3 | Deferred (optional) | Assess 1 GiB and larger files separately from FUT-15. Require a reviewed streaming authenticated-encryption format with nonce allocation, chunk ordering, truncation/completion authentication, bounded memory and fail-closed partial-output cleanup. Compare native browser/Go capabilities and measured reference devices; workers require FUT-04 policy review. No handwritten primitive, ad-hoc independent chunk encryption, throughput guarantee or compatibility claim before protocol/interoperability review. |
+| FUT-17 | Story | P2 | Deferred (optional) | Improve truthful operation status, cancellation and actionable errors where measured latency warrants it, including file read/encryption/export and sharing. Announce stages accessibly; show percentages only for measurable work. Native WebCrypto encryption has no progress/abort parameter: cancellation must suppress stale results, prevent exports, and clean owned buffers when pending work settles, without claiming the native operation stopped or memory was securely erased. Preserve existing short-message flow; test clear/retry/navigation races, keyboard/AT behavior, failure recovery and no secret-bearing diagnostics. |
+| FUT-18 | Enabler | P3 | Deferred (optional; not selected for current release) | Assess an explicitly opt-in, public-key-only IndexedDB recipient address book only if observed repeat-use trials justify its additional flow and privacy complexity. Current custom keys remain memory-only and users select a public PEM file or paste it each session. Compare against that baseline; no persistence dependency or RxDB is selected. Any future implementation needs a separate decision and review of contact metadata, saved-key substitution, fingerprint/identity-verification separation, changed-key confirmation, storage bounds/validation, remove/clear/export controls, storage loss and dedicated single-use-key handling. Never store private keys, passphrases, plaintext or ciphertext history; browser storage is neither a trust anchor nor a guaranteed backup. |
+
+#### FUT-14 / FUT-15 / FUT-17 UX acceptance and dependency assessment
+
+2026-10-11 scope: retain text messages (64 KiB) for the current release. File
+encryption is a useful optional follow-up for documents and sensitive assets,
+not an implemented feature or E08/E09 prerequisite. The 30 MiB candidate limit
+is an input-file limit, not an email attachment guarantee: Base64URL alone adds
+about one third to the encrypted binary size. Large file mode must define bounded
+download/export behavior instead of attempting millions of glyphs or print pages.
+
+- FUT-15.1: compare a labelled native `<input type="file">` with an additional
+  drop target using browser File/Drag and Drop APIs. Keep a visible keyboard/touch
+  picker and accessible instructions/errors; dropping is never the only path.
+  Reject directories, unexpected multiple files and oversized files before reads.
+  Treat extensions/MIME as hints, never execute or render selected content, and
+  disclose selected filenames/size as metadata without logging them.
+- FUT-15.2: evaluate [Uppy's Svelte integration](https://uppy.io/docs/svelte/),
+  specifically its Svelte 5 headless Dropzone/useDropzone, only if native controls
+  prove insufficient. Check current compatibility, pinned versions, licensing,
+  keyboard/AT behavior, bundle size, generated style attributes and fully bundled
+  offline behavior. Audit selected plugins and disable uploaders, Companion,
+  remote sources, thumbnail/content processing, recovery/persistence plugins and
+  telemetry. A dropzone is local selection, not authorization to upload. No
+  library is selected or installed by this research task.
+- FUT-15.3: specify binary byte preservation, encrypted filename/metadata policy,
+  safe output names/paths and unsupported-format handling. Preserve the frozen
+  v1 text envelope; a separate file profile or bounded payload encoding needs an
+  explicit compatibility decision and independent review. Test empty/binary files,
+  boundary sizes, tampering and exact independent Go recovery with safe Windows
+  output, production CSP and no network/storage serialization.
+- FUT-17.1: measure read, crypto, rendering and export separately; use stage-based
+  busy status for unmeasurable work, not invented percentages or forced delays.
+  Progress/cancel can also help slow artwork exports and OS sharing, not just
+  large files. Review cancellation at every async boundary; a stale completion
+  cannot restore a cleared message or export a discarded result.
+- FUT-14.1: offer an explicit Share ciphertext file action only when the browser
+  accepts that file via `navigator.canShare`; invoke sharing from user activation.
+  Distinguish cancelled, unsupported and failed sharing; retain Download/Copy
+  fallbacks. OS acceptance does not prove provider delivery or recipient recovery.
+- FUT-14.2: provide concise manual upload/attach/share-link steps for the named
+  providers and test synthetic exports with real provider accounts separately.
+  Explain provider limits, account/transfer metadata and revocation limits. No
+  automatic uploads, provider credentials, paste backend or application history.
 
 2026-10-11 architecture follow-up: retain native WebCrypto, the offline Go receiver
 and the existing EN-04/REL-03 self-contained HTML delivery work. REL-03 packaging

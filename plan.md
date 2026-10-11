@@ -21,6 +21,27 @@ See [sharing scope and evidence](docs/exports.md).
 
 ## 1. Product and authoritative decisions
 
+2026-10-11 confirmed release details: public repository
+https://github.com/igal-abachi-dev/zodiac-modern; its owner is responsible for
+hosting, signing-key custody, releases and vulnerability/incident triage.
+Intended self-signed subject: `CN=Zodiac Modern` (no development suffix).
+Only the latest stable release receives support; candidates/prereleases are not
+stable supported releases. Independent reviewer selection is deferred until the
+owner finds one; the review gate is not waived. Domain ownership, certificate
+provisioning/public pin, reporting activation and final reviewed hashes still
+require evidence. Current locally built bundles remain unsigned candidates.
+
+2026-10-11 release choices: retain the desired free Vercel address, subject to
+actual project ownership/final-origin verification. Select self-signed code
+signing for now, with unsigned candidates and future publicly trusted CA signing
+as alternatives. Publish full SHA-256 final-artifact checksums through official
+GitHub Releases and use GitHub private vulnerability reporting with maintainer
+triage. Repository URL, reporting activation/support policy, exact signing
+certificate subject/public pin, trusted self-signed verification workflow and
+reviewed final hashes remain gates; recording preferences is not provisioning,
+deployment or certificate trust. Existing strict receiver verification stays
+unchanged. See docs/deployment.md and config/release-trust.json.
+
 2026-10-11 optional architecture direction: retain all three delivery paths:
 hosted mobile/desktop public-key sender, independently verified self-contained
 offline HTML sender, and offline Go CLI. FUT-09 evaluates an additional signed,
@@ -31,6 +52,24 @@ explicit migration without changing the current envelope. These are optional
 future assessments, not selected implementation or E08 prerequisites. Preserve
 no automatic history/storage; FUT-13 is not selected and FUT-14 evaluates explicit
 export/provider handoff UX without uploads, databases or paste hosting in v1.
+
+2026-10-11 recipient-selection decision: do not add a public-key address book
+to the current release. Custom recipient public keys stay in memory; users
+select a PEM file or paste its contents each session. FUT-18 may evaluate an
+opt-in IndexedDB public-key address book later against the simpler current flow,
+but persistence and implementation are not selected. No RxDB dependency or
+change to the no-history/storage policy is authorized by this assessment.
+
+2026-10-11 optional file/operation UX assessment: keep the current 64 KiB text
+scope. FUT-15 evaluates arbitrary-file encryption with a proposed 30 MiB input
+limit, native accessible file controls and optional local drag-and-drop; Uppy
+Svelte 5 is a research candidate only. Define a reviewed binary payload/transport
+and matching safe Go recovery before changing any format or limits. FUT-16
+separately evaluates authenticated streaming for 1 GiB and larger files. FUT-17
+tracks truthful status, cancellation and error recovery, including slow exports
+and sharing; cancellation cannot promise to abort native WebCrypto or erase all
+copies. FUT-14 retains explicit export/share handoff without app history or an
+upload backend. These assessments add no dependency and do not delay E08/E09.
 
 Create a professional, calm website where someone chooses a recipient public key, types a message, encrypts entirely in their browser, and saves or shares ciphertext as raw text, a celestial image, or a data-preserving SVG. Ship a **signed downloadable offline Go decrypt CLI** so recipients decrypt using a local passphrase-encrypted private PEM. OpenSSL is used once for key creation; normal encryption uses the website and normal decryption uses one CLI command. The sender can immediately start another message. This receiver choice supersedes the earlier offline-browser proposal.
 

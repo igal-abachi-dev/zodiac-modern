@@ -41,8 +41,16 @@ This is development evidence, not an independent system audit or release approva
 [release-trust.json](../config/release-trust.json) records the user's proposed
 `https://zodiac-modern.vercel.app` address. Availability/control and final response
 headers have not been verified. A custom domain is unnecessary. Official origin,
-Authenticode publisher, independent verification channel, incident/domain/signing
-owners and reviewed release are pending. The operator-confirmed public recipient
+certificate provisioning/public pin and reviewed release are pending. The
+project owner, igal-abachi-dev, is responsible for hosting/signing/incidents.
+Self-signed code signing with intended subject `CN=Zodiac Modern` is selected
+for now, with official GitHub
+Releases/full SHA-256 checksums and GitHub private vulnerability reporting.
+Repository: https://github.com/igal-abachi-dev/zodiac-modern. Channel publication
+and reporting activation remain unverified; only the latest stable is supported.
+self-signing does not establish automatic Windows publisher trust. See
+[release decisions](deployment.md#release-decisions-recorded-2026-10-11).
+The operator-confirmed public recipient
 is configured separately; that does not establish release publisher trust.
 
 Verify a future sender HTML externally **before opening or typing**, against a

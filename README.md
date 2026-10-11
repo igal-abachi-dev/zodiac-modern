@@ -389,6 +389,18 @@ independent random ASCII passphrases with
 password manager. Never run production passphrase generation in an assistant or
 captured terminal, transcript or recording.
 
+The generator defaults to **32 uniformly random characters** from 94 printable
+non-space ASCII characters. Keep that default: its selection entropy is about
+210 bits; 24 characters gives about 157 bits, and 41 gives about 269 bits
+(`length * log2(94)`). These figures describe independent uniform generation,
+not human-chosen passwords or the security strength of the complete system.
+`-Length 41` is supported if you prefer it, but offers little practical benefit
+over the current 32-character default for this profile. Passphrase custody,
+recoverable protected backups and trusted local prompts remain essential.
+The script uses native cryptographic randomness with unbiased selection;
+longer passwords do not compensate for compromised endpoints or exposed copies.
+See [passphrase generation and limits](docs/passphrases.md).
+
 ```powershell
 & .\scripts\New-ZodiacPassphrase.ps1
 # Repeat independently for the final passphrase; store both securely.
@@ -795,6 +807,19 @@ has been selected for implementation. See
 and [CommunityToolkit.Mvvm](https://learn.microsoft.com/en-us/dotnet/communitytoolkit/mvvm/).
 
 ## Deployment and offline use
+
+Release choices: use the free Vercel project URL (desired
+`zodiac-modern.vercel.app`, ownership still unverified), self-signed code signing
+for now, official GitHub Releases with full SHA-256 checksums, and GitHub private
+vulnerability reporting monitored by the maintainer. The public repository is
+[igal-abachi-dev/zodiac-modern](https://github.com/igal-abachi-dev/zodiac-modern),
+owned and operated by its maintainer. The intended certificate subject is
+`CN=Zodiac Modern`; only the latest stable release will be supported. Certificate
+provisioning, reporting activation and reviewed release hashes remain pending;
+the independent reviewer will be selected later.
+Self-signing is not automatic Windows publisher trust; unsigned candidates and a
+future publicly trusted CA certificate remain alternatives. See
+[release decisions and candidate packaging](docs/deployment.md#release-decisions-recorded-2026-10-11).
 
 Build static assets with `pnpm build`. Vercel deployment uses `pnpm build:vercel` to generate static Build Output configuration and headers from the exact built artifact. No Astro runtime adapter, serverless functions, or message API is required. Alternative hosts must pass the same final-origin header and privacy checks; Surge support is conditional on enforceable headers.
 

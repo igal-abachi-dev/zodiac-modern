@@ -30,6 +30,15 @@ is rejected. `-SelfTest` checks the complete unbiased mapping and native generat
 with disposable samples, without displaying a password. The script cannot
 detect every transcript/recorder.
 
+Keep the **32-character default** for normal use. The script also accepts
+`-Length 41` (its supported range is 24 through 128); 41 uniformly selected
+characters from this alphabet has about 269 bits of selection entropy, compared
+with about 210 at 32 characters. That extra length offers little practical
+benefit for the current key-protection profile, and does not raise the security
+strength of the whole RSA/AES system to 269 bits. These calculations assume
+uniform independent generation, not a human-chosen string. Custody and protected,
+recoverable backups matter more than increasing an already strong random length.
+
 ```powershell
 $length = 32 # Choose 24 through 32.
 $alphabet = -join (33..126 | ForEach-Object { [char]$_ })

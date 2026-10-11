@@ -32,6 +32,7 @@
     "check:m4": "node scripts/check-m4.mjs",
     "verify:receiver-deps": "node scripts/receiver.mjs verify",
     "build:receiver": "node scripts/receiver.mjs build",
+    "release:package": "node scripts/release-package.mjs",
     "spike:offline-html": "node scripts/build-offline.mjs",
     "astro": "astro",
     "check:offline": "node scripts/check-offline-sender.mjs",
