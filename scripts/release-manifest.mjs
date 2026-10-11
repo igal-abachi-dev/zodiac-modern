@@ -12,7 +12,12 @@ export function validateEntryName(name) {
     !/^[A-Za-z0-9_.\/-]+$/.test(name) ||
     name.startsWith('/') ||
     name.split('/').some((part) => !part || part === '.' || part === '..') ||
-    name.split('/').some((part) => /[.]$/.test(part))
+    name.split('/').some((part) => /[.]$/.test(part)) ||
+    name
+      .split('/')
+      .some((part) =>
+        /^(?:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\.|$)/i.test(part),
+      )
   )
     throw Error('Unsafe release entry name.');
   return name;
@@ -38,13 +43,21 @@ export async function verifyManifest(root, manifest) {
   if (!Array.isArray(manifest.files) || !manifest.files.length)
     throw Error('Empty manifest.');
   const actual = await manifestEntries(root);
+  const actualNames = new Set(actual.map((entry) => entry.path));
+  if (
+    new Set(actual.map((entry) => entry.path.toLowerCase())).size !==
+    actual.length
+  )
+    throw Error('Ambiguous release file names.');
   const names = new Set();
   for (const entry of manifest.files) {
     validateEntryName(entry.path);
     const collision = entry.path.toLowerCase();
-    if (names.has(collision) || entry.path === 'manifest.json')
+    if (names.has(collision) || collision === 'manifest.json')
       throw Error('Duplicate or self-hashed manifest entry.');
     names.add(collision);
+    if (!actualNames.has(entry.path))
+      throw Error('Release file set differs from manifest.');
     if (
       !Number.isSafeInteger(entry.bytes) ||
       entry.bytes < 0 ||

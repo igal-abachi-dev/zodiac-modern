@@ -73,6 +73,13 @@ this is not clean-room reproducibility evidence. It never signs, deploys, publis
 or declares release readiness. Candidate packaging remains unsigned until the
 selected self-signing workflow is provisioned and separately validated.
 
+The owner-run [signing provisioning helper](../scripts/New-ZodiacSigningCertificate.ps1)
+has a non-mutating `-WhatIf` mode. It requests protected, non-exportable signing
+material in the current-user personal certificate store and exports only a public
+certificate and receipt. Actual provisioning requires native owner interaction;
+it is not performed by candidate packaging. No trust roots are installed. See
+[E09 signing preparation and remaining verification design](reviews/e09-signing-preparation.md).
+
 ## One public repository, two build outputs
 
 The operator selected one public GitHub repository for source and release

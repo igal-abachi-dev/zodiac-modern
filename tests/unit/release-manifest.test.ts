@@ -19,6 +19,10 @@ it('rejects traversal, Windows alternate paths and ambiguous archive names', () 
     'a./b',
     'a:b',
     'a\0b',
+    'NUL.txt',
+    'hosted/CON',
+    'COM1.exe',
+    'LPT9.log',
   ])
     expect(() => validateEntryName(name)).toThrow('Unsafe');
   expect(validateEntryName('hosted/_astro/result.ab123.js')).toBe(
@@ -37,6 +41,12 @@ it('detects changed bytes, extra files, duplicate paths and circular manifest ha
     };
     await writeFile(join(root, 'manifest.json'), JSON.stringify(manifest));
     await expect(verifyManifest(root, manifest)).resolves.toHaveLength(1);
+    await expect(
+      verifyManifest(root, {
+        ...manifest,
+        files: [{ ...manifest.files[0], path: 'hosted/INDEX.html' }],
+      }),
+    ).rejects.toThrow('file set');
     await expect(
       verifyManifest(root, {
         ...manifest,

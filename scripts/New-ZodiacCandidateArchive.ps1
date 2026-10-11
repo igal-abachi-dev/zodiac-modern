@@ -10,8 +10,34 @@ if ((Get-Item -LiteralPath $stagePath).Attributes -band [IO.FileAttributes]::Rep
     throw 'Archive root must not be a reparse point.'
 }
 $manifestPath = Join-Path $stagePath 'manifest.json'
+if ((Get-Item -LiteralPath $manifestPath).Attributes -band [IO.FileAttributes]::ReparsePoint) {
+    throw 'Manifest must not be a reparse point.'
+}
 $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+if ($manifest.schema -cne 'ZODIAC-RELEASE-CANDIDATE-1' -or -not @($manifest.files).Count) {
+    throw 'Unsupported or empty candidate manifest.'
+}
 $names = @('manifest.json') + @($manifest.files | ForEach-Object { $_.path })
+$expected = @{}
+foreach ($record in $manifest.files) {
+    if ($record.path -ieq 'manifest.json' -or $expected.ContainsKey($record.path) -or
+        $record.sha256 -cnotmatch '^[a-f0-9]{64}$' -or $record.bytes -lt 0) {
+        throw 'Invalid or duplicate manifest entry.'
+    }
+    $expected[$record.path] = $record
+}
+foreach ($name in $names) {
+    if ($name -notmatch '^[A-Za-z0-9_.\/-]+$' -or $name.StartsWith('/')) { throw 'Unsafe archive entry.' }
+    $current = $stagePath
+    foreach ($part in $name.Split('/')) {
+        if (-not $part -or $part -eq '.' -or $part -eq '..' -or $part.EndsWith('.') -or
+            $part -match '^(CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(\.|$)') { throw 'Unsafe archive entry.' }
+        $current = Join-Path $current $part
+        if ((Get-Item -LiteralPath $current).Attributes -band [IO.FileAttributes]::ReparsePoint) {
+            throw 'Archive paths must not contain reparse points.'
+        }
+    }
+}
 $stream = [IO.File]::Open($Destination, [IO.FileMode]::CreateNew, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)
 try {
     $archive = New-Object IO.Compression.ZipArchive($stream, [IO.Compression.ZipArchiveMode]::Create, $true)
@@ -46,5 +72,11 @@ try {
         finally { $hash.Dispose(); $input.Dispose() }
         $sourceHash = (Get-FileHash -LiteralPath (Join-Path $stagePath $entry.FullName.Replace('/', '\')) -Algorithm SHA256).Hash.ToLowerInvariant()
         if ($digest -cne $sourceHash) { throw 'Archive bytes differ from staged file.' }
+        if ($entry.FullName -cne 'manifest.json') {
+            $record = $expected[$entry.FullName]
+            if ($digest -cne $record.sha256 -or $entry.Length -ne $record.bytes) {
+                throw 'Archive bytes differ from manifest.'
+            }
+        }
     }
 } finally { $archive.Dispose() }

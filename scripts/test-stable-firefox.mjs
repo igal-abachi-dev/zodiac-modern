@@ -100,6 +100,7 @@ try {
   await mkdir('artifacts/en04', { recursive: true });
   const downloads = await mkdtemp(resolve('artifacts/en04/firefox-downloads-'));
   const request = async (method, path, body) => {
+    report.lastWebDriverOperation = method + ' ' + path;
     const r = await fetch(endpoint + path, {
       method,
       ...(body

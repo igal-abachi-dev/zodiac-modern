@@ -615,6 +615,13 @@ four-provider paste/attachment trials and five novice recipients. Prepared
 procedures are in [the manual handoff](docs/reviews/e08-manual-validation.md);
 no participant/provider result is inferred from local tests.
 
+E09 preparation continuation: fresh stable Chrome for Testing headless maximum-
+size/keyboard/responsive/offline checks and stock Firefox 157.0.1 offline flows
+pass for both RSA sizes. A first Firefox startup request timed out; its receipt
+is retained separately and the diagnostic retry passes. This is author-run
+desktop evidence, not manual AT, native multiline paste, reference mobile/laptop
+or provider-account qualification. See docs/reviews/e09-candidate-evidence.json.
+
 ### QA-03 — obtain and disposition an independent security review
 
 Type: enabler · Priority: P0 · Status: In progress · Milestone: M4/M5 · Dependencies: QA-01, SEC-01, SEC-02, SEC-03, SEC-04, REC-01, EN-04.
@@ -644,6 +651,19 @@ signing, deployment, independent review or recipient identity confirmation.
 Selected self-signing still requires certificate provisioning and a reviewed
 verification design; no certificate or trusted publisher was created by recording
 the decision. Preserve all E08 and release gates rather than marking E09 done.
+
+E09 local preparation update: the owner-run provisioning helper requests a
+protected non-exportable RSA-3072/SHA-256 code-signing certificate and public-only
+receipt; dry-run behavior is tested, but actual native owner prompts/provisioning
+remain pending. The strict Valid-signature receiver verifier is unchanged.
+Candidate archive validation now rejects Windows device names, case aliases,
+duplicate paths and reparse-point parents; actual ZIP bytes must match recorded
+manifest hashes. The complete Go runtime license is included. All 41 unit tests,
+formatting and a rebuilt production unsigned candidate pass. See
+[signing preparation](docs/reviews/e09-signing-preparation.md) and
+[candidate evidence](docs/reviews/e09-candidate-evidence.json). Final signing,
+pinned-signature verification design/review, independent system review,
+OS-denied networking, user trials, custody and deployment/rollback remain open.
 
 ### REL-01 — provision the real public recipient and complete custody verification
 

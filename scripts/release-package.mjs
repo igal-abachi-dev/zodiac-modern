@@ -96,6 +96,10 @@ await copyFile(
   'receiver/vendor/golang.org/x/sys/LICENSE',
   join(stage, 'licenses/go-x-sys.txt'),
 );
+await copyFile(
+  join(runGo(['env', 'GOROOT']).trim(), 'LICENSE'),
+  join(stage, 'licenses/go-runtime.txt'),
+);
 await copyFile('scripts/verify-sender.ps1', join(stage, 'verify-sender.ps1'));
 await copyFile(
   'scripts/verify-receiver.ps1',

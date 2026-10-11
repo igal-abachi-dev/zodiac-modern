@@ -1,0 +1,261 @@
+{
+  "recorded": "2026-10-11T20:55:27.169Z",
+  "scope": "Author-run unsigned E09 candidate preparation and synthetic headless browser qualification. Not human usability, reference-device qualification, independent review, certificate provisioning or a public release.",
+  "candidate": "artifacts/releases/zodiac-modern-0.0.1-45b934084cf2-candidate-20261011205341188",
+  "manifestSHA256": "5143865e7cd1630b61049e1fce0b2810ca1d23d13d8cb9aeae8c7d2ab4e7c5e8",
+  "candidateCheck": {
+    "recorded": "2026-10-11T20:53:50.480Z",
+    "sourceCommit": "45b934084cf2b48194cc60544d86c87bb132468a",
+    "workingTreeDirty": true,
+    "zip": {
+      "name": "zodiac-modern-0.0.1-45b934084cf2-candidate-20261011205341188.zip",
+      "bytes": 3427228,
+      "sha256": "0373258098f5b4e7bf33e11df3bf6afaa33d36a23b407c7538647c788ab452be"
+    },
+    "fileCount": 56,
+    "zipReadback": "all entry bytes matched staged files",
+    "manifestVerification": "passed",
+    "publicHashes": "0373258098f5b4e7bf33e11df3bf6afaa33d36a23b407c7538647c788ab452be  zodiac-modern-0.0.1-45b934084cf2-candidate-20261011205341188.zip\n9a073d9e0f90db0fe3ac2a85cfbc860191981435e00a02aecd570b4816fa2380  zodiac-sender-0.0.1-45b934084cf2-candidate.html\n1aa718192d850d2700186ccb319cd14b11f91b93d5963057e9e0106b5fa97f51  zodiac-decrypt.exe\n5143865e7cd1630b61049e1fce0b2810ca1d23d13d8cb9aeae8c7d2ab4e7c5e8  manifest.json\n",
+    "openGates": [
+      "QA-03 independent integrated review and independently rechecked remediation",
+      "QA-02 human accessibility, reference devices, novice and real provider trials",
+      "QA-01 published CI (inactive template by operator choice)",
+      "SEC-02.4 administrator-enforced receiver network-denial test",
+      "REC-03 operator custody/backup restore and observed first-time recipient trial",
+      "EN-04 reviewed final offline delivery selection and remaining native input qualification",
+      "SEC-04 confirmed origin/publisher/independent verification/reporting owners",
+      "REL-01 independently confirmed recipient identity/fingerprint",
+      "REL-02 final-origin checks and deployment rollback",
+      "REL-03 signed receiver and trusted reviewed final artifact hashes"
+    ]
+  },
+  "sameInputRepeatability": {
+    "htmlHashes": [
+      "9a073d9e0f90db0fe3ac2a85cfbc860191981435e00a02aecd570b4816fa2380",
+      "9a073d9e0f90db0fe3ac2a85cfbc860191981435e00a02aecd570b4816fa2380"
+    ],
+    "receiverHashes": [
+      "1aa718192d850d2700186ccb319cd14b11f91b93d5963057e9e0106b5fa97f51",
+      "1aa718192d850d2700186ccb319cd14b11f91b93d5963057e9e0106b5fa97f51"
+    ],
+    "scope": "Two sequential local builds with the same inputs/cache. Not clean-room reproducibility or independent verification."
+  },
+  "tools": {
+    "node": "v24.21.0",
+    "pnpm": "pnpm@12.8.1",
+    "go": "go version go1.27.1 windows/amd64"
+  },
+  "sourceHashes": {
+    "scripts/New-ZodiacSigningCertificate.ps1": "b2637eea5b908124aafd6d5d58bffc30ddaf295f3c29a2763cbe1f18c1f2f9b1",
+    "scripts/New-ZodiacCandidateArchive.ps1": "4d61090350896e69a58050b4ea6edce8735c82c4cbf99804813b490b48ba2e0b",
+    "scripts/release-manifest.mjs": "5f530d311f6007f6ff899eb59f0ad311d55bef826e9ac7be5276f590fed6fcbd",
+    "scripts/release-package.mjs": "7b123f98aca4a38c9a6344befc7bbbf23602a726d21429f5344b1f8ed8c3b4e1",
+    "scripts/test-stable-firefox.mjs": "bf5b0b66b93a457c85bd48e4d5709125dca33b434cc65aaf643daa37683e1da2",
+    "tests/unit/release-manifest.test.ts": "b7242a68f09b52082f63814ab8cc50f345baf999b4ba150b057d6f20b780772d",
+    "tests/unit/release-archive.test.ts": "0ba3a07c05a981c7e108b436030ce990501bc000d4f71ccf7ab9ef51c62d018d",
+    "config/release-trust.json": "cc395908b0631fdbd3ba954afa146cdbd36bdf47dbcca8306973aa4b79bb8d86"
+  },
+  "stableChrome": {
+    "tests": [
+      {
+        "title": "maximum-size offline encryption, keyboard gate and responsive paging",
+        "status": "passed"
+      },
+      {
+        "title": "native textarea multiline replacement control",
+        "status": "skipped"
+      },
+      {
+        "title": "file probe opens under default settings with no adjacent files or network",
+        "status": "passed"
+      }
+    ],
+    "qualification": [
+      {
+        "recorded": "2026-10-11T20:49:58.293Z",
+        "browser": "155.0.8059.39",
+        "project": "stable-chrome",
+        "system": {
+          "cpu": "AMD Ryzen 9 5900X 12-Core Processor            ",
+          "memoryBytes": 34280431616,
+          "release": "10.0.26200"
+        },
+        "scope": "Author-run desktop headless keyboard/responsive/max-byte checks. Not human accessibility, actual mobile, reference-device qualification or independent review. Long Task API availability recorded; unsupported is not zero long tasks. Timings include automation/paint waiting.",
+        "input": {
+          "utf8Bytes": 65536,
+          "lines": 1,
+          "boundaryEditing": "append/backspace"
+        },
+        "timings": [
+          {
+            "phase": "64KiB-encrypt-and-first-page",
+            "rsaBits": 3072,
+            "milliseconds": 75,
+            "longTaskAPI": true,
+            "longTasks": []
+          },
+          {
+            "phase": "next-page-1280px",
+            "rsaBits": 3072,
+            "milliseconds": 65.69999980926514,
+            "longTaskAPI": true,
+            "longTasks": []
+          },
+          {
+            "phase": "next-page-390px",
+            "rsaBits": 3072,
+            "milliseconds": 44.40000009536743,
+            "longTaskAPI": true,
+            "longTasks": []
+          },
+          {
+            "phase": "64KiB-encrypt-and-first-page",
+            "rsaBits": 4096,
+            "milliseconds": 50.90000009536743,
+            "longTaskAPI": true,
+            "longTasks": []
+          },
+          {
+            "phase": "next-page-1280px",
+            "rsaBits": 4096,
+            "milliseconds": 43.80000019073486,
+            "longTaskAPI": true,
+            "longTasks": []
+          },
+          {
+            "phase": "next-page-390px",
+            "rsaBits": 4096,
+            "milliseconds": 40.200000286102295,
+            "longTaskAPI": true,
+            "longTasks": []
+          }
+        ]
+      }
+    ]
+  },
+  "stableFirefox": {
+    "recorded": "2026-10-11T20:53:22.715Z",
+    "scope": "Stock stable Firefox, synthetic file:// workflow using Mozilla WebDriver. Headless automated compatibility, not human usability, real email paste, OS network denial, independent review or a release verdict.",
+    "checks": [
+      {
+        "rsaBits": 3072,
+        "passed": true,
+        "scope": "custom key, fingerprint gate, native crypto/independent Go, exact raw/SVG/PNG/JSON, print payload/nulls, copy fallback and reset"
+      },
+      {
+        "rsaBits": 4096,
+        "passed": true,
+        "scope": "custom key, fingerprint gate, native crypto/independent Go, exact raw/SVG/PNG/JSON, print payload/nulls, copy fallback and reset"
+      },
+      {
+        "passed": true,
+        "scope": "raw and printed-row recovery; no page HTTP requests, runtime errors, CSP violations, style attributes or local/session storage"
+      }
+    ],
+    "timings": [
+      {
+        "phase": "file-open-and-initial-render",
+        "milliseconds": 131.72549999999956
+      },
+      {
+        "phase": "public-key-import",
+        "rsaBits": 3072,
+        "milliseconds": 17.496900000000096
+      },
+      {
+        "phase": "encrypt-and-result-render",
+        "rsaBits": 3072,
+        "milliseconds": 91.39069999999992
+      },
+      {
+        "phase": "txt-export",
+        "rsaBits": 3072,
+        "milliseconds": 106.21380000000045
+      },
+      {
+        "phase": "svg-export",
+        "rsaBits": 3072,
+        "milliseconds": 109.38950000000023
+      },
+      {
+        "phase": "png-export",
+        "rsaBits": 3072,
+        "milliseconds": 263.78780000000006
+      },
+      {
+        "phase": "json-export",
+        "rsaBits": 3072,
+        "milliseconds": 93.45610000000033
+      },
+      {
+        "phase": "print-page-preparation",
+        "rsaBits": 3072,
+        "milliseconds": 107.88779999999952
+      },
+      {
+        "phase": "public-key-import",
+        "rsaBits": 4096,
+        "milliseconds": 65.9962000000005
+      },
+      {
+        "phase": "encrypt-and-result-render",
+        "rsaBits": 4096,
+        "milliseconds": 60.95679999999993
+      },
+      {
+        "phase": "txt-export",
+        "rsaBits": 4096,
+        "milliseconds": 67.6867000000002
+      },
+      {
+        "phase": "svg-export",
+        "rsaBits": 4096,
+        "milliseconds": 68.90030000000024
+      },
+      {
+        "phase": "png-export",
+        "rsaBits": 4096,
+        "milliseconds": 94.34420000000046
+      },
+      {
+        "phase": "json-export",
+        "rsaBits": 4096,
+        "milliseconds": 72.53740000000016
+      },
+      {
+        "phase": "print-page-preparation",
+        "rsaBits": 4096,
+        "milliseconds": 91.26260000000002
+      }
+    ],
+    "candidate": {
+      "bytes": 173411,
+      "sha256": "13732342abeb66395ab201ab0360ee1f277f9ba20fb497105e799ef5c19a7787"
+    },
+    "tools": {
+      "browserExecutableSHA256": "f029827ec8841dfd36e75acb95343f2669eb86c296eedd49f0e48d80c2a7d514",
+      "driverExecutableSHA256": "e95b4eac7960ffcd5acbfd92bb7d49d48f99c1d01a20ddd297fef8c80821020d"
+    },
+    "lastWebDriverOperation": "POST /session/56708658-d917-45cc-a2da-77f5abff4ca3/execute/sync",
+    "browserVersion": "157.0.1",
+    "platform": "windows",
+    "passed": true
+  },
+  "firstFirefoxAttempt": {
+    "recorded": "2026-10-11T20:51:17.867Z",
+    "scope": "Stock stable Firefox, synthetic file:// workflow using Mozilla WebDriver. Headless automated compatibility, not human usability, real email paste, OS network denial, independent review or a release verdict.",
+    "checks": [],
+    "timings": [],
+    "candidate": {
+      "bytes": 173411,
+      "sha256": "13732342abeb66395ab201ab0360ee1f277f9ba20fb497105e799ef5c19a7787"
+    },
+    "tools": {
+      "browserExecutableSHA256": "f029827ec8841dfd36e75acb95343f2669eb86c296eedd49f0e48d80c2a7d514",
+      "driverExecutableSHA256": "e95b4eac7960ffcd5acbfd92bb7d49d48f99c1d01a20ddd297fef8c80821020d"
+    },
+    "passed": false,
+    "failure": "The operation was aborted due to timeout"
+  },
+  "releaseStatus": "unsigned-unreviewed-development-candidate; mandatory gates remain open"
+}
