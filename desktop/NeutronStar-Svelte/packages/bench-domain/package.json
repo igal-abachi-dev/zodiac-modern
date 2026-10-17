@@ -1,0 +1,13 @@
+{
+  "name": "@neutronstar/bench-domain",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {},
+  "scripts": {
+    "typecheck:package": "tsc --noEmit -p tsconfig.json"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "name": "neutronstar-svelte-baseline",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build:design": "node scripts/build-design.mjs",
+    "typecheck": "pnpm -r --if-present typecheck:package && tsc --noEmit && svelte-check --tsconfig ./tsconfig.json",
+    "build": "pnpm build:design && vite build && node scripts/audit-dist.mjs",
+    "build:test": "pnpm build:design && vite build --mode test --outDir dist-test",
+    "build:workloads": "pnpm build:design && vite build --mode workload --outDir dist-workload",
+    "build:workload-tests": "pnpm build:design && vite build --mode workload-test --outDir dist-workload-test",
+    "build:diagnostics": "pnpm build:design && vite build --mode diagnostic --outDir dist-diagnostic",
+    "test": "tsx --test tests/domain.test.ts tests/workload-model.test.ts",
+    "test:browser": "playwright test",
+    "dev": "vite --host 127.0.0.1",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@neutronstar/bench-domain": "workspace:*",
+    "@neutronstar/bench-contract": "workspace:*",
+    "@neutronstar/design": "workspace:*",
+    "@neutronstar/test-support": "workspace:*",
+    "svelte": "5.57.2",
+    "@ark-ui/svelte": "5.24.3"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "svelte-check": "4.7.7",
+    "vite": "8.3.4",
+    "typescript": "6.0.3",
+    "tailwindcss": "4.3.3",
+    "@tailwindcss/cli": "4.3.3",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/noto-sans-hebrew": "5.3.0",
+    "@fontsource/noto-sans-arabic": "5.3.0",
+    "lucide-static": "1.58.0",
+    "@playwright/test": "1.64.1",
+    "tsx": "4.23.15"
+  },
+  "packageManager": "pnpm@12.8.1",
+  "engines": {
+    "node": ">=24.21.0 <25"
+  }
+}
