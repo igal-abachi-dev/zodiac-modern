@@ -678,3 +678,23 @@ For NeutronStar, Zodiac, a launcher, a Codex-style tool, or almost any normal Ta
 - Prefer simpler update models (Svelte 5 runes, Solid signals, or even plain React without concurrent patterns)
 
 You can safely ignore the concurrent machinery unless profiling shows you actually need it.
+
+
+
+
+
+
+Tauri v2 combined with Svelte (or SvelteKit) is an excellent and modern choice for building lightweight, fast, and resource-efficient Windows 11 desktop applications.
+
+Key Advantages
+
+• Tiny Bundle Sizes: Unlike Electron, which bundles its own Chromium browser and Node.js runtime (often 100 MB to 150 MB+), Tauri uses the system-native WebView2 built into Windows 11. This results in installers and app footprints as small as a few megabytes.
+• Low Memory Footprint: Idle RAM usage typically sits around 20 MB to 100 MB, making it far more lightweight than web-tech alternatives.
+• High Performance UI: Svelte’s reactive, compile-time architecture pairs smoothly with Tauri's high-speed Rust backend, which communicates safely with the operating system via a typed command bridge.
+• Tauri v2 Features: Tauri v2 provides a mature, stable plugin system, fine-grained security capabilities, and support for multi-platform targets if you ever expand beyond Windows. You can find starter setups like the Tauri Svelte Template on GitHub or community-driven project scaffolds like the Tauri 2 + Svelte 5 + Shadcn Boilerplate.
+
+Considerations for Windows 11
+
+• Styling & Fluent Design: Because WebView2 renders web code rather than native WinUI controls by default, matching Windows 11's Fluent Design (mica effects, custom window titlebars, scrollbars, and system theme integration) takes a bit of extra CSS/Tailwind work or specific styling libraries.
+• Prerequisites: Development requires installing Rust, Node.js, and the Microsoft Visual Studio C++ Build Tools (Desktop development with C++) for compilation.
+• Learning Curve: While writing the UI in Svelte is straightforward, writing native system logic or plugins requires basic familiarity with Rust.
