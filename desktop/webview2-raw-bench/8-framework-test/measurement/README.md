@@ -1,5 +1,13 @@
 # External Windows measurement harness
 
+Completed initial collection: [900 primary + 210 supplemental passing attempts](../results/2026-10-17/RESULTS.md),
+with [interpretation](../results/2026-10-17/INTERPRETATION.md) and raw metadata.
+The historical collector issues below are retained, not framework failures.
+The final accepted cohorts are `benchmark-20261017-e` and `workload-20261017-g`.
+Five Python analysis regressions and the C# stale-ancestry/PID-reuse fixtures pass.
+The interim summary's fresh/retained suffix typo was fixed only in postprocessing
+after primary collection; original summary and frozen original source remain.
+
 This is research tooling outside the C++ host and frontend bundles. It uses the
 installed .NET 10 Windows Desktop runtime, Windows UI Automation, Win32 process
 and memory APIs, Process V2 performance counters and GDI client-area capture.
@@ -136,6 +144,8 @@ idle/background/restore behavior and graceful lifecycle. Use equivalent fixtures
 window dimensions, design, data, readiness, workload and resource accounting in
 all three hosts. Avalonia's usual single UI process is not a reason to omit any
 helpers; Electron and WebView2 must include their entire attributed trees.
+The protocol is portable; the current launch arguments and document-scoped UIA
+locators need adapters for Electron/Avalonia, especially native Avalonia controls.
 
 Add equivalent native accessibility/keyboard/IME and DPI tests, reliable GPU and
 frame-pacing traces, I/O and energy/battery measurements, and on-disk/install/

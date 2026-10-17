@@ -47,7 +47,7 @@ def summarize(folder):
         tag = Path(c['output']).name
         if not tag.startswith('measured-'):
             continue
-        condition = 'fresh' if '-fresh-' in tag else 'retained'
+        condition = 'fresh' if tag.endswith('-fresh') else 'retained'
         key = '|'.join([c['app'], c['launch'], condition])
         groups.setdefault(key, []).append(r)
     rows = []

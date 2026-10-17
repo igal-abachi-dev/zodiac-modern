@@ -4,6 +4,11 @@ The production `dist` remains uninstrumented. This collector is a separate lab
 lane, not the desktop startup clock, a field Core Web Vitals assessment, or a
 performance ranking. Collection adds overhead and separate bundle bytes.
 
+Separate external collection has now completed the initial nine-app cohorts:
+[tables and raw metadata](results/2026-10-17/RESULTS.md). That does not turn these
+browser diagnostics into official INP/Lighthouse scores or physical presentation
+timestamps; their export/attribution limits below still apply.
+
 | Command | Output / purpose |
 | --- | --- |
 | `pnpm build:diagnostics` | `apps/<app>/dist-diagnostic`: original screen plus collector |

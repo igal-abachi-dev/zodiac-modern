@@ -777,6 +777,7 @@ Microsoft's [0.82 announcement](https://devblogs.microsoft.com/react-native/%F0%
 
 ### 13.7 Web frontend choice is separate from the desktop host
 
+*Svelte 5 won , its the best default for webview2*
 For the first controlled web-host comparison, use the **same Svelte 5 frontend and assets** across compatible hosts. This fits the repository's existing skills and keeps host, browser distribution and frontend changes from being confounded. These notes do not authorize changing the hosted Astro/Svelte stack or adding any package. If a later question remains about frontend cost, hold one host/browser/workload fixed and compare only a small number of frontend variants.
 
 | Frontend | Useful role / tradeoff to investigate | NeutronStar relevance |
@@ -1412,3 +1413,29 @@ packaging/update/maintenance assessment. Current nine-app results isolate
 frontend choices inside WebView2; they cannot establish a renderer-family winner.
 An installed shared WebView2 Runtime does not imply a shared browser process,
 and Avalonia's usual single-process UI does not itself prove a resource win.
+
+2026-10-17 measured continuation: the initial nine-app study is complete:
+**900 primary + 210 supplemental accepted attempts**, with earlier collector
+failures retained separately. See [key tables and raw metadata](webview2-raw-bench/8-framework-test/results/2026-10-17/RESULTS.md)
+and [source-aware interpretation](webview2-raw-bench/8-framework-test/results/2026-10-17/INTERPRETATION.md).
+All used the same unchanged native host and WebView2 155.0.4283.60. Retained-path
+Ready medians ranged from 524 to 685 ms; fresh-path medians were about 2.00–2.33 s.
+Those are instrumented warm-cache lab conditions, not OS-cold or physical paint.
+
+Visible-idle whole-tree private resident memory was about 101–107 MiB across
+all nine; private commit was about 223–245 MiB. One lifetime per app does not
+establish a statistically replicated memory ranking. React had no large private
+resident premium in that run; its commit was about 16.5 MiB above vanilla and
+its retained-path median about 140 ms higher, while its fresh-path median was
+faster. Large-list results changed order between creation and shrinking. Svelte
+remains a sensible repository default on combined integration/DX/size evidence,
+with Solid, Preact and Vue credible alternatives; the results do not establish
+a universal winner or justify rejecting React on bundle size alone.
+
+All 1,110 accepted attempts passed normal run-owned shutdown checks. Twenty-one
+UIA provider gaps recovered (Alpine nine, patched htmx seven, vanilla five), with
+no remaining worker error. Rejected preliminary stops were collector defects,
+including stale parent-PID attribution; no unrelated process was terminated.
+The older early-init-close issue and physical AT/IME/DPI acceptance remain open.
+Equivalent Electron/Avalonia apps, launch/UIA adapters, GPU/energy/footprint and
+other extended evidence are still needed for the renderer-family comparison.

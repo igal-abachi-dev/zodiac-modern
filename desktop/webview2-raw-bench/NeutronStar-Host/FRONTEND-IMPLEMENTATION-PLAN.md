@@ -6,7 +6,10 @@ workspace, shared packages, local assets and independent renderers. All nine pas
 the current native/browser checks with htmx's explicit offline no-storage patch.
 The original unmodified htmx failure remains in the validation record. The
 user approved a dialog-only bounded CSSOM style exception, documented in the
-workspace contract. Performance runs are deferred. See the
+workspace contract. Initial external measurement is now complete: 900 primary
+and 210 supplemental attempts passed. See the
+[measured results](../8-framework-test/results/2026-10-17/RESULTS.md),
+[interpretation](../8-framework-test/results/2026-10-17/INTERPRETATION.md),
 [validation record](../8-framework-test/VALIDATION.md) and
 [source comparison](../8-framework-test/CODE-COMPARISON.md). The original
 pre-implementation requirements below remain design history; they are not the
@@ -18,16 +21,16 @@ Startup measurement clarification, 2026-10-17: the workspace
 Explorer/PowerShell launch overhead, host process creation, visible window,
 loading text, blank/black intervals, complete content and usable Ready. First
 and repeat launches form a diagnostic pair after verified helper shutdown;
-neither is automatically OS-cold. Collection tooling and performance runs remain
-pending. Full screens/readiness and the current renderer compatibility checks
+neither is automatically OS-cold. Initial external collection is now published
+above; physical presentation and extended scenarios remain open. Full screens/readiness and the current renderer compatibility checks
 are already implemented; see the validation record above for the htmx exception.
 
 Supplemental follow-up: all nine now pass real-host list/filter/remount checks
 under the unchanged CSP, using a separate correctness build. Opt-in diagnostic
 builds provide bounded browser timing entries and tested summary helpers; see
 [diagnostic scope](../8-framework-test/DIAGNOSTICS.md). They do not implement the
-external Windows presentation/process collector or run the deferred performance
-cohort. Production assets remain free of instrumentation.
+external Windows collector themselves; the separate external harness has now
+completed the initial cohorts linked above. Production assets remain free of instrumentation.
 
 Agreed next phase, 2026-10-17: implement/validate the external Windows measurement
 harness, freeze environment/artifacts, pilot vanilla/Svelte/React, then measure

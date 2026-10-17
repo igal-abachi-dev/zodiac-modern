@@ -12,11 +12,13 @@ provider recovery. It then stopped during warmup after stale parent-PID reuse
 incorrectly attributed unrelated older processes. Those 57 attempts are retained;
 the host/apps were not changed. Creation-time ancestry checks and regression
 cases now pass. Replacement collector `benchmark-20261017-e` passed 18/18 pilot
-attempts and is running the full serial cohort. The separate list/input collector
-also passed its revised vanilla/React/htmx pilot (`workload-20261017-g`) and is
-queued after the primary phases. The sequence below
-is the agreed protocol, not a claim that all
-its performance, physical-presentation or accessibility gates have passed.
+attempts and completed all **900 primary attempts**. The separate list/input
+collector (`workload-20261017-g`) completed **210 attempts**. All accepted attempts
+passed: 720 measured startups (36 conditions × 20), 45 idle-state conditions,
+20 control cycles per app, and 81 supplemental operation conditions × 20.
+See the [key tables and raw metadata](results/2026-10-17/RESULTS.md) and
+[interpretation against source findings](results/2026-10-17/INTERPRETATION.md).
+Broader physical-presentation, accessibility and extended-workload gates remain open.
 
 The implemented lane times a new `-NoProfile` PowerShell process, not the
 Explorer context-menu gesture. GDI captures foreground client pixels, not the
@@ -27,10 +29,10 @@ list/input builds remain separate from primary production startup assets.
 
 ## Agreed next steps — 2026-10-17
 
-The nine frontends and their current correctness gates are ready for measurement
-preparation. **Next implement the external measurement harness, then pilot it;
-do not start the full nine-app cohort before those gates pass.** Recording this
-sequence does not claim the harness or performance runs are complete.
+This was the gated sequence agreed before external collection. The initial
+startup/resource/control and supplemental cohorts are now complete as recorded
+above. Retain these gates for new collector versions and future experiments;
+completion does not include unsupported physical or extended endpoints.
 
 1. **Complete and validate external collection.** Capture process identities and
    full host/WebView2-tree private memory/CPU; OS launch timestamps; Windows UIA
@@ -65,10 +67,11 @@ sequence does not claim the harness or performance runs are complete.
    universal framework score. Physical AT/IME/DPI acceptance remains a distinct
    product-selection gate.
 
-The browser diagnostic collector covers only part of step 1. It does not supply
+The browser diagnostic collector alone covers only part of step 1. It does not supply
 PowerShell/OS launch timing, hardware presentation, UIA integration, native full
-JSON export or total process-tree resources. Performance cohorts remain deferred
-until the harness and pilot are accepted. See [VALIDATION.md](VALIDATION.md) for
+JSON export or total process-tree resources. The separate external harness now
+supplies the supported Windows endpoints and completed the initial cohorts.
+Physical presentation and browser-entry native export remain separate. See [VALIDATION.md](VALIDATION.md) for
 completed correctness evidence and [DIAGNOSTICS.md](DIAGNOSTICS.md) for limits.
 
 ## Frozen conditions and primary sampling
@@ -210,7 +213,7 @@ search input is an auxiliary stress probe, not a replacement for Ark/Zag control
 | Typing during updates | Search/filter the same list while bounded 10/30/60 Hz updates run; default 30 Hz for two seconds | Keystroke-to-input-paint and keystroke-to-correct-result separately, p50/p95, missed frame budgets, stale/missing input; actual IME/composition remains manual acceptance |
 | Lifetime cleanup | Stop/dispose old model and unmount renderer, then mount a fresh instance | Subscriber/listener/DOM and heap trends across 100 cycles; collection timing and GC affect results. Short test verifies five remounts with an old burst timer unable to update the new store |
 | Control soak | Repeated About dialog focus/Escape/return and start/cancel/reset cycles on the original screen | Input-to-visible response, focus errors, retained dialog nodes/services, idle recovery. Five correctness cycles exist; a longer bounded soak is still needed |
-| Idle/background/restore | Existing host/window and readiness protocol | Whole process tree, CPU/I/O/wakeups, private memory, GPU attribution, minimize/restore latency; collector remains pending |
+| Idle/background/restore | Existing host/window and readiness protocol | Initial process-tree private memory/CPU collected; I/O/wakeups, GPU attribution and physical minimize/restore latency remain open |
 
 The correctness suite also exercises 10,000-row creation, an empty filter result,
 ASCII sequential typing, Hebrew/Arabic filter strings, no extra remote requests,
@@ -259,8 +262,9 @@ Optional browser diagnostics now specified in the
 FCP, LCP, eligible interaction/Event Timing, CLS, long-task/loading blocking time
 and main-thread trace attribution. A bounded opt-in [browser collector](DIAGNOSTICS.md)
 is now implemented for raw entries and provisional shift/blocking summaries.
-Main-thread trace attribution, native JSON extraction and synchronized display/
-process collection remain pending. Record support, time origins, navigation,
+Main-thread trace attribution, full browser-entry native JSON extraction and
+physical presentation remain pending; external client-frame/UIA/process
+collection is now published. Record support, time origins, navigation,
 finalization rules and overhead; do not infer field INP or Lighthouse TBT from
 Playwright test duration. Keep native launch/visual/readiness clocks and the
 whole-process resource measurements as the primary desktop evidence.
@@ -289,7 +293,7 @@ early-initialization shutdown issue remains a comparison limitation.
 Keep physical keyboard, Narrator/NVDA, high contrast, 100/150/200% DPI,
 multi-monitor movement, RTL and actual browser/OS network-storage tracing in
 the acceptance matrix. Automated media emulation is a smoke check, not full
-Windows acceptance. No GPU/frame-time or process-tree resource winner has been
-measured by building these apps. Broad collection tooling and the repeated
-performance runs remain to be carried out; current reports are correctness and
-artifact evidence only.
+Windows acceptance. Building the apps alone did not supply performance evidence;
+the initial external startup/resource/control and list/input cohorts are now
+published above. GPU/frame-time, physical acceptance and extended scenarios
+remain open. No universal framework or renderer-family winner is established.

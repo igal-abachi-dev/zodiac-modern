@@ -1,5 +1,11 @@
 # Supplemental external workload lane
 
+Final cohort `workload-20261017-g` completed 210 passing process attempts:
+three pilot, 27 warmup and 180 measured. [Tables](../results/2026-10-17/SUPPLEMENTAL.md)
+and [interpretation](../results/2026-10-17/INTERPRETATION.md) are published. Older
+development failures and collector versions remain separate. Discovery now uses
+the shared PID-and-creation-time ancestry checks and regression fixtures.
+
 This collector drives `dist-workload`, never production `dist`. It is separate
 from the frozen startup/idle collector and uses the same unchanged Release host.
 It sends Windows mouse and keyboard input; it does not invoke the test-only

@@ -1,7 +1,25 @@
 import unittest
+import json
+from pathlib import Path
+import tempfile
 from analyze import distribution, paired_interval, visual_summary, validate_idle
+from run import summarize
 
 class AnalysisTests(unittest.TestCase):
+    def test_raw_summary_keeps_fresh_and_retained_paths_separate(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);(root/'runs').mkdir()
+            for app in ['vanilla','react']:
+                for condition in ['fresh','retained']:
+                    folder=root/'runs'/f'measured-03-{app}-direct-{condition}';folder.mkdir()
+                    (folder/'result.json').write_text(json.dumps({'status':'passed','hostToReadyMs':100,'launchToReadyMs':110,
+                        'config':{'app':app,'launch':'direct','scenario':'startup','output':str(folder)}}))
+                    (folder/'frames.json').write_text('[{"startMs":0},{"startMs":10}]')
+            summarize(root)
+            summary=json.loads((root/'summary.json').read_text())
+            self.assertEqual(len(summary['startup']),4)
+            self.assertEqual({r['n'] for r in summary['startup']},{1})
+
     def test_nearest_rank_and_small_groups(self):
         result=distribution(list(range(1,21)))
         self.assertEqual(result['median'],10.5)

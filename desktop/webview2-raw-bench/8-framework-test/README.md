@@ -199,8 +199,9 @@ profile. The ordinary `Run.ps1` still launches production `dist`, which contains
 no workload driver. Browser checks cover sequential typing, multilingual filters,
 timer cleanup and repeated original Ark/Zag control actions. All nine supplemental
 workloads now pass native-host correctness too, using `pnpm build:workload-tests`
-and `scripts/Test-Frontends.ps1 -Lane workload`. Synchronized timing,
-heap/process-tree sampling and long soaks remain pending.
+and `scripts/Test-Frontends.ps1 -Lane workload`. External startup/process-tree
+and semantic workload measurements are now published below. Physical presentation,
+heap-trend studies and long soaks remain pending.
 
 Opt-in browser observers are available in separate diagnostic builds; see
 [DIAGNOSTICS.md](DIAGNOSTICS.md) for commands, bounded/redacted data, correctness
@@ -214,5 +215,8 @@ randomized measurements of all nine, then evidence-based analysis. App and
 collector correctness passes do not complete the external harness. The full
 performance cohort was gated on the harness and pilot. The user has now
 authorized it: the [external Windows harness](measurement/README.md) passed its
-18-attempt pilot and the randomized startup cohort is in progress. Final
-comparative results are not yet claimed.
+18-attempt pilot and completed 900 primary attempts. The separate supplemental
+cohort completed 210 attempts. All accepted attempts passed; rejected earlier
+collector versions remain separate. Read the [key measured tables](results/2026-10-17/RESULTS.md)
+and [interpretation](results/2026-10-17/INTERPRETATION.md). Physical AT/IME/DPI,
+GPU/energy and extended-lifetime acceptance remain open.

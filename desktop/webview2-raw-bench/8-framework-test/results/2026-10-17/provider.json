@@ -1,0 +1,6302 @@
+[
+  {
+    "sample": "actions-alpine",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.04780000448227
+  },
+  {
+    "sample": "actions-htmx",
+    "app": "htmx",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 64.75739997625351
+  },
+  {
+    "sample": "actions-lit",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.046999990940094
+  },
+  {
+    "sample": "actions-preact",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.9268000125885
+  },
+  {
+    "sample": "actions-react",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.68520003557205
+  },
+  {
+    "sample": "actions-solid",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.164000034332275
+  },
+  {
+    "sample": "actions-svelte",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.42830002307892
+  },
+  {
+    "sample": "actions-vanilla",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 73.74810004234314
+  },
+  {
+    "sample": "actions-vue",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.92239999771118
+  },
+  {
+    "sample": "measured-03-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.51969999074936
+  },
+  {
+    "sample": "measured-03-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.04780000448227
+  },
+  {
+    "sample": "measured-03-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.53420001268387
+  },
+  {
+    "sample": "measured-03-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.86360001564026
+  },
+  {
+    "sample": "measured-03-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 45.09239995479584
+  },
+  {
+    "sample": "measured-03-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.19339996576309
+  },
+  {
+    "sample": "measured-03-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.79739999771118
+  },
+  {
+    "sample": "measured-03-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.589299976825714
+  },
+  {
+    "sample": "measured-03-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.68840003013611
+  },
+  {
+    "sample": "measured-03-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.732600033283234
+  },
+  {
+    "sample": "measured-03-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.09249997138977
+  },
+  {
+    "sample": "measured-03-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.78899997472763
+  },
+  {
+    "sample": "measured-03-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.67919999361038
+  },
+  {
+    "sample": "measured-03-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.837400019168854
+  },
+  {
+    "sample": "measured-03-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.75999999046326
+  },
+  {
+    "sample": "measured-03-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.544700026512146
+  },
+  {
+    "sample": "measured-03-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.09859997034073
+  },
+  {
+    "sample": "measured-03-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 52.0145999789238
+  },
+  {
+    "sample": "measured-03-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.55270004272461
+  },
+  {
+    "sample": "measured-03-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.65539997816086
+  },
+  {
+    "sample": "measured-03-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.38419997692108
+  },
+  {
+    "sample": "measured-03-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 63.9456000328064
+  },
+  {
+    "sample": "measured-03-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.685000002384186
+  },
+  {
+    "sample": "measured-03-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 73.58570003509521
+  },
+  {
+    "sample": "measured-03-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.974399983882904
+  },
+  {
+    "sample": "measured-03-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.59529995918274
+  },
+  {
+    "sample": "measured-03-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.00639998912811
+  },
+  {
+    "sample": "measured-03-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 182.83930003643036
+  },
+  {
+    "sample": "measured-03-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 67.62430000305176
+  },
+  {
+    "sample": "measured-03-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.47689998149872
+  },
+  {
+    "sample": "measured-03-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.06800001859665
+  },
+  {
+    "sample": "measured-03-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.564900040626526
+  },
+  {
+    "sample": "measured-03-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.04729998111725
+  },
+  {
+    "sample": "measured-03-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.33090001344681
+  },
+  {
+    "sample": "measured-03-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.8507000207901
+  },
+  {
+    "sample": "measured-03-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.62880003452301
+  },
+  {
+    "sample": "measured-04-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.664799988269806
+  },
+  {
+    "sample": "measured-04-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 52.95289999246597
+  },
+  {
+    "sample": "measured-04-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 38.4796000123024
+  },
+  {
+    "sample": "measured-04-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.32860004901886
+  },
+  {
+    "sample": "measured-04-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.20859998464584
+  },
+  {
+    "sample": "measured-04-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.68439996242523
+  },
+  {
+    "sample": "measured-04-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.62200003862381
+  },
+  {
+    "sample": "measured-04-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.50370001792908
+  },
+  {
+    "sample": "measured-04-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.80360001325607
+  },
+  {
+    "sample": "measured-04-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.86309999227524
+  },
+  {
+    "sample": "measured-04-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.55360001325607
+  },
+  {
+    "sample": "measured-04-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.61470001935959
+  },
+  {
+    "sample": "measured-04-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.0518000125885
+  },
+  {
+    "sample": "measured-04-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.69029998779297
+  },
+  {
+    "sample": "measured-04-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.31370002031326
+  },
+  {
+    "sample": "measured-04-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.34520000219345
+  },
+  {
+    "sample": "measured-04-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.13239997625351
+  },
+  {
+    "sample": "measured-04-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.405099987983704
+  },
+  {
+    "sample": "measured-04-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.34709995985031
+  },
+  {
+    "sample": "measured-04-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.37379997968674
+  },
+  {
+    "sample": "measured-04-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.17950004339218
+  },
+  {
+    "sample": "measured-04-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.06049996614456
+  },
+  {
+    "sample": "measured-04-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.10470002889633
+  },
+  {
+    "sample": "measured-04-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.72069996595383
+  },
+  {
+    "sample": "measured-04-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.78899997472763
+  },
+  {
+    "sample": "measured-04-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.15820002555847
+  },
+  {
+    "sample": "measured-04-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.46560001373291
+  },
+  {
+    "sample": "measured-04-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.68589997291565
+  },
+  {
+    "sample": "measured-04-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.19060003757477
+  },
+  {
+    "sample": "measured-04-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.525600016117096
+  },
+  {
+    "sample": "measured-04-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.27880001068115
+  },
+  {
+    "sample": "measured-04-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.94120001792908
+  },
+  {
+    "sample": "measured-04-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.85920000076294
+  },
+  {
+    "sample": "measured-04-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 72.7490000128746
+  },
+  {
+    "sample": "measured-04-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.28890001773834
+  },
+  {
+    "sample": "measured-04-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.339999973773956
+  },
+  {
+    "sample": "measured-05-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.438399970531464
+  },
+  {
+    "sample": "measured-05-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 66.41480004787445
+  },
+  {
+    "sample": "measured-05-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.933899998664856
+  },
+  {
+    "sample": "measured-05-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 46.878000020980835
+  },
+  {
+    "sample": "measured-05-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.13499999046326
+  },
+  {
+    "sample": "measured-05-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.514999985694885
+  },
+  {
+    "sample": "measured-05-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.75800001621246
+  },
+  {
+    "sample": "measured-05-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.78700000047684
+  },
+  {
+    "sample": "measured-05-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.77590000629425
+  },
+  {
+    "sample": "measured-05-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.85920000076294
+  },
+  {
+    "sample": "measured-05-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.626399993896484
+  },
+  {
+    "sample": "measured-05-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 60.94580000638962
+  },
+  {
+    "sample": "measured-05-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 32.83629995584488
+  },
+  {
+    "sample": "measured-05-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.32829999923706
+  },
+  {
+    "sample": "measured-05-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.64039999246597
+  },
+  {
+    "sample": "measured-05-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.759299993515015
+  },
+  {
+    "sample": "measured-05-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.14420002698898
+  },
+  {
+    "sample": "measured-05-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.112399995326996
+  },
+  {
+    "sample": "measured-05-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.28320002555847
+  },
+  {
+    "sample": "measured-05-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.784400045871735
+  },
+  {
+    "sample": "measured-05-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.81599998474121
+  },
+  {
+    "sample": "measured-05-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.028999984264374
+  },
+  {
+    "sample": "measured-05-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.807600021362305
+  },
+  {
+    "sample": "measured-05-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 67.5025999546051
+  },
+  {
+    "sample": "measured-05-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.75800001621246
+  },
+  {
+    "sample": "measured-05-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.27310001850128
+  },
+  {
+    "sample": "measured-05-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.44729995727539
+  },
+  {
+    "sample": "measured-05-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.481199979782104
+  },
+  {
+    "sample": "measured-05-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.40829998254776
+  },
+  {
+    "sample": "measured-05-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.65539997816086
+  },
+  {
+    "sample": "measured-05-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.34380000829697
+  },
+  {
+    "sample": "measured-05-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 39.26910001039505
+  },
+  {
+    "sample": "measured-05-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.42969995737076
+  },
+  {
+    "sample": "measured-05-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.033999979496
+  },
+  {
+    "sample": "measured-05-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.1807000041008
+  },
+  {
+    "sample": "measured-05-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 739.5967000126839
+  },
+  {
+    "sample": "measured-06-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.19089996814728
+  },
+  {
+    "sample": "measured-06-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.266699969768524
+  },
+  {
+    "sample": "measured-06-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.87999999523163
+  },
+  {
+    "sample": "measured-06-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 42.090900003910065
+  },
+  {
+    "sample": "measured-06-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.71189999580383
+  },
+  {
+    "sample": "measured-06-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.368499994277954
+  },
+  {
+    "sample": "measured-06-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.6904000043869
+  },
+  {
+    "sample": "measured-06-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.546400010585785
+  },
+  {
+    "sample": "measured-06-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.83739995956421
+  },
+  {
+    "sample": "measured-06-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.96289998292923
+  },
+  {
+    "sample": "measured-06-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.02009999752045
+  },
+  {
+    "sample": "measured-06-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.24339997768402
+  },
+  {
+    "sample": "measured-06-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.54710000753403
+  },
+  {
+    "sample": "measured-06-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.132699966430664
+  },
+  {
+    "sample": "measured-06-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.425999999046326
+  },
+  {
+    "sample": "measured-06-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 67.95129996538162
+  },
+  {
+    "sample": "measured-06-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.35799998044968
+  },
+  {
+    "sample": "measured-06-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 59.51429998874664
+  },
+  {
+    "sample": "measured-06-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.159099996089935
+  },
+  {
+    "sample": "measured-06-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.619799971580505
+  },
+  {
+    "sample": "measured-06-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.52319997549057
+  },
+  {
+    "sample": "measured-06-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 63.402499973773956
+  },
+  {
+    "sample": "measured-06-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.9689000248909
+  },
+  {
+    "sample": "measured-06-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.01629996299744
+  },
+  {
+    "sample": "measured-06-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.45490002632141
+  },
+  {
+    "sample": "measured-06-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 68.58799999952316
+  },
+  {
+    "sample": "measured-06-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.69559997320175
+  },
+  {
+    "sample": "measured-06-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.471000015735626
+  },
+  {
+    "sample": "measured-06-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.36760002374649
+  },
+  {
+    "sample": "measured-06-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.21710002422333
+  },
+  {
+    "sample": "measured-06-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.21529996395111
+  },
+  {
+    "sample": "measured-06-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.96170002222061
+  },
+  {
+    "sample": "measured-06-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.63739997148514
+  },
+  {
+    "sample": "measured-06-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.87540000677109
+  },
+  {
+    "sample": "measured-06-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.042900025844574
+  },
+  {
+    "sample": "measured-06-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.39019995927811
+  },
+  {
+    "sample": "measured-07-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.56809997558594
+  },
+  {
+    "sample": "measured-07-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.18340003490448
+  },
+  {
+    "sample": "measured-07-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.36989998817444
+  },
+  {
+    "sample": "measured-07-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.09920001029968
+  },
+  {
+    "sample": "measured-07-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.383500039577484
+  },
+  {
+    "sample": "measured-07-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.35130000114441
+  },
+  {
+    "sample": "measured-07-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.59740000963211
+  },
+  {
+    "sample": "measured-07-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.67280000448227
+  },
+  {
+    "sample": "measured-07-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.28339999914169
+  },
+  {
+    "sample": "measured-07-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.80750000476837
+  },
+  {
+    "sample": "measured-07-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.55039995908737
+  },
+  {
+    "sample": "measured-07-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.099399983882904
+  },
+  {
+    "sample": "measured-07-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.653099954128265
+  },
+  {
+    "sample": "measured-07-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 101.25720000267029
+  },
+  {
+    "sample": "measured-07-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.4970999956131
+  },
+  {
+    "sample": "measured-07-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.791499972343445
+  },
+  {
+    "sample": "measured-07-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.29030001163483
+  },
+  {
+    "sample": "measured-07-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.078099966049194
+  },
+  {
+    "sample": "measured-07-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.93259996175766
+  },
+  {
+    "sample": "measured-07-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.560300052165985
+  },
+  {
+    "sample": "measured-07-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.31370002031326
+  },
+  {
+    "sample": "measured-07-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.7461000084877
+  },
+  {
+    "sample": "measured-07-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.932600021362305
+  },
+  {
+    "sample": "measured-07-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.810000002384186
+  },
+  {
+    "sample": "measured-07-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.78380000591278
+  },
+  {
+    "sample": "measured-07-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 57.174199998378754
+  },
+  {
+    "sample": "measured-07-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.11329996585846
+  },
+  {
+    "sample": "measured-07-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 60.374500036239624
+  },
+  {
+    "sample": "measured-07-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.91939997673035
+  },
+  {
+    "sample": "measured-07-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.8435999751091
+  },
+  {
+    "sample": "measured-07-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.24169999361038
+  },
+  {
+    "sample": "measured-07-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.837599992752075
+  },
+  {
+    "sample": "measured-07-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.79670000076294
+  },
+  {
+    "sample": "measured-07-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 59.52640002965927
+  },
+  {
+    "sample": "measured-07-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 60.69500005245209
+  },
+  {
+    "sample": "measured-07-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.12370002269745
+  },
+  {
+    "sample": "measured-08-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.89399999380112
+  },
+  {
+    "sample": "measured-08-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 59.896600008010864
+  },
+  {
+    "sample": "measured-08-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.04399996995926
+  },
+  {
+    "sample": "measured-08-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.43790000677109
+  },
+  {
+    "sample": "measured-08-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.35710000991821
+  },
+  {
+    "sample": "measured-08-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.011500000953674
+  },
+  {
+    "sample": "measured-08-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.378600001335144
+  },
+  {
+    "sample": "measured-08-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.27369999885559
+  },
+  {
+    "sample": "measured-08-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.28940004110336
+  },
+  {
+    "sample": "measured-08-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.7039999961853
+  },
+  {
+    "sample": "measured-08-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.38069999217987
+  },
+  {
+    "sample": "measured-08-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.910199999809265
+  },
+  {
+    "sample": "measured-08-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.620899975299835
+  },
+  {
+    "sample": "measured-08-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.751599967479706
+  },
+  {
+    "sample": "measured-08-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.067700028419495
+  },
+  {
+    "sample": "measured-08-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.44910001754761
+  },
+  {
+    "sample": "measured-08-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.424100041389465
+  },
+  {
+    "sample": "measured-08-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.03019994497299
+  },
+  {
+    "sample": "measured-08-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 91.14500004053116
+  },
+  {
+    "sample": "measured-08-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.177100002765656
+  },
+  {
+    "sample": "measured-08-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.192200005054474
+  },
+  {
+    "sample": "measured-08-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.42110002040863
+  },
+  {
+    "sample": "measured-08-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.059499979019165
+  },
+  {
+    "sample": "measured-08-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.65410000085831
+  },
+  {
+    "sample": "measured-08-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.599599957466125
+  },
+  {
+    "sample": "measured-08-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 64.08790004253387
+  },
+  {
+    "sample": "measured-08-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.58660000562668
+  },
+  {
+    "sample": "measured-08-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.82459998130798
+  },
+  {
+    "sample": "measured-08-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.058999955654144
+  },
+  {
+    "sample": "measured-08-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.5178000330925
+  },
+  {
+    "sample": "measured-08-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.46329998970032
+  },
+  {
+    "sample": "measured-08-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.636500000953674
+  },
+  {
+    "sample": "measured-08-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.65090000629425
+  },
+  {
+    "sample": "measured-08-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.96789997816086
+  },
+  {
+    "sample": "measured-08-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.58569997549057
+  },
+  {
+    "sample": "measured-08-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.8720999956131
+  },
+  {
+    "sample": "measured-09-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.29550004005432
+  },
+  {
+    "sample": "measured-09-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.84950000047684
+  },
+  {
+    "sample": "measured-09-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.44989997148514
+  },
+  {
+    "sample": "measured-09-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.0232999920845
+  },
+  {
+    "sample": "measured-09-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.69980001449585
+  },
+  {
+    "sample": "measured-09-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.998699963092804
+  },
+  {
+    "sample": "measured-09-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.92700004577637
+  },
+  {
+    "sample": "measured-09-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.67160004377365
+  },
+  {
+    "sample": "measured-09-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.019999980926514
+  },
+  {
+    "sample": "measured-09-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.517199993133545
+  },
+  {
+    "sample": "measured-09-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.40519994497299
+  },
+  {
+    "sample": "measured-09-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.40549999475479
+  },
+  {
+    "sample": "measured-09-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.70859998464584
+  },
+  {
+    "sample": "measured-09-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.52319997549057
+  },
+  {
+    "sample": "measured-09-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.04370003938675
+  },
+  {
+    "sample": "measured-09-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.73650002479553
+  },
+  {
+    "sample": "measured-09-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.451399981975555
+  },
+  {
+    "sample": "measured-09-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.282999992370605
+  },
+  {
+    "sample": "measured-09-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.71129995584488
+  },
+  {
+    "sample": "measured-09-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.085100054740906
+  },
+  {
+    "sample": "measured-09-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.56669998168945
+  },
+  {
+    "sample": "measured-09-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.76050001382828
+  },
+  {
+    "sample": "measured-09-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.54439997673035
+  },
+  {
+    "sample": "measured-09-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.00279998779297
+  },
+  {
+    "sample": "measured-09-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.50859999656677
+  },
+  {
+    "sample": "measured-09-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.49140000343323
+  },
+  {
+    "sample": "measured-09-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.7189000248909
+  },
+  {
+    "sample": "measured-09-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.4349000453949
+  },
+  {
+    "sample": "measured-09-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.65420001745224
+  },
+  {
+    "sample": "measured-09-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 69.51480001211166
+  },
+  {
+    "sample": "measured-09-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.59119999408722
+  },
+  {
+    "sample": "measured-09-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 79.16300004720688
+  },
+  {
+    "sample": "measured-09-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 67.9666999578476
+  },
+  {
+    "sample": "measured-09-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.15929996967316
+  },
+  {
+    "sample": "measured-09-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.79170000553131
+  },
+  {
+    "sample": "measured-09-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.05720001459122
+  },
+  {
+    "sample": "measured-10-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.36419999599457
+  },
+  {
+    "sample": "measured-10-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.49930000305176
+  },
+  {
+    "sample": "measured-10-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.924100041389465
+  },
+  {
+    "sample": "measured-10-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.92940002679825
+  },
+  {
+    "sample": "measured-10-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.838699996471405
+  },
+  {
+    "sample": "measured-10-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.25749999284744
+  },
+  {
+    "sample": "measured-10-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 38.84460002183914
+  },
+  {
+    "sample": "measured-10-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.15839999914169
+  },
+  {
+    "sample": "measured-10-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.17720001935959
+  },
+  {
+    "sample": "measured-10-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.335700035095215
+  },
+  {
+    "sample": "measured-10-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 52.90869998931885
+  },
+  {
+    "sample": "measured-10-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.53529995679855
+  },
+  {
+    "sample": "measured-10-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.77959996461868
+  },
+  {
+    "sample": "measured-10-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.56879997253418
+  },
+  {
+    "sample": "measured-10-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.24920004606247
+  },
+  {
+    "sample": "measured-10-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 77.18830001354218
+  },
+  {
+    "sample": "measured-10-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.57409995794296
+  },
+  {
+    "sample": "measured-10-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.948499977588654
+  },
+  {
+    "sample": "measured-10-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.73860001564026
+  },
+  {
+    "sample": "measured-10-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.99309998750687
+  },
+  {
+    "sample": "measured-10-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.151199996471405
+  },
+  {
+    "sample": "measured-10-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.1347000002861
+  },
+  {
+    "sample": "measured-10-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.909099996089935
+  },
+  {
+    "sample": "measured-10-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.41370004415512
+  },
+  {
+    "sample": "measured-10-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.261699974536896
+  },
+  {
+    "sample": "measured-10-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.6793999671936
+  },
+  {
+    "sample": "measured-10-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 31.094299972057343
+  },
+  {
+    "sample": "measured-10-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.412999987602234
+  },
+  {
+    "sample": "measured-10-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.29780000448227
+  },
+  {
+    "sample": "measured-10-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.11860001087189
+  },
+  {
+    "sample": "measured-10-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.12449997663498
+  },
+  {
+    "sample": "measured-10-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.37760001420975
+  },
+  {
+    "sample": "measured-10-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.946000039577484
+  },
+  {
+    "sample": "measured-10-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.14869999885559
+  },
+  {
+    "sample": "measured-10-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.38780003786087
+  },
+  {
+    "sample": "measured-10-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.28490000963211
+  },
+  {
+    "sample": "measured-11-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.61280000209808
+  },
+  {
+    "sample": "measured-11-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 40.5310999751091
+  },
+  {
+    "sample": "measured-11-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.97589999437332
+  },
+  {
+    "sample": "measured-11-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.545100033283234
+  },
+  {
+    "sample": "measured-11-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.66530001163483
+  },
+  {
+    "sample": "measured-11-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 63.12200003862381
+  },
+  {
+    "sample": "measured-11-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.825100004673004
+  },
+  {
+    "sample": "measured-11-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 68.8914999961853
+  },
+  {
+    "sample": "measured-11-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 74.1236999630928
+  },
+  {
+    "sample": "measured-11-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.0149000287056
+  },
+  {
+    "sample": "measured-11-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.0353000164032
+  },
+  {
+    "sample": "measured-11-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 111.08069998025894
+  },
+  {
+    "sample": "measured-11-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.79260003566742
+  },
+  {
+    "sample": "measured-11-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.298000037670135
+  },
+  {
+    "sample": "measured-11-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.34189999103546
+  },
+  {
+    "sample": "measured-11-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.62870001792908
+  },
+  {
+    "sample": "measured-11-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.63639998435974
+  },
+  {
+    "sample": "measured-11-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 57.17570000886917
+  },
+  {
+    "sample": "measured-11-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.94470000267029
+  },
+  {
+    "sample": "measured-11-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 68.14809995889664
+  },
+  {
+    "sample": "measured-11-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.5271999835968
+  },
+  {
+    "sample": "measured-11-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.45319998264313
+  },
+  {
+    "sample": "measured-11-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.32359999418259
+  },
+  {
+    "sample": "measured-11-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.61809998750687
+  },
+  {
+    "sample": "measured-11-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.77869999408722
+  },
+  {
+    "sample": "measured-11-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.24089998006821
+  },
+  {
+    "sample": "measured-11-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 32.560900032520294
+  },
+  {
+    "sample": "measured-11-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.08200001716614
+  },
+  {
+    "sample": "measured-11-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.95829999446869
+  },
+  {
+    "sample": "measured-11-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.406899988651276
+  },
+  {
+    "sample": "measured-11-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.21069997549057
+  },
+  {
+    "sample": "measured-11-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.27539998292923
+  },
+  {
+    "sample": "measured-11-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.67129999399185
+  },
+  {
+    "sample": "measured-11-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 76.69150000810623
+  },
+  {
+    "sample": "measured-11-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.45719999074936
+  },
+  {
+    "sample": "measured-11-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.69909995794296
+  },
+  {
+    "sample": "measured-12-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.21490001678467
+  },
+  {
+    "sample": "measured-12-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.65240001678467
+  },
+  {
+    "sample": "measured-12-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.32850003242493
+  },
+  {
+    "sample": "measured-12-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.96820002794266
+  },
+  {
+    "sample": "measured-12-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.05919998884201
+  },
+  {
+    "sample": "measured-12-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.91850000619888
+  },
+  {
+    "sample": "measured-12-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.244599997997284
+  },
+  {
+    "sample": "measured-12-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.91549998521805
+  },
+  {
+    "sample": "measured-12-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 70.66110002994537
+  },
+  {
+    "sample": "measured-12-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.40490001440048
+  },
+  {
+    "sample": "measured-12-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.300200045108795
+  },
+  {
+    "sample": "measured-12-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.70279997587204
+  },
+  {
+    "sample": "measured-12-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.48259997367859
+  },
+  {
+    "sample": "measured-12-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.260300040245056
+  },
+  {
+    "sample": "measured-12-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.914099991321564
+  },
+  {
+    "sample": "measured-12-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.4297000169754
+  },
+  {
+    "sample": "measured-12-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 67.62169998884201
+  },
+  {
+    "sample": "measured-12-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.741200029850006
+  },
+  {
+    "sample": "measured-12-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.850499987602234
+  },
+  {
+    "sample": "measured-12-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.65590000152588
+  },
+  {
+    "sample": "measured-12-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.87739998102188
+  },
+  {
+    "sample": "measured-12-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.99119997024536
+  },
+  {
+    "sample": "measured-12-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.51630002260208
+  },
+  {
+    "sample": "measured-12-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.82130002975464
+  },
+  {
+    "sample": "measured-12-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 85.28090000152588
+  },
+  {
+    "sample": "measured-12-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 60.1246999502182
+  },
+  {
+    "sample": "measured-12-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.16780000925064
+  },
+  {
+    "sample": "measured-12-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.68550002574921
+  },
+  {
+    "sample": "measured-12-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.89809995889664
+  },
+  {
+    "sample": "measured-12-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.50529998540878
+  },
+  {
+    "sample": "measured-12-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 61.9142000079155
+  },
+  {
+    "sample": "measured-12-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 63.46169996261597
+  },
+  {
+    "sample": "measured-12-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.549100041389465
+  },
+  {
+    "sample": "measured-12-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.624199986457825
+  },
+  {
+    "sample": "measured-12-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.223200023174286
+  },
+  {
+    "sample": "measured-12-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.620100021362305
+  },
+  {
+    "sample": "measured-13-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.516600012779236
+  },
+  {
+    "sample": "measured-13-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.09929996728897
+  },
+  {
+    "sample": "measured-13-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.09740000963211
+  },
+  {
+    "sample": "measured-13-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.22850000858307
+  },
+  {
+    "sample": "measured-13-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.712000012397766
+  },
+  {
+    "sample": "measured-13-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.804800033569336
+  },
+  {
+    "sample": "measured-13-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.551500022411346
+  },
+  {
+    "sample": "measured-13-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.8924999833107
+  },
+  {
+    "sample": "measured-13-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.23079997301102
+  },
+  {
+    "sample": "measured-13-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.58670002222061
+  },
+  {
+    "sample": "measured-13-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.23690003156662
+  },
+  {
+    "sample": "measured-13-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.9524000287056
+  },
+  {
+    "sample": "measured-13-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.963500022888184
+  },
+  {
+    "sample": "measured-13-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.9307000041008
+  },
+  {
+    "sample": "measured-13-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 59.54650002717972
+  },
+  {
+    "sample": "measured-13-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 63.94729995727539
+  },
+  {
+    "sample": "measured-13-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.71119999885559
+  },
+  {
+    "sample": "measured-13-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 82.28580003976822
+  },
+  {
+    "sample": "measured-13-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.36549997329712
+  },
+  {
+    "sample": "measured-13-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.03719997406006
+  },
+  {
+    "sample": "measured-13-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.82090002298355
+  },
+  {
+    "sample": "measured-13-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.96979999542236
+  },
+  {
+    "sample": "measured-13-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 79.01209998130798
+  },
+  {
+    "sample": "measured-13-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 62.48729997873306
+  },
+  {
+    "sample": "measured-13-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.62669998407364
+  },
+  {
+    "sample": "measured-13-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.00199997425079
+  },
+  {
+    "sample": "measured-13-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.261199951171875
+  },
+  {
+    "sample": "measured-13-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.5489000082016
+  },
+  {
+    "sample": "measured-13-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.86250001192093
+  },
+  {
+    "sample": "measured-13-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.663500010967255
+  },
+  {
+    "sample": "measured-13-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.66100001335144
+  },
+  {
+    "sample": "measured-13-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.660199999809265
+  },
+  {
+    "sample": "measured-13-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.83430004119873
+  },
+  {
+    "sample": "measured-13-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.527800023555756
+  },
+  {
+    "sample": "measured-13-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.990700006484985
+  },
+  {
+    "sample": "measured-13-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 82.2989000082016
+  },
+  {
+    "sample": "measured-14-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.769900023937225
+  },
+  {
+    "sample": "measured-14-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.3231999874115
+  },
+  {
+    "sample": "measured-14-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 107.23949998617172
+  },
+  {
+    "sample": "measured-14-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.61799997091293
+  },
+  {
+    "sample": "measured-14-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.679899990558624
+  },
+  {
+    "sample": "measured-14-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.60290002822876
+  },
+  {
+    "sample": "measured-14-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 60.02889996767044
+  },
+  {
+    "sample": "measured-14-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 57.39419996738434
+  },
+  {
+    "sample": "measured-14-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.094900012016296
+  },
+  {
+    "sample": "measured-14-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.10299998521805
+  },
+  {
+    "sample": "measured-14-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.72780001163483
+  },
+  {
+    "sample": "measured-14-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.44359999895096
+  },
+  {
+    "sample": "measured-14-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.12290000915527
+  },
+  {
+    "sample": "measured-14-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.83619999885559
+  },
+  {
+    "sample": "measured-14-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.42460000514984
+  },
+  {
+    "sample": "measured-14-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.86229997873306
+  },
+  {
+    "sample": "measured-14-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.478999972343445
+  },
+  {
+    "sample": "measured-14-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.12779998779297
+  },
+  {
+    "sample": "measured-14-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.604599952697754
+  },
+  {
+    "sample": "measured-14-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.36949998140335
+  },
+  {
+    "sample": "measured-14-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.02579998970032
+  },
+  {
+    "sample": "measured-14-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.1913999915123
+  },
+  {
+    "sample": "measured-14-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.19120001792908
+  },
+  {
+    "sample": "measured-14-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.414600014686584
+  },
+  {
+    "sample": "measured-14-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.482600033283234
+  },
+  {
+    "sample": "measured-14-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.86769998073578
+  },
+  {
+    "sample": "measured-14-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.698499977588654
+  },
+  {
+    "sample": "measured-14-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.559300005435944
+  },
+  {
+    "sample": "measured-14-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 66.88040000200272
+  },
+  {
+    "sample": "measured-14-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.21560001373291
+  },
+  {
+    "sample": "measured-14-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 125.94380003213882
+  },
+  {
+    "sample": "measured-14-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.46380001306534
+  },
+  {
+    "sample": "measured-14-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.214000046253204
+  },
+  {
+    "sample": "measured-14-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 110.21350002288818
+  },
+  {
+    "sample": "measured-14-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.933899998664856
+  },
+  {
+    "sample": "measured-14-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 74.25090003013611
+  },
+  {
+    "sample": "measured-15-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.25859999656677
+  },
+  {
+    "sample": "measured-15-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.936899960041046
+  },
+  {
+    "sample": "measured-15-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.191799998283386
+  },
+  {
+    "sample": "measured-15-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.200299978256226
+  },
+  {
+    "sample": "measured-15-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.76469999551773
+  },
+  {
+    "sample": "measured-15-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.745700001716614
+  },
+  {
+    "sample": "measured-15-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.48429995775223
+  },
+  {
+    "sample": "measured-15-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.85290002822876
+  },
+  {
+    "sample": "measured-15-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 69.9349000453949
+  },
+  {
+    "sample": "measured-15-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.888899981975555
+  },
+  {
+    "sample": "measured-15-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.05309998989105
+  },
+  {
+    "sample": "measured-15-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.669000029563904
+  },
+  {
+    "sample": "measured-15-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.99049997329712
+  },
+  {
+    "sample": "measured-15-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.02549999952316
+  },
+  {
+    "sample": "measured-15-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.60530000925064
+  },
+  {
+    "sample": "measured-15-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.0828999876976
+  },
+  {
+    "sample": "measured-15-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.62540000677109
+  },
+  {
+    "sample": "measured-15-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.337000012397766
+  },
+  {
+    "sample": "measured-15-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.77359998226166
+  },
+  {
+    "sample": "measured-15-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.66659998893738
+  },
+  {
+    "sample": "measured-15-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.53250002861023
+  },
+  {
+    "sample": "measured-15-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.04320001602173
+  },
+  {
+    "sample": "measured-15-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.65539997816086
+  },
+  {
+    "sample": "measured-15-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.246399998664856
+  },
+  {
+    "sample": "measured-15-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.87650001049042
+  },
+  {
+    "sample": "measured-15-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.130800008773804
+  },
+  {
+    "sample": "measured-15-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.655299961566925
+  },
+  {
+    "sample": "measured-15-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 60.69969999790192
+  },
+  {
+    "sample": "measured-15-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 40.98159998655319
+  },
+  {
+    "sample": "measured-15-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 66.07400000095367
+  },
+  {
+    "sample": "measured-15-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.401700019836426
+  },
+  {
+    "sample": "measured-15-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.42839998006821
+  },
+  {
+    "sample": "measured-15-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.15239995718002
+  },
+  {
+    "sample": "measured-15-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.361600041389465
+  },
+  {
+    "sample": "measured-15-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.414099991321564
+  },
+  {
+    "sample": "measured-15-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.986299991607666
+  },
+  {
+    "sample": "measured-16-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.17210000753403
+  },
+  {
+    "sample": "measured-16-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.580000042915344
+  },
+  {
+    "sample": "measured-16-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 40.42730003595352
+  },
+  {
+    "sample": "measured-16-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 50.33309996128082
+  },
+  {
+    "sample": "measured-16-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.744599997997284
+  },
+  {
+    "sample": "measured-16-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 59.4475000500679
+  },
+  {
+    "sample": "measured-16-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 35.8817999958992
+  },
+  {
+    "sample": "measured-16-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 69.5988000035286
+  },
+  {
+    "sample": "measured-16-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.43760001659393
+  },
+  {
+    "sample": "measured-16-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.938399970531464
+  },
+  {
+    "sample": "measured-16-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.645500004291534
+  },
+  {
+    "sample": "measured-16-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.688300013542175
+  },
+  {
+    "sample": "measured-16-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.98549997806549
+  },
+  {
+    "sample": "measured-16-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.409099996089935
+  },
+  {
+    "sample": "measured-16-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.475499987602234
+  },
+  {
+    "sample": "measured-16-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.74520003795624
+  },
+  {
+    "sample": "measured-16-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.528599977493286
+  },
+  {
+    "sample": "measured-16-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.97039997577667
+  },
+  {
+    "sample": "measured-16-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.79350000619888
+  },
+  {
+    "sample": "measured-16-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.443300008773804
+  },
+  {
+    "sample": "measured-16-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.96869999170303
+  },
+  {
+    "sample": "measured-16-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 74.26300001144409
+  },
+  {
+    "sample": "measured-16-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.53700000047684
+  },
+  {
+    "sample": "measured-16-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 65.67440003156662
+  },
+  {
+    "sample": "measured-16-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.44889998435974
+  },
+  {
+    "sample": "measured-16-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.458500027656555
+  },
+  {
+    "sample": "measured-16-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.41430002450943
+  },
+  {
+    "sample": "measured-16-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.00840002298355
+  },
+  {
+    "sample": "measured-16-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.66609996557236
+  },
+  {
+    "sample": "measured-16-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.57590001821518
+  },
+  {
+    "sample": "measured-16-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.570100009441376
+  },
+  {
+    "sample": "measured-16-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.57660001516342
+  },
+  {
+    "sample": "measured-16-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.49980002641678
+  },
+  {
+    "sample": "measured-16-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.70560002326965
+  },
+  {
+    "sample": "measured-16-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.530799984931946
+  },
+  {
+    "sample": "measured-16-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.14410001039505
+  },
+  {
+    "sample": "measured-17-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.175800025463104
+  },
+  {
+    "sample": "measured-17-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.507600009441376
+  },
+  {
+    "sample": "measured-17-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.3222000002861
+  },
+  {
+    "sample": "measured-17-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.59189999103546
+  },
+  {
+    "sample": "measured-17-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 40.92620003223419
+  },
+  {
+    "sample": "measured-17-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.255800008773804
+  },
+  {
+    "sample": "measured-17-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 39.17539995908737
+  },
+  {
+    "sample": "measured-17-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.39100003242493
+  },
+  {
+    "sample": "measured-17-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 73.84760004281998
+  },
+  {
+    "sample": "measured-17-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.42570000886917
+  },
+  {
+    "sample": "measured-17-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.411899983882904
+  },
+  {
+    "sample": "measured-17-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.37890005111694
+  },
+  {
+    "sample": "measured-17-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.016099989414215
+  },
+  {
+    "sample": "measured-17-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 62.23920005559921
+  },
+  {
+    "sample": "measured-17-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.62720000743866
+  },
+  {
+    "sample": "measured-17-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.26300001144409
+  },
+  {
+    "sample": "measured-17-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.688899993896484
+  },
+  {
+    "sample": "measured-17-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.222199976444244
+  },
+  {
+    "sample": "measured-17-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.16069996356964
+  },
+  {
+    "sample": "measured-17-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.00669997930527
+  },
+  {
+    "sample": "measured-17-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.76450002193451
+  },
+  {
+    "sample": "measured-17-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.290899991989136
+  },
+  {
+    "sample": "measured-17-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.436100006103516
+  },
+  {
+    "sample": "measured-17-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.46280002593994
+  },
+  {
+    "sample": "measured-17-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.645699977874756
+  },
+  {
+    "sample": "measured-17-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.71689999103546
+  },
+  {
+    "sample": "measured-17-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.078599989414215
+  },
+  {
+    "sample": "measured-17-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.99169999361038
+  },
+  {
+    "sample": "measured-17-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.36860001087189
+  },
+  {
+    "sample": "measured-17-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 61.10920000076294
+  },
+  {
+    "sample": "measured-17-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.73620003461838
+  },
+  {
+    "sample": "measured-17-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 64.075100004673
+  },
+  {
+    "sample": "measured-17-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.76219999790192
+  },
+  {
+    "sample": "measured-17-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.33689999580383
+  },
+  {
+    "sample": "measured-17-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.45999997854233
+  },
+  {
+    "sample": "measured-17-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.64609998464584
+  },
+  {
+    "sample": "measured-18-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.56080001592636
+  },
+  {
+    "sample": "measured-18-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 67.38830000162125
+  },
+  {
+    "sample": "measured-18-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 37.90490001440048
+  },
+  {
+    "sample": "measured-18-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.36120003461838
+  },
+  {
+    "sample": "measured-18-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.72359997034073
+  },
+  {
+    "sample": "measured-18-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.65420001745224
+  },
+  {
+    "sample": "measured-18-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.22640001773834
+  },
+  {
+    "sample": "measured-18-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.91380000114441
+  },
+  {
+    "sample": "measured-18-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.46150004863739
+  },
+  {
+    "sample": "measured-18-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.78080004453659
+  },
+  {
+    "sample": "measured-18-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.98919999599457
+  },
+  {
+    "sample": "measured-18-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 73.58120000362396
+  },
+  {
+    "sample": "measured-18-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.70509999990463
+  },
+  {
+    "sample": "measured-18-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 52.18049997091293
+  },
+  {
+    "sample": "measured-18-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.05799996852875
+  },
+  {
+    "sample": "measured-18-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.38029998540878
+  },
+  {
+    "sample": "measured-18-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.19059997797012
+  },
+  {
+    "sample": "measured-18-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.62330001592636
+  },
+  {
+    "sample": "measured-18-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.37319999933243
+  },
+  {
+    "sample": "measured-18-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 72.11679995059967
+  },
+  {
+    "sample": "measured-18-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.369599997997284
+  },
+  {
+    "sample": "measured-18-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.526700019836426
+  },
+  {
+    "sample": "measured-18-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.85759997367859
+  },
+  {
+    "sample": "measured-18-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.398499965667725
+  },
+  {
+    "sample": "measured-18-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.7292999625206
+  },
+  {
+    "sample": "measured-18-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.43930000066757
+  },
+  {
+    "sample": "measured-18-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.16629999876022
+  },
+  {
+    "sample": "measured-18-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.12959998846054
+  },
+  {
+    "sample": "measured-18-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.01690000295639
+  },
+  {
+    "sample": "measured-18-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.41600000858307
+  },
+  {
+    "sample": "measured-18-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.27400004863739
+  },
+  {
+    "sample": "measured-18-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.10219997167587
+  },
+  {
+    "sample": "measured-18-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.534199953079224
+  },
+  {
+    "sample": "measured-18-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.98680001497269
+  },
+  {
+    "sample": "measured-18-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.385700047016144
+  },
+  {
+    "sample": "measured-18-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.230299949645996
+  },
+  {
+    "sample": "measured-19-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.40459996461868
+  },
+  {
+    "sample": "measured-19-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.72719997167587
+  },
+  {
+    "sample": "measured-19-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.6288999915123
+  },
+  {
+    "sample": "measured-19-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.60609996318817
+  },
+  {
+    "sample": "measured-19-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.14530003070831
+  },
+  {
+    "sample": "measured-19-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.57519996166229
+  },
+  {
+    "sample": "measured-19-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.981199979782104
+  },
+  {
+    "sample": "measured-19-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.73499995470047
+  },
+  {
+    "sample": "measured-19-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.67039996385574
+  },
+  {
+    "sample": "measured-19-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 524.6406999826431
+  },
+  {
+    "sample": "measured-19-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.92460000514984
+  },
+  {
+    "sample": "measured-19-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.23180001974106
+  },
+  {
+    "sample": "measured-19-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.623600006103516
+  },
+  {
+    "sample": "measured-19-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.15200001001358
+  },
+  {
+    "sample": "measured-19-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.09999996423721
+  },
+  {
+    "sample": "measured-19-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.430400013923645
+  },
+  {
+    "sample": "measured-19-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.908300042152405
+  },
+  {
+    "sample": "measured-19-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.09869998693466
+  },
+  {
+    "sample": "measured-19-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 61.640900015830994
+  },
+  {
+    "sample": "measured-19-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.79649996757507
+  },
+  {
+    "sample": "measured-19-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.31179994344711
+  },
+  {
+    "sample": "measured-19-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.00900000333786
+  },
+  {
+    "sample": "measured-19-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.8299999833107
+  },
+  {
+    "sample": "measured-19-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.53549998998642
+  },
+  {
+    "sample": "measured-19-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.24000000953674
+  },
+  {
+    "sample": "measured-19-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.06410002708435
+  },
+  {
+    "sample": "measured-19-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.546400010585785
+  },
+  {
+    "sample": "measured-19-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.57539999485016
+  },
+  {
+    "sample": "measured-19-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.23989999294281
+  },
+  {
+    "sample": "measured-19-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 52.1942999958992
+  },
+  {
+    "sample": "measured-19-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.600499987602234
+  },
+  {
+    "sample": "measured-19-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.288199961185455
+  },
+  {
+    "sample": "measured-19-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.19229996204376
+  },
+  {
+    "sample": "measured-19-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.03329998254776
+  },
+  {
+    "sample": "measured-19-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.35149997472763
+  },
+  {
+    "sample": "measured-19-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.54100000858307
+  },
+  {
+    "sample": "measured-20-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 38.99240005016327
+  },
+  {
+    "sample": "measured-20-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.61199998855591
+  },
+  {
+    "sample": "measured-20-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.66279995441437
+  },
+  {
+    "sample": "measured-20-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.12789994478226
+  },
+  {
+    "sample": "measured-20-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.50199997425079
+  },
+  {
+    "sample": "measured-20-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.02579998970032
+  },
+  {
+    "sample": "measured-20-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.20459997653961
+  },
+  {
+    "sample": "measured-20-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.95539999008179
+  },
+  {
+    "sample": "measured-20-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.91719996929169
+  },
+  {
+    "sample": "measured-20-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 61.284600019454956
+  },
+  {
+    "sample": "measured-20-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.26540005207062
+  },
+  {
+    "sample": "measured-20-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.39680004119873
+  },
+  {
+    "sample": "measured-20-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.11910003423691
+  },
+  {
+    "sample": "measured-20-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.71060001850128
+  },
+  {
+    "sample": "measured-20-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.864299952983856
+  },
+  {
+    "sample": "measured-20-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.69250005483627
+  },
+  {
+    "sample": "measured-20-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.310000002384186
+  },
+  {
+    "sample": "measured-20-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 59.575100004673004
+  },
+  {
+    "sample": "measured-20-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.21389997005463
+  },
+  {
+    "sample": "measured-20-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.861699998378754
+  },
+  {
+    "sample": "measured-20-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.20279997587204
+  },
+  {
+    "sample": "measured-20-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.31370002031326
+  },
+  {
+    "sample": "measured-20-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.4961000084877
+  },
+  {
+    "sample": "measured-20-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.58540004491806
+  },
+  {
+    "sample": "measured-20-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.008799970149994
+  },
+  {
+    "sample": "measured-20-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.61589998006821
+  },
+  {
+    "sample": "measured-20-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.15000003576279
+  },
+  {
+    "sample": "measured-20-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.25239998102188
+  },
+  {
+    "sample": "measured-20-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 114.26690000295639
+  },
+  {
+    "sample": "measured-20-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.089299976825714
+  },
+  {
+    "sample": "measured-20-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 34.7461000084877
+  },
+  {
+    "sample": "measured-20-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.716699957847595
+  },
+  {
+    "sample": "measured-20-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.365500032901764
+  },
+  {
+    "sample": "measured-20-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.95840001106262
+  },
+  {
+    "sample": "measured-20-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.36070001125336
+  },
+  {
+    "sample": "measured-20-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 66.28529995679855
+  },
+  {
+    "sample": "measured-21-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.27770000696182
+  },
+  {
+    "sample": "measured-21-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.34380000829697
+  },
+  {
+    "sample": "measured-21-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.629100024700165
+  },
+  {
+    "sample": "measured-21-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.35849994421005
+  },
+  {
+    "sample": "measured-21-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 40.934499979019165
+  },
+  {
+    "sample": "measured-21-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.27559995651245
+  },
+  {
+    "sample": "measured-21-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.65659999847412
+  },
+  {
+    "sample": "measured-21-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.59509998559952
+  },
+  {
+    "sample": "measured-21-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.78149998188019
+  },
+  {
+    "sample": "measured-21-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.35089999437332
+  },
+  {
+    "sample": "measured-21-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.19580000638962
+  },
+  {
+    "sample": "measured-21-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.314200043678284
+  },
+  {
+    "sample": "measured-21-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.3507000207901
+  },
+  {
+    "sample": "measured-21-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.005800008773804
+  },
+  {
+    "sample": "measured-21-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.97039997577667
+  },
+  {
+    "sample": "measured-21-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.32030004262924
+  },
+  {
+    "sample": "measured-21-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 98.64709997177124
+  },
+  {
+    "sample": "measured-21-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.399599969387054
+  },
+  {
+    "sample": "measured-21-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.92430001497269
+  },
+  {
+    "sample": "measured-21-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.79249995946884
+  },
+  {
+    "sample": "measured-21-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.08930003643036
+  },
+  {
+    "sample": "measured-21-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.53030002117157
+  },
+  {
+    "sample": "measured-21-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.00780004262924
+  },
+  {
+    "sample": "measured-21-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.78940004110336
+  },
+  {
+    "sample": "measured-21-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.29729998111725
+  },
+  {
+    "sample": "measured-21-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.57849997282028
+  },
+  {
+    "sample": "measured-21-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.45859998464584
+  },
+  {
+    "sample": "measured-21-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.708799958229065
+  },
+  {
+    "sample": "measured-21-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.47689998149872
+  },
+  {
+    "sample": "measured-21-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.432000041007996
+  },
+  {
+    "sample": "measured-21-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.91010004281998
+  },
+  {
+    "sample": "measured-21-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.00639998912811
+  },
+  {
+    "sample": "measured-21-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.69859999418259
+  },
+  {
+    "sample": "measured-21-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.58230000734329
+  },
+  {
+    "sample": "measured-21-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.25569999217987
+  },
+  {
+    "sample": "measured-21-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.33219999074936
+  },
+  {
+    "sample": "measured-22-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.55349999666214
+  },
+  {
+    "sample": "measured-22-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.825299978256226
+  },
+  {
+    "sample": "measured-22-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.653599977493286
+  },
+  {
+    "sample": "measured-22-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 76.41009998321533
+  },
+  {
+    "sample": "measured-22-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.08280003070831
+  },
+  {
+    "sample": "measured-22-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 61.33799999952316
+  },
+  {
+    "sample": "measured-22-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.75340002775192
+  },
+  {
+    "sample": "measured-22-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.32819998264313
+  },
+  {
+    "sample": "measured-22-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 76.20730000734329
+  },
+  {
+    "sample": "measured-22-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 52.404500007629395
+  },
+  {
+    "sample": "measured-22-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.62489998340607
+  },
+  {
+    "sample": "measured-22-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 72.33150005340576
+  },
+  {
+    "sample": "measured-22-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.339800000190735
+  },
+  {
+    "sample": "measured-22-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.76249998807907
+  },
+  {
+    "sample": "measured-22-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.155799984931946
+  },
+  {
+    "sample": "measured-22-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.34560000896454
+  },
+  {
+    "sample": "measured-22-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.03229999542236
+  },
+  {
+    "sample": "measured-22-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.99330002069473
+  },
+  {
+    "sample": "measured-22-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.035700023174286
+  },
+  {
+    "sample": "measured-22-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.07820004224777
+  },
+  {
+    "sample": "measured-22-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.89560002088547
+  },
+  {
+    "sample": "measured-22-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.509299993515015
+  },
+  {
+    "sample": "measured-22-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.31010001897812
+  },
+  {
+    "sample": "measured-22-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.25309997797012
+  },
+  {
+    "sample": "measured-22-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.9970999956131
+  },
+  {
+    "sample": "measured-22-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.01710003614426
+  },
+  {
+    "sample": "measured-22-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.789799988269806
+  },
+  {
+    "sample": "measured-22-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.18340003490448
+  },
+  {
+    "sample": "measured-22-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.92139995098114
+  },
+  {
+    "sample": "measured-22-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.66960000991821
+  },
+  {
+    "sample": "measured-22-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.56730002164841
+  },
+  {
+    "sample": "measured-22-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.777800023555756
+  },
+  {
+    "sample": "measured-22-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.382400035858154
+  },
+  {
+    "sample": "measured-22-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.63800001144409
+  },
+  {
+    "sample": "measured-22-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.383799970149994
+  },
+  {
+    "sample": "measured-22-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 57.70360004901886
+  },
+  {
+    "sample": "pair-alpine-direct-1",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.38609999418259
+  },
+  {
+    "sample": "pair-alpine-direct-2",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 70.8769999742508
+  },
+  {
+    "sample": "pair-alpine-powershell-1",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.09809994697571
+  },
+  {
+    "sample": "pair-alpine-powershell-2",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.08799999952316
+  },
+  {
+    "sample": "pair-htmx-direct-1",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 31.697899997234344
+  },
+  {
+    "sample": "pair-htmx-direct-2",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.60690003633499
+  },
+  {
+    "sample": "pair-htmx-powershell-1",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.70730000734329
+  },
+  {
+    "sample": "pair-htmx-powershell-2",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.4064000248909
+  },
+  {
+    "sample": "pair-lit-direct-1",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.38190001249313
+  },
+  {
+    "sample": "pair-lit-direct-2",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.154699981212616
+  },
+  {
+    "sample": "pair-lit-powershell-1",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.072599947452545
+  },
+  {
+    "sample": "pair-lit-powershell-2",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.35010004043579
+  },
+  {
+    "sample": "pair-preact-direct-1",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.97709995508194
+  },
+  {
+    "sample": "pair-preact-direct-2",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.238499999046326
+  },
+  {
+    "sample": "pair-preact-powershell-1",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.44379997253418
+  },
+  {
+    "sample": "pair-preact-powershell-2",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.230099976062775
+  },
+  {
+    "sample": "pair-react-direct-1",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.33329999446869
+  },
+  {
+    "sample": "pair-react-direct-2",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.60689997673035
+  },
+  {
+    "sample": "pair-react-powershell-1",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 66.77670001983643
+  },
+  {
+    "sample": "pair-react-powershell-2",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.55019998550415
+  },
+  {
+    "sample": "pair-solid-direct-1",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.92589998245239
+  },
+  {
+    "sample": "pair-solid-direct-2",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.905099987983704
+  },
+  {
+    "sample": "pair-solid-powershell-1",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.36089998483658
+  },
+  {
+    "sample": "pair-solid-powershell-2",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.28389996290207
+  },
+  {
+    "sample": "pair-svelte-direct-1",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.74069994688034
+  },
+  {
+    "sample": "pair-svelte-direct-2",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.656899988651276
+  },
+  {
+    "sample": "pair-svelte-powershell-1",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.7771999835968
+  },
+  {
+    "sample": "pair-svelte-powershell-2",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.17839998006821
+  },
+  {
+    "sample": "pair-vanilla-direct-1",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.782800018787384
+  },
+  {
+    "sample": "pair-vanilla-direct-2",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.357000052928925
+  },
+  {
+    "sample": "pair-vanilla-powershell-1",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.97389996051788
+  },
+  {
+    "sample": "pair-vanilla-powershell-2",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.814099967479706
+  },
+  {
+    "sample": "pair-vue-direct-1",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.339000046253204
+  },
+  {
+    "sample": "pair-vue-direct-2",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.369199991226196
+  },
+  {
+    "sample": "pair-vue-powershell-1",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.4268000125885
+  },
+  {
+    "sample": "pair-vue-powershell-2",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.86880004405975
+  },
+  {
+    "sample": "pilot-react-actions",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.86699998378754
+  },
+  {
+    "sample": "pilot-react-direct-pair1",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.13390004634857
+  },
+  {
+    "sample": "pilot-react-direct-pair2",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.41250002384186
+  },
+  {
+    "sample": "pilot-react-idle",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.90490001440048
+  },
+  {
+    "sample": "pilot-react-powershell-pair1",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.536300003528595
+  },
+  {
+    "sample": "pilot-react-powershell-pair2",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.0634999871254
+  },
+  {
+    "sample": "pilot-svelte-actions",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.138700008392334
+  },
+  {
+    "sample": "pilot-svelte-direct-pair1",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.27130001783371
+  },
+  {
+    "sample": "pilot-svelte-direct-pair2",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 52.44449996948242
+  },
+  {
+    "sample": "pilot-svelte-idle",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.67449998855591
+  },
+  {
+    "sample": "pilot-svelte-powershell-pair1",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.84160000085831
+  },
+  {
+    "sample": "pilot-svelte-powershell-pair2",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 52.52079999446869
+  },
+  {
+    "sample": "pilot-vanilla-actions",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.17530000209808
+  },
+  {
+    "sample": "pilot-vanilla-direct-pair1",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.64039999246597
+  },
+  {
+    "sample": "pilot-vanilla-direct-pair2",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.27759999036789
+  },
+  {
+    "sample": "pilot-vanilla-idle",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.861299991607666
+  },
+  {
+    "sample": "pilot-vanilla-powershell-pair1",
+    "app": "vanilla",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 37.40030002593994
+  },
+  {
+    "sample": "pilot-vanilla-powershell-pair2",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.528999984264374
+  },
+  {
+    "sample": "resources-alpine",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.495899975299835
+  },
+  {
+    "sample": "resources-htmx",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.56300002336502
+  },
+  {
+    "sample": "resources-lit",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 35.64420002698898
+  },
+  {
+    "sample": "resources-preact",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.010399997234344
+  },
+  {
+    "sample": "resources-react",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.67429995536804
+  },
+  {
+    "sample": "resources-solid",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.29839998483658
+  },
+  {
+    "sample": "resources-svelte",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.209100008010864
+  },
+  {
+    "sample": "resources-vanilla",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.24729996919632
+  },
+  {
+    "sample": "resources-vue",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 67.53110003471375
+  },
+  {
+    "sample": "warmup-00-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.945699989795685
+  },
+  {
+    "sample": "warmup-00-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 39.241800010204315
+  },
+  {
+    "sample": "warmup-00-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.150099992752075
+  },
+  {
+    "sample": "warmup-00-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 66.53310000896454
+  },
+  {
+    "sample": "warmup-00-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.40479999780655
+  },
+  {
+    "sample": "warmup-00-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.09179997444153
+  },
+  {
+    "sample": "warmup-00-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 74.20129996538162
+  },
+  {
+    "sample": "warmup-00-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.870100021362305
+  },
+  {
+    "sample": "warmup-00-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.75519996881485
+  },
+  {
+    "sample": "warmup-00-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 75.38809996843338
+  },
+  {
+    "sample": "warmup-00-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.69410002231598
+  },
+  {
+    "sample": "warmup-00-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.207099974155426
+  },
+  {
+    "sample": "warmup-00-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 49.23129999637604
+  },
+  {
+    "sample": "warmup-00-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.36439996957779
+  },
+  {
+    "sample": "warmup-00-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.94279998540878
+  },
+  {
+    "sample": "warmup-00-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.35640001296997
+  },
+  {
+    "sample": "warmup-00-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.84210002422333
+  },
+  {
+    "sample": "warmup-00-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.470499992370605
+  },
+  {
+    "sample": "warmup-00-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.537999987602234
+  },
+  {
+    "sample": "warmup-00-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.267700016498566
+  },
+  {
+    "sample": "warmup-00-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.656899988651276
+  },
+  {
+    "sample": "warmup-00-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.36589998006821
+  },
+  {
+    "sample": "warmup-00-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.20509999990463
+  },
+  {
+    "sample": "warmup-00-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.3445999622345
+  },
+  {
+    "sample": "warmup-00-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.34979999065399
+  },
+  {
+    "sample": "warmup-00-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.86930000782013
+  },
+  {
+    "sample": "warmup-00-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 34.01249998807907
+  },
+  {
+    "sample": "warmup-00-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 61.1389000415802
+  },
+  {
+    "sample": "warmup-00-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.52240002155304
+  },
+  {
+    "sample": "warmup-00-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.01469999551773
+  },
+  {
+    "sample": "warmup-00-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 70.76820003986359
+  },
+  {
+    "sample": "warmup-00-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.863499999046326
+  },
+  {
+    "sample": "warmup-00-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.03750002384186
+  },
+  {
+    "sample": "warmup-00-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.08409994840622
+  },
+  {
+    "sample": "warmup-00-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.50950002670288
+  },
+  {
+    "sample": "warmup-00-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.54720002412796
+  },
+  {
+    "sample": "warmup-01-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.96009999513626
+  },
+  {
+    "sample": "warmup-01-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.37519997358322
+  },
+  {
+    "sample": "warmup-01-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.009600043296814
+  },
+  {
+    "sample": "warmup-01-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 58.424399971961975
+  },
+  {
+    "sample": "warmup-01-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.35600000619888
+  },
+  {
+    "sample": "warmup-01-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 60.01430004835129
+  },
+  {
+    "sample": "warmup-01-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.067900002002716
+  },
+  {
+    "sample": "warmup-01-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 70.55690002441406
+  },
+  {
+    "sample": "warmup-01-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.516600012779236
+  },
+  {
+    "sample": "warmup-01-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 87.04580003023148
+  },
+  {
+    "sample": "warmup-01-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.15329998731613
+  },
+  {
+    "sample": "warmup-01-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 55.17409998178482
+  },
+  {
+    "sample": "warmup-01-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.1768000125885
+  },
+  {
+    "sample": "warmup-01-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.50270003080368
+  },
+  {
+    "sample": "warmup-01-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.53810000419617
+  },
+  {
+    "sample": "warmup-01-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 68.15600001811981
+  },
+  {
+    "sample": "warmup-01-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.95539999008179
+  },
+  {
+    "sample": "warmup-01-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 45.40569996833801
+  },
+  {
+    "sample": "warmup-01-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.642799973487854
+  },
+  {
+    "sample": "warmup-01-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 57.665700018405914
+  },
+  {
+    "sample": "warmup-01-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.47680002450943
+  },
+  {
+    "sample": "warmup-01-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.52929997444153
+  },
+  {
+    "sample": "warmup-01-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 33.25299996137619
+  },
+  {
+    "sample": "warmup-01-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 47.20270001888275
+  },
+  {
+    "sample": "warmup-01-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.79289996623993
+  },
+  {
+    "sample": "warmup-01-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.04380005598068
+  },
+  {
+    "sample": "warmup-01-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 53.387500047683716
+  },
+  {
+    "sample": "warmup-01-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.59009999036789
+  },
+  {
+    "sample": "warmup-01-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.45219999551773
+  },
+  {
+    "sample": "warmup-01-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 71.72190004587173
+  },
+  {
+    "sample": "warmup-01-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.155500054359436
+  },
+  {
+    "sample": "warmup-01-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 48.21570003032684
+  },
+  {
+    "sample": "warmup-01-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.51029998064041
+  },
+  {
+    "sample": "warmup-01-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.342199981212616
+  },
+  {
+    "sample": "warmup-01-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.8503999710083
+  },
+  {
+    "sample": "warmup-01-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.250200033187866
+  },
+  {
+    "sample": "warmup-02-alpine-direct-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.47879999876022
+  },
+  {
+    "sample": "warmup-02-alpine-direct-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 36.2538999915123
+  },
+  {
+    "sample": "warmup-02-alpine-powershell-fresh",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.443499982357025
+  },
+  {
+    "sample": "warmup-02-alpine-powershell-retained",
+    "app": "alpine",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.71629995107651
+  },
+  {
+    "sample": "warmup-02-htmx-direct-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.503000020980835
+  },
+  {
+    "sample": "warmup-02-htmx-direct-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 86.91290003061295
+  },
+  {
+    "sample": "warmup-02-htmx-powershell-fresh",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.38440001010895
+  },
+  {
+    "sample": "warmup-02-htmx-powershell-retained",
+    "app": "htmx",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 54.02090001106262
+  },
+  {
+    "sample": "warmup-02-lit-direct-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.36779999732971
+  },
+  {
+    "sample": "warmup-02-lit-direct-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 51.567399978637695
+  },
+  {
+    "sample": "warmup-02-lit-powershell-fresh",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 43.30030000209808
+  },
+  {
+    "sample": "warmup-02-lit-powershell-retained",
+    "app": "lit",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.132400035858154
+  },
+  {
+    "sample": "warmup-02-preact-direct-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 40.495299994945526
+  },
+  {
+    "sample": "warmup-02-preact-direct-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.40430003404617
+  },
+  {
+    "sample": "warmup-02-preact-powershell-fresh",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.42370003461838
+  },
+  {
+    "sample": "warmup-02-preact-powershell-retained",
+    "app": "preact",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 72.81330001354218
+  },
+  {
+    "sample": "warmup-02-react-direct-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.13440001010895
+  },
+  {
+    "sample": "warmup-02-react-direct-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 56.984099984169006
+  },
+  {
+    "sample": "warmup-02-react-powershell-fresh",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.092500030994415
+  },
+  {
+    "sample": "warmup-02-react-powershell-retained",
+    "app": "react",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.73209995031357
+  },
+  {
+    "sample": "warmup-02-solid-direct-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 38.89859998226166
+  },
+  {
+    "sample": "warmup-02-solid-direct-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.77910000085831
+  },
+  {
+    "sample": "warmup-02-solid-powershell-fresh",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 87.71929997205734
+  },
+  {
+    "sample": "warmup-02-solid-powershell-retained",
+    "app": "solid",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 68.07639998197556
+  },
+  {
+    "sample": "warmup-02-svelte-direct-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 39.92150002717972
+  },
+  {
+    "sample": "warmup-02-svelte-direct-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.325100004673004
+  },
+  {
+    "sample": "warmup-02-svelte-powershell-fresh",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 37.382400035858154
+  },
+  {
+    "sample": "warmup-02-svelte-powershell-retained",
+    "app": "svelte",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 61.60469996929169
+  },
+  {
+    "sample": "warmup-02-vanilla-direct-fresh",
+    "app": "vanilla",
+    "providerGaps": 1,
+    "workerError": null,
+    "maxPollMs": 48.6075000166893
+  },
+  {
+    "sample": "warmup-02-vanilla-direct-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 46.29339998960495
+  },
+  {
+    "sample": "warmup-02-vanilla-powershell-fresh",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 31.268499970436096
+  },
+  {
+    "sample": "warmup-02-vanilla-powershell-retained",
+    "app": "vanilla",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 44.57209998369217
+  },
+  {
+    "sample": "warmup-02-vue-direct-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 50.48600000143051
+  },
+  {
+    "sample": "warmup-02-vue-direct-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 80.88699996471405
+  },
+  {
+    "sample": "warmup-02-vue-powershell-fresh",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 42.34280002117157
+  },
+  {
+    "sample": "warmup-02-vue-powershell-retained",
+    "app": "vue",
+    "providerGaps": 0,
+    "workerError": null,
+    "maxPollMs": 41.30589997768402
+  }
+]

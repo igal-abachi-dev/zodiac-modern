@@ -565,3 +565,9 @@ enable DevTools, relax CSP or add privileged messages. A later Electron versus
 Avalonia/Skia comparison needs equivalent apps plus additional GPU/energy,
 packaging and native accessibility evidence; nine frontends in this host alone
 cannot establish that comparison.
+
+Initial collection is complete: [900 primary + 210 supplemental passing attempts](../8-framework-test/results/2026-10-17/RESULTS.md).
+Read the [interpretation](../8-framework-test/results/2026-10-17/INTERPRETATION.md)
+before ranking frameworks. The C++ host/assets were unchanged; the collector's
+UIA/PID-attribution fixes and rejected preliminary cohorts are documented. Normal
+Ready-to-close success does not resolve the older early-init shutdown gate.

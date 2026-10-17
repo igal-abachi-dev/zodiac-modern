@@ -2,10 +2,13 @@
 
 All nine apps are implemented and production-built. **All nine pass current
 integration checks after the explicit htmx offline no-storage patch.**
-The user has now authorized performance runs. The external Windows collector
-passed its 18-attempt vanilla/Svelte/React pilot; the frozen randomized startup
-cohort is in progress. This is not yet a completed nine-app performance result.
-See [the collector's endpoints and limits](measurement/README.md).
+The external Windows collector and initial nine-app performance cohorts are now
+complete: **900 primary + 210 supplemental passing attempts**. See the
+[measured tables](results/2026-10-17/RESULTS.md),
+[source-aware interpretation](results/2026-10-17/INTERPRETATION.md) and
+[collector endpoints and limits](measurement/README.md). Five analysis regressions
+and the C# stale-ancestry/PID-reuse fixtures pass. Earlier rejected collector
+cohorts remain retained; they were not counted as framework failures.
 
 | Candidate | Type checks / production assets | Real WebView2 | Installed-Edge keyboard suite |
 | --- | --- | --- | --- |
@@ -44,7 +47,7 @@ primary recheck (`host-d27ff...`), supplemental workload (`host-9f407...`) and
 final diagnostic (`host-61d46...`) reports all record **155.0.4283.60** for every
 candidate. Treat these as separate runtime cohorts; do not mix their timings.
 The Release host hash is unchanged. Re-freeze the actual runtime before the
-deferred performance runs rather than assuming Evergreen remains constant.
+any new performance cohort rather than assuming Evergreen remains constant.
 Shared CSS SHA-256:
 `d1cd2490c8c5d2c6cec0b4a46d88f6b7ab2600c631a70651f7163ec0aecae44d`.
 Lockfile SHA-256 at the artifact audit:
@@ -154,12 +157,13 @@ no Web Storage or remote requests, and no CSP errors. Unit tests validate shift
 session windows, clipped long-task intervals and exclusion of DOM/URL/text data.
 See [DIAGNOSTICS.md](DIAGNOSTICS.md) for schema, commands and interpretation.
 
-Correctness probes observe timing entries to validate collection, but no repeated
-performance cohort, hardware-presentation result or comparative metric ranking
-is published. Production bytes/CSS and the native host are unchanged; the
+Correctness probes observe timing entries to validate browser collection. They
+are separate from the now-published external performance cohorts and do not
+supply hardware presentation or a universal ranking. Production bytes/CSS and the native host are unchanged; the
 artifact audit rejects diagnostic/workload markers in primary JS. Native exports
-of full JSON, OS-clock correlation, physical display capture and process-tree
-resource collectors remain pending. The diagnostic lane uses the existing
+of full browser JSON and physical display capture remain pending. The separate
+external harness now supplies its OS-clock/UIA/client-frame and process-resource
+records. The diagnostic lane uses the existing
 fixed pass/fail host channel, with no generic IPC or DevTools relaxation.
 
 All nine visible native diagnostic checks pass too:
@@ -173,7 +177,9 @@ Neither pass/fail report exports native timing samples for ranking.
 
 ## Remaining scope
 
-No startup/RAM/CPU/GPU/frame-time benchmark runs were performed. See
+Startup, process-tree private memory/CPU and semantic control/list response have
+now been measured in the linked cohorts. GPU/frame pacing, energy, post-reboot
+OS-cold and physical input-to-paint remain unmeasured. See
 [CODE-COMPARISON.md](CODE-COMPARISON.md) for source and artifact insights.
 Narrator/NVDA, physical DPI/multi-monitor/RTL acceptance, process-aware network/
 storage traces, long soak testing and independent review remain pending. Edge

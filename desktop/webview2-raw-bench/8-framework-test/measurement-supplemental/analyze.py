@@ -2,6 +2,7 @@
 import argparse
 import importlib.util
 import json
+import hashlib
 from pathlib import Path
 
 spec=importlib.util.spec_from_file_location('primary_analysis',Path(__file__).parents[1]/'measurement/analyze.py')
@@ -23,7 +24,9 @@ def main():
         rows.append({'app':app,'action':name,'semanticResponseMs':analysis.distribution([v for _,v in values]),
                      'pairedDeltaVsVanillaMs':analysis.distribution(diff),
                      'pairedBootstrapMedianDelta95IntervalMs':analysis.paired_interval(diff)})
-    report={'rows':rows,'failures':failures,'limit':'Real-input dispatch plus UIA semantic response; includes accessibility overhead. Not physical paint, pure rendering time, INP or frame rate.'}
+    report={'rows':rows,'failures':failures,'analysisSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'sharedAnalysisSha256':hashlib.sha256((Path(__file__).parents[1]/'measurement/analyze.py').read_bytes()).hexdigest(),
+            'limit':'Real-input dispatch plus UIA semantic response; includes accessibility overhead. Not physical paint, pure rendering time, INP or frame rate. htmx means the explicit patched offline variant.'}
     (root/'analysis.json').write_text(json.dumps(report,indent=2))
     lines=['# Supplemental semantic workload observations','',report['limit'],'',
            '| App | Operation | n | Median ms | p95 ms |','| --- | --- | ---: | ---: | ---: |']

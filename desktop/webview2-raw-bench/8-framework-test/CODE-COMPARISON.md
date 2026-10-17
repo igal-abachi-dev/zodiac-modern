@@ -6,12 +6,30 @@ and errors addressed in the review. This is not a
 startup, RAM, CPU, frame-time or accessibility ranking. The actual performance
 benchmark runs were previously deferred. The user has now authorized them:
 the [external Windows collector](measurement/README.md) passed its revised
-18-attempt pilot and the randomized cohort is running. Keep the source/byte
-findings below separate from its eventual measured results. Semantic UIA
+18-attempt pilot and completed 900 primary plus 210 supplemental attempts. Keep the source/byte
+findings below separate from the [measured tables](results/2026-10-17/RESULTS.md)
+and [interpretation](results/2026-10-17/INTERPRETATION.md). Semantic UIA
 responses include accessibility/provider cost; captured client frames are not
 physical presentation timestamps. These nine apps cannot establish WebView2
 versus Electron versus Avalonia/Skia performance without equivalent host apps
 and additional GPU/energy/native-accessibility evidence.
+
+Measured continuation: Svelte/Solid/Vue had similar retained-startup medians;
+Preact retained its bundle-size advantage but did not win every response metric.
+React's retained median was 685 ms versus vanilla's 546 ms, but its fresh-path
+median was faster (1999 versus 2280 ms). Visible-idle private resident memory was
+similar across all nine (about 101–107 MiB); React's private commit was about
+16.5 MiB above vanilla in the single idle lifetime. Large-list ordering changed
+between creation and shrinking. These observations reject a simple bytes-to-RAM
+or universal signal-versus-VDOM ranking. Svelte remains a practical repository
+default on combined DX/integration/size evidence, not a proven winner in every
+workload. See the linked interpretation for uncertainty and UIA costs.
+
+The [2026-10-18 feedback review](results/2026-10-17/INTERPRETATION.md#review-of-follow-up-feedback-2026-10-18)
+keeps that shortlist while distinguishing observed dialog latency from a proven
+rendering-model cause, similar RAM observations from memory equivalence, and
+normal shutdown passes from the still-open early-initialization lifecycle gate.
+It reviews the existing cohort; no new benchmark observations were added.
 
 ## What the implementations share
 
