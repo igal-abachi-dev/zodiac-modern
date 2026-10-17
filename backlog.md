@@ -903,11 +903,40 @@ The desktop GUI is an additional future option. FUT-13 is not selected: provider
 storage needs no local history. FUT-14 tracks sharing UX instead. No libsodium
 dependency, browser PKCS#8 port, database or desktop framework is added now.
 
+#### FUT-09 — NeutronStar measurement phase (2026-10-17)
+
+Research implementation status: the nine frontend candidates, shared contract,
+supplemental workloads and opt-in browser diagnostics exist. Current browser and
+native correctness checks pass, including the explicitly patched offline htmx
+variant. This does not complete the broader FUT-09 product assessment, select a
+desktop framework, close the known intermittent early-shutdown issue, or supply
+performance/accessibility acceptance. The benchmark apps do not run the Go CLI
+or cryptography. See the [validation evidence](desktop/webview2-raw-bench/8-framework-test/VALIDATION.md).
+
+Agreed next sequence; these items remain open:
+
+| Item | Status | Scope and acceptance |
+| --- | --- | --- |
+| FUT-09-B01 — external Windows measurement harness | Implemented; pilot accepted with explicit measurement limits | Collect OS/PowerShell and direct-host launch timing separately; UIA Ready plus enabled action buttons; synchronized visible window/loading/blank-or-black/complete-content evidence; and full host/WebView2 process-tree private memory/CPU. Record process identity, clock alignment, sampling overhead and unsupported endpoints. Verify clean helper shutdown and retain invalid samples with reasons. Existing browser observers cover only part of this work. |
+| FUT-09-B02 — freeze measurement conditions | Frozen for benchmark-20261017-e; c/d collector failures retained | Record source/lock/assets/host hashes, actual runtime, Windows/hardware, client size, DPI/zoom/refresh rate and power state. Latest native correctness used WebView2 155.0.4283.60; older .45 evidence is a separate cohort. Re-verify and split/restart on runtime changes. Preserve normal-memory/decorated/bridge-off primary settings. |
+| FUT-09-B03 — collection pilot | Accepted: 18/18 attempts across vanilla/Svelte/React | Pilot vanilla, Svelte and React with first/repeat launches, visible idle sampling and one common interaction workload. Validate traces against visible loading/black-frame transitions, UIA, process attribution and cleanup. Accept the collector only when those endpoints agree; preserve raw pilot evidence and limitations. |
+| FUT-09-B04 — nine-app comparative cohort | In progress; user authorized actual runs | Randomize rounds across all nine. Separate first-use/repeat/post-restart and launch-method conditions; use the protocol's warmups/sample counts and keep the first/repeat diagnostic pair. Measure startup/idle, then distinct list/input/control workloads. Separate production/supplemental/diagnostic builds and label patched htmx. Do not treat simulation duration as crypto speed or discard correctness failures. |
+| FUT-09-B05 — results and selection assessment | Pending; depends on B04 and physical acceptance evidence | Publish raw samples, distributions, uncertainty and vanilla differences; assess startup, responsiveness, background/restore resources, lifecycle, accessibility and maintenance. No universal winner score. Physical AT/IME/DPI trials and later Go/passphrase boundary review remain separate gates before product selection/release. |
+
+The [measurement protocol](desktop/webview2-raw-bench/8-framework-test/BENCHMARKING.md)
+is authoritative for detailed collection conditions; the
+[diagnostic scope](desktop/webview2-raw-bench/8-framework-test/DIAGNOSTICS.md)
+states what is implemented versus missing. The external harness and 18-attempt pilot are now implemented/accepted with stated limits;
+the full comparative performance cohort is in progress, not complete. See the collector README for UIA/capture precision, PowerShell versus Explorer, private-memory attribution and remaining GPU/physical AT/IME/DPI gates.
+
 #### FUT-02 / FUT-09 research acceptance before implementation selection
 
 FUT-09 framework comparison list: **Tauri v2; Electron; WinUI 3 / C#;
-Flutter; standalone WebView2 / C# and Wails / Go;
-Avalonia / C# with CommunityToolkit.Mvvm; Qt / C++; wxWidgets / C++**.
+Flutter; standalone WebView2 / C# CoreWebView2 and Wails / Go; Wry / Tao/webview2-com; PyWebView; 
+Modern C++ with the official WebView2 Win32 SDK;Dear ImGui; Blazor Hybrid webview2;
+`Microsoft.Web.WebView2` (WPF)
+Built-in `WebView2` control in **WinUI 3**
+Avalonia(skia) / C# with CommunityToolkit.Mvvm; Qt /QML/ C++; wxWidgets / C++**.
 Avalonia with the MVVM Community Toolkit is the user's preferred candidate for
 evaluation, not a proven winner or implementation selection. Compare it with
 WinUI 3 against this project's requirements; .NET MAUI is not added to the
