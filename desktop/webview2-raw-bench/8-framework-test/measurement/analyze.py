@@ -27,6 +27,17 @@ def paired_interval(differences):
 
 def read(path): return json.loads(Path(path).read_text(encoding='utf-8-sig'))
 
+def validate_idle(result, samples):
+    errors=[]
+    for state in ['visible','unfocused','occluded','minimized','restored']:
+        rows=[s for s in samples if s.get('state')==state]
+        if len(rows)!=result['config']['idleSeconds']:
+            errors.append(f'{state}: expected {result["config"]["idleSeconds"]} samples, got {len(rows)}')
+        for row in rows:
+            root=[p for p in row['processes'] if p['pid']==result['hostPid'] and p['startUtc']==result['hostStartUtc']]
+            if not root: errors.append(f'{state}: live host identity missing at {row["atMs"]}')
+    return errors
+
 def visual_summary(frames):
     valid=[f for f in frames if 'startMs' in f]
     intervals=[]
@@ -64,6 +75,10 @@ def main():
             pairs.append({'sample':tag,'app':app,'launch':config['launch'],'hostToReadyMs':result['hostToReadyMs'],'launchToReadyMs':result['launchToReadyMs']})
         if config['scenario']=='idle' and not tag.startswith('pilot-'):
             samples=read(Path(config['output'])/'resources.json')
+            invalid=validate_idle(result,samples)
+            if invalid:
+                failures.append({'sample':tag,'error':'Idle post-validation: '+'; '.join(invalid)})
+                continue
             for state in ['visible','unfocused','occluded','minimized','restored']:
                 rows=[s for s in samples if s.get('state')==state and s.get('complete')]
                 cpu=[]
@@ -121,5 +136,6 @@ def main():
     lines+=['','## Limits','']+['- '+limit for limit in report['limits']]
     (root/'RESULTS.md').write_text('\n'.join(lines)+'\n',encoding='utf8')
     print(f'Analyzed {len(results)} retained attempts, {len(rows)} startup conditions, {len(resources)} idle conditions.')
+    if failures: raise SystemExit('Rejected attempts or post-validation failures require review; reports retained.')
 
 if __name__=='__main__': main()

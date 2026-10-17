@@ -1,5 +1,5 @@
 import unittest
-from analyze import distribution, paired_interval, visual_summary
+from analyze import distribution, paired_interval, visual_summary, validate_idle
 
 class AnalysisTests(unittest.TestCase):
     def test_nearest_rank_and_small_groups(self):
@@ -21,5 +21,14 @@ class AnalysisTests(unittest.TestCase):
         self.assertEqual(result['nearUniformIntervals'][1]['observedSpanMs'],0)
         self.assertEqual(result['nearUniformAfterAccentCount'],1)
         self.assertEqual(result['firstAccentObservedMs'],210)
+
+    def test_idle_cannot_pass_with_an_exited_or_reused_host(self):
+        result={'hostPid':10,'hostStartUtc':'root-time','config':{'idleSeconds':1}}
+        samples=[{'state':state,'atMs':i,'processes':[{'pid':10,'startUtc':'root-time'}]} for i,state in enumerate(['visible','unfocused','occluded','minimized','restored'])]
+        self.assertEqual(validate_idle(result,samples),[])
+        samples[-1]['processes']=[]
+        self.assertIn('live host identity missing',validate_idle(result,samples)[0])
+        samples[-1]['processes']=[{'pid':10,'startUtc':'reused-pid'}]
+        self.assertIn('live host identity missing',validate_idle(result,samples)[0])
 
 if __name__=='__main__': unittest.main()
