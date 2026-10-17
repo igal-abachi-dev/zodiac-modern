@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>NeutronStar Example</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/neutronstar.svg">
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <main class="container">
+      <p class="eyebrow">LOCAL WEBVIEW2 EXAMPLE</p>
+      <h1>Welcome to NeutronStar</h1>
+      <div class="logos" aria-label="Built with HTML, NeutronStar Host and JavaScript">
+        <img src="/assets/html.svg" class="logo logo-html" width="96" height="96" alt="HTML">
+        <a href="#/about" class="logo-link" aria-label="About NeutronStar Host">
+          <img src="/assets/neutronstar.svg" class="logo logo-star" width="96" height="96" alt="NeutronStar">
+        </a>
+        <img src="/assets/javascript.svg" class="logo logo-js" width="96" height="96" alt="JavaScript">
+      </div>
+      <p class="hint">Click the star to learn about the host.</p>
+      <form class="greet-form" id="greet-form">
+        <label class="sr-only" for="greet-input">Your name</label>
+        <input id="greet-input" name="name" placeholder="Enter a name..." maxlength="120" autocomplete="off" spellcheck="false">
+        <button type="submit">Greet</button>
+      </form>
+      <p id="greet-msg" class="greeting" role="status" aria-live="polite" aria-atomic="true"></p>
+      <section id="about" class="about" aria-labelledby="about-heading" hidden>
+        <h2 id="about-heading">A small native host. A local web UI.</h2>
+        <p>One Win32 window hosts Microsoft Edge WebView2. These HTML, CSS, JavaScript and SVG files load directly from the local asset directory.</p>
+        <p>Vite compiles TypeScript into local JavaScript and external CSS. Greet calls the C++ host through an explicitly enabled test bridge. No Tauri, Rust, server or Go CLI runs here.</p>
+        <a href="#/welcome">Back to the example</a>
+      </section>
+      <footer>
+        <p>Vite + TypeScript · C++ native greeting</p>
+        <p class="footnote">Requires NeutronStar Host and Microsoft Edge WebView2 Runtime.</p>
+      </footer>
+    </main>
+  </body>
+</html>
