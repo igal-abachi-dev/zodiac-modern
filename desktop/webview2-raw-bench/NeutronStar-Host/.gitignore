@@ -1,0 +1,4 @@
+/.cache/
+/.packages/
+/out/
+/CMakeUserPresets.json

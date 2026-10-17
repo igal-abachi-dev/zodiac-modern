@@ -1,0 +1,28 @@
+{
+  "version": 6,
+  "configurePresets": [
+    { "name": "windows-bench-base", "hidden": true, "cacheVariables": { "BUILD_TESTING": "ON", "NEUTRONSTAR_STATIC_CRT": "ON", "CMAKE_LINKER_TYPE": "MSVC", "CMAKE_CXX_FLAGS_RELEASE": "/O2 /Ob2 /DNDEBUG", "CMAKE_CXX_FLAGS_DEBUG": "/Ob0 /Od /RTC1", "CMAKE_EXE_LINKER_FLAGS_RELEASE": "/INCREMENTAL:NO" } },
+    { "name": "clang-cl-ninja-x64", "displayName": "Default: clang-cl + Ninja (x64)", "inherits": "msvc-ninja-x64", "binaryDir": "${sourceDir}/out/clang-cl-ninja-x64", "cacheVariables": { "CMAKE_CXX_COMPILER": "clang-cl.exe" } },
+    { "name": "msvc-x64", "inherits": "windows-bench-base", "generator": "Visual Studio 18 2026", "architecture": "x64", "binaryDir": "${sourceDir}/out/msvc-x64" },
+    { "name": "msvc-arm64", "inherits": "msvc-x64", "architecture": "ARM64", "binaryDir": "${sourceDir}/out/msvc-arm64" },
+    { "name": "clang-cl-vs-x64", "inherits": "msvc-x64", "toolset": "ClangCL", "binaryDir": "${sourceDir}/out/clang-cl-vs-x64", "cacheVariables": { "CMAKE_LINKER_TYPE": "MSVC" } },
+    { "name": "msvc-ninja-x64", "inherits": "windows-bench-base", "generator": "Ninja Multi-Config", "architecture": { "value": "x64", "strategy": "external" }, "binaryDir": "${sourceDir}/out/msvc-ninja-x64", "cacheVariables": { "CMAKE_CXX_COMPILER": "cl.exe", "CMAKE_EXPORT_COMPILE_COMMANDS": "ON" } }
+  ],
+  "buildPresets": [
+    { "name": "release", "configurePreset": "clang-cl-ninja-x64", "configuration": "Release" },
+    { "name": "debug", "configurePreset": "clang-cl-ninja-x64", "configuration": "Debug" },
+    { "name": "msvc-release", "configurePreset": "msvc-x64", "configuration": "Release" },
+    { "name": "msvc-debug", "configurePreset": "msvc-x64", "configuration": "Debug" },
+    { "name": "clang-cl-vs-release", "configurePreset": "clang-cl-vs-x64", "configuration": "Release" },
+    { "name": "clang-cl-vs-debug", "configurePreset": "clang-cl-vs-x64", "configuration": "Debug" },
+    { "name": "msvc-ninja-release", "configurePreset": "msvc-ninja-x64", "configuration": "Release" },
+    { "name": "msvc-ninja-debug", "configurePreset": "msvc-ninja-x64", "configuration": "Debug" },
+    { "name": "clang-cl-ninja-release", "configurePreset": "clang-cl-ninja-x64", "configuration": "Release" },
+    { "name": "clang-cl-ninja-debug", "configurePreset": "clang-cl-ninja-x64", "configuration": "Debug" }
+  ],
+  "testPresets": [
+    { "name": "release", "configurePreset": "clang-cl-ninja-x64", "configuration": "Release", "output": { "outputOnFailure": true } },
+    { "name": "debug", "configurePreset": "clang-cl-ninja-x64", "configuration": "Debug", "output": { "outputOnFailure": true } },
+    { "name": "msvc-release", "configurePreset": "msvc-x64", "configuration": "Release", "output": { "outputOnFailure": true } }
+  ]
+}

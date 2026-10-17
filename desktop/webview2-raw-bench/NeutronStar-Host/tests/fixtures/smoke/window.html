@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NeutronStar custom title bar</title>
+  <link rel="stylesheet" href="window.css">
+  <script type="module" src="window.mjs"></script>
+</head>
+<body>
+  <header class="titlebar">
+    <span>NeutronStar Host</span>
+    <nav aria-label="Window controls">
+      <button type="button" data-window="minimize" aria-label="Minimize">−</button>
+      <button type="button" data-window="toggle-maximize" aria-label="Maximize or restore">□</button>
+      <button type="button" data-window="close" aria-label="Close">×</button>
+    </nav>
+  </header>
+  <main>
+    <h1>HTML title bar</h1>
+    <p>Drag the header, double-click it to maximize or restore, or use the three keyboard-accessible buttons.</p>
+    <p>The native resize edges remain. Alt+F4 and the Windows system menu remain OS behaviors.</p>
+  </main>
+</body>
+</html>

@@ -1,0 +1,10 @@
+:root { font-family: "Segoe UI", sans-serif; color-scheme: light; }
+body { margin: 0; background: #f8faf9; color: #171a18; }
+.titlebar { display: flex; justify-content: space-between; align-items: center; height: 40px; padding-left: 16px; background: #e4ebe6; app-region: drag; -webkit-app-region: drag; user-select: none; }
+.titlebar nav, .titlebar button { app-region: no-drag; -webkit-app-region: no-drag; }
+.titlebar nav { display: flex; height: 100%; }
+.titlebar button { width: 46px; border: 0; background: transparent; color: inherit; font-size: 18px; }
+.titlebar button:hover { background: #cad7cf; }
+.titlebar button:focus-visible { outline: 2px solid #047857; outline-offset: -3px; }
+.titlebar button[data-window="close"]:hover { background: #b42318; color: white; }
+main { padding: 28px; }
