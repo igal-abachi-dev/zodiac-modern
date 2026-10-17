@@ -692,6 +692,7 @@ Key Advantages
 • Low Memory Footprint: Idle RAM usage typically sits around 20 MB to 100 MB, making it far more lightweight than web-tech alternatives.
 • High Performance UI: Svelte’s reactive, compile-time architecture pairs smoothly with Tauri's high-speed Rust backend, which communicates safely with the operating system via a typed command bridge.
 • Tauri v2 Features: Tauri v2 provides a mature, stable plugin system, fine-grained security capabilities, and support for multi-platform targets if you ever expand beyond Windows. You can find starter setups like the Tauri Svelte Template on GitHub or community-driven project scaffolds like the Tauri 2 + Svelte 5 + Shadcn Boilerplate.
+https://github.com/frostybee/tauri-svelte-template
 
 Considerations for Windows 11
 
