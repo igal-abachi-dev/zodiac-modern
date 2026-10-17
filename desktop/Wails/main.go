@@ -6,7 +6,6 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -14,7 +13,7 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
 )
 
-//go:embed all:frontend
+//go:embed all:frontend/dist
 var frontend embed.FS
 
 func main() {
@@ -23,18 +22,15 @@ func main() {
 	if flag.NArg() != 0 {
 		panic("Unknown host argument")
 	}
-	for _, item := range os.Environ() {
-		if strings.HasPrefix(strings.ToUpper(item), "WEBVIEW2_") {
-			panic("Remove WEBVIEW2_* overrides")
-		}
-	}
+	// The standard Wails loader resets its own WEBVIEW2_* variables during init.
+	// Validate inherited overrides in Run.ps1 / the external test launcher instead.
 	if *profile == "" {
 		*profile = filepath.Join(os.Getenv("LOCALAPPDATA"), "NeutronStar", "Wails", "Profile")
 	}
 	if !filepath.IsAbs(*profile) {
 		panic("Profile must be absolute")
 	}
-	assets, err := fs.Sub(frontend, "frontend")
+	assets, err := fs.Sub(frontend, "frontend/dist")
 	if err != nil {
 		panic(err)
 	}

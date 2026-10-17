@@ -146,3 +146,34 @@ impl AssetRoot {
         Ok(data)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn actual_handle_confinement_and_future_profile() {
+        let folder = std::env::temp_dir().join(format!(
+            "neutronstar-rust-asset-test-{}-{}",
+            std::process::id(),
+            std::time::SystemTime::now()
+                .duration_since(std::time::UNIX_EPOCH)
+                .unwrap()
+                .as_nanos()
+        ));
+        let root = folder.join("assets");
+        std::fs::create_dir_all(&root).unwrap();
+        std::fs::write(root.join("index.html"), b"synthetic").unwrap();
+        std::fs::write(folder.join("outside.html"), b"outside").unwrap();
+        let assets = AssetRoot::new(&root).unwrap();
+        assert_eq!(assets.read("index.html").unwrap(), b"synthetic");
+        assert!(assets.read("../outside.html").is_err());
+        let future = prospective_directory(&root.join("future-profile")).unwrap();
+        assert!(nested(assets.path(), &future));
+        assert!(!future.exists());
+        drop(assets);
+        std::fs::remove_file(root.join("index.html")).unwrap();
+        std::fs::remove_file(folder.join("outside.html")).unwrap();
+        std::fs::remove_dir(root).unwrap();
+        std::fs::remove_dir(folder).unwrap();
+    }
+}
