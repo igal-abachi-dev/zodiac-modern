@@ -100,14 +100,15 @@ fn string_out(get: impl FnOnce(*mut PWSTR) -> Result<()>) -> Result<String> {
     Ok(value)
 }
 fn dispatch(weak: &Weak<State>, action: impl FnOnce(&Rc<State>) -> Result<()>) -> Result<()> {
-    if let Some(state) = weak.upgrade() {
-        if !state.closed.get() && !state.failed.get() {
-            let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| action(&state)));
-            match result {
-                Ok(Ok(())) => {}
-                Ok(Err(error)) => state.fail(error.code().0),
-                Err(_) => state.fail(E_FAIL.0),
-            }
+    if let Some(state) = weak.upgrade()
+        && !state.closed.get()
+        && !state.failed.get()
+    {
+        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| action(&state)));
+        match result {
+            Ok(Ok(())) => {}
+            Ok(Err(error)) => state.fail(error.code().0),
+            Err(_) => state.fail(E_FAIL.0),
         }
     }
     Ok(())
@@ -479,16 +480,16 @@ impl State {
                     &weak,
                     |s| {
                         s.emit(3, 0);
-                        if s.options.smoke {
-                            if let Some(sender) = sender {
-                                let title = string_out(|p| sender.DocumentTitle(p))?;
-                                if title == "NeutronStar smoke: PASS" {
-                                    s.passed.set(true);
-                                    s.close();
-                                } else if title == "NeutronStar smoke: FAIL" {
-                                    s.failed.set(true);
-                                    s.close();
-                                }
+                        if s.options.smoke
+                            && let Some(sender) = sender
+                        {
+                            let title = string_out(|p| sender.DocumentTitle(p))?;
+                            if title == "NeutronStar smoke: PASS" {
+                                s.passed.set(true);
+                                s.close();
+                            } else if title == "NeutronStar smoke: FAIL" {
+                                s.failed.set(true);
+                                s.close();
                             }
                         }
                         Ok(())
@@ -681,6 +682,8 @@ impl HostWindow {
         ));
         Ok(if s.timed_out.get() {
             3
+        } else if s.failed.get() {
+            1
         } else if !passed {
             2
         } else {

@@ -1,0 +1,4 @@
+# Separate tooling graph: changes must not invalidate the frozen frontend lock.
+packages: []
+storeDir: ../../.cache/preview-pnpm-store
+strictPeerDependencies: true

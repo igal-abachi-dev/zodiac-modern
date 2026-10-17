@@ -22,14 +22,12 @@ fn safe_segment(part: &str) -> bool {
     if let Some(tail) = stem
         .strip_prefix("COM")
         .or_else(|| stem.strip_prefix("LPT"))
+        && tail.chars().count() == 1
+        && tail
+            .chars()
+            .all(|c| c.is_ascii_digit() || "¹²³".contains(c))
     {
-        if tail.chars().count() == 1
-            && tail
-                .chars()
-                .all(|c| c.is_ascii_digit() || "¹²³".contains(c))
-        {
-            return false;
-        }
+        return false;
     }
     true
 }
@@ -140,7 +138,7 @@ mod tests {
         }
         for b in 0..=255u16 {
             let url = format!("{ORIGIN}%{b:02X}.txt");
-            if b < 32 || b >= 127 || [b'%', b'/', b'\\', b':'].contains(&(b as u8)) {
+            if !(32..127).contains(&b) || [b'%', b'/', b'\\', b':'].contains(&(b as u8)) {
                 assert!(resource_path(&url).is_none(), "{b}");
             }
         }

@@ -469,6 +469,15 @@ checks and limitations.
 The selected clang-cl/Ninja default needs no vcpkg migration, C++23 migration,
 C++/WinRT rewrite or larger framework. MSVC/MSBuild remains supported.
 WIL/WRL and Win32 fit the current task.
+
+### Compiler mitigation audit (2026-10-18)
+
+See the [C++/Rust hardening audit](../../host-test-support/HARDENING.md) for
+actual compiler settings, inspected PE headers, the newly enabled Rust CFG
+setting, and qualifications for SafeStack, automatic initialization, RTC and CET.
+The frozen C++ clang-cl/Ninja executable remains unchanged. CMake's `/RTC1`
+Debug setting must not be presented as proven MSVC-equivalent instrumentation
+under clang-cl. CET compatibility and separate sanitizer validation remain open.
 Frontend fixture implementation can proceed while these validation improvements
 are tracked; comparative benchmark claims and production release acceptance
 still require their respective evidence.

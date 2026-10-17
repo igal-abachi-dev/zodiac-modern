@@ -31,3 +31,54 @@ not new performance results. Alternative hosts, a host comparison collector,
 performance cohorts, physical AT/IME/DPI/high-contrast acceptance and the existing
 early-initialization-close concern remain open. No runes-only state comparison
 has been performed. Copied diagnostic outputs have not been revalidated here.
+
+## Fastify browser-preview change (2026-10-18)
+
+Replaced the local `node:http` fixture with Fastify **5.12.7** and
+`@fastify/static` **8.3.0**, in a separately locked `scripts/preview/` tooling
+package. A frozen install passed. No frontend dependency resolution, asset
+rebuild or native host changes were required for this preview change.
+
+- `node --test tests/preview.test.mjs`: passed. Checks all 17 response bodies
+  against built files, CSP/cache/MIME-related headers, and 12 root/query/missing/
+  forbidden-path/method/Host cases. Missing assets do not receive SPA fallback.
+- Production Edge Playwright test against the new local Fastify server:
+  **1/1 passed**, including readiness, workflow completion/cancellation, modal
+  focus/Escape, reload, empty storage and no observed CSP/page errors.
+- Main frontend lock hash remains
+  `556a5bb02d257469d45738bbc7cd8e7240228026ed38e3648cbab9b6b129dbf9`;
+  frontend manifest hash remains
+  `211ec53bbf3677974de1f1987aaadba58530739662dadcf5763bb300029f6902`.
+  The host asset verifier still reports 17 unchanged files.
+
+An initial sandboxed browser invocation stalled and was stopped using its
+confirmed task-owned Node process IDs. A first retry correctly refused the busy
+port. The completed permission-enabled retry passed; neither failed launch is
+a benchmark sample or discarded rendering result. Test runner helpers were
+managed separately from interactive native-host instances.
+
+See [browser/server choices](BROWSER-PREVIEW.md) and the
+[Win32/Tauri architecture note](HOST-COMPARISON-PLAN.md#win32-window-versus-tauri-window).
+The four alternative hosts now have implementation/builds; native admission and
+comparative measurements remain separate from the baseline/browser checks.
+
+### Nginx-informed preview follow-up (2026-10-18)
+
+The [source-review notes](BROWSER-PREVIEW.md#nginx-source-review-2026-10-18)
+record a focused read of Nginx's static-file, URI-parser and headers-filter code.
+It exposed two differences in our actual responses: an early malformed-URL 400
+omitted the security headers, and the static plugin replaced the requested JS
+MIME with its own valid but different inference. Explicit `onBadUrl`, final
+response headers and successful-asset MIME handling now correct those cases.
+
+- Preview regression test passed: all 17 byte-identical assets with exact MIME,
+  content length and headers; 16 request/rejection cases; no validators, range
+  response or compression variant under the frozen preview policy.
+- The normal browser command refused the occupied port 4188. That existing
+  instance was left untouched. A separate task-owned Fastify server on an
+  OS-assigned loopback port passed the Edge CSP/readiness/dialog/Escape/focus,
+  simulation completion/cancel/reset, reload and empty-storage regression.
+  Its browser and server were closed in `finally`.
+- No Nginx performance comparison, Internet deployment acceptance, native host
+  modification or frontend asset rebuild occurred. Node HTTP-parser failures
+  before routing and atomic file-open confinement remain outside this test.

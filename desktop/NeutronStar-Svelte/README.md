@@ -26,6 +26,36 @@ Supply `-RunnerPath` or `-ProfilePath` to override. Its reusable interactive
 profile is for convenience; benchmark runs require separately controlled profiles.
 The host does not download a missing runtime.
 
+### Open the built frontend in a browser
+
+Chrome, Vivaldi, Brave and Edge can run this frontend without a native host.
+Right-click `Run-Browser.ps1` and choose **Run with PowerShell**, or run
+`.\Run-Browser.ps1`. Keep its window open and visit http://127.0.0.1:4188/;
+Ctrl+C stops the server. It prefers the repository's pinned Node 24.21.0 and
+otherwise checks Node on PATH; `-NodePath` selects an explicit executable.
+From this directory, run:
+
+```powershell
+node scripts/serve.mjs
+```
+
+First install the separately pinned preview tooling if `init.cmd` has not done so:
+`pnpm --dir scripts/preview install --ignore-workspace --frozen-lockfile --ignore-scripts`.
+
+Open **http://127.0.0.1:4188/**. Stop the server with Ctrl+C. It serves the
+existing `dist/` with the strict CSP; rebuilding is necessary only after source
+changes. Double-clicking `dist/index.html` is not supported: its external ES
+modules are subject to browser `file://` origin/CORS restrictions. Do not disable
+browser security flags to work around that.
+
+This checks browser UI behavior, not native host integration, window lifecycle,
+native request blocking or host process-tree costs. Full-browser and desktop-host
+measurements must remain separate. `pnpm dev` supports development/HMR, while
+this server is for checking the built production assets under the CSP.
+It uses Fastify + `@fastify/static`; see [browser preview choices and the Nginx
+distinction](BROWSER-PREVIEW.md). The same frontend assets are used in the browser
+and desktop hosts; native chrome and host behavior remain separate.
+
 ## State and code ownership
 
 Keep **Nano Stores 1.5.5** for the benchmark workflow and supplemental workload

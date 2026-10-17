@@ -5,6 +5,8 @@ Push-Location $PSScriptRoot
 try {
     if(-not $GoPath){$GoPath=Join-Path $PSScriptRoot '../../.cache/toolchains/go/go/bin/go.exe'}
     if(-not(Test-Path -LiteralPath $GoPath)){$GoPath='go.exe'}
+    $resolvedGo=(Get-Command $GoPath -ErrorAction Stop).Source
+    $env:PATH=(Split-Path -Parent $resolvedGo)+';'+$env:PATH
     $env:GOTOOLCHAIN='local'
     $env:GOPATH=Join-Path $PSScriptRoot '../.cache/go-work'
     $env:GOMODCACHE=Join-Path $PSScriptRoot '../.cache/gomod'

@@ -8,6 +8,8 @@ try {
     & cargo fmt -- --check
     if($LASTEXITCODE -ne 0){throw 'Rust formatting failed.'}
     $common=@('--locked');if($Offline){$common+='--offline'}
+    & cargo clippy @common --all-targets -- -D warnings
+    if($LASTEXITCODE -ne 0){throw 'Rust Clippy checks failed.'}
     & cargo test @common
     if($LASTEXITCODE -ne 0){throw 'Rust policy tests failed.'}
     & cargo build --release @common

@@ -47,12 +47,17 @@ pub fn local_directory(path: &Path) -> Result<()> {
     Ok(())
 }
 pub fn nested(parent: &Path, child: &Path) -> bool {
-    let a = parent
-        .to_string_lossy()
-        .trim_end_matches('\\')
-        .to_lowercase();
-    let b = child.to_string_lossy().to_lowercase();
-    b == a || b.starts_with(&(a + "\\"))
+    use std::os::windows::ffi::OsStrExt;
+    use windows::Win32::Globalization::{CSTR_EQUAL, CompareStringOrdinal};
+    let mut a: Vec<u16> = parent.as_os_str().encode_wide().collect();
+    while a.last() == Some(&92) {
+        a.pop();
+    }
+    let b: Vec<u16> = child.as_os_str().encode_wide().collect();
+    !a.is_empty()
+        && b.len() >= a.len()
+        && unsafe { CompareStringOrdinal(&a, &b[..a.len()], true) } == CSTR_EQUAL
+        && (b.len() == a.len() || b[a.len()] == 92 || b[a.len()] == 47)
 }
 
 // Match weakly_canonical before creating the user-data directory. In particular,

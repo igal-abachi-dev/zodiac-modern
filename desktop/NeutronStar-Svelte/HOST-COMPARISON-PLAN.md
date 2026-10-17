@@ -1,8 +1,9 @@
 # Five-host Svelte comparison
 
 Status 2026-10-18: standalone Svelte baseline prepared and correctness checked.
-Tauri's public-API host implementation and Release build are complete; its native acceptance,
-the other three implementations and all comparative runs are **pending**.
+All four alternative host implementations and builds are present. Wails,
+pywebview and raw Rust passed production screen smoke checks; broader native
+admission, Tauri native acceptance and all comparative runs are **pending**.
 This phase selects a WebView2 host candidate before later Electron/Skia/native
 toolkit comparisons. Svelte frontend selection is not native-host selection or
 production/release acceptance.
@@ -13,9 +14,9 @@ production/release acceptance.
 | --- | --- | --- | --- |
 | NeutronStar Host | Existing C++20 Win32 + official WebView2 SDK/WIL | This project's `dist/` | Baseline; two copied/rebuilt correctness fixtures passed |
 | Tauri v2 | Standard Rust application framework; public Tauri APIs only | Same built Svelte files | Implementation in `../Tauri-v2-Test/`; build/native acceptance tracked there |
-| Wails | Go application framework | Same files, embedded/copied with hashes checked | Adapter pending in `../Wails/`; pin release line before implementation |
-| `webview2-com` | Rust COM bindings with a minimal Win32 window | Same built Svelte files | Adapter pending in `../webview2-com/` |
-| pywebview | Python shell forced to the Edge/WebView2 backend | Same built Svelte files | Adapter pending in `../PyWebView/`; freeze packaging/dependency versions |
+| Wails | Standard Wails 2.15.0 / Go 1.27.1 | Same files, embedded with hashes checked | Built; production workflow passed; profile/permission differences need separate lane; [validation](../Wails/VALIDATION.md) |
+| `webview2-com` | Rust COM bindings with a minimal Win32 window | Same built Svelte files | Built with CFG; production/native policy checks passed visibly; [validation](../webview2-com/VALIDATION.md) |
+| pywebview | Python shell forced to the Edge/WebView2 backend | Same built Svelte files | 6.2.1 packaged onedir built; production workflow passed; transport/profile/policy differences; [validation](../PyWebView/VALIDATION.md) |
 
 Here `webview2-com` means the Rust bindings, not a separate browser engine or
 C# CoreWebView2. It requires windowing, asset policy and lifecycle code of its
@@ -23,6 +24,30 @@ own. Keep that Rust candidate close to the minimal C++ design; direct COM
 customization belongs there, not inside the standard Tauri candidate. The C++
 baseline already uses the underlying COM API. None of these names
 implies a lighter Chromium renderer or proves a performance advantage.
+
+### Win32 window versus Tauri window
+
+On Windows, both candidates use the same basic native architecture: a Win32
+top-level window (`HWND`) containing a WebView2 controller that displays the
+Svelte HTML/CSS/JavaScript. Tauri's window is also a native Windows window.
+With decorations enabled, both use native title bars and minimize/maximize/close
+controls; the frontend does not render those operating-system controls.
+
+NeutronStar creates and manages the HWND and WebView2 COM interfaces directly
+in C++. Standard Tauri normally delegates native windowing to TAO and webview
+hosting to WRY, then adds lifecycle, app-protocol assets, IPC, permissions and
+application APIs. The raw Rust `webview2-com` candidate follows the direct-host
+approach instead of using those Tauri/WRY/TAO layers.
+
+Consequently, the comparison evaluates host implementation, settings, injected
+runtime code, transport, lifecycle and framework overhead around the same
+WebView2 engine. It does not compare different rendering engines. Identical
+Svelte assets do not establish identical native settings or security behavior;
+those differences remain explicit admission/measurement conditions.
+
+The [standalone browser preview](BROWSER-PREVIEW.md) displays the same built
+frontend in a browser tab. It is useful for UI checks but is a separate container
+and cannot substitute for native-host lifecycle or process-tree measurements.
 
 Build the Svelte frontend once; consume it from the candidates with no
 framework-specific frontend imports. Embedded candidates must verify their
