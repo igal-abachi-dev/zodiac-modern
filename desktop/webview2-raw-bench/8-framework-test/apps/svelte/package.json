@@ -1,0 +1,24 @@
+{
+  "name": "@neutronstar/svelte",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit && svelte-check --tsconfig ./tsconfig.json",
+    "build": "vite build",
+    "build:test": "vite build --mode test --outDir dist-test",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@neutronstar/bench-domain": "workspace:*",
+    "@neutronstar/bench-contract": "workspace:*",
+    "@neutronstar/design": "workspace:*",
+    "@neutronstar/test-support": "workspace:*",
+    "svelte": "5.57.2",
+    "@ark-ui/svelte": "5.24.3"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "7.3.1",
+    "svelte-check": "4.7.7"
+  }
+}

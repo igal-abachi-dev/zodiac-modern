@@ -1,0 +1,22 @@
+diff --git a/dist/htmx.esm.js b/dist/htmx.esm.js
+index 51ee20f2c499c8cc23b2c237a76ad6c6256d2086..641f6eb28bf8d68964e38b74a22d3fe7a21cad6a 100644
+--- a/dist/htmx.esm.js
++++ b/dist/htmx.esm.js
+@@ -824,14 +824,9 @@ var htmx = (function() {
+    * @returns {boolean}
+    */
+   function canAccessLocalStorage() {
+-    const test = 'htmx:sessionStorageTest'
+-    try {
+-      sessionStorage.setItem(test, test)
+-      sessionStorage.removeItem(test)
+-      return true
+-    } catch (e) {
+-      return false
+-    }
++    // NeutronStar offline build: history persistence is unavailable by policy.
++    // Do not probe storage: even a write followed by removal violates the contract.
++    return false
+   }
+ 
+   /**

@@ -1,0 +1,24 @@
+{
+  "name": "@neutronstar/solid",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "vite build",
+    "build:test": "vite build --mode test --outDir dist-test",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@neutronstar/bench-domain": "workspace:*",
+    "@neutronstar/bench-contract": "workspace:*",
+    "@neutronstar/design": "workspace:*",
+    "@neutronstar/test-support": "workspace:*",
+    "solid-js": "1.9.17",
+    "@ark-ui/solid": "5.39.3",
+    "@nanostores/solid": "1.1.1"
+  },
+  "devDependencies": {
+    "vite-plugin-solid": "2.11.14"
+  }
+}

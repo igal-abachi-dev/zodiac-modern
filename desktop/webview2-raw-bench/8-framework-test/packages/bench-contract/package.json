@@ -1,0 +1,16 @@
+{
+  "name": "@neutronstar/bench-contract",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "nanostores": "1.5.5",
+    "@neutronstar/bench-domain": "workspace:*"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

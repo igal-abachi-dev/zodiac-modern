@@ -1,0 +1,25 @@
+{
+  "name": "@neutronstar/vue",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit && vue-tsc --noEmit",
+    "build": "vite build",
+    "build:test": "vite build --mode test --outDir dist-test",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@neutronstar/bench-domain": "workspace:*",
+    "@neutronstar/bench-contract": "workspace:*",
+    "@neutronstar/design": "workspace:*",
+    "@neutronstar/test-support": "workspace:*",
+    "vue": "3.5.44",
+    "@ark-ui/vue": "5.39.3",
+    "@nanostores/vue": "1.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "6.0.10",
+    "vue-tsc": "3.3.13"
+  }
+}

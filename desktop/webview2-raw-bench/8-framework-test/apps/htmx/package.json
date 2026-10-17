@@ -1,0 +1,23 @@
+{
+  "name": "@neutronstar/htmx",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "vite build",
+    "build:test": "vite build --mode test --outDir dist-test",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@neutronstar/bench-domain": "workspace:*",
+    "@neutronstar/bench-contract": "workspace:*",
+    "@neutronstar/design": "workspace:*",
+    "@neutronstar/test-support": "workspace:*",
+    "htmx.org": "2.0.11",
+    "@zag-js/vanilla": "1.45.0",
+    "@zag-js/dialog": "1.45.0",
+    "@zag-js/progress": "1.45.0"
+  },
+  "devDependencies": {}
+}

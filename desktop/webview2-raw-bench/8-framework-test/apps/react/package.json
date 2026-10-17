@@ -1,0 +1,27 @@
+{
+  "name": "@neutronstar/react",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "vite build",
+    "build:test": "vite build --mode test --outDir dist-test",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@neutronstar/bench-domain": "workspace:*",
+    "@neutronstar/bench-contract": "workspace:*",
+    "@neutronstar/design": "workspace:*",
+    "@neutronstar/test-support": "workspace:*",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "@ark-ui/react": "5.39.3",
+    "@nanostores/react": "2.0.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "6.1.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0"
+  }
+}

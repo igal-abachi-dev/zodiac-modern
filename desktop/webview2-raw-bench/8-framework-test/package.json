@@ -1,0 +1,39 @@
+{
+  "name": "neutronstar-nine-frontends",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@12.8.1",
+  "engines": {
+    "node": ">=24.21.0 <25"
+  },
+  "scripts": {
+    "build:design": "node scripts/build-design.mjs",
+    "typecheck": "pnpm -r --if-present typecheck",
+    "build": "pnpm build:design && pnpm -r --filter \"./apps/*\" build && node scripts/audit-dist.mjs",
+    "build:test": "pnpm build:design && pnpm -r --filter \"./apps/*\" build:test",
+    "build:workloads": "pnpm build:design && pnpm -r --filter \"./apps/*\" exec vite build --mode workload --outDir dist-workload",
+    "build:workload-tests": "pnpm build:design && pnpm -r --filter \"./apps/*\" exec vite build --mode workload-test --outDir dist-workload-test",
+    "build:diagnostics": "pnpm build:design && pnpm -r --filter \"./apps/*\" exec vite build --mode diagnostic --outDir dist-diagnostic",
+    "build:workload-diagnostics": "pnpm build:design && pnpm -r --filter \"./apps/*\" exec vite build --mode workload-diagnostic --outDir dist-workload-diagnostic",
+    "build:diagnostic-tests": "pnpm build:design && pnpm -r --filter \"./apps/*\" exec vite build --mode workload-diagnostic-test --outDir dist-diagnostic-test",
+    "test:diagnostics": "playwright test --config playwright.diagnostics.config.ts",
+    "test:workloads": "playwright test --config playwright.workloads.config.ts",
+    "test": "tsx --test tests/domain.test.ts tests/workload-model.test.ts tests/diagnostics.test.ts",
+    "test:browser": "playwright test",
+    "manifest": "node scripts/audit-dist.mjs",
+    "dev": "node scripts/dev.mjs"
+  },
+  "devDependencies": {
+    "vite": "8.3.4",
+    "typescript": "6.0.3",
+    "tailwindcss": "4.3.3",
+    "@tailwindcss/cli": "4.3.3",
+    "@fontsource/inter": "5.3.0",
+    "@fontsource/noto-sans-hebrew": "5.3.0",
+    "@fontsource/noto-sans-arabic": "5.3.0",
+    "lucide-static": "1.58.0",
+    "@playwright/test": "1.64.1",
+    "tsx": "4.23.15"
+  }
+}

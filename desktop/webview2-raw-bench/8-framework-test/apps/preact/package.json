@@ -1,0 +1,26 @@
+{
+  "name": "@neutronstar/preact",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "vite build",
+    "build:test": "vite build --mode test --outDir dist-test",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@neutronstar/bench-domain": "workspace:*",
+    "@neutronstar/bench-contract": "workspace:*",
+    "@neutronstar/design": "workspace:*",
+    "@neutronstar/test-support": "workspace:*",
+    "preact": "11.0.1",
+    "@zag-js/preact": "1.45.0",
+    "@zag-js/dialog": "1.45.0",
+    "@zag-js/progress": "1.45.0",
+    "@nanostores/preact": "1.1.1"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "2.10.6"
+  }
+}

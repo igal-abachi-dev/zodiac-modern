@@ -1,0 +1,17 @@
+{
+  "name": "@neutronstar/test-support",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@neutronstar/design": "workspace:*",
+    "@neutronstar/bench-contract": "workspace:*",
+    "@neutronstar/bench-domain": "workspace:*"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

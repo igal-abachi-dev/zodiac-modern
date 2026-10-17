@@ -1,0 +1,134 @@
+<div x-data="benchui">
+  <main class="shell" id="background" :inert="open">
+    <header class="topbar">
+      <div>
+        <div class="brand">
+          <div class="brand-icon"><img src="/icons/orbit.svg" alt="" /></div>
+          <h1>NeutronStar GUI Bench</h1>
+        </div>
+        <p class="subtitle">
+          A UI-only simulation for comparing desktop frontends.
+        </p>
+      </div>
+      <button id="about-trigger" class="secondary">
+        <img class="icon" src="/icons/info.svg" alt="" />About this test
+      </button>
+    </header>
+    <div class="badge">
+      <img src="/icons/shield-check.svg" alt="" />SIMULATION · NO FILES OR
+      CRYPTOGRAPHY.
+    </div>
+    <div class="grid">
+      <section class="card" aria-labelledby="decrypt-title">
+        <h2 class="card-title" id="decrypt-title">
+          <img class="icon" src="/icons/unlock-keyhole.svg" alt="" />Decrypt
+        </h2>
+        <p class="eyebrow">SYNTHETIC INPUT</p>
+        <div class="fixture">
+          <p>Synthetic sample: starlight.nsx</p>
+          <p class="hint">No disk file is opened.</p>
+        </div>
+        <button
+          type="button"
+          id="decrypt"
+          :disabled="busy"
+          @click="decrypt"
+          class="action"
+          disabled
+        >
+          <img
+            class="icon"
+            src="/icons/arrow-down-to-line.svg"
+            alt=""
+          />Simulate decryption
+        </button>
+      </section>
+      <section class="card" aria-labelledby="encrypt-title">
+        <h2 class="card-title" id="encrypt-title">
+          <img class="icon" src="/icons/lock-keyhole.svg" alt="" />Encrypt
+        </h2>
+        <p class="eyebrow">SYNTHETIC INPUT</p>
+        <div class="fixture">
+          <p id="fixture-text" x-text="fixtureText" dir="auto">
+            Zodiac GUI benchmark — שלום — مرحبًا — 🌠
+          </p>
+        </div>
+        <button
+          type="button"
+          id="encrypt"
+          :disabled="busy"
+          @click="encrypt"
+          class="action primary"
+          disabled
+        >
+          <img
+            class="icon"
+            src="/icons/arrow-up-from-line.svg"
+            alt=""
+          />Simulate encryption
+        </button>
+      </section>
+    </div>
+    <section class="card status-card" aria-label="Simulation status">
+      <div class="status-row">
+        <p id="status" class="status-label" role="status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span
+          ><span id="message" x-text="message">Loading local interface…</span>
+        </p>
+        <div class="status-controls">
+          <button
+            id="cancel"
+            :hidden="notRunning"
+            @click="cancel"
+            type="button"
+            class="secondary"
+            hidden
+          >
+            Cancel</button
+          ><button
+            id="reset"
+            :disabled="notLoaded"
+            @click="reset"
+            type="button"
+            class="secondary"
+            disabled
+          >
+            Reset
+          </button>
+        </div>
+      </div>
+      <div id="progress-root" class="progress-root">
+        <div
+          id="progress-track"
+          class="progress-track"
+          aria-label="Simulation progress"
+        >
+          <span
+            id="progress-fill"
+            :data-value="snapshot.progress"
+            class="progress-fill"
+            data-value="0"
+          ></span>
+        </div>
+        <div class="progress-caption">
+          <span>Simulation progress</span
+          ><span id="percent" x-text="percent">0%</span>
+        </div>
+      </div>
+    </section>
+    <footer class="footer">
+      <p>Local interface. Synthetic data. Nothing is encrypted or decrypted.</p>
+      <span>CONTROLLED RENDERER · SHARED STATE</span>
+    </footer>
+  </main>
+  <div class="dialog-layer" id="about-layer" hidden>
+    <section id="about-content" class="dialog-content" aria-modal="true">
+      <h2 id="about-title">About this test</h2>
+      <p id="about-description">
+        Actions are UI-only simulations. No files, cryptography, Go CLI, network
+        or native bridge are involved.
+      </p>
+      <button id="about-close" class="secondary">Close</button>
+    </section>
+  </div>
+</div>
