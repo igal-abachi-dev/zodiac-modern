@@ -10,7 +10,7 @@ evidence**. Interactive native acceptance is pending the user's first run.
 | Formatting | Passed `cargo fmt --check` through Build.ps1 |
 | Native response/navigation policy unit tests | 2/2 passed; local entry/hash allow, remote/other-path/query deny, GET/MIME restrictions, missing-asset 404, forbidden response 403, fixed CSP/nosniff |
 | Compile-time frontend identity | Verified per-file sizes/SHA-256, complete file set and frontend lock hash during successful policy-test compilation |
-| Release build | Rebuilding the final public-Tauri-only version; final status recorded after build completes |
+| Final standard-Tauri Release build | Passed through `Build.ps1 -Offline`; public Tauri APIs/default features only, no direct Windows/COM application dependency |
 | First actual Tauri window / installed runtime | Pending; not launched during implementation |
 | Native CSP/DOM/font/readiness/dialog/focus/workflow/resize checks | Pending actual native run |
 | Normal and early-close process/helper lifecycle | Pending |
@@ -39,3 +39,10 @@ standard Tauri default features. Low-level controller work belongs to the
 separate Rust `webview2-com` candidate. That will be closer to the C++ host,
 but matching behavior/configuration is required before interpreting language
 differences.
+
+Final public-Tauri-only Release executable SHA-256:
+`B264C5BDBB5CA8039BAB42233F75A78C784C9CEB0DBFB7B645CFE835CF7BD054`.
+
+Source verification confirms the application has only `tauri` as a direct
+runtime dependency and no `with_webview`, raw COM calls or unsafe blocks.
+All 17 Svelte production inputs remained unchanged after implementation.

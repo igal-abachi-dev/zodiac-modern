@@ -1,7 +1,7 @@
 # Five-host Svelte comparison
 
 Status 2026-10-18: standalone Svelte baseline prepared and correctness checked.
-Tauri's public-API host implementation is in progress; its native acceptance,
+Tauri's public-API host implementation and Release build are complete; its native acceptance,
 the other three implementations and all comparative runs are **pending**.
 This phase selects a WebView2 host candidate before later Electron/Skia/native
 toolkit comparisons. Svelte frontend selection is not native-host selection or
