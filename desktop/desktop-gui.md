@@ -1461,3 +1461,12 @@ can be a separately labeled future comparison, never silently mixed into the
 matched cohort. Native browser/enterprise policy and actual runtime options still
 need validation. See the [versioned WRY source](https://docs.rs/crate/wry/0.57.0/source/src/webview2/mod.rs)
 and the candidate README for origin, internal IPC and embedding differences.
+
+The Tauri candidate uses standard Tauri default features and public builder/
+response/navigation APIs only. It has no direct Windows/WebView2 COM dependency,
+raw-controller callback, unsafe block or custom Win32 event loop. Settings that
+Tauri does not expose remain framework defaults and must be disclosed instead of
+forcing parity through COM. The separate Rust `webview2-com` candidate should
+mirror NeutronStar's minimal C++ architecture more closely, allowing a better
+implementation/language comparison once lifecycle, settings and assets match.
+Neither comparison isolates language performance automatically.

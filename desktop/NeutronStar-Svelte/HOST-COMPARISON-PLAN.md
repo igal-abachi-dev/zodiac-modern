@@ -1,7 +1,8 @@
 # Five-host Svelte comparison
 
 Status 2026-10-18: standalone Svelte baseline prepared and correctness checked.
-The four alternative host implementations and comparative runs are **pending**.
+Tauri's public-API host implementation is in progress; its native acceptance,
+the other three implementations and all comparative runs are **pending**.
 This phase selects a WebView2 host candidate before later Electron/Skia/native
 toolkit comparisons. Svelte frontend selection is not native-host selection or
 production/release acceptance.
@@ -11,14 +12,16 @@ production/release acceptance.
 | Candidate | Native layer | Frontend input | Current status |
 | --- | --- | --- | --- |
 | NeutronStar Host | Existing C++20 Win32 + official WebView2 SDK/WIL | This project's `dist/` | Baseline; two copied/rebuilt correctness fixtures passed |
-| Tauri v2 | Rust application framework | Same built Svelte files | Adapter pending in `../Tauri-v2-Test/` |
+| Tauri v2 | Standard Rust application framework; public Tauri APIs only | Same built Svelte files | Implementation in `../Tauri-v2-Test/`; build/native acceptance tracked there |
 | Wails | Go application framework | Same files, embedded/copied with hashes checked | Adapter pending in `../Wails/`; pin release line before implementation |
 | `webview2-com` | Rust COM bindings with a minimal Win32 window | Same built Svelte files | Adapter pending in `../webview2-com/` |
 | pywebview | Python shell forced to the Edge/WebView2 backend | Same built Svelte files | Adapter pending in `../PyWebView/`; freeze packaging/dependency versions |
 
 Here `webview2-com` means the Rust bindings, not a separate browser engine or
 C# CoreWebView2. It requires windowing, asset policy and lifecycle code of its
-own. The C++ baseline already uses the underlying COM API. None of these names
+own. Keep that Rust candidate close to the minimal C++ design; direct COM
+customization belongs there, not inside the standard Tauri candidate. The C++
+baseline already uses the underlying COM API. None of these names
 implies a lighter Chromium renderer or proves a performance advantage.
 
 Build the Svelte frontend once; consume it from the candidates with no

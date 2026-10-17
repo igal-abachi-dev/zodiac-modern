@@ -37,7 +37,7 @@ Interactive reuse is not the later benchmark profile protocol.
 
 ## Deliberate configuration
 
-- Tauri **2.12.4**, tauri-build **2.7.3**, WebView2 COM bindings **0.39.1**,
+- Tauri **2.12.4** with its standard default features, tauri-build **2.7.3**,
   locked transitive dependencies; standard Rust LLVM compiler with the Microsoft
   ABI, Microsoft linker/SDK and static CRT. Release uses opt-level 3, thin LTO,
   one codegen unit, abort-on-panic and stripped symbols. This is a declared build
@@ -53,10 +53,11 @@ Interactive reuse is not the later benchmark profile protocol.
   specifically to retain the already external-only app policy; the CSP itself
   remains enforced. The bounded Zag metadata exception is unchanged.
 - Navigation is restricted to the app entry document and optional hash routes.
-  New windows, downloads and browser permission requests are denied. Additional
-  native settings disable context menus, browser accelerators, host objects,
-  built-in error pages, autofill/password saving and pinch zoom. Tauri needs its
-  native message channel, so that channel is not disabled.
+  New windows, downloads and browser permission requests are denied. Public
+  Tauri APIs disable devtools, zoom hotkeys, general autofill, extensions and
+  native drag/drop integration. Other WebView2 settings stay at Tauri/WRY defaults;
+  this candidate does not call COM or obtain the raw controller. Tauri's native
+  message channel remains part of the framework.
 - The build verifies the complete asset set, per-file sizes/SHA-256 and frontend
   lock hash against the Svelte manifest. Extra/missing/changed files or descendant
   symlink/reparse assets fail the build. The standard Tauri embedded/compressed
@@ -106,9 +107,18 @@ Build-time checks establish input identity, not proof of identical served HTML
 or security behavior. The response hook operates on Tauri app-protocol responses;
 it is not an all-network native interception hook. CSP restricts page-initiated
 remote subresources and native callbacks restrict navigation/permissions, but
-browser servicing/background traffic is not claimed absent. Native settings are
-applied through Tauri's STA callback immediately after webview creation; complete
-startup/security/lifecycle parity still requires runtime inspection.
+browser servicing/background traffic is not claimed absent.
+
+This is a **standard Tauri application using public Tauri APIs**, not a custom
+Rust WebView2 controller host. There is no direct `windows`/`webview2-com`
+dependency, `with_webview` callback, unsafe block, manual HWND or COM setting in
+the application. Those bindings still appear transitively because WRY uses them
+internally. Settings not exposed by the public builder, including default context
+menus and some accelerator/autosave/error-page controls, are not forced to match
+the C++ host. Their effective values need runtime inspection and disclosure;
+complete security/settings parity is not claimed. The separate Rust
+`webview2-com` candidate will follow the minimal C++ design for a closer
+implementation/language comparison.
 
 See [validation](VALIDATION.md) and the
 [five-host plan](../NeutronStar-Svelte/HOST-COMPARISON-PLAN.md).
