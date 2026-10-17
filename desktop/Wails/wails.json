@@ -1,0 +1,8 @@
+{
+  "$schema": "https://wails.io/schemas/config.v2.json",
+  "name": "NeutronStar Wails",
+  "outputfilename": "neutronstar-wails",
+  "frontend:install": "",
+  "frontend:build": "",
+  "author": { "name": "NeutronStar Bench" }
+}
