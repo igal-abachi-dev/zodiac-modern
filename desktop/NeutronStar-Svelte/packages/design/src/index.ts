@@ -39,7 +39,6 @@ export async function assetsReady(): Promise<void> {
     document.fonts.load('500 14px Inter'),
     document.fonts.load('600 24px Inter'),
     document.fonts.load('400 14px "Noto Sans Hebrew"', 'שלום'),
-    document.fonts.load('400 14px "Noto Sans Arabic"', 'مرحبًا'),
     ...Array.from(document.images, (image) => image.decode()),
   ]);
   await document.fonts.ready;

@@ -3,12 +3,11 @@
    workload sources or research prose must not change the primary stylesheet. */
 @source "../../../src/App.svelte";
 @source "./index.ts";
-@theme { --color-accent: #047857; --font-sans: Inter, "Noto Sans Hebrew", "Noto Sans Arabic", "Segoe UI Emoji", sans-serif; }
+@theme { --color-accent: #047857; --font-sans: Inter, "Noto Sans Hebrew", "Segoe UI Emoji", sans-serif; }
 @font-face{font-family:Inter;font-style:normal;font-weight:400;src:url('./fonts/inter-latin-400-normal.woff2') format('woff2');font-display:swap}
 @font-face{font-family:Inter;font-style:normal;font-weight:500;src:url('./fonts/inter-latin-500-normal.woff2') format('woff2');font-display:swap}
 @font-face{font-family:Inter;font-style:normal;font-weight:600;src:url('./fonts/inter-latin-600-normal.woff2') format('woff2');font-display:swap}
 @font-face{font-family:"Noto Sans Hebrew";font-weight:400;src:url('./fonts/noto-sans-hebrew-hebrew-400-normal.woff2') format('woff2');font-display:swap}
-@font-face{font-family:"Noto Sans Arabic";font-weight:400;src:url('./fonts/noto-sans-arabic-arabic-400-normal.woff2') format('woff2');font-display:swap}
 :root{font-family:var(--font-sans);font-size:14px;color-scheme:light;--bg:#f8faf9;--fg:#171a18;--card:#fff;--muted:#f1f4f2;--muted-fg:#5d6660;--border:#dce3de;--primary:#047857;--primary-fg:#fff;--error:#b42318;--ring:#047857;background:var(--bg);color:var(--fg)}
 :root.dark{color-scheme:dark;--bg:#101412;--fg:#f0f3f1;--card:#171d19;--muted:#202923;--muted-fg:#a7b2aa;--border:#313b34;--primary:#34d399;--primary-fg:#062b20;--error:#f87171;--ring:#6ee7b7}
 *{box-sizing:border-box}body{margin:0;min-width:320px}button{font:inherit;cursor:pointer}button:disabled{cursor:not-allowed;opacity:.55}[hidden]{display:none!important}:focus-visible{outline:2px solid var(--ring);outline-offset:2px}

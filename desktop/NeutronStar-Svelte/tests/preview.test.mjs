@@ -7,6 +7,11 @@ test('built preview serves frozen assets with CSP and rejects non-asset requests
   const server = await createPreviewServer();
   try {
     const manifest = JSON.parse(await readFile(new URL('../.cache/frontend-manifest.json', import.meta.url)));
+    assert.equal(manifest.fixture, 'starlight-en-he-v2');
+    assert.deepEqual(manifest.files.filter(file => file.path.startsWith('fonts/')).map(file => file.path).sort(), [
+      'fonts/inter-latin-400-normal.woff2', 'fonts/inter-latin-500-normal.woff2',
+      'fonts/inter-latin-600-normal.woff2', 'fonts/noto-sans-hebrew-hebrew-400-normal.woff2',
+    ]);
     for (const file of manifest.files) {
       const response = await server.inject({ method: 'GET', url: '/' + file.path });
       assert.equal(response.statusCode, 200, file.path);

@@ -29,7 +29,7 @@ for (const common of await walk(resolve(root, 'packages/design/generated'))) {
   const name = relative(resolve(root, 'packages/design/generated'), common);
   if (hash(await readFile(resolve(directory, name))) !== hash(await readFile(common))) throw new Error(`Common asset mismatch: ${name}`);
 }
-const manifest = { schema: 1, state: 'nanostores-1.5.5', lockSha256: hash(await readFile(resolve(root, 'pnpm-lock.yaml'))), files };
+const manifest = { schema: 1, fixture: 'starlight-en-he-v2', state: 'nanostores-1.5.5', lockSha256: hash(await readFile(resolve(root, 'pnpm-lock.yaml'))), files };
 await mkdir(resolve(root, '.cache'), { recursive: true });
 await writeFile(resolve(root, '.cache/frontend-manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
 console.log(`Production asset audit passed: ${files.length} files. Manifest: .cache/frontend-manifest.json`);
