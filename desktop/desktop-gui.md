@@ -1439,3 +1439,25 @@ including stale parent-PID attribution; no unrelated process was terminated.
 The older early-init-close issue and physical AT/IME/DPI acceptance remain open.
 Equivalent Electron/Avalonia apps, launch/UIA adapters, GPU/energy/footprint and
 other extended evidence are still needed for the renderer-family comparison.
+
+
+### Tauri host implementation: WRY browser arguments (2026-10-18)
+
+The new [Tauri v2 candidate](Tauri-v2-Test/README.md) loads the selected Svelte
+production assets without rebuilding the frontend. This is host implementation,
+not a new benchmark result; compare all five only after the four alternatives
+are implemented.
+
+WRY 0.57.0 `create_environment` supplies
+`--disable-features=msWebOOUI,msPdfOOUI,msSmartScreenProtection` unless explicit
+additional arguments are provided. Its comments describe mini-menu and SmartScreen
+suppression. These switches are not evidence of a performance requirement;
+NeutronStar Host should not inherit them automatically. In particular, the
+SmartScreen disable is not adopted. The matched Tauri candidate explicitly uses
+`.additional_browser_args("")`, which replaces WRY's defaults in this pinned
+version, while the C++ host is unchanged. Context-menu controls use WebView2
+settings. No sandbox/security-disabling flags are added. A stock-WRY configuration
+can be a separately labeled future comparison, never silently mixed into the
+matched cohort. Native browser/enterprise policy and actual runtime options still
+need validation. See the [versioned WRY source](https://docs.rs/crate/wry/0.57.0/source/src/webview2/mod.rs)
+and the candidate README for origin, internal IPC and embedding differences.

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "NeutronStar Tauri",
+  "version": "0.1.0",
+  "identifier": "dev.neutronstar.bench.tauri",
+  "build": {
+    "frontendDist": "../../NeutronStar-Svelte/dist"
+  },
+  "app": {
+    "withGlobalTauri": false,
+    "windows": [],
+    "security": {
+      "csp": "default-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'none'; img-src 'self'; font-src 'self'; connect-src 'self'; worker-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+      "dangerousDisableAssetCspModification": true,
+      "capabilities": []
+    }
+  },
+  "bundle": {
+    "active": false,
+    "icon": ["icons/icon.ico"],
+    "windows": { "webviewInstallMode": { "type": "skip" } }
+  }
+}

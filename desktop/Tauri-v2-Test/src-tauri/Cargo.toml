@@ -1,0 +1,24 @@
+[package]
+name = "neutronstar-tauri"
+version = "0.1.0"
+description = "Minimal Tauri v2 host for the frozen NeutronStar Svelte frontend"
+edition = "2024"
+rust-version = "1.91"
+publish = false
+
+[build-dependencies]
+tauri-build = { version = "=2.7.3", features = [] }
+serde_json = "=1.0.154"
+sha2 = "=0.10.9"
+
+[dependencies]
+tauri = { version = "=2.12.4", default-features = false, features = ["wry", "compression", "common-controls-v6", "custom-protocol"] }
+windows = { version = "=0.62.2", features = ["Win32_Foundation"] }
+webview2-com = "=0.39.1"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = "thin"
+panic = "abort"
+strip = true
