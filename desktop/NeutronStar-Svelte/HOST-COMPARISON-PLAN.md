@@ -1,4 +1,8 @@
-# Five-host Svelte comparison
+# Six-host Svelte comparison
+
+2026-10-20 scope addition: **WinUI 3 / C# + WebView2** is the sixth candidate,
+planned in `../WinUI3-webview2/`. Its implementation and validation are pending.
+The five existing hosts' smoke results below do not include this new candidate.
 
 2026-10-20 update: use the [shared v2 English/Hebrew/emoji fixture](FIXTURE-REVISION.md)
 for every candidate (16 production files, four fonts). All five production
@@ -24,6 +28,7 @@ production/release acceptance.
 | Wails | Standard Wails 2.15.0 / Go 1.27.1 | Same files, embedded with hashes checked | Built; production workflow passed; profile/permission differences need separate lane; [validation](../Wails/VALIDATION.md) |
 | `webview2-com` | Rust COM bindings with a minimal Win32 window | Same built Svelte files | Built with CFG; production/native policy checks passed visibly; [validation](../webview2-com/VALIDATION.md) |
 | pywebview | Python shell forced to the Edge/WebView2 backend | Same built Svelte files | 6.2.1 packaged onedir built; production workflow passed; transport/profile/policy differences; [validation](../PyWebView/VALIDATION.md) |
+| WinUI 3 + WebView2 | **C# / XAML**, Windows App SDK and its built-in WebView2 control; public CoreWebView2 APIs | Same built Svelte files and manifest | Planned in `../WinUI3-webview2/`; implementation/build/native admission pending |
 
 Here `webview2-com` means the Rust bindings, not a separate browser engine or
 C# CoreWebView2. It requires windowing, asset policy and lifecycle code of its
@@ -31,6 +36,30 @@ own. Keep that Rust candidate close to the minimal C++ design; direct COM
 customization belongs there, not inside the standard Tauri candidate. The C++
 baseline already uses the underlying COM API. None of these names
 implies a lighter Chromium renderer or proves a performance advantage.
+
+### WinUI 3 / C# candidate scope
+
+Use a minimal C#/XAML WinUI 3 shell containing one built-in WebView2 control.
+Keep the existing Svelte UI, Nano Stores state, four fonts, 16 production assets
+and readiness contract unchanged. C# owns window/control lifecycle and local
+asset delivery/policy; it does not reimplement the screen or workflow in XAML.
+No Go CLI, application bridge, tray/updater or unrelated native features.
+
+Pin a supported .NET/Windows App SDK toolchain and dependencies at implementation
+time. Build Windows x64 Release with a documented deployment mode. Record the
+complete application payload and .NET/Windows App SDK prerequisites; an exe-only
+size is not the installed footprint. Native AOT is not assumed or required.
+
+Verify client size/DPI, runtime version, effective arguments, profile/private
+browsing behavior, asset origin/transport, CSP and native deny policies through
+supported APIs. Apply the same admission checks below and disclose limitations
+rather than assuming the first-party wrapper automatically matches the raw host.
+Include this candidate in collector launch/readiness/process-tree/shutdown
+adapters and pilot checks before the final six-host comparison.
+
+`../WinUI3-native/` is a separate future native-controls benchmark. It does not
+belong to this Svelte/WebView2 host comparison. This candidate compares the C# /
+WinUI shell plus WebView2, not a native-XAML renderer against Svelte.
 
 ### Win32 window versus Tauri window
 
@@ -97,10 +126,11 @@ Reuse and adapt the [external collector](../webview2-raw-bench/8-framework-test/
 and [protocol](../webview2-raw-bench/8-framework-test/BENCHMARKING.md), rather than
 using each framework's internal ready timer as its start-to-finish result.
 Add per-host launch and UIA adapters; the current collector is not automatically
-a generic five-host harness. Freeze after all admission checks and a pilot.
+a generic six-host harness. Freeze after all admission checks and a pilot.
 
 - Pilot baseline plus one candidate, including first/repeat launches, idle,
-  dialog and list correctness. Then randomize paired rounds across all five.
+  dialog and list correctness. Validate launch/readiness/cleanup for each candidate
+  in the pilot, then randomize paired rounds across all six admitted candidates.
   Use the prior protocol's warmups and n=20 per launch/workload condition.
 - Separate direct-executable from PowerShell startup; profile-fresh from
   profile-retained; record first/repeat pairs. A second launch is not OS-cold.
@@ -128,6 +158,12 @@ a generic five-host harness. Freeze after all admission checks and a pilot.
 - Preserve errors and invalid attempts with reasons. Verify run-owned helper
   cleanup without terminating unrelated browser processes. Keep performance
   timing separate from diagnostic/test injection overhead.
+
+Report the closely matched C++ NeutronStar versus raw Rust pair separately from
+the full six-stack comparison. The WinUI/C# candidate adds its managed runtime,
+Windows App SDK/control lifecycle and delivery model; differences cannot be
+attributed solely to the C# language. Candidates with unmatched profile/policy
+conditions stay in explicitly labeled comparison groups.
 
 Report medians/tails, paired differences and uncertainty, correctness/lifecycle
 failures, accessibility and maintenance/security tradeoffs. Accessibility/IME,
