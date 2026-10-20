@@ -1,7 +1,26 @@
 # Tauri host implementation validation
 
+## Current frontend revision — 2026-10-20
+
+Rebuilt with the shared `starlight-en-he-v2` fixture: 16 assets, four local fonts,
+English/Hebrew/emoji. Format, both policy tests and offline Release build passed.
+Frontend manifest SHA-256:
+`6bf90db01cfc3df86a27f401c9e961ff9157790aa734be5f13238b5745266415`.
+Release executable SHA-256:
+`417f4fa3b3588b961dd0f8ae6625036986dd7bb346c8a960c9afa429d5b23d1d`.
+
+The shared production UIA/real-input workflow passed with exit 0: Ready,
+About/open/close, encryption simulation/completion, Reset, decryption/Cancel,
+Reset and WM_CLOSE. Report:
+`../host-test-support/.cache/en-he-dbb3d95683a44c308945507c7ce63173/Tauri.json`.
+This closes the missing recorded production-window smoke, not the full native
+CSP/settings/runtime capture, helper lifecycle or a11y/DPI acceptance gates.
+
+## Historical build evidence
+
 2026-10-18. This is implementation/build evidence, **not comparative performance
-evidence**. Interactive native acceptance is pending the user's first run.
+evidence**. The original native acceptance was pending; see the limited
+2026-10-20 production-window check above for the current status.
 
 | Check | Status |
 | --- | --- |

@@ -1,5 +1,19 @@
 # Wails validation
 
+## Current frontend revision — 2026-10-20
+
+Offline production rebuild and policy tests passed with the common 16-file,
+four-font English/Hebrew/emoji fixture `starlight-en-he-v2`.
+Frontend manifest SHA-256:
+`6bf90db01cfc3df86a27f401c9e961ff9157790aa734be5f13238b5745266415`.
+Executable SHA-256:
+`5cbd30f97da243b11f5a9caf91d201aee2a8799ac31d687f06574d961a9faa63`.
+The shared production UIA/real-input workflow passed with exit 0; report:
+`../host-test-support/.cache/en-he-dbb3d95683a44c308945507c7ce63173/Wails.json`.
+No comparative timing or broader policy/helper-lifecycle acceptance is implied.
+
+## Historical validation
+
 Executed 2026-10-18. Research implementation, not release/security acceptance.
 No comparative benchmark runs.
 

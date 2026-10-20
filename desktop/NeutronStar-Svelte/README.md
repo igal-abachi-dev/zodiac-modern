@@ -5,6 +5,10 @@ This standalone project is the common frontend for NeutronStar Host, Tauri v2,
 Wails, Rust `webview2-com` and pywebview. No winning native host is selected yet.
 The screen is a synthetic UI simulation: no Go CLI, cryptography or file access.
 
+Current fixture: **English, Hebrew and emoji**, with four local fonts and
+16 production assets. See [fixture revision and historical-result boundaries](FIXTURE-REVISION.md).
+The 2026-10-18 identity checks below describe the older fixture.
+
 ## Run
 
 Build prerequisites: Node **24.21.x** and **pnpm 12.8.1** on PATH. The native

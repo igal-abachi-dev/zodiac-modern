@@ -11,7 +11,6 @@ const sources = [
     `inter-latin-${w}-normal.woff2`,
   ]),
   ['noto-sans-hebrew', 'noto-sans-hebrew-hebrew-400-normal.woff2'],
-  ['noto-sans-arabic', 'noto-sans-arabic-arabic-400-normal.woff2'],
 ];
 for (const [font, file] of sources)
   await copyFile(

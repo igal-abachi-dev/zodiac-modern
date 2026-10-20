@@ -1,5 +1,19 @@
 # Raw Rust host validation
 
+## Current frontend revision — 2026-10-20
+
+Uses the common 16-file, four-font English/Hebrew/emoji fixture
+`starlight-en-he-v2` directly from the shared asset tree. Offline build/Clippy/
+format/three policy tests passed; the receipt now identifies manifest SHA-256
+`6bf90db01cfc3df86a27f401c9e961ff9157790aa734be5f13238b5745266415`.
+The native executable is unchanged. Production UIA/real-input workflow passed,
+exit 0; report:
+`../host-test-support/.cache/en-he-dbb3d95683a44c308945507c7ce63173/RawRust.json`.
+This is correctness continuity, not a new performance cohort or full helper
+lifecycle/native-policy/a11y acceptance.
+
+## Historical validation
+
 Executed 2026-10-18; Rust **1.91.1**, x86_64-pc-windows-msvc,
 webview2-com **0.39.1**, windows **0.62.2**. Installed WebView2 observed:
 **155.0.4283.60**. No comparative benchmarks or production acceptance.

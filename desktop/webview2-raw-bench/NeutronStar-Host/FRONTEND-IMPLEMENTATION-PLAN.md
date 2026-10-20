@@ -85,7 +85,7 @@ not blend its results into the renderer comparison.
 3. **Visual artifact.** Turn Nova/Neutral/Emerald into reviewed literal CSS
    tokens: light/dark surfaces, text, muted text, borders, action colors, focus
    ring and radius. Freeze actual type sizes, spacing/control heights, local
-   Inter/Noto Sans Hebrew/Arabic font files and emoji fallback, Lucide SVG
+   Inter/Noto Sans Hebrew font files and emoji fallback, Lucide SVG
    geometry, filenames, licenses and hashes. Tailwind CSS v4 emits one common
    external stylesheet from a complete literal class inventory; all nine use
    the same stylesheet bytes and class recipes. No per-app theme tweaks.
@@ -220,7 +220,7 @@ applied to all nine variants and recorded before comparative runs.
 - Main area: two equal cards, **Decrypt** on the left and **Encrypt** on the
   right. Decrypt shows the fixed label **“Synthetic sample: starlight.nsx”**
   with **“No disk file is opened.”** Encrypt shows a read-only sample text,
-  **“Zodiac GUI benchmark — שלום — مرحبًا — 🌠”**. Neither fixture is sent to the
+  **“Zodiac GUI benchmark — שלום — 🌠”**. Neither fixture is sent to the
   host or processed cryptographically.
 - Actions: buttons say **“Simulate decryption”** and **“Simulate encryption.”**
   Either starts the same two-second visual operation. During work, show a
@@ -285,7 +285,7 @@ applied to all nine variants and recorded before comparative runs.
   proposed light primary/white contrast is 5.48:1; dark primary/dark foreground
   is 7.95:1. Verify every actual text, focus and disabled-state pairing after
   CSS composition before declaring accessibility acceptance.
-- Bundle the same local Inter weights (400/500/600), Noto Sans Hebrew and Arabic
+- Bundle the same local Inter weights (400/500/600) and Noto Sans Hebrew
   subsets, and Lucide SVG assets in every output. Use 16 px icons with the same
   viewBox/stroke geometry. Freeze actual file versions, licenses and SHA-256
   hashes when assets are fetched; do not use remote fonts or icon runtime CDN.
@@ -380,7 +380,7 @@ test completion; it is not the benchmark's Ready or first-paint timestamp.
   them in a separate API-capability test under the real host. The UI-only fixture
   remains in memory and all profiles stay isolated.
 - Use one shared Unicode/RTL display fixture and pure formatting helpers for the
-  baseline; verify the same visible Hebrew/Arabic/emoji output in all nine.
+  baseline; verify the same visible Hebrew/emoji output in all nine.
   Framework-specific accessibility and bidi rendering still require actual
   WebView2 checks.
 

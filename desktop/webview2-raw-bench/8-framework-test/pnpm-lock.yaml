@@ -214,9 +214,6 @@ importers:
       '@fontsource/inter':
         specifier: 5.3.0
         version: 5.3.0
-      '@fontsource/noto-sans-arabic':
-        specifier: 5.3.0
-        version: 5.3.0
       '@fontsource/noto-sans-hebrew':
         specifier: 5.3.0
         version: 5.3.0
@@ -824,9 +821,6 @@ packages:
 
   '@fontsource/inter@5.3.0':
     resolution: {integrity: sha512-RofMylZmjlJEfELXeNHFWBRcSs75rGU/6bV2S2jfnvv/3rPXPGe0LgUJTklcHZ9lM4OZmAVFhcJPnACfb91A3g==}
-
-  '@fontsource/noto-sans-arabic@5.3.0':
-    resolution: {integrity: sha512-i3t6GR0LOReyJVEk+YfYCnxv53wuIelg7Y9NGNvOq4Diq/EP0YszaGXkQwfQNigLjfO4POrLaPGM0sNliGYk7A==}
 
   '@fontsource/noto-sans-hebrew@5.3.0':
     resolution: {integrity: sha512-7owtzuw9D+ipt0g8mcBGOm7MS/mv/REKsjSwEUe749UUsrnG54TSmusNn7oxv2GxbUORAzADLQ8ggdtt7oKkpg==}
@@ -2818,8 +2812,6 @@ snapshots:
   '@floating-ui/utils@0.2.12': {}
 
   '@fontsource/inter@5.3.0': {}
-
-  '@fontsource/noto-sans-arabic@5.3.0': {}
 
   '@fontsource/noto-sans-hebrew@5.3.0': {}
 

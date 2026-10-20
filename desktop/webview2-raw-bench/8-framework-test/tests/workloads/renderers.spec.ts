@@ -28,7 +28,7 @@ for (const app of ['vanilla', 'svelte', 'react', 'vue', 'solid', 'lit', 'preact'
     await expect(rows.first()).toContainText(/: [1-9]\d*$/);
     await expect(input).toHaveValue('row-1000');
     await input.fill('שלום'); await expect(rows).toHaveCount(1000);
-    await input.fill('مرحبًا'); await expect(rows).toHaveCount(1000);
+    await input.fill('row-'); await expect(rows).toHaveCount(1000);
     await input.fill('no-match'); await expect(rows).toHaveCount(0);
     await page.evaluate(() => window.neutronstarWorkload!.stop());
     // Observe quiescence while detached: an old timer must not reach a new store.

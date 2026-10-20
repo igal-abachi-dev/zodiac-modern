@@ -35,7 +35,7 @@ Zodiac's recipient is a short, sensitive file operation rather than a browser, e
 | Portable, offline, standard-user launch | Mandatory | Extract verified release folder and run on a supported clean Windows 11 account without installer, administrator access or runtime download |
 | Narrow operation boundary | Mandatory | No arbitrary shell, local web service, generic filesystem bridge or secret argv/environment/stdin/temp files |
 | Secret lifetime and persistence | Mandatory | Short-lived password input, no automatic history or saved key contents, no plaintext in UI/IPC/logs; honest limits on erasure |
-| Accessibility and international text | Mandatory | Keyboard, Narrator/NVDA, high contrast, scaling, Unicode filenames and Hebrew/Arabic/bidirectional text in relevant controls |
+| Accessibility and international text | Mandatory | Keyboard, Narrator/NVDA, high contrast, scaling, Unicode filenames and Hebrew/bidirectional text in relevant controls |
 | Correct cancellation and cleanup | Mandatory | No premature success, no silent deletion, no interrupted write reported as complete; distinct output/key cleanup receipts |
 | Windows 11 integration | High | Familiar controls, system theme, title bar/Snap behavior, native file dialogs, DPI/monitor changes and predictable focus |
 | Delivery and servicing | High | Signed first-party executables, final per-file hashes, trusted verification channel, manual reviewed releases; manageable runtime patch responsibility |
@@ -432,7 +432,7 @@ The receiver's finish step lets the user read the saved file manually before req
 
 Use system light/dark/high-contrast modes, accessible contrast and visible focus, minimum target sizes, appropriate text scaling, reduced-motion preferences and no essential information conveyed by color alone. Keep the UI thread responsive during PBKDF2 and exports. Do not imply cancellation interrupts an in-flight KDF immediately if the underlying call cannot be interrupted.
 
-Test 100/150/200% DPI, multiple monitors, remote desktop/software rendering, long paths, Hebrew/Arabic filenames and bidirectional isolation of path/status text. Display untrusted filenames as text and never turn them into commands or markup. Native pickers may show network locations; Go's existing local-disk/path/reparse/ACL checks must still reject unsupported input/output selections at the actual operation boundary.
+Test 100/150/200% DPI, multiple monitors, remote desktop/software rendering, long paths, Hebrew filenames and bidirectional isolation of path/status text. Display untrusted filenames as text and never turn them into commands or markup. Native pickers may show network locations; Go's existing local-disk/path/reparse/ACL checks must still reject unsupported input/output selections at the actual operation boundary.
 
 Avoid automatic theme downloads, web documentation panels, analytics, recent-message lists, tray residency, startup registration, file associations and updates in the first GUI. They do not help the core recipient operation and expand persistence/delivery behavior.
 
@@ -552,7 +552,7 @@ Proposed initial sample counts are below. Record individual samples; increase co
 | GUI-04 | Visible idle | Start Basic, focus Decrypt rather than a text caret, settle 30 seconds, sample for 5 minutes at 1 Hz; no progress, blinking test animation or stress data; 3 runs |
 | GUI-05 | Background idle | Independent 5-minute intervals after 30-second settle for unfocused-visible, fully occluded and minimized; 3 runs/state; record counter order |
 | GUI-06 | Basic responsiveness | Alternate left Decrypt/right Encrypt, cancel halfway on every fourth run, reset; 30 runs, with visible response timestamps and keyboard equivalents |
-| GUI-07 | Input/dialog/layout | Enter the fixed English/Hebrew/Arabic/emoji fixture, open/close synthetic masked-input dialog, resize between fixed bounds, change theme; 30 deterministic cycles |
+| GUI-07 | Input/dialog/layout | Enter the fixed English/Hebrew/emoji fixture, open/close synthetic masked-input dialog, resize between fixed bounds, change theme; 30 deterministic cycles |
 | GUI-08 | Rows and scrolling | Populate 1,000 rows, scroll a fixed distance at a fixed pace for 60 seconds, clear; 3 runs; record list virtualization strategy |
 | GUI-09 | Vector rendering | Activate 512 shapes and a fixed 10-second translation/opacity animation; 5 runs; use transform animation with equivalent visual trajectory and clipping |
 | GUI-10 | Soak/recovery | 100 basic action/dialog/reset cycles, then 10 minutes idle; compare to post-warmup baseline; 3 runs; no forced GC/working-set trimming |
@@ -1076,7 +1076,7 @@ the future product requires them. Details are in the
 The user selected a common shadcn-style UI and explicitly accepts equivalent
 Tailwind implementations where React components cannot run. The baseline design
 is **Nova, Neutral, Emerald, Inter, Lucide and Tailwind CSS v4**, with local Noto
-Sans Hebrew/Arabic coverage for the multilingual fixtures. Use the same visual
+Sans Hebrew coverage for the multilingual fixtures. Use the same visual
 tokens, dimensions, icons, font files and semantics in every frontend; alternative
 styles/colors/fonts are separate future variants, not uncontrolled differences.
 

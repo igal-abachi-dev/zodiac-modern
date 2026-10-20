@@ -36,7 +36,6 @@ Generated from the installed exact-lockfile graph, including build/test tools an
 | @floating-ui/dom | 1.8.0 | MIT |
 | @floating-ui/utils | 0.2.12 | MIT |
 | @fontsource/inter | 5.3.0 | OFL-1.1 |
-| @fontsource/noto-sans-arabic | 5.3.0 | OFL-1.1 |
 | @fontsource/noto-sans-hebrew | 5.3.0 | OFL-1.1 |
 | @internationalized/date | 3.12.4 | Apache-2.0 |
 | @internationalized/number | 3.6.7 | Apache-2.0 |

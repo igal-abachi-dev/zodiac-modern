@@ -99,6 +99,7 @@ for (const app of [
   );
   const manifest = {
     app,
+    fixture: 'starlight-en-he-v2',
     scenario: 'controlled-renderer-shared-state',
     revision,
     sources: sourceHashes,

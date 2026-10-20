@@ -1,9 +1,16 @@
 # Five-host Svelte comparison
 
+2026-10-20 update: use the [shared v2 English/Hebrew/emoji fixture](FIXTURE-REVISION.md)
+for every candidate (16 production files, four fonts). All five production
+window workflows now passed a limited UIA/real-input smoke check. The broader
+admission items below remain open. The older nine-app result files are preserved;
+their historical hashes/timings are not the identity of the newly rebuilt GUI.
+
 Status 2026-10-18: standalone Svelte baseline prepared and correctness checked.
 All four alternative host implementations and builds are present. Wails,
 pywebview and raw Rust passed production screen smoke checks; broader native
-admission, Tauri native acceptance and all comparative runs are **pending**.
+admission and all comparative runs are **pending**. Tauri also passed the shared
+production screen smoke on 2026-10-20; its policy/a11y/lifecycle gates remain open.
 This phase selects a WebView2 host candidate before later Electron/Skia/native
 toolkit comparisons. Svelte frontend selection is not native-host selection or
 production/release acceptance.
@@ -54,7 +61,8 @@ framework-specific frontend imports. Embedded candidates must verify their
 embedded payloads against the same manifest. Native versions/configuration,
 lockfiles and binaries need their own recorded hashes. Any runtime-injected
 scripts count as host overhead and must be disclosed; disable unused automatic
-bridge exposure where supported. Never modify the old nine-app frozen cohort.
+bridge exposure where supported. Preserve the old nine-app measured result
+files; current sources/assets have been explicitly revised at the user's request.
 
 ## Admission before timing
 

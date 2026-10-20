@@ -5,7 +5,7 @@ comparative benchmarks and are not shipped in a desktop application's assets.
 
 - `verify_assets.py`: verifies the baseline lock/manifest and exact built file
   set, sizes and SHA-256; optionally stages identical files for embedded hosts.
-  It never rebuilds the frontend. All candidates currently consume 17 files.
+  It never rebuilds the frontend. All candidates currently consume 16 files.
 - `NativeSmoke.csproj` / `Program.cs`: .NET 10 Windows UIA correctness launcher.
   Uses visible task-owned windows and real pointer input; no screenshots or
   performance sampling. Accepts an executable, absolute profile directory,

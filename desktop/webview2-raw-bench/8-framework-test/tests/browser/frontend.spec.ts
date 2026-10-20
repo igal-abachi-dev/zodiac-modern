@@ -35,7 +35,7 @@ for (const app of [
     await page.goto(`http://127.0.0.1:4178/${app}/`);
     await expect(page.locator('#status')).toHaveText('Ready');
     await expect(page.locator('#fixture-text')).toHaveText(
-      'Zodiac GUI benchmark — שלום — مرحبًا — 🌠',
+      'Zodiac GUI benchmark — שלום — 🌠',
     );
     await page.locator('#about-trigger').focus();
     await page.keyboard.press('Enter');

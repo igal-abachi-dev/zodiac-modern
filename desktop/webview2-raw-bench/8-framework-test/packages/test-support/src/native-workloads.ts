@@ -31,7 +31,7 @@ export async function nativeWorkloadChecks(expectDiagnostics = false) {
   await until(() => rows().length === 1 && api.snapshot().tick > 0);
   await until(() => /: [1-9]\d*$/.test(rows()[0]?.textContent || ''));
   fill('שלום'); await until(() => rows().length === 1000);
-  fill('مرحبًا'); await until(() => rows().length === 1000);
+  fill('row-'); await until(() => rows().length === 1000);
   fill('no-match'); await until(() => rows().length === 0);
   api.stop();
   for (let i = 0; i < 5; i++) {

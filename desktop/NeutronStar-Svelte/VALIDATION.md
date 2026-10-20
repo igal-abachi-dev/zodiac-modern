@@ -1,5 +1,35 @@
 # Standalone baseline validation
 
+## Current fixture revision — 2026-10-20
+
+The current fixture is `starlight-en-he-v2`: English, Hebrew and emoji; Inter
+400/500/600 plus Noto Sans Hebrew 400. It supersedes the 17-asset fixture described
+in historical entries below. See [fixture boundaries](FIXTURE-REVISION.md).
+
+- TypeScript/package/Svelte checks passed with zero Svelte errors/warnings.
+- Seven domain/state/style/workload unit tests passed. The initial sandboxed
+  runner failed during OS account lookup; the permission-enabled retry passed.
+- All seven production/test/workload/diagnostic asset variants rebuilt;
+  production audit and preview policy test passed with **16 production assets**.
+- The nine-app workspace's revised Svelte production asset tree is byte-identical
+  to this standalone build. Staged Wails/pywebview and packaged pywebview frontend
+  trees match the same manifest exactly; Tauri's build verifies its embedded set.
+- All five native hosts passed the shared production UIA/real-input workflow.
+  Reports: `../host-test-support/.cache/en-he-dbb3d95683a44c308945507c7ce63173/`.
+- Scan of **74 current asset trees / 1,189 files** found no removed-language
+  sample text or font assets. Standard SVG attribute handling inside framework
+  runtimes and original historical result evidence were intentionally retained.
+  Receipt: `.cache/fixture-v2-verification.json`.
+- Current frontend lock SHA-256:
+  `442b35b6dc5c00c55789c3aaf48054e2d2f9b33f942797a844a2f9b1945e4cb1`.
+  Manifest SHA-256:
+  `6bf90db01cfc3df86a27f401c9e961ff9157790aa734be5f13238b5745266415`.
+
+These are correctness checks, not comparative benchmarks, complete native-policy
+acceptance, helper-lifecycle acceptance or a comprehensive accessibility review.
+
+## Historical validation
+
 2026-10-18: build plumbing repaired after copying the Svelte app and four private
 packages out of the nine-app workspace. No original benchmark sources/results
 were modified. Svelte UI/workflow behavior and Nano Stores ownership are retained.

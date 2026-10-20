@@ -30,7 +30,7 @@ hooks. `Build.ps1` alone uses the existing environment; `-Restore` synchronizes 
 The PyInstaller onedir/windowed build avoids a onefile extraction step. Its
 Python/.NET/native libraries must count in later footprint and process studies.
 
-The common verifier stages the same 17 production Svelte files in `frontend/`;
+The common verifier stages the same 16 production Svelte files in `frontend/`;
 PyInstaller packages them and the manifest under `_internal/`. Startup checks
 file sizes/hashes before starting the GUI. No frontend build or npm process runs.
 

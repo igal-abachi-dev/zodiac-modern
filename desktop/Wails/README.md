@@ -21,7 +21,7 @@ Go on child PATH so the CLI does not accidentally use the older system Go.
 CLI build tooling is not linked into the shipped application.
 
 Only **`frontend/dist/`** is embedded. The common verifier copies and verifies
-all 17 files against `NeutronStar-Svelte/.cache/frontend-manifest.json`, including
+all 16 files against `NeutronStar-Svelte/.cache/frontend-manifest.json`, including
 the frontend lock hash. Wails may generate `frontend/wailsjs/`; those wrappers
 are outside the embedded dist and unused. Rebuild the executable after changing
 the Svelte production artifact. No Vite/Node process or loopback listener runs.

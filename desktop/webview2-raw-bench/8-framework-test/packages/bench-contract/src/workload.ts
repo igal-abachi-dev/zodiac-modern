@@ -13,7 +13,7 @@ export function createWorkload() {
   const stop = () => { if (timer !== undefined) clearInterval(timer); timer = undefined; };
   const rows = (count: number) => Array.from({ length: count }, () => {
     const id = nextId++;
-    return { id, label: `row-${id} שלום مرحبًا`, value: 0 };
+    return { id, label: `row-${id} שלום`, value: 0 };
   });
   return {
     state,

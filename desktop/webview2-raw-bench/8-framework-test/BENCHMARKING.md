@@ -1,5 +1,10 @@
 # Measurement protocol
 
+Fixture boundary (2026-10-20): current sources/builds use `starlight-en-he-v2`
+(English/Hebrew/emoji, four fonts). The archived 2026-10-17 cohorts below retain
+their original data and prior fixture identity. Do not mix rebuilt outputs into
+those cohorts or infer new timing results from the font removal.
+
 ## Current execution status
 
 The user authorized external collection and the nine-app runs. The implemented
@@ -216,7 +221,7 @@ search input is an auxiliary stress probe, not a replacement for Ark/Zag control
 | Idle/background/restore | Existing host/window and readiness protocol | Initial process-tree private memory/CPU collected; I/O/wakeups, GPU attribution and physical minimize/restore latency remain open |
 
 The correctness suite also exercises 10,000-row creation, an empty filter result,
-ASCII sequential typing, Hebrew/Arabic filter strings, no extra remote requests,
+ASCII sequential typing, Hebrew filter strings, no extra remote requests,
 storage policy and the approved dialog-style allowlist. It checks key identity
 across reordering; it does not assert identical DOM reuse for every immutable
 value update. For example Solid's `For` tracks item identity, while other

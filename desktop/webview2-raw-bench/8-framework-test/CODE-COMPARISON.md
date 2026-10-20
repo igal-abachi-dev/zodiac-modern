@@ -1,5 +1,11 @@
 # Comparing the nine implementations
 
+Historical source/byte comparison below. On 2026-10-20 the user requested
+English/Hebrew/emoji-only GUI fixtures and four local fonts across all maintained
+GUI projects. Sources and build outputs now use `starlight-en-he-v2`; the old
+tables and archived performance measurements were not recomputed or relabeled.
+See [revision boundaries](../../NeutronStar-Svelte/FIXTURE-REVISION.md).
+
 2026-10-17 source inspection and production-artifact comparison. Reviewed findings
 precede the archived external feedback below; that feedback includes hypotheses
 and errors addressed in the review. This is not a

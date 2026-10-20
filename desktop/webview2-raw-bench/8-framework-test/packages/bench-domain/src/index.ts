@@ -1,7 +1,7 @@
 export const fixture = Object.freeze({
-  id: 'starlight-v1',
+  id: 'starlight-en-he-v2',
   file: 'Synthetic sample: starlight.nsx',
-  text: 'Zodiac GUI benchmark — שלום — مرحبًا — 🌠',
+  text: 'Zodiac GUI benchmark — שלום — 🌠',
 });
 export type Operation = 'encrypt' | 'decrypt';
 export type Status = 'ready' | 'running' | 'success' | 'canceled' | 'error';

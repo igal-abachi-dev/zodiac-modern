@@ -1,5 +1,12 @@
 # NeutronStar: nine frontend tests
 
+2026-10-20: maintained sources/assets now use the shared English/Hebrew/emoji
+fixture `starlight-en-he-v2`, four local fonts and no Arabic UI fixtures/font
+dependency. All nine production/test/workload/diagnostic outputs were rebuilt.
+Archived measurements under `results/2026-10-17/` remain unchanged and describe
+the previous fixture; they are not performance results for the rebuilt assets.
+See the [fixture revision](../../NeutronStar-Svelte/FIXTURE-REVISION.md).
+
 Nine independently rendered, production-built interfaces for the same Windows
 WebView2 host: **vanilla TypeScript, Svelte 5, React, Vue, Solid, Lit, Preact,
 Alpine CSP and htmx**. The folder keeps the original `8-framework-test` name;
@@ -66,7 +73,7 @@ Installed WebView2 Runtime
 | Controls | Ark React/Vue/Solid/Svelte public hooks and prop APIs; Zag 1.45.0 adapters elsewhere |
 | Styling | Tailwind 4.3.3 compiled once; ordinary CSS variables and shared recipes; no second styling engine |
 | Appearance | Nova-inspired spacing, Neutral/Emerald, deterministic light baseline; dark tokens for QA |
-| Assets | Local Inter 400/500/600, Noto Hebrew/Arabic 400, Lucide SVGs; Windows Segoe UI Emoji fallback |
+| Assets | Local Inter 400/500/600, Noto Hebrew 400, Lucide SVGs; Windows Segoe UI Emoji fallback |
 | Host | Same executable/runtime/policy: decorated window, normal memory target, bridge off |
 | Routing/storage | Router-free, memory only; reload starts Ready; no Web Storage or history snapshots |
 

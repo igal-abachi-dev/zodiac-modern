@@ -1,5 +1,19 @@
 # pywebview validation
 
+## Current frontend revision — 2026-10-20
+
+Policy test and PyInstaller packaging passed with the common 16-file, four-font
+English/Hebrew/emoji fixture `starlight-en-he-v2`. Both staged and packaged
+frontend trees match manifest SHA-256:
+`6bf90db01cfc3df86a27f401c9e961ff9157790aa734be5f13238b5745266415`.
+The bootloader exe hash remains the same; frontend content lives in the onedir
+bundle, so the exe hash alone must not identify this revision.
+The shared production UIA/real-input workflow passed with exit 0; report:
+`../host-test-support/.cache/en-he-dbb3d95683a44c308945507c7ce63173/PyWebView.json`.
+Existing profile/policy/size and helper-lifecycle acceptance gaps remain open.
+
+## Historical validation
+
 Executed 2026-10-18. Packaged research host, not release/security acceptance.
 No comparative benchmark runs.
 

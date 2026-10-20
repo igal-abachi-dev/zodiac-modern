@@ -21,7 +21,7 @@ the other tests to obtain the look. No UI or dependency is implemented here yet.
 | Base palette | **Neutral** | A quiet surface palette shared across light/dark themes |
 | Accent theme | **Emerald** | Clear action emphasis against neutral surfaces; actual foreground/background and focus contrast must be verified |
 | Primary font | **Inter**, local WOFF2 | Readable UI typography; identical font files, weights and sizes across variants |
-| Script coverage | Local **Noto Sans Hebrew / Noto Sans Arabic** where needed; fixed recorded emoji fallback | The multilingual fixture must not depend on different accidental system fallback per frontend; confirm exact font coverage and shaping |
+| Script coverage | Local **Noto Sans Hebrew** where needed; fixed recorded emoji fallback | The multilingual fixture must not depend on different accidental system fallback per frontend; confirm exact font coverage and shaping |
 | Icons | **Lucide**, one pinned icon set | Same SVG geometry, viewBox, size and stroke width across variants |
 | Styling | **Tailwind CSS v4**, build-time only | Shared semantic tokens and extracted local CSS; no browser CDN compiler |
 | UI behavior | **Ark UI + Zag-based integrations** across the cohort; native HTML as the semantic substrate/fallback where no suitable Ark/Zag control exists | Keep the chosen controls, visuals, keyboard/focus behavior and accessibility contract equivalent |
@@ -335,7 +335,7 @@ implemented by this design note.
 - Same CSS token values, effective spacing/dimensions, font files/weights,
   icon geometry, text and synthetic states in all nine outputs.
 - Fonts settled before timed interaction/render tests; report first-use font
-  loading separately in startup. Verify actual Hebrew/Arabic shaping and emoji
+  loading separately in startup. Verify actual Hebrew shaping and emoji
   fallback on the reference machine.
 - External local CSS/fonts/SVG only, no inline style attributes, unreviewed runtime
   styles, eval, remote assets or workers. Inspect actual DOM as well as CSP events.

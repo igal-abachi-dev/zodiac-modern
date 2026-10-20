@@ -1,4 +1,30 @@
-# Implementation validation — 2026-10-17
+# Implementation validation
+
+## Current fixture — 2026-10-20
+
+All maintained sources now use `starlight-en-he-v2` (English/Hebrew/emoji) and
+four local fonts. The unused language sample/font face/load/dependency was
+removed, including manual vanilla/Alpine/htmx HTML and workload filter cases.
+Both the package lock and installed dependency notices were updated.
+
+- All package/application TypeScript checks passed, including Svelte and Vue.
+- **10/10** domain/state/style/workload/diagnostic unit tests passed.
+- All nine production builds and all six additional test/workload/diagnostic
+  modes rebuilt successfully; current asset manifests include the new fixture ID.
+- **9/9** production browser checks passed: exact text, keyboard/dialog/focus,
+  simulation actions, themes, responsive layout, reload and storage constraints.
+- **9/9** workload browser checks passed: list identity/replacement/filtering,
+  input under updates, remount, cancellation and control soak.
+
+The existing htmx bundled-eval warning remains; the patched offline application's
+exercised paths pass CSP/browser checks. This change does not claim that every
+library path is independently reviewed.
+
+Old `results/2026-10-17/` measurements and evidence are unchanged. They belong
+to the older fixture; new source/artifact bytes are not retroactive performance
+results. See [revision details](../../NeutronStar-Svelte/FIXTURE-REVISION.md).
+
+## Historical implementation validation — 2026-10-17
 
 All nine apps are implemented and production-built. **All nine pass current
 integration checks after the explicit htmx offline no-storage patch.**
