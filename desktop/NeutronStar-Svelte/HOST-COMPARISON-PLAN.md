@@ -1,8 +1,11 @@
 # Six-host Svelte comparison
 
-2026-10-20 scope addition: **WinUI 3 / C# + WebView2** is the sixth candidate,
-planned in `../WinUI3-webview2/`. Its implementation and validation are pending.
-The five existing hosts' smoke results below do not include this new candidate.
+2026-10-22: **WinUI 3 / C# + WebView2** is implemented and Release-published in
+`../WinUI3-webview2/`, using the unchanged 16 Svelte assets. Thirty policy/integrity
+assertions and visible dialog/action/reset checks passed. Its shared UIA2 check
+sees only native chrome and times out on the document; UIA/accessibility admission
+remains open. See [validation](../WinUI3-webview2/VALIDATION.md). No six-host
+comparative runs have started; the five existing smoke passes do not include it.
 
 2026-10-20 update: use the [shared v2 English/Hebrew/emoji fixture](FIXTURE-REVISION.md)
 for every candidate (16 production files, four fonts). All five production
@@ -28,7 +31,7 @@ production/release acceptance.
 | Wails | Standard Wails 2.15.0 / Go 1.27.1 | Same files, embedded with hashes checked | Built; production workflow passed; profile/permission differences need separate lane; [validation](../Wails/VALIDATION.md) |
 | `webview2-com` | Rust COM bindings with a minimal Win32 window | Same built Svelte files | Built with CFG; production/native policy checks passed visibly; [validation](../webview2-com/VALIDATION.md) |
 | pywebview | Python shell forced to the Edge/WebView2 backend | Same built Svelte files | 6.2.1 packaged onedir built; production workflow passed; transport/profile/policy differences; [validation](../PyWebView/VALIDATION.md) |
-| WinUI 3 + WebView2 | **C# / XAML**, Windows App SDK and its built-in WebView2 control; public CoreWebView2 APIs | Same built Svelte files and manifest | Planned in `../WinUI3-webview2/`; implementation/build/native admission pending |
+| WinUI 3 + WebView2 | **C# / XAML**, Windows App SDK and its built-in WebView2 control; public CoreWebView2 APIs | Same built Svelte files and manifest | Built self-contained x64; visible workflow checks passed; missing UIA content exposure blocks admission; [validation](../WinUI3-webview2/VALIDATION.md) |
 
 Here `webview2-com` means the Rust bindings, not a separate browser engine or
 C# CoreWebView2. It requires windowing, asset policy and lifecycle code of its
