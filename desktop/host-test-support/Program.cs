@@ -14,6 +14,7 @@ internal static class Program
     [DllImport("user32.dll",CharSet=CharSet.Unicode)] private static extern int GetWindowTextW(nint hwnd,StringBuilder text,int count);
     [DllImport("user32.dll")] private static extern bool PostMessageW(nint hwnd,uint msg,nuint wp,nint lp);
     [DllImport("user32.dll")] private static extern bool ShowWindow(nint hwnd,int command);
+    [DllImport("user32.dll")] private static extern bool IsWindowVisible(nint hwnd);
     [DllImport("user32.dll")] private static extern bool SetForegroundWindow(nint hwnd);
     [DllImport("user32.dll")] private static extern nint GetForegroundWindow();
     [DllImport("user32.dll")] private static extern nint GetAncestor(nint hwnd,uint flags);
@@ -83,7 +84,7 @@ internal static class Program
                 if(process.HasExited)throw new InvalidOperationException("App exited during startup");
                 EnumWindows((hwnd,_)=>{
                     GetWindowThreadProcessId(hwnd,out var pid);
-                    if(pid!=(uint)process.Id)return true;
+                    if(pid!=(uint)process.Id || !IsWindowVisible(hwnd))return true;
                     var title=new StringBuilder(256);GetWindowTextW(hwnd,title,title.Capacity);
                     if(!title.ToString().StartsWith("NeutronStar",StringComparison.Ordinal))return true;
                     window=hwnd;return false;
@@ -96,6 +97,9 @@ internal static class Program
             // Frameworks may expose about:blank before replacing the document.
             // Do not retain that provisional UIA document while waiting for Ready.
             var document=Until(()=>{
+                // WinUI can publish its HWND before its XAML/UIA provider is
+                // attached. Reacquire the root as well as the web document.
+                root=AutomationElement.FromHandle(window);
                 foreach(AutomationElement candidate in root.FindAll(TreeScope.Descendants,new PropertyCondition(AutomationElement.ControlTypeProperty,ControlType.Document)))
                     if(candidate.FindFirst(TreeScope.Descendants,new AndCondition(new PropertyCondition(AutomationElement.NameProperty,"Ready"),new PropertyCondition(AutomationElement.IsOffscreenProperty,false))) is not null)return candidate;
                 return null;

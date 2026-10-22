@@ -1,6 +1,6 @@
 # Shared host correctness tooling
 
-These tools support the five-host Svelte experiment. They do not collect
+These tools support the six-host Svelte experiment. They do not collect
 comparative benchmarks and are not shipped in a desktop application's assets.
 
 - `verify_assets.py`: verifies the baseline lock/manifest and exact built file
@@ -13,6 +13,9 @@ comparative benchmarks and are not shipped in a desktop application's assets.
 - `inspect_pe.py`: read-only development PE metadata inspector, requiring
   `pefile` (available in the pywebview packaging environment). See
   [hardening findings](HARDENING.md).
+- `uia3/UIA3Probe.csproj`: pinned, test-only FlaUI.UIA3 workflow checker.
+  Required for this WinUI configuration's document exposure; fresh/retained WinUI
+  and C++ baseline correctness pass. See [usage and evidence](uia3/README.md).
 
 Example from `desktop/`, after building the checker with the installed .NET SDK:
 

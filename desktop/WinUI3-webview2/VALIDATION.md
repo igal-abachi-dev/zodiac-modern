@@ -1,6 +1,7 @@
 # WinUI 3 WebView2 validation
 
-Implementation evidence, 2026-10-21/22. Comparative benchmarks have **not** run.
+Implementation evidence, 2026-10-21/22; UIA3 follow-up 2026-10-23.
+Comparative benchmarks have **not** run.
 
 | Check | Result / evidence |
 | --- | --- |
@@ -10,17 +11,38 @@ Implementation evidence, 2026-10-21/22. Comparative benchmarks have **not** run.
 | Policy/integrity unit checks | 30 assertions passed: exact origin, URL decoding/traversal/reserved names, methods/MIME, missing assets, hash mismatch, exact file set, path containment |
 | Visual production screen | Passed at initial 960×640 client size: English/Hebrew/emoji, both cards, local styling, Ready |
 | Real-input visual interactions | About opened, Escape closed it and restored visible trigger focus; encryption reached complete/100%; Reset restored Ready/0%; decryption reached complete/100% |
-| Shared UIA2 production workflow | **Failed admission**: checker sees native chrome only, times out on `ready document`; reports `.cache/smoke-02.json`, `smoke-04.json`, `smoke-06.json` |
+| Shared UIA2 production workflow | Unsupported in this configuration: sees native chrome only, times out on `ready document`; initial reports retained |
+| UIA3 production workflow | **Passed**, final fresh and retained profiles: Ready, About/Escape/focus return, About/Close, encryption/complete, Reset, decryption/Cancel, Reset, normal window exit |
+| Checker cross-check | C++ baseline passed the same UIA3 workflow; updated UIA2 baseline also passed |
 | Window close | Tested instances exited after close; not a helper-tree lifecycle acceptance |
 
 The visual checks used the computer-use skill's window capture and real input
 against the production app launched by `Run.ps1`. They are correctness observations,
 not measurements. Screenshots were inspected in-session; no screenshot artifact
-is claimed. UIA text was also unavailable in that inspector. The UIA problem's
-root cause is **not established**; do not label it a harmless collector bug, an
-inherent WinUI defect, or a passed accessibility test. A compatible UIA3 inspection
-and Narrator test are the next diagnostics. Cancel was not visually checked and
-the full common workflow remains unaccepted.
+is claimed. The original inspector's missing UIA text was followed up independently.
+
+### UIA3 follow-up
+
+The production host and all Svelte assets were left unchanged. A test-only checker
+using pinned FlaUI.UIA3 5.0.0 exposes the full web document, accessible control
+names, the InPrivate web-content pane and Ready. The original managed UIA2 checker
+still fails even when waiting for a visible HWND and refreshing the automation
+root. The observed solution is a **UIA3 collector path**, not a host API/policy
+change. This evidence does not establish every underlying UIA2/provider cause or
+imply UIA2 fails for all WinUI apps.
+
+The full checker uses actual pointer input and Escape, asserting focus return
+through the About button's `HasKeyboardFocus` property. A global focused-element
+query did not identify that button in the first attempt; the element-local query
+does. Unsupported Name properties on unnamed intermediate nodes must also be read
+with safe defaults. Both exploratory collector failures remain recorded rather
+than counted as host failures or accepted results.
+
+Accepted and rejected reports plus artifact hashes are committed under
+[UIA3 evidence](../host-test-support/uia3/results/2026-10-23/). Final fresh and
+retained WinUI workflows and the C++ baseline workflow passed; Cancel is now
+explicitly checked. This closes the **automated production workflow/readiness
+blocker**, not Narrator/NVDA, complete native admission or release acceptance.
 
 The initial publish lacked generated app `.pri`/`.xbf` resources and exited with
 `XamlParseException` before rendering. The project now explicitly publishes those
@@ -42,8 +64,9 @@ runtime size or a memory measurement.
 
 ## Before six-host benchmark admission
 
-- Resolve missing UIA content exposure, then pass the shared workflow including
-  cancel, focus/keyboard and readiness under the final production artifact.
+- Use the UIA3 path for WinUI readiness and workflow (passed). Before timing,
+  pilot the same UIA3 collector across all six hosts so automation endpoint/backend
+  differences do not masquerade as framework performance differences.
 - Inspect actual WebView2 version, process arguments, InPrivate/cache behavior,
   initial client size/DPI/zoom and native policy behavior. API configuration is
   implemented, but browser-level negative policy probes are not yet passed.
@@ -53,5 +76,6 @@ runtime size or a memory measurement.
 - Adapt and pilot the six-host measurement harness; freeze host/deployment and
   frontend hashes afterward. Do not reuse old five-host admission as this host's.
 
-This is a runnable implementation with an explicit UIA/accessibility admission
-gap. It is not yet an admitted sixth benchmark candidate or a production release.
+This is a runnable implementation with passing UIA3 production workflow checks.
+The remaining policy/lifecycle/physical accessibility and six-host harness gates
+above still apply; this is not full benchmark admission or a production release.

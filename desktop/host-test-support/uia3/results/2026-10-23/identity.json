@@ -1,0 +1,29 @@
+﻿{
+    "scope":  "Correctness only; no timing or accessibility certification",
+    "artifacts":  [
+                      {
+                          "path":  "WinUI3-webview2/out/win-x64/neutronstar-winui-webview2.dll",
+                          "sha256":  "051ca43d5713700198bb6b1a97751e8cf546640c8ae4567be13975839df93e26"
+                      },
+                      {
+                          "path":  "WinUI3-webview2/.cache/build-receipt.json",
+                          "sha256":  "8876e9fcfe98067df40e1942e0a3f66c912a20c883611cde01c2efce4ebc000f"
+                      },
+                      {
+                          "path":  "NeutronStar-Svelte/.cache/frontend-manifest.json",
+                          "sha256":  "6bf90db01cfc3df86a27f401c9e961ff9157790aa734be5f13238b5745266415"
+                      },
+                      {
+                          "path":  "host-test-support/.cache/uia3/UIA3Probe.dll",
+                          "sha256":  "c55c629a126bc035174bf8df200eadfa27dc085cdc058621c55eb6af71003604"
+                      },
+                      {
+                          "path":  "host-test-support/uia3/packages.lock.json",
+                          "sha256":  "34e6db58bbb8be41e57d492f1becc81e16b41231660aa1e3befc979c60b8e4e2"
+                      },
+                      {
+                          "path":  "host-test-support/.cache/bin-v9/NativeSmoke.dll",
+                          "sha256":  "fa57a54402ba1878fbc1f4a329c95c4aca655ea37eb4d144f92123a7e754381a"
+                      }
+                  ]
+}

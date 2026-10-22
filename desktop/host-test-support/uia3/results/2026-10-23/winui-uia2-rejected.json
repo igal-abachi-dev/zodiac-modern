@@ -1,0 +1,15 @@
+{
+  "passed": false,
+  "failure": "InvalidOperationException: Timed out: ready document",
+  "exitCode": 0,
+  "observedNames": [
+    "NeutronStar GUI Bench",
+    "System Menu Bar",
+    "System",
+    "Minimize",
+    "Maximize",
+    "Close"
+  ],
+  "removedWebView2Overrides": [],
+  "scope": "production UIA correctness only; helper tree, accessibility and performance not accepted"
+}

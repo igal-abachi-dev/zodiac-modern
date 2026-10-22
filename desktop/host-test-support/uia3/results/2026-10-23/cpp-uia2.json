@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "failure": null,
+  "exitCode": 0,
+  "observedNames": [],
+  "removedWebView2Overrides": [],
+  "scope": "production UIA correctness only; helper tree, accessibility and performance not accepted"
+}

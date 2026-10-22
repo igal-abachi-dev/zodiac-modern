@@ -86,6 +86,13 @@ alone. WinUI control composition, framework defaults, profile behavior and deliv
 cost must be recorded. See [validation](VALIDATION.md) and the
 [six-host plan](../NeutronStar-Svelte/HOST-COMPARISON-PLAN.md).
 
+The production workflow/readiness check passes using the test-only
+[UIA3 checker](../host-test-support/uia3/README.md), including fresh/retained
+profiles, dialog focus and cancellation. The older UIA2 checker cannot expose
+this configuration's web document. Use one common, verified automation backend
+for later timing; these correctness passes are not physical accessibility or
+complete six-host benchmark admission.
+
 References: [WinUI WebView2](https://learn.microsoft.com/en-us/windows/apps/develop/ui/controls/webview2),
 [WinRT environment API](https://learn.microsoft.com/en-us/microsoft-edge/webview2/reference/winrt/microsoft_web_webview2_core/corewebview2environment?view=webview2-winrt-1.0.4258.31),
 [self-contained deployment](https://learn.microsoft.com/en-us/windows/apps/package-and-deploy/self-contained-deploy/deploy-self-contained-apps).
