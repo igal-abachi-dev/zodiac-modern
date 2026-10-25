@@ -1,5 +1,54 @@
 # Six-host Svelte comparison
 
+## Selected WebView2 product default - 2026-10-24
+
+**Tauri v2 + Svelte 5 is now our default WebView2 stack for feature-rich desktop
+products**, following the user's selection after reviewing the measured results.
+Keep NeutronStar C++ as the minimal baseline and an option for narrowly scoped
+offline utilities. The [stack decision](../WEBVIEW2-STACK-DECISION.md) records
+the evidence, maintenance rationale, C++ improvement priorities and remaining
+gates. Tauri/Svelte will represent WebView2 in the later comparison against
+non-WebView2 GUIs; the overall desktop GUI winner is still undecided. This
+selection does not mark the test host or a complete product release-ready.
+
+The canonical source for that next comparison is now
+[`Tauri-v2-Svelte5`](../Tauri-v2-Svelte5/README.md): standalone Svelte/TypeScript
+sources, standard Tauri/Vite build hooks, explicit Rust window/policy callbacks
+and embedded Release assets. Every later stack, including Electron, independently
+implements its UI/behavior: no imported Tauri frontend or shared runtime/dist.
+The shared-frontend approach belongs to the earlier WebView2-host isolation
+experiment only. Keep `Tauri-v2-Test` unchanged as the historical
+control. The short parity/configuration check and next benchmark artifact freeze
+are still separate from selecting this reference implementation.
+
+2026-10-24: **six-host pilot and full measurement collection completed**. See the
+[results, interpretation and raw archives](../host-test-support/results/2026-10-24/RESULTS.md).
+The common UIA3 correctness workflow passed all six. The accepted pilot included
+36 attempts plus 18 bounded first-visible-window close probes. Measured endpoints:
+480 startup launches, 30 independent idle lifetimes, 120 usable action lifetimes
+and 120 supplemental list-workload lifetimes. All selected observations passed
+their semantic/lifecycle checks and final frozen-artifact review.
+
+Startup/idle use H. A provider COM query failure during an action warmup caused
+the entire action lane to be independently piloted/recollected in I with bounded
+read-only retries; no input replay or pooling across collector revisions. One
+WinUI action attempt timed out during user-reported mouse interference; the
+explicitly authorized single retry passed, giving n=20 usable trials per host.
+The original failure remains unchanged and excluded, and the retry is outside
+the original randomized order. Supplemental preparation A also stopped during
+reported computer use; its records remain separate from the complete B cohort
+(six pilot, 18 warmup, 120 measured attempts, all passed).
+
+Keep C++ as the minimal baseline: raw Rust does not show a decisive retained-startup
+advantage. Tauri is a credible complete-framework candidate with similar retained
+startup/private resident memory and a lower fresh-profile median in this setup.
+Wails, pywebview and WinUI have documented configuration/deployment trade-offs;
+the results do not establish security parity or a universal best host. Remaining
+gates are physical accessibility/IME/high contrast/multi-monitor/DPI, GPU/energy,
+physical presentation, deployment and native-policy review. The historical early
+initialization lifecycle concern remains open beyond the bounded close probes.
+See the [protocol and amendments](../host-test-support/measurement/PROTOCOL.md).
+
 2026-10-23: **WinUI 3 / C# + WebView2** is implemented and Release-published in
 `../WinUI3-webview2/`, using the unchanged 16 Svelte assets. Thirty policy/integrity
 assertions and visible dialog/action/reset checks passed. Fresh and retained
@@ -7,7 +56,8 @@ production workflows now pass with the test-only UIA3 checker, including Cancel
 and Escape/focus return; C++ baseline cross-checks pass too. The older UIA2 path
 still cannot expose this WinUI configuration's web document. Physical accessibility,
 native policy/helper lifecycle and broader admission remain open. See
-[validation](../WinUI3-webview2/VALIDATION.md). No six-host comparative runs have started.
+[validation](../WinUI3-webview2/VALIDATION.md). This dated implementation note
+predates the measurement update above.
 
 2026-10-20 update: use the [shared v2 English/Hebrew/emoji fixture](FIXTURE-REVISION.md)
 for every candidate (16 production files, four fonts). All five production

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+out/
+public/
+.cache/
+pnpm-lock.yaml
+notices/

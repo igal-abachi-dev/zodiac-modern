@@ -7,5 +7,5 @@
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-  <ItemGroup><Compile Remove="uia3\**\*.cs" /></ItemGroup>
+  <ItemGroup><Compile Remove="uia3\**\*.cs;measurement\**\*.cs;workloads\**\*.cs;reference-workbench\**\*.cs;candidate-checks\**\*.cs" /></ItemGroup>
 </Project>

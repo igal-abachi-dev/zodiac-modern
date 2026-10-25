@@ -1,0 +1,34 @@
+{
+  "valid": true,
+  "errors": [],
+  "counts": {
+    "cpp/measured": 20,
+    "cpp/pilot": 1,
+    "cpp/warmup": 3,
+    "pywebview/measured": 20,
+    "pywebview/pilot": 1,
+    "pywebview/warmup": 3,
+    "rust/measured": 20,
+    "rust/pilot": 1,
+    "rust/warmup": 3,
+    "tauri/measured": 20,
+    "tauri/pilot": 1,
+    "tauri/warmup": 3,
+    "wails/measured": 20,
+    "wails/pilot": 1,
+    "wails/warmup": 3,
+    "winui/measured": 20,
+    "winui/pilot": 1,
+    "winui/warmup": 3
+  },
+  "providerQueryGaps": {
+    "cpp": 0,
+    "pywebview": 0,
+    "rust": 0,
+    "tauri": 0,
+    "wails": 0,
+    "winui": 1
+  },
+  "runtime": "155.0.4283.62",
+  "scope": "Independent post-collection completeness/integrity review; semantic assertions reside in frozen collector; not physical paint/accessibility acceptance"
+}

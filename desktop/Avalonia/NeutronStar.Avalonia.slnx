@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="NeutronStar.Avalonia.csproj" />
+  <Project Path="Tests/Models.Tests.csproj" />
+</Solution>

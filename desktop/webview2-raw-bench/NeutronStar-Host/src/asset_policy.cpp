@@ -3,8 +3,28 @@
 #include <Windows.h>
 #include <algorithm>
 #include <cwctype>
+#include <set>
 
 namespace neutronstar::detail {
+std::optional<std::wstring> embedded_asset_key(std::wstring_view relative) {
+    if (relative.empty() || relative.size() > 8192 || relative.find_first_of(L"%?#:\\") != std::wstring_view::npos) return std::nullopt;
+    for (const auto ch : relative) if (ch < 0x20 || ch > 0x7e) return std::nullopt;
+    auto key = resource_path(std::wstring{origin} + std::wstring{relative});
+    if (!key || !mime_type(*key)) return std::nullopt;
+    for (auto& ch : *key) if (ch >= L'A' && ch <= L'Z') ch = static_cast<wchar_t>(ch + (L'a' - L'A'));
+    return key;
+}
+bool valid_embedded_assets(const std::vector<EmbeddedAsset>& assets) {
+    if (assets.empty() || assets.size() > 4096) return false;
+    size_t total{};
+    std::set<std::wstring> keys;
+    for (const auto& asset : assets) {
+        const auto key = embedded_asset_key(asset.relative_path);
+        if (!key || asset.content.size() > 32 * 1024 * 1024 || asset.content.size() > 128 * 1024 * 1024 - total || !keys.insert(*key).second) return false;
+        total += asset.content.size();
+    }
+    return true;
+}
 namespace {
 int hex(wchar_t ch) noexcept {
     if (ch >= L'0' && ch <= L'9') return ch - L'0';

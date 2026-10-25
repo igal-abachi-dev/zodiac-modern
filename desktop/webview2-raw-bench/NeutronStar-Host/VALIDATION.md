@@ -1,5 +1,14 @@
 # Host validation record
 
+## Six-host measurement update - 2026-10-24
+
+The unchanged clang-cl/Ninja Release runner served as the baseline in the
+completed [six-host pilot and full study](../../host-test-support/results/2026-10-24/RESULTS.md).
+All selected baseline observations passed semantic/bounded lifecycle checks.
+Eighteen first-visible-window close probes across the six hosts add evidence;
+they do not close the older early-initialization helper-shutdown concern or
+replace physical accessibility/DPI/native-policy/release acceptance.
+
 Date: **2026-10-16**. Scope: the reusable native host and synthetic fixtures,
 not the eight frontend implementations or a comparative performance benchmark.
 These are local development checks, not independent security/release approval.

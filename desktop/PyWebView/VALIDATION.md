@@ -1,5 +1,14 @@
 # pywebview validation
 
+## Six-host measurement update - 2026-10-24
+
+The packaged onedir candidate completed the accepted pilot and full six-host
+collection. See [results](../host-test-support/results/2026-10-24/RESULTS.md).
+The measured private-profile cleanup, loopback transport and packaged Python/CLR
+costs are configuration-specific; retained paths do not imply equivalent browser
+cache retention. Physical accessibility, native-policy/security parity and release
+acceptance remain open. Historical records below retain their scope.
+
 ## Current frontend revision — 2026-10-20
 
 Policy test and PyInstaller packaging passed with the common 16-file, four-font

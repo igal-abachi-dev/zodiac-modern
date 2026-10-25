@@ -1,0 +1,23 @@
+﻿{
+    "acceptedUtc":  "2026-10-24T07:14:36.6695995Z",
+    "scope":  "As-configured six-host primary performance cohort; not security parity or production/physical AT acceptance",
+    "pilotAttempts":  36,
+    "earlyCloseAttempts":  18,
+    "visualReview":  "Inspected final captured client frame for each of six hosts; same complete English/Hebrew/emoji fixture, Ready and action controls",
+    "automatedReview":  "independent-review.json valid: geometry, UIA, counters/root identities, actions, runtime, exit code and discovered helper exit",
+    "runtime":  "155.0.4283.62",
+    "collectorSha256":  "b7801109bf80af66a8a6a7347f24691537b3bcb163f63b9c1feb166f9b5460fc",
+    "knownDifferences":  [
+                             "Wails persistent profile/default permissions",
+                             "pywebview loopback/private profile cleanup",
+                             "external client-area calibration for differing window sizing conventions",
+                             "WinUI self-contained managed deployment",
+                             "common PowerShell wrapper, not Explorer right-click"
+                         ],
+    "earlierRejectedCohorts":  [
+                                   "six-host-20261023-b",
+                                   "six-host-20261023-d",
+                                   "six-host-focus-20261023-e",
+                                   "six-host-focus-20261023-f"
+                               ]
+}

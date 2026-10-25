@@ -1,0 +1,27 @@
+{
+  "valid": true,
+  "errors": [],
+  "runtime": [
+    "155.0.4283.62"
+  ],
+  "counts": {
+    "earlyclose": 18,
+    "startup": 600,
+    "idle": 36
+  },
+  "pilotFramesForReview": [
+    "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\.cache\\six-host-20261024-h\\runs\\pilot-cpp-direct-pair2\\frame-000015.png",
+    "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\.cache\\six-host-20261024-h\\runs\\pilot-pywebview-direct-pair2\\frame-000023.png",
+    "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\.cache\\six-host-20261024-h\\runs\\pilot-rust-direct-pair2\\frame-000013.png",
+    "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\.cache\\six-host-20261024-h\\runs\\pilot-tauri-direct-pair2\\frame-000014.png",
+    "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\.cache\\six-host-20261024-h\\runs\\pilot-wails-direct-pair2\\frame-000012.png",
+    "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\.cache\\six-host-20261024-h\\runs\\pilot-winui-direct-pair2\\frame-000015.png"
+  ],
+  "scenarioSelection": [
+    "startup",
+    "idle",
+    "earlyclose"
+  ],
+  "reviewedRejections": [],
+  "scope": "Validates completed observations; reviewed failures remain failures and reduce usable sample counts."
+}

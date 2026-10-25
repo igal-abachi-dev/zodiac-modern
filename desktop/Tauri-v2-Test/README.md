@@ -1,5 +1,12 @@
 # NeutronStar Tauri v2 host
 
+2026-10-24 decision: **Tauri v2 + Svelte 5 is our selected default WebView2 stack
+for feature-rich products**. See the [decision and limits](../WEBVIEW2-STACK-DECISION.md)
+and [six-host measurements](../host-test-support/results/2026-10-24/RESULTS.md).
+This folder remains the minimal comparison implementation, not a complete
+product shell or release-approved application. Non-WebView2 toolkit comparisons
+are still to come.
+
 Minimal Windows 11 Tauri host for **the existing NeutronStar-Svelte `dist/`**.
 It does not have a second frontend project, Vite server or copied Svelte source.
 The Release executable embeds the production files when compiled. Rebuilding

@@ -3,21 +3,42 @@ param(
     [ValidateSet('Release', 'Debug')][string]$Configuration = 'Release',
     [ValidateSet('clang-cl-ninja-x64', 'msvc-x64', 'clang-cl-vs-x64', 'msvc-ninja-x64')]
     [string]$Preset = 'clang-cl-ninja-x64',
+    [ValidatePattern('^[a-zA-Z0-9_-]*$')][string]$BuildTag = '',
+    [string]$AssetsDirectory,
+    [switch]$FileAssets,
+    [switch]$EmbedSmokeFixtures,
     [switch]$DeveloperEnvironment
 )
 $ErrorActionPreference = 'Stop'
+if ($EmbedSmokeFixtures -and ($AssetsDirectory -or $FileAssets)) { throw 'Smoke assets are a separate test build.' }
 $root = Split-Path $PSScriptRoot -Parent
+$embedPath = ''
+if ($EmbedSmokeFixtures) { $embedPath = Join-Path $root 'tests/fixtures/smoke' }
+elseif (-not $FileAssets) {
+    if (-not $AssetsDirectory) { throw 'Embedded build (default) requires -AssetsDirectory <your production dist>. Use -FileAssets for file-backed tooling.' }
+    $embedPath = [IO.Path]::GetFullPath($AssetsDirectory)
+    if (-not (Test-Path -LiteralPath (Join-Path $embedPath 'index.html') -PathType Leaf)) { throw 'Asset directory must contain a built index.html.' }
+}
 $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio/Installer/vswhere.exe'
 if (-not (Test-Path -LiteralPath $vswhere)) { throw 'Install Visual Studio C++ build tools and the Windows SDK.' }
 $installation = & $vswhere -latest -products '*' -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
 if (-not $installation) { throw 'No Visual Studio C++ toolchain found.' }
-if (-not $DeveloperEnvironment) {
+if (-not $DeveloperEnvironment -and $env:VSCMD_ARG_TGT_ARCH -ne 'x64') {
     $developer = Join-Path $installation 'Common7/Tools/VsDevCmd.bat'
-    # Values interpolated here are restricted by ValidateSet above.
-    $command = 'call "' + $developer + '" -no_logo -arch=x64 -host_arch=x64 && powershell.exe -NoProfile -File "' + $PSCommandPath + '" -DeveloperEnvironment -Configuration ' + $Configuration + ' -Preset ' + $Preset
-    & $env:ComSpec /d /s /c $command
-    if ($LASTEXITCODE) { throw 'Host build/test failed.' }
-    exit 0
+    # Import SDK variables without interpolating caller asset paths into cmd code.
+    # Capture the output privately: never print the process environment.
+    $command = 'call "' + $developer + '" -no_logo -arch=x64 -host_arch=x64 && set'
+    $sdkEnvironment = & $env:ComSpec /d /s /c $command
+    if ($LASTEXITCODE) { throw 'Visual Studio environment setup failed.' }
+    foreach ($line in $sdkEnvironment) {
+        $separator = $line.IndexOf('=')
+        if ($separator -gt 0) {
+            $name = $line.Substring(0, $separator)
+            if ($name -match '^(PATH|INCLUDE|LIB|LIBPATH|VSCMD_.*|VCTools.*|VCINSTALLDIR|VSINSTALLDIR|VisualStudioVersion|WindowsSdk.*|UniversalCRTSdkDir|UCRTVersion|Framework.*|ExtensionSdkDir|DevEnvDir)$') {
+                [Environment]::SetEnvironmentVariable($name, $line.Substring($separator + 1), 'Process')
+            }
+        }
+    }
 }
 if ($env:VSCMD_ARG_TGT_ARCH -ne 'x64') { throw 'An x64 Visual Studio Developer environment is required.' }
 $cmakeDir = Join-Path $installation 'Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin'
@@ -32,9 +53,9 @@ if ($Preset -like 'clang-cl*' -and -not (Test-Path -LiteralPath (Join-Path $llvm
 Push-Location $root
 try {
     & (Join-Path $PSScriptRoot 'Restore-Dependencies.ps1') -Offline
-    & $cmake --preset $Preset
+    $buildDirectory = Join-Path $root ("out/$Preset" + $(if ($BuildTag) { "-$BuildTag" } else { '' }))
+    & $cmake --preset $Preset -B $buildDirectory "-DNEUTRONSTAR_EMBED_ASSETS=$embedPath"
     if ($LASTEXITCODE) { throw 'CMake configuration failed.' }
-    $buildDirectory = Join-Path $root "out/$Preset"
     & $cmake --build $buildDirectory --config $Configuration --parallel 4
     if ($LASTEXITCODE) { throw 'C++ build failed.' }
     & $ctest --test-dir $buildDirectory -C $Configuration --output-on-failure

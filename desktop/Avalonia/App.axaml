@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<Application xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Class="NeutronStar.AvaloniaApp.App" RequestedThemeVariant="Light">
+  <Application.Styles>
+    <FluentTheme/>
+    <StyleInclude Source="avares://NeutronStar-Avalonia/Styles.axaml"/>
+  </Application.Styles>
+</Application>

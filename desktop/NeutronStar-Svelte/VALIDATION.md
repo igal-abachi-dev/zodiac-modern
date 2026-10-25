@@ -1,5 +1,15 @@
 # Standalone baseline validation
 
+## Six-host measurement update - 2026-10-24
+
+The unchanged 16-file production fixture completed the accepted pilot and full
+[six-host comparison](../host-test-support/results/2026-10-24/RESULTS.md): 480
+startup launches, 30 independent idle lifetimes, 120 usable action lifetimes and
+120 independently staged supplemental lifetimes. Artifact identities were
+rechecked. Retained failures, the authorized interference retry and separate
+collector revisions remain documented. This is not physical accessibility,
+native-policy/security equivalence or production/release acceptance.
+
 ## Current fixture revision — 2026-10-20
 
 The current fixture is `starlight-en-he-v2`: English, Hebrew and emoji; Inter

@@ -1,0 +1,20 @@
+{
+  "valid": true,
+  "errors": [],
+  "runtime": [
+    "155.0.4283.62"
+  ],
+  "counts": {
+    "actions": 144
+  },
+  "pilotFramesForReview": [],
+  "scenarioSelection": null,
+  "reviewedRejections": [
+    {
+      "sample": "actions-19-winui",
+      "error": "TimeoutException: UIA condition deadline",
+      "review": "About-open semantic timeout after one dispatched input; no provider exception; root exit 0 and discovered helpers exited. Cause unresolved (input/observation/app/interference); retain as failed planned trial, do not replace."
+    }
+  ],
+  "scope": "Validates completed observations; reviewed failures remain failures and reduce usable sample counts."
+}

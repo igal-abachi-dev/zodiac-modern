@@ -1,5 +1,42 @@
 # NeutronStar Host
 
+2026-10-24 follow-up: new application builds default to **embedded assets**;
+the file-backed runner remains an explicit research/development option. Lifecycle
+initialization/shutdown handling and loading backgrounds have changed after the
+six-host cohort. See [startup/lifecycle details](STARTUP-AND-LIFECYCLE.md) and
+[current validation](VALIDATION.md). The frozen six-host binaries/results have
+not been rebuilt or relabeled. Tauri/Svelte remains the selected product stack.
+
+## Current application build/run
+
+Build your frontend production assets first. `scripts/Build.ps1` defaults to
+embedded mode and requires your explicit `-AssetsDirectory <dist>`; it builds both the application runner
+(`neutronstar_embedded_runner.exe`) and the explicit file-backed research runner
+(`neutronstar_host_runner.exe`). An embedded Release app needs the installed
+WebView2 Runtime, but no external frontend directory, Node or local server.
+
+```powershell
+# Separate output tree preserves the previous benchmark binary:
+.\scripts\Build.ps1 -AssetsDirectory D:\Apps\my-svelte-app\dist -BuildTag my-app
+.\Run.ps1 -BuildTag my-app
+```
+
+`Run.ps1` selects embedded mode and light color scheme by default. Match your UI
+with `-BackgroundRgb` (white by default). Use `-FileAssets` explicitly with
+`-AssetsDirectory` for file-backed mode; a file-only
+build also accepts `scripts/Build.ps1 -FileAssets -BuildTag file-research` and
+does not need Node or a prebuilt frontend merely to compile the C++ host.
+Existing older run/test snippets below describe the original file-backed runner.
+They remain useful for the controlled nine-frontend research lane, not the new
+application default. Rebuild native embedded executables after asset changes.
+
+For other trusted static frontends, set CMake's `NEUTRONSTAR_EMBED_ASSETS` to that
+production tree in an isolated developer-environment build. The library accepts
+owned `HostOptions::embedded_assets`; empty selects the compatible file-backed
+mode. Embedded applications may omit `asset_directory`. Unknown embedded paths
+never fall back to disk. Both modes keep the same synthetic origin, CSP and
+resource/navigation restrictions. See the linked follow-up for limits and traces.
+
 2026-10-17 frontend implementation: the separate
 [nine-app workspace](../8-framework-test/README.md) now contains all candidates,
 shared packages and correctness checks. All nine pass current native/browser

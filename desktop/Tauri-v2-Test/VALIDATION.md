@@ -1,5 +1,14 @@
 # Tauri host implementation validation
 
+## Six-host measurement update - 2026-10-24
+
+The common UIA3 correctness workflow, accepted pilot and full six-host study
+completed. See [measured results and retained failures](../host-test-support/results/2026-10-24/RESULTS.md).
+This adds observed startup, process-tree resources, synthetic actions, lists and
+bounded shutdown evidence. Physical accessibility, native-policy/security parity
+and production/release acceptance remain separate gates. Historical records below
+retain their original scope.
+
 ## Current frontend revision — 2026-10-20
 
 Rebuilt with the shared `starlight-en-he-v2` fixture: 16 assets, four local fonts,

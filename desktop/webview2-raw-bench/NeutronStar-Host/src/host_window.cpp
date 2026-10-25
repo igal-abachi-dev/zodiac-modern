@@ -11,6 +11,8 @@
 #include <wrl.h>
 #include <Shlwapi.h>
 #include <algorithm>
+#include <chrono>
+#include <map>
 #include <stdexcept>
 #include <string_view>
 #include <vector>
@@ -21,6 +23,7 @@ using Microsoft::WRL::Callback;
 constexpr wchar_t window_class[] = L"NeutronStar.Host.Window.v1";
 constexpr DWORD max_asset_bytes = 32 * 1024 * 1024;
 constexpr UINT action_message = WM_APP + 0x42;
+constexpr UINT start_browser_message = WM_APP + 0x43;
 
 std::wstring final_path(HANDLE file) {
     const DWORD size = GetFinalPathNameByHandleW(file, nullptr, 0, FILE_NAME_NORMALIZED);
@@ -60,29 +63,45 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
     bool closed{};
     bool failed{};
     bool action_in_flight{};
+    unsigned pending_initializations{};
+    unsigned callback_depth{};
+    bool drain_timed_out{};
+    bool browser_started{};
+    bool page_loaded{};
     std::optional<Action> queued_action;
     std::optional<TestGreetRequest> queued_test_greet;
     std::wstring active_test_greet_id;
     const wchar_t* status{L"Starting WebView2..."};
     wil::unique_hfile root_handle;
     std::wstring root_final;
+    std::map<std::wstring, std::vector<BYTE>> embedded;
     wil::com_ptr<ICoreWebView2Environment> environment;
     wil::com_ptr<ICoreWebView2Controller> controller;
     wil::com_ptr<ICoreWebView2> webview;
+    wil::unique_hbrush background;
     std::vector<std::function<void()>> unsubscribe;
 
     explicit State(HostOptions value) : options(std::move(value)) {
+        background.reset(CreateSolidBrush(options.background_color));
+        THROW_LAST_ERROR_IF(!background);
         if (options.memory_usage_target != MemoryUsageTarget::normal && options.memory_usage_target != MemoryUsageTarget::low)
             throw std::invalid_argument("Invalid memory target.");
+        if (options.color_scheme != ColorScheme::light && options.color_scheme != ColorScheme::dark && options.color_scheme != ColorScheme::system)
+            throw std::invalid_argument("Invalid color scheme.");
         reject_runtime_overrides();
-        if (options.asset_directory.empty() || options.user_data_directory.empty()) throw std::invalid_argument("Asset and user-data directories are required.");
-        options.asset_directory = std::filesystem::canonical(options.asset_directory);
+        const bool file_backed = options.embedded_assets.empty();
+        if (options.user_data_directory.empty() || (file_backed && options.asset_directory.empty()))
+            throw std::invalid_argument("Profile required; file-backed mode also requires an asset directory.");
         options.user_data_directory = std::filesystem::weakly_canonical(std::filesystem::absolute(options.user_data_directory));
-        require_local_directory(options.asset_directory);
         require_local_directory(options.user_data_directory);
+        if (!options.asset_directory.empty()) {
+            options.asset_directory = file_backed ? std::filesystem::canonical(options.asset_directory) :
+                std::filesystem::weakly_canonical(std::filesystem::absolute(options.asset_directory));
+            require_local_directory(options.asset_directory);
+        }
         const auto assets = options.asset_directory.wstring();
         const auto profile = options.user_data_directory.wstring();
-        if (_wcsicmp(assets.c_str(), profile.c_str()) == 0 || detail::is_within(assets, profile) || detail::is_within(profile, assets)) {
+        if (!assets.empty() && (_wcsicmp(assets.c_str(), profile.c_str()) == 0 || detail::is_within(assets, profile) || detail::is_within(profile, assets))) {
             throw std::invalid_argument("Assets and runtime profile must be separate directory trees.");
         }
         if (!options.fixed_runtime_directory.empty()) {
@@ -94,11 +113,20 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
         if (options.minimum_width_dip < 320 || options.minimum_height_dip < 240 ||
             options.client_width_dip < options.minimum_width_dip || options.client_height_dip < options.minimum_height_dip ||
             options.client_width_dip > 8192 || options.client_height_dip > 8192) throw std::invalid_argument("Invalid window dimensions.");
-        root_handle.reset(CreateFileW(assets.c_str(), FILE_READ_ATTRIBUTES, FILE_SHARE_READ | FILE_SHARE_WRITE,
-            nullptr, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, nullptr));
-        THROW_LAST_ERROR_IF(!root_handle);
-        root_final = final_path(root_handle.get());
+        if (file_backed) {
+            root_handle.reset(CreateFileW(assets.c_str(), FILE_READ_ATTRIBUTES, FILE_SHARE_READ | FILE_SHARE_WRITE,
+                nullptr, OPEN_EXISTING, FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, nullptr));
+            THROW_LAST_ERROR_IF(!root_handle);
+            root_final = final_path(root_handle.get());
+        }
         std::filesystem::create_directories(options.user_data_directory);
+        if (!options.embedded_assets.empty() && !detail::valid_embedded_assets(options.embedded_assets))
+            throw std::invalid_argument("Invalid, duplicate or oversized embedded assets.");
+        for (auto& asset : options.embedded_assets) {
+            const auto key = detail::embedded_asset_key(asset.relative_path);
+            embedded.emplace(*key, std::move(asset.content));
+        }
+        options.embedded_assets.clear();
         // Fail missing/unsupported entry before creating a window or browser process.
         (void)read_asset(*entry);
     }
@@ -126,7 +154,38 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
         if (controller) (void)controller->Close();
         webview.reset();
         controller.reset();
-        environment.reset();
+        // Keep the environment alive while an asynchronous controller request owns it.
+        if (pending_initializations == 0) environment.reset();
+    }
+
+    void initialization_completed() noexcept {
+        --pending_initializations;
+        if (closed || failed) stop_browser();
+        if (closed && pending_initializations == 0 && hwnd) DestroyWindow(hwnd);
+        if (pending_initializations == 0) emit(EventKind::initialization_drained);
+    }
+
+    // Called only outside a WebView2 callback; never nest a COM callback message loop.
+    void drain_initialization() noexcept {
+        if (callback_depth || drain_timed_out || !pending_initializations) return;
+        std::optional<int> quit_code;
+        const auto restore_quit = wil::scope_exit([&] { if (quit_code) PostQuitMessage(*quit_code); });
+        const auto deadline = std::chrono::steady_clock::now() + std::chrono::seconds(30);
+        while (pending_initializations) {
+            if (std::chrono::steady_clock::now() >= deadline) {
+                drain_timed_out = failed = true;
+                emit(EventKind::shutdown_timeout, HRESULT_FROM_WIN32(ERROR_TIMEOUT));
+                if (hwnd) DestroyWindow(hwnd);
+                return;
+            }
+            (void)MsgWaitForMultipleObjectsEx(0, nullptr, 50, QS_ALLINPUT, MWMO_INPUTAVAILABLE);
+            MSG message{};
+            while (PeekMessageW(&message, nullptr, 0, 0, PM_REMOVE)) {
+                if (message.message == WM_QUIT) { quit_code = static_cast<int>(message.wParam); continue; }
+                TranslateMessage(&message);
+                DispatchMessageW(&message);
+            }
+        }
     }
 
     void fail(HRESULT hr) noexcept {
@@ -141,12 +200,20 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
     template<class F> static HRESULT dispatch(std::weak_ptr<State> weak, F&& action) noexcept {
         auto self = weak.lock();
         if (!self || self->closed || self->failed) return S_OK;
+        ++self->callback_depth;
+        const auto callback = wil::scope_exit([&] { --self->callback_depth; });
         try { action(*self); }
         catch (...) { self->fail(wil::ResultFromCaughtException()); }
         return S_OK;
     }
 
     std::vector<BYTE> read_asset(const std::wstring& relative) const {
+        if (!embedded.empty()) {
+            const auto key = detail::embedded_asset_key(relative);
+            const auto found = key ? embedded.find(*key) : embedded.end();
+            if (found == embedded.end()) throw std::invalid_argument("Embedded asset unavailable.");
+            return found->second; // Response owns its bytes; no filesystem fallback.
+        }
         auto file_path = options.asset_directory;
         // Reject reparse components. Final handle confinement additionally catches redirection.
         for (const auto& component : std::filesystem::path{relative}) {
@@ -200,8 +267,14 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
             return;
         }
         std::vector<BYTE> bytes;
+        const auto read_start = std::chrono::steady_clock::now();
         try { bytes = read_asset(*relative); }
         catch (...) { response(args, 404, L"text/plain", {}); emit(EventKind::request_blocked); return; }
+        if (options.trace_asset_reads && options.on_event) {
+            const auto duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - read_start).count();
+            options.on_event(Event{EventKind::asset_loaded, S_OK, {}, static_cast<unsigned long long>(duration), bytes.size()});
+        }
+        if (closed || failed) return; // Diagnostics may request close from this callback.
         response(args, 200, *type, bytes);
     }
 
@@ -215,6 +288,14 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
 
     void configure_browser() {
         THROW_IF_FAILED(controller->get_CoreWebView2(webview.put()));
+        const auto color = options.background_color;
+        auto controller2 = controller.query<ICoreWebView2Controller2>();
+        THROW_IF_FAILED(controller2->put_DefaultBackgroundColor(COREWEBVIEW2_COLOR{255, GetRValue(color), GetGValue(color), GetBValue(color)}));
+        wil::com_ptr<ICoreWebView2Profile> profile;
+        THROW_IF_FAILED(webview.query<ICoreWebView2_13>()->get_Profile(profile.put()));
+        const auto scheme = options.color_scheme == ColorScheme::light ? COREWEBVIEW2_PREFERRED_COLOR_SCHEME_LIGHT :
+            (options.color_scheme == ColorScheme::dark ? COREWEBVIEW2_PREFERRED_COLOR_SCHEME_DARK : COREWEBVIEW2_PREFERRED_COLOR_SCHEME_AUTO);
+        THROW_IF_FAILED(profile->put_PreferredColorScheme(scheme));
         wil::com_ptr<ICoreWebView2Settings> settings;
         THROW_IF_FAILED(webview->get_Settings(settings.put()));
         THROW_IF_FAILED(settings->put_AreHostObjectsAllowed(FALSE));
@@ -310,6 +391,12 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
                 COREWEBVIEW2_WEB_ERROR_STATUS error{};
                 THROW_IF_FAILED(args->get_WebErrorStatus(&error));
                 // A policy-canceled external navigation leaves the current document usable.
+                if (success) {
+                    s.page_loaded = true;
+                    s.status = L"";
+                    s.update_visibility();
+                    if (s.hwnd) InvalidateRect(s.hwnd, nullptr, FALSE);
+                }
                 s.emit(EventKind::navigation_complete, success ? S_OK :
                     (error == COREWEBVIEW2_WEB_ERROR_STATUS_OPERATION_CANCELED ? S_FALSE : E_FAIL));
             });
@@ -325,10 +412,12 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
             return dispatch(weak, [](State& s) { s.emit(EventKind::process_failed, E_FAIL); s.fail(E_FAIL); });
         }), &ICoreWebView2::add_ProcessFailed, &ICoreWebView2::remove_ProcessFailed);
         resize();
-        THROW_IF_FAILED(controller->put_IsVisible(IsWindowVisible(hwnd)));
+        update_visibility();
         emit(EventKind::controller_ready);
         if (closed) return;
         const auto url = std::wstring{detail::origin} + options.entry_path;
+        emit(EventKind::navigation_starting);
+        if (closed) return;
         THROW_IF_FAILED(webview->Navigate(url.c_str()));
     }
 
@@ -338,37 +427,57 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
         wil::com_ptr<ICoreWebView2EnvironmentOptions6> extensions;
         THROW_IF_FAILED(env_options->QueryInterface(__uuidof(ICoreWebView2EnvironmentOptions6), extensions.put_void()));
         THROW_IF_FAILED(extensions->put_AreBrowserExtensionsEnabled(FALSE));
-        const std::weak_ptr<State> weak = shared_from_this();
-        const auto handler = Callback<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler>([weak](HRESULT hr, auto* env) -> HRESULT {
-            return dispatch(weak, [hr, env, weak](State& s) {
+        const auto self = shared_from_this();
+        const auto handler = Callback<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler>([self](HRESULT hr, auto* env) -> HRESULT {
+            ++self->callback_depth;
+            const auto callback = wil::scope_exit([&] { --self->callback_depth; self->initialization_completed(); });
+            if (self->closed || self->failed) return S_OK;
+            auto& s = *self;
+            try {
                 THROW_IF_FAILED(hr);
                 THROW_HR_IF_NULL(E_POINTER, env);
                 s.environment = env;
                 wil::unique_cotaskmem_string version;
                 THROW_IF_FAILED(env->get_BrowserVersionString(version.put()));
                 s.emit(EventKind::environment_ready, S_OK, version.get());
-                if (s.closed) return;
+                if (s.closed || s.failed) return S_OK;
                 auto env10 = s.environment.query<ICoreWebView2Environment10>();
                 wil::com_ptr<ICoreWebView2ControllerOptions> settings;
                 THROW_IF_FAILED(env10->CreateCoreWebView2ControllerOptions(settings.put()));
                 THROW_IF_FAILED(settings->put_ProfileName(L"NeutronStar"));
                 THROW_IF_FAILED(settings->put_IsInPrivateModeEnabled(TRUE));
-                const auto ready = Callback<ICoreWebView2CreateCoreWebView2ControllerCompletedHandler>([weak](HRESULT result, auto* created) -> HRESULT {
-                    const auto current = weak.lock();
-                    if (!current || current->closed || current->failed) { if (created) (void)created->Close(); return S_OK; }
-                    return dispatch(weak, [result, created](State& state) {
+                const auto ready = Callback<ICoreWebView2CreateCoreWebView2ControllerCompletedHandler>([self](HRESULT result, auto* created) -> HRESULT {
+                    const auto completed = wil::scope_exit([&] { self->initialization_completed(); });
+                    if (self->closed || self->failed) { if (created) (void)created->Close(); return S_OK; }
+                    return dispatch(std::weak_ptr<State>{self}, [result, created](State& state) {
                         THROW_IF_FAILED(result);
                         THROW_HR_IF_NULL(E_POINTER, created);
                         state.controller = created;
                         state.configure_browser();
                     });
                 });
-                THROW_IF_FAILED(env10->CreateCoreWebView2ControllerWithOptions(s.hwnd, settings.get(), ready.Get()));
-            });
+                s.emit(EventKind::controller_starting);
+                if (s.closed || s.failed) return S_OK;
+                ++s.pending_initializations;
+                const auto result = env10->CreateCoreWebView2ControllerWithOptions(s.hwnd, settings.get(), ready.Get());
+                if (FAILED(result)) { s.initialization_completed(); THROW_IF_FAILED(result); }
+                s.emit(EventKind::controller_requested);
+            } catch (...) { s.fail(wil::ResultFromCaughtException()); }
+            return S_OK;
         });
         const auto runtime = options.fixed_runtime_directory.wstring();
-        THROW_IF_FAILED(CreateCoreWebView2EnvironmentWithOptions(runtime.empty() ? nullptr : runtime.c_str(),
-            options.user_data_directory.c_str(), env_options.Get(), handler.Get()));
+        emit(EventKind::environment_starting);
+        if (closed || failed) return;
+        ++pending_initializations;
+        const auto result = CreateCoreWebView2EnvironmentWithOptions(runtime.empty() ? nullptr : runtime.c_str(),
+            options.user_data_directory.c_str(), env_options.Get(), handler.Get());
+        if (FAILED(result)) { initialization_completed(); THROW_IF_FAILED(result); }
+    }
+
+    void update_visibility(std::optional<bool> shown = std::nullopt) {
+        if (!controller || !hwnd) return;
+        THROW_IF_FAILED(controller->put_IsVisible(shown.value_or(IsWindowVisible(hwnd) != FALSE) && !IsIconic(hwnd) &&
+            (!options.reveal_after_navigation || page_loaded)));
     }
 
     void resize() {
@@ -401,7 +510,13 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
         if (closed) return;
         closed = true;
         stop_browser();
-        if (hwnd) DestroyWindow(hwnd);
+        // Destroying the parent while controller creation is pending can cancel its
+        // completion before the runtime finishes launching its browser. Hide now,
+        // explicitly close the late controller, then destroy the HWND.
+        if (hwnd) {
+            if (pending_initializations) ShowWindow(hwnd, SW_HIDE);
+            else DestroyWindow(hwnd);
+        }
     }
 
     void post_status(Status value) {
@@ -442,6 +557,12 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
         auto self = raw->shared_from_this();
         try {
             switch (msg) {
+            case start_browser_message:
+                if (!self->closed && !self->failed && !self->browser_started) {
+                    self->browser_started = true;
+                    self->start_browser();
+                }
+                return 0;
             case action_message:
                 if (!self->closed && self->options.on_test_greet && self->queued_test_greet) {
                     const auto request = std::move(*self->queued_test_greet);
@@ -459,12 +580,12 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
             case WM_CLOSE: self->close(); return 0;
             case WM_SIZE:
                 self->resize();
-                if (self->controller) THROW_IF_FAILED(self->controller->put_IsVisible(wp != SIZE_MINIMIZED && IsWindowVisible(window)));
+                self->update_visibility();
                 if (self->options.allow_window_controls) self->emit(EventKind::window_state_changed, S_OK,
                     wp == SIZE_MINIMIZED ? L"minimized" : (wp == SIZE_MAXIMIZED ? L"maximized" : L"normal"));
                 return 0;
             case WM_SHOWWINDOW:
-                if (self->controller) THROW_IF_FAILED(self->controller->put_IsVisible(wp != 0));
+                self->update_visibility(wp != 0);
                 break;
             case WM_MOVE:
                 if (self->controller) THROW_IF_FAILED(self->controller->NotifyParentWindowPositionChanged());
@@ -493,11 +614,20 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
                 }
                 return 0;
             }
+            case WM_ERASEBKGND: {
+                RECT rect{}; GetClientRect(window, &rect);
+                FillRect(reinterpret_cast<HDC>(wp), &rect, self->background.get());
+                return 1;
+            }
             case WM_PAINT: {
                 PAINTSTRUCT paint{};
                 HDC dc = BeginPaint(window, &paint);
                 RECT rect{};
                 GetClientRect(window, &rect);
+                FillRect(dc, &rect, self->background.get());
+                SetBkMode(dc, TRANSPARENT);
+                const auto color = self->options.background_color;
+                SetTextColor(dc, GetRValue(color) + GetGValue(color) + GetBValue(color) < 384 ? RGB(255, 255, 255) : RGB(0, 0, 0));
                 DrawTextW(dc, self->status, -1, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX);
                 EndPaint(window, &paint);
                 return 0;
@@ -521,7 +651,7 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
         cls.hInstance = GetModuleHandleW(nullptr);
         cls.hCursor = LoadCursorW(nullptr, IDC_ARROW);
         cls.hIcon = LoadIconW(nullptr, IDI_APPLICATION);
-        cls.hbrBackground = reinterpret_cast<HBRUSH>(COLOR_WINDOW + 1);
+        cls.hbrBackground = nullptr; // Each instance owns its loading background brush.
         cls.lpszClassName = window_class;
         if (!RegisterClassW(&cls) && GetLastError() != ERROR_CLASS_ALREADY_EXISTS) THROW_LAST_ERROR();
         const UINT dpi = GetDpiForSystem();
@@ -530,14 +660,20 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
         THROW_LAST_ERROR_IF_NULL(CreateWindowExW(0, window_class, options.title.c_str(), window_style() | WS_CLIPCHILDREN,
             CW_USEDEFAULT, CW_USEDEFAULT, rect.right - rect.left, rect.bottom - rect.top, nullptr, nullptr, cls.hInstance, this));
         if (options.visible) ShowWindow(hwnd, SW_SHOW);
-        try { start_browser(); } catch (...) { fail(wil::ResultFromCaughtException()); }
+        // Return the owner before asynchronous APIs can call application callbacks.
+        THROW_IF_WIN32_BOOL_FALSE(PostMessageW(hwnd, start_browser_message, 0, 0));
     }
 };
 
 HostWindow::HostWindow(std::shared_ptr<State> state) : state_(std::move(state)) {}
 HostWindow::~HostWindow() {
     if (state_->thread != GetCurrentThreadId()) std::terminate();
+    // Application callbacks may capture objects already being destroyed by the owner.
+    state_->options.on_event = {};
+    state_->options.on_action = {};
+    state_->options.on_test_greet = {};
     state_->close();
+    state_->drain_initialization();
 }
 std::unique_ptr<HostWindow> HostWindow::create(HostOptions options) {
     auto state = std::make_shared<State>(std::move(options));
@@ -552,14 +688,17 @@ void HostWindow::post_status(Status status) { state_->post_status(status); }
 void HostWindow::post_test_greeting(std::wstring_view id, std::wstring_view greeting) { state_->post_test_greeting(id, greeting); }
 int HostWindow::run() {
     state_->assert_thread();
+    if (state_->closed) state_->drain_initialization();
     MSG message{};
     while (state_->hwnd) {
         const BOOL next = GetMessageW(&message, nullptr, 0, 0);
         if (next == -1) THROW_LAST_ERROR();
-        if (!next) { close(); return static_cast<int>(message.wParam); }
+        if (!next) { close(); state_->drain_initialization(); return state_->failed ? 1 : static_cast<int>(message.wParam); }
         TranslateMessage(&message);
         DispatchMessageW(&message);
+        if (state_->closed) state_->drain_initialization();
     }
+    state_->drain_initialization();
     return state_->failed ? 1 : 0;
 }
 } // namespace neutronstar

@@ -10,6 +10,22 @@ int main() {
     using namespace neutronstar::detail;
     int failures{};
     auto check = [&](bool good, const char* name) { if (!good) { std::cerr << "FAIL " << name << '\n'; ++failures; } };
+    check(embedded_asset_key(L"assets/App-A1.js") == L"assets/app-a1.js", "embedded Windows case normalization");
+    check(valid_embedded_assets({{L"index.html", {60, 62}}, {L"assets/app.js", {}}}), "valid embedded snapshot");
+    check(!valid_embedded_assets({}), "empty snapshot is not an embedded application");
+    check(!valid_embedded_assets({{L"app.js", {}}, {L"App.js", {}}}), "case-colliding snapshot refused");
+    check(!valid_embedded_assets(std::vector<neutronstar::EmbeddedAsset>(4097)), "snapshot file-count bound");
+    {
+        std::vector<neutronstar::EmbeddedAsset> oversize{{L"a.js", std::vector<unsigned char>(32 * 1024 * 1024 + 1)}};
+        check(!valid_embedded_assets(oversize), "snapshot per-file bound");
+    }
+    {
+        std::vector<neutronstar::EmbeddedAsset> oversize;
+        for (int i = 0; i < 5; ++i) oversize.push_back({std::to_wstring(i) + L".js", std::vector<unsigned char>(27 * 1024 * 1024)});
+        check(!valid_embedded_assets(oversize), "snapshot aggregate bound");
+    }
+    for (const auto path : {L"", L"../index.html", L"/index.html", L"assets\\app.js", L"a%2fapp.js", L"index.html#x", L"index.html?q=1", L"con.txt", L"app.ts", L"data.bin"})
+        check(!embedded_asset_key(path), "embedded assets retain canonical path/MIME policy");
     check(parse_window_command_json(L"\"neutronstar.window.minimize.v1\"") == WindowCommand::minimize, "window minimize token");
     check(parse_window_command_json(L"\"neutronstar.window.toggle-maximize.v1\"") == WindowCommand::toggle_maximize, "window maximize token");
     check(parse_window_command_json(L"\"neutronstar.window.close.v1\"") == WindowCommand::close, "window close token");

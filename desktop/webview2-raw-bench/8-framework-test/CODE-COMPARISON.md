@@ -1,5 +1,13 @@
 # Comparing the nine implementations
 
+2026-10-24 follow-up: the selected standalone Svelte fixture has now completed
+a [six-host WebView2 comparison](../../host-test-support/results/2026-10-24/RESULTS.md).
+It supports keeping the minimal C++ baseline and considering Tauri when full
+framework features are needed; raw Rust showed no decisive retained-startup
+advantage. These are separate hosting/configuration measurements with a revised
+fixture/collector. Do not pool them with the historical nine-renderer timings or
+attribute hosting differences to Svelte internals.
+
 Historical source/byte comparison below. On 2026-10-20 the user requested
 English/Hebrew/emoji-only GUI fixtures and four local fonts across all maintained
 GUI projects. Sources and build outputs now use `starlight-en-he-v2`; the old

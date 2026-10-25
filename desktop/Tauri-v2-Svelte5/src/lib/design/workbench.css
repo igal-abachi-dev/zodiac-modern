@@ -1,0 +1,11 @@
+.workbench-shell { scroll-margin-top: 24px; padding-bottom: 28px; }
+.workbench-shell h2 { font-size: 22px; margin: 0; }
+.workbench-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+.workbench-filter { display: grid; gap: 10px; }
+.workbench-filter label { font-weight: 600; }
+.workbench-filter input { width: 100%; min-height: 40px; border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; color: var(--fg); background: var(--card); }
+.workbench-filter output { font-variant-numeric: tabular-nums; }
+.workbench-rows { margin: 16px 0 0; padding: 0; list-style: none; border: 1px solid var(--border); border-radius: 8px; background: var(--card); }
+.workbench-rows li { min-height: 30px; padding: 5px 12px; border-bottom: 1px solid var(--border); font-variant-numeric: tabular-nums; }
+.workbench-rows li:last-child { border-bottom: 0; }
+@media (prefers-reduced-motion: reduce) { .workbench-shell { scroll-behavior: auto; } }

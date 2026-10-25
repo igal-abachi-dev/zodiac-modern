@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net10.0-windows</TargetFramework><UseWindowsForms>true</UseWindowsForms><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><TreatWarningsAsErrors>true</TreatWarningsAsErrors><RestorePackagesWithLockFile>true</RestorePackagesWithLockFile></PropertyGroup>
+  <ItemGroup><PackageReference Include="FlaUI.UIA3" Version="5.0.0" /><Compile Include="../measurement/Native.cs" Link="Native.cs"/><Compile Include="../measurement/ProcessTree.cs" Link="ProcessTree.cs"/></ItemGroup>
+</Project>

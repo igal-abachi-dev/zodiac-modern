@@ -1,5 +1,16 @@
 # WinUI 3 WebView2 validation
 
+## Six-host measurement update - 2026-10-24
+
+The C#/WinUI 3 self-contained candidate completed the accepted pilot and full
+six-host collection. See [results and raw evidence](../host-test-support/results/2026-10-24/RESULTS.md).
+One action attempt timed out during user-reported mouse interference. Its raw
+failure remains unchanged; the explicitly authorized single retry passed with
+the frozen collector, giving 20 usable action lifetimes. One supplemental
+read-only provider query gap recovered without input replay. All selected
+observations passed semantic/bounded lifecycle checks. Physical accessibility,
+native-policy/security parity and production/release acceptance remain open.
+
 Implementation evidence, 2026-10-21/22; UIA3 follow-up 2026-10-23.
 Comparative benchmarks have **not** run.
 

@@ -35,6 +35,10 @@ Invoke-Case 'invalid-memory-target' @('--memory-target', 'invalid') 1
 for ($i = 0; $i -lt 5; ++$i) { Invoke-Case "close-before-ready-$i" @('--close-before-ready') }
 Invoke-Case 'close-at-environment' @('--close-at-environment')
 Invoke-Case 'close-at-controller' @('--close-at-controller')
+Invoke-Case 'close-pending-controller' @('--close-pending-controller')
+Invoke-Case 'close-at-asset-read' @('--close-at-asset-read')
+Invoke-Case 'quit-before-ready' @('--quit-before-ready')
+Invoke-Case 'destroy-before-ready' @('--destroy-before-ready')
 Invoke-Case 'missing-entry' @('--entry', 'absent.html') 1
 $emptyRuntime = Join-Path $runRoot 'empty-runtime'
 New-Item -ItemType Directory -Path $emptyRuntime | Out-Null

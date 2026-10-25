@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-24",
+  "scope": "implementation and actual-window correctness; no comparative benchmark or physical AT acceptance",
+  "windowChecks": {
+    "status": "passed",
+    "mainChecks": "About Escape/Close/focus; encrypt complete; decrypt cancel; reset",
+    "extraChecks": "10/60 Hz update and Stop; empty filter; close while burst active; fresh reopen/reset IDs and tick; focus restoration; main workflow after workbench",
+    "layoutChecks": "dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width",
+    "dpi": 192,
+    "engineKind": "Avalonia/Skia",
+    "hostExited": true,
+    "helpersExited": true,
+    "exitCode": 0,
+    "providerGaps": []
+  },
+  "rawEvidence": ".cache/accepted-correctness/result.json",
+  "modelChecks": "passed",
+  "locks": {
+    "packages.lock.json": "7e6a7c9e741a01c1462fdfa91c5dc57a6d544fcee97a6be755280ecd15010e16",
+    "Tests/packages.lock.json": "f5b550e24add4dbf2e3d5c1b2bce41aaf310489f00be9a6805b7b1fa2b9d2582"
+  },
+  "build": {
+    "mode": "self-contained .NET 10 JIT; Skia; standard Fluent controls; unvirtualized list",
+    "executableSha256": "80618D78A40658CF80ABE9CEA5ADCF5DC4A54001FF60E68F8EE2E82DE3E4FE97",
+    "assemblySha256": "24319B436B51A761AFD433230D743FF67B9A3490967BC969B476E1B3639B8F57",
+    "avalonia": "12.1.4",
+    "mvvm": "8.4.2",
+    "schema": 1,
+    "comparison": "Not run",
+    "lockSha256": "7E6A7C9E741A01C1462FDFA91C5DC57A6D544FCEE97A6BE755280ECD15010E16"
+  },
+  "runtimeConfiguration": {
+    "runtimeOptions": {
+      "tfm": "net10.0",
+      "includedFrameworks": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "version": "10.0.13"
+        }
+      ],
+      "configProperties": {
+        "MVVMTOOLKIT_ENABLE_INOTIFYPROPERTYCHANGING_SUPPORT": true,
+        "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+        "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false
+      }
+    }
+  },
+  "fontProvenance": {
+    "conversion": "WOFF2 decompression only; unchanged glyphs/weight; original font timestamps retained",
+    "fonttools": "4.67.0",
+    "files": [
+      {
+        "source": "inter-latin-400-normal.woff2",
+        "package": "@fontsource/inter@5.3.0",
+        "sourceSha256": "8909904ab6c872eb994093482a88a28eca2cd95912d7b6fecd72103b0dc07edc",
+        "output": "inter-latin-400-normal.ttf",
+        "outputSha256": "03693cc5689d8c89a20ae55fe945fe59884eec8ad7d7dabb4761e066e88f49ff",
+        "weight": 400
+      },
+      {
+        "source": "inter-latin-500-normal.woff2",
+        "package": "@fontsource/inter@5.3.0",
+        "sourceSha256": "f3779f1efccc4bdcdf9c0a02ab95bf6bd092ed09c48c08cedc725889edd1d19f",
+        "output": "inter-latin-500-normal.ttf",
+        "outputSha256": "7e22abfa3709ec2c67d18128ed3b7e522a8efa602c7f46fb933bf71f5f8f2e3e",
+        "weight": 500
+      },
+      {
+        "source": "inter-latin-600-normal.woff2",
+        "package": "@fontsource/inter@5.3.0",
+        "sourceSha256": "f9a06e79cd3a2a20951c0f0e28f66dd0e6d3fda73911d640a2125c8fcb78f21a",
+        "output": "inter-latin-600-normal.ttf",
+        "outputSha256": "de8a61379f04664868958cc13d22cd9d1d79b4064e1ebd7c46588399f2a12fd5",
+        "weight": 600
+      },
+      {
+        "source": "noto-sans-hebrew-hebrew-400-normal.woff2",
+        "package": "@fontsource/noto-sans-hebrew@5.3.0",
+        "sourceSha256": "330b5c315ebac6a102bea95898207a4fdae4a6180d27783dfbb2a700deb61845",
+        "output": "noto-sans-hebrew-hebrew-400-normal.ttf",
+        "outputSha256": "4df1fbfde811afbf4023ed6bfde89ce9614c94775fa57dfdfc473575d5d076d0",
+        "weight": 400
+      }
+    ]
+  }
+}

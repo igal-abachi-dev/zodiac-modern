@@ -1,0 +1,6 @@
+{
+  "original": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\.cache\\six-host-actions-20261024-i\\runs\\actions-19-winui",
+  "originalResultSha256": "ad42b22f1bd4c11d2b506dc4c7aa9dfddc56820748f792eec9086940817586b6",
+  "userStatement": "you can retry the failed winui try , as i accidently click on a mouse on other window",
+  "policy": "Exclude the original trial for reported external input interference; retain it unchanged. Exactly one authorized retry with the same frozen collector/hosts/assets. Not a new randomized round."
+}

@@ -5,6 +5,9 @@
 #include <fstream>
 #include <stdexcept>
 #include <string_view>
+#ifdef NEUTRONSTAR_EMBEDDED_ASSETS
+std::vector<neutronstar::EmbeddedAsset> neutronstar_embedded_assets();
+#endif
 
 namespace {
 bool timed_out{};
@@ -42,9 +45,12 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
         if (!argv) throw std::runtime_error("Unable to parse arguments.");
         struct Arguments { wchar_t** value; ~Arguments() { LocalFree(value); } } arguments{argv};
         neutronstar::HostOptions options;
+#ifdef NEUTRONSTAR_EMBEDDED_ASSETS
+        options.reveal_after_navigation = true;
+#endif
         options.title = L"NeutronStar Host — local frontend";
         bool smoke{}, close_early{}, bridge{}, close_environment{}, close_controller{}, test_greet{}, greet_smoke{};
-        bool window_smoke{}, memory_smoke{};
+        bool window_smoke{}, memory_smoke{}, close_pending_controller{}, quit_early{}, destroy_early{}, close_navigation{}, close_asset{};
         UINT timeout_ms{};
         std::filesystem::path report;
         for (int i = 1; i < count; ++i) {
@@ -59,6 +65,23 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             else if (arg == L"--entry") options.entry_path = value();
             else if (arg == L"--report") report = value();
             else if (arg == L"--hidden") options.visible = false;
+            else if (arg == L"--trace-assets") options.trace_asset_reads = true;
+            else if (arg == L"--reveal-after-navigation") options.reveal_after_navigation = true;
+            else if (arg == L"--show-browser-immediately") options.reveal_after_navigation = false;
+            else if (arg == L"--color-scheme") {
+                const std::wstring_view scheme{value()};
+                if (scheme == L"light") options.color_scheme = neutronstar::ColorScheme::light;
+                else if (scheme == L"dark") options.color_scheme = neutronstar::ColorScheme::dark;
+                else if (scheme == L"system") options.color_scheme = neutronstar::ColorScheme::system;
+                else throw std::invalid_argument("Color scheme must be light, dark or system.");
+            }
+            else if (arg == L"--background-rgb") {
+                const std::wstring text{value()};
+                if (text.size() != 6 || text.find_first_not_of(L"0123456789abcdefABCDEF") != std::wstring::npos)
+                    throw std::invalid_argument("Background must be six RGB hex digits.");
+                const auto color = std::stoul(text, nullptr, 16);
+                options.background_color = RGB((color >> 16) & 255, (color >> 8) & 255, color & 255);
+            }
             else if (arg == L"--custom-titlebar") { options.decorations = false; options.allow_window_controls = true; }
             else if (arg == L"--memory-target") {
                 const std::wstring_view target{value()};
@@ -79,6 +102,11 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             else if (arg == L"--close-before-ready") close_early = true;
             else if (arg == L"--close-at-environment") close_environment = true;
             else if (arg == L"--close-at-controller") close_controller = true;
+            else if (arg == L"--close-pending-controller") close_pending_controller = true;
+            else if (arg == L"--quit-before-ready") quit_early = true;
+            else if (arg == L"--destroy-before-ready") destroy_early = true;
+            else if (arg == L"--close-at-navigation") close_navigation = true;
+            else if (arg == L"--close-at-asset-read") { close_asset = true; options.trace_asset_reads = true; }
             else if (arg == L"--timeout-ms") {
                 const std::wstring text{value()};
                 size_t consumed{};
@@ -91,6 +119,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
         std::ofstream output;
         if (!report.empty()) { output.open(report, std::ios::trunc); if (!output) throw std::runtime_error("Unable to create diagnostic report."); }
         if (output) output << "{\"decorations\":" << (options.decorations ? "true" : "false")
+            << ",\"reveal_after_navigation\":" << (options.reveal_after_navigation ? "true" : "false")
             << ",\"window_controls\":" << (options.allow_window_controls ? "true" : "false")
             << ",\"memory_target\":\"" << (options.memory_usage_target == neutronstar::MemoryUsageTarget::low ? "low" : "normal") << "\"}\n";
         std::unique_ptr<neutronstar::HostWindow> host;
@@ -103,7 +132,8 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             if (output) {
                 const auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - start).count();
                 // Numeric fixed-schema diagnostics only; no document title, URI or input serialization.
-                output << "{\"event\":" << static_cast<int>(event.kind) << ",\"hr\":" << event.result << ",\"microseconds\":" << elapsed << "}\n";
+                output << "{\"event\":" << static_cast<int>(event.kind) << ",\"hr\":" << event.result << ",\"microseconds\":" << elapsed
+                    << ",\"duration_us\":" << event.duration_microseconds << ",\"bytes\":" << event.byte_count << "}\n";
                 if (event.kind == neutronstar::EventKind::environment_ready) {
                     output << "{\"runtime\":\"";
                     for (wchar_t ch : event.detail) if ((ch >= L'0' && ch <= L'9') || ch == L'.') output << static_cast<char>(ch);
@@ -131,10 +161,14 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
                 host->set_memory_usage_target(neutronstar::MemoryUsageTarget::low);
             }
             if ((close_environment && event.kind == neutronstar::EventKind::environment_ready) ||
-                (close_controller && event.kind == neutronstar::EventKind::controller_ready)) {
+                (close_controller && event.kind == neutronstar::EventKind::controller_ready) ||
+                (close_pending_controller && event.kind == neutronstar::EventKind::controller_requested) ||
+                (close_asset && event.kind == neutronstar::EventKind::asset_loaded)) {
                 pending_close = true;
                 if (host) host->close(); // Deliberate callback reentrancy/lifetime verification.
             }
+            if (close_navigation && event.kind == neutronstar::EventKind::navigation_complete && event.result == S_OK && host)
+                PostMessageW(host->native_handle(), WM_CLOSE, 0, 0);
             if (event.kind == neutronstar::EventKind::failed || event.kind == neutronstar::EventKind::process_failed ||
                 (event.kind == neutronstar::EventKind::navigation_complete && FAILED(event.result))) failure = true;
             if (smoke && event.kind == neutronstar::EventKind::document_title_changed) {
@@ -158,8 +192,13 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
                 if (!SetTimer(host->native_handle(), 3, 100, greet_reply)) throw std::runtime_error("Unable to schedule test greeting.");
             } else host->post_test_greeting(request.id, neutronstar::detail::make_test_greeting(request.name));
         };
+#ifdef NEUTRONSTAR_EMBEDDED_ASSETS
+        options.embedded_assets = neutronstar_embedded_assets();
+#endif
         host = neutronstar::HostWindow::create(std::move(options));
         acknowledgment_host = host.get();
+        if (destroy_early) { acknowledgment_host = nullptr; host.reset(); return 0; }
+        if (quit_early) PostQuitMessage(0);
         if (close_early || pending_close) host->close();
         else if (timeout_ms && !SetTimer(host->native_handle(), 1, timeout_ms, timeout)) throw std::runtime_error("Unable to set test timeout.");
         const int code = host->run();

@@ -1,5 +1,13 @@
 # Wails validation
 
+## Six-host measurement update - 2026-10-24
+
+The accepted pilot and full six-host collection completed with the identical
+Svelte fixture. See [results and configuration caveats](../host-test-support/results/2026-10-24/RESULTS.md).
+All selected Wails observations passed; persistent-profile/native-policy
+differences remain explicit. This is not physical accessibility, security parity
+or production/release acceptance. Historical records below remain historical.
+
 ## Current frontend revision — 2026-10-20
 
 Offline production rebuild and policy tests passed with the common 16-file,

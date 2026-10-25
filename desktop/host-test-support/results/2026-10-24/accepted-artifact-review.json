@@ -1,0 +1,24 @@
+{
+  "valid": true,
+  "errors": [],
+  "cohorts": [
+    {
+      "cohort": "six-host-20261024-h",
+      "files": 755,
+      "originalSourceResolvedFromArchive": [
+        "host-test-support\\measurement\\Program.cs",
+        "host-test-support\\measurement\\run.py"
+      ]
+    },
+    {
+      "cohort": "six-host-actions-20261024-i",
+      "files": 755,
+      "originalSourceResolvedFromArchive": []
+    },
+    {
+      "cohort": "six-host-workload-20261024-b",
+      "files": 737,
+      "originalSourceResolvedFromArchive": []
+    }
+  ]
+}

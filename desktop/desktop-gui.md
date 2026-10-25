@@ -53,13 +53,17 @@ Apply mandatory requirements before comparing convenience. A tiny EXE that downl
 | Tauri v2 | HTML/CSS/JS in Windows WebView2 | Svelte/TypeScript UI, Rust command layer, Go child boundary |
 | Electron | HTML/CSS/JS in bundled Chromium | Renderer/preload/main-process APIs, Node integration, Go child boundary |
 | WinUI 3 / C# | Native WinUI XAML controls | C#/XAML app, Windows App SDK deployment, Go child boundary |
+| WinUI 3 / C# + CommunityToolkit.Mvvm | Same native WinUI controls, XAML/bindings with MVVM | Separate native reference implementation and deployment |
+| WinUI 3 / C# + Microsoft.UI.Reactor | Same native WinUI controls, C# declarative elements and MVU reconciliation | Experimental authoring layer, lifecycle/state and deployment |
+| React Native for Windows | Fabric/Windows Composition host components, with native XAML hosting where used | React/TypeScript UI, native integration, release bundle and deployment |
+| Slint / Rust | Compiled declarative Slint UI using the selected native backend/renderer | Rust app, Slint models/callbacks, renderer and license selection |
 | Flutter | Flutter-rendered widgets and semantics | Dart UI, desktop plugins/native integration, Go child boundary |
 | Standalone C# CoreWebView2 | WebView2 inside a native window | Window/controller lifecycle, local content, bridge, deployment and Go integration |
 | Wails / Go | HTML/CSS/JS in WebView2 | Svelte/TypeScript UI, Go host/bindings and operation boundary |
 | Wry / Tao / webview2-com | WebView2 through Rust webview/window/COM libraries | A substantial portion of the desktop host framework |
 | PyWebView | HTML/CSS/JS in a selected platform webview | Python host/bridge, freezer/runtime dependencies and Go integration |
 | C++ official WebView2 Win32 SDK | WebView2 in a Win32 host | COM, windowing, message pump, content/bridge, deployment and Go integration |
-| Dear ImGui | Immediate-mode drawn controls | Rendering loop, window/backend, accessibility/internationalization gaps and Go integration |
+| Dear ImGui / Win32 + DX11 or DX12 | Immediate-mode controls submitted to a selected Direct3D backend | Rendering/present loop, styling, accessibility/internationalization and Go integration |
 | Blazor Hybrid WebView2 | Razor components rendered into an embedded webview; .NET code runs natively | .NET host, Razor UI, WebView2 boundary and Go integration |
 | WPF Microsoft.Web.WebView2 | WebView2 hosted in a WPF control | WPF shell/lifecycle plus HTML UI/bridge and Go integration |
 | WinUI 3 built-in WebView2 | WebView2 hosted in a WinUI XAML control | WinUI shell/lifecycle plus HTML UI/bridge and Go integration |
@@ -92,7 +96,7 @@ These are qualitative expectations for a small, competently implemented Zodiac r
 | Qt Quick/QML | Strong custom desktop UI; Fluent-like styling available | None directly | Ship Qt/QML/plugins/CRT with audited module set | Deployment and licensing need deliberate attention | Credible with existing Qt expertise |
 | wxWidgets | Familiar native controls, less immediate Fluent polish | None directly | Ship app and necessary libraries/CRT | Potentially lean; bespoke styling costs engineering time | Sensible utility toolkit, not preferred for this design goal |
 | PyWebView | Web frontend quality; host depends on selected engine | High | Freeze Python and dependencies plus explicit modern webview | Python/.NET/backend/freezer composition | Prototype-friendly; adds an unnecessary runtime here |
-| Dear ImGui | Custom tool aesthetic rather than a standard recipient form | None directly | Native application/backend dependencies | Can be lean, but accessibility/i18n work dominates | **Reject for this recipient product** |
+| Dear ImGui | dx11-12 Custom tool aesthetic rather than a standard recipient form | None directly | Native application/backend dependencies | Can be lean, but accessibility/i18n work dominates | **Reject for this recipient product** |
 
 ### Accessibility, Go integration and development cost
 
@@ -1272,6 +1276,87 @@ Tauri v2/Wails when web UI and cross-platform shell support matter, or WinUI 3 +
 WebView2 for a Windows-specific product. Reuse the design and security principles;
 do not carry the comparison runner forward as the product's framework.
 
+### 13.16 Installed-app stack survey and candidate coverage
+
+Added 2026-10-24. [installed_apps.md](installed_apps.md) inventories the GUI apps on the reference PC and records each app's GUI language, toolkit and libraries. Its **Basis** column separates *Detected* (install-folder files, executable strings, loaded modules), *Web* (thin web sources), *Known* (documented but not re-verified) and *Unverified*. File and string markers are heuristics: statically linked toolkits can be missed and short markers can false-match. The survey shows what ships on one machine. It does not say what is best for Zodiac.
+
+Decisions recorded from this survey:
+
+1. **Delivery preference: classic unpackaged Win32 desktop apps over UWP/Microsoft Store packaging.** This matches the portable, offline, standard-user launch requirement in section 2. UWP-style XAML apps are not a candidate. Their successor, WinUI 3, is already compared. The packaging options mentioned for WinUI in section 13.15 stay a deployment variant to measure, not a preference.
+2. **Win32 is not deprecated; GDI rendering is legacy.** Every WinUI 3, WebView2, Skia and Chromium app is still a Win32 process with a Win32 window. Only GDI-style CPU drawing is legacy, while Direct2D/DirectWrite, Skia and the Windows composition engine draw on the GPU. Raw Win32 and MFC are not product candidates for this receiver. The 5.10 (C++ WebView2 Win32) and 5.16 (wxWidgets) entries already cover native-Win32 hosting.
+3. **Plain WPF is skipped.** It is not deprecated: Microsoft added a Fluent theme in .NET 9 and continued it in .NET 10, and its [.NET 10 notes](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/whats-new/net100) say Fluent support is still in progress, with `Window.ThemeMode` marked experimental. No published WPF roadmap or deprecation notice was found. WinUI 3 is the recommended path for a new app, and Avalonia is the other native C# candidate. Revisit WPF only if WinUI 3 fails the portable-offline gate (Windows App SDK deployment). It would be cheap to add then because the C# MVVM code is shared. The existing 5.13 WPF + WebView2 entry is unchanged.
+4. **CEF / CefSharp is not added.** It is a different embedding model from Electron (Chromium plus Node as an app runtime) and WebView2 (the OS-provided control), and it is still widely used. Its resource profile should fall near Electron or WebView2 Fixed Version, so measuring it adds little.
+5. **Unreal Slate is not a candidate.** It needs the Unreal runtime. Dear ImGui is not an equivalent replacement: it is immediate-mode with the accessibility and internationalization gaps in section 4, so it stays a lean-floor reference only. The installed Epic Launcher uses Slate and CEF, while section 13.2 records community reports that its new preview moved to Tauri. These are different versions.
+6. **.NET MAUI is not added.** Its Windows target runs on WinUI 3, so a MAUI result would be the native WinUI 3 result plus a cross-platform layer. The 5.12 Blazor Hybrid entry covers the MAUI-with-WebView2 case.
+7. **Slint (Rust) is added as a candidate.** It is a lean, non-browser native toolkit. The `slint-rust` folder was created on 2026-10-24 and is empty. Nothing is built or measured. Its licensing, accessibility, internationalization and secret-input behavior must pass the same section 4, section 7 and 11.8 gates as every other entry. Go-native toolkits (Fyne, Gio) were suggested during the survey but are not added.
+
+Candidate coverage is extended below; historical entry numbers are retained.
+Section 14's six-host results do not measure Avalonia, Qt, Electron, Flutter,
+Dear ImGui, wxWidgets, native WinUI 3 without WebView2 or Slint. Installed-app
+prevalence on one PC does not establish performance or product suitability.
+
+### 13.17 Expanded desktop candidate registry (2026-10-24)
+
+The user added these directories for **later** independent implementations. A
+directory is not an implemented candidate or a benchmark result. The current work
+first finishes [Avalonia](Avalonia/README.md) and [Electron](Electron/README.md)
+against the complete [Tauri/Svelte reference](Tauri-v2-Svelte5/FEATURE-PARITY.md).
+
+| Directory | Planned comparison | Status |
+| --- | --- | --- |
+| `WinUI3-cs-native-mvvm` | C#/XAML, native WinUI 3 controls and CommunityToolkit.Mvvm | Planned; distinct from `WinUI3-webview2` |
+| `WinUI3-cs-native-reactor` | C# Microsoft.UI.Reactor declarative/MVU layer on native WinUI 3 | Planned experimental candidate |
+| `react-native-windows` | React/TypeScript, Fabric and Windows Composition | Planned; no HTML/WebView2 renderer |
+| `slint-rust` | Rust plus declarative Slint UI | Planned; renderer/features/license to pin |
+| `Dear-ImGui-dx11-12` | C++/Win32 plus Dear ImGui, separate DX11 and DX12 variants | Planned; backend-specific results |
+
+**Reactor and MVVM are two authoring models on WinUI**, rather than two different
+Windows renderers. Reactor describes UI in C#, reconciles element descriptions
+and updates real controls. Its preview is experimental, with API/support
+limitations; keep it as a separately labeled research candidate. Pin the same
+Windows App SDK, runtime, controls, packaging and list strategy for the MVVM/MVU
+comparison. Measure reconciliation, allocations and development effort as well
+as startup, rather than attributing every difference to WinUI rendering.
+Sources: [Microsoft introduction](https://devblogs.microsoft.com/ifdef-windows/microsoft-ui-reactor-a-c-first-way-to-build-winui-apps/),
+[Reactor source/status](https://github.com/microsoft/microsoft-ui-reactor).
+
+**React Native for Windows is a separate React-native UI implementation.** Its
+current Fabric architecture uses Windows Composition and can host XAML controls;
+it does not render Svelte/HTML in Chromium. Record the actual JavaScript engine,
+native modules, Windows App SDK and Release bundle. Do not benchmark Metro/debug
+execution against packaged production apps. Sources:
+[RNW architecture](https://github.com/microsoft/react-native-windows),
+[current Windows setup](https://microsoft.github.io/react-native-windows/docs/getting-started/).
+
+**Slint is a compiled declarative UI candidate with Rust integration.** Pin the
+selected window backend, renderer and Cargo features before measuring; Rust alone
+does not identify the graphics path. Verify controls, Hebrew/IME, accessibility
+and packaging on the actual Windows build. Its runtime is not simply MIT: choose
+and record the applicable GPLv3, royalty-free or commercial terms. The royalty-free
+desktop option has disclosure requirements. Sources: [Slint](https://slint.dev/),
+[framework licensing](https://github.com/slint-ui/slint/blob/master/LICENSE.md).
+
+**Dear ImGui can implement a styled custom UI with official DirectX 11/12
+backends.** Those are graphics APIs beneath its immediate-mode controls, not a
+complete consumer desktop framework. Treat DX11 and DX12 as separate variants
+with the same UI, synchronization and present policy. Record visible idle and
+minimized CPU/GPU/energy, frame pacing, input/IME and accessibility, alongside
+active rendering throughput. A continuously redrawing loop must not receive an
+unreported idle-power advantage or penalty. See [official backends](https://github.com/ocornut/imgui/blob/master/docs/BACKENDS.md).
+
+The comparison with Unreal Slate is useful for the goal of a custom C++ interface,
+but the UI systems are distinct: Slate has widgets and its own data-flow/caching
+architecture. Sharing a Direct3D rendering path does not make Dear ImGui an
+equivalent of Slate or Unreal Engine. See [Epic's Slate architecture](https://dev.epicgames.com/documentation/en-us/unreal-engine/understanding-the-slate-ui-architecture-in-unreal-engine).
+
+All later candidates must independently implement the same synthetic operations,
+dialog, filter/list controls and timer/cancellation semantics. Preserve the
+unvirtualized stress lane; label any optimized/virtualized lane separately. Keep
+the full process-tree and presentation measurements, freeze the actual runtime
+and delivery artifacts, and retain failed lifecycle or accessibility cases. None
+of these new entries changes the measured WebView2 decision or establishes an
+overall desktop winner.
+
 ## 14. NeutronStar raw WebView2 host implementation follow-up
 
 On 2026-10-16, the separately requested **small reusable host** was implemented at
@@ -1470,3 +1555,112 @@ forcing parity through COM. The separate Rust `webview2-com` candidate should
 mirror NeutronStar's minimal C++ architecture more closely, allowing a better
 implementation/language comparison once lifecycle, settings and assets match.
 Neither comparison isolates language performance automatically.
+
+### Six-host Svelte measurements completed (2026-10-24)
+
+**Decision after reviewing these results: Tauri v2 + Svelte 5 is our default
+WebView2 stack for feature-rich desktop products.** Keep NeutronStar C++ for the
+minimal benchmark baseline and tightly scoped utilities. The
+[stack decision](WEBVIEW2-STACK-DECISION.md) records why this is a product and
+maintenance choice supported by competitive measurements, not a universal
+performance ranking. Tauri/Svelte becomes the WebView2 representative in the
+later comparison against non-WebView2 GUIs; the overall desktop choice and
+production/release gates remain open.
+
+The accepted pilot and full comparison are now recorded in the
+[six-host results](host-test-support/results/2026-10-24/RESULTS.md), with raw
+metadata, collector versions, artifact hashes and retained failures. All six
+load the same 16 production Svelte files; supplemental lists use a separately
+matched asset set. No Go CLI or native IPC throughput was measured.
+
+| Host | Direct fresh Ready ms | Direct retained Ready ms | Visible private resident MiB | Private commit MiB |
+| --- | --- | --- | --- | --- |
+| NeutronStar C++ | 2174 | 482 | 101.0 | 227.3 |
+| Raw Rust webview2-com | 2219 | 473 | 101.8 | 231.7 |
+| Tauri v2 | 1435 | 501 | 98.4 | 214.6 |
+| Wails | 3799 | 482 | 95.0 | 278.3 |
+| Packaged pywebview | 2029 | 2028 | 146.3 | 288.8 |
+| WinUI 3 / C# | 2671 | 767 | 130.2 | 313.1 |
+
+Startup cells are medians of 20 attempts. Memory is the median of five independent
+lifetime medians and covers the discovered process tree. Fresh/retained means
+profile paths, not OS-cold starts; pywebview's private cleanup makes its retained
+path a different cache case. The WinUI deployment is untrimmed/self-contained.
+Configuration/security parity is not established.
+
+Keep the existing C++ host for the small, tightly scoped tool and comparison
+baseline. Raw Rust's small retained-startup difference has an interval spanning
+zero; these data do not support a performance-driven rewrite. Tauri is a strong
+complete-framework candidate when its additional product features are needed:
+similar private resident memory/retained startup and lower fresh-path median in
+this setup. Wails remains credible for Go integration, with a fresh-profile and
+commit trade-off. Python and WinUI costs here are configuration-specific.
+
+The study completed 480 startup, 30 idle, 120 usable action and 120 supplemental
+measured lifetimes. One WinUI action timeout overlapped user-reported mouse use;
+the original is retained and excluded, and the explicitly authorized retry passed
+outside the original randomized order. An interrupted supplemental preparation
+cohort was restarted in full. Captured black/loading/content transitions are
+sampled proxies, not physical presentation/FCP/LCP. Physical accessibility,
+GPU/energy, clean-machine deployment and broader native-policy/lifecycle gates
+remain open. None of this measures WebView2 versus Avalonia/Skia or Electron.
+
+### Ecosystem, AI-assisted UI development and desktop economics (2026-10-24)
+
+The supplied trend notes give useful decision hypotheses: web component reuse,
+familiar HTML/CSS/TypeScript tooling, design-system portability and a team's
+existing skills can make Electron/Tauri attractive for rich desktop workflows.
+This is a development-economics argument, not evidence that web technology has
+won the entire Windows desktop market or that native frameworks are obsolete.
+
+**AI multiplier: plausible, but measure it.** Public web examples and mature
+component APIs can help an assistant generate useful UI quickly. We do not have
+evidence establishing the proportion of UI training data, a universal web/native
+hallucination-rate difference, or a fixed productivity multiplier. More generated
+code does not establish correct CSP, focus, accessibility, lifecycle or native
+security boundaries. For this repository, record time to verified feature parity,
+number of corrections, test failures and maintenance burden instead of assuming
+that the assistant is intrinsically better at one toolkit. C#/XAML or QML expertise
+can also make a native team productive.
+
+**Layout flexibility is not exclusive to CSS.** Flexbox/Grid and web styling
+tools fit our chosen UI well, but calling desktop layout inherently rigid is
+incorrect. Microsoft documents responsive/adaptive XAML layouts and effective
+pixels; Qt Quick Layouts resize children and support responsive interfaces.
+Compare the actual effort and behavior at the same sizes/DPI rather than ranking
+layout languages by reputation. [Windows responsive design](https://learn.microsoft.com/en-us/windows/apps/design/layout/responsive-design),
+[Qt Quick Layouts](https://doc.qt.io/qt-6/qtquicklayouts-index.html).
+
+**Design-to-code helps but is not automatic product engineering.** Reusing color,
+spacing, typography and icon specifications is valuable in every candidate. Do
+not equate a design tool's code snippets, tokens or plugin exports with a complete,
+maintainable application. State transitions, keyboard behavior, scalable layouts,
+native permissions and testing still need implementation and review.
+
+**Cross-platform UI reuse has limits.** Electron brings Chromium's process model
+and a JavaScript/Node ecosystem, which is useful for rich web components, but
+native integration and deployment still require platform-specific work.
+[Electron process model](https://www.electronjs.org/docs/latest/tutorial/process-model).
+Tauri's system-webview strategy also requires per-platform engine/API validation;
+our Windows-only experiment does not establish macOS/Linux parity. WinUI and WPF
+are Windows-focused choices, but that does not mean every .NET UI must be rewritten
+in Swift: Avalonia/Uno are separate cross-platform options with their own costs.
+Flutter's custom rendering is not proof of poor accessibility; it has explicit
+framework support that still needs application-level acceptance tests.
+[Flutter accessibility](https://docs.flutter.dev/ui/accessibility).
+
+**Talent availability is a local constraint, not a universal price ranking.**
+Developer surveys help describe technology usage among respondents, but do not
+prove this project's hiring lead time, salary cost, onboarding time or the claim
+that almost nobody builds Windows-only software. Measure team familiarity and
+availability for the actual project. [Stack Overflow technology survey and methodology](https://survey.stackoverflow.co/2025/technology).
+
+For our next comparison, keep Tauri v2 + Svelte 5 as the selected WebView2
+representative, not the predetermined overall winner. `Tauri-v2-Svelte5` is the
+complete UI/behavior reference, including the list/filter workbench. Electron
+(also Svelte 5), Avalonia/Skia with CommunityToolkit.Mvvm, and every later toolkit
+will own independent implementation sources and builds; they will not import
+the Tauri frontend or share a runtime UI package/dist. Match visible workflows,
+fixtures, design tokens and accessible controls, then assess startup, whole-tree
+resources, interactions, lifecycle/accessibility and DX together. Use free
+standard controls and record their actual maintenance/integration cost.

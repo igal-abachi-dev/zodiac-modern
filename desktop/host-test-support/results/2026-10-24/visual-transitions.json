@@ -1,0 +1,6086 @@
+[
+  {
+    "sample": "measured-03-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 83.36669993400574,
+    "loadingTextUiaMs": 2073.8586999177933,
+    "readyUiaMs": 2165.2874999046326,
+    "stableProxyMs": 2419.923299908638,
+    "capturedClassChanges": [
+      {
+        "observedMs": 174.88409996032715,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 289.83319997787476,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 846.8792999982834,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1880.2445999383926,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2143.3623999357224,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 78.41860008239746,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2157.7729001045227,
+    "stableProxyMs": 2473.02060008049,
+    "capturedClassChanges": [
+      {
+        "observedMs": 162.17960000038147,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 277.89450001716614,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 931.4286000728607,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2064.8978000879288,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 95.63490009307861,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2111.0465000867844,
+    "stableProxyMs": 2331.875900030136,
+    "capturedClassChanges": [
+      {
+        "observedMs": 188.19690001010895,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 308.38010001182556,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 991.6385000944138,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1456.9477000236511,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2156.8393000364304,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 84.62650001049042,
+    "loadingTextUiaMs": 1654.2785999774933,
+    "readyUiaMs": 1904.584900021553,
+    "stableProxyMs": 2155.5420999526978,
+    "capturedClassChanges": [
+      {
+        "observedMs": 175.94840002059937,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 296.24839997291565,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1777.0828000307083,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 84.39660000801086,
+    "loadingTextUiaMs": 2136.4931000471115,
+    "readyUiaMs": 2235.373100042343,
+    "stableProxyMs": 2516.037600040436,
+    "capturedClassChanges": [
+      {
+        "observedMs": 166.26989996433258,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 264.92869997024536,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 958.5726000070572,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1979.282700061798,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2143.6541999578476,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 87.68859994411469,
+    "loadingTextUiaMs": 2099.5192999839783,
+    "readyUiaMs": 2182.3651000261307,
+    "stableProxyMs": 2463.552999973297,
+    "capturedClassChanges": [
+      {
+        "observedMs": 173.20469999313354,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 283.4671000242233,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1155.178200006485,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1239.849799990654,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2271.9419000148773,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 91.95160007476807,
+    "loadingTextUiaMs": 1882.1265000104904,
+    "readyUiaMs": 2115.1543999910355,
+    "stableProxyMs": 2407.0060000419617,
+    "capturedClassChanges": [
+      {
+        "observedMs": 187.4016000032425,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 302.29879999160767,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 514.3824000358582,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 697.4113000631332,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1865.7411000728607,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 101.15690004825592,
+    "loadingTextUiaMs": 2210.474900007248,
+    "readyUiaMs": 2605.813400030136,
+    "stableProxyMs": 2892.0424000024796,
+    "capturedClassChanges": [
+      {
+        "observedMs": 199.2403999567032,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 312.7621999979019,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1584.7695000171661,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2117.4862999916077,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2402.5665999650955,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 92.1114000082016,
+    "loadingTextUiaMs": 2014.3381999731064,
+    "readyUiaMs": 2091.2615000009537,
+    "stableProxyMs": 2379.5099999904633,
+    "capturedClassChanges": [
+      {
+        "observedMs": 200.11680006980896,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 312.61740005016327,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1136.3648999929428,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1324.0788000822067,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1985.5954999923706,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 91.77210009098053,
+    "loadingTextUiaMs": 1990.9541000127792,
+    "readyUiaMs": 2244.132600069046,
+    "stableProxyMs": 2439.1208000183105,
+    "capturedClassChanges": [
+      {
+        "observedMs": 196.9164000749588,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 313.3884000778198,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1049.269800066948,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1884.2432000637054,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2264.8990000486374,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 82.60899996757507,
+    "loadingTextUiaMs": 1954.6694999933243,
+    "readyUiaMs": 2033.2056000232697,
+    "stableProxyMs": 2345.893800020218,
+    "capturedClassChanges": [
+      {
+        "observedMs": 168.49489998817444,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 279.1438000202179,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2067.8087000846863,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 79.17580008506775,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3811.8803000450134,
+    "stableProxyMs": 4093.1837000846863,
+    "capturedClassChanges": [
+      {
+        "observedMs": 170.91690003871918,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 291.2218999862671,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2325.6648000478745,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 3347.82590007782,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 3548.3819999694824,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 90.75940001010895,
+    "loadingTextUiaMs": 2559.231500029564,
+    "readyUiaMs": 2659.016900062561,
+    "stableProxyMs": 2929.6040000915527,
+    "capturedClassChanges": [
+      {
+        "observedMs": 198.0101000070572,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 311.1274000406265,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1582.9185000658035,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2403.900400042534,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 84.08689999580383,
+    "loadingTextUiaMs": 1806.5314999818802,
+    "readyUiaMs": 2066.1643999814987,
+    "stableProxyMs": 2366.507500052452,
+    "capturedClassChanges": [
+      {
+        "observedMs": 164.5023000240326,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 279.4757000207901,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1790.3960000276566,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 95.88929998874664,
+    "loadingTextUiaMs": 2570.2383999824524,
+    "readyUiaMs": 2651.3752999305725,
+    "stableProxyMs": 2918.6935999393463,
+    "capturedClassChanges": [
+      {
+        "observedMs": 182.39919996261597,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 287.8052999973297,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1426.4818999767303,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1692.617499947548,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2259.790300011635,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 85.0184999704361,
+    "loadingTextUiaMs": 1994.1002999544144,
+    "readyUiaMs": 2326.784600019455,
+    "stableProxyMs": 2550.1766999959946,
+    "capturedClassChanges": [
+      {
+        "observedMs": 173.16040003299713,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 291.41390001773834,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1174.568099975586,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1691.6627999544144,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1957.278900027275,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 85.71780002117157,
+    "loadingTextUiaMs": 1947.5497000217438,
+    "readyUiaMs": 2182.431699991226,
+    "stableProxyMs": 2445.850900053978,
+    "capturedClassChanges": [
+      {
+        "observedMs": 164.37860000133514,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 277.1124999523163,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 720.174299955368,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1286.6131999492645,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2054.08679997921,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 89.82109999656677,
+    "loadingTextUiaMs": 2114.59350001812,
+    "readyUiaMs": 2193.7554000616074,
+    "stableProxyMs": 2459.0789999961853,
+    "capturedClassChanges": [
+      {
+        "observedMs": 173.70790004730225,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 274.02330005168915,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 854.0341000556946,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1235.3849999904633,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2050.6577999591827,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 77.71440005302429,
+    "loadingTextUiaMs": 1752.7169001102448,
+    "readyUiaMs": 1825.9828000068665,
+    "stableProxyMs": 2067.6431000232697,
+    "capturedClassChanges": [
+      {
+        "observedMs": 152.69810009002686,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 266.47670006752014,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 644.8162000179291,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 829.3778001070023,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1760.1816000938416,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-cpp-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 93.05309998989105,
+    "loadingTextUiaMs": 1762.6564999818802,
+    "readyUiaMs": 1846.4607999324799,
+    "stableProxyMs": 2144.1404999494553,
+    "capturedClassChanges": [
+      {
+        "observedMs": 185.0460000038147,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 774.5374000072479,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1053.8802999258041,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1853.9927999973297,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 92.97329998016357,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 486.82190001010895,
+    "stableProxyMs": 785.93649995327,
+    "capturedClassChanges": [
+      {
+        "observedMs": 183.21689999103546,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 299.702299952507,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 593.3473000526428,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 100.0329999923706,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 498.72899997234344,
+    "stableProxyMs": 810.3320000171661,
+    "capturedClassChanges": [
+      {
+        "observedMs": 206.76779997348785,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 615.5740000009537,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 83.60769999027252,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 510.8403000831604,
+    "stableProxyMs": 781.6708999872208,
+    "capturedClassChanges": [
+      {
+        "observedMs": 171.8420000076294,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 285.9276000261307,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 562.9948999881744,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 86.28779995441437,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 460.5867999792099,
+    "stableProxyMs": 753.8493999242783,
+    "capturedClassChanges": [
+      {
+        "observedMs": 169.5025999546051,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 269.47850000858307,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 547.5746999979019,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 86.50889992713928,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 476.2100999355316,
+    "stableProxyMs": 756.5080999135971,
+    "capturedClassChanges": [
+      {
+        "observedMs": 180.88389992713928,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 297.542799949646,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 565.5433999300003,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 82.7639000415802,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 503.12720000743866,
+    "stableProxyMs": 787.157900094986,
+    "capturedClassChanges": [
+      {
+        "observedMs": 174.3088001012802,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 291.9257000684738,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 591.772500038147,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 95.3309999704361,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 472.3740999698639,
+    "stableProxyMs": 750.9393999576569,
+    "capturedClassChanges": [
+      {
+        "observedMs": 191.04009997844696,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 305.6662999391556,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 561.0667999982834,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 90.85290002822876,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 488.1023999452591,
+    "stableProxyMs": 780.9144999980927,
+    "capturedClassChanges": [
+      {
+        "observedMs": 193.15520000457764,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 302.008299946785,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 606.3323999643326,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 98.12730002403259,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 482.6138000488281,
+    "stableProxyMs": 763.6513999700546,
+    "capturedClassChanges": [
+      {
+        "observedMs": 199.84909999370575,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 571.4084000587463,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 83.24870002269745,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 484.0319000482559,
+    "stableProxyMs": 763.6711000204086,
+    "capturedClassChanges": [
+      {
+        "observedMs": 163.12030005455017,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 280.30200004577637,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 573.6794000864029,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 87.15810000896454,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 475.7875999212265,
+    "stableProxyMs": 778.7839999198914,
+    "capturedClassChanges": [
+      {
+        "observedMs": 181.12389993667603,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 294.06809997558594,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 564.8572000265121,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 85.10760009288788,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 471.95899999141693,
+    "stableProxyMs": 773.5142999887466,
+    "capturedClassChanges": [
+      {
+        "observedMs": 172.06400001049042,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 268.6219000816345,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 561.2998000383377,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 89.24170005321503,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 492.1290000677109,
+    "stableProxyMs": 773.977499961853,
+    "capturedClassChanges": [
+      {
+        "observedMs": 180.5906000137329,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 293.4465000629425,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 581.7991000413895,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 100.0242999792099,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 478.77730000019073,
+    "stableProxyMs": 855.7702000141144,
+    "capturedClassChanges": [
+      {
+        "observedMs": 205.5593000650406,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 314.5891000032425,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 531.7383999824524,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 95.6065000295639,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 442.3605000972748,
+    "stableProxyMs": 814.1292001008987,
+    "capturedClassChanges": [
+      {
+        "observedMs": 200.4349000453949,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 312.9838000535965,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 601.4575001001358,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 95.3697999715805,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 459.89939999580383,
+    "stableProxyMs": 761.2546999454498,
+    "capturedClassChanges": [
+      {
+        "observedMs": 194.7684999704361,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 585.763799905777,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 89.9021999835968,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 486.06610000133514,
+    "stableProxyMs": 839.3170999288559,
+    "capturedClassChanges": [
+      {
+        "observedMs": 186.9623999595642,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 285.9099999666214,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 563.8959999084473,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 99.52710008621216,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 522.1845000982285,
+    "stableProxyMs": 838.5221999883652,
+    "capturedClassChanges": [
+      {
+        "observedMs": 207.74690008163452,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 317.23650002479553,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 627.0358000993729,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 90.53020000457764,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 480.59479999542236,
+    "stableProxyMs": 780.7555999755859,
+    "capturedClassChanges": [
+      {
+        "observedMs": 190.2069000005722,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 299.11419999599457,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 588.4645999670029,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-cpp-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 70.29009997844696,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 463.3547999858856,
+    "stableProxyMs": 795.4266999959946,
+    "capturedClassChanges": [
+      {
+        "observedMs": 155.34909999370575,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 255.45959997177124,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 615.1519000530243,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 81.88090002536774,
+    "loadingTextUiaMs": 2699.910700082779,
+    "readyUiaMs": 2856.1416000127792,
+    "stableProxyMs": 3097.2263000011444,
+    "capturedClassChanges": [
+      {
+        "observedMs": 159.06560003757477,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 281.4642000198364,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1250.204400062561,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2504.7617000341415,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2706.863900065422,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 84.18389999866486,
+    "loadingTextUiaMs": 2362.184700012207,
+    "readyUiaMs": 2518.640599966049,
+    "stableProxyMs": 2787.383499979973,
+    "capturedClassChanges": [
+      {
+        "observedMs": 175.85189998149872,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 292.7440000772476,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1078.5297000408173,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2214.1813000440598,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2397.4549000263214,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 98.14789998531342,
+    "loadingTextUiaMs": 2119.718199968338,
+    "readyUiaMs": 2198.690099954605,
+    "stableProxyMs": 2464.8586000204086,
+    "capturedClassChanges": [
+      {
+        "observedMs": 208.0972000360489,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 319.02680003643036,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1273.7019000053406,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1473.8327000141144,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2108.9222999811172,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 100.3697999715805,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2076.4408999681473,
+    "stableProxyMs": 2311.691100001335,
+    "capturedClassChanges": [
+      {
+        "observedMs": 202.41439998149872,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1006.1992999315262,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1205.8621000051498,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2121.5848999023438,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 79.55270004272461,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1990.8413000106812,
+    "stableProxyMs": 2272.8334000110626,
+    "capturedClassChanges": [
+      {
+        "observedMs": 158.03949999809265,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 271.0644999742508,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 866.3741999864578,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1048.474900007248,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1797.8960000276566,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 81.33530008792877,
+    "loadingTextUiaMs": 2718.3148000240326,
+    "readyUiaMs": 2814.9398000240326,
+    "stableProxyMs": 3111.464600086212,
+    "capturedClassChanges": [
+      {
+        "observedMs": 162.3691999912262,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 289.60030007362366,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1222.8018000125885,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2525.5472000837326,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2825.5137000083923,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 99.9322999715805,
+    "loadingTextUiaMs": 2400.680999994278,
+    "readyUiaMs": 2558.2336999177933,
+    "stableProxyMs": 2850.358899950981,
+    "capturedClassChanges": [
+      {
+        "observedMs": 196.9501999616623,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 835.7853999137878,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2353.9077999591827,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 99.48130011558533,
+    "loadingTextUiaMs": 2464.779200077057,
+    "readyUiaMs": 2627.1239000558853,
+    "stableProxyMs": 2928.430100083351,
+    "capturedClassChanges": [
+      {
+        "observedMs": 196.18280005455017,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1047.9711000919342,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1547.5193001031876,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2446.8952000141144,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 67.15980005264282,
+    "loadingTextUiaMs": 1552.2674000263214,
+    "readyUiaMs": 1781.7518999576569,
+    "stableProxyMs": 2041.6856999397278,
+    "capturedClassChanges": [
+      {
+        "observedMs": 142.75699996948242,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 246.0355999469757,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1682.4645999670029,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 92.02340006828308,
+    "loadingTextUiaMs": 1789.3370000123978,
+    "readyUiaMs": 1943.5593000650406,
+    "stableProxyMs": 2208.162299990654,
+    "capturedClassChanges": [
+      {
+        "observedMs": 200.30169999599457,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 315.13289999961853,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1949.8954000473022,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 82.29879999160767,
+    "loadingTextUiaMs": 1867.299499988556,
+    "readyUiaMs": 2040.46280002594,
+    "stableProxyMs": 2297.8673000335693,
+    "capturedClassChanges": [
+      {
+        "observedMs": 162.47000002861023,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 273.79009997844696,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 657.1776000261307,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 923.6527000665665,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1840.7066000699997,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 87.38330006599426,
+    "loadingTextUiaMs": 2022.3604000806808,
+    "readyUiaMs": 2100.97570002079,
+    "stableProxyMs": 2341.4522000551224,
+    "capturedClassChanges": [
+      {
+        "observedMs": 174.53740000724792,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 270.8461000919342,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1049.187399983406,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1230.4312000274658,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1981.04390001297,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 87.3856999874115,
+    "loadingTextUiaMs": 6410.412899971008,
+    "readyUiaMs": 6490.063199996948,
+    "stableProxyMs": 6760.264099955559,
+    "capturedClassChanges": [
+      {
+        "observedMs": 177.52680003643036,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 276.9004999399185,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 5687.1703000068665,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 6224.252300024033,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 6516.6794999837875,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 97.57740008831024,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2578.0863000154495,
+    "stableProxyMs": 2842.6630001068115,
+    "capturedClassChanges": [
+      {
+        "observedMs": 198.1004000902176,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 312.6401000022888,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1450.0625,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1632.8980000019073,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2637.9613000154495,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 92.73650002479553,
+    "loadingTextUiaMs": 2120.756500005722,
+    "readyUiaMs": 2220.911499977112,
+    "stableProxyMs": 2517.9706000089645,
+    "capturedClassChanges": [
+      {
+        "observedMs": 209.98329997062683,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 342.37139999866486,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 847.4049999713898,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1327.9201999902725,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1960.1949999332428,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 94.88950002193451,
+    "loadingTextUiaMs": 2752.371999979019,
+    "readyUiaMs": 3072.1040999889374,
+    "stableProxyMs": 3312.095199942589,
+    "capturedClassChanges": [
+      {
+        "observedMs": 197.70620000362396,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 312.140900015831,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1769.5909999608994,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 85.37909996509552,
+    "loadingTextUiaMs": 1883.611999988556,
+    "readyUiaMs": 2066.601799964905,
+    "stableProxyMs": 2352.7242000102997,
+    "capturedClassChanges": [
+      {
+        "observedMs": 171.84210002422333,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 288.7437000274658,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1807.000100016594,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 102.01240003108978,
+    "loadingTextUiaMs": 1854.692400097847,
+    "readyUiaMs": 1929.6574000120163,
+    "stableProxyMs": 2165.6716001033783,
+    "capturedClassChanges": [
+      {
+        "observedMs": 207.29150009155273,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 891.9991000890732,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1275.6208000183105,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1908.0693000555038,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 84.7273999452591,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2216.2202999591827,
+    "stableProxyMs": 2591.958699941635,
+    "capturedClassChanges": [
+      {
+        "observedMs": 173.1775999069214,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 273.99899995326996,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1233.9223999977112,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1582.3327000141144,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2300.403100013733,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-rust-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 70.82510006427765,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2338.2178000211716,
+    "stableProxyMs": 2630.2955000400543,
+    "capturedClassChanges": [
+      {
+        "observedMs": 147.79449999332428,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 267.72730004787445,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1436.3372000455856,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1620.3854999542236,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2341.0824999809265,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 85.98619997501373,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 501.7800999879837,
+    "stableProxyMs": 800.2661000490189,
+    "capturedClassChanges": [
+      {
+        "observedMs": 176.67460000514984,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 304.13150000572205,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 606.6964999437332,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 82.37229990959167,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 454.489599943161,
+    "stableProxyMs": 777.4879999160767,
+    "capturedClassChanges": [
+      {
+        "observedMs": 159.08629989624023,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 272.821799993515,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 582.3208999633789,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 94.27540004253387,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 483.45179998874664,
+    "stableProxyMs": 780.7005000114441,
+    "capturedClassChanges": [
+      {
+        "observedMs": 178.9601000547409,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 294.8012000322342,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 587.9477000236511,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 93.35189998149872,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 473.35949993133545,
+    "stableProxyMs": 818.6217999458313,
+    "capturedClassChanges": [
+      {
+        "observedMs": 205.52479994297028,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 622.480299949646,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 75.47269999980927,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 471.71429991722107,
+    "stableProxyMs": 862.039999961853,
+    "capturedClassChanges": [
+      {
+        "observedMs": 166.28079998493195,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 280.49079990386963,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 651.1248999834061,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 78.04009997844696,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 472.1676000356674,
+    "stableProxyMs": 789.2346000671387,
+    "capturedClassChanges": [
+      {
+        "observedMs": 163.29280006885529,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 292.869500041008,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 595.4609000682831,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 94.00380003452301,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 487.9039000272751,
+    "stableProxyMs": 770.9824000597,
+    "capturedClassChanges": [
+      {
+        "observedMs": 184.9219000339508,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 300.41589999198914,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 577.7652000188828,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 94.41760003566742,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 522.2649999856949,
+    "stableProxyMs": 798.7530000209808,
+    "capturedClassChanges": [
+      {
+        "observedMs": 205.78139996528625,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 314.20009994506836,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 619.0367000102997,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 78.89910006523132,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 465.80630004405975,
+    "stableProxyMs": 786.1703000068665,
+    "capturedClassChanges": [
+      {
+        "observedMs": 169.6845999956131,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 286.3835999965668,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 573.0063000917435,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 95.57929992675781,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 479.1241999864578,
+    "stableProxyMs": 767.0791000127792,
+    "capturedClassChanges": [
+      {
+        "observedMs": 183.92349994182587,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 576.0523999929428,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 72.84500002861023,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 455.69920003414154,
+    "stableProxyMs": 735.4659000635147,
+    "capturedClassChanges": [
+      {
+        "observedMs": 160.43120002746582,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 274.76890003681183,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 561.8289999961853,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 89.20450007915497,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 496.1459000110626,
+    "stableProxyMs": 776.0017000436783,
+    "capturedClassChanges": [
+      {
+        "observedMs": 183.8927000761032,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 297.1274000406265,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 584.6707000732422,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 93.7092000246048,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 437.8516000509262,
+    "stableProxyMs": 726.3865000009537,
+    "capturedClassChanges": [
+      {
+        "observedMs": 201.6735999584198,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 536.2608000040054,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 74.8837000131607,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 439.8894999027252,
+    "stableProxyMs": 799.30479991436,
+    "capturedClassChanges": [
+      {
+        "observedMs": 147.4822999238968,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 260.621199965477,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 620.7896000146866,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 91.64680004119873,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 430.3961000442505,
+    "stableProxyMs": 811.606299996376,
+    "capturedClassChanges": [
+      {
+        "observedMs": 192.97130000591278,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 600.4767000675201,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 71.70679998397827,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 472.09249997138977,
+    "stableProxyMs": 751.3357999324799,
+    "capturedClassChanges": [
+      {
+        "observedMs": 158.2991999387741,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 274.2300000190735,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 562.9433000087738,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 92.17439997196198,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 477.49639999866486,
+    "stableProxyMs": 773.9074000120163,
+    "capturedClassChanges": [
+      {
+        "observedMs": 181.04680001735687,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 295.11650002002716,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 567.2386999130249,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 87.70990002155304,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 490.52470004558563,
+    "stableProxyMs": 825.3402000665665,
+    "capturedClassChanges": [
+      {
+        "observedMs": 188.71200001239777,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 304.39200007915497,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 595.4007999897003,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 75.29579997062683,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 468.3499000072479,
+    "stableProxyMs": 748.6373000144958,
+    "capturedClassChanges": [
+      {
+        "observedMs": 157.96360003948212,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 273.3983999490738,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 558.4387999773026,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-rust-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 83.36189997196198,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 474.6554000377655,
+    "stableProxyMs": 771.031800031662,
+    "capturedClassChanges": [
+      {
+        "observedMs": 164.45260000228882,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 279.44659996032715,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 581.4343999624252,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 63.54480004310608,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1485.1535999774933,
+    "stableProxyMs": 1744.6362999677658,
+    "capturedClassChanges": [
+      {
+        "observedMs": 144.5329999923706,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 250.41079998016357,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 541.7431999444962,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 905.1303999423981,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1553.6758999824524,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 64.28430008888245,
+    "loadingTextUiaMs": 1141.610300064087,
+    "readyUiaMs": 1326.062600016594,
+    "stableProxyMs": 1622.2209000587463,
+    "capturedClassChanges": [
+      {
+        "observedMs": 148.75460004806519,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 267.0830000638962,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 570.2849000692368,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 665.0644999742508,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1431.6359000205994,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 67.515900015831,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1741.1176999807358,
+    "stableProxyMs": 1994.4067999124527,
+    "capturedClassChanges": [
+      {
+        "observedMs": 143.81699991226196,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 268.9660999774933,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 553.673299908638,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1803.2124999761581,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 69.21020007133484,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1228.2229000329971,
+    "stableProxyMs": 1508.0834000110626,
+    "capturedClassChanges": [
+      {
+        "observedMs": 150.9549000263214,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 271.826700091362,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 570.8830000162125,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 754.4648000001907,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1234.7130000591278,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 71.58959996700287,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1336.8617000579834,
+    "stableProxyMs": 1593.0324000120163,
+    "capturedClassChanges": [
+      {
+        "observedMs": 151.62020003795624,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 265.00190007686615,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 567.3858000040054,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 837.8417999744415,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1400.7692999839783,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 82.54709994792938,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1284.3883999586105,
+    "stableProxyMs": 1634.9059000015259,
+    "capturedClassChanges": [
+      {
+        "observedMs": 169.40469992160797,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 266.7273999452591,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 762.6627999544144,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1130.1972999572754,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1412.2058999538422,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 75.30569994449615,
+    "loadingTextUiaMs": 1247.7963999509811,
+    "readyUiaMs": 1347.6377999782562,
+    "stableProxyMs": 1634.2374000549316,
+    "capturedClassChanges": [
+      {
+        "observedMs": 153.99269998073578,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 266.1859999895096,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 581.6523000001907,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1131.3176000118256,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1329.288400053978,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 60.96140003204346,
+    "loadingTextUiaMs": 1380.1908000707626,
+    "readyUiaMs": 1468.036500096321,
+    "stableProxyMs": 1760.319100022316,
+    "capturedClassChanges": [
+      {
+        "observedMs": 143.2590000629425,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 250.18529999256134,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 537.3906000852585,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1469.431100010872,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 63.16110002994537,
+    "loadingTextUiaMs": 1229.9888999462128,
+    "readyUiaMs": 1322.2556999921799,
+    "stableProxyMs": 1574.9069999456406,
+    "capturedClassChanges": [
+      {
+        "observedMs": 151.3367999792099,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 264.0587999820709,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 551.7876000404358,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1102.7288999557495,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1265.6667000055313,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 75.25500011444092,
+    "loadingTextUiaMs": 1436.2748000621796,
+    "readyUiaMs": 1527.9560000896454,
+    "stableProxyMs": 1821.7738000154495,
+    "capturedClassChanges": [
+      {
+        "observedMs": 160.73690009117126,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 277.6369000673294,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 583.9393000602722,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1131.039400100708,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1513.1777000427246,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 75.98660004138947,
+    "loadingTextUiaMs": 1741.2322000265121,
+    "readyUiaMs": 1833.771299958229,
+    "stableProxyMs": 2103.2288999557495,
+    "capturedClassChanges": [
+      {
+        "observedMs": 162.5644999742508,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 276.4471000432968,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 766.036299943924,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1553.5736999511719,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1828.8550000190735,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 65.84499990940094,
+    "loadingTextUiaMs": 1078.5349999666214,
+    "readyUiaMs": 1359.4323999881744,
+    "stableProxyMs": 1604.140900015831,
+    "capturedClassChanges": [
+      {
+        "observedMs": 152.70419991016388,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 263.6741999387741,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 547.9156999588013,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1043.6727999448776,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1325.4979000091553,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 64.76139998435974,
+    "loadingTextUiaMs": 1439.824599981308,
+    "readyUiaMs": 1539.0687999725342,
+    "stableProxyMs": 1837.8407000303268,
+    "capturedClassChanges": [
+      {
+        "observedMs": 146.8668999671936,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 267.78219997882843,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 683.4663000106812,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 880.9983999729156,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1545.3238999843597,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 68.35060000419617,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1353.8521999120712,
+    "stableProxyMs": 1669.9262999296188,
+    "capturedClassChanges": [
+      {
+        "observedMs": 155.57539999485016,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 267.234099984169,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 552.1726999282837,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 750.3434000015259,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1494.5715999603271,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 68.03189992904663,
+    "loadingTextUiaMs": 1515.6260999441147,
+    "readyUiaMs": 1606.8223999738693,
+    "stableProxyMs": 1834.400999903679,
+    "capturedClassChanges": [
+      {
+        "observedMs": 159.73359990119934,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 275.2242999076843,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 660.1381999254227,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1381.4161999225616,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1643.3243999481201,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 72.20520007610321,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1685.7646000385284,
+    "stableProxyMs": 2030.0927000045776,
+    "capturedClassChanges": [
+      {
+        "observedMs": 169.11020004749298,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 286.38300001621246,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 588.6813000440598,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1221.638000011444,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1737.9436000585556,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 70.80489993095398,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1473.4546999931335,
+    "stableProxyMs": 1743.0907999277115,
+    "capturedClassChanges": [
+      {
+        "observedMs": 146.0407999753952,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 241.39789998531342,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 572.2840999364853,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 855.8156999349594,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1551.577399969101,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 73.90930008888245,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1414.0800000429153,
+    "stableProxyMs": 1705.6002000570297,
+    "capturedClassChanges": [
+      {
+        "observedMs": 154.33170008659363,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 253.04850006103516,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 533.7957000732422,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 817.4257000684738,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1414.3845000267029,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 66.06489992141724,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1456.5442999601364,
+    "stableProxyMs": 1710.4865000247955,
+    "capturedClassChanges": [
+      {
+        "observedMs": 152.63839995861053,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 266.06319999694824,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 757.3400000333786,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1292.3933999538422,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1502.6107000112534,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-tauri-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 68.11169993877411,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1268.0637999773026,
+    "stableProxyMs": 1564.126699924469,
+    "capturedClassChanges": [
+      {
+        "observedMs": 151.93379998207092,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 274.5388000011444,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 774.9866999387741,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1273.2447999715805,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 64.79280006885529,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 559.6728000640869,
+    "stableProxyMs": 787.2786000967026,
+    "capturedClassChanges": [
+      {
+        "observedMs": 158.8244000673294,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 277.30520009994507,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 614.3192000389099,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 77.39579999446869,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 480.6955999135971,
+    "stableProxyMs": 767.3016999959946,
+    "capturedClassChanges": [
+      {
+        "observedMs": 155.98279988765717,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 272.07849991321564,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 573.2836999893188,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 65.14849996566772,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 533.5254000425339,
+    "stableProxyMs": 848.2359000444412,
+    "capturedClassChanges": [
+      {
+        "observedMs": 148.2943000793457,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 270.96189999580383,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 622.2949000597,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 66.97200000286102,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 517.0404000282288,
+    "stableProxyMs": 757.7505999803543,
+    "capturedClassChanges": [
+      {
+        "observedMs": 141.26760005950928,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 257.6972999572754,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 568.4724999666214,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 70.29530000686646,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 486.0925999879837,
+    "stableProxyMs": 766.0440000295639,
+    "capturedClassChanges": [
+      {
+        "observedMs": 148.2733999490738,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 261.41119992733,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 571.5901999473572,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 73.8125,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 478.9268000125885,
+    "stableProxyMs": 765.6254999637604,
+    "capturedClassChanges": [
+      {
+        "observedMs": 156.9837999343872,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 272.26750004291534,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 574.7271000146866,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 72.8458000421524,
+    "loadingTextUiaMs": 494.47319996356964,
+    "readyUiaMs": 575.7251000404358,
+    "stableProxyMs": 878.202299952507,
+    "capturedClassChanges": [
+      {
+        "observedMs": 164.8148000240326,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 282.06379997730255,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 568.511999964714,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 70.22319996356964,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 472.4689999818802,
+    "stableProxyMs": 752.5622999668121,
+    "capturedClassChanges": [
+      {
+        "observedMs": 157.66429996490479,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 274.602499961853,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 561.463700056076,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 73.19229996204376,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 553.6325999498367,
+    "stableProxyMs": 838.1922999620438,
+    "capturedClassChanges": [
+      {
+        "observedMs": 159.03859996795654,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 273.2138999700546,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 642.274099946022,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 63.026000022888184,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 470.8438000679016,
+    "stableProxyMs": 757.6198999881744,
+    "capturedClassChanges": [
+      {
+        "observedMs": 138.22460007667542,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 250.59909999370575,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 563.506500005722,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 72.79410004615784,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 542.1875,
+    "stableProxyMs": 894.6513999700546,
+    "capturedClassChanges": [
+      {
+        "observedMs": 153.9244999885559,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 268.6125000715256,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 703.0741000175476,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 64.68099999427795,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 485.25469994544983,
+    "stableProxyMs": 833.9937000274658,
+    "capturedClassChanges": [
+      {
+        "observedMs": 154.3847999572754,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 258.22809994220734,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 643.4163999557495,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 76.65819990634918,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 489.7569999694824,
+    "stableProxyMs": 836.7691999673843,
+    "capturedClassChanges": [
+      {
+        "observedMs": 160.6729999780655,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 274.0665999650955,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 659.5051000118256,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 70.91449999809265,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 538.2278000116348,
+    "stableProxyMs": 862.3415999412537,
+    "capturedClassChanges": [
+      {
+        "observedMs": 148.36759996414185,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 268.9632999897003,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 655.3342999219894,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 62.191799998283386,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 473.69340002536774,
+    "stableProxyMs": 835.8538000583649,
+    "capturedClassChanges": [
+      {
+        "observedMs": 155.25660002231598,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 271.7484999895096,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 656.4940999746323,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 130.6188999414444,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 643.37399995327,
+    "stableProxyMs": 929.3025999069214,
+    "capturedClassChanges": [
+      {
+        "observedMs": 219.23169994354248,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 333.46509993076324,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 718.8294999599457,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 73.82190001010895,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 506.6134999990463,
+    "stableProxyMs": 872.2221999168396,
+    "capturedClassChanges": [
+      {
+        "observedMs": 163.17309999465942,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 263.3587999343872,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 664.2676999568939,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 67.77869999408722,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 466.3585000038147,
+    "stableProxyMs": 827.5360999107361,
+    "capturedClassChanges": [
+      {
+        "observedMs": 151.63069999217987,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 265.0823999643326,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 552.3056999444962,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 74.39619994163513,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 494.9866999387741,
+    "stableProxyMs": 843.4837999343872,
+    "capturedClassChanges": [
+      {
+        "observedMs": 165.59379994869232,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 264.5786999464035,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 665.8644000291824,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-tauri-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 58.286799907684326,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 586.655799984932,
+    "stableProxyMs": 833.6717000007629,
+    "capturedClassChanges": [
+      {
+        "observedMs": 139.6101999282837,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 254.42239999771118,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 656.7902998924255,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3500.907600045204,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3678.2405000925064,
+    "stableProxyMs": 4025.8496000766754,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3603.353399991989,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3726.781700015068,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3810.2834000587463,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3988.982300043106,
+    "stableProxyMs": 4304.327399969101,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3909.2418999671936,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 4022.8277000188828,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3718.8019000291824,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3914.1677000522614,
+    "stableProxyMs": 4217.0171999931335,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3806.519900083542,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3923.391200065613,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3024.7312000989914,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3200.678099989891,
+    "stableProxyMs": 3537.597200036049,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3124.0594000816345,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3240.0090000629425,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3834.889899969101,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 4011.4135999679565,
+    "stableProxyMs": 4233.951200008392,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3939.0267000198364,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 4052.9509999752045,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3791.8417999744415,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3971.6720000505447,
+    "stableProxyMs": 4312.213700056076,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3903.2103999853134,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 4018.5005000829697,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3226.805899977684,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3404.943099975586,
+    "stableProxyMs": 3727.758299946785,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3321.2848999500275,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3436.6338000297546,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3964.797800064087,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 4144.511200070381,
+    "stableProxyMs": 4464.5453000068665,
+    "capturedClassChanges": [
+      {
+        "observedMs": 4073.260200023651,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 4203.5380001068115,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3698.288100004196,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3899.46899998188,
+    "stableProxyMs": 4225.639999985695,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3795.722900032997,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3908.7347999811172,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3634.6396000385284,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3816.024099946022,
+    "stableProxyMs": 4134.329399943352,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3738.709699988365,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3854.5135999917984,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3490.6469999551773,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3687.2165999412537,
+    "stableProxyMs": 3988.330199956894,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3581.463600039482,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3696.390100002289,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3461.409600019455,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3644.842399954796,
+    "stableProxyMs": 3944.31719994545,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3539.176200032234,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3653.965800046921,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3694.351799964905,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3872.9419000148773,
+    "stableProxyMs": 4234.5917999744415,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3802.7373999357224,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3918.739799976349,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3132.6638000011444,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3310.7139999866486,
+    "stableProxyMs": 3621.127699971199,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3235.3322999477386,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3349.3473999500275,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3237.5949000120163,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3415.711699962616,
+    "stableProxyMs": 3647.608899950981,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3337.8733999729156,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3450.7867000102997,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3422.251100063324,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3620.4172999858856,
+    "stableProxyMs": 3936.0311000347137,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3521.097900032997,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3629.6808000802994,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3172.89929997921,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3379.0729999542236,
+    "stableProxyMs": 3670.1569999456406,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3265.232100009918,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3388.234400033951,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 4126.33060002327,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 4325.284600019455,
+    "stableProxyMs": 4647.5266000032425,
+    "capturedClassChanges": [
+      {
+        "observedMs": 4214.55529999733,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 4334.896299958229,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 4006.364800095558,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 4210.153500080109,
+    "stableProxyMs": 4497.980599999428,
+    "capturedClassChanges": [
+      {
+        "observedMs": 4121.085800051689,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 4219.61360001564,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-wails-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 3603.4405999183655,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 3781.5379999876022,
+    "stableProxyMs": 4144.320099949837,
+    "capturedClassChanges": [
+      {
+        "observedMs": 3706.9294999837875,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 3831.183599948883,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 350.4400999546051,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 466.465499997139,
+    "stableProxyMs": 851.6243000030518,
+    "capturedClassChanges": [
+      {
+        "observedMs": 448.1999999284744,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 559.5607999563217,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 343.3246999979019,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 473.2175999879837,
+    "stableProxyMs": 854.8578000068665,
+    "capturedClassChanges": [
+      {
+        "observedMs": 451.5537999868393,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 565.0953999757767,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 361.64450001716614,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 475.12890005111694,
+    "stableProxyMs": 862.5723000764847,
+    "capturedClassChanges": [
+      {
+        "observedMs": 460.0909000635147,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 573.449599981308,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 414.94690001010895,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 520.3468000888824,
+    "stableProxyMs": 895.9004000425339,
+    "capturedClassChanges": [
+      {
+        "observedMs": 510.4960000514984,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 608.1809000968933,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 353.7825999259949,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 467.0766999721527,
+    "stableProxyMs": 856.1690999269485,
+    "capturedClassChanges": [
+      {
+        "observedMs": 452.6385999917984,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 565.5458999872208,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 374.17489993572235,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 492.64310002326965,
+    "stableProxyMs": 788.1309000253677,
+    "capturedClassChanges": [
+      {
+        "observedMs": 485.72790002822876,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 357.2721999883652,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 495.0914000272751,
+    "stableProxyMs": 852.9713000059128,
+    "capturedClassChanges": [
+      {
+        "observedMs": 463.3380000591278,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 563.0040000677109,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 371.7758001089096,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 495.11129999160767,
+    "stableProxyMs": 866.9661000967026,
+    "capturedClassChanges": [
+      {
+        "observedMs": 466.89830005168915,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 579.0796000957489,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 365.23510003089905,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 490.29359996318817,
+    "stableProxyMs": 868.6753000020981,
+    "capturedClassChanges": [
+      {
+        "observedMs": 467.7898999452591,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 580.5592999458313,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 351.7864000797272,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 483.29560005664825,
+    "stableProxyMs": 849.2894999980927,
+    "capturedClassChanges": [
+      {
+        "observedMs": 448.3633999824524,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 561.2517000436783,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 353.3790000677109,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 466.3062000274658,
+    "stableProxyMs": 827.5778000354767,
+    "capturedClassChanges": [
+      {
+        "observedMs": 461.61450004577637,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 555.478600025177,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 361.9598000049591,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 492.28599989414215,
+    "stableProxyMs": 791.4052000045776,
+    "capturedClassChanges": [
+      {
+        "observedMs": 473.7059999704361,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 586.0848999023438,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 343.39129996299744,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 456.5925999879837,
+    "stableProxyMs": 840.1286000013351,
+    "capturedClassChanges": [
+      {
+        "observedMs": 439.7138999700546,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 552.6396999359131,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 362.5040999650955,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 479.90579998493195,
+    "stableProxyMs": 866.7143000364304,
+    "capturedClassChanges": [
+      {
+        "observedMs": 472.34560000896454,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 577.0432000160217,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 363.984099984169,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 476.8651999235153,
+    "stableProxyMs": 877.805999994278,
+    "capturedClassChanges": [
+      {
+        "observedMs": 458.94569993019104,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 571.9405000209808,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 359.35110008716583,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 550.7370001077652,
+    "stableProxyMs": 870.8383001089096,
+    "capturedClassChanges": [
+      {
+        "observedMs": 469.4262000322342,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 581.7764000892639,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 350.31550002098083,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 464.39619994163513,
+    "stableProxyMs": 827.0861999988556,
+    "capturedClassChanges": [
+      {
+        "observedMs": 439.8121999502182,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 554.1069999933243,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 366.31729996204376,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 509.9347999095917,
+    "stableProxyMs": 885.3609999418259,
+    "capturedClassChanges": [
+      {
+        "observedMs": 482.12569999694824,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 595.4005999565125,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 341.9279000759125,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 457.0932000875473,
+    "stableProxyMs": 816.4252001047134,
+    "capturedClassChanges": [
+      {
+        "observedMs": 433.0839000940323,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 546.2141000032425,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-wails-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 364.4530999660492,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 486.6069999933243,
+    "stableProxyMs": 790.7792999744415,
+    "capturedClassChanges": [
+      {
+        "observedMs": 471.86389994621277,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 703.388100028038,
+    "loadingTextUiaMs": 1809.6972000598907,
+    "readyUiaMs": 1998.990700006485,
+    "stableProxyMs": 2269.9424999952316,
+    "capturedClassChanges": [
+      {
+        "observedMs": 811.0963000059128,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1056.6459000110626,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1264.0727000236511,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1733.8167999982834,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1998.4136999845505,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 718.715399980545,
+    "loadingTextUiaMs": 2000.1280000209808,
+    "readyUiaMs": 2090.628600001335,
+    "stableProxyMs": 2351.761199951172,
+    "capturedClassChanges": [
+      {
+        "observedMs": 842.4563000202179,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1096.2892999649048,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1279.4184999465942,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2061.7308000326157,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 704.9201999902725,
+    "loadingTextUiaMs": 1850.585000038147,
+    "readyUiaMs": 2033.5972999334335,
+    "stableProxyMs": 2299.7944999933243,
+    "capturedClassChanges": [
+      {
+        "observedMs": 822.4790999889374,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1068.7452000379562,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2043.1496000289917,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 722.474799990654,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2310.6558001041412,
+    "stableProxyMs": 2584.850800037384,
+    "capturedClassChanges": [
+      {
+        "observedMs": 826.5731999874115,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1058.4167000055313,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1144.2949000597,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1428.8148000240326,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2375.829600095749,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 758.9641000032425,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1900.3292999267578,
+    "stableProxyMs": 2194.58109998703,
+    "capturedClassChanges": [
+      {
+        "observedMs": 868.6972999572754,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1146.7651000022888,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1240.275099992752,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1904.4257999658585,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 734.7344000339508,
+    "loadingTextUiaMs": 2118.272500038147,
+    "readyUiaMs": 2413.905900001526,
+    "stableProxyMs": 2691.40549993515,
+    "capturedClassChanges": [
+      {
+        "observedMs": 849.9648000001907,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1077.473799943924,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2401.975800037384,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 721.4818999767303,
+    "loadingTextUiaMs": 2174.8948999643326,
+    "readyUiaMs": 2275.068799972534,
+    "stableProxyMs": 2555.547600030899,
+    "capturedClassChanges": [
+      {
+        "observedMs": 823.2343000173569,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1041.3689000606537,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2281.529100060463,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 757.5578000545502,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2404.7942999601364,
+    "stableProxyMs": 2653.621999979019,
+    "capturedClassChanges": [
+      {
+        "observedMs": 861.7115000486374,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1069.2080999612808,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1259.5013999938965,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1628.1534999608994,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2475.213000059128,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 717.5335999727249,
+    "loadingTextUiaMs": 1887.8690999746323,
+    "readyUiaMs": 1986.958899974823,
+    "stableProxyMs": 2285.2851999998093,
+    "capturedClassChanges": [
+      {
+        "observedMs": 825.6022000312805,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1061.7410999536514,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1245.4984999895096,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1611.572800040245,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1996.0263999700546,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 734.9722000360489,
+    "loadingTextUiaMs": 1548.1667000055313,
+    "readyUiaMs": 1827.5243999958038,
+    "stableProxyMs": 2081.53820002079,
+    "capturedClassChanges": [
+      {
+        "observedMs": 845.3355000019073,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1048.7950999736786,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1524.8140000104904,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1607.0519000291824,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1793.329500079155,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 755.9727998971939,
+    "loadingTextUiaMs": 1471.5935999155045,
+    "readyUiaMs": 2015.1987999677658,
+    "stableProxyMs": 2236.350699901581,
+    "capturedClassChanges": [
+      {
+        "observedMs": 855.8945999145508,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1076.995099902153,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1362.827199935913,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1481.5338999032974,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1646.3187999725342,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 714.8993999958038,
+    "loadingTextUiaMs": 1920.6581000089645,
+    "readyUiaMs": 2005.452399969101,
+    "stableProxyMs": 2282.9381999969482,
+    "capturedClassChanges": [
+      {
+        "observedMs": 822.4436999559402,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1033.2559000253677,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1228.9338999986649,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1610.6823999881744,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1994.2388000488281,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 717.7410999536514,
+    "loadingTextUiaMs": 1981.5636999607086,
+    "readyUiaMs": 2074.021700024605,
+    "stableProxyMs": 2312.787400007248,
+    "capturedClassChanges": [
+      {
+        "observedMs": 821.9289000034332,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1067.383199930191,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1356.9100999832153,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1457.1121000051498,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2042.6600999832153,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 719.2091000080109,
+    "loadingTextUiaMs": 1917.8588000535965,
+    "readyUiaMs": 1998.8039000034332,
+    "stableProxyMs": 2228.5509999990463,
+    "capturedClassChanges": [
+      {
+        "observedMs": 830.6402000188828,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1047.6001000404358,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1239.0973000526428,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2023.234200000763,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 728.8598999977112,
+    "loadingTextUiaMs": 1913.370099902153,
+    "readyUiaMs": 2194.1229000091553,
+    "stableProxyMs": 2433.6093999147415,
+    "capturedClassChanges": [
+      {
+        "observedMs": 841.7177000045776,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1072.3629999160767,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1161.8396999835968,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2160.080399990082,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 741.4852999448776,
+    "loadingTextUiaMs": 1740.5929999351501,
+    "readyUiaMs": 2024.7642999887466,
+    "stableProxyMs": 2298.1534999608994,
+    "capturedClassChanges": [
+      {
+        "observedMs": 852.364599943161,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1127.783599972725,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1623.2604999542236,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1722.5475000143051,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2009.156800031662,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 714.5471999645233,
+    "loadingTextUiaMs": 1875.5350999832153,
+    "readyUiaMs": 2075.449299931526,
+    "stableProxyMs": 2374.4638999700546,
+    "capturedClassChanges": [
+      {
+        "observedMs": 830.1680999994278,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1065.7287999391556,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1249.5527999401093,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1882.4526998996735,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2082.3134999275208,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 733.3925999403,
+    "loadingTextUiaMs": 2293.723499894142,
+    "readyUiaMs": 2576.370099902153,
+    "stableProxyMs": 2855.5142999887466,
+    "capturedClassChanges": [
+      {
+        "observedMs": 839.3138999938965,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1076.6219999790192,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1177.9666999578476,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1358.31049990654,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2560.6674000024796,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 710.1548999547958,
+    "loadingTextUiaMs": 1581.8155999183655,
+    "readyUiaMs": 1672.76659989357,
+    "stableProxyMs": 1913.9252998828888,
+    "capturedClassChanges": [
+      {
+        "observedMs": 814.3658999204636,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1038.0077999830246,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1225.8806999921799,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1323.2950999736786,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1639.701399922371,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-pywebview-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 727.2257999181747,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1664.6658999919891,
+    "stableProxyMs": 1989.0353999137878,
+    "capturedClassChanges": [
+      {
+        "observedMs": 831.4631999731064,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1049.2038999795914,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1231.9753999710083,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1315.6827999353409,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1781.598799943924,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 748.6308000087738,
+    "loadingTextUiaMs": 2127.8833000659943,
+    "readyUiaMs": 2240.4047000408173,
+    "stableProxyMs": 2522.1862000226974,
+    "capturedClassChanges": [
+      {
+        "observedMs": 844.0350000858307,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1078.8373000621796,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1363.813600063324,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1963.1413000822067,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2247.4491000175476,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 785.2437000274658,
+    "loadingTextUiaMs": 1836.847200036049,
+    "readyUiaMs": 1934.249899983406,
+    "stableProxyMs": 2215.046499967575,
+    "capturedClassChanges": [
+      {
+        "observedMs": 890.8597999811172,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1100.8961999416351,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1290.9857000112534,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1577.3530000448227,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1940.9743000268936,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 747.6965999603271,
+    "loadingTextUiaMs": 2264.3624000549316,
+    "readyUiaMs": 2440.824800014496,
+    "stableProxyMs": 2719.088600039482,
+    "capturedClassChanges": [
+      {
+        "observedMs": 855.827399969101,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1066.7421000003815,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1340.515900015831,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2243.5032000541687,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2506.444300055504,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 735.5707000494003,
+    "loadingTextUiaMs": 1777.86410009861,
+    "readyUiaMs": 2080.587700009346,
+    "stableProxyMs": 2346.6291999816895,
+    "capturedClassChanges": [
+      {
+        "observedMs": 838.6576000452042,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1048.2615000009537,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1554.4184000492096,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1639.241600036621,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2086.8963000774384,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 725.1592999696732,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2193.6611000299454,
+    "stableProxyMs": 2593.1706000566483,
+    "capturedClassChanges": [
+      {
+        "observedMs": 831.8367999792099,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1083.1377999782562,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1383.5939999818802,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2299.3811000585556,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 718.2817999124527,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1663.3438999652863,
+    "stableProxyMs": 1939.7271999120712,
+    "capturedClassChanges": [
+      {
+        "observedMs": 820.9463999271393,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1037.8250999450684,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1132.2195999622345,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1616.8572999238968,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 711.4880999326706,
+    "loadingTextUiaMs": 1831.8089998960495,
+    "readyUiaMs": 2028.0101999044418,
+    "stableProxyMs": 2342.3874999284744,
+    "capturedClassChanges": [
+      {
+        "observedMs": 831.625,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1067.2336999177933,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1350.4200999736786,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1835.3784999847412,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2038.1476999521255,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 724.3755999803543,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2027.4888999462128,
+    "stableProxyMs": 2368.346699953079,
+    "capturedClassChanges": [
+      {
+        "observedMs": 839.8176000118256,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1073.3288999795914,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1259.074599981308,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1429.23140001297,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2074.9642000198364,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 713.602599978447,
+    "loadingTextUiaMs": 1847.565400004387,
+    "readyUiaMs": 2044.590299963951,
+    "stableProxyMs": 2362.9660999774933,
+    "capturedClassChanges": [
+      {
+        "observedMs": 821.5500999689102,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1031.8389999866486,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1655.1168999671936,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1854.4783999919891,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2041.1523998975754,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 728.4638999700546,
+    "loadingTextUiaMs": 1753.0003999471664,
+    "readyUiaMs": 1844.8569999933243,
+    "stableProxyMs": 2067.5884000062943,
+    "capturedClassChanges": [
+      {
+        "observedMs": 839.4387999773026,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1068.9074000120163,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1344.6928000450134,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1545.640900015831,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1875.5276999473572,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 718.465399980545,
+    "loadingTextUiaMs": 1760.248899936676,
+    "readyUiaMs": 1951.1416000127792,
+    "stableProxyMs": 2229.205199956894,
+    "capturedClassChanges": [
+      {
+        "observedMs": 835.4321999549866,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1063.8408999443054,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1937.2793999910355,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 717.1457999944687,
+    "loadingTextUiaMs": 1378.4607000350952,
+    "readyUiaMs": 1660.672800064087,
+    "stableProxyMs": 1925.904000043869,
+    "capturedClassChanges": [
+      {
+        "observedMs": 829.0807000398636,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1061.819000005722,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1619.6778000593185,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 731.781700015068,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1891.592299938202,
+    "stableProxyMs": 2189.2972999811172,
+    "capturedClassChanges": [
+      {
+        "observedMs": 845.6546000242233,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1078.2384999990463,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1348.984099984169,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1435.531700015068,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1902.405699968338,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 719.4615000486374,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 1702.2282999753952,
+    "stableProxyMs": 2003.4954999685287,
+    "capturedClassChanges": [
+      {
+        "observedMs": 838.5813000202179,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1058.0025000572205,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1259.0975999832153,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1707.2540999650955,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 733.274199962616,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2347.512099981308,
+    "stableProxyMs": 2675.1167999505997,
+    "capturedClassChanges": [
+      {
+        "observedMs": 838.240700006485,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1053.0430999994278,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1244.3810999393463,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1443.3413000106812,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2390.662400007248,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 736.1050999164581,
+    "loadingTextUiaMs": 1577.899099946022,
+    "readyUiaMs": 1785.9780999422073,
+    "stableProxyMs": 2028.5444999933243,
+    "capturedClassChanges": [
+      {
+        "observedMs": 843.2661999464035,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1084.3921999931335,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1351.2699999809265,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1534.402799963951,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1754.2402999401093,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 719.98140001297,
+    "loadingTextUiaMs": null,
+    "readyUiaMs": 2047.4726999998093,
+    "stableProxyMs": 2350.3885999917984,
+    "capturedClassChanges": [
+      {
+        "observedMs": 824.493399977684,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1035.526999950409,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1311.2158999443054,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2159.7328000068665,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 711.1199001073837,
+    "loadingTextUiaMs": 1786.259400010109,
+    "readyUiaMs": 2067.0649000406265,
+    "stableProxyMs": 2341.9558000564575,
+    "capturedClassChanges": [
+      {
+        "observedMs": 831.0609000921249,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1062.5911999940872,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2067.5810000896454,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 704.4308000802994,
+    "loadingTextUiaMs": 1519.9819999933243,
+    "readyUiaMs": 1801.7305999994278,
+    "stableProxyMs": 2077.2243000268936,
+    "capturedClassChanges": [
+      {
+        "observedMs": 817.2152000665665,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1034.0098000764847,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1325.3424000740051,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1440.1432000398636,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1725.8932000398636,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-pywebview-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 726.5662000179291,
+    "loadingTextUiaMs": 1856.758399963379,
+    "readyUiaMs": 2146.169000029564,
+    "stableProxyMs": 2418.4212000370026,
+    "capturedClassChanges": [
+      {
+        "observedMs": 842.52630007267,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 1129.2027000188828,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1227.3769999742508,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1327.6376000642776,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2143.3636000156403,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 258.5506000518799,
+    "loadingTextUiaMs": 405.6704000234604,
+    "readyUiaMs": 2371.4416999816895,
+    "stableProxyMs": 2686.9337000846863,
+    "capturedClassChanges": [
+      {
+        "observedMs": 415.76429998874664,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 515.2197999954224,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1527.1600000858307,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2478.0235999822617,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 378.478600025177,
+    "loadingTextUiaMs": 493.5500000715256,
+    "readyUiaMs": 2875.50569999218,
+    "stableProxyMs": 3193.9193000793457,
+    "capturedClassChanges": [
+      {
+        "observedMs": 502.9736000299454,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 627.337700009346,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1499.2051000595093,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2181.9882999658585,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2768.659299969673,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 258.3794000148773,
+    "loadingTextUiaMs": 373.8652000427246,
+    "readyUiaMs": 2649.8643000125885,
+    "stableProxyMs": 2937.262799978256,
+    "capturedClassChanges": [
+      {
+        "observedMs": 378.4823999404907,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 477.2050999403,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1839.7904000282288,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2292.306100010872,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2575.3007999658585,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 250.91340005397797,
+    "loadingTextUiaMs": 393.0609999895096,
+    "readyUiaMs": 2443.691300034523,
+    "stableProxyMs": 2685.510500073433,
+    "capturedClassChanges": [
+      {
+        "observedMs": 402.9664000272751,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 541.659500002861,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1332.3368999958038,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2100.5154000520706,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2297.981299996376,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 256.8375999927521,
+    "loadingTextUiaMs": 370.2660000324249,
+    "readyUiaMs": 2681.8384000062943,
+    "stableProxyMs": 2915.9341000318527,
+    "capturedClassChanges": [
+      {
+        "observedMs": 379.8765000104904,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 503.50360000133514,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1391.2651000022888,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1578.3473000526428,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2611.5076999664307,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 265.7753999233246,
+    "loadingTextUiaMs": 380.16859996318817,
+    "readyUiaMs": 2399.0719999074936,
+    "stableProxyMs": 2644.432799935341,
+    "capturedClassChanges": [
+      {
+        "observedMs": 388.53749990463257,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 487.4504998922348,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1119.3828999996185,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1216.8517999649048,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2365.918099999428,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 256.2194000482559,
+    "loadingTextUiaMs": 406.3206000328064,
+    "readyUiaMs": 2705.016000032425,
+    "stableProxyMs": 3001.9272000789642,
+    "capturedClassChanges": [
+      {
+        "observedMs": 416.3747000694275,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 540.1769000291824,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1311.8633000850677,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1597.343199968338,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2512.8772000074387,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 251.60060000419617,
+    "loadingTextUiaMs": 404.1444000005722,
+    "readyUiaMs": 3296.802099943161,
+    "stableProxyMs": 3588.424499988556,
+    "capturedClassChanges": [
+      {
+        "observedMs": 413.95420002937317,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 530.9773999452591,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1327.6326999664307,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2996.827199935913,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 3277.500200033188,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 257.29269993305206,
+    "loadingTextUiaMs": 389.64429998397827,
+    "readyUiaMs": 2805.543099999428,
+    "stableProxyMs": 3121.8287999629974,
+    "capturedClassChanges": [
+      {
+        "observedMs": 399.1439999341965,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 504.63839995861053,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1212.1700999736786,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2626.625799894333,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 254.71709990501404,
+    "loadingTextUiaMs": 388.9625999927521,
+    "readyUiaMs": 2783.230199933052,
+    "stableProxyMs": 3049.859200000763,
+    "capturedClassChanges": [
+      {
+        "observedMs": 397.1425999403,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 513.9276999235153,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1209.0644999742508,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2578.81049990654,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 266.66909992694855,
+    "loadingTextUiaMs": 390.41879999637604,
+    "readyUiaMs": 2746.498899936676,
+    "stableProxyMs": 3081.9143999814987,
+    "capturedClassChanges": [
+      {
+        "observedMs": 399.1313999891281,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 521.9007999897003,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1210.9859999418259,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1744.446699976921,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2678.3185999393463,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 252.36290001869202,
+    "loadingTextUiaMs": 376.64629995822906,
+    "readyUiaMs": 2660.261999964714,
+    "stableProxyMs": 2938.268800020218,
+    "capturedClassChanges": [
+      {
+        "observedMs": 385.36119997501373,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 502.1026999950409,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1430.5795999765396,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2216.6516000032425,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2481.6431999206543,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 262.46109998226166,
+    "loadingTextUiaMs": 410.6044000387192,
+    "readyUiaMs": 2549.405799984932,
+    "stableProxyMs": 2824.475000023842,
+    "capturedClassChanges": [
+      {
+        "observedMs": 419.98070001602173,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 520.111799955368,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1315.450700044632,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2350.51859998703,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2633.5262999534607,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 256.7146999835968,
+    "loadingTextUiaMs": 413.77740001678467,
+    "readyUiaMs": 2626.958899974823,
+    "stableProxyMs": 2927.7588000297546,
+    "capturedClassChanges": [
+      {
+        "observedMs": 423.8944000005722,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 540.1904000043869,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1285.0325000286102,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2356.132600069046,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2535.672600030899,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 247.64010000228882,
+    "loadingTextUiaMs": 374.251100063324,
+    "readyUiaMs": 2615.7459000349045,
+    "stableProxyMs": 2853.236100077629,
+    "capturedClassChanges": [
+      {
+        "observedMs": 384.33810007572174,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 483.73800003528595,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1613.4594000577927,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2643.642100095749,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 254.23430001735687,
+    "loadingTextUiaMs": 392.6075999736786,
+    "readyUiaMs": 2772.8145999908447,
+    "stableProxyMs": 3054.3573999404907,
+    "capturedClassChanges": [
+      {
+        "observedMs": 400.85319995880127,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 518.2111999988556,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1479.957999944687,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 1929.0692999362946,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2861.3352999687195,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 254.44050002098083,
+    "loadingTextUiaMs": 408.3729000091553,
+    "readyUiaMs": 2735.5591000318527,
+    "stableProxyMs": 3053.9589000940323,
+    "capturedClassChanges": [
+      {
+        "observedMs": 418.16360008716583,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 535.0031000375748,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1230.2151000499725,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2468.8427000045776,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2763.003600001335,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 277.19199991226196,
+    "loadingTextUiaMs": 378.65409994125366,
+    "readyUiaMs": 2855.080199956894,
+    "stableProxyMs": 3088.820999979973,
+    "capturedClassChanges": [
+      {
+        "observedMs": 386.25069999694824,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 503.31239998340607,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1216.0518000125885,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2518.3248999118805,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2797.539999961853,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 258.085000038147,
+    "loadingTextUiaMs": 386.7107000350952,
+    "readyUiaMs": 2513.15600001812,
+    "stableProxyMs": 2803.6095000505447,
+    "capturedClassChanges": [
+      {
+        "observedMs": 395.6002000570297,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 511.80110001564026,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1440.8730000257492,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2506.471300005913,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-winui-direct-fresh",
+    "profilePath": "fresh",
+    "windowVisibleMs": 254.1608999967575,
+    "loadingTextUiaMs": 412.60920000076294,
+    "readyUiaMs": 2361.352599978447,
+    "stableProxyMs": 2692.6232999563217,
+    "capturedClassChanges": [
+      {
+        "observedMs": 422.5710999965668,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 544.6620000600815,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1484.553099989891,
+        "classification": "near-black"
+      },
+      {
+        "observedMs": 2102.0686999559402,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 2387.131600022316,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-03-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 374.1420999765396,
+    "loadingTextUiaMs": 506.3643000125885,
+    "readyUiaMs": 858.0996999740601,
+    "stableProxyMs": 1137.8925999403,
+    "capturedClassChanges": [
+      {
+        "observedMs": 515.3474999666214,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 650.8568999767303,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 961.3122999668121,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-04-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 257.9881999492645,
+    "loadingTextUiaMs": 395.7307999134064,
+    "readyUiaMs": 760.0713999271393,
+    "stableProxyMs": 1077.3517999649048,
+    "capturedClassChanges": [
+      {
+        "observedMs": 406.5094999074936,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 522.8427000045776,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 883.0608999729156,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-05-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 388.78569996356964,
+    "loadingTextUiaMs": 496.4649999141693,
+    "readyUiaMs": 851.4510999917984,
+    "stableProxyMs": 1228.3434000015259,
+    "capturedClassChanges": [
+      {
+        "observedMs": 506.26199996471405,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 610.8992999792099,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1018.5670999288559,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-06-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 247.68529999256134,
+    "loadingTextUiaMs": 408.8531000614166,
+    "readyUiaMs": 773.2052999734879,
+    "stableProxyMs": 1088.3897000551224,
+    "capturedClassChanges": [
+      {
+        "observedMs": 416.29410004615784,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 535.7840000391006,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 894.1756000518799,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-07-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 287.71860003471375,
+    "loadingTextUiaMs": 411.16040003299713,
+    "readyUiaMs": 6060.341000080109,
+    "stableProxyMs": 6503.026400089264,
+    "capturedClassChanges": [
+      {
+        "observedMs": 417.9000999927521,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 537.5823000669479,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 6170.196400046349,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-08-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 419.2595000267029,
+    "loadingTextUiaMs": 553.067999958992,
+    "readyUiaMs": 930.1784999370575,
+    "stableProxyMs": 1235.5886999368668,
+    "capturedClassChanges": [
+      {
+        "observedMs": 562.8594000339508,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 683.025200009346,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 1041.6130999326706,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-09-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 270.44659996032715,
+    "loadingTextUiaMs": 406.99930000305176,
+    "readyUiaMs": 780.1068999767303,
+    "stableProxyMs": 1107.2216999530792,
+    "capturedClassChanges": [
+      {
+        "observedMs": 416.25360000133514,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 534.136999964714,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 929.5835999250412,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-10-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 252.04960000514984,
+    "loadingTextUiaMs": 393.36089992523193,
+    "readyUiaMs": 767.1507999897003,
+    "stableProxyMs": 1125.2217999696732,
+    "capturedClassChanges": [
+      {
+        "observedMs": 403.46919989585876,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 522.9831999540329,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 915.6269999742508,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-11-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 297.5135999917984,
+    "loadingTextUiaMs": 432.6705000400543,
+    "readyUiaMs": 901.4375,
+    "stableProxyMs": 1213.3105000257492,
+    "capturedClassChanges": [
+      {
+        "observedMs": 442.7921999692917,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 564.3330999612808,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 985.5426999330521,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-12-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 258.20349991321564,
+    "loadingTextUiaMs": 384.1244000196457,
+    "readyUiaMs": 745.5461999177933,
+    "stableProxyMs": 1098.1093000173569,
+    "capturedClassChanges": [
+      {
+        "observedMs": 392.2574999332428,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 510.70069992542267,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 869.5741000175476,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-13-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 256.9013999700546,
+    "loadingTextUiaMs": 397.0593000650406,
+    "readyUiaMs": 760.7703000307083,
+    "stableProxyMs": 1143.1554000377655,
+    "capturedClassChanges": [
+      {
+        "observedMs": 406.3039000034332,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 504.76980006694794,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 950.527999997139,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-14-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 253.07570004463196,
+    "loadingTextUiaMs": 395.17900002002716,
+    "readyUiaMs": 758.719200015068,
+    "stableProxyMs": 1119.6138000488281,
+    "capturedClassChanges": [
+      {
+        "observedMs": 400.5992000102997,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 518.055999994278,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 914.010300040245,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-15-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 238.48559999465942,
+    "loadingTextUiaMs": 383.31529998779297,
+    "readyUiaMs": 753.2239999771118,
+    "stableProxyMs": 1115.8676999807358,
+    "capturedClassChanges": [
+      {
+        "observedMs": 393.1516000032425,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 526.9764000177383,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 904.4089000225067,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-16-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 252.89329993724823,
+    "loadingTextUiaMs": 399.00759994983673,
+    "readyUiaMs": 753.2532999515533,
+    "stableProxyMs": 1113.0295000076294,
+    "capturedClassChanges": [
+      {
+        "observedMs": 408.033499956131,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 524.9557999372482,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 886.3090000152588,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-17-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 253.39129996299744,
+    "loadingTextUiaMs": 428.8705999851227,
+    "readyUiaMs": 828.2036000490189,
+    "stableProxyMs": 1127.627799987793,
+    "capturedClassChanges": [
+      {
+        "observedMs": 438.31229996681213,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 556.5902000665665,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 917.0590000152588,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-18-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 284.4033000469208,
+    "loadingTextUiaMs": 416.9315000772476,
+    "readyUiaMs": 767.8036000728607,
+    "stableProxyMs": 1065.9415000677109,
+    "capturedClassChanges": [
+      {
+        "observedMs": 426.49349999427795,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 528.1963000297546,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 888.9350000619888,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-19-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 248.37419998645782,
+    "loadingTextUiaMs": 383.5005999803543,
+    "readyUiaMs": 758.0640000104904,
+    "stableProxyMs": 1062.278900027275,
+    "capturedClassChanges": [
+      {
+        "observedMs": 392.1168999671936,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 512.0881999731064,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 870.9354000091553,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-20-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 257.13090002536774,
+    "loadingTextUiaMs": 388.0454000234604,
+    "readyUiaMs": 744.4519000053406,
+    "stableProxyMs": 1117.2157000303268,
+    "capturedClassChanges": [
+      {
+        "observedMs": 398.1274000406265,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 503.84389996528625,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 893.261999964714,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-21-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 288.1904000043869,
+    "loadingTextUiaMs": 391.17839992046356,
+    "readyUiaMs": 758.0618000030518,
+    "stableProxyMs": 1135.0940999984741,
+    "capturedClassChanges": [
+      {
+        "observedMs": 398.37399995326996,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 517.8529999256134,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 891.9732999801636,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  },
+  {
+    "sample": "measured-22-winui-direct-retained",
+    "profilePath": "retained",
+    "windowVisibleMs": 261.6607999801636,
+    "loadingTextUiaMs": 410.90670001506805,
+    "readyUiaMs": 771.9199000597,
+    "stableProxyMs": 1125.4257999658585,
+    "capturedClassChanges": [
+      {
+        "observedMs": 420.5299000740051,
+        "classification": "other-content"
+      },
+      {
+        "observedMs": 525.7477999925613,
+        "classification": "near-white"
+      },
+      {
+        "observedMs": 898.9724000692368,
+        "classification": "accent-content"
+      }
+    ],
+    "scope": "Sampled observations on common collector clock; not physical phase duration or browser paint"
+  }
+]

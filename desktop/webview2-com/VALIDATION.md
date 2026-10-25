@@ -1,5 +1,13 @@
 # Raw Rust host validation
 
+## Six-host measurement update - 2026-10-24
+
+The accepted pilot and full six-host collection completed; all selected raw-Rust
+observations passed. See [results and uncertainty](../host-test-support/results/2026-10-24/RESULTS.md).
+Retained startup is effectively tied with the C++ baseline; this does not justify
+a performance-motivated rewrite. Physical accessibility, native-policy/security
+parity and exhaustive lifecycle/release acceptance remain separate gates.
+
 ## Current frontend revision — 2026-10-20
 
 Uses the common 16-file, four-font English/Hebrew/emoji fixture

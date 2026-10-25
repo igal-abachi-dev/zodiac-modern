@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Style Selector="Window">
+    <Setter Property="FontFamily" Value="avares://NeutronStar-Avalonia/Assets/fonts#Inter"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="Foreground" Value="#171A18"/>
+    <Setter Property="Background" Value="#F8FAF9"/>
+  </Style>
+  <Style Selector="Button">
+    <Setter Property="CornerRadius" Value="6"/>
+    <Setter Property="Background" Value="White"/>
+    <Setter Property="BorderBrush" Value="#DCE3DE"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Padding" Value="12,6"/>
+    <Setter Property="MinHeight" Value="32"/>
+    <Setter Property="FontSize" Value="12"/>
+  </Style>
+  <Style Selector="Button.primary">
+    <Setter Property="Background" Value="#047857"/>
+    <Setter Property="Foreground" Value="White"/>
+    <Setter Property="BorderBrush" Value="#047857"/>
+  </Style>
+  <Style Selector="Button.action">
+    <Setter Property="Height" Value="40"/>
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="FontSize" Value="14"/>
+    <Setter Property="FontWeight" Value="Medium"/>
+    <Setter Property="Margin" Value="0,16,0,0"/>
+  </Style>
+  <Style Selector="Border.card">
+    <Setter Property="Background" Value="White"/>
+    <Setter Property="BorderBrush" Value="#DCE3DE"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="Padding" Value="16"/>
+  </Style>
+  <Style Selector="TextBlock.muted">
+    <Setter Property="Foreground" Value="#5D6660"/>
+  </Style>
+  <Style Selector="TextBlock.eyebrow">
+    <Setter Property="FontSize" Value="10"/>
+    <Setter Property="FontWeight" Value="SemiBold"/>
+    <Setter Property="Foreground" Value="#5D6660"/>
+    <Setter Property="Margin" Value="0,20,0,9"/>
+  </Style>
+  <Style Selector="Border.fixture">
+    <Setter Property="Background" Value="#F1F4F2"/>
+    <Setter Property="BorderBrush" Value="#DCE3DE"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="CornerRadius" Value="6"/>
+    <Setter Property="Padding" Value="13"/>
+    <Setter Property="MinHeight" Value="94"/>
+  </Style>
+  <Style Selector="WrapPanel.workbench-actions Button">
+    <Setter Property="Margin" Value="0,0,8,8"/>
+  </Style>
+</Styles>

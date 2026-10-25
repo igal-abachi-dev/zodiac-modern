@@ -1,0 +1,870 @@
+{
+  "attempts": 144,
+  "failed": [],
+  "actions": [
+    {
+      "app": "cpp",
+      "action": "filter-clear",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 92.45655000209808,
+        "p95": 112.26719999313354,
+        "min": 83.27009999752045,
+        "max": 118.11619997024536
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "cpp",
+      "action": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 234.59799998998642,
+        "p95": 256.43179988861084,
+        "min": 54.513100028038025,
+        "max": 257.5419000387192
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "cpp",
+      "action": "filter-to-one",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 74.70329999923706,
+        "p95": 100.58589994907379,
+        "min": 66.76889991760254,
+        "max": 104.03410005569458
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "cpp",
+      "action": "remount",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 76.51209998130798,
+        "p95": 81.99530005455017,
+        "min": 59.87679994106293,
+        "max": 89.87049996852875
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "cpp",
+      "action": "replace-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 792.3352500200272,
+        "p95": 877.7052999734879,
+        "min": 678.4502000808716,
+        "max": 945.3932000398636
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "cpp",
+      "action": "replace-10000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 1617.6654000282288,
+        "p95": 1742.1582000255585,
+        "min": 1569.5936999320984,
+        "max": 1807.6762000322342
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "cpp",
+      "action": "reverse-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 99.2331999540329,
+        "p95": 106.01470005512238,
+        "min": 86.86509990692139,
+        "max": 115.79840004444122
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "cpp",
+      "action": "splice-10",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 50.961499989032745,
+        "p95": 61.13469994068146,
+        "min": 44.476199984550476,
+        "max": 62.78939998149872
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "cpp",
+      "action": "update-10-percent",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 47.3719499707222,
+        "p95": 59.447399973869324,
+        "min": 29.055699944496155,
+        "max": 69.08259999752045
+      },
+      "pairedMedianDeltaVsCppMs": 0.0,
+      "pairedBootstrap95IntervalMs": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "filter-clear",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 97.04075002670288,
+        "p95": 106.71689999103546,
+        "min": 86.76530003547668,
+        "max": 106.9954000711441
+      },
+      "pairedMedianDeltaVsCppMs": 5.614400029182434,
+      "pairedBootstrap95IntervalMs": [
+        1.6409000158309937,
+        7.656450033187866
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 226.01020002365112,
+        "p95": 252.82889997959137,
+        "min": 63.38090002536774,
+        "max": 254.98269999027252
+      },
+      "pairedMedianDeltaVsCppMs": 3.2245999574661255,
+      "pairedBootstrap95IntervalMs": [
+        -22.694699943065643,
+        90.07819998264313
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "filter-to-one",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 83.01384997367859,
+        "p95": 109.14259994029999,
+        "min": 67.935800075531,
+        "max": 120.90759992599487
+      },
+      "pairedMedianDeltaVsCppMs": 3.1627999544143677,
+      "pairedBootstrap95IntervalMs": [
+        1.9052000045776367,
+        9.798449993133545
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "remount",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 77.14684998989105,
+        "p95": 82.9876000881195,
+        "min": 71.41089999675751,
+        "max": 87.53540003299713
+      },
+      "pairedMedianDeltaVsCppMs": 0.914150059223175,
+      "pairedBootstrap95IntervalMs": [
+        -2.144600033760071,
+        4.649049937725067
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "replace-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 761.2166000008583,
+        "p95": 911.4883999824524,
+        "min": 668.9072999954224,
+        "max": 963.5796999931335
+      },
+      "pairedMedianDeltaVsCppMs": -20.05125004053116,
+      "pairedBootstrap95IntervalMs": [
+        -48.77200001478195,
+        27.29925000667572
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "replace-10000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 1642.2423000335693,
+        "p95": 1723.048299908638,
+        "min": 1585.5166000127792,
+        "max": 1723.7547000646591
+      },
+      "pairedMedianDeltaVsCppMs": 17.581600069999695,
+      "pairedBootstrap95IntervalMs": [
+        -25.65470004081726,
+        41.74370002746582
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "reverse-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 96.5561500787735,
+        "p95": 106.61090004444122,
+        "min": 85.78419995307922,
+        "max": 109.1110999584198
+      },
+      "pairedMedianDeltaVsCppMs": -3.7778000235557556,
+      "pairedBootstrap95IntervalMs": [
+        -7.10004985332489,
+        2.8581498861312866
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "splice-10",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 50.33899998664856,
+        "p95": 60.35469996929169,
+        "min": 30.27810001373291,
+        "max": 63.47099995613098
+      },
+      "pairedMedianDeltaVsCppMs": -0.29965001344680786,
+      "pairedBootstrap95IntervalMs": [
+        -3.0106000900268555,
+        3.619999945163727
+      ]
+    },
+    {
+      "app": "pywebview",
+      "action": "update-10-percent",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 48.59095001220703,
+        "p95": 60.549999952316284,
+        "min": 23.56529998779297,
+        "max": 60.68899989128113
+      },
+      "pairedMedianDeltaVsCppMs": -0.8521000146865845,
+      "pairedBootstrap95IntervalMs": [
+        -9.934149980545044,
+        11.308500051498413
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "filter-clear",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 93.53750002384186,
+        "p95": 103.6360000371933,
+        "min": 86.64359998703003,
+        "max": 105.62899994850159
+      },
+      "pairedMedianDeltaVsCppMs": 1.1685000658035278,
+      "pairedBootstrap95IntervalMs": [
+        -1.4103500247001648,
+        5.985400021076202
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 230.66660004854202,
+        "p95": 257.3628000020981,
+        "min": 54.120399951934814,
+        "max": 280.0720999240875
+      },
+      "pairedMedianDeltaVsCppMs": 1.5863500237464905,
+      "pairedBootstrap95IntervalMs": [
+        -95.7517499923706,
+        92.80650007724762
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "filter-to-one",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 80.85060000419617,
+        "p95": 109.85780000686646,
+        "min": 69.61520004272461,
+        "max": 117.75269997119904
+      },
+      "pairedMedianDeltaVsCppMs": 0.6787000298500061,
+      "pairedBootstrap95IntervalMs": [
+        -2.0457499623298645,
+        7.839699983596802
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "remount",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 77.15730005502701,
+        "p95": 88.69350004196167,
+        "min": 70.05330002307892,
+        "max": 99.0958000421524
+      },
+      "pairedMedianDeltaVsCppMs": 1.1081500053405762,
+      "pairedBootstrap95IntervalMs": [
+        -1.6547499299049377,
+        6.469250023365021
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "replace-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 767.2737499475479,
+        "p95": 876.3658000230789,
+        "min": 705.6740000247955,
+        "max": 919.9455000162125
+      },
+      "pairedMedianDeltaVsCppMs": -25.497400045394897,
+      "pairedBootstrap95IntervalMs": [
+        -67.33985006809235,
+        33.23789995908737
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "replace-10000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 1666.2173500061035,
+        "p95": 1736.9616000652313,
+        "min": 1562.4891999959946,
+        "max": 1737.5319999456406
+      },
+      "pairedMedianDeltaVsCppMs": 22.834250032901764,
+      "pairedBootstrap95IntervalMs": [
+        -21.62900000810623,
+        77.24919998645782
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "reverse-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 100.28635001182556,
+        "p95": 111.82430005073547,
+        "min": 81.99270009994507,
+        "max": 112.68959999084473
+      },
+      "pairedMedianDeltaVsCppMs": 3.2669501304626465,
+      "pairedBootstrap95IntervalMs": [
+        -3.861199975013733,
+        6.1602999567985535
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "splice-10",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 46.86954993009567,
+        "p95": 61.166100025177,
+        "min": 35.22469997406006,
+        "max": 61.51579999923706
+      },
+      "pairedMedianDeltaVsCppMs": -2.466049909591675,
+      "pairedBootstrap95IntervalMs": [
+        -7.529400110244751,
+        0.7873998880386353
+      ]
+    },
+    {
+      "app": "rust",
+      "action": "update-10-percent",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 46.474749982357025,
+        "p95": 59.52280008792877,
+        "min": 40.9210000038147,
+        "max": 62.071500062942505
+      },
+      "pairedMedianDeltaVsCppMs": 0.3680000305175781,
+      "pairedBootstrap95IntervalMs": [
+        -3.866999864578247,
+        2.8971999883651733
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "filter-clear",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 95.61475002765656,
+        "p95": 110.09990000724792,
+        "min": 92.6444000005722,
+        "max": 120.24049997329712
+      },
+      "pairedMedianDeltaVsCppMs": 3.6858999729156494,
+      "pairedBootstrap95IntervalMs": [
+        -0.1685500144958496,
+        5.56850004196167
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 91.7688000202179,
+        "p95": 254.64649999141693,
+        "min": 56.94630002975464,
+        "max": 257.3250000476837
+      },
+      "pairedMedianDeltaVsCppMs": -6.2078500390052795,
+      "pairedBootstrap95IntervalMs": [
+        -15.5760999917984,
+        12.853599965572357
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "filter-to-one",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 73.16124999523163,
+        "p95": 84.45260000228882,
+        "min": 69.3400000333786,
+        "max": 120.98860001564026
+      },
+      "pairedMedianDeltaVsCppMs": -3.084399938583374,
+      "pairedBootstrap95IntervalMs": [
+        -6.953949987888336,
+        1.1600000262260437
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "remount",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 77.33739995956421,
+        "p95": 97.82260000705719,
+        "min": 68.91700005531311,
+        "max": 112.31089997291565
+      },
+      "pairedMedianDeltaVsCppMs": 2.909600019454956,
+      "pairedBootstrap95IntervalMs": [
+        -1.025950014591217,
+        7.807650029659271
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "replace-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 806.6410500407219,
+        "p95": 863.5482000112534,
+        "min": 676.0699999332428,
+        "max": 871.4349000453949
+      },
+      "pairedMedianDeltaVsCppMs": 6.546949923038483,
+      "pairedBootstrap95IntervalMs": [
+        -41.39344996213913,
+        75.45725005865097
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "replace-10000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 1628.846549987793,
+        "p95": 1686.425400018692,
+        "min": 1574.7803000211716,
+        "max": 1702.3515000343323
+      },
+      "pairedMedianDeltaVsCppMs": 9.259900033473969,
+      "pairedBootstrap95IntervalMs": [
+        -17.6115500330925,
+        27.15794998407364
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "reverse-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 97.04260003566742,
+        "p95": 103.37200009822845,
+        "min": 84.60679996013641,
+        "max": 120.99749994277954
+      },
+      "pairedMedianDeltaVsCppMs": -0.5968999266624451,
+      "pairedBootstrap95IntervalMs": [
+        -5.439000129699707,
+        2.9284000396728516
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "splice-10",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 49.51460003852844,
+        "p95": 62.13169991970062,
+        "min": 27.201599955558777,
+        "max": 62.271000027656555
+      },
+      "pairedMedianDeltaVsCppMs": 0.23114997148513794,
+      "pairedBootstrap95IntervalMs": [
+        -4.825500071048737,
+        3.3693999648094177
+      ]
+    },
+    {
+      "app": "tauri",
+      "action": "update-10-percent",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 47.463850021362305,
+        "p95": 61.51190006732941,
+        "min": 22.931699991226196,
+        "max": 62.22060000896454
+      },
+      "pairedMedianDeltaVsCppMs": 0.3332499861717224,
+      "pairedBootstrap95IntervalMs": [
+        -2.3724499940872192,
+        6.155949950218201
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "filter-clear",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 93.29324996471405,
+        "p95": 107.62919998168945,
+        "min": 85.71829998493195,
+        "max": 114.5135999917984
+      },
+      "pairedMedianDeltaVsCppMs": 1.8585500717163086,
+      "pairedBootstrap95IntervalMs": [
+        -2.1048999428749084,
+        8.422099947929382
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 220.3496499657631,
+        "p95": 248.36989998817444,
+        "min": 59.5320999622345,
+        "max": 265.6871999502182
+      },
+      "pairedMedianDeltaVsCppMs": -0.1310499906539917,
+      "pairedBootstrap95IntervalMs": [
+        -14.17535012960434,
+        8.909199953079224
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "filter-to-one",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 81.8014999628067,
+        "p95": 88.27799999713898,
+        "min": 69.24019992351532,
+        "max": 98.78519999980927
+      },
+      "pairedMedianDeltaVsCppMs": 5.213299989700317,
+      "pairedBootstrap95IntervalMs": [
+        -4.954699993133545,
+        10.375349938869476
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "remount",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 76.72024995088577,
+        "p95": 89.18639993667603,
+        "min": 66.31889998912811,
+        "max": 92.30159997940063
+      },
+      "pairedMedianDeltaVsCppMs": 1.4481999278068542,
+      "pairedBootstrap95IntervalMs": [
+        -2.677049994468689,
+        3.2757500410079956
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "replace-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 799.9524999856949,
+        "p95": 932.085599899292,
+        "min": 616.4170000553131,
+        "max": 971.0549999475479
+      },
+      "pairedMedianDeltaVsCppMs": 40.0877999663353,
+      "pairedBootstrap95IntervalMs": [
+        -34.61265003681183,
+        92.05510002374649
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "replace-10000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 1667.124049961567,
+        "p95": 1752.8604000806808,
+        "min": 1568.7667000293732,
+        "max": 1780.5638000965118
+      },
+      "pairedMedianDeltaVsCppMs": 34.34915006160736,
+      "pairedBootstrap95IntervalMs": [
+        -24.560350000858307,
+        64.62029993534088
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "reverse-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 91.95085000991821,
+        "p95": 98.76579999923706,
+        "min": 78.11860001087189,
+        "max": 101.15989995002747
+      },
+      "pairedMedianDeltaVsCppMs": -7.573499977588654,
+      "pairedBootstrap95IntervalMs": [
+        -11.91189992427826,
+        -2.075149953365326
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "splice-10",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 49.01635003089905,
+        "p95": 64.04530000686646,
+        "min": 34.612199902534485,
+        "max": 65.7065999507904
+      },
+      "pairedMedianDeltaVsCppMs": -1.5882500410079956,
+      "pairedBootstrap95IntervalMs": [
+        -7.1864500641822815,
+        3.0690999627113342
+      ]
+    },
+    {
+      "app": "wails",
+      "action": "update-10-percent",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 47.94929999113083,
+        "p95": 62.28910005092621,
+        "min": 42.962599992752075,
+        "max": 62.423799991607666
+      },
+      "pairedMedianDeltaVsCppMs": 1.3096500039100647,
+      "pairedBootstrap95IntervalMs": [
+        -0.0994499921798706,
+        7.424250066280365
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "filter-clear",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 105.86430007219315,
+        "p95": 113.27160000801086,
+        "min": 97.06360006332397,
+        "max": 114.45700001716614
+      },
+      "pairedMedianDeltaVsCppMs": 12.390750110149384,
+      "pairedBootstrap95IntervalMs": [
+        8.562400043010712,
+        16.11320000886917
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 69.4423000216484,
+        "p95": 222.42859995365143,
+        "min": 63.545300006866455,
+        "max": 259.2841999530792
+      },
+      "pairedMedianDeltaVsCppMs": -146.80260002613068,
+      "pairedBootstrap95IntervalMs": [
+        -170.47790002822876,
+        10.22694993019104
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "filter-to-one",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 77.20535004138947,
+        "p95": 83.410600066185,
+        "min": 74.99349999427795,
+        "max": 86.00559997558594
+      },
+      "pairedMedianDeltaVsCppMs": 3.3668500185012817,
+      "pairedBootstrap95IntervalMs": [
+        -3.2658499479293823,
+        5.828650057315826
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "remount",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 97.01380002498627,
+        "p95": 107.90520000457764,
+        "min": 75.9345999956131,
+        "max": 131.64719998836517
+      },
+      "pairedMedianDeltaVsCppMs": 17.525150060653687,
+      "pairedBootstrap95IntervalMs": [
+        14.112800002098083,
+        25.59060001373291
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "replace-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 659.9165999889374,
+        "p95": 808.3250999450684,
+        "min": 562.4006000757217,
+        "max": 846.6585000753403
+      },
+      "pairedMedianDeltaVsCppMs": -102.5090000629425,
+      "pairedBootstrap95IntervalMs": [
+        -166.1311000585556,
+        -37.17865002155304
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "replace-10000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 1666.8215999603271,
+        "p95": 1702.6030000448227,
+        "min": 1587.7798999547958,
+        "max": 1715.1489000320435
+      },
+      "pairedMedianDeltaVsCppMs": 23.25255000591278,
+      "pairedBootstrap95IntervalMs": [
+        3.356750011444092,
+        67.32965004444122
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "reverse-1000",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 101.78019994497299,
+        "p95": 109.83759999275208,
+        "min": 88.5537999868393,
+        "max": 111.66949999332428
+      },
+      "pairedMedianDeltaVsCppMs": 2.902899980545044,
+      "pairedBootstrap95IntervalMs": [
+        -0.8835500478744507,
+        6.9451000690460205
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "splice-10",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 33.43314999341965,
+        "p95": 41.61150002479553,
+        "min": 26.81000006198883,
+        "max": 43.15459990501404
+      },
+      "pairedMedianDeltaVsCppMs": -19.062700033187866,
+      "pairedBootstrap95IntervalMs": [
+        -20.50175005197525,
+        -13.765649974346161
+      ]
+    },
+    {
+      "app": "winui",
+      "action": "update-10-percent",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 32.45574998855591,
+        "p95": 35.344900012016296,
+        "min": 27.262400031089783,
+        "max": 40.42669999599457
+      },
+      "pairedMedianDeltaVsCppMs": -15.057200014591217,
+      "pairedBootstrap95IntervalMs": [
+        -20.743049919605255,
+        -13.391899943351746
+      ]
+    }
+  ]
+}

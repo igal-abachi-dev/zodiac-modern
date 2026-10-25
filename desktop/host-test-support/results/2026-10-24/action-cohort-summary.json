@@ -1,0 +1,412 @@
+{
+  "totalAttempts": 144,
+  "passed": 143,
+  "failed": [
+    {
+      "sample": "actions-19-winui",
+      "error": "TimeoutException: UIA condition deadline"
+    }
+  ],
+  "runtime": "155.0.4283.62",
+  "startup": [],
+  "idle": [],
+  "actions": [
+    {
+      "app": "cpp",
+      "action": "about-close",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 46.78169995546341,
+        "p95": 56.8125,
+        "min": 35.57469999790192,
+        "max": 59.40180003643036
+      }
+    },
+    {
+      "app": "cpp",
+      "action": "about-open",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 38.32330000400543,
+        "p95": 47.945899963378906,
+        "min": 27.788700103759766,
+        "max": 70.56359994411469
+      }
+    },
+    {
+      "app": "cpp",
+      "action": "cancel",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 16.669900059700012,
+        "p95": 50.11020004749298,
+        "min": 12.959699988365173,
+        "max": 58.99380004405975
+      }
+    },
+    {
+      "app": "cpp",
+      "action": "decrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.56659996509552,
+        "p95": 39.562700033187866,
+        "min": 14.013399958610535,
+        "max": 40.51929998397827
+      }
+    },
+    {
+      "app": "cpp",
+      "action": "encrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.565300047397614,
+        "p95": 40.250099897384644,
+        "min": 13.969600081443787,
+        "max": 44.65729999542236
+      }
+    },
+    {
+      "app": "cpp",
+      "action": "reset",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.158550024032593,
+        "p95": 40.808200001716614,
+        "min": 13.768700003623962,
+        "max": 41.574000000953674
+      }
+    },
+    {
+      "app": "pywebview",
+      "action": "about-close",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 17.338949978351593,
+        "p95": 46.84070003032684,
+        "min": 15.779500007629395,
+        "max": 55.10689997673035
+      }
+    },
+    {
+      "app": "pywebview",
+      "action": "about-open",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 54.178999960422516,
+        "p95": 67.5398999452591,
+        "min": 42.41719996929169,
+        "max": 68.35199999809265
+      }
+    },
+    {
+      "app": "pywebview",
+      "action": "cancel",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 24.783449947834015,
+        "p95": 47.44860005378723,
+        "min": 14.29990005493164,
+        "max": 63.94470000267029
+      }
+    },
+    {
+      "app": "pywebview",
+      "action": "decrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 17.588699996471405,
+        "p95": 55.24009990692139,
+        "min": 15.539199948310852,
+        "max": 65.70969998836517
+      }
+    },
+    {
+      "app": "pywebview",
+      "action": "encrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 17.46729999780655,
+        "p95": 37.667799949645996,
+        "min": 14.40880000591278,
+        "max": 47.180099964141846
+      }
+    },
+    {
+      "app": "pywebview",
+      "action": "reset",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 17.023800015449524,
+        "p95": 21.727100014686584,
+        "min": 15.419900059700012,
+        "max": 43.480300068855286
+      }
+    },
+    {
+      "app": "rust",
+      "action": "about-close",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 47.83009999990463,
+        "p95": 54.37269997596741,
+        "min": 35.50339996814728,
+        "max": 56.96300005912781
+      }
+    },
+    {
+      "app": "rust",
+      "action": "about-open",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 37.51694995164871,
+        "p95": 46.721100091934204,
+        "min": 28.07889997959137,
+        "max": 48.25279998779297
+      }
+    },
+    {
+      "app": "rust",
+      "action": "cancel",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 14.332350015640259,
+        "p95": 47.60320007801056,
+        "min": 13.025200009346008,
+        "max": 48.232500076293945
+      }
+    },
+    {
+      "app": "rust",
+      "action": "decrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.758799970149994,
+        "p95": 47.49550008773804,
+        "min": 14.083500027656555,
+        "max": 50.378600001335144
+      }
+    },
+    {
+      "app": "rust",
+      "action": "encrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.211300015449524,
+        "p95": 36.966399908065796,
+        "min": 14.501800060272217,
+        "max": 40.65439999103546
+      }
+    },
+    {
+      "app": "rust",
+      "action": "reset",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.394500017166138,
+        "p95": 36.31480002403259,
+        "min": 13.373700022697449,
+        "max": 49.547799944877625
+      }
+    },
+    {
+      "app": "tauri",
+      "action": "about-close",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 42.19740003347397,
+        "p95": 70.29909992218018,
+        "min": 16.104600071907043,
+        "max": 74.93589997291565
+      }
+    },
+    {
+      "app": "tauri",
+      "action": "about-open",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 49.44814991950989,
+        "p95": 65.02709996700287,
+        "min": 24.91890001296997,
+        "max": 67.93180000782013
+      }
+    },
+    {
+      "app": "tauri",
+      "action": "cancel",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 35.255649983882904,
+        "p95": 53.33840000629425,
+        "min": 14.388399958610535,
+        "max": 61.0135999917984
+      }
+    },
+    {
+      "app": "tauri",
+      "action": "decrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 17.66934996843338,
+        "p95": 45.384000062942505,
+        "min": 15.615299940109253,
+        "max": 47.66069996356964
+      }
+    },
+    {
+      "app": "tauri",
+      "action": "encrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 18.208150029182434,
+        "p95": 50.00639998912811,
+        "min": 15.68309998512268,
+        "max": 51.723999977111816
+      }
+    },
+    {
+      "app": "tauri",
+      "action": "reset",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 16.47519999742508,
+        "p95": 47.51919996738434,
+        "min": 15.257799983024597,
+        "max": 52.46899998188019
+      }
+    },
+    {
+      "app": "wails",
+      "action": "about-close",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 44.88734996318817,
+        "p95": 53.12969994544983,
+        "min": 35.52110004425049,
+        "max": 55.42559993267059
+      }
+    },
+    {
+      "app": "wails",
+      "action": "about-open",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 50.87224996089935,
+        "p95": 62.26900005340576,
+        "min": 33.51330006122589,
+        "max": 64.73950004577637
+      }
+    },
+    {
+      "app": "wails",
+      "action": "cancel",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 14.084200084209442,
+        "p95": 30.45200002193451,
+        "min": 13.006100058555603,
+        "max": 44.722399950027466
+      }
+    },
+    {
+      "app": "wails",
+      "action": "decrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.410899937152863,
+        "p95": 17.650699973106384,
+        "min": 14.325199961662292,
+        "max": 21.763400077819824
+      }
+    },
+    {
+      "app": "wails",
+      "action": "encrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.387850046157837,
+        "p95": 17.324599981307983,
+        "min": 13.983999967575073,
+        "max": 41.78149998188019
+      }
+    },
+    {
+      "app": "wails",
+      "action": "reset",
+      "inputToUiaObservedMs": {
+        "n": 20,
+        "median": 15.232699990272522,
+        "p95": 28.863100051879883,
+        "min": 13.335899949073792,
+        "max": 30.902300000190735
+      }
+    },
+    {
+      "app": "winui",
+      "action": "about-close",
+      "inputToUiaObservedMs": {
+        "n": 19,
+        "median": 25.941799998283386,
+        "p95": 40.76840007305145,
+        "min": 18.865599989891052,
+        "max": 40.76840007305145
+      }
+    },
+    {
+      "app": "winui",
+      "action": "about-open",
+      "inputToUiaObservedMs": {
+        "n": 19,
+        "median": 34.759899973869324,
+        "p95": 52.586300015449524,
+        "min": 26.118800044059753,
+        "max": 52.586300015449524
+      }
+    },
+    {
+      "app": "winui",
+      "action": "cancel",
+      "inputToUiaObservedMs": {
+        "n": 19,
+        "median": 33.227699995040894,
+        "p95": 62.173099994659424,
+        "min": 23.475299954414368,
+        "max": 62.173099994659424
+      }
+    },
+    {
+      "app": "winui",
+      "action": "decrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 19,
+        "median": 27.645900011062622,
+        "p95": 37.02849996089935,
+        "min": 23.19480001926422,
+        "max": 37.02849996089935
+      }
+    },
+    {
+      "app": "winui",
+      "action": "encrypt-start",
+      "inputToUiaObservedMs": {
+        "n": 19,
+        "median": 28.57799994945526,
+        "p95": 45.583199977874756,
+        "min": 19.612199902534485,
+        "max": 45.583199977874756
+      }
+    },
+    {
+      "app": "winui",
+      "action": "reset",
+      "inputToUiaObservedMs": {
+        "n": 19,
+        "median": 24.337200045585632,
+        "p95": 39.03350007534027,
+        "min": 21.030799984931946,
+        "max": 39.03350007534027
+      }
+    }
+  ],
+  "visuals": []
+}

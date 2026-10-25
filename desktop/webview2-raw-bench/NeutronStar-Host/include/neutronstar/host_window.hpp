@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <string_view>
+#include <vector>
 
 namespace neutronstar {
 
@@ -13,24 +14,31 @@ enum class EventKind {
     environment_ready, controller_ready, navigation_complete, document_title_changed,
     request_blocked, navigation_blocked, popup_blocked, permission_denied,
     download_blocked, process_failed, failed, closed, action_rejected,
-    memory_target_changed, window_command, window_state_changed
+    memory_target_changed, window_command, window_state_changed,
+    environment_starting, controller_starting, navigation_starting,
+    initialization_drained, shutdown_timeout, asset_loaded, controller_requested
 };
 
 enum class Action { encrypt, decrypt };
 enum class Status { idle, busy, succeeded, failed, canceled };
 enum class MemoryUsageTarget { normal, low };
+enum class ColorScheme { light, dark, system };
 
 // Explicitly opt-in synthetic example RPC; not a production secret/data channel.
 struct TestGreetRequest { std::wstring id; std::wstring name; };
+// Optional build-time asset snapshot. Runtime validation preserves the same path/MIME policy.
+struct EmbeddedAsset { std::wstring relative_path; std::vector<unsigned char> content; };
 
 struct Event {
     EventKind kind{};
     HRESULT result{S_OK};
     std::wstring detail; // Runtime version, title or fixed diagnostic; never input contents/URLs.
+    unsigned long long duration_microseconds{}; // Optional nonsecret asset-read measurement.
+    unsigned long long byte_count{};
 };
 
 struct HostOptions {
-    std::filesystem::path asset_directory;
+    std::filesystem::path asset_directory; // Required only for file-backed mode; embedded apps need no external dist.
     std::filesystem::path user_data_directory; // Required; outside the asset tree. Runtime may write here.
     std::filesystem::path fixed_runtime_directory; // Empty selects installed Evergreen. No installer/download.
     std::wstring entry_path{L"index.html"}; // Relative asset path; use hash routing for client-side routers.
@@ -43,6 +51,11 @@ struct HostOptions {
     bool decorations{true}; // False removes native caption; native resize edges remain.
     bool allow_window_controls{false}; // Only minimize, toggle-maximize and close tokens.
     MemoryUsageTarget memory_usage_target{MemoryUsageTarget::normal};
+    COLORREF background_color{RGB(255, 255, 255)}; // Opaque native/WebView loading surface.
+    ColorScheme color_scheme{ColorScheme::light}; // Match the default opaque light loading surface.
+    bool reveal_after_navigation{false}; // Opt-in app loading UI; leave false for raw rendering experiments.
+    bool trace_asset_reads{false}; // Opt-in numeric diagnostics; no asset names or contents.
+    std::vector<EmbeddedAsset> embedded_assets; // Empty: confined files (default). Nonempty: no file fallback.
     std::function<void(const Event&)> on_event;
     // Callbacks empty and allow_window_controls false by default: JS messaging disabled.
     // Never block the STA on process I/O.
@@ -65,6 +78,9 @@ public:
     HostWindow& operator=(HostWindow&&) = delete;
 
     [[nodiscard]] HWND native_handle() const noexcept;
+    // Nonblocking request. While initialization is pending, hides the HWND and
+    // defers destruction until its completion can explicitly close a late controller.
+    // Keep the owner/STA pump alive until closed; run() drains on shutdown.
     void close();
     // UI thread only. Best effort, not suspension; LOW is intended for inactive views.
     // Throws if the runtime lacks the requested API. No working-set trimming.

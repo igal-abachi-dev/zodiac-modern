@@ -1,7 +1,10 @@
-# Shared host correctness tooling
+# Shared host correctness and measurement tooling
 
-These tools support the six-host Svelte experiment. They do not collect
-comparative benchmarks and are not shipped in a desktop application's assets.
+These tools support the six-host Svelte experiment and are not shipped in a
+desktop application's assets. The original smoke checkers below verify
+correctness only. The separate [measurement collector](measurement/README.md)
+adds serial comparative startup, process-tree resource and interaction runs;
+[supplemental workloads](workloads/README.md) use independently staged assets.
 
 - `verify_assets.py`: verifies the baseline lock/manifest and exact built file
   set, sizes and SHA-256; optionally stages identical files for embedded hosts.
