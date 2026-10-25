@@ -5,7 +5,7 @@ using FlaUI.Core.AutomationElements;
 using FlaUI.Core.Definitions;
 using FlaUI.UIA3;
 
-internal sealed record Config(string App,string Runner,string Assets,string Profile,string Output,string[] Arguments,bool NativeUi=false,bool LayoutOnly=false);
+internal sealed record Config(string App,string Runner,string Assets,string Profile,string Output,string[] Arguments,bool NativeUi=false,bool LayoutOnly=false,string? EngineKind=null);
 internal static class CandidateChecks
 
 {
@@ -142,7 +142,7 @@ internal static class CandidateChecks
             ResizeClient(960,640);Wait(()=>Named("Ready",ControlType.Text)!=null);
             report["layoutChecks"]="dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width";
             report["dpi"]=dpi;
-            report["engineKind"]=nativeUi?"Avalonia/Skia":"Electron/Chromium";
+            report["engineKind"]=config.EngineKind??(nativeUi?"Avalonia/Skia":"Electron/Chromium");
             using(var host=Process.GetProcessById(process.Id))report["hostFileVersion"]=host.MainModule!.FileVersionInfo.FileVersion;
             // UIA state can precede physical paint; this is only visual QA.
             Thread.Sleep(200);

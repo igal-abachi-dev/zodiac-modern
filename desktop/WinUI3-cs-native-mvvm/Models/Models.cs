@@ -6,16 +6,16 @@ public interface IClock { double Now {get;} IDisposable Repeat(Action callback,d
 public sealed partial class MainModel:ObservableObject,IDisposable
 {
  private readonly IClock clock;private IDisposable? task;private int generation;private bool disposed;
- [ObservableProperty] private bool loaded;
- [ObservableProperty] private bool running;
- [ObservableProperty] private bool workbenchOpen;
- [ObservableProperty] private int progress;
- [ObservableProperty] private string status="Loading local interface…";
- [ObservableProperty] private WorkbenchModel workbench;
+ [ObservableProperty] public partial bool Loaded { get; set; }
+ [ObservableProperty] public partial bool Running { get; set; }
+ [ObservableProperty] public partial bool WorkbenchOpen { get; set; }
+ [ObservableProperty] public partial int Progress { get; set; }
+ [ObservableProperty] public partial string Status { get; set; } ="Loading local interface…";
+ [ObservableProperty] public partial WorkbenchModel Workbench { get; set; }
  public string Sample=>"Zodiac GUI benchmark — שלום — 🌠";
  public string Percent=>$"{Progress}%";
  public IRelayCommand EncryptCommand{get;}public IRelayCommand DecryptCommand{get;}public IRelayCommand CancelCommand{get;}public IRelayCommand ResetCommand{get;}public IRelayCommand OpenCommand{get;}public IRelayCommand BackCommand{get;}
- public MainModel(IClock clock){this.clock=clock;workbench=new(clock);EncryptCommand=new RelayCommand(()=>Start(true),CanStart);DecryptCommand=new RelayCommand(()=>Start(false),CanStart);CancelCommand=new RelayCommand(Cancel,()=>Running);ResetCommand=new RelayCommand(Reset,()=>Loaded&&!disposed);OpenCommand=new RelayCommand(Open,CanStart);BackCommand=new RelayCommand(Back);}
+ public MainModel(IClock clock){this.clock=clock;Workbench=new(clock);EncryptCommand=new RelayCommand(()=>Start(true),CanStart);DecryptCommand=new RelayCommand(()=>Start(false),CanStart);CancelCommand=new RelayCommand(Cancel,()=>Running);ResetCommand=new RelayCommand(Reset,()=>Loaded&&!disposed);OpenCommand=new RelayCommand(Open,CanStart);BackCommand=new RelayCommand(Back);}
  private bool CanStart()=>Loaded&&!Running&&!disposed;
  partial void OnLoadedChanged(bool value)=>CommandsChanged();
  partial void OnRunningChanged(bool value)=>CommandsChanged();
@@ -34,9 +34,9 @@ public sealed record Row(int Id,string Label,int Value){public string Display=>$
 public sealed partial class WorkbenchModel:ObservableObject,IDisposable
 {
  private readonly IClock clock;private IReadOnlyList<Row> all=Array.Empty<Row>();private IDisposable? timer;private int nextId,generation;private bool disposed;
- [ObservableProperty] private IReadOnlyList<Row> rows=Array.Empty<Row>();
- [ObservableProperty] private string query="";
- [ObservableProperty] private int tick;
+ [ObservableProperty] public partial IReadOnlyList<Row> Rows { get; set; } =Array.Empty<Row>();
+ [ObservableProperty] public partial string Query { get; set; } ="";
+ [ObservableProperty] public partial int Tick { get; set; }
  public string Summary=>$"{Rows.Count} rows; tick {Tick}";
  public IRelayCommand ThousandCommand{get;}public IRelayCommand TenThousandCommand{get;}public IRelayCommand ReverseCommand{get;}public IRelayCommand SpliceCommand{get;}public IRelayCommand UpdateCommand{get;}public IRelayCommand TenHzCommand{get;}public IRelayCommand ThirtyHzCommand{get;}public IRelayCommand SixtyHzCommand{get;}public IRelayCommand StopCommand{get;}public IRelayCommand RemountCommand{get;}
  public WorkbenchModel(IClock clock){this.clock=clock;ThousandCommand=new RelayCommand(()=>Replace(1000));TenThousandCommand=new RelayCommand(()=>Replace(10000));ReverseCommand=new RelayCommand(Reverse);SpliceCommand=new RelayCommand(Splice);UpdateCommand=new RelayCommand(Update);TenHzCommand=new RelayCommand(()=>Burst(10));ThirtyHzCommand=new RelayCommand(()=>Burst(30));SixtyHzCommand=new RelayCommand(()=>Burst(60));StopCommand=new RelayCommand(Stop);RemountCommand=new RelayCommand(Remount);}
