@@ -176,6 +176,40 @@ class _BenchScreenState extends State<BenchScreen> {
     openFocus.requestFocus();
   }
 
+  Widget footer(bool narrow) {
+    final openButton = button(
+      'Open workbench',
+      flow.ready && !flow.running ? showWorkbench : null,
+      id: 'open-workbench',
+      focus: openFocus,
+    );
+    final privacy = label(
+      'Local interface. Synthetic data. Nothing is encrypted or decrypted.',
+      size: 11,
+    );
+    final renderer = label('CONTROLLED RENDERER · LOCAL STATE', size: 9);
+    return narrow
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              openButton,
+              const SizedBox(height: 10),
+              privacy,
+              const SizedBox(height: 10),
+              renderer,
+            ],
+          )
+        : Row(
+            children: [
+              openButton,
+              const SizedBox(width: 16),
+              Expanded(child: privacy),
+              const SizedBox(width: 16),
+              SizedBox(width: 130, child: renderer),
+            ],
+          );
+  }
+
   Widget operation(bool encrypt) {
     final name = encrypt ? 'Encrypt' : 'Decrypt';
     final text = encrypt ? 'Simulate encryption' : 'Simulate decryption';
@@ -367,22 +401,7 @@ class _BenchScreenState extends State<BenchScreen> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: button(
-                          'Open workbench',
-                          flow.ready && !flow.running ? showWorkbench : null,
-                          id: 'open-workbench',
-                          focus: openFocus,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      label(
-                        'Local interface. Synthetic data. Nothing is encrypted or decrypted.',
-                        size: 11,
-                      ),
-                      const SizedBox(height: 10),
-                      label('CONTROLLED RENDERER · LOCAL STATE', size: 9),
+                      footer(narrow),
                       if (open)
                         Padding(
                           key: workbenchKey,

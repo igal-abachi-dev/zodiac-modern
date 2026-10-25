@@ -34,6 +34,7 @@ public sealed class BenchRoot : Component
         Element Operation(string title, string icon, string label, string op, bool primary)
         {
             var button = B(label, () => StartFlow(op), op, s.Loaded && s.Status != "running").Height(40).HAlign(HorizontalAlignment.Stretch).Set(b => b.Style = (Style)Application.Current.Resources[primary ? "PrimaryAction" : "ActionButton"]);
+            button = button.Background(primary ? "#047857" : "#FFFFFF").Foreground(primary ? "#FFFFFF" : "#171A18");
             return Card(VStack(0, HStack(8, Icon(icon), T(title, 16).Bold()), T("SYNTHETIC INPUT", 10).Foreground("#5D6660").Margin(0, 20, 0, 9), Border(VStack(5, T(op == "encrypt" ? Reducers.Fixture : "Synthetic sample: starlight.nsx"), op == "decrypt" ? T("No disk file is opened.", 12).Foreground("#5D6660") : null)).Padding(13).MinHeight(94).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(6), button.Margin(0, 16, 0, 0)));
         }
         var decrypt = Operation("Decrypt", "unlock-keyhole", "Simulate decryption", "decrypt", false);
@@ -46,10 +47,17 @@ public sealed class BenchRoot : Component
         {
             ColumnSpacing = 20
         });
+        var openButton = B("Open workbench", () => { setOpen(true); Shell.IntoWorkbench(); }, "open-workbench", s.Loaded && s.Status != "running");
+        var privacy = T("Local interface. Synthetic data. Nothing is encrypted or decrypted.", 11).Set(t => t.TextWrapping = TextWrapping.Wrap);
+        var renderer = T("CONTROLLED RENDERER · LOCAL STATE", 9).Width(130).Set(t => t.TextWrapping = TextWrapping.Wrap);
+        Element footer = narrow ? VStack(10, openButton, privacy, renderer) : (Grid(columns: [GridSize.Auto, GridSize.Star(), GridSize.Auto], rows: [GridSize.Auto], openButton, privacy.Grid(row: 0, column: 1), renderer.Grid(row: 0, column: 2)) with
+        {
+            ColumnSpacing = 16
+        });
         return ScrollViewer(VStack(20, headerLayout, Border(HStack(7, Icon("shield-check"), T("SIMULATION · NO FILES OR CRYPTOGRAPHY.", 10))).Padding(9, 7).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(6).HAlign(HorizontalAlignment.Left),
         cardsLayout,
         Card(VStack(16, HStack(12, T(Reducers.Status(s)).AutomationId("status"), s.Status == "running" ? B("Cancel", () => { timer.Stop(); dispatch(new Cancel()); }) : null, B("Reset", () => { timer.Stop(); dispatch(new Reset()); }, enabled: s.Loaded)), Progress(s.Progress).Height(6).AutomationName("Simulation progress").Set(p => p.Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 4, 120, 87))), HStack(8, T("Simulation progress", 11), T($"{s.Progress}%", 11)))),
-        VStack(10, B("Open workbench", () => { setOpen(true); Shell.IntoWorkbench(); }, "open-workbench", s.Loaded && s.Status != "running"), T("Local interface. Synthetic data. Nothing is encrypted or decrypted.", 11), T("CONTROLLED RENDERER · LOCAL STATE", 9)),
+        footer,
         ContentDialog("About this test", T("Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved."), "") with
         {
             IsOpen = showAbout,
