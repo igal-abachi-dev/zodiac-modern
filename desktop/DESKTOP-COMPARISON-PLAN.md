@@ -1,6 +1,6 @@
 # Independent desktop implementations
 
-Updated 2026-10-24. This stage builds and checks applications before running a
+Updated 2026-10-25. This stage builds and checks applications before running a
 new cross-toolkit benchmark. The old six-host WebView2 measurements remain a
 separate frozen experiment. Tauri + Svelte is the selected WebView2 representative.
 
@@ -9,6 +9,7 @@ separate frozen experiment. Tauri + Svelte is the selected WebView2 representati
 | `Tauri-v2-Svelte5` | Tauri 2.12.4, Svelte 5.57.2, WebView2 | Own Svelte UI, Nano Stores, Ark, embedded dist |
 | `Electron` | Electron 45.0.0, Svelte 5.57.2, bundled Chromium 156 | Independently authored UI/controllers, Svelte runes, Ark, ASAR |
 | `Avalonia` | Avalonia 12.1.4, Toolkit 8.4.2, self-contained .NET 10 | Independently authored AXAML/MVVM, Fluent controls, Skia |
+| `WinUI3-cs-native-mvvm` | Windows App SDK 2.5.1, Toolkit 8.4.2, self-contained .NET 10 | Independently authored native XAML/compiled bindings, Fluent controls, unpackaged Win32 |
 
 All implement the [reference feature inventory](Tauri-v2-Svelte5/FEATURE-PARITY.md),
 including the complete workbench. Share design/fixture specifications and external
@@ -27,7 +28,7 @@ whole stacks, not an isolated graphics-engine or language effect.
    and delivery mode. Never compare only Avalonia's small apphost EXE with the
    entire Electron distribution. Include required WebView2/runtime deployment
    assumptions for Tauri. No dev servers or debug builds in the primary lane.
-3. Extend/calibrate the external collector for all three automation/presentation
+3. Extend/calibrate the external collector for all candidate automation/presentation
    trees. Validate actual HWND client geometry, clock origin and readiness.
    UIA rectangles and semantic Ready are not physical presentation timestamps.
 4. Match light opaque chrome, 960 × 640 logical client area, scaling, fixtures,
@@ -56,13 +57,13 @@ I/O or automatic updater belongs in this UI-only cohort.
 
 ## Later candidates
 
-2026-10-24 native WinUI MVVM progress: independent source and passing model
-assertions now exist in `WinUI3-cs-native-mvvm`; publication is blocked on
-Toolkit MVVMTK0045 partial-property/WinRT compatibility work. The user requested
-a pause before actual-window checks. See [the exact handoff](WinUI3-cs-native-mvvm/HANDOFF.md).
-It is not yet a built or accepted candidate.
+2026-10-25: native WinUI MVVM resumed after the session pause. Its interop blocker
+is fixed, the native build/model checks pass and actual-window correctness is
+recorded in [validation](WinUI3-cs-native-mvvm/VALIDATION.md). It joins the current
+implementation cohort; comparative measurements and physical accessibility gates
+remain open. The original pause handoff is retained as history.
 
-The directories `WinUI3-cs-native-mvvm`, `WinUI3-cs-native-reactor`,
+The directories `WinUI3-cs-native-reactor`,
 `react-native-windows`, `slint-rust`, `Dear-ImGui-dx11-12`, `Flutter`, `Qt` and
 `wxWidgets` reserve later independent implementations. They are not benchmarked
 by this stage. [Research §13.17](desktop-gui.md#1317-expanded-desktop-candidate-registry-2026-10-24)

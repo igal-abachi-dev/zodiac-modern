@@ -1304,7 +1304,7 @@ against the complete [Tauri/Svelte reference](Tauri-v2-Svelte5/FEATURE-PARITY.md
 
 | Directory | Planned comparison | Status |
 | --- | --- | --- |
-| `WinUI3-cs-native-mvvm` | C#/XAML, native WinUI 3 controls and CommunityToolkit.Mvvm | Planned; distinct from `WinUI3-webview2` |
+| `WinUI3-cs-native-mvvm` | C#/XAML, native WinUI 3 Fluent controls and CommunityToolkit.Mvvm | Implemented 2026-10-25; [build/window validation](WinUI3-cs-native-mvvm/VALIDATION.md); not performance-benchmarked; distinct from `WinUI3-webview2` |
 | `WinUI3-cs-native-reactor` | C# Microsoft.UI.Reactor declarative/MVU layer on native WinUI 3 | Planned experimental candidate |
 | `react-native-windows` | React/TypeScript, Fabric and Windows Composition | Planned; no HTML/WebView2 renderer |
 | `slint-rust` | Rust plus declarative Slint UI | Planned; renderer/features/license to pin |

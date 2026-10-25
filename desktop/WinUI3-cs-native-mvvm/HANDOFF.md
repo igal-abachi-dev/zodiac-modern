@@ -1,5 +1,10 @@
 # Resume here — 2026-10-24
 
+**Historical pause record. Resumed 2026-10-25:** the partial-property blocker is
+fixed, the native app builds and the implemented workflow/workbench window
+checks are recorded in [VALIDATION.md](VALIDATION.md). The remainder of this file
+preserves the original checkpoint; it is not the current status.
+
 User requested pausing this candidate until the session allowance resets.
 No GUI instance or benchmark is running for this project.
 

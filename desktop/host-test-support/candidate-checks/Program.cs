@@ -19,7 +19,7 @@ internal static class CandidateChecks
     static double Now()=>Stopwatch.GetTimestamp()*1000.0/Stopwatch.Frequency;
     static void Wait(Func<bool> query,int timeout=30000){double end=Now()+timeout;while(!Read(query)){if(Now()>end)throw new TimeoutException("Workload semantic endpoint");Thread.Sleep(5);}}
     static AutomationElement? Document()=>nativeUi?Automation.FromHandle(window):Automation.FromHandle(window).FindFirstDescendant(cf=>cf.ByControlType(ControlType.Document));
-    static AutomationElement? Named(string name,ControlType type)=>nativeUi&&name=="Close"?Id("about-close"):Document()?.FindFirstDescendant(cf=>cf.ByName(name).And(cf.ByControlType(type)));
+    static AutomationElement? Named(string name,ControlType type)=>nativeUi&&name=="Close"?(Id("about-close")??Id("CloseButton")):Document()?.FindFirstDescendant(cf=>cf.ByName(name).And(cf.ByControlType(type)));
     static AutomationElement? Id(string id)=>Document()?.FindFirstDescendant(cf=>cf.ByAutomationId(id));
     static void Click(AutomationElement element)
     {
@@ -34,25 +34,27 @@ internal static class CandidateChecks
         var inputs=new[]{new Native.Input{Mouse=new Native.MouseInput{Flags=2}},new Native.Input{Mouse=new Native.MouseInput{Flags=4}}};
         inputAt=Now();if(Native.SendInput(2,inputs,Marshal.SizeOf<Native.Input>())!=2)throw new InvalidOperationException("Pointer input failed");
     }
-    static void Button(string name){AutomationElement? element=null;Wait(()=>{element=Named(name,ControlType.Button);return element is not null&&element.Properties.IsEnabled.ValueOrDefault;});Click(element!);}
+    static void Button(string name){AutomationElement? element=null;try{Wait(()=>{element=Named(name,ControlType.Button);return element is not null&&element.Properties.IsEnabled.ValueOrDefault;});}catch(TimeoutException error){throw new InvalidOperationException("Button unavailable: "+name,error);}Click(element!);}
     static string Summary()=>nativeUi?(Id("workload-summary")?.Properties.Name.ValueOrDefault??""):string.Join("",(Id("workload-summary")?.FindAllDescendants(cf=>cf.ByControlType(ControlType.Text))??[]).Select(e=>e.Properties.Name.ValueOrDefault));
     static bool Summary(int count,int tick)=>Summary()==$"{count} rows; tick {tick}";
     static int? Tick(int count){var text=Summary();var prefix=$"{count} rows; tick ";return text.StartsWith(prefix,StringComparison.Ordinal)&&int.TryParse(text[prefix.Length..],out var tick)?tick:null;}
-    static int FirstId()
+    static int? FirstId()
     {
         var row=nativeUi?Id("workload-rows")?.FindFirstDescendant(cf=>cf.ByControlType(ControlType.Text)):Id("workload-rows")?.FindFirstChild(cf=>cf.ByControlType(ControlType.ListItem));
-        if(row is null)throw new InvalidOperationException("Missing first row");
+        if(row is null)return null; // A reset can temporarily detach row peers.
         var text=row.Properties.Name.ValueOrDefault??"";
         if(!text.Contains("row-",StringComparison.Ordinal))text=string.Join("",row.FindAllDescendants(cf=>cf.ByControlType(ControlType.Text)).Select(e=>e.Properties.Name.ValueOrDefault));
-        var first=text.IndexOf("row-",StringComparison.Ordinal);if(first<0)throw new InvalidOperationException("Missing keyed label");
-        first+=4;var end=first;while(end<text.Length&&char.IsAsciiDigit(text[end]))end++;return int.Parse(text[first..end]);
+        var first=text.IndexOf("row-",StringComparison.Ordinal);if(first<0)return null;
+        first+=4;var end=first;while(end<text.Length&&char.IsAsciiDigit(text[end]))end++;return int.TryParse(text[first..end],out var id)?id:null;
     }
     [StructLayout(LayoutKind.Sequential)] struct Key {public ushort Vk,Scan;public uint Flags,Time;public nuint Extra;}
     [StructLayout(LayoutKind.Explicit,Size=40)] struct KeyInput{[FieldOffset(0)]public uint Type;[FieldOffset(8)]public Key Key;}
     [DllImport("user32.dll",EntryPoint="SendInput")]static extern uint Keys(uint count,KeyInput[] input,int size);
     static void Query(string text)
     {
-        Click(Read(()=>Named("Filter synthetic rows",ControlType.Edit))??throw new InvalidOperationException("Missing filter"));
+        var edit=Read(()=>Named("Filter synthetic rows",ControlType.Edit))??throw new InvalidOperationException("Missing filter");
+        Click(edit);
+        Wait(()=>edit.Properties.HasKeyboardFocus.ValueOrDefault);
         var keys=new List<KeyInput>();
         void KeyEvent(ushort vk,bool up=false)=>keys.Add(new KeyInput{Type=1,Key=new Key{Vk=vk,Flags=up?2u:0u}});
         KeyEvent(0x11);KeyEvent(0x41);KeyEvent(0x41,true);KeyEvent(0x11,true);KeyEvent(8);KeyEvent(8,true);
@@ -137,7 +139,16 @@ internal static class CandidateChecks
             Wait(()=>Named("Close",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
             Button("Close");Wait(()=>Named("About this test",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
             ResizeClient(480,640);
-            Wait(()=>{var decrypt=Id("decrypt")!.Properties.BoundingRectangle.Value;var encrypt=Id("encrypt")!.Properties.BoundingRectangle.Value;return encrypt.Y>=decrypt.Bottom;});
+            if(config.EngineKind?.Contains("WinUI",StringComparison.Ordinal)==true){
+                System.Drawing.RectangleF VisibleBounds(string id){var element=Id(id)!;element.Patterns.ScrollItem.Pattern.ScrollIntoView();System.Drawing.RectangleF rect=default;Wait(()=>{rect=element.Properties.BoundingRectangle.ValueOrDefault;return rect.Width>0&&rect.Height>0&&!element.Properties.IsOffscreen.ValueOrDefault;});return rect;}
+                var scroll=Id("PageScroll")!.Patterns.Scroll.Pattern;
+                var decrypt=VisibleBounds("decrypt");var before=scroll.VerticalScrollPercent.Value;
+                var encrypt=VisibleBounds("encrypt");var after=scroll.VerticalScrollPercent.Value;
+                if(Math.Abs(decrypt.X-encrypt.X)>2||after<=before)throw new InvalidOperationException("Narrow WinUI cards did not stack with vertical scrolling");
+                scroll.SetScrollPercent(-1,0);
+                Wait(()=>scroll.VerticalScrollPercent.Value<=0.1);
+                Thread.Sleep(200); // Visual QA after native scroll presentation.
+            }else Wait(()=>{var decrypt=Id("decrypt")!.Properties.BoundingRectangle.Value;var encrypt=Id("encrypt")!.Properties.BoundingRectangle.Value;return encrypt.Y>=decrypt.Bottom;});
             Capture("narrow.png");
             ResizeClient(960,640);Wait(()=>Named("Ready",ControlType.Text)!=null);
             report["layoutChecks"]="dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width";
@@ -149,7 +160,7 @@ internal static class CandidateChecks
             Capture("main.png");
             report["status"]="passed";exit=0;
         }
-        catch(Exception error){report["status"]="failed";report["error"]=error.GetType().Name+": "+error.Message;report["stack"]=error.StackTrace;try{report["lastTree"]=Document()?.FindAllDescendants().Take(120).Select(e=>new{type=e.Properties.ControlType.ValueOrDefault.ToString(),name=e.Properties.Name.ValueOrDefault,id=e.Properties.AutomationId.ValueOrDefault,offscreen=e.Properties.IsOffscreen.ValueOrDefault}).ToArray();}catch{}}
+        catch(Exception error){report["status"]="failed";report["error"]=error.GetType().Name+": "+error.Message;report["stack"]=error.StackTrace;try{report["lastTree"]=Document()?.FindAllDescendants().Take(120).Select(e=>new{type=e.Properties.ControlType.ValueOrDefault.ToString(),name=e.Properties.Name.ValueOrDefault,id=e.Properties.AutomationId.ValueOrDefault,enabled=e.Properties.IsEnabled.ValueOrDefault,focus=e.Properties.HasKeyboardFocus.ValueOrDefault,offscreen=e.Properties.IsOffscreen.ValueOrDefault}).ToArray();}catch{}}
         finally
         {
             if(window!=0)Native.PostMessageW(window,0x10,0,0);

@@ -1,0 +1,90 @@
+{
+  "date": "2026-10-25",
+  "scope": "independent unpackaged native WinUI implementation/window correctness; no comparative performance or physical AT acceptance",
+  "rawEvidence": ".cache/accepted-final-20261025/result.json",
+  "windowChecks": {
+    "status": "passed",
+    "mainChecks": "About Escape/Close/focus; encrypt complete; decrypt cancel; reset",
+    "extraChecks": "10/60 Hz update and Stop; empty filter; close while burst active; fresh reopen/reset IDs and tick; focus restoration; main workflow after workbench",
+    "layoutChecks": "dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width",
+    "dpi": 192,
+    "engineKind": "native WinUI 3 / C# MVVM",
+    "hostExited": true,
+    "helpersExited": true,
+    "exitCode": 0,
+    "providerGaps": []
+  },
+  "modelChecks": "passed: fake-clock workflow, bounded keyed rows, filter, update, rates, cancellation/disposal and reopening",
+  "build": {
+    "mode": "Release unpackaged self-contained .NET and Windows App SDK; untrimmed JIT",
+    "sdk": "10.0.402",
+    "assemblySha256": "C10587D87B1E69E7978B34C2597FC30BE50C3D1D57BAC9A316D6AC142E85C8FD",
+    "windowsAppSdk": "2.5.1",
+    "mvvm": "8.4.2",
+    "schema": 1,
+    "comparison": "Not run",
+    "lockSha256": "6BF0B07529BD59718F04E1798D01A700E1FF3CE2648A610330646A048454CA84"
+  },
+  "publishedFiles": 530,
+  "publishedManifestSha256": "08c20a6a131fd3db5cb8be25203cf82627e39b7a10a2309d0305fa5235bd6a98",
+  "locks": {
+    "packages.lock.json": "6bf0b07529bd59718f04e1798d01a700e1ff3ce2648a610330646a048454ca84",
+    "Tests/packages.lock.json": "8e50f212e122ea7051a3ee504750028d21818486036be1d11663f6e70f469884"
+  },
+  "runtimeConfiguration": {
+    "runtimeOptions": {
+      "tfm": "net10.0",
+      "includedFrameworks": [
+        {
+          "name": "Microsoft.NETCore.App",
+          "version": "10.0.13"
+        }
+      ],
+      "configProperties": {
+        "MVVMTOOLKIT_ENABLE_INOTIFYPROPERTYCHANGING_SUPPORT": true,
+        "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
+        "System.Runtime.Serialization.EnableUnsafeBinaryFormatterSerialization": false,
+        "CSWINRT_USE_WINDOWS_UI_XAML_PROJECTIONS": false
+      }
+    }
+  },
+  "fontProvenance": {
+    "conversion": "WOFF2 decompression only; unchanged glyphs/weight; original font timestamps retained",
+    "fonttools": "4.67.0",
+    "files": [
+      {
+        "source": "inter-latin-400-normal.woff2",
+        "package": "@fontsource/inter@5.3.0",
+        "sourceSha256": "8909904ab6c872eb994093482a88a28eca2cd95912d7b6fecd72103b0dc07edc",
+        "output": "inter-latin-400-normal.ttf",
+        "outputSha256": "03693cc5689d8c89a20ae55fe945fe59884eec8ad7d7dabb4761e066e88f49ff",
+        "weight": 400
+      },
+      {
+        "source": "inter-latin-500-normal.woff2",
+        "package": "@fontsource/inter@5.3.0",
+        "sourceSha256": "f3779f1efccc4bdcdf9c0a02ab95bf6bd092ed09c48c08cedc725889edd1d19f",
+        "output": "inter-latin-500-normal.ttf",
+        "outputSha256": "7e22abfa3709ec2c67d18128ed3b7e522a8efa602c7f46fb933bf71f5f8f2e3e",
+        "weight": 500
+      },
+      {
+        "source": "inter-latin-600-normal.woff2",
+        "package": "@fontsource/inter@5.3.0",
+        "sourceSha256": "f9a06e79cd3a2a20951c0f0e28f66dd0e6d3fda73911d640a2125c8fcb78f21a",
+        "output": "inter-latin-600-normal.ttf",
+        "outputSha256": "de8a61379f04664868958cc13d22cd9d1d79b4064e1ebd7c46588399f2a12fd5",
+        "weight": 600
+      },
+      {
+        "source": "noto-sans-hebrew-hebrew-400-normal.woff2",
+        "package": "@fontsource/noto-sans-hebrew@5.3.0",
+        "sourceSha256": "330b5c315ebac6a102bea95898207a4fdae4a6180d27783dfbb2a700deb61845",
+        "output": "noto-sans-hebrew-hebrew-400-normal.ttf",
+        "outputSha256": "4df1fbfde811afbf4023ed6bfde89ce9614c94775fa57dfdfc473575d5d076d0",
+        "weight": 400
+      }
+    ]
+  },
+  "visualReview": "main and narrow synthetic captures inspected; native primary hover contrast corrected"
+}

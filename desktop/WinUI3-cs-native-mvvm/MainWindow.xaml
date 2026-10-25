@@ -1,26 +1,153 @@
-<Window x:Class="NeutronStar.WinUINative.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:model="using:NeutronStar.WinUINative.Models" xmlns:local="using:NeutronStar.WinUINative">
- <Grid x:Name="Root" Background="#F8FAF9" RequestedTheme="Light">
-  <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-   <StackPanel Margin="28" MaxWidth="1044" Spacing="20">
-    <Grid x:Name="Header" ColumnDefinitions="*,Auto" RowSpacing="12">
-     <StackPanel><StackPanel Orientation="Horizontal" Spacing="12"><Border Width="40" Height="40" CornerRadius="8" Background="#F1F4F2" BorderBrush="#DCE3DE" BorderThickness="1"><local:LucideIcon Kind="orbit" Width="20" Height="20"/></Border><TextBlock Text="NeutronStar GUI Bench" FontFamily="{StaticResource HeadingFont}" FontSize="24" VerticalAlignment="Center"/></StackPanel><TextBlock Text="A UI-only simulation for comparing desktop frontends." Foreground="#5D6660" FontFamily="{StaticResource BodyFont}" FontSize="14" Margin="0,8,0,0" TextWrapping="Wrap"/></StackPanel>
-     <Button x:Name="AboutTrigger" Grid.Column="1" Click="AboutClicked" VerticalAlignment="Top" AutomationProperties.Name="About this test"><StackPanel Orientation="Horizontal" Spacing="8"><local:LucideIcon Kind="info"/><TextBlock Text="About this test"/></StackPanel></Button>
-    </Grid>
-    <Border HorizontalAlignment="Left" Background="#F1F4F2" BorderBrush="#DCE3DE" BorderThickness="1" CornerRadius="6" Padding="9,7"><StackPanel Orientation="Horizontal" Spacing="7"><local:LucideIcon Kind="shield-check" Width="14" Height="14"/><TextBlock Text="SIMULATION · NO FILES OR CRYPTOGRAPHY." FontFamily="{StaticResource BodyFont}" FontSize="10"/></StackPanel></Border>
-    <Grid x:Name="Cards" ColumnDefinitions="*,*" ColumnSpacing="20" RowSpacing="20">
-     <Border Style="{StaticResource Card}"><StackPanel><StackPanel Orientation="Horizontal" Spacing="8"><local:LucideIcon Kind="unlock-keyhole"/><TextBlock Text="Decrypt" FontSize="16" FontFamily="{StaticResource HeadingFont}"/></StackPanel><TextBlock Style="{StaticResource Eyebrow}"/><Border Style="{StaticResource Fixture}"><StackPanel Spacing="5"><TextBlock Text="Synthetic sample: starlight.nsx" FontFamily="{StaticResource BodyFont}" FontSize="14"/><TextBlock Text="No disk file is opened." FontSize="12" Foreground="#5D6660"/></StackPanel></Border><Button Style="{StaticResource ActionButton}" Command="{x:Bind ViewModel.DecryptCommand}" AutomationProperties.Name="Simulate decryption" AutomationProperties.AutomationId="decrypt"><StackPanel Orientation="Horizontal" Spacing="8"><local:LucideIcon Kind="arrow-down-to-line"/><TextBlock Text="Simulate decryption"/></StackPanel></Button></StackPanel></Border>
-     <Border x:Name="EncryptCard" Grid.Column="1" Style="{StaticResource Card}"><StackPanel><StackPanel Orientation="Horizontal" Spacing="8"><local:LucideIcon Kind="lock-keyhole"/><TextBlock Text="Encrypt" FontSize="16" FontFamily="{StaticResource HeadingFont}"/></StackPanel><TextBlock Style="{StaticResource Eyebrow}"/><Border Style="{StaticResource Fixture}"><TextBlock Text="{x:Bind ViewModel.Sample}" FontFamily="{StaticResource BodyFont}" FontSize="14" TextWrapping="Wrap"/></Border><Button Style="{StaticResource PrimaryAction}" Command="{x:Bind ViewModel.EncryptCommand}" AutomationProperties.Name="Simulate encryption" AutomationProperties.AutomationId="encrypt"><StackPanel Orientation="Horizontal" Spacing="8"><local:LucideIcon Kind="arrow-up-from-line" Stroke="White"/><TextBlock Text="Simulate encryption"/></StackPanel></Button></StackPanel></Border>
-    </Grid>
-    <Border Style="{StaticResource Card}"><StackPanel Spacing="16"><Grid ColumnDefinitions="*,Auto"><StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center"><Ellipse Width="7" Height="7" Fill="#047857"/><TextBlock Text="{x:Bind ViewModel.Status,Mode=OneWay}" FontFamily="{StaticResource BodyFont}" FontSize="14" AutomationProperties.AutomationId="status" AutomationProperties.LiveSetting="Polite"/></StackPanel><StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8"><Button Content="Cancel" Command="{x:Bind ViewModel.CancelCommand}" Visibility="{x:Bind Show(ViewModel.Running),Mode=OneWay}"/><Button Content="Reset" Command="{x:Bind ViewModel.ResetCommand}"/></StackPanel></Grid><StackPanel Spacing="8"><ProgressBar Minimum="0" Maximum="100" Value="{x:Bind ViewModel.Progress,Mode=OneWay}" Height="6" Foreground="#047857" Background="#F1F4F2" AutomationProperties.Name="Simulation progress"/><Grid ColumnDefinitions="*,Auto"><TextBlock Text="Simulation progress" FontSize="11" Foreground="#5D6660"/><TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Percent,Mode=OneWay}" FontSize="11" Foreground="#5D6660"/></Grid></StackPanel></StackPanel></Border>
-    <Grid x:Name="Footer" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16" RowSpacing="10"><Button x:Name="OpenButton" Content="Open workbench" Command="{x:Bind ViewModel.OpenCommand}"/><TextBlock x:Name="Privacy" Grid.Column="1" Text="Local interface. Synthetic data. Nothing is encrypted or decrypted." FontSize="11" Foreground="#5D6660" TextWrapping="Wrap" VerticalAlignment="Center"/><TextBlock x:Name="Renderer" Grid.Column="2" Text="CONTROLLED RENDERER · LOCAL STATE" FontSize="9" Foreground="#5D6660" VerticalAlignment="Center"/></Grid>
-    <Border x:Name="WorkbenchSection" Visibility="{x:Bind Show(ViewModel.WorkbenchOpen),Mode=OneWay}" BorderBrush="#DCE3DE" BorderThickness="0,1,0,0" Padding="0,24,0,0"><StackPanel Spacing="16">
-     <Grid ColumnDefinitions="*,Auto"><StackPanel><TextBlock Text="List and filter workbench" FontSize="20" FontFamily="{StaticResource HeadingFont}"/><TextBlock Text="Deterministic synthetic rows. No files, network, cryptography or native commands." Foreground="#5D6660" TextWrapping="Wrap" Margin="0,8,0,0"/></StackPanel><Button Grid.Column="1" Content="Back to main screen" Command="{x:Bind ViewModel.BackCommand}"/></Grid>
-     <TextBlock Text="Workbench ready"/>
-     <local:WrapPanel><Button Content="1,000 rows" Command="{x:Bind ViewModel.Workbench.ThousandCommand,Mode=OneWay}"/><Button Content="10,000 rows" Command="{x:Bind ViewModel.Workbench.TenThousandCommand,Mode=OneWay}"/><Button Content="Reverse" Command="{x:Bind ViewModel.Workbench.ReverseCommand,Mode=OneWay}"/><Button Content="Splice 10" Command="{x:Bind ViewModel.Workbench.SpliceCommand,Mode=OneWay}"/><Button Content="Update 10%" Command="{x:Bind ViewModel.Workbench.UpdateCommand,Mode=OneWay}"/><Button Content="10 Hz / 2 s" Command="{x:Bind ViewModel.Workbench.TenHzCommand,Mode=OneWay}"/><Button Content="30 Hz / 2 s" Command="{x:Bind ViewModel.Workbench.ThirtyHzCommand,Mode=OneWay}"/><Button Content="60 Hz / 2 s" Command="{x:Bind ViewModel.Workbench.SixtyHzCommand,Mode=OneWay}"/><Button Content="Stop" Command="{x:Bind ViewModel.Workbench.StopCommand,Mode=OneWay}"/><Button Content="Remount workload" Command="{x:Bind ViewModel.Workbench.RemountCommand,Mode=OneWay}"/></local:WrapPanel>
-     <Border Style="{StaticResource Card}"><StackPanel Spacing="10"><TextBlock Text="Filter synthetic rows"/><TextBox Text="{x:Bind ViewModel.Workbench.Query,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Filter synthetic rows" AutomationProperties.AutomationId="workload-query"/><TextBlock Text="{x:Bind ViewModel.Workbench.Summary,Mode=OneWay}" AutomationProperties.AutomationId="workload-summary"/><TextBlock Text="Case-sensitive label filtering. Replacement advances row IDs; remount resets IDs, query and tick." FontSize="12" Foreground="#5D6660" TextWrapping="Wrap"/></StackPanel></Border>
-     <ItemsControl ItemsSource="{x:Bind ViewModel.Workbench.Rows,Mode=OneWay}" AutomationProperties.Name="Synthetic rows" AutomationProperties.AutomationId="workload-rows"><ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel/></ItemsPanelTemplate></ItemsControl.ItemsPanel><ItemsControl.ItemTemplate><DataTemplate x:DataType="model:Row"><Border BorderBrush="#DCE3DE" BorderThickness="1,0,1,1" Background="White" Padding="12,6"><TextBlock Text="{x:Bind Display}" FontFamily="{StaticResource BodyFont}" FontSize="14"/></Border></DataTemplate></ItemsControl.ItemTemplate></ItemsControl>
-    </StackPanel></Border>
-   </StackPanel>
-  </ScrollViewer>
- </Grid>
+<?xml version="1.0" ?>
+<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:model="using:NeutronStar.WinUINative.Models" xmlns:local="using:NeutronStar.WinUINative" x:Class="NeutronStar.WinUINative.MainWindow">
+  <Grid x:Name="Root" Background="#F8FAF9" RequestedTheme="Light">
+    <ScrollViewer x:Name="PageScroll" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+      <StackPanel Margin="28" MaxWidth="1044" Spacing="20">
+        <Grid x:Name="Header" ColumnDefinitions="*,Auto" RowSpacing="12">
+          <StackPanel>
+            <StackPanel Orientation="Horizontal" Spacing="12">
+              <Border Width="40" Height="40" CornerRadius="8" Background="#F1F4F2" BorderBrush="#DCE3DE" BorderThickness="1">
+                <local:LucideIcon Kind="orbit" Width="20" Height="20"/>
+              </Border>
+              <TextBlock Text="NeutronStar GUI Bench" FontFamily="{StaticResource HeadingFont}" FontSize="24" VerticalAlignment="Center"/>
+            </StackPanel>
+            <TextBlock Text="A UI-only simulation for comparing desktop frontends." Foreground="#5D6660" FontFamily="{StaticResource BodyFont}" FontSize="14" Margin="0,8,0,0" TextWrapping="Wrap"/>
+          </StackPanel>
+          <Button x:Name="AboutTrigger" Grid.Column="1" Click="AboutClicked" VerticalAlignment="Top" AutomationProperties.Name="About this test">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <local:LucideIcon Kind="info"/>
+              <TextBlock Text="About this test"/>
+            </StackPanel>
+          </Button>
+        </Grid>
+        <Border HorizontalAlignment="Left" Background="#F1F4F2" BorderBrush="#DCE3DE" BorderThickness="1" CornerRadius="6" Padding="9,7">
+          <StackPanel Orientation="Horizontal" Spacing="7">
+            <local:LucideIcon Kind="shield-check" Width="14" Height="14"/>
+            <TextBlock Text="SIMULATION · NO FILES OR CRYPTOGRAPHY." FontFamily="{StaticResource BodyFont}" FontSize="10"/>
+          </StackPanel>
+        </Border>
+        <Grid x:Name="Cards" ColumnDefinitions="*,*" ColumnSpacing="20" RowSpacing="20">
+          <Border Style="{StaticResource Card}">
+            <StackPanel>
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <local:LucideIcon Kind="unlock-keyhole"/>
+                <TextBlock Text="Decrypt" FontSize="16" FontFamily="{StaticResource HeadingFont}"/>
+              </StackPanel>
+              <TextBlock Style="{StaticResource Eyebrow}"/>
+              <Border Style="{StaticResource Fixture}">
+                <StackPanel Spacing="5">
+                  <TextBlock Text="Synthetic sample: starlight.nsx" FontFamily="{StaticResource BodyFont}" FontSize="14"/>
+                  <TextBlock Text="No disk file is opened." FontSize="12" Foreground="#5D6660"/>
+                </StackPanel>
+              </Border>
+              <Button Style="{StaticResource ActionButton}" Command="{x:Bind ViewModel.DecryptCommand}" AutomationProperties.Name="Simulate decryption" AutomationProperties.AutomationId="decrypt">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <local:LucideIcon Kind="arrow-down-to-line"/>
+                  <TextBlock Text="Simulate decryption"/>
+                </StackPanel>
+              </Button>
+            </StackPanel>
+          </Border>
+          <Border x:Name="EncryptCard" Grid.Column="1" Style="{StaticResource Card}">
+            <StackPanel>
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <local:LucideIcon Kind="lock-keyhole"/>
+                <TextBlock Text="Encrypt" FontSize="16" FontFamily="{StaticResource HeadingFont}"/>
+              </StackPanel>
+              <TextBlock Style="{StaticResource Eyebrow}"/>
+              <Border Style="{StaticResource Fixture}">
+                <TextBlock Text="{x:Bind ViewModel.Sample}" FontFamily="{StaticResource BodyFont}" FontSize="14" TextWrapping="Wrap"/>
+              </Border>
+              <Button Style="{StaticResource PrimaryAction}" Command="{x:Bind ViewModel.EncryptCommand}" AutomationProperties.Name="Simulate encryption" AutomationProperties.AutomationId="encrypt">
+                <Button.Resources>
+                  <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#065F46"/>
+                  <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+                  <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="#065F46"/>
+                  <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#064E3B"/>
+                  <SolidColorBrush x:Key="ButtonForegroundPressed" Color="White"/>
+                  <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#064E3B"/>
+                </Button.Resources>
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <local:LucideIcon Kind="arrow-up-from-line" Stroke="White"/>
+                  <TextBlock Text="Simulate encryption"/>
+                </StackPanel>
+              </Button>
+            </StackPanel>
+          </Border>
+        </Grid>
+        <Border Style="{StaticResource Card}">
+          <StackPanel Spacing="16">
+            <Grid ColumnDefinitions="*,Auto">
+              <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                <Ellipse Width="7" Height="7" Fill="#047857"/>
+                <TextBlock Text="{x:Bind ViewModel.Status,Mode=OneWay}" FontFamily="{StaticResource BodyFont}" FontSize="14" AutomationProperties.AutomationId="status" AutomationProperties.LiveSetting="Polite"/>
+              </StackPanel>
+              <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+                <Button Content="Cancel" Command="{x:Bind ViewModel.CancelCommand}" Visibility="{x:Bind Show(ViewModel.Running),Mode=OneWay}"/>
+                <Button Content="Reset" Command="{x:Bind ViewModel.ResetCommand}"/>
+              </StackPanel>
+            </Grid>
+            <StackPanel Spacing="8">
+              <ProgressBar Minimum="0" Maximum="100" Value="{x:Bind ViewModel.Progress,Mode=OneWay}" Height="6" Foreground="#047857" Background="#F1F4F2" AutomationProperties.Name="Simulation progress"/>
+              <Grid ColumnDefinitions="*,Auto">
+                <TextBlock Text="Simulation progress" FontSize="11" Foreground="#5D6660"/>
+                <TextBlock Grid.Column="1" Text="{x:Bind ViewModel.Percent,Mode=OneWay}" FontSize="11" Foreground="#5D6660"/>
+              </Grid>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+        <Grid x:Name="Footer" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16" RowSpacing="10">
+          <Button x:Name="OpenButton" Content="Open workbench" Command="{x:Bind ViewModel.OpenCommand}"/>
+          <TextBlock x:Name="Privacy" Grid.Column="1" Text="Local interface. Synthetic data. Nothing is encrypted or decrypted." FontSize="11" Foreground="#5D6660" TextWrapping="Wrap" VerticalAlignment="Center"/>
+          <TextBlock x:Name="Renderer" Grid.Column="2" Text="CONTROLLED RENDERER · LOCAL STATE" FontSize="9" Foreground="#5D6660" VerticalAlignment="Center"/>
+        </Grid>
+        <Border x:Name="WorkbenchSection" Visibility="{x:Bind Show(ViewModel.WorkbenchOpen),Mode=OneWay}" BorderBrush="#DCE3DE" BorderThickness="0,1,0,0" Padding="0,24,0,0">
+          <StackPanel Spacing="16">
+            <Grid ColumnDefinitions="*,Auto">
+              <StackPanel>
+                <TextBlock Text="List and filter workbench" FontSize="20" FontFamily="{StaticResource HeadingFont}"/>
+                <TextBlock Text="Deterministic synthetic rows. No files, network, cryptography or native commands." Foreground="#5D6660" TextWrapping="Wrap" Margin="0,8,0,0"/>
+              </StackPanel>
+              <Button Grid.Column="1" Content="Back to main screen" Command="{x:Bind ViewModel.BackCommand}"/>
+            </Grid>
+            <TextBlock Text="Workbench ready"/>
+            <local:WrapPanel>
+              <Button Content="1,000 rows" Command="{x:Bind ViewModel.Workbench.ThousandCommand,Mode=OneWay}"/>
+              <Button Content="10,000 rows" Command="{x:Bind ViewModel.Workbench.TenThousandCommand,Mode=OneWay}"/>
+              <Button Content="Reverse" Command="{x:Bind ViewModel.Workbench.ReverseCommand,Mode=OneWay}"/>
+              <Button Content="Splice 10" Command="{x:Bind ViewModel.Workbench.SpliceCommand,Mode=OneWay}"/>
+              <Button Content="Update 10%" Command="{x:Bind ViewModel.Workbench.UpdateCommand,Mode=OneWay}"/>
+              <Button Content="10 Hz / 2 s" Command="{x:Bind ViewModel.Workbench.TenHzCommand,Mode=OneWay}"/>
+              <Button Content="30 Hz / 2 s" Command="{x:Bind ViewModel.Workbench.ThirtyHzCommand,Mode=OneWay}"/>
+              <Button Content="60 Hz / 2 s" Command="{x:Bind ViewModel.Workbench.SixtyHzCommand,Mode=OneWay}"/>
+              <Button Content="Stop" Command="{x:Bind ViewModel.Workbench.StopCommand,Mode=OneWay}"/>
+              <Button Content="Remount workload" Command="{x:Bind ViewModel.Workbench.RemountCommand,Mode=OneWay}"/>
+            </local:WrapPanel>
+            <Border Style="{StaticResource Card}">
+              <StackPanel Spacing="10">
+                <TextBlock Text="Filter synthetic rows"/>
+                <TextBox Text="{x:Bind ViewModel.Workbench.Query,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" AutomationProperties.Name="Filter synthetic rows" AutomationProperties.AutomationId="workload-query"/>
+                <TextBlock Text="{x:Bind ViewModel.Workbench.Summary,Mode=OneWay}" AutomationProperties.AutomationId="workload-summary"/>
+                <TextBlock Text="Case-sensitive label filtering. Replacement advances row IDs; remount resets IDs, query and tick." FontSize="12" Foreground="#5D6660" TextWrapping="Wrap"/>
+              </StackPanel>
+            </Border>
+            <ItemsControl ItemsSource="{x:Bind ViewModel.Workbench.Rows,Mode=OneWay}" AutomationProperties.Name="Synthetic rows" AutomationProperties.AutomationId="workload-rows">
+              <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <StackPanel/>
+                </ItemsPanelTemplate>
+              </ItemsControl.ItemsPanel>
+              <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="model:Row">
+                  <Border BorderBrush="#DCE3DE" BorderThickness="1,0,1,1" Background="White" Padding="12,6">
+                    <TextBlock Text="{x:Bind Display}" FontFamily="{StaticResource BodyFont}" FontSize="14"/>
+                  </Border>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+          </StackPanel>
+        </Border>
+      </StackPanel>
+    </ScrollViewer>
+  </Grid>
 </Window>

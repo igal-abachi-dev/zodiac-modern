@@ -1,6 +1,8 @@
 # Independent desktop correctness checks
 
-From this directory, run `./Run.ps1 -Candidate Both`, `Avalonia` or `Electron`.
+From this directory, run `./Run.ps1 -Candidate Both`, `Avalonia`, `Electron` or
+`WinUI`. `Both` preserves the original Avalonia/Electron pair; select `WinUI`
+explicitly for the unpackaged native WinUI MVVM candidate.
 Build the applications first. Requires the pinned .NET SDK and restores locked
 FlaUI 5 UIA3 dependencies. It opens one actual app at a time and uses the pointer
 and keyboard; leave that window undisturbed. `-LayoutOnly` skips workflow/list
@@ -16,6 +18,9 @@ Native Avalonia's tree has no browser Document node, and Windows' title-bar Clos
 must be distinguished from the dialog Close button. Native visibility/scroll
 changes also need layout stabilization before physical pointer input. The checker
 handles those differences without modifying application state or adding app hooks.
+WinUI's ContentDialog also has the standard `CloseButton` ID, list peer resets
+are polled, keyboard input waits for focus, and off-screen card geometry is
+validated with native scrolling/alignment instead of unsupported rectangles.
 Capture uses HWND bounds; UIA bounds need not include the same non-client region.
 
 This is correctness/visual evidence, **not the comparative measurement harness**.
