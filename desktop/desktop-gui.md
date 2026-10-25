@@ -1664,3 +1664,55 @@ the Tauri frontend or share a runtime UI package/dist. Match visible workflows,
 fixtures, design tokens and accessible controls, then assess startup, whole-tree
 resources, interactions, lifecycle/accessibility and DX together. Use free
 standard controls and record their actual maintenance/integration cost.
+
+### 13.18 Reactor and Flutter implementation lessons (2026-10-26)
+
+The independent [Reactor](WinUI3-cs-native-reactor/README.md) and
+[Flutter](Flutter/README.md) candidates implement the same complete Tauri/Svelte
+reference, including the unvirtualized 1k/10k list/filter workbench. They share
+fixture/design specifications and local font/icon assets, not runtime UI/state
+code. These are implementation/correctness findings, not performance rankings.
+
+- **Reactor is C# over native WinUI, not React or a webview.** The selected
+  Microsoft.UI.Reactor `0.1.0-preview.16` uses components/hooks, immutable reducers
+  and controlled overlays. Windows App SDK `2.5.1` provides Fluent controls in an
+  unpackaged Win32 application. Its preview API/support risk remains distinct
+  from the established MVVM Toolkit candidate. Reference:
+  [Microsoft Reactor source](https://github.com/microsoft/microsoft-ui-reactor).
+- **Flutter app code is Dart.** Stable `3.47.8` / Dart `3.13.7` builds AOT Release
+  code and uses Flutter's renderer with stock free Material 3 controls. The small
+  generated C++ runner supplies the HWND; it does not make the application a C++
+  UI or a WebView2 host. Local trusted Lucide SVGs use pinned `flutter_svg 2.3.0`.
+  Reference: [official Windows build guide](https://docs.flutter.dev/platform-integration/windows/building).
+- **Readiness must include local assets and each host's presentation policy.**
+  Flutter loads bundled fonts/icons before publishing readiness and retains its
+  standard first-frame window-show callback. A short window-visible → Ready
+  interval alone would therefore be misleading. Record process creation,
+  first visible window, content and semantic Ready separately. UIA/screenshot
+  correctness is not physical input-to-presentation measurement.
+- **Accessibility trees are part of the implementation.** A raw WinUI layout
+  panel is not necessarily an accessible named container. Reactor's row group
+  needs an actual SemanticPanel peer. On the tested Flutter Windows build,
+  supplied `Semantics.identifier` values did not become UIA AutomationId values;
+  the external checker uses actual names/roles instead. Avoid expensive whole-row
+  tree enumeration just to read a single summary. None of this substitutes for
+  Narrator/NVDA, IME or high-contrast trials.
+- **DIPs and queued UI commits need explicit handling.** Reactor's desktop window
+  width was in device pixels at the observed 200% scale; breakpoints now use
+  DPI-normalized client width. A timer's cancellation can precede the committed
+  UI render. Its accessible Stop help text reports committed active/stopped state
+  before the external stability assertion. Synthetic Windows input uses proper
+  scan codes and held modifier keys; malformed zero-scan input is not evidence
+  of a framework's keyboard bug.
+- **Freeze the complete deployment and tools.** Self-contained .NET brings CLR
+  and Windows App SDK files; Flutter needs its engine DLL and data/assets. Small
+  EXE sizes are not delivery sizes. The machine's Visual Studio/.NET installation
+  changed during this work; the new Reactor/checker pin is SDK `10.0.403`.
+  Align or explicitly disclose .NET runtime versions before comparing MVVM,
+  Reactor and Avalonia. Preserve the earlier frozen measurement cohorts.
+
+Actual acceptance, retained failed attempts and remaining gates are in
+[Reactor validation](WinUI3-cs-native-reactor/VALIDATION.md) and
+[Flutter validation](Flutter/VALIDATION.md). Tauri/Svelte remains the selected
+WebView2 representative; these candidates do not establish an overall desktop
+winner.

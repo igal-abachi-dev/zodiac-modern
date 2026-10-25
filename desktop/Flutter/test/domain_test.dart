@@ -59,10 +59,12 @@ void main() {
     expect(flow.progress, 0);
     flow.dispose();
     final list = Workload()..burst(60);
+    expect(list.active, true);
     await tester.pump(const Duration(milliseconds: 100));
     final tick = list.tick;
     expect(tick, greaterThan(0));
     list.stop();
+    expect(list.active, false);
     await tester.pump(const Duration(seconds: 3));
     expect(list.tick, tick);
     list.dispose();

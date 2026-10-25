@@ -98,8 +98,10 @@ Widget button(
   VoidCallback? action, {
   String? id,
   FocusNode? focus,
+  String? hint,
 }) => Semantics(
   identifier: id ?? name,
+  hint: hint,
   child: OutlinedButton(onPressed: action, focusNode: focus, child: Text(name)),
 );
 
@@ -475,7 +477,7 @@ class _WorkbenchState extends State<Workbench> {
               button('Update 10%', model.update),
               for (final hz in [10, 30, 60])
                 button('$hz Hz / 2 s', () => model.burst(hz)),
-              button('Stop', model.stop),
+              button('Stop', model.stop, hint: model.active ? 'Updates active' : 'Updates stopped'),
               button('Remount workload', () {
                 query.clear();
                 model.remount();

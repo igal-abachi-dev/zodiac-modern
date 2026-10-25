@@ -95,6 +95,7 @@ class BenchRow {
 }
 
 class Workload extends ChangeNotifier {
+  bool active = false;
   List<BenchRow> rows = const [];
   int next = 0, tick = 0;
   String query = '';
@@ -107,7 +108,7 @@ class Workload extends ChangeNotifier {
   Iterable<BenchRow> get visible => rows.where((r) => r.label.contains(query));
   void replace(int count) {
     if (count < 0 || count > 10000) throw RangeError.range(count, 0, 10000);
-    stop();
+    _stop();
     rows = List.generate(count, (i) => BenchRow(next + i));
     next += count;
     tick = 0;
@@ -142,7 +143,9 @@ class Workload extends ChangeNotifier {
 
   void burst(int hz) {
     if (![10, 30, 60].contains(hz)) throw ArgumentError.value(hz);
-    stop();
+    _stop();
+    active = true;
+    notifyListeners();
     final generation = _generation;
     _clock
       ..reset()
@@ -159,7 +162,8 @@ class Workload extends ChangeNotifier {
     });
   }
 
-  void stop() {
+  void _stop() {
+    active = false;
     _generation++;
     _timer?.cancel();
     _timer = null;
@@ -173,7 +177,12 @@ class Workload extends ChangeNotifier {
 
   @override
   void dispose() {
-    stop();
+    _stop();
     super.dispose();
+  }
+  void stop() {
+    final wasActive = active;
+    _stop();
+    if (wasActive) notifyListeners();
   }
 }

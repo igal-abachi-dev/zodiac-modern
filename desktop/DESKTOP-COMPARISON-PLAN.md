@@ -1,6 +1,6 @@
 # Independent desktop implementations
 
-Updated 2026-10-25. This stage builds and checks applications before running a
+Updated 2026-10-26. This stage builds and checks applications before running a
 new cross-toolkit benchmark. The old six-host WebView2 measurements remain a
 separate frozen experiment. Tauri + Svelte is the selected WebView2 representative.
 
@@ -10,6 +10,8 @@ separate frozen experiment. Tauri + Svelte is the selected WebView2 representati
 | `Electron` | Electron 45.0.0, Svelte 5.57.2, bundled Chromium 156 | Independently authored UI/controllers, Svelte runes, Ark, ASAR |
 | `Avalonia` | Avalonia 12.1.4, Toolkit 8.4.2, self-contained .NET 10 | Independently authored AXAML/MVVM, Fluent controls, Skia |
 | `WinUI3-cs-native-mvvm` | Windows App SDK 2.5.1, Toolkit 8.4.2, self-contained .NET 10 | Independently authored native XAML/compiled bindings, Fluent controls, unpackaged Win32 |
+| `WinUI3-cs-native-reactor` | Windows App SDK 2.5.1, Reactor 0.1.0-preview.16, self-contained .NET 10 | Independent C# MVU/components/reducers over native Fluent; experimental, unpackaged Win32 |
+| `Flutter` | Flutter stable 3.47.8, Dart 3.13.7, flutter_svg 2.3.0 | Independent AOT Dart UI/controllers, stock Material 3, local fonts/SVGs, standard C++ Win32 runner |
 
 All implement the [reference feature inventory](Tauri-v2-Svelte5/FEATURE-PARITY.md),
 including the complete workbench. Share design/fixture specifications and external
@@ -63,8 +65,14 @@ recorded in [validation](WinUI3-cs-native-mvvm/VALIDATION.md). It joins the curr
 implementation cohort; comparative measurements and physical accessibility gates
 remain open. The original pause handoff is retained as history.
 
-The directories `WinUI3-cs-native-reactor`,
-`react-native-windows`, `slint-rust`, `Dear-ImGui-dx11-12`, `Flutter`, `Qt` and
+2026-10-26: Reactor and Flutter now have independent full-screen/workbench
+implementations and Release builds. Their build/model/actual-window evidence and
+limitations are recorded in [Reactor validation](WinUI3-cs-native-reactor/VALIDATION.md)
+and [Flutter validation](Flutter/VALIDATION.md). Reactor remains preview software.
+Neither has comparative performance results. All six current implementations
+still need a calibrated cross-toolkit measurement cohort and physical AT review.
+
+The directories `react-native-windows`, `slint-rust`, `Dear-ImGui-dx11-12`, `Qt` and
 `wxWidgets` reserve later independent implementations. They are not benchmarked
 by this stage. [Research §13.17](desktop-gui.md#1317-expanded-desktop-candidate-registry-2026-10-24)
 records their distinct authoring/rendering models and Reactor's experimental
