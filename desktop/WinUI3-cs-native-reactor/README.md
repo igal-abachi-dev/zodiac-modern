@@ -7,7 +7,7 @@ The application is an unpackaged Win32 executable using Windows App SDK 2.5.1.
 It does not require Store installation or an MSIX package.
 
 Run `Build.ps1`, then right-click `Run.ps1` → **Run with PowerShell**.
-Build prerequisites: Windows 11 x64, .NET SDK **10.0.402**, Visual Studio C++/WinUI
+Build prerequisites: Windows 11 x64, .NET SDK **10.0.403**, Visual Studio C++/WinUI
 build tools and Windows SDK 10.0.26100 or compatible newer tooling. Initial
 locked NuGet restore requires network access. Copy the **entire** `out/win-x64`
 directory when testing on another machine; the EXE alone is not the application.

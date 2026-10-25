@@ -24,6 +24,15 @@ Future<void> main() async {
     }
     await loader.load();
   }
+  // Decode the local icons before publishing UI readiness, too.
+  for (final name in [
+    'orbit',
+    'shield-check',
+    'lock-keyhole',
+    'unlock-keyhole',
+  ]) {
+    await SvgAssetLoader('assets/icons/$name.svg').loadBytes(null);
+  }
   runApp(const BenchApp());
 }
 
@@ -482,6 +491,8 @@ class _WorkbenchState extends State<Workbench> {
           // Deliberately materialize every row; virtualization is a separate workload.
           Semantics(
             identifier: 'workload-rows',
+            container: true,
+            label: 'Synthetic rows',
             explicitChildNodes: true,
             child: Column(
               children: [

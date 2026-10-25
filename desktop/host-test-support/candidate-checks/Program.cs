@@ -13,15 +13,26 @@ internal static class CandidateChecks
     static readonly UIA3Automation Automation=new(){ConnectionTimeout=TimeSpan.FromSeconds(3),TransactionTimeout=TimeSpan.FromSeconds(3)};
     static nint window;
     static bool nativeUi;
+    static bool flutterUi;
     static int semanticTimeoutMs=30000;
     static double inputAt;
     static readonly List<object> ProviderGaps=new();
     static T Read<T>(Func<T> query){for(int attempt=1;;attempt++)try{return query();}catch(COMException error){ProviderGaps.Add(new{atMs=Now(),hresult=error.HResult,attempt,readOnly=true});if(attempt>=10)throw;Thread.Sleep(20);}catch(TimeoutException error) when(error.Message.Contains("UIA",StringComparison.Ordinal)){ProviderGaps.Add(new{atMs=Now(),uiaTimeout=true,attempt,readOnly=true});if(attempt>=3)throw;Thread.Sleep(20);}catch(FlaUI.Core.Exceptions.ElementNotAvailableException){ProviderGaps.Add(new{atMs=Now(),unavailable=true,attempt,readOnly=true});if(attempt>=10)throw;Thread.Sleep(20);}}
     static double Now()=>Stopwatch.GetTimestamp()*1000.0/Stopwatch.Frequency;
     static void Wait(Func<bool> query,int timeout=0){double end=Now()+(timeout==0?semanticTimeoutMs:timeout);while(!Read(query)){if(Now()>end)throw new TimeoutException("Workload semantic endpoint");Thread.Sleep(5);}}
-    static AutomationElement? Document()=>nativeUi?Automation.FromHandle(window):Automation.FromHandle(window).FindFirstDescendant(cf=>cf.ByControlType(ControlType.Document));
-    static AutomationElement? Named(string name,ControlType type)=>nativeUi&&name=="Close"?(Id("about-close")??Id("CloseButton")):Document()?.FindFirstDescendant(cf=>cf.ByName(name).And(cf.ByControlType(type)));
-    static AutomationElement? Id(string id)=>Document()?.FindFirstDescendant(cf=>cf.ByAutomationId(id));
+    static AutomationElement? Document()=>flutterUi?Automation.FromHandle(window).FindFirstChild(cf=>cf.ByControlType(ControlType.Pane)):nativeUi?Automation.FromHandle(window):Automation.FromHandle(window).FindFirstDescendant(cf=>cf.ByControlType(ControlType.Document));
+    static AutomationElement? Named(string name,ControlType type)=>nativeUi&&!flutterUi&&name=="Close"?(Id("about-close")??Id("CloseButton")):Document()?.FindFirstDescendant(cf=>cf.ByName(name).And(cf.ByControlType(type)));
+    static AutomationElement? Id(string id){
+        if(!flutterUi)return Document()?.FindFirstDescendant(cf=>cf.ByAutomationId(id));
+        // Flutter 3.47 Windows does not expose Semantics.identifier as AutomationId.
+        // Use its actual public names/roles, not an application test endpoint.
+        return id switch{
+            "decrypt"=>Named("Simulate decryption",ControlType.Button),
+            "encrypt"=>Named("Simulate encryption",ControlType.Button),
+            "workload-rows"=>Named("Synthetic rows",ControlType.Group),
+            "workload-summary"=>Document()?.FindFirstDescendant(cf=>cf.ByName(" rows; tick ",PropertyConditionFlags.MatchSubstring).And(cf.ByControlType(ControlType.Text))),
+            _=>Document()?.FindFirstDescendant(cf=>cf.ByAutomationId(id))};
+    }
     static void Click(AutomationElement element)
     {
         if(!Native.Foreground(window))throw new InvalidOperationException("Foreground lost");
@@ -35,7 +46,7 @@ internal static class CandidateChecks
         var inputs=new[]{new Native.Input{Mouse=new Native.MouseInput{Flags=2}},new Native.Input{Mouse=new Native.MouseInput{Flags=4}}};
         inputAt=Now();if(Native.SendInput(2,inputs,Marshal.SizeOf<Native.Input>())!=2)throw new InvalidOperationException("Pointer input failed");
     }
-    static void Button(string name){AutomationElement? element=null;try{Wait(()=>{element=Named(name,ControlType.Button);return element is not null&&element.Properties.IsEnabled.ValueOrDefault;});}catch(TimeoutException error){throw new InvalidOperationException("Button unavailable: "+name,error);}Click(element!);}
+    static void Button(string name){AutomationElement? element=null;try{Wait(()=>{element=Named(name,ControlType.Button);return element is not null&&element.Properties.IsEnabled.ValueOrDefault;});}catch(TimeoutException error){throw new InvalidOperationException("Button unavailable: "+name,error);}Click(element!);if(name=="Stop"&&element!.Properties.HelpText.ValueOrDefault=="Updates active")Wait(()=>Named("Stop",ControlType.Button)?.Properties.HelpText.ValueOrDefault=="Updates stopped");}
     static string Summary()=>nativeUi?(Id("workload-summary")?.Properties.Name.ValueOrDefault??""):string.Join("",(Id("workload-summary")?.FindAllDescendants(cf=>cf.ByControlType(ControlType.Text))??[]).Select(e=>e.Properties.Name.ValueOrDefault));
     static bool Summary(int count,int tick)=>Summary()==$"{count} rows; tick {tick}";
     static int? Tick(int count){var text=Summary();var prefix=$"{count} rows; tick ";return text.StartsWith(prefix,StringComparison.Ordinal)&&int.TryParse(text[prefix.Length..],out var tick)?tick:null;}
@@ -58,14 +69,17 @@ internal static class CandidateChecks
         Wait(()=>edit.Properties.HasKeyboardFocus.ValueOrDefault);
         var keys=new List<KeyInput>();
         void KeyEvent(ushort vk,bool up=false)=>keys.Add(new KeyInput{Type=1,Key=new Key{Vk=vk,Flags=up?2u:0u}});
-        KeyEvent(0x11);KeyEvent(0x41);KeyEvent(0x41,true);KeyEvent(0x11,true);KeyEvent(8);KeyEvent(8,true);
+        KeyEvent(0x11);KeyEvent(0x41);KeyEvent(0x41,true);KeyEvent(0x11,true);
+        if(flutterUi){if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Selection input failed");keys.Clear();Thread.Sleep(50);}
+        KeyEvent(8);KeyEvent(8,true);
+        if(flutterUi){if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Delete input failed");keys.Clear();Thread.Sleep(50);}
         foreach(char ch in text){keys.Add(new KeyInput{Type=1,Key=new Key{Scan=ch,Flags=4}});keys.Add(new KeyInput{Type=1,Key=new Key{Scan=ch,Flags=6}});}
         inputAt=Now();if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Keyboard input failed");
     }
     [MTAThread]static int Main(string[] args)
     {
         var config=JsonSerializer.Deserialize<Config>(File.ReadAllText(args[0]),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
-        nativeUi=config.NativeUi;semanticTimeoutMs=config.SemanticTimeoutMs;Automation.TransactionTimeout=TimeSpan.FromSeconds(config.UiaTimeoutSeconds);Directory.CreateDirectory(config.Output);Native.SetProcessDpiAwarenessContext(-4);Native.GetCursorPos(out var original);
+        nativeUi=config.NativeUi;flutterUi=config.EngineKind?.StartsWith("Flutter",StringComparison.Ordinal)==true;semanticTimeoutMs=config.SemanticTimeoutMs;Automation.TransactionTimeout=TimeSpan.FromSeconds(config.UiaTimeoutSeconds);Directory.CreateDirectory(config.Output);Native.SetProcessDpiAwarenessContext(-4);Native.GetCursorPos(out var original);
         var report=new Dictionary<string,object?>{["config"]=config,["automation"]="UIA3",["scope"]="reference feature correctness only; not comparative timing, scripting or physical paint"};
         var actions=new List<object>();var known=new Dictionary<int,DateTime>();var gate=new object();bool stop=false;Process? process=null;Thread? discovery=null;int exit=1;
         bool Alive(int pid,DateTime time){try{using var p=Process.GetProcessById(pid);return !p.HasExited&&p.StartTime.ToUniversalTime()==time;}catch(ArgumentException){return false;}}
@@ -145,6 +159,7 @@ internal static class CandidateChecks
                 var scroll=Id("PageScroll")!.Patterns.Scroll.Pattern;
                 var decrypt=VisibleBounds("decrypt");var before=scroll.VerticalScrollPercent.Value;
                 var encrypt=VisibleBounds("encrypt");var after=scroll.VerticalScrollPercent.Value;
+                report["narrowGeometry"]=new{decryptX=decrypt.X,decryptY=decrypt.Y,decryptWidth=decrypt.Width,encryptX=encrypt.X,encryptY=encrypt.Y,encryptWidth=encrypt.Width,before,after};
                 if(Math.Abs(decrypt.X-encrypt.X)>2||after<=before)throw new InvalidOperationException("Narrow WinUI cards did not stack with vertical scrolling");
                 scroll.SetScrollPercent(-1,0);
                 Wait(()=>scroll.VerticalScrollPercent.Value<=0.1);
