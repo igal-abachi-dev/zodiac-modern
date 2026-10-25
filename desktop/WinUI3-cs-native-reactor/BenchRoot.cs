@@ -33,7 +33,24 @@ public sealed class BenchRoot : Component
         }
         Element Operation(string title, string icon, string label, string op, bool primary)
         {
-            var button = B(label, () => StartFlow(op), op, s.Loaded && s.Status != "running").Height(40).HAlign(HorizontalAlignment.Stretch).Set(b => b.Style = (Style)Application.Current.Resources[primary ? "PrimaryAction" : "ActionButton"]);
+            var button = B(label, () => StartFlow(op), op, s.Loaded && s.Status != "running").Height(40).HAlign(HorizontalAlignment.Stretch).Set(b =>
+            {
+                b.Style = (Style)Application.Current.Resources[primary ? "PrimaryAction" : "ActionButton"];
+                if (primary)
+                {
+                    var green = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 4, 120, 87));
+                    var white = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 255));
+                    b.Background = green;
+                    b.Foreground = white;
+                    b.BorderBrush = green;
+                    foreach (var state in new[] { "", "PointerOver", "Pressed" })
+                    {
+                        b.Resources["ButtonBackground" + state] = green;
+                        b.Resources["ButtonForeground" + state] = white;
+                        b.Resources["ButtonBorderBrush" + state] = green;
+                    }
+                }
+            });
             button = button.Background(primary ? "#047857" : "#FFFFFF").Foreground(primary ? "#FFFFFF" : "#171A18");
             return Card(VStack(0, HStack(8, Icon(icon), T(title, 16).Bold()), T("SYNTHETIC INPUT", 10).Foreground("#5D6660").Margin(0, 20, 0, 9), Border(VStack(5, T(op == "encrypt" ? Reducers.Fixture : "Synthetic sample: starlight.nsx"), op == "decrypt" ? T("No disk file is opened.", 12).Foreground("#5D6660") : null)).Padding(13).MinHeight(94).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(6), button.Margin(0, 16, 0, 0)));
         }
