@@ -5,6 +5,7 @@ namespace NeutronStar.ReactorBench;
 internal sealed class Pulse : IDisposable
 {
     private DispatcherQueueTimer? timer; private int generation; private bool disposed;
+    private Windows.Foundation.TypedEventHandler<DispatcherQueueTimer, object>? tickHandler;
     public int Start(double hz, Action<int, double> callback, bool finalTick = false, Action? ended = null)
     {
         if (disposed)
@@ -17,7 +18,8 @@ internal sealed class Pulse : IDisposable
         timer = Shell.Window.DispatcherQueue.CreateTimer();
         timer.Interval = TimeSpan.FromMilliseconds(1000 / hz);
         timer.IsRepeating = true;
-        timer.Tick += (_, _) => { if (token != generation || disposed) return; double elapsed = Stopwatch.GetTimestamp() * 1000.0 / Stopwatch.Frequency - began; if (elapsed >= 2000) { Stop(); if (finalTick) callback(token, elapsed); ended?.Invoke(); return; } callback(token, elapsed); };
+        tickHandler = (_, _) => { if (token != generation || disposed) return; double elapsed = Stopwatch.GetTimestamp() * 1000.0 / Stopwatch.Frequency - began; if (elapsed >= 2000) { Stop(); if (finalTick) callback(token, elapsed); ended?.Invoke(); return; } callback(token, elapsed); };
+        timer.Tick += tickHandler;
         timer.Start();
         return token;
     }
@@ -25,6 +27,9 @@ internal sealed class Pulse : IDisposable
     {
         generation++;
         timer?.Stop();
+        if (timer is not null && tickHandler is not null)
+            timer.Tick -= tickHandler;
+        tickHandler = null;
         timer = null;
     }
     public void Dispose()

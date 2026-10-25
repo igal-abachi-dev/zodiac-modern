@@ -62,15 +62,17 @@ internal static class CandidateChecks
     [StructLayout(LayoutKind.Sequential)] struct Key {public ushort Vk,Scan;public uint Flags,Time;public nuint Extra;}
     [StructLayout(LayoutKind.Explicit,Size=40)] struct KeyInput{[FieldOffset(0)]public uint Type;[FieldOffset(8)]public Key Key;}
     [DllImport("user32.dll",EntryPoint="SendInput")]static extern uint Keys(uint count,KeyInput[] input,int size);
+    [DllImport("user32.dll")]static extern uint MapVirtualKeyW(uint code,uint type);
     static void Query(string text)
     {
         var edit=Read(()=>Named("Filter synthetic rows",ControlType.Edit))??throw new InvalidOperationException("Missing filter");
         Click(edit);
         Wait(()=>edit.Properties.HasKeyboardFocus.ValueOrDefault);
         var keys=new List<KeyInput>();
-        void KeyEvent(ushort vk,bool up=false)=>keys.Add(new KeyInput{Type=1,Key=new Key{Vk=vk,Flags=up?2u:0u}});
-        KeyEvent(0x11);KeyEvent(0x41);KeyEvent(0x41,true);KeyEvent(0x11,true);
-        if(flutterUi){if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Selection input failed");keys.Clear();Thread.Sleep(50);}
+        void KeyEvent(ushort vk,bool up=false)=>keys.Add(new KeyInput{Type=1,Key=new Key{Vk=vk,Scan=(ushort)MapVirtualKeyW(vk,0),Flags=up?2u:0u}});
+        void Flush(){if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Selection input failed");keys.Clear();Thread.Sleep(50);}
+        if(flutterUi){KeyEvent(0xA2);Flush();KeyEvent(0x41);KeyEvent(0x41,true);Flush();KeyEvent(0xA2,true);Flush();}
+        else {KeyEvent(0x11);KeyEvent(0x41);KeyEvent(0x41,true);KeyEvent(0x11,true);}
         KeyEvent(8);KeyEvent(8,true);
         if(flutterUi){if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Delete input failed");keys.Clear();Thread.Sleep(50);}
         foreach(char ch in text){keys.Add(new KeyInput{Type=1,Key=new Key{Scan=ch,Flags=4}});keys.Add(new KeyInput{Type=1,Key=new Key{Scan=ch,Flags=6}});}
@@ -160,7 +162,7 @@ internal static class CandidateChecks
                 var decrypt=VisibleBounds("decrypt");var before=scroll.VerticalScrollPercent.Value;
                 var encrypt=VisibleBounds("encrypt");var after=scroll.VerticalScrollPercent.Value;
                 report["narrowGeometry"]=new{decryptX=decrypt.X,decryptY=decrypt.Y,decryptWidth=decrypt.Width,encryptX=encrypt.X,encryptY=encrypt.Y,encryptWidth=encrypt.Width,before,after};
-                if(Math.Abs(decrypt.X-encrypt.X)>2||after<=before)throw new InvalidOperationException("Narrow WinUI cards did not stack with vertical scrolling");
+                if(Math.Abs(decrypt.X-encrypt.X)>2||(after<=before&&encrypt.Y<decrypt.Bottom))throw new InvalidOperationException("Narrow WinUI cards did not stack with vertical scrolling");
                 scroll.SetScrollPercent(-1,0);
                 Wait(()=>scroll.VerticalScrollPercent.Value<=0.1);
                 Thread.Sleep(200); // Visual QA after native scroll presentation.

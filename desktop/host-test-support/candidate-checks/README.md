@@ -3,6 +3,9 @@
 From this directory, run `./Run.ps1 -Candidate Both`, `Avalonia`, `Electron` or
 `WinUI`. `Both` preserves the original Avalonia/Electron pair; select `WinUI`
 explicitly for the unpackaged native WinUI MVVM candidate.
+`Reactor` and `Flutter` select the independent preview-MVU and Dart candidates.
+Reactor's correctness lane explicitly allows 180-second semantic / 30-second UIA
+deadlines; these are not benchmark timing budgets or an acceptance of UI hangs.
 Build the applications first. Requires the pinned .NET SDK and restores locked
 FlaUI 5 UIA3 dependencies. It opens one actual app at a time and uses the pointer
 and keyboard; leave that window undisturbed. `-LayoutOnly` skips workflow/list
@@ -22,6 +25,13 @@ WinUI's ContentDialog also has the standard `CloseButton` ID, list peer resets
 are polled, keyboard input waits for focus, and off-screen card geometry is
 validated with native scrolling/alignment instead of unsupported rectangles.
 Capture uses HWND bounds; UIA bounds need not include the same non-client region.
+Flutter 3.47 Windows currently exposes the supplied semantic names/roles without
+their Dart `Semantics.identifier` as UIA AutomationId. Its adapter searches the
+client Pane (excluding the native caption buttons), uses targeted name conditions
+and the named Synthetic rows group. It does not enumerate all row peers to read
+one summary. Synthetic keyboard edit sequences allow selection/deletion to settle.
+Reactor exposes its row panel through an actual SemanticPanel peer and Stop's
+public HelpText reports committed active/stopped state before stability checks.
 
 This is correctness/visual evidence, **not the comparative measurement harness**.
 Read retries, stabilization waits, screenshots and UIA observation overhead are
