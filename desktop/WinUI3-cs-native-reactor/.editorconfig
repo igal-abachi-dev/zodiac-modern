@@ -1,0 +1,12 @@
+root = true
+
+[*.cs]
+indent_style = space
+indent_size = 4
+csharp_new_line_before_open_brace = all
+csharp_preserve_single_line_blocks = false
+csharp_preserve_single_line_statements = false
+
+# This comparison intentionally freezes a light palette to the canonical fixture.
+# OS high-contrast/theme adaptation remains a separate validation gate.
+dotnet_diagnostic.REACTOR_THEME_001.severity = none

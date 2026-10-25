@@ -1,0 +1,31 @@
+name: neutronstar_flutter
+description: Independent Windows desktop comparison candidate; synthetic UI only.
+publish_to: none
+version: 1.0.0+1
+environment:
+  sdk: '>=3.13.7 <3.14.0'
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: 2.3.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 6.0.0
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/fonts/
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/inter-latin-400-normal.ttf
+          weight: 400
+        - asset: assets/fonts/inter-latin-500-normal.ttf
+          weight: 500
+        - asset: assets/fonts/inter-latin-600-normal.ttf
+          weight: 600
+    - family: Noto Sans Hebrew
+      fonts:
+        - asset: assets/fonts/noto-sans-hebrew-hebrew-400-normal.ttf
