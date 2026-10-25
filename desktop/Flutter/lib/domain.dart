@@ -180,6 +180,7 @@ class Workload extends ChangeNotifier {
     _stop();
     super.dispose();
   }
+
   void stop() {
     final wasActive = active;
     _stop();
