@@ -1,0 +1,37 @@
+﻿[
+    {
+        "attempt":  "check-d9a12c9c59b347d6905cd52aae09eecd",
+        "status":  "failed",
+        "error":  "InvalidOperationException: Stop left a visible timer running",
+        "hostExited":  true,
+        "helpersExited":  true
+    },
+    {
+        "attempt":  "check-f2a5ad6705774e1889afe85e1bf28a18",
+        "status":  "failed",
+        "error":  "TimeoutException: Workload semantic endpoint",
+        "hostExited":  true,
+        "helpersExited":  true
+    },
+    {
+        "attempt":  "first-check",
+        "status":  "failed",
+        "error":  "TimeoutException: Workload semantic endpoint",
+        "hostExited":  true,
+        "helpersExited":  true
+    },
+    {
+        "attempt":  "names-check",
+        "status":  "failed",
+        "error":  "TimeoutException: Workload semantic endpoint",
+        "hostExited":  true,
+        "helpersExited":  true
+    },
+    {
+        "attempt":  "targeted-summary-check",
+        "status":  "failed",
+        "error":  "TimeoutException: Workload semantic endpoint",
+        "hostExited":  true,
+        "helpersExited":  true
+    }
+]

@@ -1,0 +1,171 @@
+﻿{
+    "schema":  1,
+    "files":  [
+                  {
+                      "path":  "DART-LICENSE.txt",
+                      "sha256":  "2CFA3EE8E7512E6D44C854B986510810FADC815F93F890373B3A81C1B6CCD256",
+                      "bytes":  1502
+                  },
+                  {
+                      "path":  "data/app.so",
+                      "sha256":  "A47AFA0B1E669DD8358DF3FA087FAB0B509C1096689470FFFFE9A55F2E55BA9D",
+                      "bytes":  5440392
+                  },
+                  {
+                      "path":  "data/flutter_assets/AssetManifest.bin",
+                      "sha256":  "68D2633A248F420C470A0F8A36B7F92535E9AD3C71F6CEEE32CB198DE43A1DD1",
+                      "bytes":  1282
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/fonts/inter-latin-400-normal.ttf",
+                      "sha256":  "03693CC5689D8C89A20AE55FE945FE59884EEC8AD7D7DABB4761E066E88F49FF",
+                      "bytes":  66592
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/fonts/inter-latin-500-normal.ttf",
+                      "sha256":  "7E22ABFA3709EC2C67D18128ED3B7E522A8EFA602C7F46FB933BF71F5F8F2E3E",
+                      "bytes":  66692
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/fonts/inter-latin-600-normal.ttf",
+                      "sha256":  "DE8A61379F04664868958CC13D22CD9D1D79B4064E1EBD7C46588399F2A12FD5",
+                      "bytes":  66800
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/fonts/noto-sans-hebrew-hebrew-400-normal.ttf",
+                      "sha256":  "4DF1FBFDE811AFBF4023ED6BFDE89CE9614C94775FA57DFDFC473575D5D076D0",
+                      "bytes":  17072
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/fonts/OFL-NotoSansHebrew.txt",
+                      "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+                      "bytes":  4380
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/fonts/provenance.json",
+                      "sha256":  "9DB6AA2FBA2D444EF17CA58130138EFF5AE6C232107351B363D862C227FBC899",
+                      "bytes":  1626
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/icons/arrow-down-to-line.svg",
+                      "sha256":  "8B692D916102083901B392C3F098B6F460604D5FAD4029FBE79D934E5C065892",
+                      "bytes":  374
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/icons/arrow-up-from-line.svg",
+                      "sha256":  "3A9B8037387DF9D552042E229AA9A16AE7326B52BF2A5AAB07450F3B539A404C",
+                      "bytes":  374
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/icons/info.svg",
+                      "sha256":  "BD039CBC60ABC0AF2D241232FA6FE76DA45C974A8928141B266B15435CA26E0C",
+                      "bytes":  369
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/icons/lock-keyhole.svg",
+                      "sha256":  "0D7D87CE30B53B2B26D03237D47011B447D4F4D49E4456F1E2EEFF2A410944D4",
+                      "bytes":  420
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/icons/orbit.svg",
+                      "sha256":  "90426BC45F068DD6576026B17E5723EEACBE25333D7587EBE79BD7A27F2B51BD",
+                      "bytes":  494
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/icons/shield-check.svg",
+                      "sha256":  "21B195F0BF7F6ED344D9327066C9E9DB6FD2E03AB8673C19907001D87B710E06",
+                      "bytes":  498
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/icons/unlock-keyhole.svg",
+                      "sha256":  "456E12DB802726BB969F996196EC71E89E3C1C00DF57C4843C3362CEF58A1E41",
+                      "bytes":  424
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/notices/Flutter-BSD.txt",
+                      "sha256":  "A3A9FD82F800A47377F7D3F60C60A5C91CAE0495BE8F329031E1448CE0F5DAB9",
+                      "bytes":  1544
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/notices/Inter-OFL.txt",
+                      "sha256":  "3B0A5FCA3D17942CDE889069889DEDBBBD075E9B599968C82A95F4D944E9B345",
+                      "bytes":  4477
+                  },
+                  {
+                      "path":  "data/flutter_assets/assets/notices/Lucide-ISC.txt",
+                      "sha256":  "B495047BD93A9B06913511076F504DABA17D5BBEB3E0650F3BB53A4220329C57",
+                      "bytes":  3208
+                  },
+                  {
+                      "path":  "data/flutter_assets/FontManifest.json",
+                      "sha256":  "7ADF938B2E0A92E1A52B1A1A84B76BF41CAEC7B4F66E3B52AE5B99BB4C2E3637",
+                      "bytes":  410
+                  },
+                  {
+                      "path":  "data/flutter_assets/fonts/MaterialIcons-Regular.otf",
+                      "sha256":  "A63D746AA47B5A990040913C1809568822D5E01A04E3625938D337938065243F",
+                      "bytes":  1256
+                  },
+                  {
+                      "path":  "data/flutter_assets/NativeAssetsManifest.json",
+                      "sha256":  "9548A31E4A048135C1D94F919328BFB62AE2C7BB3CAB96557C7941DAA97776CB",
+                      "bytes":  45
+                  },
+                  {
+                      "path":  "data/flutter_assets/NOTICES.Z",
+                      "sha256":  "3D9FA118F4025CD24496AA8CC7B17753F8498E1A07DCE88C401783E42543C3C3",
+                      "bytes":  99143
+                  },
+                  {
+                      "path":  "data/flutter_assets/shaders/ink_sparkle.frag",
+                      "sha256":  "1FE8436A743884CB65078FE8C7B38E18F5365F2A2961270916F426FD13C604AF",
+                      "bytes":  21856
+                  },
+                  {
+                      "path":  "data/flutter_assets/shaders/stretch_effect.frag",
+                      "sha256":  "BC7599DBBBAAB310EFE41520574138D21FB18A88C8FE4495ED79315309336F6F",
+                      "bytes":  17616
+                  },
+                  {
+                      "path":  "data/icudtl.dat",
+                      "sha256":  "325A86063D26334C2EABE1743CEA073B612540FBF3D8FC2EF0B5708E3763A8C7",
+                      "bytes":  864880
+                  },
+                  {
+                      "path":  "flutter_windows.dll",
+                      "sha256":  "ECA1F8C9B1537BD585BBBCC62362DF9CA7E69FAA7D4E895688108AF63CCEA157",
+                      "bytes":  21289472
+                  },
+                  {
+                      "path":  "FLUTTER-ENGINE-NOTICES.txt",
+                      "sha256":  "3C0040023A5789BF56D6BF41FD44F08B21758523D41F128FB7DD6BEB398D1191",
+                      "bytes":  1269349
+                  },
+                  {
+                      "path":  "native_assets.json",
+                      "sha256":  "9548A31E4A048135C1D94F919328BFB62AE2C7BB3CAB96557C7941DAA97776CB",
+                      "bytes":  45
+                  },
+                  {
+                      "path":  "neutronstar_flutter.exe",
+                      "sha256":  "59793649B682E221BF102430A7B0B24B1AAFEADCBE69CD86E2D5746860005BE1",
+                      "bytes":  91136
+                  }
+              ],
+    "comparison":  "Not run",
+    "flutter":  {
+                    "frameworkVersion":  "3.47.8",
+                    "channel":  "stable",
+                    "repositoryUrl":  "https://github.com/flutter/flutter.git",
+                    "frameworkRevision":  "737ba8f885dc774b53b442759999a312c9461e4e",
+                    "frameworkCommitDate":  "2026-10-22 21:37:31 -0700",
+                    "engineRevision":  "cf636b1dfb818dd6a3ff16e390e93b1a036969c8",
+                    "engineCommitDate":  "2026-10-23 02:13:38.000Z",
+                    "engineContentHash":  "dfd2e6cb7d319db05e3bf1503f3e2ac60f6288a2",
+                    "engineBuildDate":  "2026-10-23 06:34:48.330",
+                    "dartSdkVersion":  "3.13.7",
+                    "devToolsVersion":  "2.60.0",
+                    "flutterVersion":  "3.47.8",
+                    "flutterRoot":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\.cache\\flutter-toolchain\\flutter"
+                }
+}

@@ -1,0 +1,82 @@
+{
+  "config": {
+    "app": "Flutter",
+    "runner": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Flutter\\build\\windows\\x64\\runner\\Release\\neutronstar_flutter.exe",
+    "assets": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Flutter\\dist",
+    "profile": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Flutter\\.cache\\check-dfc3787e089f405bb2753f70183d04eb\\profile",
+    "output": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Flutter\\.cache\\check-dfc3787e089f405bb2753f70183d04eb",
+    "arguments": [],
+    "nativeUi": true,
+    "layoutOnly": false,
+    "engineKind": "Flutter / Dart AOT",
+    "semanticTimeoutMs": 30000,
+    "uiaTimeoutSeconds": 3
+  },
+  "automation": "UIA3",
+  "scope": "reference feature correctness only; not comparative timing, scripting or physical paint",
+  "mainChecks": "About Escape/Close/focus; encrypt complete; decrypt cancel; reset",
+  "tickAfterStop": 17,
+  "extraChecks": "10/60 Hz update and Stop; empty filter; close while burst active; fresh reopen/reset IDs and tick; focus restoration; main workflow after workbench",
+  "layoutChecks": "dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width",
+  "dpi": 192,
+  "engineKind": "Flutter / Dart AOT",
+  "hostFileVersion": "1.0.0\u002B1",
+  "status": "passed",
+  "hostExited": true,
+  "helpersExited": true,
+  "exitCode": 0,
+  "providerGaps": [],
+  "actions": [
+    {
+      "name": "replace-10000",
+      "inputToUiaObservedMs": 1287.2691000699997,
+      "requestToUiaMs": 1381.9771000146866
+    },
+    {
+      "name": "replace-1000",
+      "inputToUiaObservedMs": 320.472000002861,
+      "requestToUiaMs": 405.6384000778198
+    },
+    {
+      "name": "reverse-1000",
+      "inputToUiaObservedMs": 44.00069999694824,
+      "requestToUiaMs": 149.45379996299744
+    },
+    {
+      "name": "splice-10",
+      "inputToUiaObservedMs": 30.871599912643433,
+      "requestToUiaMs": 135.7542999982834
+    },
+    {
+      "name": "update-10-percent",
+      "inputToUiaObservedMs": 38.72970008850098,
+      "requestToUiaMs": 127.70180010795593
+    },
+    {
+      "name": "filter-to-one",
+      "inputToUiaObservedMs": 38.25450003147125,
+      "requestToUiaMs": 392.15199995040894
+    },
+    {
+      "name": "filter-clear",
+      "inputToUiaObservedMs": 58.463199973106384,
+      "requestToUiaMs": 400.2796000242233
+    },
+    {
+      "name": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": 47.15209996700287,
+      "requestToUiaMs": 442.9127000570297
+    },
+    {
+      "name": "remount",
+      "inputToUiaObservedMs": 155.0592999458313,
+      "requestToUiaMs": 243.28030002117157
+    }
+  ],
+  "processIdentities": [
+    {
+      "pid": 11756,
+      "startUtc": "2026-10-25T23:13:22.4922129Z"
+    }
+  ]
+}

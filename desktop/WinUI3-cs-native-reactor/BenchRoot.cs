@@ -14,7 +14,7 @@ public sealed class BenchRoot : Component
     internal static TextBlockElement T(string text, double size = 14) => TextBlock(text).FontSize(size).FontFamily(Font).Foreground("#171A18");
     internal static Element Card(Element child) => Border(child).Padding(16).Background("#FFFFFF").WithBorder("#DCE3DE", 1).CornerRadius(8);
     internal static Element Icon(string name) => Image("ms-appx:///Assets/Icons/" + name + ".svg").AccessibilityHidden().Width(16).Height(16).Set(image => { if (image.Source is not SvgImageSource) image.Source = new SvgImageSource(new Uri("ms-appx:///Assets/Icons/" + name + ".svg")); });
-    internal static ButtonElement B(string text, Action click, string? id = null, bool enabled = true) => Button(text, click).IsEnabled(enabled).AutomationName(text).AutomationId(id ?? text).Set(static button => button.Style = (Style)Application.Current.Resources["BaseButton"]);
+    internal static ButtonElement B(string text, Action click, string? id = null, bool enabled = true,string styleKey="BaseButton") => Button(text, click).IsEnabled(enabled).AutomationName(text).AutomationId(id ?? text).Set(button => {var style=(Style)Application.Current.Resources[styleKey];if(!ReferenceEquals(button.Style,style))button.Style=style;});
     public override Element Render()
     {
         var (s, dispatch) = UseReducer<Flow, FlowAction>(Reducers.Flow, new Flow());
@@ -33,25 +33,7 @@ public sealed class BenchRoot : Component
         }
         Element Operation(string title, string icon, string label, string op, bool primary)
         {
-            var button = B(label, () => StartFlow(op), op, s.Loaded && s.Status != "running").Height(40).HAlign(HorizontalAlignment.Stretch).Set(b =>
-            {
-                b.Style = (Style)Application.Current.Resources[primary ? "PrimaryAction" : "ActionButton"];
-                if (primary)
-                {
-                    var green = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 4, 120, 87));
-                    var white = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 255, 255, 255));
-                    b.Background = green;
-                    b.Foreground = white;
-                    b.BorderBrush = green;
-                    foreach (var state in new[] { "", "PointerOver", "Pressed" })
-                    {
-                        b.Resources["ButtonBackground" + state] = green;
-                        b.Resources["ButtonForeground" + state] = white;
-                        b.Resources["ButtonBorderBrush" + state] = green;
-                    }
-                }
-            });
-            button = button.Background(primary ? "#047857" : "#FFFFFF").Foreground(primary ? "#FFFFFF" : "#171A18");
+            var button = B(label, () => StartFlow(op), op, s.Loaded && s.Status != "running",primary?"PrimaryAction":"ActionButton").Height(40).HAlign(HorizontalAlignment.Stretch);
             return Card(VStack(0, HStack(8, Icon(icon), T(title, 16).Bold()), T("SYNTHETIC INPUT", 10).Foreground("#5D6660").Margin(0, 20, 0, 9), Border(VStack(5, T(op == "encrypt" ? Reducers.Fixture : "Synthetic sample: starlight.nsx"), op == "decrypt" ? T("No disk file is opened.", 12).Foreground("#5D6660") : null)).Padding(13).MinHeight(94).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(6), button.Margin(0, 16, 0, 0)));
         }
         var decrypt = Operation("Decrypt", "unlock-keyhole", "Simulate decryption", "decrypt", false);
