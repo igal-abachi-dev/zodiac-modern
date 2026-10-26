@@ -34,7 +34,16 @@ public sealed class BenchRoot : Component
         Element Operation(string title, string icon, string label, string op, bool primary)
         {
             var button = B(label, () => StartFlow(op), op, s.Loaded && s.Status != "running", primary ? "PrimaryAction" : "ActionButton").Height(40).HAlign(HorizontalAlignment.Stretch);
-            if(primary)button=button.Background("#047857").Foreground("#FFFFFF").WithBorder("#047857",1);
+            if (primary)
+            {
+                // Keep the themed content declarative; repeated native resource
+                // writes during Render can continuously invalidate a preview host.
+                button = button with
+                {
+                    ContentElement = Border(T(label).Foreground("#FFFFFF").HAlign(HorizontalAlignment.Center).VAlign(VerticalAlignment.Center)).Padding(12, 8).Background("#047857").CornerRadius(5).Opacity(s.Loaded && s.Status != "running" ? 1 : .45)
+                };
+                button = button.Padding(0).Set(b => { b.HorizontalContentAlignment = HorizontalAlignment.Stretch; b.VerticalContentAlignment = VerticalAlignment.Stretch; });
+            }
             return Card(VStack(0, HStack(8, Icon(icon), T(title, 16).Bold()), T("SYNTHETIC INPUT", 10).Foreground("#5D6660").Margin(0, 20, 0, 9), Border(VStack(5, T(op == "encrypt" ? Reducers.Fixture : "Synthetic sample: starlight.nsx"), op == "decrypt" ? T("No disk file is opened.", 12).Foreground("#5D6660") : null)).Padding(13).MinHeight(94).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(6), button.Margin(0, 16, 0, 0)));
         }
         var decrypt = Operation("Decrypt", "unlock-keyhole", "Simulate decryption", "decrypt", false);
