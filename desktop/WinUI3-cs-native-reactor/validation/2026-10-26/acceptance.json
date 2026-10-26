@@ -1,0 +1,99 @@
+{
+  "config": {
+    "app": "Reactor",
+    "runner": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\WinUI3-cs-native-reactor\\out\\win-x64\\NeutronStar-WinUI-Reactor.exe",
+    "assets": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\WinUI3-cs-native-reactor\\dist",
+    "profile": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\WinUI3-cs-native-reactor\\.cache\\check-71d21152357c4a97a631b52064248a43\\profile",
+    "output": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\WinUI3-cs-native-reactor\\.cache\\check-71d21152357c4a97a631b52064248a43",
+    "arguments": [],
+    "nativeUi": true,
+    "layoutOnly": false,
+    "engineKind": "native WinUI 3 / Reactor",
+    "semanticTimeoutMs": 180000,
+    "uiaTimeoutSeconds": 30
+  },
+  "automation": "UIA3",
+  "scope": "reference feature correctness only; not comparative timing, scripting or physical paint",
+  "mainChecks": "About Escape/Close/focus; encrypt complete; decrypt cancel; reset",
+  "tickAfterStop": 9,
+  "extraChecks": "10/60 Hz update and Stop; empty filter; close while burst active; fresh reopen/reset IDs and tick; focus restoration; main workflow after workbench",
+  "narrowGeometry": {
+    "decryptX": 123,
+    "decryptY": 872,
+    "decryptWidth": 780,
+    "encryptX": 123,
+    "encryptY": 1278,
+    "encryptWidth": 780,
+    "before": 0,
+    "after": 17.613636363636363
+  },
+  "layoutChecks": "dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width",
+  "dpi": 192,
+  "engineKind": "native WinUI 3 / Reactor",
+  "hostFileVersion": "1.0.0.0",
+  "status": "passed",
+  "hostExited": true,
+  "helpersExited": true,
+  "exitCode": 0,
+  "providerGaps": [
+    {
+      "atMs": 1021121310.5881,
+      "uiaTimeout": true,
+      "attempt": 1,
+      "readOnly": true
+    }
+  ],
+  "actions": [
+    {
+      "name": "replace-10000",
+      "inputToUiaObservedMs": 2280.6923999786377,
+      "requestToUiaMs": 2375.571699976921
+    },
+    {
+      "name": "replace-1000",
+      "inputToUiaObservedMs": 4069.010100007057,
+      "requestToUiaMs": 4163.492600083351
+    },
+    {
+      "name": "reverse-1000",
+      "inputToUiaObservedMs": 164.21350002288818,
+      "requestToUiaMs": 255.21689999103546
+    },
+    {
+      "name": "splice-10",
+      "inputToUiaObservedMs": 295.1086999177933,
+      "requestToUiaMs": 385.0526999235153
+    },
+    {
+      "name": "update-10-percent",
+      "inputToUiaObservedMs": 83.9274001121521,
+      "requestToUiaMs": 186.81809997558594
+    },
+    {
+      "name": "filter-to-one",
+      "inputToUiaObservedMs": 152.11349999904633,
+      "requestToUiaMs": 258.3440999984741
+    },
+    {
+      "name": "filter-clear",
+      "inputToUiaObservedMs": 169.87090003490448,
+      "requestToUiaMs": 286.070100069046
+    },
+    {
+      "name": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": 144.08199989795685,
+      "requestToUiaMs": 348.31639993190765
+    },
+    {
+      "name": "remount",
+      "inputToUiaObservedMs": 187.75299990177155,
+      "requestToUiaMs": 286.1506999731064
+    }
+  ],
+  "processIdentities": [
+    {
+      "pid": 49520,
+      "startUtc": "2026-10-26T06:13:24.0590943Z"
+    }
+  ]
+}

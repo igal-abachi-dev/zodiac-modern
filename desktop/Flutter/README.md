@@ -48,7 +48,8 @@ If `flutter build windows` rejects Visual Studio while its installer reports
 `isComplete=false` / `isLaunchable=false`, finish or repair that installation.
 Do not patch Flutter's discovery logic. During this session, the already-generated
 standard CMake project built successfully using VS 2026's own CMake/MSBuild;
-that is a disclosed local build path, not evidence the installation check passed.
+that was a disclosed local build path, not evidence the installation check passed.
+After the installation completed, the normal `Build.ps1` path also passed.
 
 See `VALIDATION.md` for actual acceptance and remaining gates. No cross-toolkit
 performance benchmark has been run for Flutter.

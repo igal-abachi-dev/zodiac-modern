@@ -28,6 +28,12 @@ correctness reports include retries, input settling and provider cost. They are
 not unbiased render timings. The Reactor lane records longer 180-second semantic
 and 30-second UIA deadlines; these do not excuse hangs or establish responsiveness.
 Read-only recovered UIA gaps, when present, remain in the raw accepted report.
+The final full check passed with **one recovered read-only UIA timeout** and clean
+process exit. This remains a provider/accessibility caveat, not a zero-gap claim.
+The complete self-contained folder is **547 files / 247,167,825 bytes** at this
+snapshot, including the CLR/App SDK graph and notices; not a compressed installer
+size or RAM measurement. Final main/narrow screenshots were inspected, including
+the emerald primary action and responsive footer.
 
 ## Corrections and retained attempts
 

@@ -1,0 +1,51 @@
+﻿[
+    {
+        "attempt":  "check-5f48a7236c104dbe80de89b888e74e09",
+        "status":  "failed",
+        "error":  "TimeoutException: Workload semantic endpoint",
+        "hostExited":  true,
+        "helpersExited":  true
+    },
+    {
+        "attempt":  "dialog-check",
+        "status":  "failed",
+        "error":  "TimeoutException: UIA Timeout",
+        "hostExited":  false,
+        "helpersExited":  false
+    },
+    {
+        "attempt":  "dpi-check",
+        "status":  "failed",
+        "error":  "InvalidOperationException: Narrow WinUI cards did not stack with vertical scrolling",
+        "hostExited":  true,
+        "helpersExited":  true
+    },
+    {
+        "attempt":  "extended-check",
+        "status":  "failed",
+        "error":  "TimeoutException: UIA Timeout",
+        "hostExited":  false,
+        "helpersExited":  false
+    },
+    {
+        "attempt":  "first-check",
+        "status":  "failed",
+        "error":  "InvalidOperationException: Button unavailable: Close",
+        "hostExited":  true,
+        "helpersExited":  true
+    },
+    {
+        "attempt":  "semantic-group-check",
+        "status":  "failed",
+        "error":  "InvalidOperationException: Stop left a visible timer running",
+        "hostExited":  true,
+        "helpersExited":  true
+    },
+    {
+        "attempt":  "stop-check",
+        "status":  "failed",
+        "error":  "InvalidOperationException: Narrow WinUI cards did not stack with vertical scrolling",
+        "hostExited":  true,
+        "helpersExited":  true
+    }
+]

@@ -30,8 +30,10 @@ their Dart `Semantics.identifier` as UIA AutomationId. Its adapter searches the
 client Pane (excluding the native caption buttons), uses targeted name conditions
 and the named Synthetic rows group. It does not enumerate all row peers to read
 one summary. Synthetic keyboard edit sequences allow selection/deletion to settle.
-Reactor exposes its row panel through an actual SemanticPanel peer and Stop's
-public HelpText reports committed active/stopped state before stability checks.
+Reactor exposes its row panel through an actual SemanticPanel peer. Reactor and
+Flutter publish accessible active/stopped feedback for Stop; the checker waits
+for committed stopped feedback before sampling tick stability. Held modifier
+input includes Windows scan codes; correctness settling is not benchmark timing.
 
 This is correctness/visual evidence, **not the comparative measurement harness**.
 Read retries, stabilization waits, screenshots and UIA observation overhead are

@@ -1297,15 +1297,17 @@ prevalence on one PC does not establish performance or product suitability.
 
 ### 13.17 Expanded desktop candidate registry (2026-10-24)
 
-The user added these directories for **later** independent implementations. A
-directory is not an implemented candidate or a benchmark result. The current work
-first finishes [Avalonia](Avalonia/README.md) and [Electron](Electron/README.md)
-against the complete [Tauri/Svelte reference](Tauri-v2-Svelte5/FEATURE-PARITY.md).
+The user added these directories for independent implementations. A directory is
+not an implemented candidate or a benchmark result. Implementation status is
+updated below; [§13.18](#1318-reactor-and-flutter-implementation-lessons-2026-10-26)
+records the later Reactor/Flutter findings against the complete
+[Tauri/Svelte reference](Tauri-v2-Svelte5/FEATURE-PARITY.md).
 
 | Directory | Planned comparison | Status |
 | --- | --- | --- |
 | `WinUI3-cs-native-mvvm` | C#/XAML, native WinUI 3 Fluent controls and CommunityToolkit.Mvvm | Implemented 2026-10-25; [build/window validation](WinUI3-cs-native-mvvm/VALIDATION.md); not performance-benchmarked; distinct from `WinUI3-webview2` |
-| `WinUI3-cs-native-reactor` | C# Microsoft.UI.Reactor declarative/MVU layer on native WinUI 3 | Planned experimental candidate |
+| `WinUI3-cs-native-reactor` | C# Microsoft.UI.Reactor declarative/MVU layer on native WinUI 3 | Implemented 2026-10-26; [validation](WinUI3-cs-native-reactor/VALIDATION.md); experimental; not performance-benchmarked |
+| `Flutter` | Dart AOT, stock Material 3, Flutter engine and standard C++ Win32 runner | Implemented 2026-10-26; [validation](Flutter/VALIDATION.md); not performance-benchmarked |
 | `react-native-windows` | React/TypeScript, Fabric and Windows Composition | Planned; no HTML/WebView2 renderer |
 | `slint-rust` | Rust plus declarative Slint UI | Planned; renderer/features/license to pin |
 | `Dear-ImGui-dx11-12` | C++/Win32 plus Dear ImGui, separate DX11 and DX12 variants | Planned; backend-specific results |
