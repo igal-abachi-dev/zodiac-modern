@@ -1,0 +1,8 @@
+{"decorations":true,"reveal_after_navigation":false,"window_controls":false,"memory_target":"normal"}
+{"event":23,"hr":0,"microseconds":9876,"duration_us":0,"bytes":0}
+{"event":16,"hr":0,"microseconds":9981,"duration_us":0,"bytes":0}
+{"event":0,"hr":0,"microseconds":14455,"duration_us":0,"bytes":0}
+{"runtime":"156.0.4314.50"}
+{"event":11,"hr":0,"microseconds":15402,"duration_us":0,"bytes":0}
+{"event":19,"hr":0,"microseconds":15614,"duration_us":0,"bytes":0}
+{"passed":false,"requests_blocked":0,"navigation_blocked":0,"popups_blocked":0,"actions":0,"actions_rejected":0,"test_greetings":0,"window_commands":0,"memory_changes":0,"maximized":false,"restored":false,"minimized":false}

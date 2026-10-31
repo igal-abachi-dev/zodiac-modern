@@ -1,4 +1,5 @@
 #include <neutronstar/host_window.hpp>
+#include "failure_policy.hpp"
 #include "asset_policy.hpp"
 #include "test_greet_protocol.hpp"
 #include "window_protocol.hpp"
@@ -188,11 +189,11 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
         }
     }
 
-    void fail(HRESULT hr) noexcept {
+    void fail(HRESULT hr, const wchar_t* message = nullptr) noexcept {
         if (closed || failed) return;
         failed = true;
         stop_browser();
-        status = L"WebView2 could not load the local application. See the native diagnostic event.";
+        status = message ? message : L"WebView2 could not load the local application. See the native diagnostic event.";
         if (hwnd) InvalidateRect(hwnd, nullptr, TRUE);
         emit(EventKind::failed, hr);
     }
@@ -408,8 +409,28 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
                 s.emit(EventKind::document_title_changed, S_OK, std::wstring{title.get()}.substr(0, 256));
             });
         }), &ICoreWebView2::add_DocumentTitleChanged, &ICoreWebView2::remove_DocumentTitleChanged);
-        subscribe(webview, Callback<ICoreWebView2ProcessFailedEventHandler>([weak](auto*, auto*) -> HRESULT {
-            return dispatch(weak, [](State& s) { s.emit(EventKind::process_failed, E_FAIL); s.fail(E_FAIL); });
+        subscribe(webview, Callback<ICoreWebView2ProcessFailedEventHandler>([weak](auto*, auto* args) -> HRESULT {
+            return dispatch(weak, [args](State& s) {
+                ProcessFailure info;
+                COREWEBVIEW2_PROCESS_FAILED_KIND kind{};
+                if (SUCCEEDED(args->get_ProcessFailedKind(&kind))) info.kind = static_cast<int>(kind);
+                wil::com_ptr<ICoreWebView2ProcessFailedEventArgs2> more;
+                if (SUCCEEDED(args->QueryInterface(IID_PPV_ARGS(more.put())))) {
+                    COREWEBVIEW2_PROCESS_FAILED_REASON reason{};
+                    int code{};
+                    if (SUCCEEDED(more->get_Reason(&reason))) info.reason = static_cast<int>(reason);
+                    if (SUCCEEDED(more->get_ExitCode(&code))) info.exit_code = code;
+                }
+                // Capture only bounded numeric fields, never runtime descriptions/frame URLs.
+                if (s.options.on_event) {
+                    Event event{EventKind::process_failed, E_FAIL, L"process.failed"};
+                    event.process_failure = info;
+                    try { s.options.on_event(event); }
+                    catch (...) { s.failed = true; if (s.hwnd) PostMessageW(s.hwnd, WM_CLOSE, 0, 0); }
+                }
+                // Deliberately no Reload/recreation: failed benchmark samples stay failures.
+                s.fail(E_FAIL, L"A WebView2 process failed. This application has stopped; close and restart it. See the numeric native failure diagnostic.");
+            });
         }), &ICoreWebView2::add_ProcessFailed, &ICoreWebView2::remove_ProcessFailed);
         resize();
         update_visibility();
@@ -422,8 +443,23 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
     }
 
     void start_browser() {
+        const auto runtime = options.fixed_runtime_directory.wstring();
         auto env_options = Microsoft::WRL::Make<CoreWebView2EnvironmentOptions>();
         THROW_HR_IF_NULL(E_OUTOFMEMORY, env_options.Get());
+        wil::com_ptr<ICoreWebView2EnvironmentOptions7> channels;
+        THROW_IF_FAILED(env_options->QueryInterface(IID_PPV_ARGS(channels.put())));
+        THROW_IF_FAILED(channels->put_ReleaseChannels(COREWEBVIEW2_RELEASE_CHANNELS_STABLE));
+        wil::unique_cotaskmem_string available;
+        const auto detected = GetAvailableCoreWebView2BrowserVersionStringWithOptions(
+            runtime.empty() ? nullptr : runtime.c_str(), env_options.Get(), available.put());
+        const auto problem = detail::runtime_problem(detected, !runtime.empty());
+        if (problem != detail::RuntimeProblem::none) {
+            emit(EventKind::runtime_unavailable, detected, std::wstring{detail::runtime_tag(problem)});
+            fail(detected, detail::runtime_message(problem).data());
+            return;
+        }
+        emit(EventKind::runtime_checked, S_OK, L"runtime.available");
+        if (closed || failed) return;
         wil::com_ptr<ICoreWebView2EnvironmentOptions6> extensions;
         THROW_IF_FAILED(env_options->QueryInterface(__uuidof(ICoreWebView2EnvironmentOptions6), extensions.put_void()));
         THROW_IF_FAILED(extensions->put_AreBrowserExtensionsEnabled(FALSE));
@@ -465,7 +501,6 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
             } catch (...) { s.fail(wil::ResultFromCaughtException()); }
             return S_OK;
         });
-        const auto runtime = options.fixed_runtime_directory.wstring();
         emit(EventKind::environment_starting);
         if (closed || failed) return;
         ++pending_initializations;
@@ -628,7 +663,13 @@ struct HostWindow::State : std::enable_shared_from_this<HostWindow::State> {
                 SetBkMode(dc, TRANSPARENT);
                 const auto color = self->options.background_color;
                 SetTextColor(dc, GetRValue(color) + GetGValue(color) + GetBValue(color) < 384 ? RGB(255, 255, 255) : RGB(0, 0, 0));
-                DrawTextW(dc, self->status, -1, &rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX);
+                RECT text{20, 0, std::max(21L, rect.right - 20), 0};
+                DrawTextW(dc, self->status, -1, &text, DT_CENTER | DT_WORDBREAK | DT_NOPREFIX | DT_CALCRECT);
+                const auto height = text.bottom - text.top;
+                text.right = std::max(21L, rect.right - 20); // CALCRECT may shrink short lines.
+                text.top = std::max(20L, (rect.bottom - height) / 2);
+                text.bottom = text.top + height;
+                DrawTextW(dc, self->status, -1, &text, DT_CENTER | DT_WORDBREAK | DT_NOPREFIX);
                 EndPaint(window, &paint);
                 return 0;
             }

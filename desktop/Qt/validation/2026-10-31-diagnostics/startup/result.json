@@ -1,0 +1,71 @@
+﻿[
+    {
+        "modules":  [
+                        "Qt6Core.dll",
+                        "Qt6Qml.dll",
+                        "Qt6Quick.dll",
+                        "Qt6QuickControls2.dll",
+                        "Qt6Gui.dll",
+                        "MSVCP140.dll",
+                        "VCRUNTIME140.dll",
+                        "MSVCP140_1.dll",
+                        "VCRUNTIME140_1.dll",
+                        "Qt6Network.dll",
+                        "Qt6QmlMeta.dll",
+                        "Qt6QmlModels.dll",
+                        "Qt6OpenGL.dll",
+                        "MSVCP140_2.dll",
+                        "Qt6QuickTemplates2.dll",
+                        "Qt6QmlWorkerScript.dll",
+                        "Qt6QuickControls2Basic.dll",
+                        "Qt6QuickLayouts.dll",
+                        "Qt6QuickControls2BasicStyleImpl.dll",
+                        "Qt6QuickControls2Impl.dll",
+                        "Qt6Svg.dll"
+                    ],
+        "status":  "passed",
+        "case":  "isolated-module-origins"
+    },
+    {
+        "status":  "passed",
+        "case":  "isolated-deployment",
+        "exitCode":  0,
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\isolated-deployment.jsonl"
+    },
+    {
+        "status":  "passed",
+        "case":  "font-failure",
+        "exitCode":  2,
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\font-failure.jsonl"
+    },
+    {
+        "status":  "passed",
+        "case":  "qml-failure",
+        "exitCode":  2,
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\qml-failure.jsonl"
+    },
+    {
+        "status":  "passed",
+        "case":  "scene-graph-policy",
+        "exitCode":  2,
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\scene-graph-policy.jsonl"
+    },
+    {
+        "status":  "passed",
+        "case":  "software-backend-refused",
+        "exitCode":  2,
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\software-backend-refused.jsonl"
+    },
+    {
+        "status":  "passed",
+        "case":  "software-adapter-refused",
+        "exitCode":  2,
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\software-adapter-refused.jsonl"
+    },
+    {
+        "status":  "passed",
+        "case":  "renderer-override-refused",
+        "exitCode":  2,
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\renderer-override-refused.jsonl"
+    }
+]

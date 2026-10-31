@@ -1288,7 +1288,7 @@ Decisions recorded from this survey:
 4. **CEF / CefSharp is not added.** It is a different embedding model from Electron (Chromium plus Node as an app runtime) and WebView2 (the OS-provided control), and it is still widely used. Its resource profile should fall near Electron or WebView2 Fixed Version, so measuring it adds little.
 5. **Unreal Slate is not a candidate.** It needs the Unreal runtime. Dear ImGui is not an equivalent replacement: it is immediate-mode with the accessibility and internationalization gaps in section 4, so it stays a lean-floor reference only. The installed Epic Launcher uses Slate and CEF, while section 13.2 records community reports that its new preview moved to Tauri. These are different versions.
 6. **.NET MAUI is not added.** Its Windows target runs on WinUI 3, so a MAUI result would be the native WinUI 3 result plus a cross-platform layer. The 5.12 Blazor Hybrid entry covers the MAUI-with-WebView2 case.
-7. **Slint (Rust) is added as a candidate.** It is a lean, non-browser native toolkit. The `slint-rust` folder was created on 2026-10-24 and is empty. Nothing is built or measured. Its licensing, accessibility, internationalization and secret-input behavior must pass the same section 4, section 7 and 11.8 gates as every other entry. Go-native toolkits (Fyne, Gio) were suggested during the survey but are not added.
+7. **Slint (Rust) is added as a candidate.** It is a non-browser toolkit. The `slint-rust` folder was initially empty on 2026-10-24; the complete UI-only candidate was implemented and checked on 2026-10-31 (section 13.19), without comparative performance results. Licensing, accessibility, internationalization and any later secret-input behavior must pass the same section 4, section 7 and 11.8 gates as every other entry. Go-native toolkits (Fyne, Gio) were suggested during the survey but are not added.
 
 Candidate coverage is extended below; historical entry numbers are retained.
 Section 14's six-host results do not measure Avalonia, Qt, Electron, Flutter,
@@ -1309,7 +1309,8 @@ records the later Reactor/Flutter findings against the complete
 | `WinUI3-cs-native-reactor` | C# Microsoft.UI.Reactor declarative/MVU layer on native WinUI 3 | Implemented 2026-10-26; [validation](WinUI3-cs-native-reactor/VALIDATION.md); experimental; not performance-benchmarked |
 | `Flutter` | Dart AOT, stock Material 3, Flutter engine and standard C++ Win32 runner | Implemented 2026-10-26; [validation](Flutter/VALIDATION.md); not performance-benchmarked |
 | `react-native-windows` | React/TypeScript, Fabric and Windows Composition | Planned; no HTML/WebView2 renderer |
-| `slint-rust` | Rust plus declarative Slint UI | Planned; renderer/features/license to pin |
+| `slint-rust` | Rust plus declarative Slint UI | Implemented 2026-10-31; Slint 1.18.1/Rust 1.99.1, Winit/Skia; [validation](slint-rust/VALIDATION.md); not performance-benchmarked |
+| `Qt` | C++20 plus Qt Quick/QML | Implemented 2026-10-31; Qt 6.12.0, clang-cl/Ninja/Microsoft linker, D3D11; [validation](Qt/VALIDATION.md); not performance-benchmarked |
 | `Dear-ImGui-dx11-12` | C++/Win32 plus Dear ImGui, separate DX11 and DX12 variants | Planned; backend-specific results |
 
 **Reactor and MVVM are two authoring models on WinUI**, rather than two different
@@ -1718,3 +1719,251 @@ Actual acceptance, retained failed attempts and remaining gates are in
 [Flutter validation](Flutter/VALIDATION.md). Tauri/Svelte remains the selected
 WebView2 representative; these candidates do not establish an overall desktop
 winner.
+
+### 13.19 Qt/QML and Slint/Rust implementation lessons (2026-10-31)
+
+The independent [Qt candidate](Qt/README.md) and [Slint candidate](slint-rust/README.md)
+now include the main simulation UI **and** full filter/list workbench. They do not
+load a sibling dist or share runtime state. Both pass Release model checks and
+the external actual-window correctness suite. This is implementation evidence,
+not a performance ranking or completion of the deferred FUT-09 product/security
+review. Exact artifacts, retained failures and remaining gates are recorded in
+their validation documents.
+
+- **Qt follows the Microsoft ABI C++ path.** Qt 6.12.0's official MSVC shared kit
+  works with C++20/clang-cl, CMake/Ninja and Microsoft `link.exe`. Unlike the small
+  standalone C++ WebView2 host, these prebuilt Qt libraries use the dynamic CRT;
+  retain `/MD`. Set CMake's linker type explicitly: the installed CMake otherwise
+  selects lld-link for clang-cl despite a separate `CMAKE_LINKER` value. QML and
+  local fonts/icons are embedded, while Qt DLLs, QML modules and plugins ship as
+  a complete folder. Qt Quick's renderer is explicitly RHI Direct3D 11.
+- **Slint is an actual non-browser candidate.** Slint 1.18.1 uses a compiled Slint
+  UI, independent Rust models, standard Fluent widgets, Winit/Skia and AccessKit.
+  Cargo pins Rust 1.99.1 for this project without replacing the user's default
+  toolchain. First-build Skia/dependency setup is separate from launch cost.
+  Record the actual adapter/API before any graphics comparison; the label Rust
+  or Skia alone does not identify a GPU implementation.
+- **Equal data operations do not mean equal view reconciliation.** Both eager
+  lists exercise all 10,000 rows. Qt preserves persistent indexes on reverse;
+  Slint VecModel preserves data IDs but ordinary repetition reuses view instances
+  by position. Disclose that difference and keep any virtualized lane separate.
+- **Semantic readiness is toolkit-specific.** Qt waits for local font loading
+  and frame callbacks. The selected Slint Skia build does not deliver the default
+  graphics API AfterRendering notifier, so Ready follows show and an event-loop
+  turn. Neither is a physical presentation timestamp. Calibrate the external
+  collector rather than treating Ready as identical first paint.
+- **Input delivery and provider visibility need calibration.** The first Slint
+  Close clicks failed when the checker moved the cursor and immediately pressed;
+  allowing CursorMoved to reach Winit before pressing resolved them. Slint's
+  AccessKit tree also omits fully clipped controls: narrow-layout validation now
+  scrolls with real wheel input before comparing both buttons. No app test RPC
+  or hidden renderer endpoint was added. UIA success is not Narrator/IME proof.
+- **Standard controls and licenses remain visible trade-offs.** Qt uses free
+  Quick Controls Basic with neutral/emerald styling and dynamic open-source Qt
+  modules. Slint's stock Fluent accent/caption can follow Windows; its public
+  accessibility roles lack Dialog, so About exposes a named group with keyboard
+  focus containment. Royalty-free Slint desktop terms require attribution, shown
+  using AboutSlint. Qt LGPL obligations, source/relinking rights and all dependency
+  notices need distribution review. Neither candidate requires paid controls.
+
+Tauri + Svelte remains the chosen WebView2 reference. A cross-toolkit pilot and
+calibrated benchmark, physical accessibility/IME/contrast/multi-monitor checks,
+graphics/power traces and distribution review remain open for these candidates.
+
+### 13.20 Stremio: native media shell, Rust core and web renderer (2026-10-31)
+
+This summarizes the user's 2026-10-30 research with a selective primary-source
+check on 2026-10-31. **Stated** means an upstream description; **code** means the
+linked implementation was inspected; **inference** means an architectural
+interpretation. Links name mutable branches, not immutable source snapshots.
+No Stremio binary was built, benchmarked or audited here. Unchecked details from
+the supplied note remain research leads. Neither this section nor Stremio's
+claims replace our [stack decision](WEBVIEW2-STACK-DECISION.md),
+[comparison plan](DESKTOP-COMPARISON-PLAN.md) or frozen measurements.
+
+#### 13.20.1 What changed, and which comparison it supports
+
+| Layer | Older Stremio implementation | Newer implementation | Relevance here |
+| --- | --- | --- | --- |
+| Native shell | `stremio-shell`: C++/Qt5/QML with QtWebEngine and libmpv integration | `stremio-shell-ng`: Windows-specific Rust shell with WebView2 and MPV | A custom shell can be justified by native media-surface ownership |
+| Video path | MPV render API into a Qt OpenGL framebuffer object | Native HWND passed to MPV; its video-output path selects rendering options | This changes video/compositing work, not just the web framework |
+| Domain core | Platform-independent engine | `stremio-core`: Rust updates/effects and an environment abstraction | Separate domain work from UI and OS adapters |
+| Web UI | Existing web frontend/bridge | `stremio-web`: React; core transport is separate from components | React is not the source of the Elm-style architecture |
+
+**Stated:** shell-ng's README attributes its efficiency improvement to removing
+the old video integration overhead. Its **2–5×** figure is an upstream claim,
+without a reproduced workload/cohort here. It does not establish that WebView2
+is faster than native Qt 6 controls, that Rust beats C++, or that React beats
+Svelte. [Upstream rationale](https://github.com/Stremio/stremio-shell-ng/blob/main/README.md).
+
+**Code:** the old renderer subclasses `QQuickFramebufferObject::Renderer` and
+uses MPV's OpenGL render API. The new player supplies an HWND through `wid`,
+requests `gpu-next,gpu,` video outputs and a `d3d11` GPU context. Its readiness
+state uses load IDs and tests stale/out-of-order media events. Those are useful
+patterns for asynchronous ownership; its HDR, subtitles and hardware-video
+options are media requirements we do not have.
+[Old MPV integration](https://github.com/Stremio/stremio-shell/blob/master/mpv.cpp),
+[new player and tests](https://github.com/Stremio/stremio-shell-ng/blob/main/src/stremio_app/stremio_player/player.rs).
+
+The supplied note also describes transparent web overlays, dedicated media
+threads and device-specific processing. Exact HWND z-order/composition, shell
+start date, and why Tauri or React was chosen remain unverified. **Inference:**
+direct native video-surface ownership and an existing bridge can justify a
+specialized host. That does not imply Tauri cannot integrate native handles or
+that its cross-platform support is its only benefit. No Stremio source inspected
+states its framework-selection reasoning.
+
+#### 13.20.2 Transferable architecture, without importing their product scope
+
+**Code:** Stremio's Rust runtime dispatches actions into model updates, resolves
+effects through an environment abstraction and publishes changed fields/domain
+events. The React provider initializes a separate transport and subscribes to
+its output. A Svelte renderer could use the same separation; changing React
+would not itself replace the core architecture.
+[Rust runtime](https://github.com/Stremio/stremio-core/blob/development/src/runtime/runtime.rs),
+[React provider](https://github.com/Stremio/stremio-web/blob/development/src/core/CoreProvider.tsx).
+
+Borrow the principles: typed actions/results, small state slices, explicit
+side-effect ownership, subscription cleanup, and generation-tagged cancellation.
+Do not copy panic-on-channel-failure behavior into a receiver. The supplied
+worker/WASM bridge and version-keyed worker URL are ideas for a different future
+workload, **not** additions to this no-worker fixture. A worker does not make
+stored secrets safe. No profile/history/localStorage persistence or Rust/WASM
+core is introduced. Tauri's current reference uses Nano Stores; independent
+Svelte implementations can use runes without changing these architectural rules.
+
+Two qualifications to the supplied note: assigning `window.core` does **not**
+itself violate CSP; the concern is exposed authority and lifecycle, while CSP
+controls resource/script execution. Also, a guarded initialization effect with
+cleanup deserves a React development StrictMode setup/cleanup/setup test; code
+inspection alone does not establish a reproduced listener-loss bug. Svelte
+subscriptions likewise need explicit destruction/`$effect` cleanup.
+
+#### 13.20.3 Security and lifecycle lessons for the C++ host
+
+**Code:** shell-ng preserves a Qt-compatible web-channel adapter, injects an IPC
+key through a formatted script, enables DevTools/context menus, and handles web
+navigation/media commands. These are a substantially broader contract than our
+local fixed-message bridge. A separate option to open DevTools does not negate
+the settings permission being enabled. Keep our tools/menus off and our local
+origin/content policy. Script initialization timing alone is not a security fix:
+serialize values safely, avoid page secrets and authorize each privileged call.
+[WebView2 integration](https://github.com/Stremio/stremio-shell-ng/blob/main/src/stremio_app/stremio_wevbiew/wevbiew.rs).
+
+Its bounded media command types, generation-tagged web-load retries and Windows
+Job-object supervision are useful references for future product features.
+They do not justify adding arbitrary RPC, a child server or automatic retries
+to a small benchmark host.
+[Command types](https://github.com/Stremio/stremio-shell-ng/blob/main/src/stremio_app/stremio_player/communication.rs),
+[load/retry state](https://github.com/Stremio/stremio-shell-ng/blob/main/src/stremio_app/app.rs),
+[Job-object code](https://github.com/Stremio/stremio-shell-ng/blob/main/src/stremio_app/stremio_server/job.rs).
+
+The inspected updater compares a downloaded payload with a hash from remote
+metadata; this file does not demonstrate independent publisher-signature
+verification. Such a hash detects mismatched bytes but is insufficient if an
+attacker controls both metadata and payload. This is a limited path inspection,
+not proof that the entire product has no other verification. Filenames in the
+older repository do not prove signature verification was lost. Keep our signed
+artifact/trusted-channel requirement and no-updater scope.
+[Updater path](https://github.com/Stremio/stremio-shell-ng/blob/main/src/stremio_app/updater.rs).
+
+The supplied named-pipe, browser-switch and thread-stop concerns are review leads,
+not a complete vulnerability assessment. Do not copy browser security-disable
+flags. If future helpers or single-instance IPC become necessary, specify
+least-authority commands, per-user access controls, bounded framing/timeouts and
+assignment/cleanup races before implementing them.
+
+#### 13.20.4 Inspection outcome for our implementations
+
+Local inspection covered `Qt/src/main.cpp`, its model/controller and validation,
+plus the C++ host's settings, navigation/bridge, failure and initialization paths.
+**No Stremio-derived blocking implementation defect was found.**
+
+| Topic | Our current behavior / decision |
+| --- | --- |
+| Qt rendering | Native Qt 6.12 Quick Controls Basic over D3D11 RHI; no WebEngine, MPV, ANGLE/FBO media path or Node server. Keep it. |
+| Graphics API setup | `setGraphicsApi` runs before the first QQuickWindow, as required. Pinning an API does **not** certify hardware execution or rule out a software adapter; verify actual backend/adapter and overrides before benchmarking. |
+| Qt readiness | Local font load plus two frame callbacks gates actions. This is semantic readiness, not web-channel acknowledgment, physical paint or media readiness. |
+| List notifications | Keep the sparse changed-row notifications and unvirtualized workload. Coalescing is not an established fix; test it only as an explicitly labeled variant after a parity decision. |
+| Drop protection | C++ already sets `ICoreWebView2Controller4::AllowExternalDrop` false. No missing drop blocker to add. |
+| Initialization/shutdown | Current posted initialization, pending-request ownership and STA drain already address the previously reproduced early-close path. The supplied historical concern is not evidence that the old implementation is still present. |
+| Process failure | Current handler fails visibly/terminally. Keep that primary benchmark policy; automatic recovery would hide failures and alter measured work. |
+| Runtime diagnosis | Environment creation already reports failure. An earlier runtime-presence check and clearer missing-runtime text are reasonable usability follow-ups, not a prerequisite or a reason to install/download silently. |
+| Fullscreen, tray, single instance, helpers | Not required by this fixture. Add only to a product with the requirement; do not turn NeutronStar into another general framework. |
+
+Qt's documented requirement is to select the graphics API before constructing
+the first window; it does not mandate a universal ordering relative to
+QGuiApplication. For future custom video rendering, `QQuickFramebufferObject`
+is OpenGL-specific; `QQuickRhiItem` is a QRhi-based alternative, **not** a drop-in
+MPV integration. No Qt5 ANGLE switches or libmpv locale workaround belong here.
+[Window API](https://doc.qt.io/qt-6/qquickwindow.html#setGraphicsApi),
+[FBO constraints](https://doc.qt.io/qt-6/qquickframebufferobject.html),
+[RHI integration](https://doc.qt.io/qt-6/qquickrhiitem.html).
+
+For a later product, assess kind-aware ProcessFailed diagnostics/recovery with
+bounded attempts, generation checks, state-loss semantics and fresh regression
+evidence. Do not assume every GPU failure requires controller recreation.
+Priorities now remain physical AT/IME/contrast/DPI review, actual graphics and
+presentation tracing, clean-machine deployment and the calibrated desktop
+benchmark. **No runtime code, default browser arguments, artifacts or accepted
+benchmark evidence were changed by this research update.**
+
+### 13.21 WebView2 portability, servicing and footprint corrections (2026-10-31)
+
+- **WebView2 is Windows-specific.** Tauri uses WebView2 on Windows, WKWebView on
+  macOS and WebKitGTK on Linux. Tauri's abstractions help portability but do not
+  guarantee identical CSS, accessibility, plugins, packaging or OS behavior.
+  Vite/Svelte compiles the frontend; Tauri builds the native shell and embeds its
+  assets. MAUI/Uno platform coverage must be checked separately; do not infer
+  Linux support from the phrase system webview.
+  [Tauri webview reference](https://v2.tauri.app/reference/webview-versions/).
+- **Runtime is not Edge Stable.** Production WebView2 uses a dedicated Runtime.
+  Evergreen is included with Windows 11 and widely deployed on Windows 10;
+  applications still need a missing-runtime policy. Fixed Version is a separate
+  distribution/servicing choice. Current support must not be described as
+  Windows 7 support: Runtime 109 was the last for Windows 7/8.1.
+  [Runtime distribution](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/distribution),
+  [Microsoft end-of-support announcement](https://blogs.windows.com/msedgedev/2022/12/09/microsoft-edge-and-webview2-ending-support-for-windows-7-and-windows-8-8-1/).
+- **Shared installation does not mean a single shared browser process.** WebView2
+  still creates browser/renderer/GPU/utility processes. Removing a bundled engine
+  reduces application delivery obligations; it does not imply 30–60 MB total
+  memory. Our own process-tree data, memory definitions and lifecycle conditions
+  take precedence over generic Tauri/Electron RAM and installer ranges.
+  [Our six-host results](host-test-support/results/2026-10-24/RESULTS.md),
+  [Microsoft process model](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/process-model).
+- **Svelte does not exclude Electron.** Both hosts can run the same frontend
+  technology. Electron's bundled Chromium/Node brings footprint and servicing
+  obligations, but also a controlled engine and ecosystem; it remains an
+  independently implemented comparison candidate. Evergreen shifts engine
+  servicing, not responsibility for host/frontend/dependency security. Stremio
+  does not establish a universal winner, a RAM ratio or a reason to discard it.
+
+Tauri v2 + Svelte 5 remains our selected feature-rich **WebView2** product stack;
+NeutronStar C++ remains the narrow local host. Qt/native and other desktop-stack
+selection still depends on our independent implementations and measurements.
+
+### 13.22 Implemented Qt/C++ diagnostics follow-up (2026-10-31)
+
+The user subsequently authorized the eight improvements identified from this
+review. [The implementation/evidence record](DESKTOP-DIAGNOSTICS-2026-10-31.md)
+distinguishes completed code/automated checks from physical acceptance.
+
+Qt now verifies the actual QSG D3D11 device and DXGI adapter before Ready,
+rejects software rendering in the primary lane, reports actionable startup
+failures and includes the Microsoft CRT app-locally. It has system contrast
+palette bindings, polite status announcements and accessible filter edits that
+update the model. Normal and test-only contrast-palette checks cover the full
+workbench plus keyboard scrolling and distinct Hebrew/Unicode input paths.
+
+The C++ host now probes the selected Runtime using matching creation options,
+reports separate runtime failure categories and captures bounded numeric process
+failure information. Controlled owned-renderer/browser termination verifies
+pending-action cleanup, terminal failure and helper exit; automatic recovery
+remains off. New EventKind values are appended, preserving older numeric IDs.
+Consumers must rebuild against the changed static C++ event structure.
+
+An isolated PATH/module-origin check is **not** a clean Windows install, and a
+synthetic contrast palette/UIA report is **not** spoken screen-reader, OS contrast
+or IME acceptance. This machine has no Windows Sandbox and only one monitor.
+A clean-machine test generator and physical checklist are provided; these gates
+stay open. Historical measurements and the Tauri/Svelte selection are unchanged.

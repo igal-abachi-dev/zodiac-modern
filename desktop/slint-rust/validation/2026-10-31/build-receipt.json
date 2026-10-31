@@ -1,0 +1,40 @@
+﻿{
+    "slint":  "1.18.1",
+    "renderer":  "skia",
+    "backend":  "winit",
+    "files":  [
+                  {
+                      "path":  "neutronstar-slint.exe",
+                      "sha256":  "81AD72D95F0755FFF081DDDC32AD5E0E13665D8F3CFFCC85D366B02EB3F6967E",
+                      "bytes":  22345216
+                  },
+                  {
+                      "path":  "Notices/Inter-OFL.txt",
+                      "sha256":  "3B0A5FCA3D17942CDE889069889DEDBBBD075E9B599968C82A95F4D944E9B345",
+                      "bytes":  4477
+                  },
+                  {
+                      "path":  "Notices/Lucide-ISC.txt",
+                      "sha256":  "B495047BD93A9B06913511076F504DABA17D5BBEB3E0650F3BB53A4220329C57",
+                      "bytes":  3208
+                  },
+                  {
+                      "path":  "Notices/OFL-NotoSansHebrew.txt",
+                      "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+                      "bytes":  4380
+                  },
+                  {
+                      "path":  "Notices/Slint-Royalty-Free-2.0.md",
+                      "sha256":  "5167F5056E850419106AB6265EFBDCA7CBA4D99C849D1445CA0BBF6A1E2315FE",
+                      "bytes":  3620
+                  },
+                  {
+                      "path":  "THIRD-PARTY-NOTICES.txt",
+                      "sha256":  "35A83DB2D9191574249644ED3F80AED277D81DF630288D30CFD8CFA5113DAF5D",
+                      "bytes":  4217952
+                  }
+              ],
+    "schema":  1,
+    "comparison":  "Not run",
+    "rust":  "rustc 1.99.1 (58cf8f9c3 2026-10-13)"
+}

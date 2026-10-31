@@ -1,0 +1,36 @@
+﻿[
+    {
+        "exitCode":  1,
+        "automaticRecovery":  false,
+        "failure":  {
+                        "event":  9,
+                        "hr":  -2147467259,
+                        "microseconds":  1839274,
+                        "duration_us":  0,
+                        "bytes":  0,
+                        "process_kind":  1,
+                        "process_reason":  3,
+                        "process_exit_code":  -1
+                    },
+        "case":  "renderer",
+        "helpersExited":  true,
+        "status":  "passed"
+    },
+    {
+        "exitCode":  1,
+        "automaticRecovery":  false,
+        "failure":  {
+                        "event":  9,
+                        "hr":  -2147467259,
+                        "microseconds":  1082213,
+                        "duration_us":  0,
+                        "bytes":  0,
+                        "process_kind":  0,
+                        "process_reason":  0,
+                        "process_exit_code":  -1
+                    },
+        "case":  "browser",
+        "helpersExited":  true,
+        "status":  "passed"
+    }
+]

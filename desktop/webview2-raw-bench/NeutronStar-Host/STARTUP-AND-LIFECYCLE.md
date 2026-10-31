@@ -139,3 +139,34 @@ file and embedded fresh profiles. Its sampled GDI frames and UIA
 Ready checks can demonstrate observed loading/content transitions, not guarantee
 the absence of every physical flash. Exact evidence and remaining physical
 accessibility/DPI/GPU/energy gates belong to `VALIDATION.md`.
+
+## Stremio comparison follow-up (2026-10-31; research only)
+
+Later implementation: the runtime/process diagnostic items below are now
+implemented and tested in the separate [diagnostics follow-up](../../DESKTOP-DIAGNOSTICS-2026-10-31.md).
+Automatic recovery, helper supervision and product IPC remain outside scope.
+This earlier research note is retained as the rationale, not a current TODO list.
+
+See [desktop research §§13.20–13.21](../../desktop-gui.md#1320-stremio-native-media-shell-rust-core-and-web-renderer-2026-10-31).
+Stremio's remote media shell is a useful reference for generation-tagged
+readiness and helper supervision; it does not require us to add its product
+features. Current source already disables external drops and retains pending
+initialization ownership/STA draining. Do not describe those as missing based
+on an older snapshot. No runtime behavior or accepted cohort changed here.
+
+Follow-ups, if a product needs them:
+
+- Earlier missing-runtime diagnosis with an actionable native message, respecting
+  the selected Fixed Version directory. Test missing/invalid runtime separately;
+  never silently download/install or mask a different initialization failure.
+- Kind-aware ProcessFailed reporting, then a separate recovery-policy experiment
+  only with state-loss semantics, bounded attempts and generation/close races
+  tested. Keep terminal failure in the primary comparison lane so a retry cannot
+  turn a failed sample into an apparently normal launch.
+- Job supervision, bounded single-instance IPC, page fullscreen or native media
+  surfaces only when required. No child process or remote UI exists in this
+  fixture. Existing narrow bridge/content restrictions remain appropriate.
+
+Any runtime change must get fresh relevant tests, build/artifact hashes and
+validation. Stremio's performance claims and browser switches are not evidence
+for changing our defaults.

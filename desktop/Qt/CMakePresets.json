@@ -1,0 +1,17 @@
+{
+  "version": 6,
+  "configurePresets": [{
+    "name": "clang-cl-ninja-x64",
+    "displayName": "Qt 6.12 / clang-cl / Ninja / Microsoft ABI",
+    "generator": "Ninja Multi-Config",
+    "binaryDir": "${sourceDir}/out/clang-cl-ninja-x64",
+    "architecture": { "value": "x64", "strategy": "external" },
+    "cacheVariables": {
+      "CMAKE_CXX_COMPILER": "clang-cl",
+      "CMAKE_LINKER": "link.exe",
+      "CMAKE_PREFIX_PATH": "${sourceDir}/../.cache/qt-toolchain/6.12.0/msvc2022_64"
+    }
+  }],
+  "buildPresets": [{"name":"release","configurePreset":"clang-cl-ninja-x64","configuration":"Release"}],
+  "testPresets": [{"name":"release","configurePreset":"clang-cl-ninja-x64","configuration":"Release","output":{"outputOnFailure":true}}]
+}

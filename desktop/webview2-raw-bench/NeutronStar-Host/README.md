@@ -1,5 +1,24 @@
 # NeutronStar Host
 
+2026-10-31 diagnostics follow-up: the current default Release runner is rebuilt
+with runtime preflight and structured ProcessFailed diagnostics. It requests the
+stable Runtime channel using the same options for probe and creation; explicit
+Fixed Version selection never silently falls back. No installer, download,
+browser-security switch, retry or recovery is added. See
+[the eight-item record](../../DESKTOP-DIAGNOSTICS-2026-10-31.md) and
+[current validation](VALIDATION.md#latest-diagnostics-follow-up--2026-10-31).
+
+`EventKind::runtime_unavailable` carries the HRESULT and a fixed diagnostic tag;
+the native fallback text distinguishes runtime problems. `Event::process_failure`
+optionally carries numeric kind/reason/exit-code fields, never process descriptions
+or frame URLs. Rebuild both library and consumer when updating this static C++
+interface. Interactive runner failures remain readable until closed; hidden,
+timeout and reporting modes retain terminal/nonzero behavior for the harness.
+`scripts/Test-Failures.ps1 -RunnerPath <runner>` verifies owned renderer/browser
+failure, pending-action rejection, no recreation and helper cleanup. Managed OS
+policy and a genuinely missing installed Runtime still need deployment-specific
+checks; the tests do not uninstall or change the machine's runtime/registry.
+
 2026-10-24 follow-up: new application builds default to **embedded assets**;
 the file-backed runner remains an explicit research/development option. Lifecycle
 initialization/shutdown handling and loading backgrounds have changed after the

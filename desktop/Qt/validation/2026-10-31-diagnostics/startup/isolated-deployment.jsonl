@@ -1,0 +1,3 @@
+{"event":"starting","qt":"6.12.0","rendererOverride":false}
+{"adapter":"NVIDIA GeForce RTX 2070 SUPER","api":4,"device":7812,"event":"graphics","failure":"","software":false,"vendor":4318,"verified":true}
+{"event":"ready","verifiedHardware":true}

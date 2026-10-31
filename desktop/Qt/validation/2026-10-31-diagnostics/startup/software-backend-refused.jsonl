@@ -1,0 +1,3 @@
+{"event":"starting","qt":"6.12.0","rendererOverride":true}
+{"adapter":"","api":1,"device":0,"event":"graphics","failure":"graphics-api","software":false,"vendor":0,"verified":false}
+{"code":"graphics-api","event":"failed"}

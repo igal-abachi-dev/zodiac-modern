@@ -1,0 +1,192 @@
+﻿[
+    {
+        "path":  ".editorconfig",
+        "sha256":  "1182AEB38F712D922E4A87EAC68C2DFBA89032B99888BED1AECC8777B6785E7B",
+        "bytes":  394
+    },
+    {
+        "path":  ".gitignore",
+        "sha256":  "D4D54A747323E9EFED4BFBDF8114C850AECDAED2C209A6C4933684F3E2CA355F",
+        "bytes":  27
+    },
+    {
+        "path":  "app.manifest",
+        "sha256":  "D9046F421D972D970CC3495DFE2C57F27B9316C3B0E6511A1ABE9222CEF97E74",
+        "bytes":  887
+    },
+    {
+        "path":  "App.xaml",
+        "sha256":  "D714F95631E6C61EA285A626EA0690ECFEE0E7F438D2DD4452E6D43CA9F7476D",
+        "bytes":  3120
+    },
+    {
+        "path":  "App.xaml.cs",
+        "sha256":  "8E7E50F3E57A2F88D574CD3225D2D7E289D02D1584D967276BD0D862D5573271",
+        "bytes":  1076
+    },
+    {
+        "path":  "Assets/Fonts/inter-latin-400-normal.ttf",
+        "sha256":  "03693CC5689D8C89A20AE55FE945FE59884EEC8AD7D7DABB4761E066E88F49FF",
+        "bytes":  66592
+    },
+    {
+        "path":  "Assets/Fonts/inter-latin-500-normal.ttf",
+        "sha256":  "7E22ABFA3709EC2C67D18128ED3B7E522A8EFA602C7F46FB933BF71F5F8F2E3E",
+        "bytes":  66692
+    },
+    {
+        "path":  "Assets/Fonts/inter-latin-600-normal.ttf",
+        "sha256":  "DE8A61379F04664868958CC13D22CD9D1D79B4064E1EBD7C46588399F2A12FD5",
+        "bytes":  66800
+    },
+    {
+        "path":  "Assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf",
+        "sha256":  "4DF1FBFDE811AFBF4023ED6BFDE89CE9614C94775FA57DFDFC473575D5D076D0",
+        "bytes":  17072
+    },
+    {
+        "path":  "Assets/Fonts/OFL-NotoSansHebrew.txt",
+        "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+        "bytes":  4380
+    },
+    {
+        "path":  "Assets/Fonts/provenance.json",
+        "sha256":  "9DB6AA2FBA2D444EF17CA58130138EFF5AE6C232107351B363D862C227FBC899",
+        "bytes":  1626
+    },
+    {
+        "path":  "Assets/Icons/arrow-down-to-line.svg",
+        "sha256":  "8B692D916102083901B392C3F098B6F460604D5FAD4029FBE79D934E5C065892",
+        "bytes":  374
+    },
+    {
+        "path":  "Assets/Icons/arrow-up-from-line.svg",
+        "sha256":  "3A9B8037387DF9D552042E229AA9A16AE7326B52BF2A5AAB07450F3B539A404C",
+        "bytes":  374
+    },
+    {
+        "path":  "Assets/Icons/info.svg",
+        "sha256":  "BD039CBC60ABC0AF2D241232FA6FE76DA45C974A8928141B266B15435CA26E0C",
+        "bytes":  369
+    },
+    {
+        "path":  "Assets/Icons/lock-keyhole.svg",
+        "sha256":  "0D7D87CE30B53B2B26D03237D47011B447D4F4D49E4456F1E2EEFF2A410944D4",
+        "bytes":  420
+    },
+    {
+        "path":  "Assets/Icons/orbit.svg",
+        "sha256":  "90426BC45F068DD6576026B17E5723EEACBE25333D7587EBE79BD7A27F2B51BD",
+        "bytes":  494
+    },
+    {
+        "path":  "Assets/Icons/shield-check.svg",
+        "sha256":  "21B195F0BF7F6ED344D9327066C9E9DB6FD2E03AB8673C19907001D87B710E06",
+        "bytes":  498
+    },
+    {
+        "path":  "Assets/Icons/unlock-keyhole.svg",
+        "sha256":  "456E12DB802726BB969F996196EC71E89E3C1C00DF57C4843C3362CEF58A1E41",
+        "bytes":  424
+    },
+    {
+        "path":  "Assets/Notices/Inter-OFL.txt",
+        "sha256":  "3B0A5FCA3D17942CDE889069889DEDBBBD075E9B599968C82A95F4D944E9B345",
+        "bytes":  4477
+    },
+    {
+        "path":  "Assets/Notices/Lucide-ISC.txt",
+        "sha256":  "B495047BD93A9B06913511076F504DABA17D5BBEB3E0650F3BB53A4220329C57",
+        "bytes":  3208
+    },
+    {
+        "path":  "BenchRoot.cs",
+        "sha256":  "9E1C2512F02F2FD0190A8D4B9AE6882E4BF1C5A2701519339F44EEB6DD058C7B",
+        "bytes":  9553
+    },
+    {
+        "path":  "Build.ps1",
+        "sha256":  "E497904229B12BC381DAB2C5D9FF50EA7E00180951517D39474AC1E00A8EE9F2",
+        "bytes":  1465
+    },
+    {
+        "path":  "Domain.cs",
+        "sha256":  "C907F922457D3EA6E2AFFD663595E7CB0CA828829F6CC07B9F28EFCA144CA8F3",
+        "bytes":  3393
+    },
+    {
+        "path":  "global.json",
+        "sha256":  "830EF8B8BB52E6CBF69C2C315F314855066A0D31F4A7DE1B09920C7FC06658E7",
+        "bytes":  56
+    },
+    {
+        "path":  "Init.cmd",
+        "sha256":  "7485BC040E9504464B5ABE1E443B5445A6FAFEC01DCA6B2AC421759D6F51CD87",
+        "bytes":  81
+    },
+    {
+        "path":  "NeutronStar.Reactor.csproj",
+        "sha256":  "2E91159266EF1ECEEDB7D248BA4D71952DA62816823DE2BA536C93BC1F524685",
+        "bytes":  2133
+    },
+    {
+        "path":  "NeutronStar.Reactor.slnx",
+        "sha256":  "C5417C65B208625723BAEE6EF8B5390850ABE6F9D2F62F14187A647BAD09C9A4",
+        "bytes":  107
+    },
+    {
+        "path":  "NuGet.Config",
+        "sha256":  "B01297E53F711503D03F72EC4D3006FD75D81359B48463461797FC99E97F39AA",
+        "bytes":  159
+    },
+    {
+        "path":  "packages.lock.json",
+        "sha256":  "C6841AA67AF551CE3151AB4210746A93D1FC170FF500A480E818534A6FA664F2",
+        "bytes":  9171
+    },
+    {
+        "path":  "Pulse.cs",
+        "sha256":  "2DE1EAFE6F464713DFD11B5617093C6C214134FFD52526B12A7FCE6EFFB7729C",
+        "bytes":  1635
+    },
+    {
+        "path":  "README.md",
+        "sha256":  "EE923652013A779A6943B915E935A9C07C4AB6595D106E985CD684352BC76A08",
+        "bytes":  2671
+    },
+    {
+        "path":  "Run.ps1",
+        "sha256":  "BF1713BEDC92BE86E6E76CB8955780204F25589EC44ACC9A9AF7874D187FAB9E",
+        "bytes":  294
+    },
+    {
+        "path":  "scripts/Write-Notices.ps1",
+        "sha256":  "F47F8CE233462D926319E36BAB736A68A7098367F3FAA1E6B2C1279682375804",
+        "bytes":  2116
+    },
+    {
+        "path":  "Shell.cs",
+        "sha256":  "710274EAF9891F7B64E302EE8166969E47A83C74D6F140542388F445FF94A043",
+        "bytes":  2201
+    },
+    {
+        "path":  "Tests/DomainTests.csproj",
+        "sha256":  "398D94202600D5661CD5FC594A9400057834DDD0FF84BACF71B640C680AD8BBB",
+        "bytes":  397
+    },
+    {
+        "path":  "Tests/packages.lock.json",
+        "sha256":  "A4364D81A6DE2707D66FBCED18FBBC926C882AB96E1D1AEBBB17E871285B9D75",
+        "bytes":  66
+    },
+    {
+        "path":  "Tests/Program.cs",
+        "sha256":  "5768FB86F52E6D6FE74A538351FA68CAB461705F7EEBD7388BDDF3C45B58A816",
+        "bytes":  1414
+    },
+    {
+        "path":  "VALIDATION.md",
+        "sha256":  "B846C939BD3B5BB99F25E8EA6FCAD8C0B041BA966D313611AF535F10ED27ED7F",
+        "bytes":  4988
+    }
+]

@@ -1,5 +1,35 @@
 # Host validation record
 
+## Latest diagnostics follow-up — 2026-10-31
+
+See [validation/2026-10-31-diagnostics](validation/2026-10-31-diagnostics) and the
+[eight-item follow-up](../../DESKTOP-DIAGNOSTICS-2026-10-31.md). This is fresh
+correctness evidence for changed source/default Release artifacts, not a rerun
+or replacement of the historical measurement cohorts below.
+
+The loader now probes the selected runtime before environment creation, using
+the same environment options and a stable-channel mask (subject to managed OS
+policy). Fixed Version does not silently fall back to Evergreen. Missing-runtime,
+unusable fixed-runtime and other probe errors have separate fixed messages/tags;
+failure text wraps. Interactive runner errors remain visible until the user
+closes them; automated/reporting modes still terminate with failure.
+
+ProcessFailed emits only numeric kind/reason/exit-code information, gracefully
+omitting unsupported optional fields. No frame URLs/process descriptions are
+read. Real owned renderer/browser terminations passed with a synthetic action
+pending; stale completion was rejected, failure stayed terminal, and helpers
+exited. The test checks unique profile, ancestry and PID/creation identity before
+terminating its own child. There is no reload/recreation or failed-sample retry.
+
+The 23 existing regression cases and 18 repeated lifecycle cases pass, including
+invalid Fixed Version, confinement, bridge, custom-window and close-during-init
+paths. Unit checks distinguish missing Evergreen from access/other probe errors.
+No installed runtime was uninstalled and no machine registry/policy was changed;
+actual missing-Evergreen validation still requires an appropriate clean VM.
+Environment-variable overrides remain rejected; managed registry policy and
+production distribution/review remain separate gates. Earlier evidence below
+applies only to its recorded builds.
+
 ## Six-host measurement update - 2026-10-24
 
 The unchanged clang-cl/Ninja Release runner served as the baseline in the

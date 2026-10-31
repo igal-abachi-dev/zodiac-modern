@@ -1,0 +1,7 @@
+﻿{
+    "date":  "2026-10-31",
+    "sandboxAvailable":  false,
+    "screenCount":  1,
+    "scope":  "local environment capability; not a clean VM or physical AT pass",
+    "physicalAcceptance":  "deferred by user"
+}

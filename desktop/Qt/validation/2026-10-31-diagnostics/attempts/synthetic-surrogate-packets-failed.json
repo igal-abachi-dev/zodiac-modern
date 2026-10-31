@@ -1,0 +1,687 @@
+{
+  "config": {
+    "app": "Qt",
+    "runner": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\out\\win-x64\\neutronstar_qt.exe",
+    "assets": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\dist",
+    "profile": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\check-838344f16a7648e48912dda786d2a451\\profile",
+    "output": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\check-838344f16a7648e48912dda786d2a451",
+    "arguments": [],
+    "nativeUi": true,
+    "layoutOnly": false,
+    "engineKind": "Qt Quick / C\u002B\u002B / D3D11",
+    "semanticTimeoutMs": 30000,
+    "uiaTimeoutSeconds": 3
+  },
+  "automation": "UIA3",
+  "scope": "reference feature correctness only; not comparative timing, scripting or physical paint",
+  "runnerSha256": "A65D57C1070EA4658426B69DF4D4762BA9EE4E0C4AD4576928F115EA6BC34F62",
+  "mainChecks": "About Escape/Close/focus; encrypt complete; decrypt cancel; reset",
+  "tickAfterStop": 11,
+  "status": "failed",
+  "error": "TimeoutException: Workload semantic endpoint",
+  "stack": "   at CandidateChecks.Wait(Func\u00601 query, Int32 timeout) in D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\candidate-checks\\Program.cs:line 23\r\n   at CandidateChecks.Main(String[] args) in D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\candidate-checks\\Program.cs:line 151",
+  "lastTree": [
+    {
+      "type": "TitleBar",
+      "name": null,
+      "id": "TitleBar",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "MenuBar",
+      "name": "System",
+      "id": "SystemMenuBar",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "MenuItem",
+      "name": "System",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Minimize",
+      "id": "Minimize-Restore",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Maximize",
+      "id": "Maximize-Restore",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Close",
+      "id": "Close",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Group",
+      "name": "",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "NeutronStar GUI Bench",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Text",
+      "name": "A UI-only simulation for comparing desktop frontends.",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Button",
+      "name": "About this test",
+      "id": "about-trigger",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Text",
+      "name": "SIMULATION \u00B7 NO FILES OR CRYPTOGRAPHY.",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Custom",
+      "name": "",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Decrypt",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Text",
+      "name": "SYNTHETIC INPUT",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Text",
+      "name": "Synthetic sample: starlight.nsx",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Text",
+      "name": "No disk file is opened.",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Button",
+      "name": "Simulate decryption",
+      "id": "decrypt",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Custom",
+      "name": "",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Encrypt",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Text",
+      "name": "SYNTHETIC INPUT",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Text",
+      "name": "Zodiac GUI benchmark \u2014 \u05E9\u05DC\u05D5\u05DD \u2014 \uD83C\uDF20",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Operation_QMLTYPE_7.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": true
+    },
+    {
+      "type": "Button",
+      "name": "Simulate encryption",
+      "id": "encrypt",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Custom",
+      "name": "",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Card_QMLTYPE_9",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Ready",
+      "id": "status",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Reset",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Card_QMLTYPE_9.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "ProgressBar",
+      "name": "Simulation progress",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Card_QMLTYPE_9.ProgressBar_QMLTYPE_11",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Simulation progress  0%",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Card_QMLTYPE_9.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Open workbench",
+      "id": "open-workbench",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Local interface. Synthetic data. Nothing is encrypted or decrypted.",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "CONTROLLED RENDERER \u00B7 LOCAL STATE",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "List and filter workbench",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Deterministic synthetic rows. No files, network, cryptography or native commands.",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Back to main screen",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Workbench ready",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "1,000 rows",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "10,000 rows",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Reverse",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Splice 10",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Update 10%",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "10 Hz / 2 s",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8_QML_29",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "30 Hz / 2 s",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8_QML_29",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "60 Hz / 2 s",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8_QML_29",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Stop",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Remount workload",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.BenchButton_QMLTYPE_8",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Custom",
+      "name": "",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Card_QMLTYPE_9",
+      "enabled": true,
+      "focus": true,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Filter synthetic rows",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.Card_QMLTYPE_9.BenchLabel_QMLTYPE_2",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Edit",
+      "name": "Filter synthetic rows",
+      "id": "workload-query",
+      "enabled": true,
+      "focus": true,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "0 rows; tick 15",
+      "id": "workload-summary",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "List",
+      "name": "Synthetic rows",
+      "id": "workload-rows",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "ScrollBar",
+      "name": "",
+      "id": "QGuiApplication.Main_QMLTYPE_0.ApplicationWindowContentControl.ScrollBar_QMLTYPE_4",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    }
+  ],
+  "hostExited": true,
+  "helpersExited": true,
+  "exitCode": 0,
+  "inputTargets": [
+    {
+      "name": "About this test",
+      "x": 2612,
+      "y": 480,
+      "width": 212,
+      "height": 68
+    },
+    {
+      "name": "About this test",
+      "x": 2612,
+      "y": 480,
+      "width": 212,
+      "height": 68
+    },
+    {
+      "name": "Close",
+      "x": 2204,
+      "y": 1098,
+      "width": 112,
+      "height": 68
+    },
+    {
+      "name": "Simulate encryption",
+      "x": 1972,
+      "y": 1098,
+      "width": 820,
+      "height": 80
+    },
+    {
+      "name": "Reset",
+      "x": 1634,
+      "y": 1282,
+      "width": 112,
+      "height": 68
+    },
+    {
+      "name": "Simulate decryption",
+      "x": 1048,
+      "y": 1098,
+      "width": 820,
+      "height": 80
+    },
+    {
+      "name": "Cancel",
+      "x": 1384,
+      "y": 1282,
+      "width": 126,
+      "height": 68
+    },
+    {
+      "name": "Reset",
+      "x": 1346,
+      "y": 1282,
+      "width": 112,
+      "height": 68
+    },
+    {
+      "name": "Open workbench",
+      "x": 1016,
+      "y": 1526,
+      "width": 244,
+      "height": 68
+    },
+    {
+      "name": "10,000 rows",
+      "x": 1204,
+      "y": 702,
+      "width": 186,
+      "height": 68
+    },
+    {
+      "name": "1,000 rows",
+      "x": 1016,
+      "y": 702,
+      "width": 172,
+      "height": 68
+    },
+    {
+      "name": "Reverse",
+      "x": 1404,
+      "y": 702,
+      "width": 140,
+      "height": 68
+    },
+    {
+      "name": "Splice 10",
+      "x": 1560,
+      "y": 702,
+      "width": 148,
+      "height": 68
+    },
+    {
+      "name": "Update 10%",
+      "x": 1724,
+      "y": 702,
+      "width": 186,
+      "height": 68
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 972,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1350,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "30 Hz / 2 s",
+      "x": 2110,
+      "y": 1080,
+      "width": 172,
+      "height": 68
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1350,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Stop",
+      "x": 2484,
+      "y": 1080,
+      "width": 100,
+      "height": 68
+    },
+    {
+      "name": "Remount workload",
+      "x": 1016,
+      "y": 1164,
+      "width": 260,
+      "height": 68
+    },
+    {
+      "name": "10 Hz / 2 s",
+      "x": 1926,
+      "y": 1080,
+      "width": 166,
+      "height": 68
+    },
+    {
+      "name": "Stop",
+      "x": 2484,
+      "y": 1080,
+      "width": 100,
+      "height": 68
+    },
+    {
+      "name": "60 Hz / 2 s",
+      "x": 2298,
+      "y": 1080,
+      "width": 172,
+      "height": 68
+    },
+    {
+      "name": "Stop",
+      "x": 2484,
+      "y": 1080,
+      "width": 100,
+      "height": 68
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1350,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1450,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1450,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1450,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1450,
+      "width": 1744,
+      "height": 80
+    }
+  ],
+  "providerGaps": [],
+  "actions": [
+    {
+      "name": "replace-10000",
+      "inputToUiaObservedMs": 1439.5506000518799,
+      "requestToUiaMs": 1581.7267999649048
+    },
+    {
+      "name": "replace-1000",
+      "inputToUiaObservedMs": 543.3896999359131,
+      "requestToUiaMs": 673.2904000282288
+    },
+    {
+      "name": "reverse-1000",
+      "inputToUiaObservedMs": 174.33490014076233,
+      "requestToUiaMs": 309.07419991493225
+    },
+    {
+      "name": "splice-10",
+      "inputToUiaObservedMs": 24.308799982070923,
+      "requestToUiaMs": 166.52680015563965
+    },
+    {
+      "name": "update-10-percent",
+      "inputToUiaObservedMs": 15.958899974822998,
+      "requestToUiaMs": 150.22470021247864
+    },
+    {
+      "name": "filter-to-one",
+      "inputToUiaObservedMs": 38.21519994735718,
+      "requestToUiaMs": 199.19320011138916
+    },
+    {
+      "name": "filter-clear",
+      "inputToUiaObservedMs": 140.18250012397766,
+      "requestToUiaMs": 280.9519999027252
+    },
+    {
+      "name": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": 54.377700090408325,
+      "requestToUiaMs": 225.76530003547668
+    },
+    {
+      "name": "remount",
+      "inputToUiaObservedMs": 302.87859988212585,
+      "requestToUiaMs": 442.7962999343872
+    }
+  ],
+  "processIdentities": [
+    {
+      "pid": 52900,
+      "startUtc": "2026-10-30T23:12:08.3885015Z"
+    }
+  ]
+}

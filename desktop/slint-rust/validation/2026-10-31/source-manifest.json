@@ -1,0 +1,212 @@
+﻿{
+    "date":  "2026-10-31",
+    "scope":  "candidate sources/assets/build/docs plus correctness checker; excludes build caches and validation outputs",
+    "schema":  1,
+    "files":  [
+                  {
+                      "path":  "host-test-support/candidate-checks/CandidateChecks.csproj",
+                      "sha256":  "457CC83F7B11699ED42B0F8080003B1EDF0F5D893CE38AFA5D8591447D73CCAC",
+                      "bytes":  593
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/global.json",
+                      "sha256":  "37014080B001EEDD3486CD6FFAA789626901F22C0434949318493D8462FC1ADA",
+                      "bytes":  55
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/NuGet.Config",
+                      "sha256":  "593813D027AE058C94C59138C6618D9B3526A825D91DB6E0E3BEC2C5D60C07FC",
+                      "bytes":  198
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/packages.lock.json",
+                      "sha256":  "E94C18692BE87047BFE13BC337572E47AA5B5B079C1A5B0DDF1D147A9CE4DD86",
+                      "bytes":  1183
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/Program.cs",
+                      "sha256":  "C3DCA5C3DE372F5B586AACFA134FC917CB0B123ECB1366B07DFB6E1DCED05F23",
+                      "bytes":  22245
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/README.md",
+                      "sha256":  "293BB7B5D06BD02CCE5D103BEB6066731396DF5B1ADB04EEB67B8C7BAFBC03C5",
+                      "bytes":  3698
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/Run.ps1",
+                      "sha256":  "3B6B0E1DC79FD011C92E110AC36D36F7729782DE2FD3C60223F948D28F871553",
+                      "bytes":  2584
+                  },
+                  {
+                      "path":  "host-test-support/measurement/Native.cs",
+                      "sha256":  "8CBD93BE78092850F103559C812E33719F7509488BF049C523EEC03E6CB779CC",
+                      "bytes":  9613
+                  },
+                  {
+                      "path":  "host-test-support/measurement/ProcessTree.cs",
+                      "sha256":  "0ECD0FA4E24D5F98E1FA863B5477C7E123245B4F261C43C682669D05349FFDEE",
+                      "bytes":  989
+                  },
+                  {
+                      "path":  "slint-rust/.cache-build.log",
+                      "sha256":  "E8E1B6B01BBB83AB5EA789B0155B57C3305A2797556421731BB93916A71056F5",
+                      "bytes":  3752
+                  },
+                  {
+                      "path":  "slint-rust/.gitignore",
+                      "sha256":  "6EE3E65A2D2D6CE704D6BC22C0206AC7964770EC5885FD116F12B61FCE693982",
+                      "bytes":  38
+                  },
+                  {
+                      "path":  "slint-rust/assets/Fonts/inter-latin-400-normal.ttf",
+                      "sha256":  "03693CC5689D8C89A20AE55FE945FE59884EEC8AD7D7DABB4761E066E88F49FF",
+                      "bytes":  66592
+                  },
+                  {
+                      "path":  "slint-rust/assets/Fonts/inter-latin-500-normal.ttf",
+                      "sha256":  "7E22ABFA3709EC2C67D18128ED3B7E522A8EFA602C7F46FB933BF71F5F8F2E3E",
+                      "bytes":  66692
+                  },
+                  {
+                      "path":  "slint-rust/assets/Fonts/inter-latin-600-normal.ttf",
+                      "sha256":  "DE8A61379F04664868958CC13D22CD9D1D79B4064E1EBD7C46588399F2A12FD5",
+                      "bytes":  66800
+                  },
+                  {
+                      "path":  "slint-rust/assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf",
+                      "sha256":  "4DF1FBFDE811AFBF4023ED6BFDE89CE9614C94775FA57DFDFC473575D5D076D0",
+                      "bytes":  17072
+                  },
+                  {
+                      "path":  "slint-rust/assets/Fonts/OFL-NotoSansHebrew.txt",
+                      "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+                      "bytes":  4380
+                  },
+                  {
+                      "path":  "slint-rust/assets/Fonts/provenance.json",
+                      "sha256":  "9DB6AA2FBA2D444EF17CA58130138EFF5AE6C232107351B363D862C227FBC899",
+                      "bytes":  1626
+                  },
+                  {
+                      "path":  "slint-rust/assets/Icons/arrow-down-to-line.svg",
+                      "sha256":  "8B692D916102083901B392C3F098B6F460604D5FAD4029FBE79D934E5C065892",
+                      "bytes":  374
+                  },
+                  {
+                      "path":  "slint-rust/assets/Icons/arrow-up-from-line.svg",
+                      "sha256":  "3A9B8037387DF9D552042E229AA9A16AE7326B52BF2A5AAB07450F3B539A404C",
+                      "bytes":  374
+                  },
+                  {
+                      "path":  "slint-rust/assets/Icons/info.svg",
+                      "sha256":  "BD039CBC60ABC0AF2D241232FA6FE76DA45C974A8928141B266B15435CA26E0C",
+                      "bytes":  369
+                  },
+                  {
+                      "path":  "slint-rust/assets/Icons/lock-keyhole.svg",
+                      "sha256":  "0D7D87CE30B53B2B26D03237D47011B447D4F4D49E4456F1E2EEFF2A410944D4",
+                      "bytes":  420
+                  },
+                  {
+                      "path":  "slint-rust/assets/Icons/orbit.svg",
+                      "sha256":  "90426BC45F068DD6576026B17E5723EEACBE25333D7587EBE79BD7A27F2B51BD",
+                      "bytes":  494
+                  },
+                  {
+                      "path":  "slint-rust/assets/Icons/shield-check.svg",
+                      "sha256":  "21B195F0BF7F6ED344D9327066C9E9DB6FD2E03AB8673C19907001D87B710E06",
+                      "bytes":  498
+                  },
+                  {
+                      "path":  "slint-rust/assets/Icons/unlock-keyhole.svg",
+                      "sha256":  "456E12DB802726BB969F996196EC71E89E3C1C00DF57C4843C3362CEF58A1E41",
+                      "bytes":  424
+                  },
+                  {
+                      "path":  "slint-rust/assets/Notices/Inter-OFL.txt",
+                      "sha256":  "3B0A5FCA3D17942CDE889069889DEDBBBD075E9B599968C82A95F4D944E9B345",
+                      "bytes":  4477
+                  },
+                  {
+                      "path":  "slint-rust/assets/Notices/Lucide-ISC.txt",
+                      "sha256":  "B495047BD93A9B06913511076F504DABA17D5BBEB3E0650F3BB53A4220329C57",
+                      "bytes":  3208
+                  },
+                  {
+                      "path":  "slint-rust/assets/Notices/OFL-NotoSansHebrew.txt",
+                      "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+                      "bytes":  4380
+                  },
+                  {
+                      "path":  "slint-rust/assets/Notices/Slint-Royalty-Free-2.0.md",
+                      "sha256":  "5167F5056E850419106AB6265EFBDCA7CBA4D99C849D1445CA0BBF6A1E2315FE",
+                      "bytes":  3620
+                  },
+                  {
+                      "path":  "slint-rust/Build.ps1",
+                      "sha256":  "B3F6610F11C46D328E4E895D6B20A8E78E8AD54FE4E6A17B09718A34286E735F",
+                      "bytes":  1287
+                  },
+                  {
+                      "path":  "slint-rust/build.rs",
+                      "sha256":  "5B8FB70FA21AD5AAFA98A11BC618C6A2FF35494FEEF4257ECC7D7F92A1D1F1E9",
+                      "bytes":  207
+                  },
+                  {
+                      "path":  "slint-rust/Cargo.lock",
+                      "sha256":  "DD36A6BD282BAF25C3795ED43F5D6E206CBFCBAAC93F4FFC01F1DD749C7A2478",
+                      "bytes":  138248
+                  },
+                  {
+                      "path":  "slint-rust/Cargo.toml",
+                      "sha256":  "88CDC664AFAC3233CB4CA520E9F2B79482C4CB05B894A3EB19C5A8FF913D0F74",
+                      "bytes":  422
+                  },
+                  {
+                      "path":  "slint-rust/Init.cmd",
+                      "sha256":  "08535D55BCB5428B35D97C0CFEB1F3985D468FC216BF2E5C9597A36F284695F9",
+                      "bytes":  105
+                  },
+                  {
+                      "path":  "slint-rust/README.md",
+                      "sha256":  "6288A84428D85C914CAFF27230E10961BEF35420557504B0E5ED21C4C4ED109E",
+                      "bytes":  3503
+                  },
+                  {
+                      "path":  "slint-rust/Run.ps1",
+                      "sha256":  "1FFE1F9FD3F6DB183AB55499156185EE86DC66F8363DBD674252DE4533FDDCB4",
+                      "bytes":  281
+                  },
+                  {
+                      "path":  "slint-rust/rust-toolchain.toml",
+                      "sha256":  "4387889E7EF217B7A0CEA12EE152FB5570EC33880F985BFF2EBCD49B963B3B24",
+                      "bytes":  123
+                  },
+                  {
+                      "path":  "slint-rust/scripts/Write-Notices.py",
+                      "sha256":  "B5FC1D360249BBBC78607AB1B288F56E414416764E30D04065091C1F0817A102",
+                      "bytes":  1566
+                  },
+                  {
+                      "path":  "slint-rust/src/domain.rs",
+                      "sha256":  "26FB9538B8D15C5CCABD2012BE7BD3B3DDA4E4E4898E1D0FC2D8629DBF55ED0F",
+                      "bytes":  5051
+                  },
+                  {
+                      "path":  "slint-rust/src/main.rs",
+                      "sha256":  "B67F6315802898545E60822771AEC8A80CA1AEE3DD4AC79098EFA1DE768901A7",
+                      "bytes":  8429
+                  },
+                  {
+                      "path":  "slint-rust/ui/main.slint",
+                      "sha256":  "DEF451F3BBA37ECD886FF2D21CC297E89F803446342ED2869467BC63A2DF8911",
+                      "bytes":  11690
+                  },
+                  {
+                      "path":  "slint-rust/VALIDATION.md",
+                      "sha256":  "80280DFC8206CB834C1E87A5168E8925007BC72E847310A3AC462562668A0126",
+                      "bytes":  3954
+                  }
+              ]
+}

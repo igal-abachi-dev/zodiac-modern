@@ -1,0 +1,321 @@
+{
+  "config": {
+    "app": "Slint",
+    "runner": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\slint-rust\\out\\win-x64\\neutronstar-slint.exe",
+    "assets": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\slint-rust\\dist",
+    "profile": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\slint-rust\\.cache\\check-62238178ebe24e68ba2c3f549074c754\\profile",
+    "output": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\slint-rust\\.cache\\check-62238178ebe24e68ba2c3f549074c754",
+    "arguments": [],
+    "nativeUi": true,
+    "layoutOnly": false,
+    "engineKind": "Slint / Rust / Skia",
+    "semanticTimeoutMs": 30000,
+    "uiaTimeoutSeconds": 3
+  },
+  "automation": "UIA3",
+  "scope": "reference feature correctness only; not comparative timing, scripting or physical paint",
+  "status": "failed",
+  "error": "TimeoutException: Workload semantic endpoint",
+  "stack": "   at CandidateChecks.Wait(Func\u00601 query, Int32 timeout) in D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\candidate-checks\\Program.cs:line 22\r\n   at CandidateChecks.Main(String[] args) in D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\candidate-checks\\Program.cs:line 111",
+  "lastTree": [
+    {
+      "type": "TitleBar",
+      "name": null,
+      "id": "TitleBar",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "MenuBar",
+      "name": "System",
+      "id": "SystemMenuBar",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "MenuItem",
+      "name": "System",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Minimize",
+      "id": "Minimize-Restore",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Maximize",
+      "id": "Maximize-Restore",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Close",
+      "id": "Close",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": null,
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "NeutronStar GUI Bench",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "A UI-only simulation for comparing desktop frontends.",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "About this test",
+      "id": "about-trigger",
+      "enabled": false,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": null,
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "SIMULATION \u00B7 NO FILES OR CRYPTOGRAPHY.",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": null,
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Decrypt",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "SYNTHETIC INPUT",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Synthetic sample: starlight.nsx",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "No disk file is opened.",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Simulate decryption",
+      "id": "decrypt",
+      "enabled": false,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": null,
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Encrypt",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "SYNTHETIC INPUT",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Zodiac GUI benchmark \u2014 \u05E9\u05DC\u05D5\u05DD \u2014 \uD83C\uDF20",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Simulate encryption",
+      "id": "encrypt",
+      "enabled": false,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Ready",
+      "id": "status",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Reset",
+      "id": null,
+      "enabled": false,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "ProgressBar",
+      "name": "Simulation progress",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Simulation progress  0%",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Open workbench",
+      "id": "open-workbench",
+      "enabled": false,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Local interface. Synthetic data. Nothing is encrypted or decrypted.",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "CONTROLLED RENDERER \u00B7 LOCAL STATE",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Group",
+      "name": "About this test",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "About this test",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved.",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": "#MadeWithSlint",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Version 1.18.1\nhttps://slint.dev/",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Close",
+      "id": "about-close",
+      "enabled": true,
+      "focus": true,
+      "offscreen": false
+    }
+  ],
+  "hostExited": true,
+  "helpersExited": true,
+  "exitCode": 0,
+  "providerGaps": [],
+  "actions": [],
+  "processIdentities": [
+    {
+      "pid": 24316,
+      "startUtc": "2026-10-30T20:54:30.2494274Z"
+    }
+  ]
+}

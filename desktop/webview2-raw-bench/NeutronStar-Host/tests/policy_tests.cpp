@@ -1,6 +1,7 @@
 #include "asset_policy.hpp"
 #include "test_greet_protocol.hpp"
 #include "window_protocol.hpp"
+#include "failure_policy.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -10,6 +11,11 @@ int main() {
     using namespace neutronstar::detail;
     int failures{};
     auto check = [&](bool good, const char* name) { if (!good) { std::cerr << "FAIL " << name << '\n'; ++failures; } };
+    check(runtime_problem(S_OK, false) == RuntimeProblem::none, "runtime probe success");
+    check(runtime_problem(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND), false) == RuntimeProblem::missing_evergreen, "missing Evergreen classified");
+    check(runtime_problem(HRESULT_FROM_WIN32(ERROR_PATH_NOT_FOUND), true) == RuntimeProblem::invalid_fixed, "fixed runtime never falls back");
+    check(runtime_problem(E_ACCESSDENIED, false) == RuntimeProblem::probe_failed, "access error is not mislabeled missing");
+    check(runtime_problem(E_ACCESSDENIED, true) == RuntimeProblem::invalid_fixed, "unusable fixed runtime classified");
     check(embedded_asset_key(L"assets/App-A1.js") == L"assets/app-a1.js", "embedded Windows case normalization");
     check(valid_embedded_assets({{L"index.html", {60, 62}}, {L"assets/app.js", {}}}), "valid embedded snapshot");
     check(!valid_embedded_assets({}), "empty snapshot is not an embedded application");

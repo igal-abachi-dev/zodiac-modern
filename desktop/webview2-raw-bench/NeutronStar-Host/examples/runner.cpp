@@ -35,6 +35,7 @@ void CALLBACK greet_reply(HWND hwnd, UINT, UINT_PTR id, DWORD) {
 }
 
 int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
+    bool interactive_errors = true;
     try {
         // The embedding application owns process DPI policy; library owns per-window resize handling.
         if (!SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2) && GetLastError() != ERROR_ACCESS_DENIED) {
@@ -51,6 +52,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
         options.title = L"NeutronStar Host — local frontend";
         bool smoke{}, close_early{}, bridge{}, close_environment{}, close_controller{}, test_greet{}, greet_smoke{};
         bool window_smoke{}, memory_smoke{}, close_pending_controller{}, quit_early{}, destroy_early{}, close_navigation{}, close_asset{};
+        bool failure_test{}, bridge_closed{};
         UINT timeout_ms{};
         std::filesystem::path report;
         for (int i = 1; i < count; ++i) {
@@ -63,8 +65,8 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             else if (arg == L"--profile") options.user_data_directory = value();
             else if (arg == L"--runtime") options.fixed_runtime_directory = value();
             else if (arg == L"--entry") options.entry_path = value();
-            else if (arg == L"--report") report = value();
-            else if (arg == L"--hidden") options.visible = false;
+            else if (arg == L"--report") { report = value(); interactive_errors = false; }
+            else if (arg == L"--hidden") { options.visible = false; interactive_errors = false; }
             else if (arg == L"--trace-assets") options.trace_asset_reads = true;
             else if (arg == L"--reveal-after-navigation") options.reveal_after_navigation = true;
             else if (arg == L"--show-browser-immediately") options.reveal_after_navigation = false;
@@ -96,6 +98,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
                 smoke = true; memory_smoke = true; options.memory_usage_target = neutronstar::MemoryUsageTarget::low;
             }
             else if (arg == L"--smoke-test") smoke = true;
+            else if (arg == L"--failure-test") failure_test = true;
             else if (arg == L"--bridge-smoke-test") { smoke = true; bridge = true; }
             else if (arg == L"--test-greet") test_greet = true;
             else if (arg == L"--test-greet-smoke-test") { smoke = true; test_greet = true; greet_smoke = true; }
@@ -108,6 +111,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             else if (arg == L"--close-at-navigation") close_navigation = true;
             else if (arg == L"--close-at-asset-read") { close_asset = true; options.trace_asset_reads = true; }
             else if (arg == L"--timeout-ms") {
+                interactive_errors = false;
                 const std::wstring text{value()};
                 size_t consumed{};
                 const auto number = std::stoul(text, &consumed);
@@ -133,7 +137,14 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
                 const auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - start).count();
                 // Numeric fixed-schema diagnostics only; no document title, URI or input serialization.
                 output << "{\"event\":" << static_cast<int>(event.kind) << ",\"hr\":" << event.result << ",\"microseconds\":" << elapsed
-                    << ",\"duration_us\":" << event.duration_microseconds << ",\"bytes\":" << event.byte_count << "}\n";
+                    << ",\"duration_us\":" << event.duration_microseconds << ",\"bytes\":" << event.byte_count;
+                if (event.process_failure) {
+                    const auto& info = *event.process_failure;
+                    output << ",\"process_kind\":" << info.kind;
+                    if (info.reason) output << ",\"process_reason\":" << *info.reason;
+                    if (info.exit_code) output << ",\"process_exit_code\":" << *info.exit_code;
+                }
+                output << "}\n";
                 if (event.kind == neutronstar::EventKind::environment_ready) {
                     output << "{\"runtime\":\"";
                     for (wchar_t ch : event.detail) if ((ch >= L'0' && ch <= L'9') || ch == L'.') output << static_cast<char>(ch);
@@ -171,17 +182,22 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
                 PostMessageW(host->native_handle(), WM_CLOSE, 0, 0);
             if (event.kind == neutronstar::EventKind::failed || event.kind == neutronstar::EventKind::process_failed ||
                 (event.kind == neutronstar::EventKind::navigation_complete && FAILED(event.result))) failure = true;
+            if (failure_test && event.kind == neutronstar::EventKind::failed && host) {
+                try { host->post_status(neutronstar::Status::succeeded); }
+                catch (const std::logic_error&) { bridge_closed = true; }
+            }
             if (smoke && event.kind == neutronstar::EventKind::document_title_changed) {
                 if (event.detail == L"NeutronStar smoke: PASS") passed = true;
                 if (event.detail == L"NeutronStar smoke: FAIL") failure = true;
             }
-            if (failure || (smoke && passed && !window_smoke)) {
+            if ((failure && !interactive_errors) || (smoke && passed && !window_smoke)) {
                 pending_close = true;
                 if (host && host->native_handle()) PostMessageW(host->native_handle(), WM_CLOSE, 0, 0);
             }
         };
-        if (bridge || window_smoke) options.on_action = [&](neutronstar::Action) {
+        if (bridge || window_smoke || failure_test) options.on_action = [&](neutronstar::Action) {
             ++action_count;
+            if (failure_test) { if (output) { output << "{\"action_pending\":true}\n"; output.flush(); } return; }
             // Keep the gate busy long enough to test a duplicate command. No process is launched.
             if (!SetTimer(host->native_handle(), 2, 500, acknowledge)) throw std::runtime_error("Unable to schedule synthetic acknowledgment.");
         };
@@ -210,6 +226,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
             << ",\"window_commands\":" << window_commands << ",\"memory_changes\":" << memory_changes
             << ",\"maximized\":" << (saw_maximized ? "true" : "false") << ",\"restored\":" << (saw_restored ? "true" : "false")
             << ",\"minimized\":" << (saw_minimized ? "true" : "false") << "}\n";
+        if (output && failure_test) output << "{\"bridge_closed\":" << (bridge_closed ? "true" : "false") << "}\n";
         if (timed_out) return 3;
         if (failure || code) return 1;
         if (smoke && !passed) return 2;
@@ -221,9 +238,14 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, PWSTR, int) {
         return 0;
     } catch (const std::exception& ex) {
         OutputDebugStringA(ex.what());
+        if (interactive_errors) MessageBoxW(nullptr,
+            L"The local application could not initialize. Check its assets, profile and selected runtime directories. No WebView2 runtime is downloaded or installed automatically.",
+            L"NeutronStar Host — startup failure", MB_OK | MB_ICONERROR);
         return 1;
     } catch (...) {
         OutputDebugStringW(L"NeutronStar host initialization failed.");
+        if (interactive_errors) MessageBoxW(nullptr, L"The local application could not initialize.",
+            L"NeutronStar Host — startup failure", MB_OK | MB_ICONERROR);
         return 1;
     }
 }

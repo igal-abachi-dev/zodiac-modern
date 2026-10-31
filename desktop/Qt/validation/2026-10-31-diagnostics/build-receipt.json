@@ -1,0 +1,835 @@
+﻿{
+    "compiler":  "clang version 22.1.3 (https://github.com/llvm/llvm-project e9846648fd6183ee6d8cbdb4502213fcf902a211)",
+    "renderer":  "Qt Quick RHI Direct3D11",
+    "files":  [
+                  {
+                      "path":  "concrt140.dll",
+                      "sha256":  "54716F0738AF891F283D213B5C8D11B25896BB8EE3097D301EAE718560CF974E",
+                      "bytes":  374200
+                  },
+                  {
+                      "path":  "d3dcompiler_47.dll",
+                      "sha256":  "1DA540A0DDBC54DE4142570C8EC4A4566EF610FCE72C181EFB55A9332C480790",
+                      "bytes":  4741544
+                  },
+                  {
+                      "path":  "dxcompiler.dll",
+                      "sha256":  "5DA37A35D53123274E2E4E7E247148350871DF8AE9ECC05778BF2AC2057932BE",
+                      "bytes":  14261192
+                  },
+                  {
+                      "path":  "dxil.dll",
+                      "sha256":  "BA2F78F784B39B6E1AF3A90EC99AB794953B09F4F617A5DB765F800BEC22D360",
+                      "bytes":  1503656
+                  },
+                  {
+                      "path":  "generic/qtuiotouchplugin.dll",
+                      "sha256":  "5DE903FA0CA5680243C01B8ED7AD0E6C27A6D00C7B29E0A51F581D32E0CDCDE7",
+                      "bytes":  102712
+                  },
+                  {
+                      "path":  "iconengines/qsvgicon.dll",
+                      "sha256":  "09D02F929B537F9BA83834651B17C70FD89DCACBE22012B9FAE3B529EFA9C390",
+                      "bytes":  72504
+                  },
+                  {
+                      "path":  "imageformats/qgif.dll",
+                      "sha256":  "A1EA6BE36C9AEDBC54BF88BF391BE85F1477D1D80F831F6EAF6A4D10FAC8D027",
+                      "bytes":  48440
+                  },
+                  {
+                      "path":  "imageformats/qico.dll",
+                      "sha256":  "964B39989A4A8DCCD809C39B8E7D5813990AA31676D1D39B18AEEA97336DDAB7",
+                      "bytes":  47416
+                  },
+                  {
+                      "path":  "imageformats/qjpeg.dll",
+                      "sha256":  "9E67DC18C9F67141F5DA20646B63A5EE4A57F8CFDAD6B1B3C4C5F70E49ACE065",
+                      "bytes":  592696
+                  },
+                  {
+                      "path":  "imageformats/qsvg.dll",
+                      "sha256":  "E8F2C80DF916B363738D6F6DC112AC4555A42278347E78C0B609A55D1ADF70CB",
+                      "bytes":  40248
+                  },
+                  {
+                      "path":  "msvcp140.dll",
+                      "sha256":  "7C26614E1D733892C2DEAC7E245CE115504B1D80592DD0A01B08E3E5A55F89CA",
+                      "bytes":  643512
+                  },
+                  {
+                      "path":  "msvcp140_1.dll",
+                      "sha256":  "206C931BF90FDAD8816DE3B5E2EF80B2BCAA9406C89ECC05FE6FDDFFE251E982",
+                      "bytes":  35768
+                  },
+                  {
+                      "path":  "msvcp140_2.dll",
+                      "sha256":  "D50D7883F20D1DC6191768D3746F52DD9CAC89C346FFAED5BE1F110C2F34A838",
+                      "bytes":  274872
+                  },
+                  {
+                      "path":  "msvcp140_atomic_wait.dll",
+                      "sha256":  "3D0CBFAA1BF3EECF5A3F4491D2960EE803CB994F30292C6ADC4A07C498F60E2B",
+                      "bytes":  57792
+                  },
+                  {
+                      "path":  "msvcp140_codecvt_ids.dll",
+                      "sha256":  "8A65C7596EF2E6938731F5A1058E7E40145B6D97967CC649231A076B9A608D78",
+                      "bytes":  31160
+                  },
+                  {
+                      "path":  "networkinformation/qnetworklistmanager.dll",
+                      "sha256":  "CC66815A9621F41C7FC4925D320A44F564F5D69722A1A23A731753592E5E8058",
+                      "bytes":  79160
+                  },
+                  {
+                      "path":  "neutronstar_qt.exe",
+                      "sha256":  "5C381579C703FB0970650ADFEE92D7E14BF58DBCC34FBB07A2E5D68EF5FF7C45",
+                      "bytes":  623616
+                  },
+                  {
+                      "path":  "Notices/Microsoft-Redist.txt",
+                      "sha256":  "2D69E3B0AC782D5513B503BAFDF269A93C4FEC0F1F8EFAC82BFBFA4B6296AEF5",
+                      "bytes":  190
+                  },
+                  {
+                      "path":  "platforms/qwindows.dll",
+                      "sha256":  "12EEF54BCDB6711B2722E9CEF983D91A54546565A96B684D7BD9E2A7370FDE92",
+                      "bytes":  1001784
+                  },
+                  {
+                      "path":  "qml/QML/plugins.qmltypes",
+                      "sha256":  "156E5981000F67E9521AA38BC05CC2CC2FF10F7C7205E54907855B94AE0A83C1",
+                      "bytes":  163974
+                  },
+                  {
+                      "path":  "qml/QML/qmldir",
+                      "sha256":  "0BA0B60157111B988CC583B73CEB445A2D0C8633179513E284EDE7A2794BCE70",
+                      "bytes":  114
+                  },
+                  {
+                      "path":  "qml/QtQml/Models/modelsplugin.dll",
+                      "sha256":  "10F1055D68644EBBC5B4C12545A350C4598BD1CA840FE91285B937EC52700E24",
+                      "bytes":  31032
+                  },
+                  {
+                      "path":  "qml/QtQml/Models/plugins.qmltypes",
+                      "sha256":  "0A5B76DBCC1D431A973E4D7F29B804E237733C9B59C556072DF763E9B53B2AC2",
+                      "bytes":  83922
+                  },
+                  {
+                      "path":  "qml/QtQml/Models/qmldir",
+                      "sha256":  "313CEC98E20382271B7627998F3AFBA3CBB1C69BC05204728406517000DB0247",
+                      "bytes":  222
+                  },
+                  {
+                      "path":  "qml/QtQml/plugins.qmltypes",
+                      "sha256":  "2832F8F726DC5DBB14260F02B07D1D0173C89D7B4B1ADC0EDB2DFA43AEA60520",
+                      "bytes":  7869
+                  },
+                  {
+                      "path":  "qml/QtQml/qmldir",
+                      "sha256":  "4487F30737A083FA69C5B9D408FC29856908CB50956A0652DB50C47B9683A289",
+                      "bytes":  253
+                  },
+                  {
+                      "path":  "qml/QtQml/qmlplugin.dll",
+                      "sha256":  "2857742BEB24D1209201305938E6B5BAB3DCCDFE23385356F939F891872E0808",
+                      "bytes":  31032
+                  },
+                  {
+                      "path":  "qml/QtQml/WorkerScript/plugins.qmltypes",
+                      "sha256":  "701CD44FD43B9BDAE92685471D0E8F8CF6D7C743518AAA6FC3E544FB3989807D",
+                      "bytes":  1510
+                  },
+                  {
+                      "path":  "qml/QtQml/WorkerScript/qmldir",
+                      "sha256":  "7E930397861106A9A5931F5448F76B3E981C0BC0C150A1E7BC6FBE6A049F9ED8",
+                      "bytes":  252
+                  },
+                  {
+                      "path":  "qml/QtQml/WorkerScript/workerscriptplugin.dll",
+                      "sha256":  "A3AB0E99AD09B07697F7818798AF6A49B336A2B2B5D273AE34473284B263AD3E",
+                      "bytes":  31032
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/AbstractButton.qml",
+                      "sha256":  "5FA041C5807E08D014F6F3B18FE024380A842189B2DAC09C45D203BD50C3E314",
+                      "bytes":  610
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Action.qml",
+                      "sha256":  "051F5D75FA8FE7A8D4666EB812FC5A309421DCA12322752FA56025891BE0250D",
+                      "bytes":  260
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ActionGroup.qml",
+                      "sha256":  "BDC70C4A56862FD038161E64950426A68C4015FFF0AA89890F3CDC6331723804",
+                      "bytes":  265
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ApplicationWindow.qml",
+                      "sha256":  "D870991929AAF167DD3B5E016F089C53DFC2685CFE3C22B909854AD3E8EEFA7E",
+                      "bytes":  354
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/BusyIndicator.qml",
+                      "sha256":  "B89A77D45505759D9F09936B814942F1B37DF9E0D49CD297FC66BB9DF28701E4",
+                      "bytes":  983
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Button.qml",
+                      "sha256":  "9F5478C372A1D32774592C0AF352CDC869F391F2EAA99C6E7F45371EA1031F7B",
+                      "bytes":  1932
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ButtonGroup.qml",
+                      "sha256":  "680D2A00B58CEC1C335B44B13BE180EBEA5050EC34FB2FC0672FFEE4227B8AC6",
+                      "bytes":  265
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Calendar.qml",
+                      "sha256":  "1DB0C2E654BFACAC2D4FCDD948B2D53A15C457E39A01D230C46869B3013DC307",
+                      "bytes":  265
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/CalendarModel.qml",
+                      "sha256":  "41B803C3D839D84EAF99FED878487AD92F94B7B26D540E278C2C01947B495BD1",
+                      "bytes":  250
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/CheckBox.qml",
+                      "sha256":  "106B10377034ADD8426FBF44BBCF3BB62B0C810E95B847319293664DE6497B71",
+                      "bytes":  2733
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/CheckDelegate.qml",
+                      "sha256":  "2F4F91291A06007EEFEF1D3187AE020490EA7B6E3437815A16620142E14C8E2E",
+                      "bytes":  3195
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ComboBox.qml",
+                      "sha256":  "F6CEDC629180FC21D88435ABD93D3AE02092C7950C35091D4CAAC6A61A2DE661",
+                      "bytes":  5574
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Container.qml",
+                      "sha256":  "3F5E134B583C74018BB0255C3AF9EADE635A29B9C5102259850027DD78B523E7",
+                      "bytes":  605
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Control.qml",
+                      "sha256":  "216DD75B082C6CC4A9C8CFFE42132B48A1DC9097488502E5649E3F9579CC974A",
+                      "bytes":  603
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/DayOfWeekRow.qml",
+                      "sha256":  "EFDEE120C095E4E8A01F5EC6B0783B9EB821DDB51A91B532DDED50EF44E9421D",
+                      "bytes":  1212
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/DelayButton.qml",
+                      "sha256":  "4EF7DFE658AB89DBCC27B72BB4B3F84DFE13B582A4A48AEA5961035923A184C8",
+                      "bytes":  2689
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Dial.qml",
+                      "sha256":  "2E1F851A28E56C442B3EBB30DBFC9F914A0ABC61D024F9CCFCB382FCA7AA0AFF",
+                      "bytes":  1977
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Dialog.qml",
+                      "sha256":  "8E2416855705BE692C39FD4A6D73AE3E07F8F8D98AAF54128EAC145B309FE5A1",
+                      "bytes":  1743
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/DialogButtonBox.qml",
+                      "sha256":  "1C7291C96A3D88F990730EA30BE7BBD8425B70664E3994B917CE33F6065D6EAA",
+                      "bytes":  1390
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/DoubleSpinBox.qml",
+                      "sha256":  "8D9D7E3A73AE427601A52E225A0D3121BFF0EF5B9F884930767AC1555F16019C",
+                      "bytes":  4270
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Drawer.qml",
+                      "sha256":  "65521C84893A665475F78B9B2FCF6AEB3362FB33625C8F580AB5383FE3219459",
+                      "bytes":  1802
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Frame.qml",
+                      "sha256":  "1A6F7CF46DEF311D05DD93BB2BADF389574E03BA2CDC5B08D165AAFFCD5FA6C0",
+                      "bytes":  989
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/GroupBox.qml",
+                      "sha256":  "2A8B0DA4488380B06EE964E45FCA7B8D8BE3D6DD23C230F71A1C7F8A10C06351",
+                      "bytes":  1615
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/HorizontalHeaderView.qml",
+                      "sha256":  "529300DAB184B8B597775933D749E973A37377C9E15FE295EA232204A0865E3B",
+                      "bytes":  851
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/HorizontalHeaderViewDelegate.qml",
+                      "sha256":  "C450201E728ED0569D36FBA1838C6B0115410F629F950D46B5A04DB589DAC9DB",
+                      "bytes":  1171
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/impl/plugins.qmltypes",
+                      "sha256":  "14C5C67DF9664A7F60A3A4EDFC31234E553581BCA8BAE54C60BB5C74BEAF2D96",
+                      "bytes":  5467
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/impl/qmldir",
+                      "sha256":  "3673CCA17ED3522692C942F148BB8A9D37AE2D40EA1BB2E5DF05439D56968AC7",
+                      "bytes":  361
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/impl/qtquickcontrols2basicstyleimplplugin.dll",
+                      "sha256":  "F693F7CCF481AF6518642CEA77B44BA934418543515C417258E5B3E27ED6BB38",
+                      "bytes":  31032
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/impl/TextEditingContextMenu.qml",
+                      "sha256":  "7DBFF23E277B12A9C1A0F0FCDF38BF463A12531116820418A9EFE1B98D1D110D",
+                      "bytes":  858
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ItemDelegate.qml",
+                      "sha256":  "B17615BA64311D7E3B6E43F8CD7EF57137EFDA09D3AB3F4121DB09C0FDBCBF27",
+                      "bytes":  1868
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Label.qml",
+                      "sha256":  "D46120C5F4FD394C83BD21FC8A843F88E19209FA0CBFE4DE874610CA44247B97",
+                      "bytes":  385
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Menu.qml",
+                      "sha256":  "A3F0026FC66E57BA200D8057F5D505C2669D4ABA03E98BBBA30B50FC5DC761B3",
+                      "bytes":  1487
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/MenuBar.qml",
+                      "sha256":  "F81C51205916616A27E46BEEC1262B82CCED1F2420598926F1190F8991858894",
+                      "bytes":  1076
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/MenuBarItem.qml",
+                      "sha256":  "05B5BD0FE8EE25A05EB14AE310973B20CCF1203DAA9B77D3A172E6FCA4E14820",
+                      "bytes":  1561
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/MenuItem.qml",
+                      "sha256":  "C55552273E5CDCEFB256F62CB2BC82EC28DB3DC5B6504BDAF044D31394389FE1",
+                      "bytes":  2966
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/MenuSeparator.qml",
+                      "sha256":  "B8194FC759406C3A26D4B596D2F59349F51E7C2B47A2A53CE60178370B66B909",
+                      "bytes":  894
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/MonthGrid.qml",
+                      "sha256":  "46A6299B74A8089E33B6D5A9CCF27A523C4163CF821D91114684CF20D91490F5",
+                      "bytes":  1279
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Page.qml",
+                      "sha256":  "B77F10CA786492AD963D1A588961FA3129ED47D6582E9AC687F6A56F7C93795E",
+                      "bytes":  999
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/PageIndicator.qml",
+                      "sha256":  "A1E451B24C907D008EC02BF4A66DBF975F6F19878B9C3B2158E51149E44D04E3",
+                      "bytes":  1191
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Pane.qml",
+                      "sha256":  "5DE2DD3C225A889D5BBEB94CECE80239812ADE32129854D6382BB2BED5587F0E",
+                      "bytes":  726
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/plugins.qmltypes",
+                      "sha256":  "98DBEB88A37E10FD2BF06014425723D0CF6BDA1922727C668921E016E5ED6943",
+                      "bytes":  4216
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Popup.qml",
+                      "sha256":  "FDB2BF6C142C64CFCE0D51A278202E1E6A7CF2514E23580584C4BA55F38B40F7",
+                      "bytes":  987
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ProgressBar.qml",
+                      "sha256":  "BED89370558E2D85B822768843186F894FAA5CC87DC759C0526C129B12F73645",
+                      "bytes":  1120
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/qmldir",
+                      "sha256":  "F855404786210FD15A4464B4CCB2DC68F0FDE137B952015D17536247A8ED535F",
+                      "bytes":  4294
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/qtquickcontrols2basicstyleplugin.dll",
+                      "sha256":  "0A0DCFA80CBD5446AD84DA34ED1D25A7235CD2EA0DE2E4DFA33E33950050E1D4",
+                      "bytes":  31544
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/RadioButton.qml",
+                      "sha256":  "763B99057B3DAF4BC24BF670403C9D87166BDDDD3543D979B96A1CC392E5B894",
+                      "bytes":  2420
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/RadioDelegate.qml",
+                      "sha256":  "59637C498E602DC527DC19BB8EDBA35D6B2BFFEB1FB8CDBA6012D5CBE49DF263",
+                      "bytes":  2882
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/RangeSlider.qml",
+                      "sha256":  "A1077096F9FFF8C7FC67ABA9117C62A4BBB824D3B224D14E85DF93021F781C3C",
+                      "bytes":  3743
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/RoundButton.qml",
+                      "sha256":  "10920195F5BA8C1849958F97A5EEAD279BA8EFA22C73CB2A24971FB61BD3F59D",
+                      "bytes":  2298
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ScrollBar.qml",
+                      "sha256":  "1027CCDC91A42375078DF7FCFA8E611B0B927C7001B0043F89D24BD128213EB4",
+                      "bytes":  2021
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ScrollIndicator.qml",
+                      "sha256":  "6101799F11E3AF59F103BFD144B2433FFF2E99C62BC053CEE12D7657B7A2D22E",
+                      "bytes":  1664
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ScrollView.qml",
+                      "sha256":  "4C2B30446B2C41685188D9A5AB82B97FD4E73E39893BAD21EED2850AAB2047D3",
+                      "bytes":  1120
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/SearchField.qml",
+                      "sha256":  "4C88422E4484FA66BB6C16E3F2F45F98677AD5F5260E0FF9D4FBBD11D27B68DD",
+                      "bytes":  6753
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/SelectionRectangle.qml",
+                      "sha256":  "C57480406AA226D91F6FCCCC85328CAD0DADDE81A9158AC8BE3FE4CD4CA97225",
+                      "bytes":  864
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Slider.qml",
+                      "sha256":  "E67D2C83AEC07E3FEABCCDB3D383BB25C8B47D913BAB8FA285A691CFB42B6B20",
+                      "bytes":  2742
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/SpinBox.qml",
+                      "sha256":  "A00A8D538D86ABBA678FCFA24F28243C443DC4E66C23335119B5C38BBFE84763",
+                      "bytes":  4225
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/SplitView.qml",
+                      "sha256":  "C47A7B1DC06ED6FDB6C9A3CDAB9A0A03C3CFBEAA73967B1BBC6085B1C0A1CDE9",
+                      "bytes":  1126
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/StackView.qml",
+                      "sha256":  "A9F8B0D1099940F8E9A6C91872CF1103744F7EC1FA60FC78BC7D24292283BCA7",
+                      "bytes":  1263
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/SwipeDelegate.qml",
+                      "sha256":  "6595D69675AB70ED77AA31B0A3BFDFAD84ABB26CF7F9C711F58EF4CCA26B1978",
+                      "bytes":  2131
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/SwipeView.qml",
+                      "sha256":  "3FBB61D5CB053EDB32EB9A403E87CA0432F713A597F84ACA6DA01ACAC157E738",
+                      "bytes":  1221
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Switch.qml",
+                      "sha256":  "17FB36D73CF4B7A1312750F0950521721E9ABADFAFA69709879C7B0E54DE55D2",
+                      "bytes":  2885
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/SwitchDelegate.qml",
+                      "sha256":  "EBB4C014A7AE66CE3E4445BABE721FE3DB26AAB5E0DC93BF38D5EBCB900AAB76",
+                      "bytes":  3433
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/TabBar.qml",
+                      "sha256":  "61B021092CAC6D6843109BE4D2FEBE883AF056938C7874AC1454E4968B070C5B",
+                      "bytes":  1203
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/TabButton.qml",
+                      "sha256":  "07BFCFAC0C2C0AD30DA6CE30ECFC6FB6ABC4748F1DFAB9258DED410887F37F70",
+                      "bytes":  1475
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/TableViewDelegate.qml",
+                      "sha256":  "C23588E4D805BB6CEF7C7C4CE15EA82A24141D1BB67A60A5BA208541BA8C87D3",
+                      "bytes":  2750
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/TextArea.qml",
+                      "sha256":  "FDF623ADC74B8A6BD8514021890403B2168306599094A8FB9D8DD3B26C84F447",
+                      "bytes":  2205
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/TextField.qml",
+                      "sha256":  "D22172DA8037AC34F064F8C61A2DD053AC996E163BA885416C6718B16A188EB4",
+                      "bytes":  2390
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ToolBar.qml",
+                      "sha256":  "152A336FE967BFD458586431F22389032934E39E00D35D7C47831CFF32F991FD",
+                      "bytes":  904
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ToolButton.qml",
+                      "sha256":  "E3602AF06521C303AC35E9694DC4F584312D527E5D9830D9A4191AE5AD391A6B",
+                      "bytes":  1990
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ToolSeparator.qml",
+                      "sha256":  "B90207F8220A3A54E0F279D6E7BE93ED2791AA864C10835130E505589BF22309",
+                      "bytes":  1037
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/ToolTip.qml",
+                      "sha256":  "0F70C39A283641F6D309B62A62DC8B62C5FDE500510A117D554F932FA4BA0D82",
+                      "bytes":  1158
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/TreeViewDelegate.qml",
+                      "sha256":  "FFAB415177DAA180DC978C5EDC4E78B5D04B306159DD859B6471E48FABFB3930",
+                      "bytes":  4389
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/Tumbler.qml",
+                      "sha256":  "8BC5DB7673954DF7F925B806D3657EA7CA6FEB067BA34CA26D9EB752E7CCE541",
+                      "bytes":  2126
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/VerticalHeaderView.qml",
+                      "sha256":  "BFB44B28BE8636CF5FEDD504B41DED92DDE35350A9E437F61F327E413CB18F07",
+                      "bytes":  841
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/VerticalHeaderViewDelegate.qml",
+                      "sha256":  "C450201E728ED0569D36FBA1838C6B0115410F629F950D46B5A04DB589DAC9DB",
+                      "bytes":  1171
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/Basic/WeekNumberColumn.qml",
+                      "sha256":  "20C891CF756F0711F8FDBF2371F04D0A8F0D8F556613EB0F85F2A18FA5C2724C",
+                      "bytes":  1181
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/CopyAction.qml",
+                      "sha256":  "1C568ADFC62FF4BB2B41107F0975245B585483E58F45854003A46B7A38A67765",
+                      "bytes":  533
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/CutAction.qml",
+                      "sha256":  "4C9D7B346B6B917EAF1A4BC1CD2F17E50545D3589D5B0176575B6E369DC2DA28",
+                      "bytes":  1088
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/DeleteAction.qml",
+                      "sha256":  "F48AB60EB0EAC508DB0D343B21EB588CEFC94972037F731B3CEB115E50A66AC1",
+                      "bytes":  570
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/PasteAction.qml",
+                      "sha256":  "CED9D6B9497B8E1C0423F648581F16E4FAAB58791DE5A97B42B7B8315D5A59FD",
+                      "bytes":  524
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/plugins.qmltypes",
+                      "sha256":  "7F87A441807CBAEBF942E3AAAC6299462690857738B544E7E5F145D58BE70EEC",
+                      "bytes":  52033
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/qmldir",
+                      "sha256":  "218FBF40BC80D5577807DCD865520248D49B64C81E4EA87D2DCE8C93FD043B24",
+                      "bytes":  533
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/qtquickcontrols2implplugin.dll",
+                      "sha256":  "6389A9BD779336180ACB7D36260E054C3A3E55199923486F5D5EF5577A94AC38",
+                      "bytes":  31032
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/RedoAction.qml",
+                      "sha256":  "46E67F8681D82D18695DE58FF0E287799A5613FC6B1BDE7B46AEA1870A1CA5BE",
+                      "bytes":  435
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/SelectAllAction.qml",
+                      "sha256":  "BE8CFBCD5815FA21E5B7C359C6547A2DDD7F367B76D26E33790FEAC672FEF25E",
+                      "bytes":  477
+                  },
+                  {
+                      "path":  "qml/QtQuick/Controls/impl/UndoAction.qml",
+                      "sha256":  "77E368EEB3FEE65ACCA0BA8205A7974950BF09CBE331B76A470AF54C7BEB546B",
+                      "bytes":  435
+                  },
+                  {
+                      "path":  "qml/QtQuick/Layouts/plugins.qmltypes",
+                      "sha256":  "14B0064A675BA2D46C67F4C3DFE88BF957DF635226B444746AFF103DCE070392",
+                      "bytes":  28713
+                  },
+                  {
+                      "path":  "qml/QtQuick/Layouts/qmldir",
+                      "sha256":  "BE7BC0D0DEFD3037FD4493987ADE323210F191BAD527255EB32D1DF15B1B8EDF",
+                      "bytes":  250
+                  },
+                  {
+                      "path":  "qml/QtQuick/Layouts/qquicklayoutsplugin.dll",
+                      "sha256":  "6D2C11109ECF7A9281F19F5DF27449CFB37E6EAF8593DD2B8C3EDCC8DFF818A0",
+                      "bytes":  31032
+                  },
+                  {
+                      "path":  "qml/QtQuick/plugins.qmltypes",
+                      "sha256":  "20ECC5A3E17D975328D7230AFAECCEDF9A436ECB4295ED16AED5997AE37669DB",
+                      "bytes":  675924
+                  },
+                  {
+                      "path":  "qml/QtQuick/qmldir",
+                      "sha256":  "137C386F9B2BA49FB3A3417B55096F6F1BD15A794A98613A862B490A6FE4FA79",
+                      "bytes":  215
+                  },
+                  {
+                      "path":  "qml/QtQuick/qtquick2plugin.dll",
+                      "sha256":  "17DC8C4739F7CE2B3511532D4DBCFDCC948D7F37772066E59266FB1679094EE2",
+                      "bytes":  31032
+                  },
+                  {
+                      "path":  "qml/QtQuick/Shapes/plugins.qmltypes",
+                      "sha256":  "36F2D7DF9DFD03450B554AD6D0B1E7ECF669B716D6383376C8256B9FAB6829ED",
+                      "bytes":  21936
+                  },
+                  {
+                      "path":  "qml/QtQuick/Shapes/qmldir",
+                      "sha256":  "DE2DAB12C07574207DB93315EBF5BD6EC6656D1AA506DF756328F73342B2A7F9",
+                      "bytes":  207
+                  },
+                  {
+                      "path":  "qml/QtQuick/Shapes/qmlshapesplugin.dll",
+                      "sha256":  "3A7DDB070030A3DD887016173272DE326C21554C4DF707494242FD21FB3AB635",
+                      "bytes":  31032
+                  },
+                  {
+                      "path":  "qml/QtQuick/Templates/plugins.qmltypes",
+                      "sha256":  "BFA659DAF48307BF454C82704FCDAA1023C5C2D0540B230489EDF4F4A904FC9F",
+                      "bytes":  315977
+                  },
+                  {
+                      "path":  "qml/QtQuick/Templates/qmldir",
+                      "sha256":  "60E185A2A878267D15F2B54F6088E1BCB3C7E66B67AC016B121B9E79B305A9AC",
+                      "bytes":  237
+                  },
+                  {
+                      "path":  "qml/QtQuick/Templates/qtquicktemplates2plugin.dll",
+                      "sha256":  "3D796B2D697C3A120C0FC0C8F34EFB5C266A85B3EF802A99964BFE0E7BD2FD82",
+                      "bytes":  31544
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_debugger.dll",
+                      "sha256":  "CBB2B8DECF052457F7C576BF5BA4A2E68FCC0B6FA9ECA9A9BB10BE0987A803C3",
+                      "bytes":  216888
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_inspector.dll",
+                      "sha256":  "6335574C713B8D83644BE681C9A115AC3F03B951C198DA4C893A3CFDC3F7F819",
+                      "bytes":  101688
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_local.dll",
+                      "sha256":  "7BD9B9185160A30CB056E59AB5E5C38ADFB4F7CE9758A44404C841B444659D16",
+                      "bytes":  39736
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_messages.dll",
+                      "sha256":  "F30F1343CD07E71F699AB854C073D036137F25D9BB06BC2AA2E8D7633BAA5CF7",
+                      "bytes":  36152
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_native.dll",
+                      "sha256":  "6CE03C99E2FE4B6E3811E155170E25CE1DCB48D88E65D055626599A76550E799",
+                      "bytes":  49464
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_nativedebugger.dll",
+                      "sha256":  "46A44B7F32FC0E4EFF469E1FC45C3EEA8EC96E186F75CCF68983D5B84C9AAEA1",
+                      "bytes":  71480
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_preview.dll",
+                      "sha256":  "2F695F845443ED59E89671DE5B72379FA0493602DADC63605A0FB26705360BF6",
+                      "bytes":  417592
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_profiler.dll",
+                      "sha256":  "3BC39DCD71F87072B5CCB699323114F862C17FE37C40B2AA49E617CAE470C3EC",
+                      "bytes":  120120
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_quickeventreplay.dll",
+                      "sha256":  "5558575B258EAC42D3FA903C60DD0D582ECDAF8E27B30403EEDEA0EC25D973BC",
+                      "bytes":  44856
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_quickprofiler.dll",
+                      "sha256":  "5B90DA6C1B13D0644B2FFDE17194B490EACF655E2A73CA9A6FB31F28AC8BE563",
+                      "bytes":  44344
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_server.dll",
+                      "sha256":  "0B0237B9B8B1435E9883C9CCA9350E6C1520F69CAABCA92BE10C590753BD2BE5",
+                      "bytes":  100152
+                  },
+                  {
+                      "path":  "qmltooling/qmldbg_tcp.dll",
+                      "sha256":  "C8493F6943222A1D5682E0813F8113E0F8545FABE175A6757FEB31EA1ABBBEB2",
+                      "bytes":  36664
+                  },
+                  {
+                      "path":  "qt.conf",
+                      "sha256":  "9F8C895693D7D3B1AFCBA7A93A4FD26989CAF2A018F6DA282C72FC2CEFE27DCB",
+                      "bytes":  46
+                  },
+                  {
+                      "path":  "Qt6Core.dll",
+                      "sha256":  "39175459C4837C8CC0F709A637FB6EADB25D696785109C8393559EC876F02703",
+                      "bytes":  10472760
+                  },
+                  {
+                      "path":  "Qt6Gui.dll",
+                      "sha256":  "37C79B48B9CC2D9A03D21410C26FEA683D236F9280F5C9AAAB85D980759F2835",
+                      "bytes":  9683256
+                  },
+                  {
+                      "path":  "Qt6Network.dll",
+                      "sha256":  "9825558F184C64F639C4B8663650CEE0AE8FFE01C18D98FF76F006A02389965F",
+                      "bytes":  1780536
+                  },
+                  {
+                      "path":  "Qt6OpenGL.dll",
+                      "sha256":  "1E88FF2D5C02E817839C8BE4257162E677E7B8335DEE9128185CB5888CEEBC67",
+                      "bytes":  1989944
+                  },
+                  {
+                      "path":  "Qt6Qml.dll",
+                      "sha256":  "2572E315C36D8CEA89A5BECB910DDCCDCF5D34E5421EEF1E033187A99B68F84B",
+                      "bytes":  5390136
+                  },
+                  {
+                      "path":  "Qt6QmlMeta.dll",
+                      "sha256":  "26110C74D4DACDF73C94326A554A9F866383487250CD058C0410B037EB205C17",
+                      "bytes":  158520
+                  },
+                  {
+                      "path":  "Qt6QmlModels.dll",
+                      "sha256":  "FD3F5E540705B7625292DF7F12556AB96EB0C53769083B31BF59CED50639683B",
+                      "bytes":  1021752
+                  },
+                  {
+                      "path":  "Qt6QmlWorkerScript.dll",
+                      "sha256":  "900ED9907EC695E8F8D0775EF7993DC40423B69513324D5BEE434F2751755FE5",
+                      "bytes":  80184
+                  },
+                  {
+                      "path":  "Qt6Quick.dll",
+                      "sha256":  "6D9B5639E8CAD3B01083FC7C8C838B09D9F2D04A38CC4C339DDC3973123D5FA8",
+                      "bytes":  6752568
+                  },
+                  {
+                      "path":  "Qt6QuickControls2.dll",
+                      "sha256":  "6DC2413EB7A8138EF821A9886C7B5799D9A570968B1BA31848774F991AA89060",
+                      "bytes":  102712
+                  },
+                  {
+                      "path":  "Qt6QuickControls2Basic.dll",
+                      "sha256":  "04CAB4012313CBE5F02F4D665078C939F1D702072494AE0542B01654CBB06356",
+                      "bytes":  2539832
+                  },
+                  {
+                      "path":  "Qt6QuickControls2BasicStyleImpl.dll",
+                      "sha256":  "15F74454BEDDAF91B8CA1FD50E9D83CC3F236BBAC1E4F3E338BDBF49897E6714",
+                      "bytes":  103736
+                  },
+                  {
+                      "path":  "Qt6QuickControls2Impl.dll",
+                      "sha256":  "8D1281B8047295C0793902B68D5940CA7779B60BDC4E03281088A81E9CF66D05",
+                      "bytes":  325944
+                  },
+                  {
+                      "path":  "Qt6QuickLayouts.dll",
+                      "sha256":  "F1DEFECE7E4ACD24582CB4216FFB3EDC8BD81B650E2E3EF42B7CDF3148389302",
+                      "bytes":  314168
+                  },
+                  {
+                      "path":  "Qt6QuickShapes.dll",
+                      "sha256":  "B6FB07B8B449337B4DECF8FB574A882599A5C78C55BEDF827F211FA7326173F1",
+                      "bytes":  348472
+                  },
+                  {
+                      "path":  "Qt6QuickTemplates2.dll",
+                      "sha256":  "94C70CF4D6A15720A2E2E2B41B4C99F85A3D0B6A758BDB12B18128FE3C26F4BC",
+                      "bytes":  2048824
+                  },
+                  {
+                      "path":  "Qt6Svg.dll",
+                      "sha256":  "CCE84059F1857FF1859DB7C4FE10334E603D9CA81EB4D5F0A22CA0AC515B340C",
+                      "bytes":  608056
+                  },
+                  {
+                      "path":  "THIRD-PARTY-NOTICES.txt",
+                      "sha256":  "47B53E150202822E850B30405DF329D9655A039C3B1B9E36FEC5A255D7F6E644",
+                      "bytes":  190986
+                  },
+                  {
+                      "path":  "tls/qcertonlybackend.dll",
+                      "sha256":  "BF7F2550A0C689EDE7B90D71A8D6371C6A01B01A8ABA26F0B755F3933FB78FE4",
+                      "bytes":  105784
+                  },
+                  {
+                      "path":  "tls/qschannelbackend.dll",
+                      "sha256":  "F37162F9FF47BC552132314DBF1BF6D436EDAEE983EC67A9A175CB52E0C38045",
+                      "bytes":  249144
+                  },
+                  {
+                      "path":  "vccorlib140.dll",
+                      "sha256":  "09F93D5FF96AE09767F3E1AF3CDD43A5A58F2598654FC63089429BB6F9F4737F",
+                      "bytes":  350648
+                  },
+                  {
+                      "path":  "vcruntime140.dll",
+                      "sha256":  "D1F4225DF2CD877DBF130D5668A021DCE3F94118455FF5EC952061C30AFC9CE7",
+                      "bytes":  178616
+                  },
+                  {
+                      "path":  "vcruntime140_1.dll",
+                      "sha256":  "A7146C08F89FE5B04541AB507CDB59FF7B44534D4BA3C668A426C6450A03434E",
+                      "bytes":  50112
+                  },
+                  {
+                      "path":  "vcruntime140_threads.dll",
+                      "sha256":  "40F39E8CEE5F5A531B4010E18B807E8FE265B908DC58F959ECB7EBC6EA6CB11A",
+                      "bytes":  38840
+                  }
+              ],
+    "schema":  1,
+    "comparison":  "Not run",
+    "qt":  "6.12.0",
+    "crt":  "dynamic /MD"
+}

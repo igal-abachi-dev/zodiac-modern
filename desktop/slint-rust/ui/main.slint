@@ -1,0 +1,184 @@
+import { Button, LineEdit, ScrollView, ProgressIndicator, AboutSlint, Palette } from "std-widgets.slint";
+import "../assets/Fonts/inter-latin-400-normal.ttf";
+import "../assets/Fonts/inter-latin-500-normal.ttf";
+import "../assets/Fonts/inter-latin-600-normal.ttf";
+import "../assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf";
+
+export enum BenchAction { encrypt, decrypt, cancel, reset, open, back, rows1000, rows10000, reverse, splice, update, hz10, hz30, hz60, stop, remount }
+export struct RowData { row-key: int, display-text: string }
+component Label inherits Text {
+    color: #171a18; font-family: "Inter"; font-size: 14px;
+    wrap: word-wrap; accessible-role: text; accessible-label: self.text;
+}
+component Card inherits Rectangle {
+    background: white; border-color: #dce3de; border-width: 1px; border-radius: 8px;
+    VerticalLayout { padding: 16px; spacing: 16px; @children }
+}
+component Operation inherits Card {
+    in property <bool> encrypt;
+    in property <bool> enabled;
+    callback operate(bool);
+    HorizontalLayout {
+        spacing: 8px;
+        Image { source: root.encrypt ? @image-url("../assets/Icons/lock-keyhole.svg") : @image-url("../assets/Icons/unlock-keyhole.svg"); width: 16px; height: 16px; }
+        Label { text: root.encrypt ? "Encrypt" : "Decrypt"; font-size: 16px; font-weight: 600; }
+    }
+    Label { text: "SYNTHETIC INPUT"; color: #5d6660; font-size: 10px; }
+    Rectangle {
+        height: 94px; background: #f1f4f2; border-color: #dce3de; border-width: 1px; border-radius: 6px;
+        VerticalLayout { padding: 13px; spacing: 5px; alignment: start;
+            Label { text: root.encrypt ? "Zodiac GUI benchmark — שלום — 🌠" : "Synthetic sample: starlight.nsx"; }
+            if !root.encrypt: Label { text: "No disk file is opened."; color: #5d6660; font-size: 12px; }
+        }
+    }
+    Button { text: root.encrypt ? "Simulate encryption" : "Simulate decryption"; accessible-id: root.encrypt ? "encrypt" : "decrypt"; primary: root.encrypt; enabled: root.enabled; height: 40px; horizontal-stretch: 1; clicked => { root.operate(root.encrypt); } }
+}
+component Workbench inherits VerticalLayout {
+    in property <[RowData]> rows;
+    in property <string> summary;
+    in property <string> query;
+    in property <bool> active;
+    in property <bool> enabled: true;
+    callback action(BenchAction);
+    callback filter(string);
+    spacing: 16px;
+    Label { text: "List and filter workbench"; font-size: 20px; font-weight: 600; }
+    Label { text: "Deterministic synthetic rows. No files, network, cryptography or native commands."; font-size: 12px; }
+    HorizontalLayout { Button { text: "Back to main screen"; enabled: root.enabled; clicked => {root.action(BenchAction.back);} } Rectangle {} }
+    Label { text: "Workbench ready"; }
+    FlexboxLayout {
+        flex-wrap: wrap; spacing: 8px;
+        Button { text: "1,000 rows"; enabled: root.enabled; clicked => {root.action(BenchAction.rows1000);} }
+        Button { text: "10,000 rows"; enabled: root.enabled; clicked => {root.action(BenchAction.rows10000);} }
+        Button { text: "Reverse"; enabled: root.enabled; clicked => {root.action(BenchAction.reverse);} }
+        Button { text: "Splice 10"; enabled: root.enabled; clicked => {root.action(BenchAction.splice);} }
+        Button { text: "Update 10%"; enabled: root.enabled; clicked => {root.action(BenchAction.update);} }
+        Button { text: "10 Hz / 2 s"; enabled: root.enabled; clicked => {root.action(BenchAction.hz10);} }
+        Button { text: "30 Hz / 2 s"; enabled: root.enabled; clicked => {root.action(BenchAction.hz30);} }
+        Button { text: "60 Hz / 2 s"; enabled: root.enabled; clicked => {root.action(BenchAction.hz60);} }
+        Button { text: "Stop"; enabled: root.enabled; accessible-description: root.active ? "Updates active" : "Updates stopped"; clicked => {root.action(BenchAction.stop);} }
+        Button { text: "Remount workload"; enabled: root.enabled; clicked => {root.action(BenchAction.remount);} }
+    }
+    Card {
+        Label { text: "Filter synthetic rows"; }
+        LineEdit { text: root.query; enabled: root.enabled; accessible-label: "Filter synthetic rows"; accessible-id: "workload-query"; edited(value) => {root.filter(value);} }
+    Label { text: root.summary; accessible-id: "workload-summary"; }
+    }
+    VerticalLayout {
+        spacing: 0px; accessible-role: list; accessible-label: "Synthetic rows"; accessible-id: "workload-rows";
+        // Ordinary repetition is eager. Do not replace with a virtualized ListView.
+        for row in root.rows: Rectangle {
+            height: 34px; background: white; border-color: #dce3de; border-width: 1px;
+            Label { x: 12px; width: parent.width - 24px; height: parent.height; vertical-alignment: center; text: row.display-text; }
+        }
+    }
+}
+export component BenchWindow inherits Window {
+    title: "NeutronStar GUI Bench"; preferred-width: 960px; preferred-height: 640px;
+    min-width: 360px; min-height: 480px; background: #f8faf9;
+    default-font-family: "Inter"; default-font-size: 14px;
+    in property <bool> ready;
+    in property <bool> busy;
+    in property <int> progress;
+    in property <string> status: "Loading local interface…";
+    in property <bool> workbench-open;
+    in property <bool> active;
+    in property <[RowData]> rows;
+    in property <string> summary;
+    in property <string> query;
+    in-out property <bool> about-open: false;
+    callback action(BenchAction);
+    callback filter(string);
+    private property <bool> narrow: self.width < 620px;
+    init => { Palette.color-scheme = ColorScheme.light; }
+    forward-focus: keys;
+    keys := FocusScope {
+        width: root.width; height: root.height;
+        capture-key-pressed(event) => {
+            if(root.about-open && event.text == Key.Escape) {root.about-open=false; about-trigger.focus(); return accept;}
+            if(root.about-open && event.text == Key.Tab) {about-close.focus();return accept;}
+            return reject;
+        }
+        scroll := ScrollView {
+            width: parent.width; height: parent.height;
+            content-width: self.visible-width;
+            content-height: content.preferred-height;
+            content := VerticalLayout {
+                padding: 28px; spacing: 20px;
+                Rectangle {
+                    height: root.narrow ? 144px : 84px;
+                    Image { x:0px;y:0px;source:@image-url("../assets/Icons/orbit.svg");width:40px;height:40px; }
+                    Label { x:52px;y:0px; width:parent.width - 52px; text:"NeutronStar GUI Bench";font-size:24px;font-weight:600; }
+                    Label {y:48px;width:parent.width;text:"A UI-only simulation for comparing desktop frontends.";color:#5d6660;}
+                    about-trigger := Button { x:root.narrow ? 0px : parent.width - self.width; y:root.narrow ? 102px : 8px;
+                        text:"About this test";accessible-id:"about-trigger";enabled:!root.about-open;clicked=>{root.about-open=true;about-close.focus();} }
+                }
+                Rectangle {
+                    height:32px;background:#f1f4f2;border-color:#dce3de;border-width:1px;border-radius:6px;
+                    HorizontalLayout {padding-left:9px;padding-right:9px;spacing:7px;
+                        Image {source:@image-url("../assets/Icons/shield-check.svg");width:16px;height:16px;}
+                        Label {text:"SIMULATION · NO FILES OR CRYPTOGRAPHY.";font-size:10px;}
+                    }
+                }
+                if !root.narrow: HorizontalLayout {
+                    spacing:20px;
+                    Operation {enabled:root.ready&&!root.busy&&!root.about-open;operate(op)=>{root.action(BenchAction.decrypt);}}
+                    Operation {encrypt:true;enabled:root.ready&&!root.busy&&!root.about-open;operate(op)=>{root.action(BenchAction.encrypt);}}
+                }
+                if root.narrow: VerticalLayout {
+                    spacing:20px;
+                    Operation {enabled:root.ready&&!root.busy&&!root.about-open;operate(op)=>{root.action(BenchAction.decrypt);}}
+                    Operation {encrypt:true;enabled:root.ready&&!root.busy&&!root.about-open;operate(op)=>{root.action(BenchAction.encrypt);}}
+                }
+                Card {
+                    HorizontalLayout {
+                        Label {text:root.status;accessible-id:"status";horizontal-stretch:1;}
+                        if root.busy: Button {text:"Cancel";enabled:!root.about-open;clicked=>{root.action(BenchAction.cancel);}}
+                        Button {text:"Reset";horizontal-stretch:0;enabled:root.ready&&!root.about-open;clicked=>{root.action(BenchAction.reset);}}
+                    }
+                    ProgressIndicator {progress:root.progress/100;accessible-label:"Simulation progress";}
+                    Label {text:"Simulation progress  \{root.progress}%";font-size:11px;}
+                }
+                Rectangle {
+                    height: root.narrow ? 112px : 48px;
+                    open-trigger := Button {x:0px;y:0px;text:"Open workbench";accessible-id:"open-workbench";enabled:root.ready&&!root.busy&&!root.about-open;
+                        clicked=>{root.action(BenchAction.open);scroll.content-y=-work.y;}}
+                    Label {x:root.narrow ? 0px : open-trigger.width + 16px;y:root.narrow ? 44px : 0px;
+                        width:root.narrow ? parent.width : max(0px,parent.width - open-trigger.width - 178px);
+                        text:"Local interface. Synthetic data. Nothing is encrypted or decrypted.";font-size:11px;}
+                    Label {x:root.narrow ? 0px : parent.width - 130px;y:root.narrow ? 86px : 0px;width:130px;
+                        text:"CONTROLLED RENDERER · LOCAL STATE";font-size:9px;}
+                }
+                work := Rectangle {
+                    height: root.workbench-open ? work-content.preferred-height : 0px;
+                    clip: true;
+                    work-content := Workbench {
+                        visible:root.workbench-open; enabled:!root.about-open;
+                        rows:root.rows;summary:root.summary;query:root.query;active:root.active;
+                        filter(text)=>{root.filter(text);}
+                        action(a)=>{root.action(a);if(a==BenchAction.back){scroll.content-y=0px;open-trigger.focus();}}
+                    }
+                }
+            }
+        }
+        Rectangle {
+            visible: root.about-open; width:parent.width;height:parent.height;background:#00000040;
+            TouchArea { }
+            Rectangle {
+                x:(parent.width - self.width)/2;y:(parent.height - self.height)/2;
+                width:min(420px,parent.width - 56px);height:310px;background:white;border-color:#dce3de;border-width:1px;border-radius:8px;
+                accessible-role: groupbox; accessible-label: "About this test";
+                VerticalLayout {padding:20px;spacing:16px;
+                    Label {text:"About this test";font-size:20px;font-weight:600;}
+                    Label {text:"Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved.";}
+                    Rectangle { height:100px;
+                        AboutSlint {width:parent.width;height:parent.height;}
+                        // Keep the required attribution visible without launching a browser.
+                        TouchArea { }
+                    }
+                    about-close := Button {text:"Close";accessible-id:"about-close";enabled:root.about-open;clicked=>{root.about-open=false;about-trigger.focus();}}
+                }
+            }
+        }
+    }
+}

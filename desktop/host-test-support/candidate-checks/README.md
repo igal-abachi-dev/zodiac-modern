@@ -4,6 +4,7 @@ From this directory, run `./Run.ps1 -Candidate Both`, `Avalonia`, `Electron` or
 `WinUI`. `Both` preserves the original Avalonia/Electron pair; select `WinUI`
 explicitly for the unpackaged native WinUI MVVM candidate.
 `Reactor` and `Flutter` select the independent preview-MVU and Dart candidates.
+`Qt` and `Slint` select the independent QML/C++ and Slint/Rust candidates.
 Reactor's correctness lane explicitly allows 180-second semantic / 30-second UIA
 deadlines; these are not benchmark timing budgets or an acceptance of UI hangs.
 Build the applications first. Requires the pinned .NET SDK and restores locked
@@ -12,7 +13,7 @@ and keyboard; leave that window undisturbed. `-LayoutOnly` skips workflow/list
 checks for focused layout verification.
 
 The checker follows semantic endpoints for main simulation/cancel/reset, About
-Escape/Close/focus, full keyed list/filter operations, requested 10/30/60 Hz
+Escape/Close/focus, full stable-data-ID list/filter operations, requested 10/30/60 Hz
 activity, Stop/remount/disposal/reopen, dialog Tab containment and 480/960 DIP
 layout. It records process identities, discovered helper exit and screenshots of
 synthetic content. Every attempt gets its own application `.cache/check-*` tree.
@@ -34,6 +35,24 @@ Reactor exposes its row panel through an actual SemanticPanel peer. Reactor and
 Flutter publish accessible active/stopped feedback for Stop; the checker waits
 for committed stopped feedback before sampling tick stability. Held modifier
 input includes Windows scan codes; correctness settling is not benchmark timing.
+
+Qt uses its public QML Accessible IDs and the standard native adapter. Slint's
+AccessKit tree omits fully clipped controls, so narrow-layout validation uses
+real wheel input before comparing both card buttons. Ordinary Slint repetition
+is positional despite stable data IDs; this checker tests data/results, not keyed
+view-instance reuse. Native pointer delivery waits 40 ms after SetCursorPos so
+Winit can consume CursorMoved before MouseInput. It never retries a failed action.
+Reports include actual input rectangles, the tested EXE SHA-256, and a synthetic
+failure screenshot when available. These are correctness diagnostics only and
+do not alter old frozen comparative reports.
+
+The Qt follow-up adds real Hebrew keyboard filtering, whole-string accessible
+ValuePattern emoji/bidi edits (including model synchronization), and Tab scrolling
+to the lower narrow-layout card. These are not real IME composition. An exploratory
+synthetic surrogate-key packet failure remains recorded separately. `-RunnerPath`
+can select the explicit Qt test probe; `-HighContrastProbe` runs its synthetic
+palette branch, never changing Windows contrast settings. Qt's helper script
+stages that probe separately; it is not the production benchmark executable.
 
 This is correctness/visual evidence, **not the comparative measurement harness**.
 Read retries, stabilization waits, screenshots and UIA observation overhead are

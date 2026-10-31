@@ -1,0 +1,3 @@
+{"event":"starting","qt":"6.12.0","rendererOverride":true}
+{"adapter":"Microsoft Basic Render Driver","api":4,"device":140,"event":"graphics","failure":"software-adapter","software":true,"vendor":5140,"verified":false}
+{"code":"software-adapter","event":"failed"}

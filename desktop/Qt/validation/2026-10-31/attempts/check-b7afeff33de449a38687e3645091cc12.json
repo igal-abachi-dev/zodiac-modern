@@ -1,0 +1,82 @@
+{
+  "config": {
+    "app": "Qt",
+    "runner": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\out\\win-x64\\neutronstar_qt.exe",
+    "assets": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\dist",
+    "profile": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\check-b7afeff33de449a38687e3645091cc12\\profile",
+    "output": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\check-b7afeff33de449a38687e3645091cc12",
+    "arguments": [],
+    "nativeUi": true,
+    "layoutOnly": false,
+    "engineKind": "Qt Quick / C\u002B\u002B / D3D11",
+    "semanticTimeoutMs": 30000,
+    "uiaTimeoutSeconds": 3
+  },
+  "automation": "UIA3",
+  "scope": "reference feature correctness only; not comparative timing, scripting or physical paint",
+  "mainChecks": "About Escape/Close/focus; encrypt complete; decrypt cancel; reset",
+  "tickAfterStop": 8,
+  "extraChecks": "10/60 Hz update and Stop; empty filter; close while burst active; fresh reopen/reset IDs and tick; focus restoration; main workflow after workbench",
+  "layoutChecks": "dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width",
+  "dpi": 192,
+  "engineKind": "Qt Quick / C\u002B\u002B / D3D11",
+  "hostFileVersion": null,
+  "status": "passed",
+  "hostExited": true,
+  "helpersExited": true,
+  "exitCode": 0,
+  "providerGaps": [],
+  "actions": [
+    {
+      "name": "replace-10000",
+      "inputToUiaObservedMs": 1307.2595999240875,
+      "requestToUiaMs": 1404.0292000770569
+    },
+    {
+      "name": "replace-1000",
+      "inputToUiaObservedMs": 506.8361999988556,
+      "requestToUiaMs": 595.5429000854492
+    },
+    {
+      "name": "reverse-1000",
+      "inputToUiaObservedMs": 147.3575999736786,
+      "requestToUiaMs": 242.08119988441467
+    },
+    {
+      "name": "splice-10",
+      "inputToUiaObservedMs": 12.147700071334839,
+      "requestToUiaMs": 102.43829989433289
+    },
+    {
+      "name": "update-10-percent",
+      "inputToUiaObservedMs": 12.191200017929077,
+      "requestToUiaMs": 95.6078999042511
+    },
+    {
+      "name": "filter-to-one",
+      "inputToUiaObservedMs": 35.48780012130737,
+      "requestToUiaMs": 149.0543999671936
+    },
+    {
+      "name": "filter-clear",
+      "inputToUiaObservedMs": 146.44309997558594,
+      "requestToUiaMs": 250.0836000442505
+    },
+    {
+      "name": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": 43.365700006484985,
+      "requestToUiaMs": 153.67490005493164
+    },
+    {
+      "name": "remount",
+      "inputToUiaObservedMs": 257.69050002098083,
+      "requestToUiaMs": 342.1633999347687
+    }
+  ],
+  "processIdentities": [
+    {
+      "pid": 52644,
+      "startUtc": "2026-10-30T20:26:05.2268497Z"
+    }
+  ]
+}

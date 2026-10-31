@@ -1,0 +1,498 @@
+{
+  "config": {
+    "app": "Slint",
+    "runner": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\slint-rust\\out\\win-x64\\neutronstar-slint.exe",
+    "assets": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\slint-rust\\dist",
+    "profile": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\slint-rust\\.cache\\check-6a5555a7cf9746d0a40305e452ac2263\\profile",
+    "output": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\slint-rust\\.cache\\check-6a5555a7cf9746d0a40305e452ac2263",
+    "arguments": [],
+    "nativeUi": true,
+    "layoutOnly": false,
+    "engineKind": "Slint / Rust / Skia",
+    "semanticTimeoutMs": 30000,
+    "uiaTimeoutSeconds": 3
+  },
+  "automation": "UIA3",
+  "scope": "reference feature correctness only; not comparative timing, scripting or physical paint",
+  "mainChecks": "About Escape/Close/focus; encrypt complete; decrypt cancel; reset",
+  "tickAfterStop": 9,
+  "extraChecks": "10/60 Hz update and Stop; empty filter; close while burst active; fresh reopen/reset IDs and tick; focus restoration; main workflow after workbench",
+  "status": "failed",
+  "error": "NullReferenceException: Object reference not set to an instance of an object.",
+  "stack": "   at CandidateChecks.\u003C\u003Ec.\u003CMain\u003Eb__26_9() in D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\candidate-checks\\Program.cs:line 175\r\n   at CandidateChecks.Read[T](Func\u00601 query) in D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\candidate-checks\\Program.cs:line 21\r\n   at CandidateChecks.Wait(Func\u00601 query, Int32 timeout) in D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\candidate-checks\\Program.cs:line 23\r\n   at CandidateChecks.Main(String[] args) in D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\host-test-support\\candidate-checks\\Program.cs:line 175",
+  "lastTree": [
+    {
+      "type": "TitleBar",
+      "name": null,
+      "id": "TitleBar",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "MenuBar",
+      "name": "System",
+      "id": "SystemMenuBar",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "MenuItem",
+      "name": "System",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Minimize",
+      "id": "Minimize-Restore",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Maximize",
+      "id": "Maximize-Restore",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Close",
+      "id": "Close",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": null,
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "NeutronStar GUI Bench",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "A UI-only simulation for comparing desktop frontends.",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "About this test",
+      "id": "about-trigger",
+      "enabled": true,
+      "focus": true,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": null,
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "SIMULATION \u00B7 NO FILES OR CRYPTOGRAPHY.",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": null,
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Decrypt",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "SYNTHETIC INPUT",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Synthetic sample: starlight.nsx",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "No disk file is opened.",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Button",
+      "name": "Simulate decryption",
+      "id": "decrypt",
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Image",
+      "name": null,
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Encrypt",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "SYNTHETIC INPUT",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    },
+    {
+      "type": "Text",
+      "name": "Zodiac GUI benchmark \u2014 \u05E9\u05DC\u05D5\u05DD \u2014 \uD83C\uDF20",
+      "id": null,
+      "enabled": true,
+      "focus": false,
+      "offscreen": false
+    }
+  ],
+  "hostExited": true,
+  "helpersExited": true,
+  "exitCode": 0,
+  "inputTargets": [
+    {
+      "name": "About this test",
+      "x": 1980,
+      "y": 473,
+      "width": 240,
+      "height": 64
+    },
+    {
+      "name": "About this test",
+      "x": 1980,
+      "y": 473,
+      "width": 240,
+      "height": 64
+    },
+    {
+      "name": "Close",
+      "x": 936,
+      "y": 1226,
+      "width": 760,
+      "height": 84
+    },
+    {
+      "name": "Simulate encryption",
+      "x": 1327,
+      "y": 1151,
+      "width": 861,
+      "height": 80
+    },
+    {
+      "name": "Reset",
+      "x": 2064,
+      "y": 1335,
+      "width": 124,
+      "height": 64
+    },
+    {
+      "name": "Simulate decryption",
+      "x": 444,
+      "y": 1151,
+      "width": 779,
+      "height": 80
+    },
+    {
+      "name": "Cancel",
+      "x": 1924,
+      "y": 1335,
+      "width": 140,
+      "height": 64
+    },
+    {
+      "name": "Reset",
+      "x": 2064,
+      "y": 1335,
+      "width": 124,
+      "height": 64
+    },
+    {
+      "name": "Open workbench",
+      "x": 412,
+      "y": 1569,
+      "width": 276,
+      "height": 64
+    },
+    {
+      "name": "10,000 rows",
+      "x": 620,
+      "y": 707,
+      "width": 210,
+      "height": 64
+    },
+    {
+      "name": "1,000 rows",
+      "x": 412,
+      "y": 707,
+      "width": 192,
+      "height": 64
+    },
+    {
+      "name": "Reverse",
+      "x": 846,
+      "y": 707,
+      "width": 156,
+      "height": 64
+    },
+    {
+      "name": "Splice 10",
+      "x": 1018,
+      "y": 707,
+      "width": 166,
+      "height": 64
+    },
+    {
+      "name": "Update 10%",
+      "x": 1200,
+      "y": 707,
+      "width": 210,
+      "height": 64
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 444,
+      "y": 981,
+      "width": 1744,
+      "height": 64
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 444,
+      "y": 1363,
+      "width": 1744,
+      "height": 64
+    },
+    {
+      "name": "30 Hz / 2 s",
+      "x": 1630,
+      "y": 1089,
+      "width": 194,
+      "height": 64
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 444,
+      "y": 1363,
+      "width": 1744,
+      "height": 64
+    },
+    {
+      "name": "Stop",
+      "x": 2050,
+      "y": 1089,
+      "width": 110,
+      "height": 64
+    },
+    {
+      "name": "Remount workload",
+      "x": 412,
+      "y": 1169,
+      "width": 296,
+      "height": 64
+    },
+    {
+      "name": "10 Hz / 2 s",
+      "x": 1426,
+      "y": 1089,
+      "width": 188,
+      "height": 64
+    },
+    {
+      "name": "Stop",
+      "x": 2050,
+      "y": 1089,
+      "width": 110,
+      "height": 64
+    },
+    {
+      "name": "60 Hz / 2 s",
+      "x": 1840,
+      "y": 1089,
+      "width": 194,
+      "height": 64
+    },
+    {
+      "name": "Stop",
+      "x": 2050,
+      "y": 1089,
+      "width": 110,
+      "height": 64
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 444,
+      "y": 1363,
+      "width": 1744,
+      "height": 64
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 444,
+      "y": 1431,
+      "width": 1744,
+      "height": 64
+    },
+    {
+      "name": "30 Hz / 2 s",
+      "x": 1630,
+      "y": 1157,
+      "width": 194,
+      "height": 64
+    },
+    {
+      "name": "Back to main screen",
+      "x": 412,
+      "y": 995,
+      "width": 318,
+      "height": 64
+    },
+    {
+      "name": "Open workbench",
+      "x": 412,
+      "y": 1569,
+      "width": 276,
+      "height": 64
+    },
+    {
+      "name": "Back to main screen",
+      "x": 412,
+      "y": 545,
+      "width": 318,
+      "height": 64
+    },
+    {
+      "name": "Simulate encryption",
+      "x": 1327,
+      "y": 1151,
+      "width": 861,
+      "height": 80
+    },
+    {
+      "name": "Reset",
+      "x": 2064,
+      "y": 1335,
+      "width": 124,
+      "height": 64
+    },
+    {
+      "name": "About this test",
+      "x": 1980,
+      "y": 473,
+      "width": 240,
+      "height": 64
+    },
+    {
+      "name": "Close",
+      "x": 936,
+      "y": 1226,
+      "width": 760,
+      "height": 84
+    }
+  ],
+  "providerGaps": [],
+  "actions": [
+    {
+      "name": "replace-10000",
+      "inputToUiaObservedMs": 92.66059994697571,
+      "requestToUiaMs": 234.97339987754822
+    },
+    {
+      "name": "replace-1000",
+      "inputToUiaObservedMs": 76.81430006027222,
+      "requestToUiaMs": 217.11380004882812
+    },
+    {
+      "name": "reverse-1000",
+      "inputToUiaObservedMs": 15.308599948883057,
+      "requestToUiaMs": 159.89849996566772
+    },
+    {
+      "name": "splice-10",
+      "inputToUiaObservedMs": 10.54450011253357,
+      "requestToUiaMs": 150.59969997406006
+    },
+    {
+      "name": "update-10-percent",
+      "inputToUiaObservedMs": 14.875699996948242,
+      "requestToUiaMs": 144.32209992408752
+    },
+    {
+      "name": "filter-to-one",
+      "inputToUiaObservedMs": 43.20420002937317,
+      "requestToUiaMs": 201.3860001564026
+    },
+    {
+      "name": "filter-clear",
+      "inputToUiaObservedMs": 11.952300071716309,
+      "requestToUiaMs": 141.6006999015808
+    },
+    {
+      "name": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": 24.907299995422363,
+      "requestToUiaMs": 166.9909999370575
+    },
+    {
+      "name": "remount",
+      "inputToUiaObservedMs": 23.857800006866455,
+      "requestToUiaMs": 153.8855001926422
+    }
+  ],
+  "processIdentities": [
+    {
+      "pid": 24840,
+      "startUtc": "2026-10-30T22:35:09.5795984Z"
+    }
+  ]
+}

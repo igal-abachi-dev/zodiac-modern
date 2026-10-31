@@ -1,8 +1,14 @@
 # Independent desktop implementations
 
-Updated 2026-10-26. This stage builds and checks applications before running a
+Updated 2026-10-31. This stage builds and checks applications before running a
 new cross-toolkit benchmark. The old six-host WebView2 measurements remain a
 separate frozen experiment. Tauri + Svelte is the selected WebView2 representative.
+
+The later [Qt/C++ host diagnostics follow-up](DESKTOP-DIAGNOSTICS-2026-10-31.md)
+changes their current binaries/readiness/deployment and requires fresh artifact
+freezes. Automated failure, normal/contrast and lifecycle checks are separate
+from the still-open clean-VM and physical AT/IME/multi-monitor gates. No later
+performance cohort was run as part of that work.
 
 | Current candidate | Stack | Implementation strategy |
 | --- | --- | --- |
@@ -12,6 +18,8 @@ separate frozen experiment. Tauri + Svelte is the selected WebView2 representati
 | `WinUI3-cs-native-mvvm` | Windows App SDK 2.5.1, Toolkit 8.4.2, self-contained .NET 10 | Independently authored native XAML/compiled bindings, Fluent controls, unpackaged Win32 |
 | `WinUI3-cs-native-reactor` | Windows App SDK 2.5.1, Reactor 0.1.0-preview.16, self-contained .NET 10 | Independent C# MVU/components/reducers over native Fluent; experimental, unpackaged Win32 |
 | `Flutter` | Flutter stable 3.47.8, Dart 3.13.7, flutter_svg 2.3.0 | Independent AOT Dart UI/controllers, stock Material 3, local fonts/SVGs, standard C++ Win32 runner |
+| `Qt` | Qt 6.12.0 Quick/QML, C++20, clang-cl 22.1.3, Ninja, Microsoft linker | Independent typed C++ model/controller, standard Basic controls with local styling, Qt Quick RHI D3D11, dynamic Qt/CRT |
+| `slint-rust` | Slint 1.18.1, Rust 1.99.1, Winit/Skia, AccessKit | Independent Rust models/timers and compiled Slint UI, standard Fluent widgets, embedded local assets |
 
 All implement the [reference feature inventory](Tauri-v2-Svelte5/FEATURE-PARITY.md),
 including the complete workbench. Share design/fixture specifications and external
@@ -72,7 +80,20 @@ and [Flutter validation](Flutter/VALIDATION.md). Reactor remains preview softwar
 Neither has comparative performance results. All six current implementations
 still need a calibrated cross-toolkit measurement cohort and physical AT review.
 
-The directories `react-native-windows`, `slint-rust`, `Dear-ImGui-dx11-12`, `Qt` and
+2026-10-31: Qt and Slint now implement the complete reference, including the
+unvirtualized 10k-row workbench, and pass build/model/full actual-window checks.
+See [Qt validation](Qt/VALIDATION.md) and [Slint validation](slint-rust/VALIDATION.md).
+There are eight implemented candidates; no new comparative timings were run.
+Before measuring, disclose Qt's dynamic DLL/plugin delivery, Slint's stock
+Windows accent/caption and attribution panel, positional Slint repetition versus
+keyed/persistent model identity, and each toolkit's semantic readiness endpoint.
+Calibrate actual graphics adapters/presentation and accessibility provider behavior.
+The correctness checker now lets native cursor movement reach the event loop
+before pressing, records input rectangles and EXE hashes, and scrolls real Slint
+controls into view because its AccessKit tree omits fully clipped controls.
+These correctness changes do not amend old frozen benchmark cohorts.
+
+The directories `react-native-windows`, `Dear-ImGui-dx11-12` and
 `wxWidgets` reserve later independent implementations. They are not benchmarked
 by this stage. [Research §13.17](desktop-gui.md#1317-expanded-desktop-candidate-registry-2026-10-24)
 records their distinct authoring/rendering models and Reactor's experimental

@@ -1,0 +1,247 @@
+﻿[
+    {
+        "path":  ".gitignore",
+        "sha256":  "03A2A9EBAA37701D89E491D875F5EF207E404B66488BB20E26BD2EB7195E91AE",
+        "bytes":  804
+    },
+    {
+        "path":  ".metadata",
+        "sha256":  "5A1657E5C866224FA41F7E738B4770BFC25082DD1D3E1FD2DA5217D9B4BCAB1B",
+        "bytes":  968
+    },
+    {
+        "path":  "analysis_options.yaml",
+        "sha256":  "E213CD1115A5EA26AFAC8FA55F0228A05B7D139164BDE68C5F36EC31D6896A74",
+        "bytes":  1507
+    },
+    {
+        "path":  "assets/fonts/inter-latin-400-normal.ttf",
+        "sha256":  "03693CC5689D8C89A20AE55FE945FE59884EEC8AD7D7DABB4761E066E88F49FF",
+        "bytes":  66592
+    },
+    {
+        "path":  "assets/fonts/inter-latin-500-normal.ttf",
+        "sha256":  "7E22ABFA3709EC2C67D18128ED3B7E522A8EFA602C7F46FB933BF71F5F8F2E3E",
+        "bytes":  66692
+    },
+    {
+        "path":  "assets/fonts/inter-latin-600-normal.ttf",
+        "sha256":  "DE8A61379F04664868958CC13D22CD9D1D79B4064E1EBD7C46588399F2A12FD5",
+        "bytes":  66800
+    },
+    {
+        "path":  "assets/fonts/noto-sans-hebrew-hebrew-400-normal.ttf",
+        "sha256":  "4DF1FBFDE811AFBF4023ED6BFDE89CE9614C94775FA57DFDFC473575D5D076D0",
+        "bytes":  17072
+    },
+    {
+        "path":  "assets/fonts/OFL-NotoSansHebrew.txt",
+        "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+        "bytes":  4380
+    },
+    {
+        "path":  "assets/fonts/provenance.json",
+        "sha256":  "9DB6AA2FBA2D444EF17CA58130138EFF5AE6C232107351B363D862C227FBC899",
+        "bytes":  1626
+    },
+    {
+        "path":  "assets/icons/arrow-down-to-line.svg",
+        "sha256":  "8B692D916102083901B392C3F098B6F460604D5FAD4029FBE79D934E5C065892",
+        "bytes":  374
+    },
+    {
+        "path":  "assets/icons/arrow-up-from-line.svg",
+        "sha256":  "3A9B8037387DF9D552042E229AA9A16AE7326B52BF2A5AAB07450F3B539A404C",
+        "bytes":  374
+    },
+    {
+        "path":  "assets/icons/info.svg",
+        "sha256":  "BD039CBC60ABC0AF2D241232FA6FE76DA45C974A8928141B266B15435CA26E0C",
+        "bytes":  369
+    },
+    {
+        "path":  "assets/icons/lock-keyhole.svg",
+        "sha256":  "0D7D87CE30B53B2B26D03237D47011B447D4F4D49E4456F1E2EEFF2A410944D4",
+        "bytes":  420
+    },
+    {
+        "path":  "assets/icons/orbit.svg",
+        "sha256":  "90426BC45F068DD6576026B17E5723EEACBE25333D7587EBE79BD7A27F2B51BD",
+        "bytes":  494
+    },
+    {
+        "path":  "assets/icons/shield-check.svg",
+        "sha256":  "21B195F0BF7F6ED344D9327066C9E9DB6FD2E03AB8673C19907001D87B710E06",
+        "bytes":  498
+    },
+    {
+        "path":  "assets/icons/unlock-keyhole.svg",
+        "sha256":  "456E12DB802726BB969F996196EC71E89E3C1C00DF57C4843C3362CEF58A1E41",
+        "bytes":  424
+    },
+    {
+        "path":  "assets/notices/Flutter-BSD.txt",
+        "sha256":  "A3A9FD82F800A47377F7D3F60C60A5C91CAE0495BE8F329031E1448CE0F5DAB9",
+        "bytes":  1544
+    },
+    {
+        "path":  "assets/notices/Inter-OFL.txt",
+        "sha256":  "3B0A5FCA3D17942CDE889069889DEDBBBD075E9B599968C82A95F4D944E9B345",
+        "bytes":  4477
+    },
+    {
+        "path":  "assets/notices/Lucide-ISC.txt",
+        "sha256":  "B495047BD93A9B06913511076F504DABA17D5BBEB3E0650F3BB53A4220329C57",
+        "bytes":  3208
+    },
+    {
+        "path":  "Build.ps1",
+        "sha256":  "71A33B894D05F6854B1971F04F54F27D8652EE3361423503903F5902193EDD76",
+        "bytes":  1385
+    },
+    {
+        "path":  "Init.cmd",
+        "sha256":  "7485BC040E9504464B5ABE1E443B5445A6FAFEC01DCA6B2AC421759D6F51CD87",
+        "bytes":  81
+    },
+    {
+        "path":  "lib/domain.dart",
+        "sha256":  "B46C2B9BCE2B1B91F53F2FA8B801A1335EA880E337D58DB007F8EB5378137F45",
+        "bytes":  4043
+    },
+    {
+        "path":  "lib/main.dart",
+        "sha256":  "74E91721FE55B1CFA09163BA72B930694E819D04865C798991ED4A8EECA64262",
+        "bytes":  18048
+    },
+    {
+        "path":  "pubspec.lock",
+        "sha256":  "CE2853F32D75B081CAB3772841CEDECC0F91160BD2E939F4B527329D3ACF8CEC",
+        "bytes":  8617
+    },
+    {
+        "path":  "pubspec.yaml",
+        "sha256":  "861D822E4F4C3AF5D526D5316AC7E2BD5A967F40E39C495F8C1DBFC97C47F70F",
+        "bytes":  820
+    },
+    {
+        "path":  "README.md",
+        "sha256":  "C1D2C011D597AC29761385ED61AE5659E5ABB07439EC47083100CB479A06AB7E",
+        "bytes":  3654
+    },
+    {
+        "path":  "Run.ps1",
+        "sha256":  "0684D7D8D553DB14684891FEF8FDDB7C4CF7F96D839F0A6B7C8ACDB6B9389332",
+        "bytes":  430
+    },
+    {
+        "path":  "test/domain_test.dart",
+        "sha256":  "987B9B26CC60590541602D43866DEC5F2868D0FFD6F4A9B83C6E33B9F8ABE02A",
+        "bytes":  2259
+    },
+    {
+        "path":  "test/screen_test.dart",
+        "sha256":  "6ED6C74A53BF413827E7BE76CAC98DA4674447F49B9333941F81D3C3B803C06E",
+        "bytes":  1188
+    },
+    {
+        "path":  "Toolchain.ps1",
+        "sha256":  "617E39ADC2740603791D1AE35873C083D1FF71A645FA346041B027EAF20D92E0",
+        "bytes":  751
+    },
+    {
+        "path":  "VALIDATION.md",
+        "sha256":  "9BFABB4E5BA5E0BB040857D9D51DAB43ED9E089A3E810672B892A945531E9520",
+        "bytes":  3987
+    },
+    {
+        "path":  "windows/.gitignore",
+        "sha256":  "955E3110CB16494EE76E1CD5DF47E2C212309EB94A49A123FE87F718DE413CB8",
+        "bytes":  308
+    },
+    {
+        "path":  "windows/CMakeLists.txt",
+        "sha256":  "04CCB4D0C138EB4B659C99D376D07FC24FF4D00BA9DD63BAB72995C3BA7ACDC2",
+        "bytes":  4282
+    },
+    {
+        "path":  "windows/flutter/CMakeLists.txt",
+        "sha256":  "BD05E3268B2F246BCBAFDB778165FE67A7BAFDBA04EB73599502563A67B8AE7E",
+        "bytes":  3851
+    },
+    {
+        "path":  "windows/flutter/generated_plugin_registrant.cc",
+        "sha256":  "82E02567F2FAF5E732DC92A2FB0D01104F7BA8C48973F8CFD41A860B4FAC3F3B",
+        "bytes":  164
+    },
+    {
+        "path":  "windows/flutter/generated_plugin_registrant.h",
+        "sha256":  "DBC11635D7B1BA1887ADF40DF5B83D634E9C3AB0BEE34510C71528BB4D73602A",
+        "bytes":  302
+    },
+    {
+        "path":  "windows/flutter/generated_plugins.cmake",
+        "sha256":  "286346B0D5303DC6B41072F9582D4C52BCA35255B85B27B310F858E264DFDC56",
+        "bytes":  743
+    },
+    {
+        "path":  "windows/runner/CMakeLists.txt",
+        "sha256":  "D765FDD05F63AD099E585A2CCED0CBFF13EC3229B7DE68C8681B2107DB850089",
+        "bytes":  1836
+    },
+    {
+        "path":  "windows/runner/flutter_window.cpp",
+        "sha256":  "D615EEDC06AE37321E59C2C00C7687D1887DCD97904EB7225FAFD8DCB5B83DA6",
+        "bytes":  2193
+    },
+    {
+        "path":  "windows/runner/flutter_window.h",
+        "sha256":  "0252B804F5DA380C7709CBE1DAFF2B8D18DAF6C49D7E6DD43E5AF3C99C19F56C",
+        "bytes":  961
+    },
+    {
+        "path":  "windows/runner/main.cpp",
+        "sha256":  "45D1AB29DA93E2BD54164295A9089466AF870F2FC412EE0C50C02CA31D67FD29",
+        "bytes":  1316
+    },
+    {
+        "path":  "windows/runner/resource.h",
+        "sha256":  "D0E8BF7835468B4B6B1F8F0747F2E8F25C19841F2DF2AC60AAA584DDAE3AA7C6",
+        "bytes":  448
+    },
+    {
+        "path":  "windows/runner/resources/app_icon.ico",
+        "sha256":  "C098D3FC85CACFF98B8E69811B48E9F0D852FCEE278132D794411D978869CBF8",
+        "bytes":  33772
+    },
+    {
+        "path":  "windows/runner/runner.exe.manifest",
+        "sha256":  "639A56233FCD8CBCB8BBEFCD93E4680EC2664F32D9ACFB3D2EC1D8726A96E090",
+        "bytes":  616
+    },
+    {
+        "path":  "windows/runner/Runner.rc",
+        "sha256":  "AD83FF340DC63280873F1F65C6EEB68E3603E772CE6247B3CFA56701AE6D06B0",
+        "bytes":  3202
+    },
+    {
+        "path":  "windows/runner/utils.cpp",
+        "sha256":  "A128B67B9F3C2579E2ECEF5B0DDE2C33F222A097CDFE5DA2A3067C73D1485B39",
+        "bytes":  2237
+    },
+    {
+        "path":  "windows/runner/utils.h",
+        "sha256":  "832E246B6758253F89016FB0374B30791242E97AD950D27FC678B3D9FEACFDC4",
+        "bytes":  691
+    },
+    {
+        "path":  "windows/runner/win32_window.cpp",
+        "sha256":  "93A8BCAA766288977C87930D597D336ED8CB15B8B2A3D7BB8D604EC2E41B298C",
+        "bytes":  9121
+    },
+    {
+        "path":  "windows/runner/win32_window.h",
+        "sha256":  "D154CF89BA85F820631A9B5BEDACBE64FC5815E428FE6BC5DA579CE649F69841",
+        "bytes":  3624
+    }
+]

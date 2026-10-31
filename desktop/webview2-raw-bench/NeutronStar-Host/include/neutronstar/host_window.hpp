@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <functional>
 #include <memory>
+#include <optional>
 #include <string>
 #include <string_view>
 #include <vector>
@@ -16,7 +17,8 @@ enum class EventKind {
     download_blocked, process_failed, failed, closed, action_rejected,
     memory_target_changed, window_command, window_state_changed,
     environment_starting, controller_starting, navigation_starting,
-    initialization_drained, shutdown_timeout, asset_loaded, controller_requested
+    initialization_drained, shutdown_timeout, asset_loaded, controller_requested,
+    runtime_checked, runtime_unavailable
 };
 
 enum class Action { encrypt, decrypt };
@@ -29,12 +31,18 @@ struct TestGreetRequest { std::wstring id; std::wstring name; };
 // Optional build-time asset snapshot. Runtime validation preserves the same path/MIME policy.
 struct EmbeddedAsset { std::wstring relative_path; std::vector<unsigned char> content; };
 
+struct ProcessFailure {
+    int kind{-1}; // Numeric WebView2 enum; -1 means unavailable.
+    std::optional<int> reason;
+    std::optional<int> exit_code; // 259 can mean an unresponsive process is still alive.
+};
 struct Event {
     EventKind kind{};
     HRESULT result{S_OK};
     std::wstring detail; // Runtime version, title or fixed diagnostic; never input contents/URLs.
     unsigned long long duration_microseconds{}; // Optional nonsecret asset-read measurement.
     unsigned long long byte_count{};
+    std::optional<ProcessFailure> process_failure{}; // No frame URLs/descriptions or input data.
 };
 
 struct HostOptions {

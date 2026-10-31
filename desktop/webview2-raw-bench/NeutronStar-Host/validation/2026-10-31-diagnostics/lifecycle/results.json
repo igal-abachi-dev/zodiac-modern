@@ -1,0 +1,99 @@
+﻿{
+    "runnerSha256":  "7CCCA4670726760C12AA0C06F6BB0D2D280F1931BE949296A1BFE8379B340109",
+    "cases":  [
+                  {
+                      "exitCode":  0,
+                      "case":  "0-close-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\0-close-before-ready.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "0-close-at-environment",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\0-close-at-environment.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "0-close-pending-controller",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\0-close-pending-controller.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "0-close-at-controller",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\0-close-at-controller.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "0-quit-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\0-quit-before-ready.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "0-destroy-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\0-destroy-before-ready.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "1-close-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\1-close-before-ready.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "1-close-at-environment",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\1-close-at-environment.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "1-close-pending-controller",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\1-close-pending-controller.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "1-close-at-controller",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\1-close-at-controller.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "1-quit-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\1-quit-before-ready.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "1-destroy-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\1-destroy-before-ready.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "2-close-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\2-close-before-ready.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "2-close-at-environment",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\2-close-at-environment.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "2-close-pending-controller",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\2-close-pending-controller.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "2-close-at-controller",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\2-close-at-controller.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "2-quit-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\2-quit-before-ready.jsonl"
+                  },
+                  {
+                      "exitCode":  0,
+                      "case":  "2-destroy-before-ready",
+                      "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\webview2-raw-bench\\NeutronStar-Host\\.cache\\lifecycle-3a22999aa70746f8b9e78a32d6aff32a\\2-destroy-before-ready.jsonl"
+                  }
+              ],
+    "repeats":  3,
+    "remainingHelpers":  [
+
+                         ]
+}

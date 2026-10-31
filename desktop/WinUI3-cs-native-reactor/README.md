@@ -6,7 +6,7 @@ authoring layer over native WinUI 3. It is not React, React Native, WebView2 or 
 The application is an unpackaged Win32 executable using Windows App SDK 2.5.1.
 It does not require Store installation or an MSIX package.
 
-Run `Build.ps1`, then right-click `Run.ps1` → **Run with PowerShell**.
+Run `Build.ps1` (or `Init.cmd`), then right-click `Run.ps1` → **Run with PowerShell**.
 Build prerequisites: Windows 11 x64, .NET SDK **10.0.403**, Visual Studio C++/WinUI
 build tools and Windows SDK 10.0.26100 or compatible newer tooling. Initial
 locked NuGet restore requires network access. Copy the **entire** `out/win-x64`

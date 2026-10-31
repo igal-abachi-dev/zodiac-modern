@@ -1,0 +1,8 @@
+<Configuration>
+ <Networking>Disable</Networking><ClipboardRedirection>Disable</ClipboardRedirection><vGPU>Enable</vGPU>
+ <MappedFolders>
+  <MappedFolder><HostFolder>D:\Libraries\Repositories\zodiac-modern\desktop\Qt\.cache\clean-machine-ae2dd3f7171448f880e5f11336bf2aa4\readonly</HostFolder><SandboxFolder>C:\NeutronStar</SandboxFolder><ReadOnly>true</ReadOnly></MappedFolder>
+  <MappedFolder><HostFolder>D:\Libraries\Repositories\zodiac-modern\desktop\Qt\.cache\clean-machine-ae2dd3f7171448f880e5f11336bf2aa4\results</HostFolder><SandboxFolder>C:\NeutronStar-Results</SandboxFolder><ReadOnly>false</ReadOnly></MappedFolder>
+ </MappedFolders>
+ <LogonCommand><Command>powershell.exe -NoProfile -ExecutionPolicy Bypass -WindowStyle Hidden -File C:\NeutronStar\verify.ps1</Command></LogonCommand>
+</Configuration>

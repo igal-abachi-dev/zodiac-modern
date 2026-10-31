@@ -17,6 +17,7 @@ internal static class CandidateChecks
     static int semanticTimeoutMs=30000;
     static double inputAt;
     static readonly List<object> ProviderGaps=new();
+    static readonly List<object> InputTargets=new();
     static T Read<T>(Func<T> query){for(int attempt=1;;attempt++)try{return query();}catch(COMException error){ProviderGaps.Add(new{atMs=Now(),hresult=error.HResult,attempt,readOnly=true});if(attempt>=10)throw;Thread.Sleep(20);}catch(TimeoutException error) when(error.Message.Contains("UIA",StringComparison.Ordinal)){ProviderGaps.Add(new{atMs=Now(),uiaTimeout=true,attempt,readOnly=true});if(attempt>=3)throw;Thread.Sleep(20);}catch(FlaUI.Core.Exceptions.ElementNotAvailableException){ProviderGaps.Add(new{atMs=Now(),unavailable=true,attempt,readOnly=true});if(attempt>=10)throw;Thread.Sleep(20);}}
     static double Now()=>Stopwatch.GetTimestamp()*1000.0/Stopwatch.Frequency;
     static void Wait(Func<bool> query,int timeout=0){double end=Now()+(timeout==0?semanticTimeoutMs:timeout);while(!Read(query)){if(Now()>end)throw new TimeoutException("Workload semantic endpoint");Thread.Sleep(5);}}
@@ -41,8 +42,13 @@ internal static class CandidateChecks
         // presentation tree before using UIA's screen rectangle for real input.
         if(nativeUi)Thread.Sleep(75);
         var rect=Read(()=>element.Properties.BoundingRectangle.Value);
+        InputTargets.Add(new{name=element.Name,x=rect.X,y=rect.Y,width=rect.Width,height=rect.Height});
         if(element.Properties.IsOffscreen.ValueOrDefault||rect.Width<1||rect.Height<1)throw new InvalidOperationException("Offscreen input target");
         Native.SetCursorPos((int)(rect.X+rect.Width/2),(int)(rect.Y+rect.Height/2));
+        // Winit consumes CursorMoved before MouseInput; allow the independent
+        // SetCursorPos message to reach the native loop before pressing. This
+        // is correctness input delivery, not part of comparative timing.
+        if(nativeUi)Thread.Sleep(40);
         var inputs=new[]{new Native.Input{Mouse=new Native.MouseInput{Flags=2}},new Native.Input{Mouse=new Native.MouseInput{Flags=4}}};
         inputAt=Now();if(Native.SendInput(2,inputs,Marshal.SizeOf<Native.Input>())!=2)throw new InvalidOperationException("Pointer input failed");
     }
@@ -83,6 +89,7 @@ internal static class CandidateChecks
         var config=JsonSerializer.Deserialize<Config>(File.ReadAllText(args[0]),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
         nativeUi=config.NativeUi;flutterUi=config.EngineKind?.StartsWith("Flutter",StringComparison.Ordinal)==true;semanticTimeoutMs=config.SemanticTimeoutMs;Automation.TransactionTimeout=TimeSpan.FromSeconds(config.UiaTimeoutSeconds);Directory.CreateDirectory(config.Output);Native.SetProcessDpiAwarenessContext(-4);Native.GetCursorPos(out var original);
         var report=new Dictionary<string,object?>{["config"]=config,["automation"]="UIA3",["scope"]="reference feature correctness only; not comparative timing, scripting or physical paint"};
+        using(var binary=File.OpenRead(config.Runner))report["runnerSha256"]=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(binary));
         var actions=new List<object>();var known=new Dictionary<int,DateTime>();var gate=new object();bool stop=false;Process? process=null;Thread? discovery=null;int exit=1;
         bool Alive(int pid,DateTime time){try{using var p=Process.GetProcessById(pid);return !p.HasExited&&p.StartTime.ToUniversalTime()==time;}catch(ArgumentException){return false;}}
         try
@@ -137,6 +144,15 @@ internal static class CandidateChecks
                 if(Read(()=>Tick(1000))!=stopped)throw new InvalidOperationException("Stop left a visible timer running");
             }
             Query("not-present");Wait(()=>Tick(0)!=null);Query("");Wait(()=>Tick(1000)!=null);
+            if(config.App=="Qt"){
+                Query("שלום");Wait(()=>Tick(1000)!=null);
+                Query("row-0 שלום");Wait(()=>Tick(1)!=null);
+                Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text="שלום 🌠";
+                Wait(()=>Tick(0)!=null);
+                Wait(()=>Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text=="שלום 🌠");
+                Query("");Wait(()=>Tick(1000)!=null);
+                report["unicodeChecks"]="real Hebrew keyboard filter/bidi exact match; accessible ValuePattern supplementary-character roundtrip updates the model; synthetic surrogate-key packets and real IME composition are separate unaccepted paths";
+            }
             Button("30 Hz / 2 s");Wait(()=>Tick(1000)>2);Button("Back to main screen");
             Wait(()=>Named("Open workbench",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
             Button("Open workbench");Wait(()=>Named("Workbench ready",ControlType.Text)!=null);
@@ -156,6 +172,21 @@ internal static class CandidateChecks
             Wait(()=>Named("Close",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
             Button("Close");Wait(()=>Named("About this test",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
             ResizeClient(480,640);
+            if(config.App=="Qt"){
+                bool reached=false;
+                for(int i=0;i<16;i++){
+                    Keys(2,tab,Marshal.SizeOf<KeyInput>());Thread.Sleep(40);
+                    var target=Id("encrypt");
+                    if(target?.Properties.HasKeyboardFocus.ValueOrDefault==true){
+                        if(target.Properties.IsOffscreen.ValueOrDefault)throw new InvalidOperationException("Keyboard focus did not reveal the offscreen card");
+                        reached=true;break;
+                    }
+                }
+                if(!reached)throw new InvalidOperationException("Tab could not reach encryption in the narrow layout");
+                Named("About this test",ControlType.Button)!.FrameworkAutomationElement.SetFocus();
+                Wait(()=>Named("About this test",ControlType.Button)!.Properties.HasKeyboardFocus.ValueOrDefault);
+                report["keyboardScroll"]="Tab reached the lower encryption button and scrolled it into view; focus restored to About";
+            }
             if(config.EngineKind?.Contains("WinUI",StringComparison.Ordinal)==true){
                 System.Drawing.RectangleF VisibleBounds(string id){var element=Id(id)!;element.Patterns.ScrollItem.Pattern.ScrollIntoView();System.Drawing.RectangleF rect=default;Wait(()=>{rect=element.Properties.BoundingRectangle.ValueOrDefault;return rect.Width>0&&rect.Height>0&&!element.Properties.IsOffscreen.ValueOrDefault;});return rect;}
                 var scroll=Id("PageScroll")!.Patterns.Scroll.Pattern;
@@ -166,7 +197,15 @@ internal static class CandidateChecks
                 scroll.SetScrollPercent(-1,0);
                 Wait(()=>scroll.VerticalScrollPercent.Value<=0.1);
                 Thread.Sleep(200); // Visual QA after native scroll presentation.
-            }else Wait(()=>{var decrypt=Id("decrypt")!.Properties.BoundingRectangle.Value;var encrypt=Id("encrypt")!.Properties.BoundingRectangle.Value;return encrypt.Y>=decrypt.Bottom;});
+            }else if(config.App=="Slint"){
+                // AccessKit omits fully clipped items. Bring both controls into
+                // view with real wheel input before comparing screen geometry.
+                void Wheel(int delta){Native.GetWindowRect(window,out var frame);Native.SetCursorPos(frame.Right-90,(frame.Top+frame.Bottom)/2);Thread.Sleep(40);var wheel=new[]{new Native.Input{Mouse=new Native.MouseInput{Data=unchecked((uint)delta),Flags=0x0800}}};if(Native.SendInput(1,wheel,Marshal.SizeOf<Native.Input>())!=1)throw new InvalidOperationException("Wheel input failed");Thread.Sleep(100);}
+                int steps=0;while(Read(()=>Id("encrypt"))==null&&steps<12){Wheel(-120);steps++;}
+                Wait(()=>{var d=Id("decrypt");var e=Id("encrypt");if(d==null||e==null)return false;var dr=d.Properties.BoundingRectangle.Value;var er=e.Properties.BoundingRectangle.Value;return Math.Abs(dr.X-er.X)<2&&er.Y>=dr.Bottom;});
+                report["narrowGeometry"]=new{method="real wheel input; both clipped-tree controls visible",steps};
+                for(int i=0;i<steps+2;i++)Wheel(120);
+            }else Wait(()=>{var d=Id("decrypt");var e=Id("encrypt");return d!=null&&e!=null&&e.Properties.BoundingRectangle.Value.Y>=d.Properties.BoundingRectangle.Value.Bottom;});
             Capture("narrow.png");
             ResizeClient(960,640);Wait(()=>Named("Ready",ControlType.Text)!=null);
             report["layoutChecks"]="dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width";
@@ -178,7 +217,7 @@ internal static class CandidateChecks
             Capture("main.png");
             report["status"]="passed";exit=0;
         }
-        catch(Exception error){report["status"]="failed";report["error"]=error.GetType().Name+": "+error.Message;report["stack"]=error.StackTrace;try{report["lastTree"]=Document()?.FindAllDescendants().Take(120).Select(e=>new{type=e.Properties.ControlType.ValueOrDefault.ToString(),name=e.Properties.Name.ValueOrDefault,id=e.Properties.AutomationId.ValueOrDefault,enabled=e.Properties.IsEnabled.ValueOrDefault,focus=e.Properties.HasKeyboardFocus.ValueOrDefault,offscreen=e.Properties.IsOffscreen.ValueOrDefault}).ToArray();}catch{}}
+        catch(Exception error){try{if(window!=0){Native.GetWindowRect(window,out var frame);using var snapshot=new System.Drawing.Bitmap(frame.Right-frame.Left,frame.Bottom-frame.Top);using var graphics=System.Drawing.Graphics.FromImage(snapshot);graphics.CopyFromScreen(frame.Left,frame.Top,0,0,snapshot.Size);snapshot.Save(Path.Combine(config.Output,"failure.png"),System.Drawing.Imaging.ImageFormat.Png);}}catch{}report["status"]="failed";report["error"]=error.GetType().Name+": "+error.Message;report["stack"]=error.StackTrace;try{report["lastTree"]=Document()?.FindAllDescendants().Take(120).Select(e=>new{type=e.Properties.ControlType.ValueOrDefault.ToString(),name=e.Properties.Name.ValueOrDefault,id=e.Properties.AutomationId.ValueOrDefault,enabled=e.Properties.IsEnabled.ValueOrDefault,focus=e.Properties.HasKeyboardFocus.ValueOrDefault,offscreen=e.Properties.IsOffscreen.ValueOrDefault}).ToArray();}catch{}}
         finally
         {
             if(window!=0)Native.PostMessageW(window,0x10,0,0);
@@ -186,7 +225,7 @@ internal static class CandidateChecks
             double deadline=Now()+30000;while(Now()<deadline&&known.Any(p=>Alive(p.Key,p.Value)))Thread.Sleep(100);
             bool helpers=!known.Any(p=>Alive(p.Key,p.Value));report["hostExited"]=closed;report["helpersExited"]=helpers;report["exitCode"]=process?.HasExited==true?process.ExitCode:null;
             if(!closed||!helpers||(process!=null&&process.ExitCode!=0)){report["status"]="failed";report["cleanupFailure"]="Host/helper shutdown or exit-code failure";exit=1;}
-            report["providerGaps"]=ProviderGaps;report["actions"]=actions;report["processIdentities"]=known.Select(p=>new{pid=p.Key,startUtc=p.Value}).ToArray();File.WriteAllText(Path.Combine(config.Output,"result.json"),JsonSerializer.Serialize(report,Json));
+            report["inputTargets"]=InputTargets;report["providerGaps"]=ProviderGaps;report["actions"]=actions;report["processIdentities"]=known.Select(p=>new{pid=p.Key,startUtc=p.Value}).ToArray();File.WriteAllText(Path.Combine(config.Output,"result.json"),JsonSerializer.Serialize(report,Json));
             Native.SetCursorPos(original.X,original.Y);process?.Dispose();Automation.Dispose();
         }
         Console.WriteLine(JsonSerializer.Serialize(new{config.App,status=report["status"],output=config.Output}));return exit;

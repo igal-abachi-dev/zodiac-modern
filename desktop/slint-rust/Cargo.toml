@@ -1,0 +1,19 @@
+[package]
+name = "neutronstar-slint"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.99"
+publish = false
+build = "build.rs"
+
+[dependencies]
+slint = { version = "=1.18.1", default-features = false, features = ["std", "backend-winit", "renderer-skia", "accessibility", "compat-1-18"] }
+
+[build-dependencies]
+slint-build = "=1.18.1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = "debuginfo"
+panic = "unwind"
