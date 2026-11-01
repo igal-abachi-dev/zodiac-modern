@@ -5,7 +5,7 @@
         "failure":  {
                         "event":  9,
                         "hr":  -2147467259,
-                        "microseconds":  1839274,
+                        "microseconds":  1594995,
                         "duration_us":  0,
                         "bytes":  0,
                         "process_kind":  1,
@@ -22,7 +22,7 @@
         "failure":  {
                         "event":  9,
                         "hr":  -2147467259,
-                        "microseconds":  1082213,
+                        "microseconds":  1864154,
                         "duration_us":  0,
                         "bytes":  0,
                         "process_kind":  0,

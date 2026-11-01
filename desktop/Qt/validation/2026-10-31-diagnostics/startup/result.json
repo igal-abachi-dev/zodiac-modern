@@ -19,8 +19,8 @@
                         "Qt6QmlWorkerScript.dll",
                         "Qt6QuickControls2Basic.dll",
                         "Qt6QuickLayouts.dll",
-                        "Qt6QuickControls2BasicStyleImpl.dll",
                         "Qt6QuickControls2Impl.dll",
+                        "Qt6QuickControls2BasicStyleImpl.dll",
                         "Qt6Svg.dll"
                     ],
         "status":  "passed",
@@ -30,42 +30,42 @@
         "status":  "passed",
         "case":  "isolated-deployment",
         "exitCode":  0,
-        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\isolated-deployment.jsonl"
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-0c7d275f59e74f56846498b2a6f6acaf\\isolated-deployment.jsonl"
     },
     {
         "status":  "passed",
         "case":  "font-failure",
         "exitCode":  2,
-        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\font-failure.jsonl"
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-0c7d275f59e74f56846498b2a6f6acaf\\font-failure.jsonl"
     },
     {
         "status":  "passed",
         "case":  "qml-failure",
         "exitCode":  2,
-        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\qml-failure.jsonl"
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-0c7d275f59e74f56846498b2a6f6acaf\\qml-failure.jsonl"
     },
     {
         "status":  "passed",
         "case":  "scene-graph-policy",
         "exitCode":  2,
-        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\scene-graph-policy.jsonl"
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-0c7d275f59e74f56846498b2a6f6acaf\\scene-graph-policy.jsonl"
     },
     {
         "status":  "passed",
         "case":  "software-backend-refused",
         "exitCode":  2,
-        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\software-backend-refused.jsonl"
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-0c7d275f59e74f56846498b2a6f6acaf\\software-backend-refused.jsonl"
     },
     {
         "status":  "passed",
         "case":  "software-adapter-refused",
         "exitCode":  2,
-        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\software-adapter-refused.jsonl"
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-0c7d275f59e74f56846498b2a6f6acaf\\software-adapter-refused.jsonl"
     },
     {
         "status":  "passed",
         "case":  "renderer-override-refused",
         "exitCode":  2,
-        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-1e171dbd0926423ba21e7e5fb9eb037c\\renderer-override-refused.jsonl"
+        "report":  "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\startup-0c7d275f59e74f56846498b2a6f6acaf\\renderer-override-refused.jsonl"
     }
 ]

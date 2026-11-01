@@ -1,0 +1,22 @@
+﻿{
+    "finalizedOn":  "2026-11-02",
+    "schema":  1,
+    "files":  [
+                  {
+                      "path":  "out/clang-cl-ninja-x64/Release/neutronstar_host_runner.exe",
+                      "sha256":  "C923E88416392FEF463B9D6870393F8796309DB953E2E86562D157F9DB24C0B6",
+                      "bytes":  579072
+                  },
+                  {
+                      "path":  "out/clang-cl-ninja-x64/Release/neutronstar_embedded_runner.exe",
+                      "sha256":  "93224DC15088CA4ACB5B31BF3643DAE6E21162C099305A1EE111956A24F61635",
+                      "bytes":  788480
+                  },
+                  {
+                      "path":  "out/clang-cl-ninja-x64/Release/neutronstar_host.lib",
+                      "sha256":  "07A0EC1C339CB251FC1024FC9B09C536BAA9EB8B355D783FCD6A590CD9D55984",
+                      "bytes":  1749316
+                  }
+              ],
+    "note":  "Qt complete delivery is additionally covered by build-receipt.json; probe is test-only"
+}

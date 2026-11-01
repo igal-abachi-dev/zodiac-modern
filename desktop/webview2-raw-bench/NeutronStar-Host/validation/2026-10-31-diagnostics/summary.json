@@ -1,0 +1,22 @@
+﻿{
+    "startedOn":  "2026-10-31",
+    "comparativeBenchmarks":  "not run",
+    "physicalAcceptance":  "deferred by user",
+    "optionalNativeCapture":  "not accepted: foreground unavailable",
+    "schema":  1,
+    "host":  {
+                 "regressionCases":  23,
+                 "processFaultCases":  2,
+                 "lifecycleCases":  18,
+                 "remainingHelpers":  0,
+                 "policySuite":  "passed"
+             },
+    "finalizedOn":  "2026-11-02",
+    "qt":  {
+               "syntheticContrastWindow":  "passed",
+               "modelSuites":  2,
+               "normalWindow":  "passed",
+               "cleanVM":  "not run",
+               "startupRecords":  8
+           }
+}

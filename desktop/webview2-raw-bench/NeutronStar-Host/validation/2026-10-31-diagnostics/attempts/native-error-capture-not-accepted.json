@@ -1,0 +1,7 @@
+﻿{
+    "date":  "2026-11-02",
+    "status":  "not-captured",
+    "scope":  "optional native interactive failure-surface image",
+    "reason":  "Foreground check failed; desktop image was deliberately not captured",
+    "countedAsAccepted":  false
+}

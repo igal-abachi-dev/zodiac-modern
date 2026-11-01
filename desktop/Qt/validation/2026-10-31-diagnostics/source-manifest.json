@@ -1,0 +1,312 @@
+﻿{
+    "finalizedOn":  "2026-11-02",
+    "scope":  "candidate source/assets/docs and exact checker source; excludes caches/dependencies/validation outputs",
+    "schema":  1,
+    "files":  [
+                  {
+                      "path":  "DESKTOP-COMPARISON-PLAN.md",
+                      "sha256":  "A7A126F9816FEF303916D1A1FF02A2B2CB2DF985D6A87BBF2AB2C5DE5D76EF18",
+                      "bytes":  7304
+                  },
+                  {
+                      "path":  "DESKTOP-DIAGNOSTICS-2026-10-31.md",
+                      "sha256":  "DED76AD2A99E2F77EB598976A6406F92685CA3B4B9DB3D9409CE4E82455BCA09",
+                      "bytes":  6362
+                  },
+                  {
+                      "path":  "desktop-gui.md",
+                      "sha256":  "161709631BA97CBA592BC46AB5382B0C783E3A2AA8D576F08C6BA065FBDDAD75",
+                      "bytes":  204688
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/CandidateChecks.csproj",
+                      "sha256":  "457CC83F7B11699ED42B0F8080003B1EDF0F5D893CE38AFA5D8591447D73CCAC",
+                      "bytes":  593
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/global.json",
+                      "sha256":  "37014080B001EEDD3486CD6FFAA789626901F22C0434949318493D8462FC1ADA",
+                      "bytes":  55
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/NuGet.Config",
+                      "sha256":  "593813D027AE058C94C59138C6618D9B3526A825D91DB6E0E3BEC2C5D60C07FC",
+                      "bytes":  198
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/packages.lock.json",
+                      "sha256":  "E94C18692BE87047BFE13BC337572E47AA5B5B079C1A5B0DDF1D147A9CE4DD86",
+                      "bytes":  1183
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/Program.cs",
+                      "sha256":  "1814E6BB95F9BD2EBE9DE93811873AD4D2043DC894532A1B8CB83AF4143D695E",
+                      "bytes":  24044
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/README.md",
+                      "sha256":  "3309BAA89254EBF0C3CF3F93886D34C1A4E52215D1119BBEDD32C95E1347BA79",
+                      "bytes":  4259
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/Run.ps1",
+                      "sha256":  "155C7B788F5AF0C6C94F60F8AEB019865AFC5B131F0D9A5FC8953FBEABE83860",
+                      "bytes":  3022
+                  },
+                  {
+                      "path":  "host-test-support/measurement/Native.cs",
+                      "sha256":  "8CBD93BE78092850F103559C812E33719F7509488BF049C523EEC03E6CB779CC",
+                      "bytes":  9613
+                  },
+                  {
+                      "path":  "host-test-support/measurement/ProcessTree.cs",
+                      "sha256":  "0ECD0FA4E24D5F98E1FA863B5477C7E123245B4F261C43C682669D05349FFDEE",
+                      "bytes":  989
+                  },
+                  {
+                      "path":  "Qt/.clang-format",
+                      "sha256":  "F82D7C43A1792CC1F33224A0F3D34F2A5D911D15B5449CEBF5B8ACBD650A764B",
+                      "bytes":  91
+                  },
+                  {
+                      "path":  "Qt/.gitignore",
+                      "sha256":  "1559E28EEB9DE8D322A9F6AC2C78CD50007B65E689C7B2DD5CB7E2FB19812E3D",
+                      "bytes":  13
+                  },
+                  {
+                      "path":  "Qt/assets/Fonts/inter-latin-400-normal.ttf",
+                      "sha256":  "03693CC5689D8C89A20AE55FE945FE59884EEC8AD7D7DABB4761E066E88F49FF",
+                      "bytes":  66592
+                  },
+                  {
+                      "path":  "Qt/assets/Fonts/inter-latin-500-normal.ttf",
+                      "sha256":  "7E22ABFA3709EC2C67D18128ED3B7E522A8EFA602C7F46FB933BF71F5F8F2E3E",
+                      "bytes":  66692
+                  },
+                  {
+                      "path":  "Qt/assets/Fonts/inter-latin-600-normal.ttf",
+                      "sha256":  "DE8A61379F04664868958CC13D22CD9D1D79B4064E1EBD7C46588399F2A12FD5",
+                      "bytes":  66800
+                  },
+                  {
+                      "path":  "Qt/assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf",
+                      "sha256":  "4DF1FBFDE811AFBF4023ED6BFDE89CE9614C94775FA57DFDFC473575D5D076D0",
+                      "bytes":  17072
+                  },
+                  {
+                      "path":  "Qt/assets/Fonts/OFL-NotoSansHebrew.txt",
+                      "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+                      "bytes":  4380
+                  },
+                  {
+                      "path":  "Qt/assets/Fonts/provenance.json",
+                      "sha256":  "9DB6AA2FBA2D444EF17CA58130138EFF5AE6C232107351B363D862C227FBC899",
+                      "bytes":  1626
+                  },
+                  {
+                      "path":  "Qt/assets/Icons/arrow-down-to-line.svg",
+                      "sha256":  "8B692D916102083901B392C3F098B6F460604D5FAD4029FBE79D934E5C065892",
+                      "bytes":  374
+                  },
+                  {
+                      "path":  "Qt/assets/Icons/arrow-up-from-line.svg",
+                      "sha256":  "3A9B8037387DF9D552042E229AA9A16AE7326B52BF2A5AAB07450F3B539A404C",
+                      "bytes":  374
+                  },
+                  {
+                      "path":  "Qt/assets/Icons/info.svg",
+                      "sha256":  "BD039CBC60ABC0AF2D241232FA6FE76DA45C974A8928141B266B15435CA26E0C",
+                      "bytes":  369
+                  },
+                  {
+                      "path":  "Qt/assets/Icons/lock-keyhole.svg",
+                      "sha256":  "0D7D87CE30B53B2B26D03237D47011B447D4F4D49E4456F1E2EEFF2A410944D4",
+                      "bytes":  420
+                  },
+                  {
+                      "path":  "Qt/assets/Icons/orbit.svg",
+                      "sha256":  "90426BC45F068DD6576026B17E5723EEACBE25333D7587EBE79BD7A27F2B51BD",
+                      "bytes":  494
+                  },
+                  {
+                      "path":  "Qt/assets/Icons/shield-check.svg",
+                      "sha256":  "21B195F0BF7F6ED344D9327066C9E9DB6FD2E03AB8673C19907001D87B710E06",
+                      "bytes":  498
+                  },
+                  {
+                      "path":  "Qt/assets/Icons/unlock-keyhole.svg",
+                      "sha256":  "456E12DB802726BB969F996196EC71E89E3C1C00DF57C4843C3362CEF58A1E41",
+                      "bytes":  424
+                  },
+                  {
+                      "path":  "Qt/assets/Notices/Inter-OFL.txt",
+                      "sha256":  "3B0A5FCA3D17942CDE889069889DEDBBBD075E9B599968C82A95F4D944E9B345",
+                      "bytes":  4477
+                  },
+                  {
+                      "path":  "Qt/assets/Notices/Lucide-ISC.txt",
+                      "sha256":  "B495047BD93A9B06913511076F504DABA17D5BBEB3E0650F3BB53A4220329C57",
+                      "bytes":  3208
+                  },
+                  {
+                      "path":  "Qt/assets/Notices/OFL-NotoSansHebrew.txt",
+                      "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+                      "bytes":  4380
+                  },
+                  {
+                      "path":  "Qt/assets/Notices/Qt-GPL-3.0.txt",
+                      "sha256":  "8CEB4B9EE5ADEDDE47B31E975C1D90C73AD27B6B165A1DCD80C7C545EB65B903",
+                      "bytes":  35147
+                  },
+                  {
+                      "path":  "Qt/assets/Notices/Qt-LGPL-3.0.txt",
+                      "sha256":  "DA7EABB7BAFDF7D3AE5E9F223AA5BDC1EECE45AC569DC21B3B037520B4464768",
+                      "bytes":  7651
+                  },
+                  {
+                      "path":  "Qt/Build.ps1",
+                      "sha256":  "944D7539C828A8D50D9BFB8EBD9AB52FB8F997F69AE623A844F9AF8E07749066",
+                      "bytes":  2871
+                  },
+                  {
+                      "path":  "Qt/CMakeLists.txt",
+                      "sha256":  "523C671E56B8AC05208CB601AB51350D8D0AD8105C518F69532FC50F615948E5",
+                      "bytes":  2302
+                  },
+                  {
+                      "path":  "Qt/CMakePresets.json",
+                      "sha256":  "135C8795E9CFF71415D3FE450032FC7DA2ADCF6089F8F7E48F303FDCDE6838F7",
+                      "bytes":  739
+                  },
+                  {
+                      "path":  "Qt/Init.cmd",
+                      "sha256":  "08535D55BCB5428B35D97C0CFEB1F3985D468FC216BF2E5C9597A36F284695F9",
+                      "bytes":  105
+                  },
+                  {
+                      "path":  "Qt/README.md",
+                      "sha256":  "26EA33DF2BA63D3FF25C19C517402A4809FADAEC0A0EE99A83E6A40021D08FED",
+                      "bytes":  5694
+                  },
+                  {
+                      "path":  "Qt/Run.ps1",
+                      "sha256":  "0F868270DDACDF10BC5A699F0AF6505C03158BDAB1BF866B7185C59B9F1E2767",
+                      "bytes":  278
+                  },
+                  {
+                      "path":  "Qt/scripts/Acquire-Qt.py",
+                      "sha256":  "DC3F89AB23116C3D3E5BA91A2A24DEDCE8D53530FC0A0F653B21EC5D02B38B29",
+                      "bytes":  3414
+                  },
+                  {
+                      "path":  "Qt/scripts/New-CleanMachineCheck.ps1",
+                      "sha256":  "B3975F49DCBFDFAF82DB924C5EBC54561DAAC57ABD4E8FF98555E6E52B47341D",
+                      "bytes":  3073
+                  },
+                  {
+                      "path":  "Qt/scripts/Test-Accessibility.ps1",
+                      "sha256":  "525365396ADF28B6DD450FE910507E92A802C092F2AB194EA52D3649D482490A",
+                      "bytes":  1021
+                  },
+                  {
+                      "path":  "Qt/scripts/Test-Startup.ps1",
+                      "sha256":  "1AC09E226BA14B2BD85469B72E5409F3566473033CE5D1FCF8C9A450BA07BCCA",
+                      "bytes":  4344
+                  },
+                  {
+                      "path":  "Qt/scripts/Toolchain.ps1",
+                      "sha256":  "29AE6D78AFE487C9460404AA5F8C5545EA65A4DE4B0EBD3984F97BC4D48A43D7",
+                      "bytes":  1660
+                  },
+                  {
+                      "path":  "Qt/scripts/Write-Notices.py",
+                      "sha256":  "9363759B1AC6CD82A26595744346B1706727675E1D79FDFCE0A3DA57A48F5360",
+                      "bytes":  1237
+                  },
+                  {
+                      "path":  "Qt/src/controller.cpp",
+                      "sha256":  "40B9BB456190BA25DE16D4667B0CF4A75A8840F575095A7B31468AA0103423EE",
+                      "bytes":  5520
+                  },
+                  {
+                      "path":  "Qt/src/controller.hpp",
+                      "sha256":  "B96FD58A78145625309B65640596577AD0F8E84820D900B354EBDF1E337518EB",
+                      "bytes":  3747
+                  },
+                  {
+                      "path":  "Qt/src/domain.hpp",
+                      "sha256":  "ED09E0982735F27D5C7069BC2EF7474D5755472D4D1D4449B9A50FC920D3FAFA",
+                      "bytes":  2301
+                  },
+                  {
+                      "path":  "Qt/src/main.cpp",
+                      "sha256":  "CBC0CE0505798F24A529FEE43AFBE5AD0CB5ECFB9ABF8E0D32B014576BDB51A1",
+                      "bytes":  7730
+                  },
+                  {
+                      "path":  "Qt/src/startup.cpp",
+                      "sha256":  "96B816046266BDA7BAA5C4B4255ED2BE715665AA820167AD5A46246A6A640880",
+                      "bytes":  4489
+                  },
+                  {
+                      "path":  "Qt/src/startup.hpp",
+                      "sha256":  "916268B3DA900E840A94C03BF8A736ABB6D965B9497B92E848AA9115CDB44D7F",
+                      "bytes":  577
+                  },
+                  {
+                      "path":  "Qt/src/theme.cpp",
+                      "sha256":  "D030C59769F6C8C28E807D383F62277E975D066694454F1F6B43FB6CCA11DCEB",
+                      "bytes":  1825
+                  },
+                  {
+                      "path":  "Qt/src/theme.hpp",
+                      "sha256":  "B5A5386C5407376D73FAB2079A3F1B276419FB00919F865505B6420FA7026A81",
+                      "bytes":  1111
+                  },
+                  {
+                      "path":  "Qt/tests/domain_tests.cpp",
+                      "sha256":  "71268BDC001F7F71F2C2E19429C2EEF1B7DB2899484FB428450C678B692DEAF8",
+                      "bytes":  1422
+                  },
+                  {
+                      "path":  "Qt/tests/model_tests.cpp",
+                      "sha256":  "BC7730323FA45305D24A28C69728CE3611B8161165B4DBC6206B71D87F14D878",
+                      "bytes":  1807
+                  },
+                  {
+                      "path":  "Qt/ui/BenchButton.qml",
+                      "sha256":  "0747EB07368B7D8D75C9463BD557C5DA450FE3FE94FF399B061ECF6CD8161D07",
+                      "bytes":  999
+                  },
+                  {
+                      "path":  "Qt/ui/BenchLabel.qml",
+                      "sha256":  "DD3784D0001F3087C01A661A3DEEB7141B47FD502E7AF20A738CA7F139E69E25",
+                      "bytes":  237
+                  },
+                  {
+                      "path":  "Qt/ui/Card.qml",
+                      "sha256":  "8A1703652FD989414E01C31619382D11FCF54DC1A5A6ECCF5C8D4B9CC140842F",
+                      "bytes":  180
+                  },
+                  {
+                      "path":  "Qt/ui/Main.qml",
+                      "sha256":  "43F0F3394EC77DBFCD67788C587E4D01CA9DFD190A7BC382407F090D930BF5BE",
+                      "bytes":  5567
+                  },
+                  {
+                      "path":  "Qt/ui/Operation.qml",
+                      "sha256":  "3E312E0339015E7D068660E3A1DF5C222B1DB38B16FD41126D56A9A5FE46AE6A",
+                      "bytes":  1644
+                  },
+                  {
+                      "path":  "Qt/ui/Workbench.qml",
+                      "sha256":  "F49ACAE4A95AD4861B0EA5F2D08A75CB3D05EB92C727AA27D8B069F017408292",
+                      "bytes":  3019
+                  },
+                  {
+                      "path":  "Qt/VALIDATION.md",
+                      "sha256":  "13B271F18E5DCBB5080C9657B7D1AF41A21D64DFBA41CB94BC0583093815D56E",
+                      "bytes":  5517
+                  }
+              ]
+}

@@ -1,0 +1,337 @@
+﻿{
+    "finalizedOn":  "2026-11-02",
+    "scope":  "candidate source/assets/docs and exact checker source; excludes caches/dependencies/validation outputs",
+    "schema":  1,
+    "files":  [
+                  {
+                      "path":  "DESKTOP-COMPARISON-PLAN.md",
+                      "sha256":  "A7A126F9816FEF303916D1A1FF02A2B2CB2DF985D6A87BBF2AB2C5DE5D76EF18",
+                      "bytes":  7304
+                  },
+                  {
+                      "path":  "DESKTOP-DIAGNOSTICS-2026-10-31.md",
+                      "sha256":  "DED76AD2A99E2F77EB598976A6406F92685CA3B4B9DB3D9409CE4E82455BCA09",
+                      "bytes":  6362
+                  },
+                  {
+                      "path":  "desktop-gui.md",
+                      "sha256":  "161709631BA97CBA592BC46AB5382B0C783E3A2AA8D576F08C6BA065FBDDAD75",
+                      "bytes":  204688
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/CandidateChecks.csproj",
+                      "sha256":  "457CC83F7B11699ED42B0F8080003B1EDF0F5D893CE38AFA5D8591447D73CCAC",
+                      "bytes":  593
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/global.json",
+                      "sha256":  "37014080B001EEDD3486CD6FFAA789626901F22C0434949318493D8462FC1ADA",
+                      "bytes":  55
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/NuGet.Config",
+                      "sha256":  "593813D027AE058C94C59138C6618D9B3526A825D91DB6E0E3BEC2C5D60C07FC",
+                      "bytes":  198
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/packages.lock.json",
+                      "sha256":  "E94C18692BE87047BFE13BC337572E47AA5B5B079C1A5B0DDF1D147A9CE4DD86",
+                      "bytes":  1183
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/Program.cs",
+                      "sha256":  "1814E6BB95F9BD2EBE9DE93811873AD4D2043DC894532A1B8CB83AF4143D695E",
+                      "bytes":  24044
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/README.md",
+                      "sha256":  "3309BAA89254EBF0C3CF3F93886D34C1A4E52215D1119BBEDD32C95E1347BA79",
+                      "bytes":  4259
+                  },
+                  {
+                      "path":  "host-test-support/candidate-checks/Run.ps1",
+                      "sha256":  "155C7B788F5AF0C6C94F60F8AEB019865AFC5B131F0D9A5FC8953FBEABE83860",
+                      "bytes":  3022
+                  },
+                  {
+                      "path":  "host-test-support/measurement/Native.cs",
+                      "sha256":  "8CBD93BE78092850F103559C812E33719F7509488BF049C523EEC03E6CB779CC",
+                      "bytes":  9613
+                  },
+                  {
+                      "path":  "host-test-support/measurement/ProcessTree.cs",
+                      "sha256":  "0ECD0FA4E24D5F98E1FA863B5477C7E123245B4F261C43C682669D05349FFDEE",
+                      "bytes":  989
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/.gitignore",
+                      "sha256":  "036FF5B8E13CED7AA950DE1EFF35C1C26F545D0A5B9529B8440E9E0A651D6258",
+                      "bytes":  50
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/CMakeLists.txt",
+                      "sha256":  "C5B89716BD661374356ABCAB67C22FC663A14FF6BC26B458AB584A80AD72C6DF",
+                      "bytes":  5304
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/CMakePresets.json",
+                      "sha256":  "1DCE130C2CDB33C3DFC46B725AE0D418FCD6F56CAF576C6A1D553000BCC5583A",
+                      "bytes":  2789
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/dependencies.lock.json",
+                      "sha256":  "F13795332EBE0CBDC77E26AA5E94F2D8CF29881DD93B215FDC4AE55E6B3E843E",
+                      "bytes":  395
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/examples/app.manifest",
+                      "sha256":  "86772C53F1549790F95F98789F6D4BC16585D12E3F36E07ADE815E507AEFE346",
+                      "bytes":  933
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/examples/app.rc",
+                      "sha256":  "251FF8B33F6066AF7F5FFCFB0FB333E037A8A1D874BF059428A2364703D15571",
+                      "bytes":  50
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/examples/runner.cpp",
+                      "sha256":  "C396879A3A2AC7848713F60BC8863A7209B7C5EDD9EF22059D4644BF9657805C",
+                      "bytes":  16466
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/FRONTEND-CHECKLIST.md",
+                      "sha256":  "3D1F1BB714A5AA865A5B038100C66CFB89910B84446E2DC453B7D56DC9A34784",
+                      "bytes":  11178
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/FRONTEND-IMPLEMENTATION-PLAN.md",
+                      "sha256":  "BFC836B13263E2D6BC08A6881DF00416E78F941294EE01EFB0E9831655D32157",
+                      "bytes":  27626
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/include/neutronstar/host_window.hpp",
+                      "sha256":  "6A48480D056F85B07A26EE86A51EB8B413589A504F86695540C7788A07708F1D",
+                      "bytes":  5432
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/MEMORY-NOTES.md",
+                      "sha256":  "9F745F43A17029AF95FCFE4901CB15D7CBB6AD009A832279F26D6C2435B82A8C",
+                      "bytes":  9922
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/README.md",
+                      "sha256":  "C33E0FECFC6DC5C95F9D34D51EC99CE8A64414EF78D6F1EA71426D27463F7A99",
+                      "bytes":  37738
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/ROUTING.md",
+                      "sha256":  "84D20A5BC828D140F6DFBFBE549E2ADB724C2ADE437DE72864A39F61AADD3939",
+                      "bytes":  11169
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/Run.ps1",
+                      "sha256":  "7A4F5130D01FAFA2A8A9E33C2D12C0AB9D07212928E05B9FBDA281E567D4DB89",
+                      "bytes":  1266
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/scripts/Build.ps1",
+                      "sha256":  "0CF995B097B1ED33FFA0210C9297EC8B736D7549169883B820E350EB3308E490",
+                      "bytes":  4216
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/scripts/probe_startup.py",
+                      "sha256":  "F1ECAFBBBD9A5CC1B652677AE42E09BD979D477658BE1F718BCD074D25AC554C",
+                      "bytes":  5095
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/scripts/probe_visuals.py",
+                      "sha256":  "C74C7328FB6014FFE08028AFCE5F46210B3740D820961D9AB4B4CED14A4AF86F",
+                      "bytes":  2329
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/scripts/Restore-Dependencies.ps1",
+                      "sha256":  "CFC3830A7E9583B2B06F8B39BA9747B1436AA910B981E02B6B62618C4872BC22",
+                      "bytes":  2531
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/scripts/Test-Failures.ps1",
+                      "sha256":  "2DA5F1EB812087176B23AD5D2C21E9CB7D7837F50912090D9DAFBCD585C2A036",
+                      "bytes":  4570
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/scripts/Test-Host.ps1",
+                      "sha256":  "17C2884438D5BB0EE7B44D34608D254AE2A38B28E7A7EFD08210149DEAD4E126",
+                      "bytes":  4229
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/scripts/Test-Lifecycle.ps1",
+                      "sha256":  "3DCB293FABE7F6BC03C7A626B97590F51A47E2847A349738DDFD7C15093AB42C",
+                      "bytes":  2762
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/scripts/Test-Toolchains.ps1",
+                      "sha256":  "AEDC661A06E0D01A464D2C2860DD07985FA0C6E3FB2CE89C573DA6082AFFC5A5",
+                      "bytes":  7640
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/src/asset_policy.cpp",
+                      "sha256":  "F825D333913CFCB1FA7200DFC3704E9D9E4A4109944EE2E58DCE488AE9B747B9",
+                      "bytes":  6503
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/src/asset_policy.hpp",
+                      "sha256":  "2FAD3A34F102A2DCC845F1F1BCEF402315A1CFBE4BC46BE745B22204AB450D90",
+                      "bytes":  1337
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/src/failure_policy.hpp",
+                      "sha256":  "6B90934D227930CD77E7D559726E5C5092BF712E5D89F1CBA33E9F6294931F7E",
+                      "bytes":  1736
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/src/host_window.cpp",
+                      "sha256":  "CAD9849C8FFA67E04EA7CB5E99FC6EF1A55E977C0EB0FFB4557C777EEB7F8875",
+                      "bytes":  43276
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/src/test_greet_protocol.cpp",
+                      "sha256":  "0B61F9BE966137BC536E03C1788360B42C1A30F3B0E028FF24BDAA6400C89F3E",
+                      "bytes":  2987
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/src/test_greet_protocol.hpp",
+                      "sha256":  "0465F0D927E3F579AE21C8E192BBB47B60E34A54AC6254FB4127740424FA3440",
+                      "bytes":  794
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/src/window_protocol.hpp",
+                      "sha256":  "48B1F92043902C9E1581F864F47C206DB0B220F5564D1EC6050E39BD9A9BC8CD",
+                      "bytes":  582
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/STARTUP-AND-LIFECYCLE.md",
+                      "sha256":  "CEE5211ADA609AB58DB01A7589440CD786178836A45D0B47FF0A0FDFB13F943D",
+                      "bytes":  11036
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/STATE-MANAGEMENT.md",
+                      "sha256":  "E835D395B8792128CD4F8C23CD0991DD13620124E4FE616A561B6A36D4F9FD1C",
+                      "bytes":  15481
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/STYLING.md",
+                      "sha256":  "5388C22773AC7757040CFF61DC0E508ACF400EB3DF83E8B2F0BF1165526D2C5F",
+                      "bytes":  8644
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/SVELTE5-QUICKSTART.md",
+                      "sha256":  "84FEFA19DAA865A67569E5E942F3EA6223430A62EF772451D00057CE69C0A7CD",
+                      "bytes":  4201
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/TEMPLATE-COMPATIBILITY.md",
+                      "sha256":  "325EAA6714583694C5F1FAD75B6AC8F86B596A19320D0AF8AC057C18987F8B53",
+                      "bytes":  6910
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/bridge.html",
+                      "sha256":  "FAC0642551A78FE2777B849958B5E0AE6889D91AEE75D8B5B4FF74482803B624",
+                      "bytes":  237
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/bridge.mjs",
+                      "sha256":  "835B252943E4790FE394FC79F05DEAE158548700CF7C049AAE4B8E2F385EA93E",
+                      "bytes":  1499
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/failure.html",
+                      "sha256":  "EFD53E0F7922FFADC37D39EA3C9E4494B1A8D830C6DAC97263ED1CEE5C6B6143",
+                      "bytes":  242
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/failure.mjs",
+                      "sha256":  "8E17FABF3FA18D55B4021C3E44585C6C961447710243E300E7D2E32854BF28B5",
+                      "bytes":  68
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/fragment.html",
+                      "sha256":  "1B514F29D791F229E333B70810674F60EFCCC365E996E5373E5C0CAB283C1AC0",
+                      "bytes":  66
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/index.html",
+                      "sha256":  "3B937CF992B42D0FDFEEFA654F0CA31720803B0703AC0037FDDD31C4EF56A96D",
+                      "bytes":  462
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/module.mjs",
+                      "sha256":  "23CB7260488559931614F3E61F22C84D7C810838E70D4FDF3E1832EC2E8451CC",
+                      "bytes":  46
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/routing.html",
+                      "sha256":  "F50FA7BF12330F3C9BAF5B3B96A1E57D53256797366BE156EBF10177D6DB69AE",
+                      "bytes":  464
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/routing.mjs",
+                      "sha256":  "D3C3A24108C7D30D1E07BFC169F83E81FD3408DB9E6BF7C956995800DE79BB53",
+                      "bytes":  2943
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/smoke.css",
+                      "sha256":  "9B6CC2D86425669BDF138D825D91FA28ED3590F6273F9EAA693F1F5D71CCFADA",
+                      "bytes":  98
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/smoke.mjs",
+                      "sha256":  "7FAACF0D7245F383B923E223324054DE68C74BCCB7033FB0F3EAFB9D87F2006F",
+                      "bytes":  1742
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/window.css",
+                      "sha256":  "C231FDAB0A5AC1B780A2B60B76B3916961D3AF91D6072C076617853F8B39D65E",
+                      "bytes":  801
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/window.html",
+                      "sha256":  "076C3B2724D46B38F71B33DA5F7F5D16116999136A83519BFC4B3BBB9DC78BDF",
+                      "bytes":  961
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/window.mjs",
+                      "sha256":  "81CA77C4950C7E5F37CCE76656C0D5FC14C9CBCA22B2CC3FD36782931701D5F1",
+                      "bytes":  209
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/window-smoke.html",
+                      "sha256":  "FE37781AC77A4BE5798C57D764CE686130D5798799FA125B31BC32CCA1F964BB",
+                      "bytes":  346
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/fixtures/smoke/window-smoke.mjs",
+                      "sha256":  "DEF93ECEEFF53CFDDE6729BDB8A8D94DAAE11D23222357AA44F8C38E4BBA8D06",
+                      "bytes":  1075
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/tests/policy_tests.cpp",
+                      "sha256":  "4200F077A314A2FC83F00704EF6F75B532CF5720A0B96C1606210567426931FF",
+                      "bytes":  8464
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/TOOLCHAIN.md",
+                      "sha256":  "AA327B4251118721B010C00A1A3338D2DF6CA81568107549122044292DFB78D6",
+                      "bytes":  32867
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/UI-DESIGN.md",
+                      "sha256":  "A5444D1FD69C7B0D735133BBB479C974E0185B369C481613F9B1410D32F50A8C",
+                      "bytes":  24801
+                  },
+                  {
+                      "path":  "webview2-raw-bench/NeutronStar-Host/VALIDATION.md",
+                      "sha256":  "8F02D682F9BB1CBBA6E4270AACFF40B9F4EFDC78426FA94806BE54E5F1B8B315",
+                      "bytes":  24215
+                  }
+              ]
+}

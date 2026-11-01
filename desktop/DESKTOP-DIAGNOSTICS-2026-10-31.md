@@ -1,13 +1,17 @@
 # Qt and NeutronStar host follow-up
 
+Started 2026-10-31; evidence finalized 2026-11-02. Current evidence:
+[Qt](Qt/validation/2026-10-31-diagnostics/summary.json) and
+[C++ host](webview2-raw-bench/NeutronStar-Host/validation/2026-10-31-diagnostics/summary.json).
+
 The code and automated portions of the eight follow-ups are implemented; physical
 acceptance remains explicitly open below. Source/runtime changes require
 new correctness evidence; the older performance cohorts remain historical and
 are not reinterpreted using the new executables. No comparative benchmark was run.
 
 The user explicitly deferred the physical/clean-machine acceptance checks on
-2026-10-31. They remain incomplete; no additional confirmation is needed to
-resume them later when the required environment/listener is available.
+2026-10-31. They remain incomplete and can resume at the later validation stage
+when the required environment/listener is available.
 
 | Item | Implemented | Acceptance scope |
 | --- | --- | --- |

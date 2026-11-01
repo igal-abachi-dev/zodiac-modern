@@ -1,0 +1,14 @@
+﻿{
+    "scope":  "direct function tests with a live FileStream writer",
+    "status":  "passed",
+    "readers":  [
+                    "Qt/scripts/Test-Startup.ps1",
+                    "webview2-raw-bench/NeutronStar-Host/scripts/Test-Failures.ps1"
+                ],
+    "checks":  [
+                   "concurrent writer sharing",
+                   "partial line deferred",
+                   "incomplete final line rejected",
+                   "malformed committed JSON rejected"
+               ]
+}

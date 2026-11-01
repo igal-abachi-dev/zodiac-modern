@@ -2,6 +2,11 @@
 
 ## Latest diagnostics follow-up — 2026-10-31
 
+Evidence finalized 2026-11-02. An optional native-error image capture was not
+accepted because foreground ownership could not be established; no desktop
+image was taken. The retained attempt is separate from the passing functional
+regression/failure/lifecycle suites and is not presentation/AT acceptance.
+
 See [validation/2026-10-31-diagnostics](validation/2026-10-31-diagnostics) and the
 [eight-item follow-up](../../DESKTOP-DIAGNOSTICS-2026-10-31.md). This is fresh
 correctness evidence for changed source/default Release artifacts, not a rerun
