@@ -16,7 +16,8 @@ try {
  if($LASTEXITCODE){throw 'RNW model tests failed.'}
  New-Item -ItemType Directory -Force windows/NeutronStar/Bundle|Out-Null
  $arguments=@('windows/NeutronStar/NeutronStar.vcxproj','/m:2','/p:Configuration=Release','/p:Platform=x64','/p:WindowsTargetPlatformVersion=10.0.26100.0',"/p:SolutionDir=$PSScriptRoot\windows\","/p:SolutionPath=$PSScriptRoot\windows\NeutronStar.sln",'/p:AppxPackage=false','/p:Bundle=true','/p:WindowsAppSDKSelfContained=true','/p:WindowsPackageType=None',"/p:OutDir=$PSScriptRoot\out\win-x64\",'/verbosity:minimal')
- if($Restore){$arguments+=@('/restore','/p:RestoreLockedMode=false')}else{$arguments+='/p:RestoreLockedMode=true'}
+ $arguments+='/p:RestoreLockedMode=true'
+ if($Restore){$arguments+='/restore'}
  & $msbuild @arguments
  if($LASTEXITCODE){throw 'RNW native build failed.'}
  Copy-Item windows/NeutronStar/Bundle out/win-x64 -Recurse -Force

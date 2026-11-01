@@ -1,6 +1,6 @@
 # Independent desktop implementations
 
-Updated 2026-10-31. This stage builds and checks applications before running a
+Updated 2026-11-02. This stage builds and checks applications before running a
 new cross-toolkit benchmark. The old six-host WebView2 measurements remain a
 separate frozen experiment. Tauri + Svelte is the selected WebView2 representative.
 
@@ -20,6 +20,8 @@ performance cohort was run as part of that work.
 | `Flutter` | Flutter stable 3.47.8, Dart 3.13.7, flutter_svg 2.3.0 | Independent AOT Dart UI/controllers, stock Material 3, local fonts/SVGs, standard C++ Win32 runner |
 | `Qt` | Qt 6.12.0 Quick/QML, C++20, clang-cl 22.1.3, Ninja, Microsoft linker | Independent typed C++ model/controller, standard Basic controls with local styling, Qt Quick RHI D3D11, dynamic Qt/CRT |
 | `slint-rust` | Slint 1.18.1, Rust 1.99.1, Winit/Skia, AccessKit | Independent Rust models/timers and compiled Slint UI, standard Fluent widgets, embedded local assets |
+| `react-native-windows` | RNW 0.85.0, React Native 0.85.3, React 19.2.3, Hermes, MSVC v145 | Independent TSX/reducer UI, Fabric/Windows Composition, unpackaged Win32, bundled optimized Hermes bytecode; system Segoe UI limitation |
+| `wxWidgets` | wxWidgets stable 3.2.12, C++20, clang-cl/Ninja/Microsoft linker | Independent C++ models, standard wxMSW native controls, normal non-virtual wxListCtrl, static wx/CRT and local fonts/SVGs |
 
 All implement the [reference feature inventory](Tauri-v2-Svelte5/FEATURE-PARITY.md),
 including the complete workbench. Share design/fixture specifications and external
@@ -28,6 +30,23 @@ Use local equivalent fonts/icons. Report native text/control differences and
 font container formats (TTF versus WOFF2). The Electron renderer intentionally
 uses runes instead of copying Tauri's Nano Stores model: results compare practical
 whole stacks, not an isolated graphics-engine or language effect.
+
+The [RNW candidate](react-native-windows/README.md) explicitly uses system Segoe UI:
+its pinned Fabric release does not load custom local TTF collections in this
+text path. Its Lucide icons are local rasterizations of the same SVGs. Establish
+a common-font lane or disclose this visual/font difference before comparative
+measurement. It is not a WebView2 client and its React UI uses no HTML or CSS.
+The [wxWidgets candidate](wxWidgets/README.md) stores all native list items eagerly
+without owner-data/virtual mode; structural changes rebuild native items and
+value updates change touched text. Native clipping/control identity differs from
+the reference's keyed DOM rows. These are whole-stack implementation differences.
+
+RNW/wx implementation and correctness evidence is recorded separately in their
+`VALIDATION.md` files. This addition runs no comparative timing/memory cohort;
+the existing WebView2 results remain unchanged. Backlog before measurement:
+normalize/disclose fonts and control differences, freeze the final folders,
+calibrate native UIA/presentation endpoints, and retain the user-deferred physical
+AT/IME/OS contrast/multi-monitor/clean-machine gates.
 
 ## Before measuring
 

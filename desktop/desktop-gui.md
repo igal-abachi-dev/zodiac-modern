@@ -1967,3 +1967,37 @@ synthetic contrast palette/UIA report is **not** spoken screen-reader, OS contra
 or IME acceptance. This machine has no Windows Sandbox and only one monitor.
 A clean-machine test generator and physical checklist are provided; these gates
 stay open. Historical measurements and the Tauri/Svelte selection are unchanged.
+
+### 13.23 React Native Windows and wxWidgets candidates (2026-11-02)
+
+Two additional independent implementations now target the complete Tauri/Svelte
+main screen and list/filter workbench. See the [candidate comparison plan](DESKTOP-COMPARISON-PLAN.md)
+and each candidate's validation record for acceptance evidence; no new comparative
+performance cohort is implied.
+
+- [React Native Windows](react-native-windows/README.md): RNW 0.85.0, React Native
+  0.85.3, React 19.2.3, Fabric/Windows Composition, Hermes, standard free native
+  primitives and a C++ Win32/Windows App SDK shell. Release embeds an optimized
+  local Hermes bytecode bundle plus local icons, with no Metro server. It does
+  not render HTML, use WebView2 or require a UWP/Store application. WinRT is also
+  an ABI/API technology used by ordinary desktop apps; using it does not make an
+  application UWP. Do not describe every Fabric primitive as a WinUI XAML control.
+- [wxWidgets](wxWidgets/README.md): stable 3.2.12, C++20, clang-cl/Ninja/Microsoft
+  linker and static wx/CRT. Standard wxMSW buttons, edits, gauge, modal dialog and
+  normal eager list control use Windows native rendering, not a bundled browser
+  or a Skia canvas. It owns its models/timers and process-private local fonts.
+
+Two parity details matter. RNW's pinned text implementation passes a null custom
+font collection to DirectWrite, selecting system fonts; it explicitly uses Segoe UI
+instead of claiming local Inter/Noto support. Its icons are local PNG derivatives
+of the same Lucide SVGs. Normalize typography in a separate lane or disclose this
+difference before comparing performance. wxWidgets stores every list item without
+owner-data/virtual mode, but rebuilds native item peers for structural/filter
+changes and updates only changed text for value updates. This avoids 10,000 HWNDs;
+it is a whole-stack implementation, not an isolated keyed-DOM renderer test.
+
+Both examples exercise bounded synthetic UI actions only. Neither adds Go CLI
+integration, cryptography, native secret handling or an updater. Actual-window
+correctness does not close the deferred physical accessibility/IME/contrast/DPI
+and clean-machine checks. Tauri + Svelte remains the selected WebView2 product
+stack; these additional native candidates do not change that decision.

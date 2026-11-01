@@ -146,4 +146,9 @@
     <Error Condition="!Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Composition.CppApp.props')" Text="$([System.String]::Format('$(ErrorText)', '$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Composition.CppApp.props'))" />
     <Error Condition="!Exists('$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Composition.CppApp.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(ReactNativeWindowsDir)\PropertySheets\External\Microsoft.ReactNative.Composition.CppApp.targets'))" />
   </Target>
+  <!-- Fail closed if Metro fails; never compile or publish a stale HBC bundle. -->
+  <Target Name="MakeBundle" BeforeTargets="PrepareForBuild" Condition="'$(UseBundle)' == 'true'">
+    <MakeDir Directories="$(BundleContentRoot);$(BundleSourceMapDir)" />
+    <Exec Command="$(BundleCliCommand) --platform windows --entry-file &quot;$(BundleEntryFile)&quot; --bundle-output &quot;$(BundleOutputFile)&quot; --assets-dest &quot;$(BundleContentRoot)&quot; --dev false --reset-cache --sourcemap-output &quot;$(PackagerSourceMap)&quot; $(BundlerExtraArgs)" WorkingDirectory="$(BundleCommandWorkingDir)" Timeout="$(BundleCommandTimeoutMs)" />
+  </Target>
 </Project>

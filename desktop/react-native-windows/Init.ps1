@@ -8,7 +8,7 @@ try {
  $env:DOTNET_CLI_TELEMETRY_OPTOUT='1'
  & npm.cmd ci --ignore-scripts --cache ../.cache/npm --no-audit --no-fund
  if($LASTEXITCODE){throw 'Locked npm restore failed.'}
- & dotnet restore tools/Tools.csproj --configfile NuGet.config -p:NuGetAudit=false
+ & dotnet tool restore --tool-manifest .config/dotnet-tools.json --configfile NuGet.config
  if($LASTEXITCODE){throw 'RNW PowerShell tool restore failed.'}
  & ./Build.ps1 -Restore
 } finally {Pop-Location}

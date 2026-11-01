@@ -1,0 +1,104 @@
+﻿{
+    "compiler":  "clang version 22.1.3 (https://github.com/llvm/llvm-project e9846648fd6183ee6d8cbdb4502213fcf902a211)",
+    "renderer":  "wxMSW native Win32 controls",
+    "files":  [
+                  {
+                      "path":  "neutronstar_wx.exe",
+                      "sha256":  "000356F1B97489A58F69C043C4DAF8D928BE12AABFE60D371A73F3BC15BFB828",
+                      "bytes":  6080512
+                  },
+                  {
+                      "path":  "assets\\Fonts\\inter-latin-400-normal.ttf",
+                      "sha256":  "03693CC5689D8C89A20AE55FE945FE59884EEC8AD7D7DABB4761E066E88F49FF",
+                      "bytes":  66592
+                  },
+                  {
+                      "path":  "assets\\Fonts\\inter-latin-500-normal.ttf",
+                      "sha256":  "7E22ABFA3709EC2C67D18128ED3B7E522A8EFA602C7F46FB933BF71F5F8F2E3E",
+                      "bytes":  66692
+                  },
+                  {
+                      "path":  "assets\\Fonts\\inter-latin-600-normal.ttf",
+                      "sha256":  "DE8A61379F04664868958CC13D22CD9D1D79B4064E1EBD7C46588399F2A12FD5",
+                      "bytes":  66800
+                  },
+                  {
+                      "path":  "assets\\Fonts\\Inter-OFL.txt",
+                      "sha256":  "3B0A5FCA3D17942CDE889069889DEDBBBD075E9B599968C82A95F4D944E9B345",
+                      "bytes":  4477
+                  },
+                  {
+                      "path":  "assets\\Fonts\\noto-sans-hebrew-hebrew-400-normal.ttf",
+                      "sha256":  "4DF1FBFDE811AFBF4023ED6BFDE89CE9614C94775FA57DFDFC473575D5D076D0",
+                      "bytes":  17072
+                  },
+                  {
+                      "path":  "assets\\Fonts\\OFL-NotoSansHebrew.txt",
+                      "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+                      "bytes":  4380
+                  },
+                  {
+                      "path":  "assets\\Fonts\\provenance.json",
+                      "sha256":  "9DB6AA2FBA2D444EF17CA58130138EFF5AE6C232107351B363D862C227FBC899",
+                      "bytes":  1626
+                  },
+                  {
+                      "path":  "assets\\Icons\\arrow-down-to-line.svg",
+                      "sha256":  "8B692D916102083901B392C3F098B6F460604D5FAD4029FBE79D934E5C065892",
+                      "bytes":  374
+                  },
+                  {
+                      "path":  "assets\\Icons\\arrow-up-from-line.svg",
+                      "sha256":  "3A9B8037387DF9D552042E229AA9A16AE7326B52BF2A5AAB07450F3B539A404C",
+                      "bytes":  374
+                  },
+                  {
+                      "path":  "assets\\Icons\\info.svg",
+                      "sha256":  "BD039CBC60ABC0AF2D241232FA6FE76DA45C974A8928141B266B15435CA26E0C",
+                      "bytes":  369
+                  },
+                  {
+                      "path":  "assets\\Icons\\lock-keyhole.svg",
+                      "sha256":  "0D7D87CE30B53B2B26D03237D47011B447D4F4D49E4456F1E2EEFF2A410944D4",
+                      "bytes":  420
+                  },
+                  {
+                      "path":  "assets\\Icons\\Lucide-ISC.txt",
+                      "sha256":  "B495047BD93A9B06913511076F504DABA17D5BBEB3E0650F3BB53A4220329C57",
+                      "bytes":  3208
+                  },
+                  {
+                      "path":  "assets\\Icons\\orbit.svg",
+                      "sha256":  "90426BC45F068DD6576026B17E5723EEACBE25333D7587EBE79BD7A27F2B51BD",
+                      "bytes":  494
+                  },
+                  {
+                      "path":  "assets\\Icons\\shield-check.svg",
+                      "sha256":  "21B195F0BF7F6ED344D9327066C9E9DB6FD2E03AB8673C19907001D87B710E06",
+                      "bytes":  498
+                  },
+                  {
+                      "path":  "assets\\Icons\\unlock-keyhole.svg",
+                      "sha256":  "456E12DB802726BB969F996196EC71E89E3C1C00DF57C4843C3362CEF58A1E41",
+                      "bytes":  424
+                  },
+                  {
+                      "path":  "Notices\\licence.txt",
+                      "sha256":  "7132837C2AF55BD7CE8BFC72EF837E0CAAFEE6B1E5EEFB9CECDEE713C29F57CC",
+                      "bytes":  2386
+                  },
+                  {
+                      "path":  "Notices\\licendoc.txt",
+                      "sha256":  "7C6ED4BDF7FB075505E7E246D24AA96ADB43BB37255996535F490C1711D4BA89",
+                      "bytes":  3331
+                  },
+                  {
+                      "path":  "Notices\\OFL-NotoSansHebrew.txt",
+                      "sha256":  "7387750A626D005E86ADC8B9321567F001FC2F6EF5C8F275261C454FE86981D4",
+                      "bytes":  4380
+                  }
+              ],
+    "linker":  "Microsoft link.exe",
+    "crt":  "static /MT",
+    "wx":  "3.2.12"
+}

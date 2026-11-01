@@ -1,4 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup><TargetFramework>net10.0</TargetFramework><RestoreProjectStyle>DotnetToolReference</RestoreProjectStyle><RestorePackagesPath>../../.cache/rnw-nuget</RestorePackagesPath></PropertyGroup>
-  <ItemGroup><PackageReference Include="PowerShell" Version="7.6.1" /></ItemGroup>
-</Project>

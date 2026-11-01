@@ -59,3 +59,17 @@ Read retries, stabilization waits, screenshots and UIA observation overhead are
 not unbiased render/script timings. Physical screen reader/IME/contrast/DPI,
 GPU/power and broader lifecycle acceptance remain separate. The older frozen
 six-host collectors/results have not been replaced by this new checker.
+# React Native Windows and wxWidgets additions (2026-11-02)
+
+`-Candidate ReactNative` and `-Candidate Wx` exercise their independent Release
+apps. RNW uses testID/public accessibility properties, with separated modifier-key
+delivery for its native edit control. Stop exposes the public HelpText lifecycle
+endpoint; the checker waits for stopped state before checking tick stability.
+wxMSW uses actual native control IDs (6000 workbench, 6001 list, 6002 summary)
+and its owned native About dialog. Direct-child queries avoid traversing 10,000
+row peers to find sibling controls. These are external UIA/real-input adaptations,
+not hidden application test hooks. Incidental input-to-UIA timings remain
+correctness observations, not a comparative benchmark.
+
+Failure screenshots are now skipped when another process owns the foreground.
+Run one candidate at a time and leave the desktop undisturbed.
