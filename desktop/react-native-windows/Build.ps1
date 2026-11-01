@@ -1,4 +1,4 @@
-[CmdletBinding()]param([switch]$Restore,[switch]$SkipBundle)
+[CmdletBinding()]param([switch]$Restore)
 $ErrorActionPreference='Stop'
 Push-Location $PSScriptRoot
 try {
@@ -15,13 +15,20 @@ try {
  & node --experimental-strip-types --test tests/domain.test.ts
  if($LASTEXITCODE){throw 'RNW model tests failed.'}
  New-Item -ItemType Directory -Force windows/NeutronStar/Bundle|Out-Null
- if(-not $SkipBundle){
-  & node node_modules/react-native/cli.js bundle --platform windows --dev false --entry-file index.js --bundle-output windows/NeutronStar/Bundle/index.windows.bundle --assets-dest windows/NeutronStar/Bundle --max-workers 2
-  if($LASTEXITCODE){throw 'Production JS bundle failed.'}
- }
  $arguments=@('windows/NeutronStar/NeutronStar.vcxproj','/m:2','/p:Configuration=Release','/p:Platform=x64','/p:WindowsTargetPlatformVersion=10.0.26100.0',"/p:SolutionDir=$PSScriptRoot\windows\","/p:SolutionPath=$PSScriptRoot\windows\NeutronStar.sln",'/p:AppxPackage=false','/p:Bundle=true','/p:WindowsAppSDKSelfContained=true','/p:WindowsPackageType=None',"/p:OutDir=$PSScriptRoot\out\win-x64\",'/verbosity:minimal')
  if($Restore){$arguments+=@('/restore','/p:RestoreLockedMode=false')}else{$arguments+='/p:RestoreLockedMode=true'}
  & $msbuild @arguments
  if($LASTEXITCODE){throw 'RNW native build failed.'}
  Copy-Item windows/NeutronStar/Bundle out/win-x64 -Recurse -Force
+ $redist=Get-ChildItem (Join-Path $vs 'VC/Redist/MSVC') -Directory|Where-Object {$_.Name -match '^14\.\d+\.\d+$'}|Sort-Object {[version]$_.Name} -Descending|Select-Object -First 1
+ $crt=Get-ChildItem (Join-Path $redist.FullName 'x64/Microsoft.VC*.CRT') -Directory|Select-Object -First 1
+ Copy-Item (Join-Path $crt.FullName '*.dll') out/win-x64 -Force
+ New-Item -ItemType Directory -Force out/win-x64/Notices|Out-Null
+ Copy-Item assets/notices/* out/win-x64/Notices -Force
+ Copy-Item (Join-Path $vs 'Licenses/1033/Redist.txt') out/win-x64/Notices/Microsoft-Redist.txt -Force
+ & node tools/notices.cjs
+ if($LASTEXITCODE){throw 'Dependency notices failed.'}
+ $root=Join-Path $PSScriptRoot 'out/win-x64'
+ $files=@(Get-ChildItem $root -Recurse -File|ForEach-Object{@{path=$_.FullName.Substring($root.Length+1).Replace('\','/');bytes=$_.Length;sha256=(Get-FileHash $_.FullName).Hash}})
+ @{rnw='0.85.0';react='19.2.3';reactNative='0.85.3';sdk='10.0.26100.0';nativeCompiler='MSVC v145';renderer='Fabric / Windows Composition';engine='Hermes';font='Windows Segoe UI (local custom fonts unsupported by this release)';files=$files}|ConvertTo-Json -Depth 5|Set-Content .cache-build-receipt.json -Encoding UTF8
 } finally {Pop-Location}

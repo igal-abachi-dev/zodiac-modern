@@ -15,6 +15,7 @@ internal static class CandidateChecks
     static bool nativeUi;
     static bool flutterUi;
     static bool wxUi;
+    static bool rnwUi;
     static int semanticTimeoutMs=30000;
     static double inputAt;
     static readonly List<object> ProviderGaps=new();
@@ -87,17 +88,17 @@ internal static class CandidateChecks
         var keys=new List<KeyInput>();
         void KeyEvent(ushort vk,bool up=false)=>keys.Add(new KeyInput{Type=1,Key=new Key{Vk=vk,Scan=(ushort)MapVirtualKeyW(vk,0),Flags=up?2u:0u}});
         void Flush(){if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Selection input failed");keys.Clear();Thread.Sleep(50);}
-        if(flutterUi){KeyEvent(0xA2);Flush();KeyEvent(0x41);KeyEvent(0x41,true);Flush();KeyEvent(0xA2,true);Flush();}
+        if(flutterUi||rnwUi){KeyEvent(0xA2);Flush();KeyEvent(0x41);KeyEvent(0x41,true);Flush();KeyEvent(0xA2,true);Flush();}
         else {KeyEvent(0x11);KeyEvent(0x41);KeyEvent(0x41,true);KeyEvent(0x11,true);}
         KeyEvent(8);KeyEvent(8,true);
-        if(flutterUi){if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Delete input failed");keys.Clear();Thread.Sleep(50);}
+        if(flutterUi||rnwUi){if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Delete input failed");keys.Clear();Thread.Sleep(50);}
         foreach(char ch in text){keys.Add(new KeyInput{Type=1,Key=new Key{Scan=ch,Flags=4}});keys.Add(new KeyInput{Type=1,Key=new Key{Scan=ch,Flags=6}});}
         inputAt=Now();if(Keys((uint)keys.Count,keys.ToArray(),Marshal.SizeOf<KeyInput>())!=keys.Count)throw new InvalidOperationException("Keyboard input failed");
     }
     [MTAThread]static int Main(string[] args)
     {
         var config=JsonSerializer.Deserialize<Config>(File.ReadAllText(args[0]),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
-        nativeUi=config.NativeUi;wxUi=config.App=="Wx";flutterUi=config.EngineKind?.StartsWith("Flutter",StringComparison.Ordinal)==true;semanticTimeoutMs=config.SemanticTimeoutMs;Automation.TransactionTimeout=TimeSpan.FromSeconds(config.UiaTimeoutSeconds);Directory.CreateDirectory(config.Output);Native.SetProcessDpiAwarenessContext(-4);Native.GetCursorPos(out var original);
+        nativeUi=config.NativeUi;wxUi=config.App=="Wx";rnwUi=config.App=="ReactNative";flutterUi=config.EngineKind?.StartsWith("Flutter",StringComparison.Ordinal)==true;semanticTimeoutMs=config.SemanticTimeoutMs;Automation.TransactionTimeout=TimeSpan.FromSeconds(config.UiaTimeoutSeconds);Directory.CreateDirectory(config.Output);Native.SetProcessDpiAwarenessContext(-4);Native.GetCursorPos(out var original);
         var report=new Dictionary<string,object?>{["config"]=config,["automation"]="UIA3",["scope"]="reference feature correctness only; not comparative timing, scripting or physical paint"};
         using(var binary=File.OpenRead(config.Runner))report["runnerSha256"]=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(binary));
         var actions=new List<object>();var known=new Dictionary<int,DateTime>();var gate=new object();bool stop=false;Process? process=null;Thread? discovery=null;int exit=1;
@@ -155,11 +156,11 @@ internal static class CandidateChecks
             }
             Query("not-present");Wait(()=>Tick(0)!=null);Query("");Wait(()=>Tick(1000)!=null);
             if(config.App=="Qt"){
-                Query("שלום");Wait(()=>Tick(1000)!=null);
-                Query("row-0 שלום");Wait(()=>Tick(1)!=null);
-                Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text="שלום 🌠";
+                Query("×©×œ×•×");Wait(()=>Tick(1000)!=null);
+                Query("row-0 ×©×œ×•×");Wait(()=>Tick(1)!=null);
+                Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text="×©×œ×•× ðŸŒ ";
                 Wait(()=>Tick(0)!=null);
-                Wait(()=>Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text=="שלום 🌠");
+                Wait(()=>Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text=="×©×œ×•× ðŸŒ ");
                 Query("");Wait(()=>Tick(1000)!=null);
                 report["unicodeChecks"]="real Hebrew keyboard filter/bidi exact match; accessible ValuePattern supplementary-character roundtrip updates the model; synthetic surrogate-key packets and real IME composition are separate unaccepted paths";
             }
@@ -227,7 +228,7 @@ internal static class CandidateChecks
             Capture("main.png");
             report["status"]="passed";exit=0;
         }
-        catch(Exception error){try{if(window!=0){Native.GetWindowRect(window,out var frame);using var snapshot=new System.Drawing.Bitmap(frame.Right-frame.Left,frame.Bottom-frame.Top);using var graphics=System.Drawing.Graphics.FromImage(snapshot);graphics.CopyFromScreen(frame.Left,frame.Top,0,0,snapshot.Size);snapshot.Save(Path.Combine(config.Output,"failure.png"),System.Drawing.Imaging.ImageFormat.Png);}}catch{}report["status"]="failed";report["error"]=error.GetType().Name+": "+error.Message;report["stack"]=error.StackTrace;try{report["lastTree"]=Document()?.FindAllDescendants().Take(120).Select(e=>new{type=e.Properties.ControlType.ValueOrDefault.ToString(),name=e.Properties.Name.ValueOrDefault,id=e.Properties.AutomationId.ValueOrDefault,enabled=e.Properties.IsEnabled.ValueOrDefault,focus=e.Properties.HasKeyboardFocus.ValueOrDefault,offscreen=e.Properties.IsOffscreen.ValueOrDefault}).ToArray();}catch{}}
+        catch(Exception error){try{if(window!=0&&Native.GetWindowThreadProcessId(Native.GetForegroundWindow(),out var foregroundPid)!=0&&foregroundPid==process?.Id){Native.GetWindowRect(window,out var frame);using var snapshot=new System.Drawing.Bitmap(frame.Right-frame.Left,frame.Bottom-frame.Top);using var graphics=System.Drawing.Graphics.FromImage(snapshot);graphics.CopyFromScreen(frame.Left,frame.Top,0,0,snapshot.Size);snapshot.Save(Path.Combine(config.Output,"failure.png"),System.Drawing.Imaging.ImageFormat.Png);}}catch{}report["status"]="failed";report["error"]=error.GetType().Name+": "+error.Message;report["stack"]=error.StackTrace;try{report["lastTree"]=Document()?.FindAllDescendants().Take(120).Select(e=>new{type=e.Properties.ControlType.ValueOrDefault.ToString(),name=e.Properties.Name.ValueOrDefault,id=e.Properties.AutomationId.ValueOrDefault,enabled=e.Properties.IsEnabled.ValueOrDefault,focus=e.Properties.HasKeyboardFocus.ValueOrDefault,offscreen=e.Properties.IsOffscreen.ValueOrDefault}).ToArray();}catch{}}
         finally
         {
             if(window!=0)Native.PostMessageW(window,0x10,0,0);

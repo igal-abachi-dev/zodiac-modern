@@ -4,8 +4,8 @@
     "files":  [
                   {
                       "path":  "neutronstar_wx.exe",
-                      "sha256":  "DA624D33E51286FDD0DB9F7F466C20A3F0753001C58B58F0ADCFE8478F759365",
-                      "bytes":  6071808
+                      "sha256":  "000356F1B97489A58F69C043C4DAF8D928BE12AABFE60D371A73F3BC15BFB828",
+                      "bytes":  6080512
                   },
                   {
                       "path":  "assets\\Fonts\\inter-latin-400-normal.ttf",
@@ -21,6 +21,11 @@
                       "path":  "assets\\Fonts\\inter-latin-600-normal.ttf",
                       "sha256":  "DE8A61379F04664868958CC13D22CD9D1D79B4064E1EBD7C46588399F2A12FD5",
                       "bytes":  66800
+                  },
+                  {
+                      "path":  "assets\\Fonts\\Inter-OFL.txt",
+                      "sha256":  "3B0A5FCA3D17942CDE889069889DEDBBBD075E9B599968C82A95F4D944E9B345",
+                      "bytes":  4477
                   },
                   {
                       "path":  "assets\\Fonts\\noto-sans-hebrew-hebrew-400-normal.ttf",
@@ -56,6 +61,11 @@
                       "path":  "assets\\Icons\\lock-keyhole.svg",
                       "sha256":  "0D7D87CE30B53B2B26D03237D47011B447D4F4D49E4456F1E2EEFF2A410944D4",
                       "bytes":  420
+                  },
+                  {
+                      "path":  "assets\\Icons\\Lucide-ISC.txt",
+                      "sha256":  "B495047BD93A9B06913511076F504DABA17D5BBEB3E0650F3BB53A4220329C57",
+                      "bytes":  3208
                   },
                   {
                       "path":  "assets\\Icons\\orbit.svg",

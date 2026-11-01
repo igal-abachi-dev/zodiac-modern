@@ -7,3 +7,6 @@ windows/packages/
 windows/NeutronStar/Bundle/
 .vs/
 *.user
+**/obj/
+.cache-build.log
+tools/obj/

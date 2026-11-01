@@ -1,3 +1,5 @@
 .cache/
 out/
 .vs/
+.cache-build.log
+.cache-icons.log

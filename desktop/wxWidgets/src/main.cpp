@@ -6,6 +6,7 @@
 #include <wx/wrapsizer.h>
 #include <wx/filename.h>
 #include <wx/stdpaths.h>
+#include <wx/bmpbndl.h>
 #include <chrono>
 #include <windows.h>
 
@@ -25,6 +26,7 @@ public:
 class Frame final : public wxFrame {
     bench::Workflow workflow;
     bench::Rows model;
+    std::vector<bench::Row> rendered;
     wxTimer operation{this}, burst{this};
     Clock::time_point started{}, burstStarted{};
     unsigned operationToken = 0;
@@ -37,6 +39,10 @@ class Frame final : public wxFrame {
     wxTextCtrl* query = nullptr;
     wxListCtrl* rows = nullptr;
     bool narrow = false;
+    wxBitmapBundle icon(const wxString& name) {
+        const auto root=wxFileName(wxStandardPaths::Get().GetExecutablePath()).GetPath();
+        return wxBitmapBundle::FromSVGFile(root+"/assets/Icons/"+name+".svg",wxSize(24,24));
+    }
     wxStaticText* text(wxWindow* parent, const wxString& value, int points = 11, bool bold = false) {
         auto* label = new wxStaticText(parent, wxID_ANY, value);
         label->SetFont(wxFont(wxFontInfo(points).FaceName("Inter").Bold(bold)));
@@ -55,7 +61,7 @@ class Frame final : public wxFrame {
         cancel->Show(running); gauge->SetValue(workflow.progress);
         switch(workflow.phase) {
         case bench::Phase::ready: status->SetLabel("Ready"); break;
-        case bench::Phase::running: status->SetLabel("Simulation running…"); break;
+        case bench::Phase::running: status->SetLabel(L"Simulation running…"); break;
         case bench::Phase::success: status->SetLabel("Simulation complete. No file was changed."); break;
         case bench::Phase::canceled: status->SetLabel("Simulation canceled."); break;
         }
@@ -66,11 +72,19 @@ class Frame final : public wxFrame {
         workflow.start(); operationToken = workflow.generation; started = Clock::now();
         operation.Start(100); refreshOperation();
     }
-    void stopBurst() { burst.Stop(); if(stop) stop->Disable(); }
+    void stopBurst() { burst.Stop(); }
     void renderRows() {
         const auto filtered = model.filtered(query->GetValue().ToStdWstring());
-        rows->Freeze(); rows->DeleteAllItems();
-        for (const auto& row : filtered) rows->InsertItem(rows->GetItemCount(), row.label() + L": " + std::to_wstring(row.value));
+        rows->Freeze();
+        const bool sameOrder=filtered.size()==rendered.size()&&std::equal(filtered.begin(),filtered.end(),rendered.begin(),[](const auto& a,const auto& b){return a.id==b.id;});
+        if(sameOrder) {
+            for(size_t i=0;i<filtered.size();++i) if(filtered[i].value!=rendered[i].value)
+                rows->SetItem(static_cast<long>(i),0,filtered[i].label()+L": "+std::to_wstring(filtered[i].value));
+        } else {
+            rows->DeleteAllItems();
+            for (const auto& row : filtered) {const auto item=rows->InsertItem(rows->GetItemCount(), row.label() + L": " + std::to_wstring(row.value));rows->SetItemData(item,static_cast<wxUIntPtr>(row.id));}
+        }
+        rendered=filtered;
         rows->Thaw();
         summary->SetLabel(wxString::Format("%zu rows; tick %d", filtered.size(), model.tick));
     }
@@ -89,9 +103,12 @@ class Frame final : public wxFrame {
         scroll->SetScrollRate(0,FromDIP(12));
         auto* outer = new wxBoxSizer(wxVERTICAL); outer->Add(scroll,1,wxEXPAND); main->SetSizer(outer);
         auto* layout = new wxBoxSizer(wxVERTICAL); scroll->SetSizer(layout);
-        layout->Add(text(scroll,"NeutronStar GUI Bench",24,true),0,wxALL,FromDIP(20));
+        auto* heading=new wxBoxSizer(wxHORIZONTAL);
+        heading->Add(new wxStaticBitmap(scroll,wxID_ANY,icon("orbit")),0,wxRIGHT|wxALIGN_CENTER_VERTICAL,FromDIP(12));
+        heading->Add(text(scroll,"NeutronStar GUI Bench",24,true),1,wxALIGN_CENTER_VERTICAL);
+        layout->Add(heading,0,wxALL|wxEXPAND,FromDIP(20));
         layout->Add(text(scroll,"A UI-only simulation for comparing desktop frontends."),0,wxLEFT|wxRIGHT|wxBOTTOM,FromDIP(20));
-        layout->Add(text(scroll,"SIMULATION · NO FILES OR CRYPTOGRAPHY.",10,true),0,wxLEFT|wxRIGHT|wxBOTTOM,FromDIP(20));
+        layout->Add(text(scroll,L"SIMULATION · NO FILES OR CRYPTOGRAPHY.",10,true),0,wxLEFT|wxRIGHT|wxBOTTOM,FromDIP(20));
         cards = new wxPanel(scroll); cardSizer = new wxBoxSizer(wxHORIZONTAL); cards->SetSizer(cardSizer);
         for (bool enc : {false,true}) {
             auto* card = new wxPanel(cards,wxID_ANY,wxDefaultPosition,wxDefaultSize,wxBORDER_SIMPLE);
@@ -106,6 +123,7 @@ class Frame final : public wxFrame {
                 box->Add(text(card,"No disk file is opened.",10),0,wxLEFT|wxRIGHT|wxBOTTOM,FromDIP(16));
             }
             auto* action = button(card,enc?"Simulate encryption":"Simulate decryption",[this]{start();});
+            action->SetBitmap(icon(enc?"lock-keyhole":"unlock-keyhole"));
             if(enc) encrypt=action; else decrypt=action;
             box->Add(action,0,wxALL|wxEXPAND,FromDIP(16)); cardSizer->Add(card,1,wxALL|wxEXPAND,FromDIP(6));
         }
@@ -135,7 +153,7 @@ class Frame final : public wxFrame {
         add("Reverse",[this]{model.reverse();renderRows();});add("Splice 10",[this]{model.splice();renderRows();});
         add("Update 10%",[this]{model.update();renderRows();});
         for(int hz:{10,30,60}) add(wxString::Format("%d Hz / 2 s",hz),[this,hz]{stopBurst();burstStarted=Clock::now();stop->Enable();burst.Start(std::max(1,1000/hz));});
-        stop=button(work,"Stop",[this]{stopBurst();});stop->Disable();toolbar->Add(stop,0,wxALL,FromDIP(3));
+        stop=button(work,"Stop",[this]{stopBurst();});toolbar->Add(stop,0,wxALL,FromDIP(3));
         add("Remount workload",[this]{stopBurst();query->ChangeValue("");model.remount();renderRows();});
         layout->Add(toolbar,0,wxALL|wxEXPAND,FromDIP(12));
         layout->Add(text(work,"Filter synthetic rows",10,true),0,wxLEFT|wxRIGHT,FromDIP(16));

@@ -1,5 +1,5 @@
 import React,{useEffect,useMemo,useReducer,useRef,useState} from 'react';
-import {Modal,Pressable,ScrollView,StyleSheet,Text,TextInput,View,useWindowDimensions} from 'react-native';
+import {Image,Modal,Pressable,ScrollView,StyleSheet,Text,TextInput,View,useWindowDimensions} from 'react-native';
 import {filtered,initialRows,initialWorkflow,label,replace,reverse,splice,update,workflow} from './domain';
 
 function Button({children,onPress,disabled=false,id,buttonRef}:{children:string;onPress:()=>void;disabled?:boolean;id?:string;buttonRef?:React.Ref<View>}) {
@@ -24,7 +24,7 @@ function Workbench({back}:{back:()=>void}) {
    <Button onPress={()=>set(reverse)}>Reverse</Button><Button onPress={()=>set(splice)}>Splice 10</Button>
    <Button onPress={()=>set(update)}>Update 10%</Button>
    {([10,30,60] as const).map(rate=><Button key={rate} onPress={()=>setHz(rate)}>{`${rate} Hz / 2 s`}</Button>)}
-   <Button onPress={()=>setHz(0)} disabled={!hz}>Stop</Button>
+   <Button onPress={()=>setHz(0)}>Stop</Button>
    <Button onPress={()=>{setHz(0);set(initialRows());}}>Remount workload</Button>
   </View>
   <Text style={s.label}>Filter synthetic rows</Text>
@@ -52,12 +52,12 @@ export default function App() {
  const status=!ready?'Loading…':state.phase==='ready'?'Ready':running?'Simulation running…':state.phase==='success'?'Simulation complete. No file was changed.':'Simulation canceled.';
  if(work)return <Workbench back={()=>setWork(false)}/>;
  return <View style={s.root}><ScrollView contentContainerStyle={s.main}>
-  <Text accessibilityRole="header" style={s.title}>NeutronStar GUI Bench</Text>
+  <View style={s.titleRow}><Image source={require('../assets/icons/orbit.png')} style={s.icon} accessible={false}/><Text accessibilityRole="header" style={s.title}>NeutronStar GUI Bench</Text></View>
   <Text style={s.copy}>A UI-only simulation for comparing desktop frontends.</Text>
   <Text style={s.disclosure}>SIMULATION · NO FILES OR CRYPTOGRAPHY.</Text>
   <View style={[s.cards,width<640&&s.stacked]}>
-   <View style={s.card}><Text style={s.heading}>Decrypt</Text><Text style={s.label}>Synthetic input</Text><Text style={s.copy}>Synthetic sample: starlight.nsx</Text><Text style={s.copy}>No disk file is opened.</Text><Button id="decrypt" disabled={running||!ready} onPress={()=>dispatch({type:'start'})}>Simulate decryption</Button></View>
-   <View style={s.card}><Text style={s.heading}>Encrypt</Text><Text style={s.label}>Message</Text><TextInput accessibilityLabel="Message" multiline value={message} onChangeText={setMessage} style={s.message}/><Button id="encrypt" disabled={running||!ready} onPress={()=>dispatch({type:'start'})}>Simulate encryption</Button></View>
+   <View style={s.card}><View style={s.titleRow}><Image source={require('../assets/icons/unlock-keyhole.png')} style={s.icon} accessible={false}/><Text style={s.heading}>Decrypt</Text></View><Text style={s.label}>Synthetic input</Text><Text style={s.copy}>Synthetic sample: starlight.nsx</Text><Text style={s.copy}>No disk file is opened.</Text><Button id="decrypt" disabled={running||!ready} onPress={()=>dispatch({type:'start'})}>Simulate decryption</Button></View>
+   <View style={s.card}><View style={s.titleRow}><Image source={require('../assets/icons/lock-keyhole.png')} style={s.icon} accessible={false}/><Text style={s.heading}>Encrypt</Text></View><Text style={s.label}>Message</Text><TextInput accessibilityLabel="Message" multiline value={message} onChangeText={setMessage} style={s.message}/><Button id="encrypt" disabled={running||!ready} onPress={()=>dispatch({type:'start'})}>Simulate encryption</Button></View>
   </View>
   <Text accessibilityLiveRegion="polite" style={s.ready}>{status}</Text>
   <View accessibilityRole="progressbar" accessibilityValue={{min:0,max:100,now:state.progress}} style={s.track}><View style={[s.progress,{width:`${state.progress}%`}]}/></View>
@@ -75,12 +75,13 @@ export default function App() {
  </Modal></View>;
 }
 const s=StyleSheet.create({
- root:{flex:1,backgroundColor:'#fafafa'},main:{padding:24,gap:16},title:{fontFamily:'Inter',fontSize:30,fontWeight:'600',color:'#18181b'},heading:{fontFamily:'Inter',fontSize:22,fontWeight:'600',color:'#18181b'},
- copy:{fontFamily:'Inter',fontSize:14,color:'#52525b'},label:{fontFamily:'Inter',fontSize:13,fontWeight:'600',color:'#27272a'},disclosure:{fontFamily:'Inter',fontSize:12,fontWeight:'600',color:'#047857'},
+ titleRow:{flexDirection:'row',alignItems:'center',gap:12},icon:{width:24,height:24},
+ root:{flex:1,backgroundColor:'#fafafa'},main:{padding:24,gap:16},title:{fontFamily:'Segoe UI',fontSize:30,fontWeight:'600',color:'#18181b'},heading:{fontFamily:'Segoe UI',fontSize:22,fontWeight:'600',color:'#18181b'},
+ copy:{fontFamily:'Segoe UI',fontSize:14,color:'#52525b'},label:{fontFamily:'Segoe UI',fontSize:13,fontWeight:'600',color:'#27272a'},disclosure:{fontFamily:'Segoe UI',fontSize:12,fontWeight:'600',color:'#047857'},
  cards:{flexDirection:'row',gap:16},stacked:{flexDirection:'column'},card:{flex:1,padding:20,gap:14,borderWidth:1,borderColor:'#d4d4d8',borderRadius:12,backgroundColor:'white'},
- button:{backgroundColor:'#047857',borderRadius:6,paddingVertical:10,paddingHorizontal:14,alignItems:'center',justifyContent:'center',minHeight:38,borderWidth:1,borderColor:'#065f46'},buttonText:{fontFamily:'Inter',color:'white',fontWeight:'500',fontSize:14},disabled:{opacity:0.45},pressed:{backgroundColor:'#064e3b'},
- message:{height:72,borderColor:'#a1a1aa',borderWidth:1,padding:8,color:'#18181b',fontFamily:'Inter',backgroundColor:'#fafafa'},ready:{fontFamily:'Inter',fontSize:14,fontWeight:'600',color:'#18181b'},
+ button:{backgroundColor:'#047857',borderRadius:6,paddingVertical:10,paddingHorizontal:14,alignItems:'center',justifyContent:'center',minHeight:38,borderWidth:1,borderColor:'#065f46'},buttonText:{fontFamily:'Segoe UI',color:'white',fontWeight:'500',fontSize:14},disabled:{opacity:0.45},pressed:{backgroundColor:'#064e3b'},
+ message:{height:72,borderColor:'#a1a1aa',borderWidth:1,padding:8,color:'#18181b',fontFamily:'Segoe UI',backgroundColor:'#fafafa'},ready:{fontFamily:'Segoe UI',fontSize:14,fontWeight:'600',color:'#18181b'},
  toolbar:{flexDirection:'row',flexWrap:'wrap',gap:8},track:{height:8,backgroundColor:'#e4e4e7',borderRadius:4,overflow:'hidden'},progress:{height:8,backgroundColor:'#059669'},
  overlay:{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#00000055',padding:24},dialog:{backgroundColor:'white',padding:24,borderRadius:12,gap:20,maxWidth:460},
- work:{flex:1,padding:20,gap:12,backgroundColor:'#fafafa'},filter:{borderWidth:1,borderColor:'#a1a1aa',backgroundColor:'white',padding:8,minHeight:38,fontFamily:'Inter',color:'#18181b'},list:{flex:1,backgroundColor:'white',borderWidth:1,borderColor:'#d4d4d8'},row:{fontFamily:'Inter',fontSize:14,lineHeight:28,paddingHorizontal:12,color:'#18181b',borderBottomWidth:1,borderColor:'#e4e4e7'}
+ work:{flex:1,padding:20,gap:12,backgroundColor:'#fafafa'},filter:{borderWidth:1,borderColor:'#a1a1aa',backgroundColor:'white',padding:8,minHeight:38,fontFamily:'Segoe UI',color:'#18181b'},list:{flex:1,backgroundColor:'white',borderWidth:1,borderColor:'#d4d4d8'},row:{fontFamily:'Segoe UI',fontSize:14,lineHeight:28,paddingHorizontal:12,color:'#18181b',borderBottomWidth:1,borderColor:'#e4e4e7'}
 });
