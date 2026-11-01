@@ -14,6 +14,7 @@ internal static class CandidateChecks
     static nint window;
     static bool nativeUi;
     static bool flutterUi;
+    static bool wxUi;
     static int semanticTimeoutMs=30000;
     static double inputAt;
     static readonly List<object> ProviderGaps=new();
@@ -21,9 +22,18 @@ internal static class CandidateChecks
     static T Read<T>(Func<T> query){for(int attempt=1;;attempt++)try{return query();}catch(COMException error){ProviderGaps.Add(new{atMs=Now(),hresult=error.HResult,attempt,readOnly=true});if(attempt>=10)throw;Thread.Sleep(20);}catch(TimeoutException error) when(error.Message.Contains("UIA",StringComparison.Ordinal)){ProviderGaps.Add(new{atMs=Now(),uiaTimeout=true,attempt,readOnly=true});if(attempt>=3)throw;Thread.Sleep(20);}catch(FlaUI.Core.Exceptions.ElementNotAvailableException){ProviderGaps.Add(new{atMs=Now(),unavailable=true,attempt,readOnly=true});if(attempt>=10)throw;Thread.Sleep(20);}}
     static double Now()=>Stopwatch.GetTimestamp()*1000.0/Stopwatch.Frequency;
     static void Wait(Func<bool> query,int timeout=0){double end=Now()+(timeout==0?semanticTimeoutMs:timeout);while(!Read(query)){if(Now()>end)throw new TimeoutException("Workload semantic endpoint");Thread.Sleep(5);}}
-    static AutomationElement? Document()=>flutterUi?Automation.FromHandle(window).FindFirstChild(cf=>cf.ByControlType(ControlType.Pane)):nativeUi?Automation.FromHandle(window):Automation.FromHandle(window).FindFirstDescendant(cf=>cf.ByControlType(ControlType.Document));
-    static AutomationElement? Named(string name,ControlType type)=>nativeUi&&!flutterUi&&name=="Close"?(Id("about-close")??Id("CloseButton")):Document()?.FindFirstDescendant(cf=>cf.ByName(name).And(cf.ByControlType(type)));
+    static AutomationElement? Document(){
+        if(wxUi){var root=Automation.FromHandle(window);var dialog=Automation.GetDesktop().FindFirstChild(cf=>cf.ByProcessId(root.Properties.ProcessId.Value).And(cf.ByName("About this test")));if(dialog!=null)return dialog;var work=root.FindFirstChild(cf=>cf.ByAutomationId("6000"));return work?.Properties.IsOffscreen.ValueOrDefault==false?work:root;}
+        return flutterUi?Automation.FromHandle(window).FindFirstChild(cf=>cf.ByControlType(ControlType.Pane)):nativeUi?Automation.FromHandle(window):Automation.FromHandle(window).FindFirstDescendant(cf=>cf.ByControlType(ControlType.Document));
+    }
+    static AutomationElement? Named(string name,ControlType type){var document=Document();if(wxUi&&document?.Properties.AutomationId.ValueOrDefault=="6000")return document.FindFirstChild(cf=>cf.ByName(name).And(cf.ByControlType(type)));return nativeUi&&!flutterUi&&!wxUi&&name=="Close"?(Id("about-close")??Id("CloseButton")):document?.FindFirstDescendant(cf=>cf.ByName(name).And(cf.ByControlType(type)));}
     static AutomationElement? Id(string id){
+        if(wxUi)return id switch{
+            "decrypt"=>Named("Simulate decryption",ControlType.Button),
+            "encrypt"=>Named("Simulate encryption",ControlType.Button),
+            "workload-rows"=>Document()?.FindFirstChild(cf=>cf.ByAutomationId("6001")),
+            "workload-summary"=>Document()?.FindFirstChild(cf=>cf.ByAutomationId("6002")),
+            _=>Document()?.FindFirstDescendant(cf=>cf.ByAutomationId(id))};
         if(!flutterUi)return Document()?.FindFirstDescendant(cf=>cf.ByAutomationId(id));
         // Flutter 3.47 Windows does not expose Semantics.identifier as AutomationId.
         // Use its actual public names/roles, not an application test endpoint.
@@ -58,7 +68,7 @@ internal static class CandidateChecks
     static int? Tick(int count){var text=Summary();var prefix=$"{count} rows; tick ";return text.StartsWith(prefix,StringComparison.Ordinal)&&int.TryParse(text[prefix.Length..],out var tick)?tick:null;}
     static int? FirstId()
     {
-        var row=nativeUi?Id("workload-rows")?.FindFirstDescendant(cf=>cf.ByControlType(ControlType.Text)):Id("workload-rows")?.FindFirstChild(cf=>cf.ByControlType(ControlType.ListItem));
+        var row=wxUi?Id("workload-rows")?.FindFirstChild(cf=>cf.ByControlType(ControlType.ListItem)):nativeUi?Id("workload-rows")?.FindFirstDescendant(cf=>cf.ByControlType(ControlType.Text)):Id("workload-rows")?.FindFirstChild(cf=>cf.ByControlType(ControlType.ListItem));
         if(row is null)return null; // A reset can temporarily detach row peers.
         var text=row.Properties.Name.ValueOrDefault??"";
         if(!text.Contains("row-",StringComparison.Ordinal))text=string.Join("",row.FindAllDescendants(cf=>cf.ByControlType(ControlType.Text)).Select(e=>e.Properties.Name.ValueOrDefault));
@@ -87,7 +97,7 @@ internal static class CandidateChecks
     [MTAThread]static int Main(string[] args)
     {
         var config=JsonSerializer.Deserialize<Config>(File.ReadAllText(args[0]),new JsonSerializerOptions{PropertyNameCaseInsensitive=true})!;
-        nativeUi=config.NativeUi;flutterUi=config.EngineKind?.StartsWith("Flutter",StringComparison.Ordinal)==true;semanticTimeoutMs=config.SemanticTimeoutMs;Automation.TransactionTimeout=TimeSpan.FromSeconds(config.UiaTimeoutSeconds);Directory.CreateDirectory(config.Output);Native.SetProcessDpiAwarenessContext(-4);Native.GetCursorPos(out var original);
+        nativeUi=config.NativeUi;wxUi=config.App=="Wx";flutterUi=config.EngineKind?.StartsWith("Flutter",StringComparison.Ordinal)==true;semanticTimeoutMs=config.SemanticTimeoutMs;Automation.TransactionTimeout=TimeSpan.FromSeconds(config.UiaTimeoutSeconds);Directory.CreateDirectory(config.Output);Native.SetProcessDpiAwarenessContext(-4);Native.GetCursorPos(out var original);
         var report=new Dictionary<string,object?>{["config"]=config,["automation"]="UIA3",["scope"]="reference feature correctness only; not comparative timing, scripting or physical paint"};
         using(var binary=File.OpenRead(config.Runner))report["runnerSha256"]=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(binary));
         var actions=new List<object>();var known=new Dictionary<int,DateTime>();var gate=new object();bool stop=false;Process? process=null;Thread? discovery=null;int exit=1;

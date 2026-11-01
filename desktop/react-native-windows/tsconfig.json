@@ -1,0 +1,9 @@
+{
+ "compilerOptions": {
+  "target":"ES2022","module":"ESNext","moduleResolution":"bundler","jsx":"react-jsx",
+  "strict":true,"noUncheckedIndexedAccess":true,"noEmit":true,"skipLibCheck":true,
+  "allowImportingTsExtensions":true,"types":["react","node"],
+  "paths":{"react-native":["./node_modules/react-native-windows"]}
+ },
+ "include":["src","tests"]
+}

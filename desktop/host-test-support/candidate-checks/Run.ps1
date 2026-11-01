@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([ValidateSet('Avalonia','Electron','WinUI','Reactor','Flutter','Qt','Slint','Both')][string]$Candidate='Both',[switch]$LayoutOnly,
+param([ValidateSet('Avalonia','Electron','WinUI','Reactor','Flutter','Qt','Slint','ReactNative','Wx','Both')][string]$Candidate='Both',[switch]$LayoutOnly,
  [string]$RunnerPath,[switch]$HighContrastProbe)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
@@ -12,8 +12,8 @@ try {
     $names=if($Candidate -eq 'Both'){@('Avalonia','Electron')}else{@($Candidate)}
     foreach($name in $names){
         $native=$name -ne 'Electron'
-        $relative=if($name -eq 'WinUI'){'out/win-x64/NeutronStar-WinUI-Mvvm.exe'}elseif($name -eq 'Reactor'){'out/win-x64/NeutronStar-WinUI-Reactor.exe'}elseif($name -eq 'Flutter'){'build/windows/x64/runner/Release/neutronstar_flutter.exe'}elseif($name -eq 'Qt'){'out/win-x64/neutronstar_qt.exe'}elseif($name -eq 'Slint'){'out/win-x64/neutronstar-slint.exe'}elseif($native){'out/win-x64/NeutronStar-Avalonia.exe'}else{'out/NeutronStar-Electron-win32-x64/NeutronStar-Electron.exe'}
-        $appRoot=Join-Path $root $(if($name -eq 'WinUI'){'WinUI3-cs-native-mvvm'}elseif($name -eq 'Reactor'){'WinUI3-cs-native-reactor'}elseif($name -eq 'Slint'){'slint-rust'}else{$name})
+        $relative=if($name -eq 'WinUI'){'out/win-x64/NeutronStar-WinUI-Mvvm.exe'}elseif($name -eq 'Reactor'){'out/win-x64/NeutronStar-WinUI-Reactor.exe'}elseif($name -eq 'Flutter'){'build/windows/x64/runner/Release/neutronstar_flutter.exe'}elseif($name -eq 'Qt'){'out/win-x64/neutronstar_qt.exe'}elseif($name -eq 'Slint'){'out/win-x64/neutronstar-slint.exe'}elseif($name -eq 'Wx'){'out/win-x64/neutronstar_wx.exe'}elseif($name -eq 'ReactNative'){'out/win-x64/NeutronStar.exe'}elseif($native){'out/win-x64/NeutronStar-Avalonia.exe'}else{'out/NeutronStar-Electron-win32-x64/NeutronStar-Electron.exe'}
+        $appRoot=Join-Path $root $(if($name -eq 'WinUI'){'WinUI3-cs-native-mvvm'}elseif($name -eq 'Reactor'){'WinUI3-cs-native-reactor'}elseif($name -eq 'Slint'){'slint-rust'}elseif($name -eq 'Wx'){'wxWidgets'}elseif($name -eq 'ReactNative'){'react-native-windows'}else{$name})
         $runner=Join-Path $appRoot $relative
         if($RunnerPath){$runner=[IO.Path]::GetFullPath($RunnerPath)}
         if($HighContrastProbe -and ($name -ne 'Qt' -or -not $RunnerPath)){throw 'HighContrastProbe requires an explicit Qt test runner.'}
@@ -28,6 +28,8 @@ try {
         if($name -eq 'Qt'){$config.EngineKind='Qt Quick / C++ / D3D11'}
         if($HighContrastProbe){$config.EngineKind+=' / test-only contrast palette (not OS high contrast)'}
         if($name -eq 'Slint'){$config.EngineKind='Slint / Rust / Skia'}
+        if($name -eq 'Wx'){$config.EngineKind='wxWidgets / wxMSW Win32'}
+        if($name -eq 'ReactNative'){$config.EngineKind='React Native Windows / Fabric / Hermes';$config.SemanticTimeoutMs=120000}
         $file=Join-Path $output 'config.json'
         [IO.File]::WriteAllText($file,($config|ConvertTo-Json))
         & dotnet ../.cache/candidate-checks-bin/CandidateChecks.dll $file

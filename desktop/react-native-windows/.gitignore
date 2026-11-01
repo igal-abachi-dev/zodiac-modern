@@ -1,0 +1,9 @@
+node_modules/
+.cache/
+out/
+windows/x64/
+windows/ARM64/
+windows/packages/
+windows/NeutronStar/Bundle/
+.vs/
+*.user
