@@ -58,13 +58,22 @@ class BenchApp extends StatelessWidget {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           foregroundColor: ink,
+          backgroundColor: Colors.white,
           side: const BorderSide(color: line),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          minimumSize: const Size(0, 40),
+          padding: const EdgeInsets.symmetric(horizontal: 13),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 12, fontWeight: FontWeight.w500),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          minimumSize: const Size(0, 40),
+          padding: const EdgeInsets.symmetric(horizontal: 13),
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 12, fontWeight: FontWeight.w500),
         ),
       ),
     ),
@@ -91,7 +100,7 @@ Widget label(
   FontWeight? weight,
 }) => Text(
   text,
-  style: TextStyle(fontSize: size, color: color, fontWeight: weight),
+  style: TextStyle(fontSize: size, height: size == 24 ? 1.3 : 1.5, letterSpacing: size == 24 ? -0.96 : null, color: color, fontWeight: weight),
 );
 Widget button(
   String name,
@@ -139,21 +148,12 @@ class _BenchScreenState extends State<BenchScreen> {
     dialogOpen = true;
     await showDialog<void>(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('About this test'),
-        content: const Text(
-          'Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved.',
-        ),
-        actions: [
-          Semantics(
-            identifier: 'about-close',
-            child: TextButton(
-              autofocus: true,
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Close'),
-            ),
-          ),
-        ],
+      barrierColor: const Color(0x6607130d),
+      builder: (context) => Dialog(
+        backgroundColor: Colors.white, surfaceTintColor: Colors.transparent,
+        insetPadding: const EdgeInsets.all(28),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8), side: const BorderSide(color: line)),
+        child: ConstrainedBox(constraints: const BoxConstraints(maxWidth: 420), child: Padding(padding: const EdgeInsets.all(24), child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [label('About this test', size: 18, weight: FontWeight.w600), const SizedBox(height: 14), label('Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved.', color: muted), const SizedBox(height: 20), Semantics(identifier: 'about-close', child: OutlinedButton(autofocus: true, onPressed: () => Navigator.pop(context), child: const Text('Close')))]))),
       ),
     );
     dialogOpen = false;
@@ -189,7 +189,7 @@ class _BenchScreenState extends State<BenchScreen> {
       'Local interface. Synthetic data. Nothing is encrypted or decrypted.',
       size: 11,
     );
-    final renderer = label('CONTROLLED RENDERER · LOCAL STATE', size: 9);
+    final renderer = label('CONTROLLED RENDERER · LOCAL STATE', size: 11);
     return narrow
         ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -207,7 +207,7 @@ class _BenchScreenState extends State<BenchScreen> {
               const SizedBox(width: 16),
               Expanded(child: privacy),
               const SizedBox(width: 16),
-              SizedBox(width: 130, child: renderer),
+              renderer,
             ],
           );
   }
@@ -230,7 +230,7 @@ class _BenchScreenState extends State<BenchScreen> {
             ],
           ),
           const SizedBox(height: 20),
-          label('SYNTHETIC INPUT', size: 10, color: muted),
+          label('SYNTHETIC INPUT', size: 10, color: muted, weight: FontWeight.w600),
           const SizedBox(height: 9),
           Container(
             constraints: const BoxConstraints(minHeight: 94),
@@ -257,8 +257,8 @@ class _BenchScreenState extends State<BenchScreen> {
             child: SizedBox(
               height: 40,
               child: encrypt
-                  ? FilledButton(onPressed: action, child: Text(text))
-                  : OutlinedButton(onPressed: action, child: Text(text)),
+                  ? FilledButton(onPressed: action, style: FilledButton.styleFrom(textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500)), child: Text(text))
+                  : OutlinedButton(onPressed: action, style: OutlinedButton.styleFrom(textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500)), child: Text(text)),
             ),
           ),
         ],
@@ -276,16 +276,16 @@ class _BenchScreenState extends State<BenchScreen> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1100),
             child: Padding(
-              padding: const EdgeInsets.all(28),
+              padding: EdgeInsets.all(MediaQuery.sizeOf(context).width < 760 ? 20 : 28),
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final narrow = constraints.maxWidth < 564;
+                  final narrow = MediaQuery.sizeOf(context).width < 760;
                   final header = Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          icon('orbit', 40),
+                          Container(width: 40, height: 40, decoration: BoxDecoration(color: surface, border: Border.all(color: line), borderRadius: BorderRadius.circular(8)), child: Center(child: icon('orbit', 20))),
                           const SizedBox(width: 12),
                           Expanded(
                             child: label(
@@ -343,7 +343,7 @@ class _BenchScreenState extends State<BenchScreen> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              icon('shield-check'),
+                              icon('shield-check', 14),
                               const SizedBox(width: 7),
                               Flexible(
                                 child: label(
@@ -374,31 +374,11 @@ class _BenchScreenState extends State<BenchScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Wrap(
-                              spacing: 12,
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              children: [
-                                Semantics(
-                                  identifier: 'status',
-                                  liveRegion: true,
-                                  child: label(flow.status),
-                                ),
-                                if (flow.running) button('Cancel', flow.cancel),
-                                button('Reset', flow.ready ? flow.reset : null),
-                              ],
-                            ),
-                            const SizedBox(height: 16),
-                            LinearProgressIndicator(
-                              value: flow.progress / 100,
-                              minHeight: 6,
-                              semanticsLabel: 'Simulation progress',
-                              semanticsValue: '${flow.progress}%',
-                            ),
-                            const SizedBox(height: 12),
-                            label(
-                              'Simulation progress  ${flow.progress}%',
-                              size: 11,
-                            ),
+                            Row(children: [Container(width: 7, height: 7, decoration: const BoxDecoration(color: emerald, shape: BoxShape.circle)), const SizedBox(width: 8), Expanded(child: Semantics(identifier: 'status', liveRegion: true, child: label(flow.status, size: 13))), if (flow.running) ...[button('Cancel', flow.cancel), const SizedBox(width: 8)], button('Reset', flow.ready ? flow.reset : null)]),
+                            const SizedBox(height: 14),
+                            LinearProgressIndicator(value: flow.progress / 100, minHeight: 6, color: emerald, backgroundColor: surface, borderRadius: BorderRadius.circular(8), semanticsLabel: 'Simulation progress', semanticsValue: '${flow.progress}%'),
+                            const SizedBox(height: 8),
+                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [label('Simulation progress', size: 11, color: muted), label('${flow.progress}%', size: 11, color: muted)]),
                           ],
                         ),
                       ),
@@ -452,7 +432,7 @@ class _WorkbenchState extends State<Workbench> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          label('List and filter workbench', size: 20, weight: FontWeight.w600),
+          label('List and filter workbench', size: 22, weight: FontWeight.w600),
           const SizedBox(height: 10),
           label(
             'Deterministic synthetic rows. No files, network, cryptography or native commands.',
@@ -527,7 +507,7 @@ class _WorkbenchState extends State<Workbench> {
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
                       horizontal: 12,
-                      vertical: 6,
+                      vertical: 5,
                     ),
                     decoration: BoxDecoration(
                       color: Colors.white,
