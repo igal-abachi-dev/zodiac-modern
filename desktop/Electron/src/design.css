@@ -198,9 +198,9 @@ h1 {
   background: white;
   color: #171a18;
   border: 1px solid var(--border);
-  border-radius: 6px;
-  min-height: 32px;
-  padding: 6px 12px;
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 13px;
   font-size: 12px;
   font-weight: 500;
 }
@@ -215,6 +215,8 @@ h1 {
   justify-content: space-between;
 }
 .status-label {
+  font-size: 13px;
+  min-height: 24px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -228,7 +230,7 @@ h1 {
   background: var(--accent);
 }
 .progress-root {
-  margin-top: 16px;
+  margin-top: 14px;
 }
 .progress-track {
   height: 6px;
@@ -253,14 +255,14 @@ h1 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 18px;
+  line-height: 1.6;
   font-size: 11px;
   color: var(--muted);
 }
 .footer span {
-  font-size: 9px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
 }
 .dialog-layer {
   position: fixed;
@@ -268,14 +270,14 @@ h1 {
   z-index: 20;
   display: grid;
   place-items: center;
-  background: #0006;
-  padding: 20px;
+  background: #07130d66;
+  padding: 28px;
 }
 .dialog-content {
   background: white;
   color: #171a18;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 8px;
   max-width: 420px;
   width: 100%;
   padding: 24px;
@@ -283,26 +285,28 @@ h1 {
 }
 .dialog-content h2 {
   font-size: 18px;
-  margin: 0 0 12px;
+  font-weight: 600;
+  margin: 0;
 }
 .dialog-content p {
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--muted);
-  margin: 0 0 20px;
+  margin: 14px 0 20px;
 }
+.dialog-content .secondary { width: 100%; }
 .workbench-shell {
   border-top: 1px solid var(--border);
   scroll-margin-top: 12px;
 }
 .workbench-shell h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 22px;
 }
 .workbench-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 16px 0;
+  margin: 20px 0;
 }
 .workbench-filter {
   display: grid;
@@ -310,7 +314,8 @@ h1 {
 }
 .workbench-filter input {
   width: 100%;
-  padding: 9px 12px;
+  padding: 8px 12px;
+  min-height: 40px;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: white;
@@ -325,14 +330,14 @@ h1 {
   background: white;
 }
 .workbench-rows li {
-  padding: 6px 12px;
+  padding: 5px 12px;
   border-bottom: 1px solid var(--border);
   min-height: 30px;
 }
 .workbench-rows li:last-child {
   border-bottom: 0;
 }
-@media (max-width: 620px) {
+@media (max-width: 759px) {
   .shell {
     padding: 20px;
   }
@@ -343,6 +348,7 @@ h1 {
     flex-wrap: wrap;
   }
   .footer {
+    flex-direction: column;
     align-items: flex-start;
   }
 }

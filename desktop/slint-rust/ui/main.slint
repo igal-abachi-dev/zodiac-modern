@@ -42,7 +42,7 @@ component Workbench inherits VerticalLayout {
     callback action(BenchAction);
     callback filter(string);
     spacing: 16px;
-    Label { text: "List and filter workbench"; font-size: 20px; font-weight: 600; }
+    Label { text: "List and filter workbench"; font-size: 22px; font-weight: 600; }
     Label { text: "Deterministic synthetic rows. No files, network, cryptography or native commands."; font-size: 12px; }
     HorizontalLayout { Button { text: "Back to main screen"; enabled: root.enabled; clicked => {root.action(BenchAction.back);} } Rectangle {} }
     Label { text: "Workbench ready"; }
@@ -89,7 +89,7 @@ export component BenchWindow inherits Window {
     in-out property <bool> about-open: false;
     callback action(BenchAction);
     callback filter(string);
-    private property <bool> narrow: self.width < 620px;
+    private property <bool> narrow: self.width < 760px;
     init => { Palette.color-scheme = ColorScheme.light; }
     forward-focus: keys;
     keys := FocusScope {
@@ -104,13 +104,13 @@ export component BenchWindow inherits Window {
             content-width: self.visible-width;
             content-height: content.preferred-height;
             content := VerticalLayout {
-                padding: 28px; spacing: 20px;
+                padding: root.narrow ? 20px : 28px; spacing: 20px;
                 Rectangle {
-                    height: root.narrow ? 144px : 84px;
-                    Image { x:0px;y:0px;source:@image-url("../assets/Icons/orbit.svg");width:40px;height:40px; }
+                    height: root.narrow ? 130px : 74px;
+                    Rectangle { width:40px;height:40px;background:#f1f4f2;border-color:#dce3de;border-width:1px;border-radius:8px; Image {x:10px;y:10px;source:@image-url("../assets/Icons/orbit.svg");width:20px;height:20px;} }
                     Label { x:52px;y:0px; width:parent.width - 52px; text:"NeutronStar GUI Bench";font-size:24px;font-weight:600; }
                     Label {y:48px;width:parent.width;text:"A UI-only simulation for comparing desktop frontends.";color:#5d6660;}
-                    about-trigger := Button { x:root.narrow ? 0px : parent.width - self.width; y:root.narrow ? 102px : 8px;
+                    about-trigger := Button { x:root.narrow ? 0px : parent.width - self.width; y:root.narrow ? 90px : 0px;
                         text:"About this test";accessible-id:"about-trigger";enabled:!root.about-open;clicked=>{root.about-open=true;about-close.focus();} }
                 }
                 Rectangle {
@@ -147,7 +147,7 @@ export component BenchWindow inherits Window {
                         width:root.narrow ? parent.width : max(0px,parent.width - open-trigger.width - 178px);
                         text:"Local interface. Synthetic data. Nothing is encrypted or decrypted.";font-size:11px;}
                     Label {x:root.narrow ? 0px : parent.width - 130px;y:root.narrow ? 86px : 0px;width:130px;
-                        text:"CONTROLLED RENDERER · LOCAL STATE";font-size:9px;}
+                        text:"CONTROLLED RENDERER · LOCAL STATE";font-size:11px;}
                 }
                 work := Rectangle {
                     height: root.workbench-open ? work-content.preferred-height : 0px;
@@ -162,13 +162,13 @@ export component BenchWindow inherits Window {
             }
         }
         Rectangle {
-            visible: root.about-open; width:parent.width;height:parent.height;background:#00000040;
+            visible: root.about-open; width:parent.width;height:parent.height;background:#07130d66;
             TouchArea { }
             Rectangle {
                 x:(parent.width - self.width)/2;y:(parent.height - self.height)/2;
                 width:min(420px,parent.width - 56px);height:310px;background:white;border-color:#dce3de;border-width:1px;border-radius:8px;
                 accessible-role: groupbox; accessible-label: "About this test";
-                VerticalLayout {padding:20px;spacing:16px;
+                VerticalLayout {padding:24px;spacing:16px;
                     Label {text:"About this test";font-size:20px;font-weight:600;}
                     Label {text:"Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved.";}
                     Rectangle { height:100px;

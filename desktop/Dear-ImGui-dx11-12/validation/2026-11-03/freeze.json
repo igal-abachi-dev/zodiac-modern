@@ -1,0 +1,308 @@
+{
+  "schema": 1,
+  "scope": "correctness evidence only; no UIA or comparative performance acceptance",
+  "productionSha256": "B2A1F7C8BB5834B1FC78EAB63EB8DE2487B0A265686EB84865D8E3F69723757B",
+  "probeSha256": "540B7F0ED8219F3A6128955F3D6DC5609B8B6252B78E28F3E94D251CF5628631",
+  "attempts": {
+    "production-dx12": "check-83a73b3eb1434361882a6609fe14f46a",
+    "production-dx11": "check-7ef67dbe426b4ebea5fab976fd15762b",
+    "probe-auto": "check-b0fbe6fd2a05498fbf85973cc76a0768",
+    "probe-auto-fallback": "check-391e4dea12e84c8fba35f3da5fd1919c",
+    "probe-dx11": "check-39862ed4937f4181aae1dea829731e74",
+    "probe-dx12": "check-2710f55825f64e2e9251086a91b2586d"
+  },
+  "sources": [
+    {
+      "path": "Dear-ImGui-dx11-12/.clang-format",
+      "bytes": 226,
+      "sha256": "36578aba03e61eb0a84021798c86a2be3a0199b503671b06d744a3d7136958c5"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/.gitignore",
+      "bytes": 58,
+      "sha256": "946ab8c2c1de60b85be651efedc8b9bd0c6db5dea31ed175a873b3c44d8591a2"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/Build.ps1",
+      "bytes": 1324,
+      "sha256": "e31eaf3f547fda548612c22a18c7f921a15a2d0d25626279f39ca598d6d87b36"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/CMakeLists.txt",
+      "bytes": 2011,
+      "sha256": "8204c46b2ac06cfea19b8f4194225fe7ecdbc2a9084daa3f2c7cb5189aef9766"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/Check.ps1",
+      "bytes": 1195,
+      "sha256": "5d4aa0fdcb34a3cac0e883016ffcb65b77e4af74d8a0897a5a17631df3e45c48"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/Init.cmd",
+      "bytes": 88,
+      "sha256": "22ea8f0bf24f515b24095c0055b6922092d9fdfcddb7a43374c0cbaa35148cdf"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/Init.ps1",
+      "bytes": 627,
+      "sha256": "f90b603c04fc70bf18920b8c1f95fee3a595f0fdd5ddffb487788243270085a7"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/README.md",
+      "bytes": 6674,
+      "sha256": "eb6b6c372395212067aae09a08628d1d909bd76236a7cead1aba26902f7da699"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/Run.ps1",
+      "bytes": 474,
+      "sha256": "9467007c064bcd74b46537b098e523a0c81f69f3dbba07290f7c3e59413b5ee8"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/VALIDATION.md",
+      "bytes": 5382,
+      "sha256": "8f0f5c7a7118fe34451c478fa02ac69898683a706c999ec7640becc7b2095bbd"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/Validate.ps1",
+      "bytes": 1386,
+      "sha256": "167df486ed9b22a15509025739595e7284e3da749ebf564f959909ed21c8de41"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Fonts/Inter-OFL.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Fonts/OFL-NotoSansHebrew.txt",
+      "bytes": 4380,
+      "sha256": "7387750a626d005e86adc8b9321567f001fc2f6ef5c8f275261c454fe86981d4"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Fonts/inter-latin-400-normal.ttf",
+      "bytes": 66592,
+      "sha256": "03693cc5689d8c89a20ae55fe945fe59884eec8ad7d7dabb4761e066e88f49ff"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Fonts/inter-latin-500-normal.ttf",
+      "bytes": 66692,
+      "sha256": "7e22abfa3709ec2c67d18128ed3b7e522a8efa602c7f46fb933bf71f5f8f2e3e"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Fonts/inter-latin-600-normal.ttf",
+      "bytes": 66800,
+      "sha256": "de8a61379f04664868958cc13d22cd9d1d79b4064e1ebd7c46588399f2a12fd5"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf",
+      "bytes": 17072,
+      "sha256": "4df1fbfde811afbf4023ed6bfde89ce9614c94775fa57dfdfc473575d5d076d0"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Fonts/provenance.json",
+      "bytes": 1626,
+      "sha256": "9db6aa2fba2d444ef17ca58130138eff5ae6c232107351b363d862c227fbc899"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Icons/Lucide-ISC.txt",
+      "bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Icons/arrow-down-to-line.svg",
+      "bytes": 374,
+      "sha256": "8b692d916102083901b392c3f098b6f460604d5fad4029fbe79d934e5c065892"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Icons/arrow-up-from-line.svg",
+      "bytes": 374,
+      "sha256": "3a9b8037387df9d552042e229aa9a16ae7326b52bf2a5aab07450f3b539a404c"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Icons/info.svg",
+      "bytes": 369,
+      "sha256": "bd039cbc60abc0af2d241232fa6fe76da45c974a8928141b266b15435ca26e0c"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Icons/lock-keyhole.svg",
+      "bytes": 420,
+      "sha256": "0d7d87ce30b53b2b26d03237d47011b447d4f4d49e4456f1e2eeff2a410944d4"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Icons/orbit.svg",
+      "bytes": 494,
+      "sha256": "90426bc45f068dd6576026b17e5723eeacbe25333d7587ebe79bd7a27f2b51bd"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Icons/shield-check.svg",
+      "bytes": 498,
+      "sha256": "21b195f0bf7f6ed344d9327066c9e9db6fd2e03ab8673c19907001d87b710e06"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/assets/Icons/unlock-keyhole.svg",
+      "bytes": 424,
+      "sha256": "456e12db802726bb969f996196ec71e89e3c1c00df57c4843c3362cef58a1e41"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/scripts/Freeze.py",
+      "bytes": 3600,
+      "sha256": "7b150129ca8bc3e05b45bd67ded2db33c20c6f9764fa962777e8a960d5a18aaf"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/scripts/Toolchain.ps1",
+      "bytes": 1359,
+      "sha256": "d5f65c549c34c0a7d5a109f7f85ca3b687cc64c4e7855eda8e78da817f61045d"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/src/app.manifest",
+      "bytes": 1094,
+      "sha256": "df5ef4614bb83ebad019f1ac3b3af4a57fdc240f64d25d68444fe4a6934b7d3e"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/src/domain.hpp",
+      "bytes": 3718,
+      "sha256": "60481b4f75cfa5a754d4d8c1bf5b5837aaf7d20cc1bfb1b21d3d7b8f4c131e79"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/src/graphics.cpp",
+      "bytes": 15559,
+      "sha256": "13febdcfbc7a6df677fd10a3c9ccf588d8bf6aaf53f1da5d87d5c8aada494696"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/src/graphics.hpp",
+      "bytes": 921,
+      "sha256": "bf4b49deace6ab2ca381884e196ecc19d44367f2c9ee43d34d2ccc100cbb470b"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/src/main.cpp",
+      "bytes": 9941,
+      "sha256": "8f0843ee83731a91eb4676af67390ffcc2d44ff352e7325546df77f65c69ef1e"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/src/ui.cpp",
+      "bytes": 15043,
+      "sha256": "5785c7d098426b515847a50af509f30a7479ecdad1ee3f1a0f019e28418151a0"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/src/ui.hpp",
+      "bytes": 1350,
+      "sha256": "d2375265cdd4089518550dd8206caec5a753bac0b94f4aac71095c8e4c236128"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/tests/domain_tests.cpp",
+      "bytes": 1878,
+      "sha256": "91b68ae4048ec182dad854886d9daa49adbff4361a3281e879cadd834e290e4d"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/tests/window-checks/NuGet.Config",
+      "bytes": 111,
+      "sha256": "d853d1e103d452cc8f6ea1712ea37b75c9df656cf892b362527ad3f98a0e0592"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/tests/window-checks/Program.cs",
+      "bytes": 9964,
+      "sha256": "6ff69e1e7a579c404adfb0541c81e2b0362302f0771f788b65bedbaab034ef45"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/tests/window-checks/WindowChecks.csproj",
+      "bytes": 423,
+      "sha256": "6a9d37226b1bfe12367ecb29d1033a1cf670cedc7162c0f681a784c19b016602"
+    },
+    {
+      "path": "Dear-ImGui-dx11-12/tests/window-checks/global.json",
+      "bytes": 55,
+      "sha256": "37014080b001eedd3486cd6ffaa789626901f22c0434949318493d8462fc1ada"
+    },
+    {
+      "path": "host-test-support/measurement/Native.cs",
+      "bytes": 9613,
+      "sha256": "8cbd93be78092850f103559c812e33719f7509488bf049c523eec03e6cb779cc"
+    }
+  ],
+  "publishedFiles": [
+    {
+      "path": "assets/Fonts/inter-latin-400-normal.ttf",
+      "bytes": 66592,
+      "sha256": "03693cc5689d8c89a20ae55fe945fe59884eec8ad7d7dabb4761e066e88f49ff"
+    },
+    {
+      "path": "assets/Fonts/inter-latin-500-normal.ttf",
+      "bytes": 66692,
+      "sha256": "7e22abfa3709ec2c67d18128ed3b7e522a8efa602c7f46fb933bf71f5f8f2e3e"
+    },
+    {
+      "path": "assets/Fonts/inter-latin-600-normal.ttf",
+      "bytes": 66800,
+      "sha256": "de8a61379f04664868958cc13d22cd9d1d79b4064e1ebd7c46588399f2a12fd5"
+    },
+    {
+      "path": "assets/Fonts/Inter-OFL.txt",
+      "bytes": 4477,
+      "sha256": "3b0a5fca3d17942cde889069889dedbbbd075e9b599968c82a95f4d944e9b345"
+    },
+    {
+      "path": "assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf",
+      "bytes": 17072,
+      "sha256": "4df1fbfde811afbf4023ed6bfde89ce9614c94775fa57dfdfc473575d5d076d0"
+    },
+    {
+      "path": "assets/Fonts/OFL-NotoSansHebrew.txt",
+      "bytes": 4380,
+      "sha256": "7387750a626d005e86adc8b9321567f001fc2f6ef5c8f275261c454fe86981d4"
+    },
+    {
+      "path": "assets/Fonts/provenance.json",
+      "bytes": 1626,
+      "sha256": "9db6aa2fba2d444ef17ca58130138eff5ae6c232107351b363d862c227fbc899"
+    },
+    {
+      "path": "assets/Icons/arrow-down-to-line.svg",
+      "bytes": 374,
+      "sha256": "8b692d916102083901b392c3f098b6f460604d5fad4029fbe79d934e5c065892"
+    },
+    {
+      "path": "assets/Icons/arrow-up-from-line.svg",
+      "bytes": 374,
+      "sha256": "3a9b8037387df9d552042e229aa9a16ae7326b52bf2a5aab07450f3b539a404c"
+    },
+    {
+      "path": "assets/Icons/info.svg",
+      "bytes": 369,
+      "sha256": "bd039cbc60abc0af2d241232fa6fe76da45c974a8928141b266b15435ca26e0c"
+    },
+    {
+      "path": "assets/Icons/lock-keyhole.svg",
+      "bytes": 420,
+      "sha256": "0d7d87ce30b53b2b26d03237d47011b447d4f4d49e4456f1e2eeff2a410944d4"
+    },
+    {
+      "path": "assets/Icons/Lucide-ISC.txt",
+      "bytes": 3208,
+      "sha256": "b495047bd93a9b06913511076f504daba17d5bbeb3e0650f3bb53a4220329c57"
+    },
+    {
+      "path": "assets/Icons/orbit.svg",
+      "bytes": 494,
+      "sha256": "90426bc45f068dd6576026b17e5723eeacbe25333d7587ebe79bd7a27f2b51bd"
+    },
+    {
+      "path": "assets/Icons/shield-check.svg",
+      "bytes": 498,
+      "sha256": "21b195f0bf7f6ed344d9327066c9e9db6fd2e03ab8673c19907001d87b710e06"
+    },
+    {
+      "path": "assets/Icons/unlock-keyhole.svg",
+      "bytes": 424,
+      "sha256": "456e12db802726bb969f996196ec71e89e3c1c00df57c4843c3362cef58a1e41"
+    },
+    {
+      "path": "neutronstar_imgui.exe",
+      "bytes": 954368,
+      "sha256": "b2a1f7c8bb5834b1fc78eab63eb8de2487b0a265686eb84865d8e3f69723757b"
+    },
+    {
+      "path": "Notices/Dear-ImGui-MIT.txt",
+      "bytes": 1083,
+      "sha256": "173506a2d6f7fb67990d257fb2507f188690eca39060c39469ae7bef43aae2a3"
+    }
+  ]
+}

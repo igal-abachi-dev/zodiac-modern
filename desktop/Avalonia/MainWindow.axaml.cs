@@ -37,7 +37,8 @@ public sealed partial class MainWindow : Window
     }
     private void ArrangeCards()
     {
-        bool narrow = ClientSize.Width < 620;
+        bool narrow = ClientSize.Width < 760;
+        Shell.Margin = new Thickness(narrow ? 20 : 28);
         HeaderGrid.ColumnDefinitions = narrow ? new ColumnDefinitions("*") : new ColumnDefinitions("*,Auto");
         HeaderGrid.RowDefinitions = narrow ? new RowDefinitions("Auto,Auto") : new RowDefinitions("Auto");
         Grid.SetColumn(AboutTrigger, narrow ? 0 : 1);

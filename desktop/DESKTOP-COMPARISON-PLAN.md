@@ -1,6 +1,6 @@
 # Independent desktop implementations
 
-Updated 2026-11-02. This stage builds and checks applications before running a
+Updated 2026-11-03. This stage builds and checks applications before running a
 new cross-toolkit benchmark. The old six-host WebView2 measurements remain a
 separate frozen experiment. Tauri + Svelte is the selected WebView2 representative.
 
@@ -22,9 +22,11 @@ performance cohort was run as part of that work.
 | `slint-rust` | Slint 1.18.1, Rust 1.99.1, Winit/Skia, AccessKit | Independent Rust models/timers and compiled Slint UI, standard Fluent widgets, embedded local assets |
 | `react-native-windows` | RNW 0.85.0, React Native 0.85.3, React 19.2.3, Hermes, MSVC v145 | Independent TSX/reducer UI, Fabric/Windows Composition, unpackaged Win32, bundled optimized Hermes bytecode; system Segoe UI limitation |
 | `wxWidgets` | wxWidgets stable 3.2.12, C++20, clang-cl/Ninja/Microsoft linker | Independent C++ models, standard wxMSW native controls, normal non-virtual wxListCtrl, static wx/CRT and local fonts/SVGs |
+| `Dear-ImGui-dx11-12` | Dear ImGui 1.93.0, C++20, clang-cl/Ninja/Microsoft linker, Win32 + DX12/DX11 | Independent immediate-mode controls/state; DX12 default with startup DX11 fallback and explicit strict renderer options; static CRT, local fonts/native vector icons |
 
-All implement the [reference feature inventory](Tauri-v2-Svelte5/FEATURE-PARITY.md),
-including the complete workbench. Share design/fixture specifications and external
+The candidates implement the [reference behavioral inventory](Tauri-v2-Svelte5/FEATURE-PARITY.md),
+including the complete workbench, with the text/accessibility differences below.
+Share design/fixture specifications and external
 test infrastructure, not runtime UI/state packages or sibling dist directories.
 Use local equivalent fonts/icons. Report native text/control differences and
 font container formats (TTF versus WOFF2). The Electron renderer intentionally
@@ -40,6 +42,23 @@ The [wxWidgets candidate](wxWidgets/README.md) stores all native list items eage
 without owner-data/virtual mode; structural changes rebuild native items and
 value updates change touched text. Native clipping/control identity differs from
 the reference's keyed DOM rows. These are whole-stack implementation differences.
+
+The [Dear ImGui candidate](Dear-ImGui-dx11-12/README.md) implements the main and
+complete workbench behaviors, but does **not** meet full text/accessibility parity:
+stock widgets have no Windows UIA provider here, and full bidi/shaping/color emoji
+are not provided by this text path. Exact UTF-8 fixture data is preserved.
+Every matching model row is submitted without ImGuiListClipper, but immediate-mode
+items are not retained native/DOM peers. Idle redraw policy is on demand.
+Its test-only read-only snapshots support real pointer/keyboard checks; they are
+not UIA or measurement endpoints and are absent from the published executable.
+
+For later measurement, use the production ImGui binary, record actual API/adapter,
+separate hardware/WARP and fallback runs, and calibrate external pixel/presentation
+readiness rather than substituting its instrumented state timestamps for other
+candidates' UIA endpoints. Verify the actual adapter matches between explicit
+DX11/DX12 runs; default adapter selection policies can differ on multi-GPU systems.
+Actual RDP configurations and text/AT acceptance remain open. The old cohorts are
+unchanged; no cross-toolkit winner follows from this work.
 
 RNW/wx implementation and correctness evidence is recorded separately in their
 `VALIDATION.md` files. This addition runs no comparative timing/memory cohort;

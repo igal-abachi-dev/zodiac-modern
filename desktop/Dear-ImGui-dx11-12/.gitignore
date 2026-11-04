@@ -1,0 +1,7 @@
+out/
+.cache/
+.vs/
+imgui.ini
+imgui_log.txt
+**/obj/
+**/bin/

@@ -7,7 +7,7 @@ Column {
     required property BenchController bench
     signal back()
     spacing: 16
-    BenchLabel { text: "List and filter workbench"; font.pixelSize: 20; font.weight: Font.DemiBold }
+    BenchLabel { text: "List and filter workbench"; font.pixelSize: 22; font.weight: Font.DemiBold }
     BenchLabel { width: root.width; text: "Deterministic synthetic rows. No files, network, cryptography or native commands."; font.pixelSize: 12 }
     BenchButton { text: "Back to main screen"; onClicked: root.back() }
     BenchLabel { text: "Workbench ready" }

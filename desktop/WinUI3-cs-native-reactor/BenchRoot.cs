@@ -22,7 +22,7 @@ public sealed class BenchRoot : Component
         var timer = UseMemo(() => new Pulse());
         var (width, _) = UseWindowSize(Shell.Window);
         // Window.Bounds/SizeChanged use device pixels for this desktop host.
-        bool narrow = Shell.ClientWidth < 620;
+        bool narrow = Shell.ClientWidth < 760;
         UseEffect((Func<Action>)(() => { int frames = 0; EventHandler<object>? handler = null; handler = (_, _) => { if (++frames < 2) return; CompositionTarget.Rendering -= handler; dispatch(new Loaded()); }; CompositionTarget.Rendering += handler; return () => { CompositionTarget.Rendering -= handler; timer.Dispose(); }; }));
         void StartFlow(string op)
         {
@@ -40,7 +40,7 @@ public sealed class BenchRoot : Component
                 // writes during Render can continuously invalidate a preview host.
                 button = button with
                 {
-                    ContentElement = Border(T(label).Foreground("#FFFFFF").HAlign(HorizontalAlignment.Center).VAlign(VerticalAlignment.Center)).Padding(12, 8).Background("#047857").CornerRadius(5).Opacity(s.Loaded && s.Status != "running" ? 1 : .45)
+                    ContentElement = Border(T(label).Foreground("#FFFFFF").HAlign(HorizontalAlignment.Center).VAlign(VerticalAlignment.Center)).Padding(12, 8).Background("#047857").CornerRadius(8).Opacity(s.Loaded && s.Status != "running" ? 1 : .55)
                 };
                 button = button.Padding(0).Set(b => { b.HorizontalContentAlignment = HorizontalAlignment.Stretch; b.VerticalContentAlignment = VerticalAlignment.Stretch; });
             }
@@ -48,7 +48,7 @@ public sealed class BenchRoot : Component
         }
         var decrypt = Operation("Decrypt", "unlock-keyhole", "Simulate decryption", "decrypt", false);
         var encrypt = Operation("Encrypt", "lock-keyhole", "Simulate encryption", "encrypt", true);
-        var header = VStack(8, HStack(12, Icon("orbit").Width(40).Height(40), T("NeutronStar GUI Bench", 24).Bold()), T("A UI-only simulation for comparing desktop frontends.").Foreground("#5D6660"));
+        var header = VStack(8, HStack(12, Border(Icon("orbit").Width(20).Height(20)).Width(40).Height(40).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(8), T("NeutronStar GUI Bench", 24).Bold()), T("A UI-only simulation for comparing desktop frontends.").Foreground("#5D6660"));
         var (showAbout, setAbout) = UseState(false);
         var about = B("About this test", () => setAbout(true), "about-trigger", !showAbout);
         Element headerLayout = narrow ? VStack(12, header, about) : Grid(columns: [GridSize.Star(), GridSize.Auto], rows: [GridSize.Auto], header, about.Grid(row: 0, column: 1));
@@ -58,7 +58,7 @@ public sealed class BenchRoot : Component
         });
         var openButton = B("Open workbench", () => { setOpen(true); Shell.IntoWorkbench(); }, "open-workbench", s.Loaded && s.Status != "running");
         var privacy = T("Local interface. Synthetic data. Nothing is encrypted or decrypted.", 11).Set(t => t.TextWrapping = TextWrapping.Wrap);
-        var renderer = T("CONTROLLED RENDERER · LOCAL STATE", 9).Width(130).Set(t => t.TextWrapping = TextWrapping.Wrap);
+        var renderer = T("CONTROLLED RENDERER · LOCAL STATE", 11).Set(t => t.TextWrapping = TextWrapping.Wrap);
         Element footer = narrow ? VStack(10, openButton, privacy, renderer) : (Grid(columns: [GridSize.Auto, GridSize.Star(), GridSize.Auto], rows: [GridSize.Auto], openButton, privacy.Grid(row: 0, column: 1), renderer.Grid(row: 0, column: 2)) with
         {
             ColumnSpacing = 16
@@ -74,7 +74,7 @@ public sealed class BenchRoot : Component
             DefaultButton = W.ContentDialogButton.Close,
             OnClosed = _ => { setAbout(false); Shell.FocusAbout(); }
         },
-        open ? Component<Workbench, WorkbenchProps>(new(() => { setOpen(false); Shell.Back(); })).WithKey("workbench") : null).Padding(28).MaxWidth(1100)).AutomationId("PageScroll").Background("#F8FAF9").Set(scroll => scroll.HorizontalScrollBarVisibility = W.ScrollBarVisibility.Disabled);
+        open ? Component<Workbench, WorkbenchProps>(new(() => { setOpen(false); Shell.Back(); })).WithKey("workbench") : null).Padding(narrow ? 20 : 28).MaxWidth(1100)).AutomationId("PageScroll").Background("#F8FAF9").Set(scroll => scroll.HorizontalScrollBarVisibility = W.ScrollBarVisibility.Disabled);
     }
 }
 public sealed record WorkbenchProps(Action Back);
@@ -101,13 +101,13 @@ public sealed class Workbench : Component<WorkbenchProps>
             controls.Add(BenchRoot.B($"{hz} Hz / 2 s", () => Burst(hz)));
         controls.Add(BenchRoot.B("Stop", () => { timer.Stop(); dispatch(new Stop()); }).HelpText(s.Token < 0 ? "Updates stopped" : "Updates active"));
         controls.Add(BenchRoot.B("Remount workload", () => { timer.Stop(); dispatch(new Remount()); }));
-        return VStack(16, BenchRoot.T("List and filter workbench", 20).Bold(), BenchRoot.T("Deterministic synthetic rows. No files, network, cryptography or native commands.", 12), BenchRoot.B("Back to main screen", Props.Back), BenchRoot.T("Workbench ready"), FlexRow(controls.ToArray()) with
+        return VStack(16, BenchRoot.T("List and filter workbench", 22).Bold(), BenchRoot.T("Deterministic synthetic rows. No files, network, cryptography or native commands.", 14), BenchRoot.B("Back to main screen", Props.Back), BenchRoot.T("Workbench ready"), FlexRow(controls.ToArray()) with
         {
             Wrap = Microsoft.UI.Reactor.Layout.FlexWrap.Wrap,
             ColumnGap = 8,
             RowGap = 8
         },
         BenchRoot.Card(VStack(10, BenchRoot.T("Filter synthetic rows"), TextBox(s.Query, text => dispatch(new Query(text))).AutomationName("Filter synthetic rows").AutomationId("workload-query"), BenchRoot.T($"{rows.Length} rows; tick {s.Tick}").AutomationId("workload-summary"))),
-        VStack(0, rows.Select(r => Border(BenchRoot.T($"{r.Label}: {r.Value}")).Padding(12, 6).Background("#FFFFFF").WithBorder("#DCE3DE", 1).WithKey(r.Id.ToString())).ToArray<Element?>()).Semantics(role: "group").AutomationName("Synthetic rows").AutomationId("workload-rows")).AutomationId("workbench");
+        VStack(0, rows.Select(r => Border(BenchRoot.T($"{r.Label}: {r.Value}")).Padding(12, 5).Background("#FFFFFF").WithBorder("#DCE3DE", 1).WithKey(r.Id.ToString())).ToArray<Element?>()).Semantics(role: "group").AutomationName("Synthetic rows").AutomationId("workload-rows")).AutomationId("workbench");
     }
 }

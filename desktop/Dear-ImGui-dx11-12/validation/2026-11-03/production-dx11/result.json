@@ -1,0 +1,10 @@
+{
+  "scope": "production window startup/drawing/shutdown smoke only; no read-only probe or UIA controls",
+  "requested": "dx11",
+  "injected": false,
+  "runnerSha256": "B2A1F7C8BB5834B1FC78EAB63EB8DE2487B0A265686EB84865D8E3F69723757B",
+  "status": "passed",
+  "exitedNormally": true,
+  "exitCode": 0,
+  "checks": []
+}

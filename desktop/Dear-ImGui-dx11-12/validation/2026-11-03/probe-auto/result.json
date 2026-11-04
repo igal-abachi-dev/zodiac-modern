@@ -1,0 +1,16 @@
+{
+  "scope": "test-only read-only frame instrumentation \u002B real pointer/keyboard input; NOT UIA, physical paint or comparative timing",
+  "requested": "auto",
+  "injected": false,
+  "runnerSha256": "540B7F0ED8219F3A6128955F3D6DC5609B8B6252B78E28F3E94D251CF5628631",
+  "actualRenderer": "DX12",
+  "adapter": "NVIDIA GeForce RTX 2070 SUPER",
+  "software": false,
+  "fallback": false,
+  "status": "passed",
+  "exitedNormally": true,
+  "exitCode": 0,
+  "checks": [
+    "Ready"
+  ]
+}

@@ -73,7 +73,7 @@ public sealed partial class MainWindow : Window
     }
     private void Responsive()
     {
-        bool narrow = Root.ActualWidth < 620;
+        bool narrow = Root.ActualWidth < 760;
         Header.ColumnDefinitions.Clear();
         Header.RowDefinitions.Clear();
         Header.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });

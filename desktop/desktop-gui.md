@@ -2001,3 +2001,41 @@ integration, cryptography, native secret handling or an updater. Actual-window
 correctness does not close the deferred physical accessibility/IME/contrast/DPI
 and clean-machine checks. Tauri + Svelte remains the selected WebView2 product
 stack; these additional native candidates do not change that decision.
+
+### 13.24 Dear ImGui / DirectX implementation (2026-11-03)
+
+[The independent candidate](Dear-ImGui-dx11-12/README.md) uses Dear ImGui 1.93.0,
+C++20, standard Win32 chrome and the official DX12/DX11 rendering backends, built
+with clang-cl/Ninja/Microsoft link.exe and static CRT. It uses no CEF, browser UI
+or native widget toolkit for its content. Its controls are immediate-mode draw
+commands, not WinUI/XAML controls; sharing DirectX with other toolkits does not
+make their rendering/control/accessibility models equivalent.
+
+The user's selected default is **DX12**, with DX11 fallback for initial capability
+or availability failure. Explicit DX12/DX11 options are strict. Auto fallback can
+use DX11 WARP when hardware initialization fails; the actual API/adapter/software
+state is shown and must be retained in comparison metadata. RDP capabilities vary
+with driver and session policy, so no fixed "RDP means DX11" rule is assumed.
+Unexpected initialization errors and later device loss are terminal rather than
+silently changing the renderer mid-run.
+
+The main simulation, modal, responsive cards and complete list/filter workbench
+have independent C++ state/timers. Every matching model row is submitted without
+ImGuiListClipper; the framework clips rendering but retains no DOM/native row
+peers. Idle redraw is on demand; minimized/occluded windows stop drawing while
+logical elapsed-time activity is handled separately. These choices need to be
+reported, not inferred as benchmark wins.
+
+Two material gaps remain: stock ImGui widgets expose no Windows UIA provider here,
+and the text path lacks full bidi/complex shaping/browser-style color emoji.
+Local Inter/Noto, optional OS emoji outlines and 32-bit character support do not
+solve shaping or screen-reader accessibility. The UTF-8 fixture/filter state stays
+unchanged; stored Hebrew is not reversed to disguise the rendering gap.
+
+A separate test-only build exports read-only frame/widget snapshots for real
+pointer/keyboard correctness checks. Snapshot IO and forced-unavailable injection
+are compiled out of production and that probe is not published. These tests are
+not UIA acceptance, physical-presentation timing or a comparative cohort. Later
+measurement must calibrate production pixel/presentation endpoints and disclose
+or normalize text differences. [Validation](Dear-ImGui-dx11-12/VALIDATION.md)
+separates those gates and actual RDP/physical checks from local evidence.

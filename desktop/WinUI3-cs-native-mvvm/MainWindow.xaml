@@ -99,13 +99,13 @@
         <Grid x:Name="Footer" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16" RowSpacing="10">
           <Button x:Name="OpenButton" Content="Open workbench" Command="{x:Bind ViewModel.OpenCommand}"/>
           <TextBlock x:Name="Privacy" Grid.Column="1" Text="Local interface. Synthetic data. Nothing is encrypted or decrypted." FontSize="11" Foreground="#5D6660" TextWrapping="Wrap" VerticalAlignment="Center"/>
-          <TextBlock x:Name="Renderer" Grid.Column="2" Text="CONTROLLED RENDERER · LOCAL STATE" FontSize="9" Foreground="#5D6660" VerticalAlignment="Center"/>
+          <TextBlock x:Name="Renderer" Grid.Column="2" Text="CONTROLLED RENDERER · LOCAL STATE" FontSize="11" Foreground="#5D6660" VerticalAlignment="Center"/>
         </Grid>
         <Border x:Name="WorkbenchSection" Visibility="{x:Bind Show(ViewModel.WorkbenchOpen),Mode=OneWay}" BorderBrush="#DCE3DE" BorderThickness="0,1,0,0" Padding="0,24,0,0">
           <StackPanel Spacing="16">
             <Grid ColumnDefinitions="*,Auto">
               <StackPanel>
-                <TextBlock Text="List and filter workbench" FontSize="20" FontFamily="{StaticResource HeadingFont}"/>
+                <TextBlock Text="List and filter workbench" FontSize="22" FontFamily="{StaticResource HeadingFont}"/>
                 <TextBlock Text="Deterministic synthetic rows. No files, network, cryptography or native commands." Foreground="#5D6660" TextWrapping="Wrap" Margin="0,8,0,0"/>
               </StackPanel>
               <Button Grid.Column="1" Content="Back to main screen" Command="{x:Bind ViewModel.BackCommand}"/>

@@ -9,7 +9,7 @@ ApplicationWindow {
     visible: true; title: "NeutronStar GUI Bench"; color: Theme.background
     palette.highlight: Theme.accent
     palette.highlightedText: Theme.onAccent
-    property bool narrow: width < 620
+    property bool narrow: width < 760
     onClosing: bench.close()
     function reveal(item) {
         let ancestor=item
@@ -21,18 +21,19 @@ ApplicationWindow {
         page.contentY=Math.max(0,Math.min(page.contentY,page.contentHeight-page.height))
     }
     Flickable {
-        id: page; anchors.fill: parent; contentWidth: width; contentHeight: content.height+56
+        id: page; anchors.fill: parent; contentWidth: width; contentHeight: content.height + 2 * content.y
         clip: true; boundsBehavior: Flickable.StopAtBounds
         ScrollBar.vertical: ScrollBar { }
         Column {
-            id: content; x: 28; y: 28; width: parent.width-56; spacing: 20
+            id: content; x: window.narrow ? 20 : 28; y: x; width: parent.width - 2*x; spacing: 20
             GridLayout {
                 width: parent.width; columns: window.narrow ? 1 : 2; columnSpacing: 16; rowSpacing: 12
                 ColumnLayout {
                     Layout.fillWidth: true; spacing: 8
                     RowLayout {
-                        Image { source: "qrc:/Icons/orbit.svg"; sourceSize: Qt.size(40,40); Accessible.ignored: true; visible: !Theme.highContrast }
-                        BenchLabel { text: "NeutronStar GUI Bench"; font.pixelSize: 24; font.weight: Font.DemiBold; Layout.fillWidth: true }
+                        Rectangle { width: 40; height: 40; radius: 8; color: Theme.inset; border.color: Theme.border
+                            Image { anchors.centerIn: parent; source: "qrc:/Icons/orbit.svg"; sourceSize: Qt.size(20,20); Accessible.ignored: true; visible: !Theme.highContrast } }
+                        BenchLabel { text: "NeutronStar GUI Bench"; font.pixelSize: 24; font.weight: Font.DemiBold; font.letterSpacing: -0.96; Layout.fillWidth: true }
                     }
                     BenchLabel { text: "A UI-only simulation for comparing desktop frontends."; color: Theme.muted; Layout.fillWidth: true }
                 }
@@ -53,7 +54,7 @@ ApplicationWindow {
             }
             Card {
                 width: parent.width
-                contentItem: ColumnLayout { spacing: 16
+                contentItem: ColumnLayout { spacing: 14
                     Flow { Layout.fillWidth: true; spacing: 12
                         BenchLabel { text: bench.status; Accessible.id: "status"; topPadding: 8
                             onTextChanged: Accessible.announce(text)
@@ -72,7 +73,7 @@ ApplicationWindow {
                     onClicked: {bench.openWorkbench();Qt.callLater(()=>{page.contentY=workbench.y+content.y})}
                 }
                 BenchLabel { text: "Local interface. Synthetic data. Nothing is encrypted or decrypted."; font.pixelSize: 11; Layout.fillWidth: true }
-                BenchLabel { text: "CONTROLLED RENDERER · LOCAL STATE"; font.pixelSize: 9; Layout.preferredWidth: 130 }
+                BenchLabel { text: "CONTROLLED RENDERER · LOCAL STATE"; font.pixelSize: 11 }
             }
             Loader {
                 id: workbench; width: parent.width; active: bench.workbenchOpen

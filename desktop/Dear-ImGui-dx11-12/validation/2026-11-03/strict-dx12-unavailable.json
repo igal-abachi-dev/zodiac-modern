@@ -1,0 +1,7 @@
+﻿{
+    "scenario":  "forced DX12 unavailable with strict dx12 selection",
+    "status":  "passed",
+    "expectedExitCode":  2,
+    "actualExitCode":  2,
+    "testOnly":  true
+}
