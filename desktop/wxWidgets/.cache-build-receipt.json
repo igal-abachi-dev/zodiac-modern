@@ -4,8 +4,8 @@
     "files":  [
                   {
                       "path":  "neutronstar_wx.exe",
-                      "sha256":  "000356F1B97489A58F69C043C4DAF8D928BE12AABFE60D371A73F3BC15BFB828",
-                      "bytes":  6080512
+                      "sha256":  "465FAFF27AA4ECB6720112EC3DA81A1B271DA566245178CE5A73CE38F22C214B",
+                      "bytes":  6109696
                   },
                   {
                       "path":  "assets\\Fonts\\inter-latin-400-normal.ttf",
@@ -44,23 +44,38 @@
                   },
                   {
                       "path":  "assets\\Icons\\arrow-down-to-line.svg",
-                      "sha256":  "8B692D916102083901B392C3F098B6F460604D5FAD4029FBE79D934E5C065892",
-                      "bytes":  374
-                  },
-                  {
-                      "path":  "assets\\Icons\\arrow-up-from-line.svg",
-                      "sha256":  "3A9B8037387DF9D552042E229AA9A16AE7326B52BF2A5AAB07450F3B539A404C",
-                      "bytes":  374
-                  },
-                  {
-                      "path":  "assets\\Icons\\info.svg",
-                      "sha256":  "BD039CBC60ABC0AF2D241232FA6FE76DA45C974A8928141B266B15435CA26E0C",
+                      "sha256":  "0D455BF778B62334A66848A4C476B134AAD18154EA592EF6F62EC7EB1F425DF6",
                       "bytes":  369
                   },
                   {
+                      "path":  "assets\\Icons\\arrow-up-from-line-white.svg",
+                      "sha256":  "9A1E1E5FD82F55053DD8A4F556CDED8C8FAF27BF8DA0DD930BDBE43EF514E389",
+                      "bytes":  386
+                  },
+                  {
+                      "path":  "assets\\Icons\\arrow-up-from-line.svg",
+                      "sha256":  "29B07D7685E0C02DB472A1ABBB8582B3957D3233964CF77DD646F090C2A47B4B",
+                      "bytes":  369
+                  },
+                  {
+                      "path":  "assets\\Icons\\color-variant.json",
+                      "sha256":  "A7E4F05C650EA1B2312EDAFF9E3B11BFA013AB115DF70FAF41026576B2C5C0A9",
+                      "bytes":  345
+                  },
+                  {
+                      "path":  "assets\\Icons\\info.svg",
+                      "sha256":  "5894A2F3E789916BB078209CB0DB4DD9F76A4756F8FCBC3E83CF97F4ED2E71DE",
+                      "bytes":  364
+                  },
+                  {
+                      "path":  "assets\\Icons\\ink-normalization.json",
+                      "sha256":  "B92EA29DCA802874663CE9426154375FB99DB627FDC019A6019D6C26CF361393",
+                      "bytes":  1811
+                  },
+                  {
                       "path":  "assets\\Icons\\lock-keyhole.svg",
-                      "sha256":  "0D7D87CE30B53B2B26D03237D47011B447D4F4D49E4456F1E2EEFF2A410944D4",
-                      "bytes":  420
+                      "sha256":  "DFCAEE2944BA1ADB455B81DDB153E106BB3081516831C4E482BAB00C1D5E20D7",
+                      "bytes":  415
                   },
                   {
                       "path":  "assets\\Icons\\Lucide-ISC.txt",
@@ -69,18 +84,18 @@
                   },
                   {
                       "path":  "assets\\Icons\\orbit.svg",
-                      "sha256":  "90426BC45F068DD6576026B17E5723EEACBE25333D7587EBE79BD7A27F2B51BD",
-                      "bytes":  494
+                      "sha256":  "0845C480050D854E791D2B98FF1AE753FF9F6270D9C0A802881796EDB5C5670E",
+                      "bytes":  489
                   },
                   {
                       "path":  "assets\\Icons\\shield-check.svg",
-                      "sha256":  "21B195F0BF7F6ED344D9327066C9E9DB6FD2E03AB8673C19907001D87B710E06",
-                      "bytes":  498
+                      "sha256":  "A217C76E515F40E9526D6553F5BBBD379645BB1549D9BC98104932C746A4A814",
+                      "bytes":  493
                   },
                   {
                       "path":  "assets\\Icons\\unlock-keyhole.svg",
-                      "sha256":  "456E12DB802726BB969F996196EC71E89E3C1C00DF57C4843C3362CEF58A1E41",
-                      "bytes":  424
+                      "sha256":  "AE2FBCA122E1DD0FCAF3CDAAE72475568E5488CE2E59840AB7AA849F1D513EC0",
+                      "bytes":  419
                   },
                   {
                       "path":  "Notices\\licence.txt",

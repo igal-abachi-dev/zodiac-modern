@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([ValidateSet('Avalonia','Electron','WinUI','Reactor','Flutter','Qt','Slint','ReactNative','Wx','Both')][string]$Candidate='Both',[switch]$LayoutOnly,
+param([ValidateSet('Avalonia','Electron','WinUI','Reactor','Flutter','Qt','Slint','ReactNative','Wx','Tauri','Both')][string]$Candidate='Both',[switch]$LayoutOnly,
  [string]$RunnerPath,[switch]$HighContrastProbe)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
@@ -11,9 +11,9 @@ try {
     if($LASTEXITCODE){throw 'Checker build failed.'}
     $names=if($Candidate -eq 'Both'){@('Avalonia','Electron')}else{@($Candidate)}
     foreach($name in $names){
-        $native=$name -ne 'Electron'
-        $relative=if($name -eq 'WinUI'){'out/win-x64/NeutronStar-WinUI-Mvvm.exe'}elseif($name -eq 'Reactor'){'out/win-x64/NeutronStar-WinUI-Reactor.exe'}elseif($name -eq 'Flutter'){'build/windows/x64/runner/Release/neutronstar_flutter.exe'}elseif($name -eq 'Qt'){'out/win-x64/neutronstar_qt.exe'}elseif($name -eq 'Slint'){'out/win-x64/neutronstar-slint.exe'}elseif($name -eq 'Wx'){'out/win-x64/neutronstar_wx.exe'}elseif($name -eq 'ReactNative'){'out/win-x64/NeutronStar.exe'}elseif($native){'out/win-x64/NeutronStar-Avalonia.exe'}else{'out/NeutronStar-Electron-win32-x64/NeutronStar-Electron.exe'}
-        $appRoot=Join-Path $root $(if($name -eq 'WinUI'){'WinUI3-cs-native-mvvm'}elseif($name -eq 'Reactor'){'WinUI3-cs-native-reactor'}elseif($name -eq 'Slint'){'slint-rust'}elseif($name -eq 'Wx'){'wxWidgets'}elseif($name -eq 'ReactNative'){'react-native-windows'}else{$name})
+        $native=$name -notin @('Electron','Tauri')
+        $relative=if($name -eq 'Tauri'){'src-tauri/target/x86_64-pc-windows-msvc/release/neutronstar-tauri-svelte5.exe'}elseif($name -eq 'WinUI'){'out/win-x64/NeutronStar-WinUI-Mvvm.exe'}elseif($name -eq 'Reactor'){'out/win-x64/NeutronStar-WinUI-Reactor.exe'}elseif($name -eq 'Flutter'){'build/windows/x64/runner/Release/neutronstar_flutter.exe'}elseif($name -eq 'Qt'){'out/win-x64/neutronstar_qt.exe'}elseif($name -eq 'Slint'){'out/win-x64/neutronstar-slint.exe'}elseif($name -eq 'Wx'){'out/win-x64/neutronstar_wx.exe'}elseif($name -eq 'ReactNative'){'out/win-x64/NeutronStar.exe'}elseif($native){'out/win-x64/NeutronStar-Avalonia.exe'}else{'out/NeutronStar-Electron-win32-x64/NeutronStar-Electron.exe'}
+        $appRoot=Join-Path $root $(if($name -eq 'Tauri'){'Tauri-v2-Svelte5'}elseif($name -eq 'WinUI'){'WinUI3-cs-native-mvvm'}elseif($name -eq 'Reactor'){'WinUI3-cs-native-reactor'}elseif($name -eq 'Slint'){'slint-rust'}elseif($name -eq 'Wx'){'wxWidgets'}elseif($name -eq 'ReactNative'){'react-native-windows'}else{$name})
         $runner=Join-Path $appRoot $relative
         if($RunnerPath){$runner=[IO.Path]::GetFullPath($RunnerPath)}
         if($HighContrastProbe -and ($name -ne 'Qt' -or -not $RunnerPath)){throw 'HighContrastProbe requires an explicit Qt test runner.'}

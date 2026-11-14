@@ -1,0 +1,41 @@
+{
+  "package": "lucide-static@1.58.0",
+  "change": "Only stroke=currentColor becomes #171a18; all geometry unchanged. Explicit color avoids wx SVG parser gray fallback.",
+  "files": [
+    {
+      "file": "arrow-down-to-line.svg",
+      "sourceSha256": "8b692d916102083901b392c3f098b6f460604d5fad4029fbe79d934e5c065892",
+      "outputSha256": "0d455bf778b62334a66848a4c476b134aad18154ea592ef6f62ec7eb1f425df6"
+    },
+    {
+      "file": "arrow-up-from-line.svg",
+      "sourceSha256": "3a9b8037387df9d552042e229aa9a16ae7326b52bf2a5aab07450f3b539a404c",
+      "outputSha256": "29b07d7685e0c02db472a1abbb8582b3957d3233964cf77dd646f090c2a47b4b"
+    },
+    {
+      "file": "info.svg",
+      "sourceSha256": "bd039cbc60abc0af2d241232fa6fe76da45c974a8928141b266b15435ca26e0c",
+      "outputSha256": "5894a2f3e789916bb078209cb0db4dd9f76a4756f8fcbc3e83cf97f4ed2e71de"
+    },
+    {
+      "file": "lock-keyhole.svg",
+      "sourceSha256": "0d7d87ce30b53b2b26d03237d47011b447d4f4d49e4456f1e2eeff2a410944d4",
+      "outputSha256": "dfcaee2944ba1adb455b81ddb153e106bb3081516831c4e482bab00c1d5e20d7"
+    },
+    {
+      "file": "orbit.svg",
+      "sourceSha256": "90426bc45f068dd6576026b17e5723eeacbe25333d7587ebe79bd7a27f2b51bd",
+      "outputSha256": "0845c480050d854e791d2b98ff1ae753ff9f6270d9c0a802881796edb5c5670e"
+    },
+    {
+      "file": "shield-check.svg",
+      "sourceSha256": "21b195f0bf7f6ed344d9327066c9e9db6fd2e03ab8673c19907001d87b710e06",
+      "outputSha256": "a217c76e515f40e9526d6553f5bbbd379645bb1549d9bc98104932c746a4a814"
+    },
+    {
+      "file": "unlock-keyhole.svg",
+      "sourceSha256": "456e12db802726bb969f996196ec71e89e3c1c00df57c4843c3362cef58a1e41",
+      "outputSha256": "ae2fbca122e1dd0fcaf3cdaae72475568e5488ce2e59840ab7aa849f1d513ec0"
+    }
+  ]
+}

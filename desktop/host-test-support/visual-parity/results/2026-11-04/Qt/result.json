@@ -1,0 +1,347 @@
+{
+  "config": {
+    "app": "Qt",
+    "runner": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\out\\win-x64\\neutronstar_qt.exe",
+    "assets": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\dist",
+    "profile": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\check-39e0a7de70e94313a8f5c56034d7cca0\\profile",
+    "output": "D:\\Libraries\\Repositories\\zodiac-modern\\desktop\\Qt\\.cache\\check-39e0a7de70e94313a8f5c56034d7cca0",
+    "arguments": [],
+    "nativeUi": true,
+    "layoutOnly": false,
+    "engineKind": "Qt Quick / C\u002B\u002B / D3D11",
+    "semanticTimeoutMs": 30000,
+    "uiaTimeoutSeconds": 3
+  },
+  "automation": "UIA3",
+  "scope": "reference feature correctness only; not comparative timing, scripting or physical paint",
+  "runnerSha256": "83E97E785D16782D8EA86D978311E4379A1D89F236E971EDD1B228AAA7A9307D",
+  "visualPolicy": "Svelte primary reference; Avalonia desktop behavior; stock controls only; captures are QA, not timings",
+  "mainChecks": "About Escape/Close/focus; encrypt complete; decrypt cancel; reset",
+  "tickAfterStop": 11,
+  "unicodeChecks": "real Hebrew keyboard filter/bidi exact match; accessible ValuePattern supplementary-character roundtrip updates the model; synthetic surrogate-key packets and real IME composition are separate unaccepted paths",
+  "extraChecks": "10/60 Hz update and Stop; empty filter; close while burst active; fresh reopen/reset IDs and tick; focus restoration; main workflow after workbench",
+  "keyboardScroll": "Tab reached the lower encryption button and scrolled it into view; focus restored to About",
+  "layoutChecks": "dialog Tab remains in content; 480 DIP two-card stacking; restored 960 DIP client width",
+  "dpi": 192,
+  "engineKind": "Qt Quick / C\u002B\u002B / D3D11",
+  "hostFileVersion": null,
+  "status": "passed",
+  "hostExited": true,
+  "helpersExited": true,
+  "exitCode": 0,
+  "inputTargets": [
+    {
+      "name": "About this test",
+      "x": 2596,
+      "y": 474,
+      "width": 228,
+      "height": 80
+    },
+    {
+      "name": "About this test",
+      "x": 2596,
+      "y": 474,
+      "width": 228,
+      "height": 80
+    },
+    {
+      "name": "Close",
+      "x": 2190,
+      "y": 1092,
+      "width": 126,
+      "height": 80
+    },
+    {
+      "name": "Simulate encryption",
+      "x": 1972,
+      "y": 1098,
+      "width": 820,
+      "height": 80
+    },
+    {
+      "name": "Reset",
+      "x": 2666,
+      "y": 1282,
+      "width": 126,
+      "height": 80
+    },
+    {
+      "name": "Simulate decryption",
+      "x": 1048,
+      "y": 1098,
+      "width": 820,
+      "height": 80
+    },
+    {
+      "name": "Cancel",
+      "x": 2510,
+      "y": 1282,
+      "width": 140,
+      "height": 80
+    },
+    {
+      "name": "Reset",
+      "x": 2666,
+      "y": 1282,
+      "width": 126,
+      "height": 80
+    },
+    {
+      "name": "Open workbench",
+      "x": 1016,
+      "y": 1530,
+      "width": 258,
+      "height": 80
+    },
+    {
+      "name": "10,000 rows",
+      "x": 1216,
+      "y": 722,
+      "width": 200,
+      "height": 80
+    },
+    {
+      "name": "1,000 rows",
+      "x": 1016,
+      "y": 722,
+      "width": 184,
+      "height": 80
+    },
+    {
+      "name": "Reverse",
+      "x": 1432,
+      "y": 722,
+      "width": 152,
+      "height": 80
+    },
+    {
+      "name": "Splice 10",
+      "x": 1602,
+      "y": 722,
+      "width": 162,
+      "height": 80
+    },
+    {
+      "name": "Update 10%",
+      "x": 1780,
+      "y": 722,
+      "width": 198,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1016,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1300,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "30 Hz / 2 s",
+      "x": 2188,
+      "y": 1006,
+      "width": 184,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1300,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Stop",
+      "x": 2588,
+      "y": 1006,
+      "width": 112,
+      "height": 80
+    },
+    {
+      "name": "Remount workload",
+      "x": 1016,
+      "y": 1102,
+      "width": 274,
+      "height": 80
+    },
+    {
+      "name": "10 Hz / 2 s",
+      "x": 1994,
+      "y": 1006,
+      "width": 178,
+      "height": 80
+    },
+    {
+      "name": "Stop",
+      "x": 2588,
+      "y": 1006,
+      "width": 112,
+      "height": 80
+    },
+    {
+      "name": "60 Hz / 2 s",
+      "x": 2388,
+      "y": 1006,
+      "width": 184,
+      "height": 80
+    },
+    {
+      "name": "Stop",
+      "x": 2588,
+      "y": 1006,
+      "width": 112,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1300,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1400,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1400,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1400,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "Filter synthetic rows",
+      "x": 1048,
+      "y": 1400,
+      "width": 1744,
+      "height": 80
+    },
+    {
+      "name": "30 Hz / 2 s",
+      "x": 2188,
+      "y": 1106,
+      "width": 184,
+      "height": 80
+    },
+    {
+      "name": "Back to main screen",
+      "x": 1016,
+      "y": 928,
+      "width": 292,
+      "height": 80
+    },
+    {
+      "name": "Open workbench",
+      "x": 1016,
+      "y": 1530,
+      "width": 258,
+      "height": 80
+    },
+    {
+      "name": "Back to main screen",
+      "x": 1016,
+      "y": 544,
+      "width": 292,
+      "height": 80
+    },
+    {
+      "name": "Simulate encryption",
+      "x": 1972,
+      "y": 1098,
+      "width": 820,
+      "height": 80
+    },
+    {
+      "name": "Reset",
+      "x": 2666,
+      "y": 1282,
+      "width": 126,
+      "height": 80
+    },
+    {
+      "name": "About this test",
+      "x": 2596,
+      "y": 474,
+      "width": 228,
+      "height": 80
+    },
+    {
+      "name": "Close",
+      "x": 2190,
+      "y": 1092,
+      "width": 126,
+      "height": 80
+    }
+  ],
+  "providerGaps": [],
+  "actions": [
+    {
+      "name": "replace-10000",
+      "inputToUiaObservedMs": 1489.1098999977112,
+      "requestToUiaMs": 1632.1017000675201
+    },
+    {
+      "name": "replace-1000",
+      "inputToUiaObservedMs": 525.2065000534058,
+      "requestToUiaMs": 665.4026000499725
+    },
+    {
+      "name": "reverse-1000",
+      "inputToUiaObservedMs": 166.21539998054504,
+      "requestToUiaMs": 303.04390001296997
+    },
+    {
+      "name": "splice-10",
+      "inputToUiaObservedMs": 16.21810007095337,
+      "requestToUiaMs": 161.03290009498596
+    },
+    {
+      "name": "update-10-percent",
+      "inputToUiaObservedMs": 14.131900072097778,
+      "requestToUiaMs": 155.06049990653992
+    },
+    {
+      "name": "filter-to-one",
+      "inputToUiaObservedMs": 40.91160011291504,
+      "requestToUiaMs": 200.7704999446869
+    },
+    {
+      "name": "filter-clear",
+      "inputToUiaObservedMs": 144.989599943161,
+      "requestToUiaMs": 298.8436999320984
+    },
+    {
+      "name": "filter-during-30hz-requested",
+      "inputToUiaObservedMs": 44.36970019340515,
+      "requestToUiaMs": 199.8241000175476
+    },
+    {
+      "name": "remount",
+      "inputToUiaObservedMs": 317.6403999328613,
+      "requestToUiaMs": 453.08979988098145
+    }
+  ],
+  "processIdentities": [
+    {
+      "pid": 45192,
+      "startUtc": "2026-11-04T21:17:11.6362985Z"
+    }
+  ]
+}

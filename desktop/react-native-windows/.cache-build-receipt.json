@@ -522,18 +522,18 @@
                   },
                   {
                       "path":  "NeutronStar.exe",
-                      "sha256":  "9327332FF43E89C812E145AD4A6BB96E30C8EB63BF713648618BAE368B8DB13B",
+                      "sha256":  "91314F3286C2F236200A6436246EAB88E3C23949D1441463AE0F16720498AD14",
                       "bytes":  271360
                   },
                   {
                       "path":  "NeutronStar.pdb",
-                      "sha256":  "7E29D87FFA5941C9C1E23D63B48376F4E9F160199B0761499C8C05C2F5B03F5E",
-                      "bytes":  44503040
+                      "sha256":  "1C52852A6135667484CCB0B470D411EAA705C5FEBC10FAB1CF8B6C7A4DBE16E1",
+                      "bytes":  44871680
                   },
                   {
                       "path":  "NeutronStar.pri",
-                      "sha256":  "23EAED491EC8D8C2825E4F6A555E3E7AFA6C4CD36CC6E455FA3FA5CFE83EEDFC",
-                      "bytes":  1352608
+                      "sha256":  "C5B6BE154633D4AB6D8457A37E0769F489D53BDF196410DEBE36936E7CC55E56",
+                      "bytes":  1352984
                   },
                   {
                       "path":  "onnxruntime.dll",
@@ -747,23 +747,43 @@
                   },
                   {
                       "path":  "Bundle/index.windows.bundle",
-                      "sha256":  "C55BF65A3300CB1D86804BA578F4C6C4AAB6B4866165378716ECA05276B330E8",
-                      "bytes":  1087920
+                      "sha256":  "E90056EB8D323BA8A1293C93D3C206528C28B69BAF7BC59A04E690908D11FE7B",
+                      "bytes":  1091852
+                  },
+                  {
+                      "path":  "Bundle/assets/assets/icons/arrow-down-to-line.png",
+                      "sha256":  "C86140E39EDE30C8C41A8922DEDA06281A36C8E96C0425A319CF6FA8D341472B",
+                      "bytes":  1532
+                  },
+                  {
+                      "path":  "Bundle/assets/assets/icons/arrow-up-from-line.png",
+                      "sha256":  "8E9DB97545D946123FF75FDA5C3BB5A19E4B6561A564A4E9B9F754C9C9B9CE59",
+                      "bytes":  1519
+                  },
+                  {
+                      "path":  "Bundle/assets/assets/icons/info.png",
+                      "sha256":  "D821BD15A3BE6B2119AFF618024826243E7A9DDD6ADD4FEBD443B3E1676FF4D6",
+                      "bytes":  3472
                   },
                   {
                       "path":  "Bundle/assets/assets/icons/lock-keyhole.png",
-                      "sha256":  "FC468EE845C5D4AF0681B687B67A93E4783FB2C3BCB2EE3BBC3FAD458837B4F7",
-                      "bytes":  2287
+                      "sha256":  "CA52E076D7478A21BF0496C4FF5A5DFDB4012F6CD2E89A9C0C8EF5FD385EF330",
+                      "bytes":  2270
                   },
                   {
                       "path":  "Bundle/assets/assets/icons/orbit.png",
-                      "sha256":  "7E5F06ACE8430323AC6948C88DFA31200DC977E975E27A20278A8C8B6C4561FC",
-                      "bytes":  4497
+                      "sha256":  "8BAAAB64FDB7B0E5CD0C187B04397FF87AFC923632ED25A33D2656AFCD21352F",
+                      "bytes":  4372
+                  },
+                  {
+                      "path":  "Bundle/assets/assets/icons/shield-check.png",
+                      "sha256":  "D5D404940D09C8C28F7FDECF0CF03CC51ED3BE4B1287B1048D26E2EE01195F35",
+                      "bytes":  3292
                   },
                   {
                       "path":  "Bundle/assets/assets/icons/unlock-keyhole.png",
-                      "sha256":  "CD277841E30E57F5F5E8E82B57C745A0F39DCFDF0CC85654610D181B3220A81B",
-                      "bytes":  2281
+                      "sha256":  "1C270F46D8B5CB3828D6C35DE96631788C584182E60EE144E45241F48B4953DF",
+                      "bytes":  2266
                   },
                   {
                       "path":  "ca-ES/Microsoft.ui.xaml.dll.mui",
@@ -3757,18 +3777,18 @@
                   },
                   {
                       "path":  "sourcemaps/react/index.windows.bundle.compiler.map",
-                      "sha256":  "F561EABCE6BD8CBCCC670F71655F9C6D58DBFCB129DAE89E358CC9D2AE91C98B",
-                      "bytes":  856668
+                      "sha256":  "470982E1C3CBEB5AD0E54B59EE8E0D9A912FCBA2F967D1F089579C9C8B4EA116",
+                      "bytes":  858935
                   },
                   {
                       "path":  "sourcemaps/react/index.windows.bundle.map",
-                      "sha256":  "EC949BB2064238498EEA190C653677C8C93603997A757521C10F14B4A25B31F8",
-                      "bytes":  4232352
+                      "sha256":  "DC8F6E222262BB762A83827FC91488682F53062E9842687D23887ED8A5AD7428",
+                      "bytes":  4239552
                   },
                   {
                       "path":  "sourcemaps/react/index.windows.bundle.packager.map",
-                      "sha256":  "277A87BBC6F6482202F9D436E8A9B47EABAADEC95A1BBE987F2B80DC8F22E121",
-                      "bytes":  4467527
+                      "sha256":  "8E6A3B29757208AD33C4785BE3EFE2234C498BB15C9BEA4B3BAA47A5B2F73DDB",
+                      "bytes":  4477274
                   },
                   {
                       "path":  "sq-AL/Microsoft.ui.xaml.dll.mui",

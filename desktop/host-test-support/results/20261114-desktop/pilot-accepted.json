@@ -1,0 +1,6 @@
+{
+  "acceptedUtc": "2026-11-14T18:42:58.801544+00:00",
+  "attempts": 52,
+  "criteria": "automated: status passed, host exit 0, run-owned helpers exited, client 960x640 DIP after calibration, no capture resets; plus sampled visual inspection of reference/final/mismatch PNGs by the operator",
+  "note": "not an independent review"
+}

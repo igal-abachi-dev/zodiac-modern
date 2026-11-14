@@ -293,7 +293,9 @@ h1 {
   color: var(--muted);
   margin: 14px 0 20px;
 }
-.dialog-content .secondary { width: 100%; }
+.dialog-content .secondary {
+  width: 100%;
+}
 .workbench-shell {
   border-top: 1px solid var(--border);
   scroll-margin-top: 12px;
@@ -367,4 +369,9 @@ h1 {
   .progress-track {
     outline: 1px solid CanvasText;
   }
+}
+
+/* External SVG images do not inherit the button text color. */
+.action.primary .icon {
+  filter: brightness(0) invert(1);
 }

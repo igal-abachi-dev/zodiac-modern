@@ -6,7 +6,11 @@
     <Setter Property="Foreground" Value="#171A18"/>
     <Setter Property="Background" Value="#F8FAF9"/>
   </Style>
+  <Style Selector="TextBlock"><Setter Property="LineHeight" Value="21"/></Style>
+  <Style Selector="Border.fixture TextBlock"><Setter Property="LineHeight" Value="23.8"/></Style>
   <Style Selector="Button">
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
     <Setter Property="CornerRadius" Value="8"/>
     <Setter Property="Background" Value="White"/>
     <Setter Property="BorderBrush" Value="#DCE3DE"/>
@@ -15,6 +19,9 @@
     <Setter Property="MinHeight" Value="40"/>
     <Setter Property="FontSize" Value="12"/>
   </Style>
+  <Style Selector="Button StackPanel"><Setter Property="VerticalAlignment" Value="Center"/></Style>
+  <Style Selector="Button StackPanel TextBlock"><Setter Property="VerticalAlignment" Value="Center"/></Style>
+  <Style Selector="TextBox"><Setter Property="MinHeight" Value="40"/><Setter Property="CornerRadius" Value="8"/><Setter Property="Padding" Value="12,8"/></Style>
   <Style Selector="Button.primary">
     <Setter Property="Background" Value="#047857"/>
     <Setter Property="Foreground" Value="White"/>
@@ -39,6 +46,7 @@
     <Setter Property="Foreground" Value="#5D6660"/>
   </Style>
   <Style Selector="TextBlock.eyebrow">
+    <Setter Property="LineHeight" Value="15"/>
     <Setter Property="FontSize" Value="10"/>
     <Setter Property="FontWeight" Value="SemiBold"/>
     <Setter Property="Foreground" Value="#5D6660"/>
@@ -48,7 +56,7 @@
     <Setter Property="Background" Value="#F1F4F2"/>
     <Setter Property="BorderBrush" Value="#DCE3DE"/>
     <Setter Property="BorderThickness" Value="1"/>
-    <Setter Property="CornerRadius" Value="8"/>
+    <Setter Property="CornerRadius" Value="6"/>
     <Setter Property="Padding" Value="13"/>
     <Setter Property="MinHeight" Value="94"/>
   </Style>

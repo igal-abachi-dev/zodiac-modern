@@ -25,7 +25,7 @@ ApplicationWindow {
         clip: true; boundsBehavior: Flickable.StopAtBounds
         ScrollBar.vertical: ScrollBar { }
         Column {
-            id: content; x: window.narrow ? 20 : 28; y: x; width: parent.width - 2*x; spacing: 20
+            id: content; x: (parent.width-width)/2; y: window.narrow ? 20 : 28; width: Math.min(1044,parent.width-2*y); spacing: 20
             GridLayout {
                 width: parent.width; columns: window.narrow ? 1 : 2; columnSpacing: 16; rowSpacing: 12
                 ColumnLayout {
@@ -37,7 +37,7 @@ ApplicationWindow {
                     }
                     BenchLabel { text: "A UI-only simulation for comparing desktop frontends."; color: Theme.muted; Layout.fillWidth: true }
                 }
-                BenchButton { id: aboutTrigger; text: "About this test"; Accessible.id: "about-trigger"; onClicked: about.open() }
+                BenchButton { id: aboutTrigger; text: "About this test"; glyph: "qrc:/Icons/info.svg"; Accessible.id: "about-trigger"; onClicked: about.open() }
             }
             Rectangle {
                 width: Math.min(parent.width,disclosure.implicitWidth+18); height: 32
@@ -55,15 +55,18 @@ ApplicationWindow {
             Card {
                 width: parent.width
                 contentItem: ColumnLayout { spacing: 14
-                    Flow { Layout.fillWidth: true; spacing: 12
-                        BenchLabel { text: bench.status; Accessible.id: "status"; topPadding: 8
+                    RowLayout { Layout.fillWidth: true; spacing: 8
+                        BenchLabel { text: bench.status; Accessible.id: "status"; font.pixelSize: 13; Layout.fillWidth: true
                             onTextChanged: Accessible.announce(text)
                         }
                         BenchButton { text: "Cancel"; visible: bench.busy; onClicked: bench.cancel() }
                         BenchButton { text: "Reset"; enabled: bench.ready; onClicked: bench.reset() }
                     }
-                    ProgressBar { Layout.fillWidth: true; from: 0; to: 100; value: bench.progress; Accessible.name: "Simulation progress" }
-                    BenchLabel { text: "Simulation progress  " + bench.progress + "%"; font.pixelSize: 11 }
+                    ProgressBar { Layout.fillWidth: true; Layout.preferredHeight: 6; from: 0; to: 100; value: bench.progress; Accessible.name: "Simulation progress" }
+                    RowLayout { Layout.fillWidth: true
+                        BenchLabel { text: "Simulation progress"; font.pixelSize: 11; color: Theme.muted; Layout.fillWidth: true }
+                        BenchLabel { text: bench.progress + "%"; font.pixelSize: 11; color: Theme.muted }
+                    }
                 }
             }
             GridLayout {

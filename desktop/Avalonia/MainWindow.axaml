@@ -9,9 +9,9 @@
               <Border Background="#F1F4F2" BorderBrush="#DCE3DE" BorderThickness="1" CornerRadius="8" Width="40" Height="40">
                 <icons:LucideIcon Kind="orbit" Width="20" Height="20"/>
               </Border>
-              <TextBlock Text="NeutronStar GUI Bench" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap"/>
+              <TextBlock Text="NeutronStar GUI Bench" LetterSpacing="-0.96" FontSize="24" LineHeight="31.2" FontWeight="SemiBold" VerticalAlignment="Center" TextWrapping="Wrap"/>
             </StackPanel>
-            <TextBlock Text="A UI-only simulation for comparing desktop frontends." Classes="muted" Margin="0,8,0,0" TextWrapping="Wrap"/>
+            <TextBlock Text="A UI-only simulation for comparing desktop frontends." Classes="muted" LineHeight="22.4" Margin="0,8,0,0" TextWrapping="Wrap"/>
           </StackPanel>
           <Button x:Name="AboutTrigger" Grid.Column="1" Command="{Binding AboutCommand}" AutomationProperties.Name="About this test" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal" Spacing="8">
@@ -23,7 +23,7 @@
         <Border Margin="0,4,0,0" HorizontalAlignment="Left" Background="#F1F4F2" BorderBrush="#DCE3DE" BorderThickness="1" CornerRadius="6" Padding="9,7">
           <StackPanel Orientation="Horizontal" Spacing="7">
             <icons:LucideIcon Kind="shield-check" Width="14" Height="14"/>
-            <TextBlock FontSize="10" FontWeight="SemiBold" Text="SIMULATION · NO FILES OR CRYPTOGRAPHY."/>
+            <TextBlock FontSize="10" LineHeight="15" FontWeight="SemiBold" Text="SIMULATION · NO FILES OR CRYPTOGRAPHY."/>
           </StackPanel>
         </Border>
         <Grid x:Name="Cards" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="20" RowSpacing="20">
@@ -31,13 +31,13 @@
             <StackPanel>
               <StackPanel Orientation="Horizontal" Spacing="8">
                 <icons:LucideIcon Kind="unlock-keyhole"/>
-                <TextBlock Text="Decrypt" FontSize="16" FontWeight="SemiBold"/>
+                <TextBlock Text="Decrypt" FontSize="16" LineHeight="24" FontWeight="SemiBold"/>
               </StackPanel>
               <TextBlock Classes="eyebrow" Text="SYNTHETIC INPUT"/>
               <Border Classes="fixture">
                 <StackPanel Spacing="5">
                   <TextBlock Text="Synthetic sample: starlight.nsx"/>
-                  <TextBlock Classes="muted" FontSize="12" Text="No disk file is opened."/>
+                  <TextBlock Classes="muted" FontSize="12" LineHeight="20.4" Text="No disk file is opened."/>
                 </StackPanel>
               </Border>
               <Button Classes="action" AutomationProperties.AutomationId="decrypt" AutomationProperties.Name="Simulate decryption" Command="{Binding DecryptCommand}">
@@ -52,7 +52,7 @@
             <StackPanel>
               <StackPanel Orientation="Horizontal" Spacing="8">
                 <icons:LucideIcon Kind="lock-keyhole"/>
-                <TextBlock Text="Encrypt" FontSize="16" FontWeight="SemiBold"/>
+                <TextBlock Text="Encrypt" FontSize="16" LineHeight="24" FontWeight="SemiBold"/>
               </StackPanel>
               <TextBlock Classes="eyebrow" Text="SYNTHETIC INPUT"/>
               <Border Classes="fixture">
@@ -82,16 +82,16 @@
             <StackPanel Spacing="8">
               <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" Height="6" Foreground="#047857" Background="#F1F4F2" AutomationProperties.Name="Simulation progress"/>
               <Grid ColumnDefinitions="*,Auto">
-                <TextBlock Text="Simulation progress" Classes="muted" FontSize="11"/>
-                <TextBlock Grid.Column="1" Text="{Binding Percent}" Classes="muted" FontSize="11"/>
+                <TextBlock Text="Simulation progress" Classes="muted" FontSize="11" LineHeight="17.6"/>
+                <TextBlock Grid.Column="1" Text="{Binding Percent}" Classes="muted" FontSize="11" LineHeight="17.6"/>
               </Grid>
             </StackPanel>
           </StackPanel>
         </Border>
         <Grid x:Name="FooterGrid" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="16" RowSpacing="10">
           <Button x:Name="OpenWorkbenchButton" Content="Open workbench" Command="{Binding OpenWorkbenchCommand}" HorizontalAlignment="Left"/>
-          <TextBlock x:Name="PrivacyText" Grid.Column="1" Text="Local interface. Synthetic data. Nothing is encrypted or decrypted." Classes="muted" FontSize="11" TextWrapping="Wrap" VerticalAlignment="Center"/>
-          <TextBlock x:Name="RendererText" Grid.Column="2" Text="CONTROLLED RENDERER · LOCAL STATE" Classes="muted" FontSize="11" VerticalAlignment="Center"/>
+          <TextBlock x:Name="PrivacyText" Grid.Column="1" Text="Local interface. Synthetic data. Nothing is encrypted or decrypted." Classes="muted" FontSize="11" LineHeight="17.6" TextWrapping="Wrap" VerticalAlignment="Center"/>
+          <TextBlock x:Name="RendererText" Grid.Column="2" Text="CONTROLLED RENDERER · LOCAL STATE" Classes="muted" FontSize="11" LineHeight="17.6" VerticalAlignment="Center"/>
         </Grid>
         <Border x:Name="WorkbenchSection" IsVisible="{Binding HasWorkbench}" BorderBrush="#DCE3DE" BorderThickness="0,1,0,0" Padding="0,24,0,0">
           <StackPanel Spacing="14">
@@ -124,7 +124,7 @@
                         <TextBlock Text="Filter synthetic rows"/>
                         <TextBox Text="{Binding Query,Mode=TwoWay}" AutomationProperties.Name="Filter synthetic rows" AutomationProperties.AutomationId="workload-query"/>
                         <TextBlock Text="{Binding Summary}" AutomationProperties.AutomationId="workload-summary"/>
-                        <TextBlock Text="Case-sensitive label filtering. Replacement advances row IDs; remount resets IDs, query and tick." Classes="muted" FontSize="12" TextWrapping="Wrap"/>
+                        <TextBlock Text="Case-sensitive label filtering. Replacement advances row IDs; remount resets IDs, query and tick." Classes="muted" FontSize="12" LineHeight="20.4" TextWrapping="Wrap"/>
                       </StackPanel>
                     </Border>
                     <ItemsControl ItemsSource="{Binding VisibleRows}" AutomationProperties.Name="Synthetic rows" AutomationProperties.AutomationId="workload-rows">
@@ -152,7 +152,7 @@
     <Border x:Name="DialogOverlay" IsVisible="{Binding AboutOpen}" Background="#6607130D" Padding="28">
       <Border x:Name="AboutCard" Background="White" BorderBrush="#DCE3DE" BorderThickness="1" CornerRadius="8" Padding="24" MaxWidth="420" VerticalAlignment="Center" HorizontalAlignment="Center" KeyboardNavigation.TabNavigation="Cycle" AutomationProperties.Name="About this test">
         <StackPanel Spacing="16">
-          <TextBlock Text="About this test" FontSize="18" FontWeight="SemiBold"/>
+          <TextBlock Text="About this test" FontSize="18" LineHeight="27" FontWeight="SemiBold"/>
           <TextBlock Text="Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved." TextWrapping="Wrap" Classes="muted" LineHeight="24"/>
           <Button x:Name="CloseAboutButton" AutomationProperties.AutomationId="about-close" Content="Close" Command="{Binding CloseAboutCommand}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
         </StackPanel>

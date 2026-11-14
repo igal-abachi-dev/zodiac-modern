@@ -2039,3 +2039,35 @@ not UIA acceptance, physical-presentation timing or a comparative cohort. Later
 measurement must calibrate production pixel/presentation endpoints and disclose
 or normalize text differences. [Validation](Dear-ImGui-dx11-12/VALIDATION.md)
 separates those gates and actual RDP/physical checks from local evidence.
+
+
+## 13.25 Standard-control visual parity across desktop candidates (2026-11-05)
+
+The appearance reference is **Tauri v2 + Svelte 5 first**, with **Avalonia as the
+reference for desktop-specific gaps**, including list/filter details. Independent
+implementations should match both appearance and interaction: progress, scrolling,
+field focus/typing, list rows, disabled states, modal focus and responsive layout.
+
+The user explicitly selected maximum parity through public styling/layout APIs,
+**without remaking controls or adding custom-painted replacements**. Consequently,
+a visually different stock control is a recorded trade-off, not an invitation to
+fork the toolkit. CSS in Electron, XAML in Avalonia/WinUI, Material themes in Flutter
+and Qt Quick styling provide substantial flexibility. React Native needed larger
+application layout changes; that alone does not establish an inherent styling
+limit. Slint Fluent exposes fewer appearance knobs for stock controls; its public
+Palette color outputs are not writable app-theme properties. wxMSW retains more
+native Win32 chrome/borders/gauge/list/scroll behavior. ImGui has flexible stock
+widget styling but still lacks this project's UIA and full complex-text parity.
+
+Two practical findings from rendered QA: Flutter's default desktop visual density
+can reduce an explicitly requested button minimum, so fix density when comparing
+40-pixel controls. WinUI's ProgressBar root height does not set the one-pixel stock
+track height; the supported ProgressBarTrackHeight theme resource does, without a
+replacement template. wxWidgets requires header/footer sizers and text wrapping to
+adapt too: merely stacking cards can leave the entire page too wide.
+
+See [the contract, limitations and evidence](DESKTOP-VISUAL-PARITY.md). Screenshots
+and control rectangles support visual review; they do not produce a defensible
+universal 90?99% score or a performance winner. New visual artifacts need new
+benchmark hashes. Historic measurements and deferred physical acceptance remain
+separate.

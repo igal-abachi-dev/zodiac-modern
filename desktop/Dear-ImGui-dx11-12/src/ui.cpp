@@ -1,4 +1,5 @@
 #include "ui.hpp"
+#include "lucide_icons.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstring>
@@ -40,6 +41,7 @@ void Ui::loadFonts(const std::filesystem::path &root) {
         auto *font = load(root / "assets/Fonts" / file, nullptr);
         ImFontConfig merge{};
         merge.MergeMode = true;
+        load(root / "assets/Fonts/lucide-bench.ttf", &merge);
         load(root / "assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf", &merge);
         if (!emoji.empty() && std::filesystem::exists(emoji))
             load(emoji, &merge);
@@ -47,29 +49,37 @@ void Ui::loadFonts(const std::filesystem::path &root) {
     };
     regular = add("inter-latin-400-normal.ttf");
     bold = add("inter-latin-600-normal.ttf");
+    symbols = load(root / "assets/Fonts/lucide-bench.ttf", nullptr);
     io.FontDefault = regular;
 }
 void Ui::scale(float value) {
     dpi = value;
     ImGui::StyleColorsLight();
     auto &s = ImGui::GetStyle();
-    s.WindowPadding = {24, 24};
-    s.FramePadding = {12, 10};
-    s.ItemSpacing = {8, 12};
-    s.ChildRounding = 12;
-    s.FrameRounding = 6;
-    s.PopupRounding = 12;
+    s.WindowPadding = {28, 28};
+    s.FramePadding = {13, 0};
+    s.ItemSpacing = {8, 20};
+    s.ChildRounding = 8;
+    s.FrameRounding = 8;
+    s.PopupRounding = 8;
     s.ChildBorderSize = 1;
     s.FrameBorderSize = 1;
     s.WindowBorderSize = 0;
     s.FontSizeBase = 14;
-    s.Colors[ImGuiCol_WindowBg] = {.98f, .98f, .98f, 1};
+    s.Colors[ImGuiCol_WindowBg] = {248.f / 255, 250.f / 255, 249.f / 255, 1};
     s.Colors[ImGuiCol_ChildBg] = {1, 1, 1, 1};
-    s.Colors[ImGuiCol_Text] = {.095f, .095f, .11f, 1};
-    s.Colors[ImGuiCol_Button] = {.015f, .47f, .34f, 1};
-    s.Colors[ImGuiCol_ButtonHovered] = {.025f, .37f, .27f, 1};
-    s.Colors[ImGuiCol_ButtonActive] = {.025f, .3f, .22f, 1};
-    s.Colors[ImGuiCol_PlotHistogram] = {.02f, .59f, .4f, 1};
+    s.Colors[ImGuiCol_PopupBg] = {1, 1, 1, 1};
+    s.Colors[ImGuiCol_Text] = {23.f / 255, 26.f / 255, 24.f / 255, 1};
+    s.Colors[ImGuiCol_TextDisabled] = {93.f / 255, 102.f / 255, 96.f / 255, 1};
+    s.Colors[ImGuiCol_Border] = {220.f / 255, 227.f / 255, 222.f / 255, 1};
+    s.Colors[ImGuiCol_Button] = {1, 1, 1, 1};
+    s.Colors[ImGuiCol_ButtonHovered] = {.97f, .97f, .97f, 1};
+    s.Colors[ImGuiCol_ButtonActive] = {.94f, .95f, .94f, 1};
+    s.Colors[ImGuiCol_FrameBg] = {241.f / 255, 244.f / 255, 242.f / 255, 1};
+    s.Colors[ImGuiCol_PlotHistogram] = {4.f / 255, 120.f / 255, 87.f / 255, 1};
+    s.Colors[ImGuiCol_NavCursor] = s.Colors[ImGuiCol_PlotHistogram];
+    s.Colors[ImGuiCol_ModalWindowDimBg] = {7.f / 255, 19.f / 255, 13.f / 255, .4f};
+    s.DisabledAlpha = .55f;
     s.ScaleAllSizes(dpi);
     s.FontScaleDpi = dpi;
 }
@@ -82,12 +92,26 @@ void Ui::mark(const char *name, bool enabled) {
     (void)enabled;
 #endif
 }
-bool Ui::button(const char *label, bool enabled, float width) {
+bool Ui::button(const char *label, bool enabled, float width, bool primary, float fontSize) {
     ImGui::BeginDisabled(!enabled);
-    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1, 1, 1, 1));
-    const bool clicked = ImGui::Button(label, {width, 38 * dpi});
-    ImGui::PopStyleColor();
+    ImGui::PushFont(regular, fontSize);
+    if (primary) {
+        ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(4.f / 255, 120.f / 255, 87.f / 255, 1));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(.015f, .45f, .33f, 1));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(.015f, .40f, .30f, 1));
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1, 1, 1, 1));
+    }
+    const char *glyph =
+        std::strcmp(label, "About this test") == 0       ? lucide::info
+        : std::strcmp(label, "Simulate encryption") == 0 ? lucide::arrow_up_from_line
+        : std::strcmp(label, "Simulate decryption") == 0 ? lucide::arrow_down_to_line
+                                                         : nullptr;
+    const std::string display = glyph ? std::string(glyph) + "  " + label + "###" + label : label;
+    const bool clicked = ImGui::Button(display.c_str(), {width, 40 * dpi});
     mark(label, enabled);
+    if (primary)
+        ImGui::PopStyleColor(4);
+    ImGui::PopFont();
     ImGui::EndDisabled();
     return clicked;
 }
@@ -96,81 +120,125 @@ void Ui::title(const char *text, float size) {
     ImGui::TextWrapped("%s", text);
     ImGui::PopFont();
 }
-void Ui::icon(bool orbit, bool locked) {
-    const auto p = ImGui::GetCursorScreenPos();
-    ImGui::Dummy({24 * dpi, 24 * dpi});
-    auto *draw = ImGui::GetWindowDrawList();
-    const auto color = IM_COL32(4, 120, 87, 255);
-    auto at = [&](float x, float y) { return ImVec2(p.x + x * dpi, p.y + y * dpi); };
-    const float stroke = 2 * dpi;
-    if (orbit) {
-        draw->PathArcTo(at(12, 12), 10 * dpi, -.584f, 1.745f);
-        draw->PathStroke(color, stroke);
-        draw->PathArcTo(at(12, 12), 10 * dpi, 2.557f, 4.887f);
-        draw->PathStroke(color, stroke);
-        draw->AddCircle(at(12, 12), 3 * dpi, color, 0, stroke);
-        draw->AddCircle(at(19, 5), 2 * dpi, color, 0, stroke);
-        draw->AddCircle(at(5, 19), 2 * dpi, color, 0, stroke);
-    } else {
-        draw->AddRect(at(3, 11), at(21, 22), color, 2 * dpi, stroke);
-        draw->PathArcTo(at(12, 7), 5 * dpi, 3.14159265f, 6.2831853f);
-        draw->PathStroke(color, stroke);
-        draw->AddLine(at(7, 7), at(7, 11), color, stroke);
-        if (locked)
-            draw->AddLine(at(17, 7), at(17, 11), color, stroke);
-        draw->AddCircleFilled(at(12, 16), dpi * 1.4f, color);
-    }
+void Ui::icon(const char *glyph, float size) {
+    ImGui::PushFont(symbols, size);
+    ImGui::TextUnformatted(glyph);
+    ImGui::PopFont();
 }
 void Ui::mainPage(const GraphicsInfo &graphics) {
-    icon(true);
-    ImGui::SameLine();
-    title("NeutronStar GUI Bench", 28);
-    ImGui::TextWrapped("A UI-only simulation for comparing desktop frontends.");
-    ImGui::TextColored({.015f, .47f, .34f, 1}, "SIMULATION · NO FILES OR CRYPTOGRAPHY.");
-    ImGui::Spacing();
+    const auto origin = ImGui::GetCursorPos();
+    const auto available = ImGui::GetContentRegionAvail().x;
+    const bool narrow = ImGui::GetIO().DisplaySize.x < 760 * dpi;
     const bool running = state.operation.phase == bench::Phase::running;
-    const bool narrow = ImGui::GetContentRegionAvail().x < 592 * dpi;
-    const float width = narrow ? ImGui::GetContentRegionAvail().x
-                               : (ImGui::GetContentRegionAvail().x - 16 * dpi) / 2;
+    const ImVec4 muted(93.f / 255, 102.f / 255, 96.f / 255, 1);
+    auto y = [&](float value) { ImGui::SetCursorPos({origin.x, origin.y + value * dpi}); };
+    auto text = [&](const char *value, float size, bool subdued = false) {
+        ImGui::PushFont(regular, size);
+        if (subdued)
+            ImGui::PushStyleColor(ImGuiCol_Text, muted);
+        ImGui::TextWrapped("%s", value);
+        if (subdued)
+            ImGui::PopStyleColor();
+        ImGui::PopFont();
+    };
+    // Use stock ImGui children/buttons/progress widgets; no painted substitute controls.
+    ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(241.f / 255, 244.f / 255, 242.f / 255, 1));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(10 * dpi, 10 * dpi));
+    ImGui::BeginChild("brand", {40 * dpi, 40 * dpi}, ImGuiChildFlags_Borders,
+                      ImGuiWindowFlags_NoScrollbar);
+    icon(lucide::orbit, 20);
+    ImGui::EndChild();
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor();
+    ImGui::SetCursorPos({origin.x + 52 * dpi, origin.y + 5 * dpi});
+    title("NeutronStar GUI Bench", 24);
+    y(48);
+    text("A UI-only simulation for comparing desktop frontends.", 14, true);
+    ImGui::SetCursorPos(
+        {narrow ? origin.x : origin.x + available - 126 * dpi, origin.y + (narrow ? 84 : 0) * dpi});
+    if (restoreAbout) {
+        ImGui::SetKeyboardFocusHere();
+        restoreAbout = false;
+    }
+    if (button("About this test", true, 126 * dpi)) {
+        ImGui::OpenPopup("About this test");
+        about = true;
+    }
+    const float badgeY = narrow ? 148.f : 94.4f;
+    y(badgeY);
+    ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(241.f / 255, 244.f / 255, 242.f / 255, 1));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(9 * dpi, 7 * dpi));
+    ImGui::BeginChild("disclosure", {300 * dpi, 31 * dpi}, ImGuiChildFlags_Borders,
+                      ImGuiWindowFlags_NoScrollbar);
+    icon(lucide::shield_check, 14);
+    ImGui::SameLine(0, 7 * dpi);
+    text("SIMULATION \xc2\xb7 NO FILES OR CRYPTOGRAPHY.", 10);
+    ImGui::EndChild();
+    ImGui::PopStyleVar();
+    ImGui::PopStyleColor();
+    const float cardsY = badgeY + 51;
+    const float width = narrow ? available : (available - 20 * dpi) / 2;
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(16 * dpi, 16 * dpi));
     for (int i = 0; i < 2; ++i) {
-        if (i && !narrow)
-            ImGui::SameLine(0, 16 * dpi);
-        ImGui::BeginChild(i ? "encrypt-card" : "decrypt-card", {width, 232 * dpi},
-                          ImGuiChildFlags_Borders);
-        icon(false, i != 0);
-        ImGui::SameLine();
-        title(i ? "Encrypt" : "Decrypt");
-        ImGui::TextUnformatted(i ? "Message" : "Synthetic input");
-        if (i) {
-            ImGui::SetNextItemWidth(-1);
-            ImGui::InputTextMultiline("##message", message.data(), message.size(), {-1, 72 * dpi});
-            mark("Message");
-        } else {
-            ImGui::TextWrapped("Synthetic sample: starlight.nsx");
-            ImGui::TextWrapped("No disk file is opened.");
+        ImGui::SetCursorPos({origin.x + (i && !narrow ? width + 20 * dpi : 0),
+                             origin.y + (cardsY + (i && narrow ? 272.f : 0)) * dpi});
+        ImGui::BeginChild(i ? "encrypt-card" : "decrypt-card", {width, 252 * dpi},
+                          ImGuiChildFlags_Borders, ImGuiWindowFlags_NoScrollbar);
+        icon(i ? lucide::lock_keyhole : lucide::unlock_keyhole);
+        ImGui::SameLine(0, 8 * dpi);
+        title(i ? "Encrypt" : "Decrypt", 16);
+        ImGui::SetCursorPos({16 * dpi, 60 * dpi});
+        text("SYNTHETIC INPUT", 10, true);
+        ImGui::SetCursorPos({16 * dpi, 84 * dpi});
+        ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(241.f / 255, 244.f / 255, 242.f / 255, 1));
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(13 * dpi, 13 * dpi));
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildRounding, 6 * dpi);
+        ImGui::BeginChild("fixture", {-1, 94 * dpi}, ImGuiChildFlags_Borders,
+                          ImGuiWindowFlags_NoScrollbar);
+        text(i ? message.data() : "Synthetic sample: starlight.nsx", 14);
+        if (!i) {
+            ImGui::SetCursorPosY(42 * dpi);
+            text("No disk file is opened.", 12, true);
         }
-        ImGui::SetCursorPosY(ImGui::GetWindowHeight() - ImGui::GetStyle().WindowPadding.y -
-                             38 * dpi);
-        if (button(i ? "Simulate encryption" : "Simulate decryption", ready && !running, -1))
+        ImGui::EndChild();
+        ImGui::PopStyleVar(2);
+        ImGui::PopStyleColor();
+        ImGui::SetCursorPos({16 * dpi, 194 * dpi});
+        if (button(i ? "Simulate encryption" : "Simulate decryption", ready && !running, -1, i != 0,
+                   14))
             state.start(bench::Clock::now());
         ImGui::EndChild();
     }
-    const char *status = !ready                                         ? "Loading…"
+    const float statusY = cardsY + (narrow ? 524.f : 252.f) + 20;
+    y(statusY);
+    ImGui::BeginChild("status-card", {available, 118.5f * dpi}, ImGuiChildFlags_Borders,
+                      ImGuiWindowFlags_NoScrollbar);
+    const char *status = !ready                                         ? "Loading..."
                          : state.operation.phase == bench::Phase::ready ? "Ready"
-                         : running                                      ? "Simulation running…"
+                         : running                                      ? "Simulation running..."
                          : state.operation.phase == bench::Phase::success
                              ? "Simulation complete. No file was changed."
                              : "Simulation canceled.";
-    ImGui::TextWrapped("%s", status);
-    ImGui::ProgressBar(static_cast<float>(state.operation.progress) / 100, {-1, 8 * dpi}, "");
-    if (running) {
-        if (button("Cancel"))
-            state.operation.cancel();
-        ImGui::SameLine();
-    }
-    if (button("Reset"))
+    ImGui::SetCursorPos({16 * dpi, 25 * dpi});
+    text(status, 13);
+    ImGui::SetCursorPos({ImGui::GetWindowWidth() - 76 * dpi, 16 * dpi});
+    if (button("Reset", ready, 60 * dpi))
         state.operation.reset();
-    ImGui::SameLine();
+    if (running) {
+        ImGui::SetCursorPos({ImGui::GetWindowWidth() - 154 * dpi, 16 * dpi});
+        if (button("Cancel", true, 70 * dpi))
+            state.operation.cancel();
+    }
+    ImGui::SetCursorPos({16 * dpi, 70 * dpi});
+    ImGui::ProgressBar(static_cast<float>(state.operation.progress) / 100, {-1, 6 * dpi}, "");
+    ImGui::SetCursorPos({16 * dpi, 84 * dpi});
+    text("Simulation progress", 11, true);
+    ImGui::SetCursorPos({ImGui::GetWindowWidth() - 48 * dpi, 84 * dpi});
+    const auto percent = std::to_string(state.operation.progress) + "%";
+    text(percent.c_str(), 11, true);
+    ImGui::EndChild();
+    ImGui::PopStyleVar();
+    y(statusY + 136.5f);
     if (restoreWorkbench) {
         ImGui::SetKeyboardFocusHere();
         restoreWorkbench = false;
@@ -179,37 +247,47 @@ void Ui::mainPage(const GraphicsInfo &graphics) {
         state.open();
         query.fill(0);
     }
-    ImGui::SameLine();
-    if (restoreAbout) {
-        ImGui::SetKeyboardFocusHere();
-        restoreAbout = false;
-    }
-    if (button("About this test")) {
-        ImGui::OpenPopup("About this test");
-        about = true;
-    }
-    ImGui::TextWrapped("%s · %s%s%s", graphics.renderer.c_str(), graphics.adapter.c_str(),
-                       graphics.fallback ? " · fallback" : "",
-                       graphics.software ? " · SOFTWARE" : "");
-    ImGui::SetNextWindowSize({440 * dpi, 0}, ImGuiCond_Appearing);
+    if (!narrow)
+        ImGui::SameLine(0, 12 * dpi);
+    text("Local interface. Synthetic data. Nothing is encrypted or decrypted.", 11, true);
+    if (!narrow)
+        ImGui::SameLine(0, 12 * dpi);
+    text("CONTROLLED RENDERER \xc2\xb7 LOCAL STATE", 11, true);
+    ImGui::SetNextWindowSize({420 * dpi, 0}, ImGuiCond_Appearing);
+    ImGui::SetNextWindowPos({ImGui::GetIO().DisplaySize.x / 2, ImGui::GetIO().DisplaySize.y / 2},
+                            ImGuiCond_Appearing, {.5f, .5f});
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(24 * dpi, 24 * dpi));
     if (ImGui::BeginPopupModal("About this test", nullptr,
-                               ImGuiWindowFlags_AlwaysAutoResize |
+                               ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar |
                                    ImGuiWindowFlags_NoSavedSettings)) {
-        ImGui::TextWrapped("Actions are UI-only simulations. No files, cryptography, Go CLI, "
-                           "network or native bridge are involved.");
+        title("About this test", 18);
+        text("Actions are UI-only simulations. No files, cryptography, Go CLI, network or native "
+             "bridge are involved.",
+             14, true);
+        // Renderer diagnostics remain available without changing the main-screen layout.
+        text(graphics.renderer.c_str(), 11, true);
         if (ImGui::IsWindowAppearing())
             ImGui::SetKeyboardFocusHere();
-        const bool close = button("Close");
-        if (close || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
+        if (button("Close", true, -1) || ImGui::IsKeyPressed(ImGuiKey_Escape)) {
             ImGui::CloseCurrentPopup();
             about = false;
             restoreAbout = true;
         }
         ImGui::EndPopup();
     }
+    ImGui::PopStyleVar();
 }
 void Ui::workPage() {
-    title("List and filter workbench", 24);
+    const auto heading = ImGui::GetCursorPos();
+    const float available = ImGui::GetContentRegionAvail().x;
+    title("List and filter workbench", 22);
+    if (available > 704 * dpi)
+        ImGui::SetCursorPos({heading.x + available - 150 * dpi, heading.y});
+    if (button("Back to main screen", true, 150 * dpi)) {
+        state.back();
+        restoreWorkbench = true;
+    }
+    ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 8 * dpi);
     ImGui::TextWrapped(
         "Deterministic synthetic rows. No files, network, cryptography or native commands.");
     ImGui::TextUnformatted("Workbench ready");
@@ -223,10 +301,6 @@ void Ui::workPage() {
             fn();
         first = false;
     };
-    action("Back to main screen", [&] {
-        state.back();
-        restoreWorkbench = true;
-    });
     action("1,000 rows", [&] {
         state.stop();
         state.workload.replace(1000);
@@ -249,7 +323,10 @@ void Ui::workPage() {
     });
     ImGui::TextUnformatted("Filter synthetic rows");
     ImGui::SetNextItemWidth(-1);
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding,
+                        ImVec2(12 * dpi, (40 * dpi - ImGui::GetFontSize()) / 2));
     ImGui::InputText("##filter", query.data(), query.size());
+    ImGui::PopStyleVar();
     mark("Filter synthetic rows");
     visibleRows = 0;
     firstId = 0;
@@ -280,6 +357,9 @@ void Ui::draw(const GraphicsInfo &graphics) {
     auto &io = ImGui::GetIO();
     ImGui::SetNextWindowPos({0, 0});
     ImGui::SetNextWindowSize(io.DisplaySize);
+    const float inset = io.DisplaySize.x < 760 * dpi ? 20.f : 28.f;
+    const float horizontal = std::max(inset * dpi, (io.DisplaySize.x - 1044 * dpi) / 2);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(horizontal, inset * dpi));
     ImGui::Begin("NeutronStar surface", nullptr,
                  ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoMove |
                      ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoBringToFrontOnFocus);
@@ -288,6 +368,7 @@ void Ui::draw(const GraphicsInfo &graphics) {
     else
         mainPage(graphics);
     ImGui::End();
+    ImGui::PopStyleVar();
 }
 
 #ifdef NEUTRONSTAR_PROBE

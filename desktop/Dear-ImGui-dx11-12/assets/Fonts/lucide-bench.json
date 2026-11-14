@@ -1,0 +1,18 @@
+{
+  "package": "lucide-static@1.58.0",
+  "license": "ISC",
+  "source": "font/lucide.ttf",
+  "sourceSha256": "2c0453c7d2efb9a11f0de70842dfe87c1b7871717f1edb38b9495dfd3a3f31e0",
+  "fontTools": "4.67.0",
+  "operation": "Seven-glyph subset; no path redesign",
+  "outputSha256": "2dfc849ecb107e79df899d64018629aa2b29d5f72b9af55546cd71b2c22570ee",
+  "codepoints": {
+    "orbit": 58343,
+    "info": 57593,
+    "shield-check": 57855,
+    "lock-keyhole": 58673,
+    "unlock-keyhole": 58674,
+    "arrow-down-to-line": 58453,
+    "arrow-up-from-line": 58458
+  }
+}

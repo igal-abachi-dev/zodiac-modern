@@ -1,0 +1,7 @@
+{
+  "source": "arrow-up-from-line.svg",
+  "sourceSha256": "29b07d7685e0c02db472a1abbb8582b3957d3233964cf77dd646f090c2a47b4b",
+  "output": "arrow-up-from-line-white.svg",
+  "outputSha256": "9a1e1e5fd82f55053dd8a4f556cded8c8faf27bf8da0dd930bdbe43ef514e389",
+  "change": "Only #171a18 stroke replaced with #ffffff; all geometry unchanged"
+}

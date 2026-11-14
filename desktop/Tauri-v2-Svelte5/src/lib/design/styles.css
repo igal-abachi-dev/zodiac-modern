@@ -17,3 +17,6 @@
 @media(max-width:759px){.grid{grid-template-columns:1fr}.shell{padding:20px}.topbar{flex-wrap:wrap}.footer{align-items:flex-start;flex-direction:column}.status-row{align-items:flex-start;flex-direction:column}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 @media(forced-colors:active){.card,.fixture,.secondary,.action,.badge{border-color:ButtonText}.progress-fill,.status-dot{background:Highlight;forced-color-adjust:none}.progress-track{outline:1px solid CanvasText}}
+
+/* External SVG images do not inherit the button text color. */
+.action.primary .icon { filter: brightness(0) invert(1); }

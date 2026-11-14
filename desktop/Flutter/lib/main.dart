@@ -30,6 +30,9 @@ Future<void> main() async {
     'shield-check',
     'lock-keyhole',
     'unlock-keyhole',
+    'info',
+    'arrow-down-to-line',
+    'arrow-up-from-line',
   ]) {
     await SvgAssetLoader('assets/icons/$name.svg').loadBytes(null);
   }
@@ -44,6 +47,7 @@ class BenchApp extends StatelessWidget {
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
       useMaterial3: true,
+      visualDensity: VisualDensity.standard,
       brightness: Brightness.light,
       fontFamily: 'Inter',
       fontFamilyFallback: const ['Noto Sans Hebrew', 'Segoe UI Emoji'],
@@ -64,7 +68,11 @@ class BenchApp extends StatelessWidget {
           minimumSize: const Size(0, 40),
           padding: const EdgeInsets.symmetric(horizontal: 13),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 12, fontWeight: FontWeight.w500),
+          textStyle: const TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
@@ -73,7 +81,11 @@ class BenchApp extends StatelessWidget {
           minimumSize: const Size(0, 40),
           padding: const EdgeInsets.symmetric(horizontal: 13),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 12, fontWeight: FontWeight.w500),
+          textStyle: const TextStyle(
+            fontFamily: 'Inter',
+            fontSize: 12,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     ),
@@ -81,8 +93,13 @@ class BenchApp extends StatelessWidget {
   );
 }
 
-Widget icon(String name, [double size = 16]) => ExcludeSemantics(
-  child: SvgPicture.asset('assets/icons/$name.svg', width: size, height: size),
+Widget icon(String name, [double size = 16, Color? tint]) => ExcludeSemantics(
+  child: SvgPicture.asset(
+    'assets/icons/$name.svg',
+    width: size,
+    height: size,
+    colorFilter: tint == null ? null : ColorFilter.mode(tint, BlendMode.srcIn),
+  ),
 );
 Widget panel(Widget child) => Container(
   padding: const EdgeInsets.all(16),
@@ -100,7 +117,13 @@ Widget label(
   FontWeight? weight,
 }) => Text(
   text,
-  style: TextStyle(fontSize: size, height: size == 24 ? 1.3 : 1.5, letterSpacing: size == 24 ? -0.96 : null, color: color, fontWeight: weight),
+  style: TextStyle(
+    fontSize: size,
+    height: size == 24 ? 1.3 : 1.5,
+    letterSpacing: size == 24 ? -0.96 : 0,
+    color: color,
+    fontWeight: weight,
+  ),
 );
 Widget button(
   String name,
@@ -108,10 +131,18 @@ Widget button(
   String? id,
   FocusNode? focus,
   String? hint,
+  String? iconName,
 }) => Semantics(
   identifier: id ?? name,
   hint: hint,
-  child: OutlinedButton(onPressed: action, focusNode: focus, child: Text(name)),
+  child: iconName == null
+      ? OutlinedButton(onPressed: action, focusNode: focus, child: Text(name))
+      : OutlinedButton.icon(
+          onPressed: action,
+          focusNode: focus,
+          icon: icon(iconName),
+          label: Text(name),
+        ),
 );
 
 class BenchScreen extends StatefulWidget {
@@ -150,10 +181,40 @@ class _BenchScreenState extends State<BenchScreen> {
       context: context,
       barrierColor: const Color(0x6607130d),
       builder: (context) => Dialog(
-        backgroundColor: Colors.white, surfaceTintColor: Colors.transparent,
+        backgroundColor: Colors.white,
+        surfaceTintColor: Colors.transparent,
         insetPadding: const EdgeInsets.all(28),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8), side: const BorderSide(color: line)),
-        child: ConstrainedBox(constraints: const BoxConstraints(maxWidth: 420), child: Padding(padding: const EdgeInsets.all(24), child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.stretch, children: [label('About this test', size: 18, weight: FontWeight.w600), const SizedBox(height: 14), label('Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved.', color: muted), const SizedBox(height: 20), Semantics(identifier: 'about-close', child: OutlinedButton(autofocus: true, onPressed: () => Navigator.pop(context), child: const Text('Close')))]))),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: const BorderSide(color: line),
+        ),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 420),
+          child: Padding(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                label('About this test', size: 18, weight: FontWeight.w600),
+                const SizedBox(height: 14),
+                label(
+                  'Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved.',
+                  color: muted,
+                ),
+                const SizedBox(height: 20),
+                Semantics(
+                  identifier: 'about-close',
+                  child: OutlinedButton(
+                    autofocus: true,
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text('Close'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
     dialogOpen = false;
@@ -230,7 +291,12 @@ class _BenchScreenState extends State<BenchScreen> {
             ],
           ),
           const SizedBox(height: 20),
-          label('SYNTHETIC INPUT', size: 10, color: muted, weight: FontWeight.w600),
+          label(
+            'SYNTHETIC INPUT',
+            size: 10,
+            color: muted,
+            weight: FontWeight.w600,
+          ),
           const SizedBox(height: 9),
           Container(
             constraints: const BoxConstraints(minHeight: 94),
@@ -257,8 +323,30 @@ class _BenchScreenState extends State<BenchScreen> {
             child: SizedBox(
               height: 40,
               child: encrypt
-                  ? FilledButton(onPressed: action, style: FilledButton.styleFrom(textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500)), child: Text(text))
-                  : OutlinedButton(onPressed: action, style: OutlinedButton.styleFrom(textStyle: const TextStyle(fontFamily: 'Inter', fontSize: 14, fontWeight: FontWeight.w500)), child: Text(text)),
+                  ? FilledButton.icon(
+                      icon: icon('arrow-up-from-line', 16, Colors.white),
+                      onPressed: action,
+                      style: FilledButton.styleFrom(
+                        textStyle: const TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      label: Text(text),
+                    )
+                  : OutlinedButton.icon(
+                      icon: icon('arrow-down-to-line'),
+                      onPressed: action,
+                      style: OutlinedButton.styleFrom(
+                        textStyle: const TextStyle(
+                          fontFamily: 'Inter',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      label: Text(text),
+                    ),
             ),
           ),
         ],
@@ -276,7 +364,9 @@ class _BenchScreenState extends State<BenchScreen> {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 1100),
             child: Padding(
-              padding: EdgeInsets.all(MediaQuery.sizeOf(context).width < 760 ? 20 : 28),
+              padding: EdgeInsets.all(
+                MediaQuery.sizeOf(context).width < 760 ? 20 : 28,
+              ),
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   final narrow = MediaQuery.sizeOf(context).width < 760;
@@ -285,7 +375,16 @@ class _BenchScreenState extends State<BenchScreen> {
                     children: [
                       Row(
                         children: [
-                          Container(width: 40, height: 40, decoration: BoxDecoration(color: surface, border: Border.all(color: line), borderRadius: BorderRadius.circular(8)), child: Center(child: icon('orbit', 20))),
+                          Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: surface,
+                              border: Border.all(color: line),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Center(child: icon('orbit', 20)),
+                          ),
                           const SizedBox(width: 12),
                           Expanded(
                             child: label(
@@ -306,6 +405,7 @@ class _BenchScreenState extends State<BenchScreen> {
                   final aboutButton = button(
                     'About this test',
                     about,
+                    iconName: 'info',
                     id: 'about-trigger',
                     focus: aboutFocus,
                   );
@@ -321,13 +421,14 @@ class _BenchScreenState extends State<BenchScreen> {
                         ),
                       ] else
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(child: header),
                             const SizedBox(width: 12),
                             aboutButton,
                           ],
                         ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 24),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Container(
@@ -374,15 +475,61 @@ class _BenchScreenState extends State<BenchScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
-                            Row(children: [Container(width: 7, height: 7, decoration: const BoxDecoration(color: emerald, shape: BoxShape.circle)), const SizedBox(width: 8), Expanded(child: Semantics(identifier: 'status', liveRegion: true, child: label(flow.status, size: 13))), if (flow.running) ...[button('Cancel', flow.cancel), const SizedBox(width: 8)], button('Reset', flow.ready ? flow.reset : null)]),
+                            Row(
+                              children: [
+                                Container(
+                                  width: 7,
+                                  height: 7,
+                                  decoration: const BoxDecoration(
+                                    color: emerald,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Semantics(
+                                    identifier: 'status',
+                                    liveRegion: true,
+                                    child: label(flow.status, size: 13),
+                                  ),
+                                ),
+                                if (flow.running) ...[
+                                  button('Cancel', flow.cancel),
+                                  const SizedBox(width: 8),
+                                ],
+                                button('Reset', flow.ready ? flow.reset : null),
+                              ],
+                            ),
                             const SizedBox(height: 14),
-                            LinearProgressIndicator(value: flow.progress / 100, minHeight: 6, color: emerald, backgroundColor: surface, borderRadius: BorderRadius.circular(8), semanticsLabel: 'Simulation progress', semanticsValue: '${flow.progress}%'),
+                            LinearProgressIndicator(
+                              value: flow.progress / 100,
+                              minHeight: 6,
+                              color: emerald,
+                              backgroundColor: surface,
+                              borderRadius: BorderRadius.circular(8),
+                              semanticsLabel: 'Simulation progress',
+                              semanticsValue: '${flow.progress}%',
+                            ),
                             const SizedBox(height: 8),
-                            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [label('Simulation progress', size: 11, color: muted), label('${flow.progress}%', size: 11, color: muted)]),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                label(
+                                  'Simulation progress',
+                                  size: 11,
+                                  color: muted,
+                                ),
+                                label(
+                                  '${flow.progress}%',
+                                  size: 11,
+                                  color: muted,
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 18),
                       footer(narrow),
                       if (open)
                         Padding(
@@ -432,16 +579,38 @@ class _WorkbenchState extends State<Workbench> {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          label('List and filter workbench', size: 22, weight: FontWeight.w600),
-          const SizedBox(height: 10),
-          label(
-            'Deterministic synthetic rows. No files, network, cryptography or native commands.',
-            size: 12,
-          ),
-          const SizedBox(height: 16),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: button('Back to main screen', widget.onBack),
+          LayoutBuilder(
+            builder: (context, box) {
+              final heading = Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  label(
+                    'List and filter workbench',
+                    size: 22,
+                    weight: FontWeight.w600,
+                  ),
+                  const SizedBox(height: 8),
+                  label(
+                    'Deterministic synthetic rows. No files, network, cryptography or native commands.',
+                    color: muted,
+                  ),
+                ],
+              );
+              final back = button('Back to main screen', widget.onBack);
+              return box.maxWidth < 704
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [heading, const SizedBox(height: 12), back],
+                    )
+                  : Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(child: heading),
+                        const SizedBox(width: 16),
+                        back,
+                      ],
+                    );
+            },
           ),
           const SizedBox(height: 16),
           label('Workbench ready'),
@@ -473,14 +642,32 @@ class _WorkbenchState extends State<Workbench> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                label('Filter synthetic rows', weight: FontWeight.w600),
+                const SizedBox(height: 10),
                 Semantics(
+                  label: 'Filter synthetic rows',
                   identifier: 'workload-query',
                   child: TextField(
                     controller: query,
                     onChanged: model.filter,
-                    decoration: const InputDecoration(
-                      labelText: 'Filter synthetic rows',
-                      border: OutlineInputBorder(),
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: line),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: line),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: const BorderSide(color: emerald, width: 2),
+                      ),
                     ),
                   ),
                 ),
@@ -488,6 +675,12 @@ class _WorkbenchState extends State<Workbench> {
                 Semantics(
                   identifier: 'workload-summary',
                   child: label('${rows.length} rows; tick ${model.tick}'),
+                ),
+                const SizedBox(height: 10),
+                label(
+                  'Case-sensitive label filtering. Replacement advances row IDs; remount resets IDs, query and tick.',
+                  size: 12,
+                  color: muted,
                 ),
               ],
             ),

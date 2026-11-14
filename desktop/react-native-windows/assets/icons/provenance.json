@@ -1,0 +1,41 @@
+{
+  "source": "lucide-static@1.58.0",
+  "conversion": "existing wxWidgets 3.2.12 SVG rasterizer; explicit #171a18 stroke; 96x96 pixels; normal native Image scaled/tinted at display time",
+  "files": [
+    {
+      "name": "orbit",
+      "svgSha256": "0845c480050d854e791d2b98ff1ae753ff9f6270d9c0a802881796edb5c5670e",
+      "pngSha256": "8baaab64fdb7b0e5cd0c187b04397ff87afc923632ed25a33d2656afcd21352f"
+    },
+    {
+      "name": "info",
+      "svgSha256": "5894a2f3e789916bb078209cb0db4dd9f76a4756f8fcbc3e83cf97f4ed2e71de",
+      "pngSha256": "d821bd15a3be6b2119aff618024826243e7a9ddd6add4febd443b3e1676ff4d6"
+    },
+    {
+      "name": "shield-check",
+      "svgSha256": "a217c76e515f40e9526d6553f5bbbd379645bb1549d9bc98104932c746a4a814",
+      "pngSha256": "d5d404940d09c8c28f7fdecf0cf03cc51ed3be4b1287b1048d26e2ee01195f35"
+    },
+    {
+      "name": "lock-keyhole",
+      "svgSha256": "dfcaee2944ba1adb455b81ddb153e106bb3081516831c4e482bab00c1d5e20d7",
+      "pngSha256": "ca52e076d7478a21bf0496c4ff5a5dfdb4012f6cd2e89a9c0c8ef5fd385ef330"
+    },
+    {
+      "name": "unlock-keyhole",
+      "svgSha256": "ae2fbca122e1dd0fcaf3cdaae72475568e5488ce2e59840ab7aa849f1d513ec0",
+      "pngSha256": "1c270f46d8b5cb3828d6c35de96631788c584182e60ee144e45241f48b4953df"
+    },
+    {
+      "name": "arrow-down-to-line",
+      "svgSha256": "0d455bf778b62334a66848a4c476b134aad18154ea592ef6f62ec7eb1f425df6",
+      "pngSha256": "c86140e39ede30c8c41a8922deda06281a36c8e96c0425a319cf6fa8d341472b"
+    },
+    {
+      "name": "arrow-up-from-line",
+      "svgSha256": "29b07d7685e0c02db472a1abbb8582b3957d3233964cf77dd646f090c2a47b4b",
+      "pngSha256": "8e9db97545d946123ff75fda5c3bb5a19e4b6561a564a4e9b9f754c9c9b9ce59"
+    }
+  ]
+}

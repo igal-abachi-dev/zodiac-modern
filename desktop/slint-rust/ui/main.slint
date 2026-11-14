@@ -1,4 +1,4 @@
-import { Button, LineEdit, ScrollView, ProgressIndicator, AboutSlint, Palette } from "std-widgets.slint";
+import { Button as FluentButton, LineEdit, ScrollView, ProgressIndicator, AboutSlint, Palette } from "std-widgets.slint";
 import "../assets/Fonts/inter-latin-400-normal.ttf";
 import "../assets/Fonts/inter-latin-500-normal.ttf";
 import "../assets/Fonts/inter-latin-600-normal.ttf";
@@ -6,6 +6,8 @@ import "../assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf";
 
 export enum BenchAction { encrypt, decrypt, cancel, reset, open, back, rows1000, rows10000, reverse, splice, update, hz10, hz30, hz60, stop, remount }
 export struct RowData { row-key: int, display-text: string }
+// A dimension/icon wrapper over the stock Fluent button; its implementation is unchanged.
+component Button inherits FluentButton { height: 40px; icon-size: 16px; colorize-icon: true; }
 component Label inherits Text {
     color: #171a18; font-family: "Inter"; font-size: 14px;
     wrap: word-wrap; accessible-role: text; accessible-label: self.text;
@@ -31,7 +33,7 @@ component Operation inherits Card {
             if !root.encrypt: Label { text: "No disk file is opened."; color: #5d6660; font-size: 12px; }
         }
     }
-    Button { text: root.encrypt ? "Simulate encryption" : "Simulate decryption"; accessible-id: root.encrypt ? "encrypt" : "decrypt"; primary: root.encrypt; enabled: root.enabled; height: 40px; horizontal-stretch: 1; clicked => { root.operate(root.encrypt); } }
+    Button { icon: root.encrypt ? @image-url("../assets/Icons/arrow-up-from-line.svg") : @image-url("../assets/Icons/arrow-down-to-line.svg"); text: root.encrypt ? "Simulate encryption" : "Simulate decryption"; accessible-id: root.encrypt ? "encrypt" : "decrypt"; primary: root.encrypt; enabled: root.enabled; height: 40px; horizontal-stretch: 1; clicked => { root.operate(root.encrypt); } }
 }
 component Workbench inherits VerticalLayout {
     in property <[RowData]> rows;
@@ -42,9 +44,12 @@ component Workbench inherits VerticalLayout {
     callback action(BenchAction);
     callback filter(string);
     spacing: 16px;
-    Label { text: "List and filter workbench"; font-size: 22px; font-weight: 600; }
-    Label { text: "Deterministic synthetic rows. No files, network, cryptography or native commands."; font-size: 12px; }
-    HorizontalLayout { Button { text: "Back to main screen"; enabled: root.enabled; clicked => {root.action(BenchAction.back);} } Rectangle {} }
+    Rectangle {
+        height: root.width < 704px ? 142px : 88px;
+        Label { x:0px;y:0px;width:root.width < 704px ? parent.width : parent.width - 200px; text:"List and filter workbench";font-size:22px;font-weight:600; }
+        Label { x:0px;y:40px;width:root.width < 704px ? parent.width : parent.width - 200px;text:"Deterministic synthetic rows. No files, network, cryptography or native commands.";color:#5d6660; }
+        Button { x:root.width < 704px ? 0px : parent.width - self.width; y:root.width < 704px ? 100px : 0px; text:"Back to main screen"; enabled:root.enabled; clicked=>{root.action(BenchAction.back);} }
+    }
     Label { text: "Workbench ready"; }
     FlexboxLayout {
         flex-wrap: wrap; spacing: 8px;
@@ -104,21 +109,25 @@ export component BenchWindow inherits Window {
             content-width: self.visible-width;
             content-height: content.preferred-height;
             content := VerticalLayout {
+                width:min(1100px,root.width); x:max(0px,(root.width - self.width) / 2);
                 padding: root.narrow ? 20px : 28px; spacing: 20px;
                 Rectangle {
                     height: root.narrow ? 130px : 74px;
-                    Rectangle { width:40px;height:40px;background:#f1f4f2;border-color:#dce3de;border-width:1px;border-radius:8px; Image {x:10px;y:10px;source:@image-url("../assets/Icons/orbit.svg");width:20px;height:20px;} }
-                    Label { x:52px;y:0px; width:parent.width - 52px; text:"NeutronStar GUI Bench";font-size:24px;font-weight:600; }
+                    Rectangle { x:0px;y:0px;width:40px;height:40px;background:#f1f4f2;border-color:#dce3de;border-width:1px;border-radius:8px; Image {x:10px;y:10px;source:@image-url("../assets/Icons/orbit.svg");width:20px;height:20px;} }
+                    Label { x:52px;y:0px; width:parent.width - 52px; text:"NeutronStar GUI Bench";letter-spacing:-0.96px;font-size:24px;font-weight:600; }
                     Label {y:48px;width:parent.width;text:"A UI-only simulation for comparing desktop frontends.";color:#5d6660;}
                     about-trigger := Button { x:root.narrow ? 0px : parent.width - self.width; y:root.narrow ? 90px : 0px;
-                        text:"About this test";accessible-id:"about-trigger";enabled:!root.about-open;clicked=>{root.about-open=true;about-close.focus();} }
+                        text:"About this test";icon:@image-url("../assets/Icons/info.svg");accessible-id:"about-trigger";enabled:!root.about-open;clicked=>{root.about-open=true;about-close.focus();} }
                 }
-                Rectangle {
+                HorizontalLayout {
+                  Rectangle { width:min(330px,root.width - (root.narrow ? 40px : 56px));horizontal-stretch:0;
                     height:32px;background:#f1f4f2;border-color:#dce3de;border-width:1px;border-radius:6px;
                     HorizontalLayout {padding-left:9px;padding-right:9px;spacing:7px;
-                        Image {source:@image-url("../assets/Icons/shield-check.svg");width:16px;height:16px;}
-                        Label {text:"SIMULATION · NO FILES OR CRYPTOGRAPHY.";font-size:10px;}
+                        Image {source:@image-url("../assets/Icons/shield-check.svg");width:14px;height:14px;}
+                        Label {text:"SIMULATION · NO FILES OR CRYPTOGRAPHY.";letter-spacing:0.7px;font-weight:600;font-size:10px;}
                     }
+                }
+                  Rectangle {horizontal-stretch:1;}
                 }
                 if !root.narrow: HorizontalLayout {
                     spacing:20px;
@@ -136,17 +145,17 @@ export component BenchWindow inherits Window {
                         if root.busy: Button {text:"Cancel";enabled:!root.about-open;clicked=>{root.action(BenchAction.cancel);}}
                         Button {text:"Reset";horizontal-stretch:0;enabled:root.ready&&!root.about-open;clicked=>{root.action(BenchAction.reset);}}
                     }
-                    ProgressIndicator {progress:root.progress/100;accessible-label:"Simulation progress";}
-                    Label {text:"Simulation progress  \{root.progress}%";font-size:11px;}
+                    Rectangle { height:6px;background:#f1f4f2;border-radius:3px; ProgressIndicator { width:parent.width;height:6px;progress:root.progress/100;accessible-label:"Simulation progress";} }
+                    HorizontalLayout { Label {text:"Simulation progress";font-size:11px;color:#5d6660;} Rectangle {horizontal-stretch:1;} Label {text:"\{root.progress}%";font-size:11px;color:#5d6660;} }
                 }
                 Rectangle {
                     height: root.narrow ? 112px : 48px;
                     open-trigger := Button {x:0px;y:0px;text:"Open workbench";accessible-id:"open-workbench";enabled:root.ready&&!root.busy&&!root.about-open;
                         clicked=>{root.action(BenchAction.open);scroll.content-y=-work.y;}}
                     Label {x:root.narrow ? 0px : open-trigger.width + 16px;y:root.narrow ? 44px : 0px;
-                        width:root.narrow ? parent.width : max(0px,parent.width - open-trigger.width - 178px);
+                        width:root.narrow ? parent.width : max(0px,parent.width - open-trigger.width - 266px);
                         text:"Local interface. Synthetic data. Nothing is encrypted or decrypted.";font-size:11px;}
-                    Label {x:root.narrow ? 0px : parent.width - 130px;y:root.narrow ? 86px : 0px;width:130px;
+                    Label {x:root.narrow ? 0px : parent.width - 240px;y:root.narrow ? 86px : 0px;width:240px;
                         text:"CONTROLLED RENDERER · LOCAL STATE";font-size:11px;}
                 }
                 work := Rectangle {

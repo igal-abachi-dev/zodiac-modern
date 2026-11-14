@@ -7,9 +7,14 @@ Column {
     required property BenchController bench
     signal back()
     spacing: 16
-    BenchLabel { text: "List and filter workbench"; font.pixelSize: 22; font.weight: Font.DemiBold }
-    BenchLabel { width: root.width; text: "Deterministic synthetic rows. No files, network, cryptography or native commands."; font.pixelSize: 12 }
-    BenchButton { text: "Back to main screen"; onClicked: root.back() }
+    GridLayout {
+        width: root.width; columns: root.width < 704 ? 1 : 2; rowSpacing: 12; columnSpacing: 16
+        ColumnLayout { Layout.fillWidth: true; spacing: 8
+            BenchLabel { Layout.fillWidth: true; text: "List and filter workbench"; font.pixelSize: 22; font.weight: Font.DemiBold }
+            BenchLabel { Layout.fillWidth: true; text: "Deterministic synthetic rows. No files, network, cryptography or native commands."; color: Theme.muted }
+        }
+        BenchButton { text: "Back to main screen"; Layout.alignment: Qt.AlignTop; onClicked: root.back() }
+    }
     BenchLabel { text: "Workbench ready" }
     Flow {
         width: root.width; spacing: 8
@@ -36,8 +41,11 @@ Column {
                 onActiveFocusChanged: if(activeFocus) query.Window.window.reveal(query)
                 Accessible.onShowOnScreenAction: query.Window.window.reveal(query)
                 font.family: "Inter"; font.pixelSize: 14; selectByMouse: true
+                Layout.preferredHeight: 40; leftPadding: 12; rightPadding: 12
+                palette.highlight: Theme.accent; palette.highlightedText: Theme.onAccent
             }
             BenchLabel { text: bench.summary; Accessible.id: "workload-summary" }
+            BenchLabel { Layout.fillWidth: true; text: "Case-sensitive label filtering. Replacement advances row IDs; remount resets IDs, query and tick."; font.pixelSize: 12; color: Theme.muted }
         }
     }
     Column {

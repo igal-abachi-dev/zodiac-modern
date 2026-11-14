@@ -26,7 +26,7 @@ Card {
             Layout.fillWidth: true; Layout.preferredHeight: 40; Layout.topMargin: 16
             text: encrypt ? "Simulate encryption" : "Simulate decryption"
             Accessible.id: encrypt ? "encrypt" : "decrypt"
-            primary: encrypt; font.pixelSize: 14
+            primary: encrypt; glyph: "qrc:/Icons/" + (encrypt ? "arrow-up-from-line-white" : "arrow-down-to-line") + ".svg"; font.pixelSize: 14
             enabled: bench.ready && !bench.busy
             onClicked: bench.start(encrypt)
         }

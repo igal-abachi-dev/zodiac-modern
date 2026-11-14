@@ -1,0 +1,257 @@
+﻿{
+    "evidence":  [
+                     {
+                         "app":  "Tauri-v2-Svelte5",
+                         "captures":  [
+                                          {
+                                              "sha256":  "2BB44219BFB8772791C8CC1ABBC0B5FA841E527D1C6602365E69EA858AD75E33",
+                                              "path":  "Tauri-v2-Svelte5/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "E1BE5FFBD8508B24B609ECF3305F529AF6C41873DF0C73792C75F502FD68FD46",
+                                              "path":  "Tauri-v2-Svelte5/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "29D5D74FA013EDDB770F9C031D2AE6164EB2C477CE930A1781B50D0C51B27D19",
+                                              "path":  "Tauri-v2-Svelte5/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "9B0C89B2151AE355FEE728178CDF773A61CFC8252DE16893A542894444958FDF",
+                                              "path":  "Tauri-v2-Svelte5/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "64C5DEC28631376ACC7E644333B90D4B8D081CC7CCCF3904DFBF934FEEF76FF0",
+                         "check":  "Tauri-v2-Svelte5/.cache/check-a62d19ae3b9d4213b251b102ae60f8f9"
+                     },
+                     {
+                         "app":  "Avalonia",
+                         "captures":  [
+                                          {
+                                              "sha256":  "2076387F643345AF1B2BC180F5131EAE2037F3E81283E8D0687EB2AA6531AB6A",
+                                              "path":  "Avalonia/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "AD2414D0DC091C93365E8E724F2DFC9A084627B2D36756288C59D5B75AB678BA",
+                                              "path":  "Avalonia/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "85F8947E8C6C4C517DBEFA2EE6DE48F2D20DFA2BA48960B336017C4D451CD45E",
+                                              "path":  "Avalonia/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "8AEAF4842617F7091B924CCEFFCAFBFAB22900F370A8CBCEE63296768203FE8E",
+                                              "path":  "Avalonia/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "3CA32624A46E44DCD581D652EE83EA79AE8473C7BEEA6E4830D25F1F09DF84D0",
+                         "check":  "Avalonia/.cache/check-1e6f6f87a0d842a98bc11d4823126e87"
+                     },
+                     {
+                         "app":  "Electron",
+                         "captures":  [
+                                          {
+                                              "sha256":  "ECDA8FE94DA1915C4A52D468425184ECCD5902CF01E64A73C57348AE257DDDF3",
+                                              "path":  "Electron/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "DB80DC85C04DE6C9DD2C5ABEED5087B4889696050E00259E052FD41A4EC4FD10",
+                                              "path":  "Electron/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "F1CF02B8EAEF57FC3D4CF370481F0CF813549173CE2F287832717BE81267F53A",
+                                              "path":  "Electron/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "8DBA3A61980D55FEB1D7021531773496196C04BB4EA4DAEE56C9BD3E4E2604C7",
+                                              "path":  "Electron/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "0A8AFEEB1E6E6EABCA3FD61F5845C85359B026D2001B670D952E1C7E543A5EAD",
+                         "check":  "Electron/.cache/check-ca562ca46b144c0098f63cb879bf3bcd"
+                     },
+                     {
+                         "app":  "Flutter",
+                         "captures":  [
+                                          {
+                                              "sha256":  "88456094FAB10F2E56A4D9B5EFFF272631CE9842DFE7AD033E6A29B06E9E816F",
+                                              "path":  "Flutter/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "53B0016DCEA03F867EDD13AFD456E32F705AA11D4B999FAF356B067CC1920202",
+                                              "path":  "Flutter/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "A390F14A17DC22E5C1C1201A7AE775213E4973AF1518C75E2EB00F6E21C22BAA",
+                                              "path":  "Flutter/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "C50B5FC811D9F163357BF2AFE08015FC6CD75CAA2552ADB5F522676297125134",
+                                              "path":  "Flutter/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "59793649B682E221BF102430A7B0B24B1AAFEADCBE69CD86E2D5746860005BE1",
+                         "check":  "Flutter/.cache/check-50158ec280f24379a522e2145bdbaf9b"
+                     },
+                     {
+                         "app":  "Qt",
+                         "captures":  [
+                                          {
+                                              "sha256":  "460D3FE526035DB7A69CEB8A3EE5F25451CD249711CA48C2AD993D70728CC018",
+                                              "path":  "Qt/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "246335309B373262D58E3838D7467376DADD13E905444463739A67430C18CD6D",
+                                              "path":  "Qt/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "636C7333C21501F0E0CA114DE0DB3F510AB2811B9F03E9EABB3EA29A08ECFABD",
+                                              "path":  "Qt/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "2F5402CA89F2CE1D17CC83995BE2E1590E2B47EFA16F347318EEADF94FA3F5D0",
+                                              "path":  "Qt/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "83E97E785D16782D8EA86D978311E4379A1D89F236E971EDD1B228AAA7A9307D",
+                         "check":  "Qt/.cache/check-39e0a7de70e94313a8f5c56034d7cca0"
+                     },
+                     {
+                         "app":  "react-native-windows",
+                         "captures":  [
+                                          {
+                                              "sha256":  "EBF0CD5A09913D6AB379FD59C2786D337C024C573BC2E85D0260DDC6C284C94A",
+                                              "path":  "react-native-windows/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "D6CAFE7B3FBBEDF0710A1FE7847961E81285C754DE7D89BF5A4772E58A37FAD9",
+                                              "path":  "react-native-windows/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "5C4ADF8AF97444E5AF1E97D7744E40E44DCF7AE3231EF74C5746B3660ED9FE1A",
+                                              "path":  "react-native-windows/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "EE2647C2F59B6267454AF06F91DA9A39B199881939B16BB6C861B9A4ACA8C25F",
+                                              "path":  "react-native-windows/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "9327332FF43E89C812E145AD4A6BB96E30C8EB63BF713648618BAE368B8DB13B",
+                         "check":  "react-native-windows/.cache/check-7a580291b27642fa85d86e35e77e9cc6"
+                     },
+                     {
+                         "app":  "slint-rust",
+                         "captures":  [
+                                          {
+                                              "sha256":  "0E03FE6E8234A7C979B8099C4668001E9D7A5750C43DA94AF11332E6489B3B4E",
+                                              "path":  "slint-rust/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "DCD26FF22BFB1A38C9FA960F38C36695A22759FD34664B4A3DDC87FFC497D4E3",
+                                              "path":  "slint-rust/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "B9BFF263508386957D673EF6F617BBE741BD848555834E918EC0B31477E33302",
+                                              "path":  "slint-rust/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "9C60398F4B7273B08B8D7E7002AB98883C173548D9006D978C38BC51080A2A8E",
+                                              "path":  "slint-rust/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "70C8212943E39939DD7FF33A1553759E81C15E45F80B85AF33D875768935B3A5",
+                         "check":  "slint-rust/.cache/check-0cd34f1375a346ab9bd32f71254c1a0a"
+                     },
+                     {
+                         "app":  "WinUI3-cs-native-mvvm",
+                         "captures":  [
+                                          {
+                                              "sha256":  "60B6718775A0421BA50E62C0DFBA2F4B688AABD3DFBEC5B57CE2CE475944A29C",
+                                              "path":  "WinUI3-cs-native-mvvm/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "551020F03BDB613023DF415C7AF09B698D89E08BABFD83BE806BE1AB3E996262",
+                                              "path":  "WinUI3-cs-native-mvvm/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "F956C8159D915F3FBE61DFF2F9199A12D1DC72961CACFA3BE6E335781A6CFA58",
+                                              "path":  "WinUI3-cs-native-mvvm/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "EF6D701500735872E8E18ADEEC5A90534A5F8D9C1B454506F3D4DFA2C13C6CA2",
+                                              "path":  "WinUI3-cs-native-mvvm/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "5D0CD10166747CEA7EEB81BB740308C2F8F25A51B5ED969D2339EC54552EF460",
+                         "check":  "WinUI3-cs-native-mvvm/.cache/check-e5588303477941b9a4f9d6d51773910c"
+                     },
+                     {
+                         "app":  "WinUI3-cs-native-reactor",
+                         "captures":  [
+                                          {
+                                              "sha256":  "30279172B3727EB56034A8FE6E7AE3F7146DAE5E38F7FD34E102368EA2B4CEB0",
+                                              "path":  "WinUI3-cs-native-reactor/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "A9E3EAAC8F64A79CA04DA32A1903E4488FBCBBE6DA519262EDB6E599C3FA4906",
+                                              "path":  "WinUI3-cs-native-reactor/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "71C916CA47F0AED81DA959FC2450419C689FD52A77F1D815EB48F47F3667A23D",
+                                              "path":  "WinUI3-cs-native-reactor/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "0CE5E36CCF0AC163140D4561AE0A604E1F08AA155F66B7D32BE7A1C1EDC4E6FA",
+                                              "path":  "WinUI3-cs-native-reactor/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "A606A1EEF4716EB08A28772BC72613BCF4DE02D6133CDC33531B4A13F56F85B9",
+                         "check":  "WinUI3-cs-native-reactor/.cache/check-73a26698807d4fb3b0bb842e14b9c47e"
+                     },
+                     {
+                         "app":  "wxWidgets",
+                         "captures":  [
+                                          {
+                                              "sha256":  "3A6D4E7A617B5782044F36EA775E9EDF7C8B4CEA3ED07A9F7D8876A7F5505195",
+                                              "path":  "wxWidgets/initial-main-client.png"
+                                          },
+                                          {
+                                              "sha256":  "6D680E1CC36F495CDDE69C0F0671E96110B79AC37789357854945E90FFABCFA4",
+                                              "path":  "wxWidgets/about-client.png"
+                                          },
+                                          {
+                                              "sha256":  "36152C50EEA4913D768D7FD0C282A5AC24F71AB225A91B7AC436906F39D3005D",
+                                              "path":  "wxWidgets/workbench-client.png"
+                                          },
+                                          {
+                                              "sha256":  "F3F0165213E6586C52D356942C69351DD92000AD2A84A4784E950699F7C1842D",
+                                              "path":  "wxWidgets/narrow-client.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "2D6FCF9BFF1F1A92211141E590E3F4DDFE496E108E092AE36DFFAFB5758F1455",
+                         "check":  "wxWidgets/.cache/check-8b5c03adabf748f0b310f545f75bd75f"
+                     },
+                     {
+                         "app":  "Dear-ImGui-dx11-12",
+                         "captures":  [
+                                          {
+                                              "sha256":  "BB8E2F166CE34F7A79530B763D4E20442B496C220254B508038E8DD20702C730",
+                                              "path":  "Dear-ImGui-dx11-12/main.png"
+                                          }
+                                      ],
+                         "status":  "passed",
+                         "runnerSha256":  "ABF6848B45D8FAE4FB872D8586DCEF4A37D3FD7A029F8895E476710BD2BFEED1",
+                         "check":  "Dear-ImGui-dx11-12/.cache/check-26625dd7e8e64e02b79fb076fc66438e"
+                     }
+                 ],
+    "scope":  "Visual QA; 960x640 DIP client; standard controls, no replacement painting; not comparative performance or a percentage score"
+}

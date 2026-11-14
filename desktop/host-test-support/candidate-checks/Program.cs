@@ -121,19 +121,29 @@ internal static class CandidateChecks
             Native.GetClientRect(window,out var client);Native.GetWindowRect(window,out var outer);var dpi=Native.GetDpiForWindow(window);
             if(client.Right!=960*dpi/96||client.Bottom!=640*dpi/96)Native.SetWindowPos(window,0,0,0,(int)(outer.Right-outer.Left+960*dpi/96-client.Right),(int)(outer.Bottom-outer.Top+640*dpi/96-client.Bottom),0x16);
             Wait(()=>Named("Ready",ControlType.Text)!=null);
+            Thread.Sleep(200);Capture("initial-main.png");
+            var referenceOrigin=new Native.Point();Native.ClientToScreen(window,ref referenceOrigin);
+            report["initialButtons"]=new[]{"About this test","Simulate decryption","Simulate encryption","Reset","Open workbench"}.Select(name=>{
+                var e=Named(name,ControlType.Button)??throw new InvalidOperationException("Missing visual contract button: "+name);var rect=e.Properties.BoundingRectangle.Value;
+                return new{name,x=Math.Round((rect.X-referenceOrigin.X)*96.0/dpi,2),y=Math.Round((rect.Y-referenceOrigin.Y)*96.0/dpi,2),width=Math.Round(rect.Width*96.0/dpi,2),height=Math.Round(rect.Height*96.0/dpi,2)};
+            }).ToArray();
+            var appRoot=Path.GetDirectoryName(config.Assets)!;var receipt=Path.Combine(appRoot,".cache","build-receipt.json");if(!File.Exists(receipt))receipt=Path.Combine(appRoot,".cache-build-receipt.json");
+            if(File.Exists(receipt))report["buildReceiptSha256"]=Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(receipt)));
+            report["visualPolicy"]="Svelte primary reference; Avalonia desktop behavior; stock controls only; captures are QA, not timings";
             if(!config.LayoutOnly){
             
             Button("About this test");Wait(()=>Named("Close",ControlType.Button)!=null);
             void Escape(){var keys=new[]{new KeyInput{Type=1,Key=new Key{Vk=27}},new KeyInput{Type=1,Key=new Key{Vk=27,Flags=2}}};Keys(2,keys,Marshal.SizeOf<KeyInput>());}
             Escape();Wait(()=>Named("About this test",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
             Button("About this test");Button("Close");Wait(()=>Named("About this test",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
-            Button("Simulate encryption");Wait(()=>Named("Simulation complete. No file was changed.",ControlType.Text)!=null);
+            Button("Simulate encryption");Thread.Sleep(350);Capture("running.png");Wait(()=>Named("Simulation complete. No file was changed.",ControlType.Text)!=null);
             Button("Reset");Wait(()=>Named("Ready",ControlType.Text)!=null);
             Button("Simulate decryption");Button("Cancel");Wait(()=>Named("Simulation canceled.",ControlType.Text)!=null);
             Button("Reset");Wait(()=>Named("Ready",ControlType.Text)!=null);
             report["mainChecks"]="About Escape/Close/focus; encrypt complete; decrypt cancel; reset";
             Button("Open workbench");
             Wait(()=>Named("Workbench ready",ControlType.Text)!=null);
+            Thread.Sleep(200);Capture("workbench.png");
             var remount=Named("Remount workload",ControlType.Button)??throw new InvalidOperationException("Supplemental assets absent");
             if(remount.Patterns.ScrollItem.IsSupported)remount.Patterns.ScrollItem.Pattern.ScrollIntoView();Thread.Sleep(1000);
             void Measure(string name,Action action,Func<bool> done){double requested=Now();action();double sent=inputAt;Wait(done);actions.Add(new{name,inputToUiaObservedMs=Now()-sent,requestToUiaMs=Now()-requested});}
@@ -143,6 +153,7 @@ internal static class CandidateChecks
             Measure("splice-10",()=>Button("Splice 10"),()=>FirstId()==12000);
             Measure("update-10-percent",()=>Button("Update 10%"),()=>Summary(1000,1));
             Measure("filter-to-one",()=>Query("row-12000 "),()=>Summary(1,1));
+            Thread.Sleep(200);Capture("filter-focus.png");
             Measure("filter-clear",()=>Query(""),()=>Summary(1000,1));
             Button("30 Hz / 2 s");
             Measure("filter-during-30hz-requested",()=>Query("row-12000 "),()=>Tick(1)>1);
@@ -151,16 +162,18 @@ internal static class CandidateChecks
             
             foreach (var hz in new[]{10,60}) {
                 Button($"{hz} Hz / 2 s"); Wait(()=>Tick(1000)>2);
-                Button("Stop"); var stopped=Read(()=>Tick(1000)); Thread.Sleep(250);
-                if(Read(()=>Tick(1000))!=stopped)throw new InvalidOperationException("Stop left a visible timer running");
+                Button("Stop");
+                // Stop is asynchronous: an in-flight tick may still land. The timer must be stable for 250 ms within 1.5 s of the click.
+                {bool stable=false;double until=Now()+1500;while(!stable&&Now()<until){var before=Read(()=>Tick(1000));Thread.Sleep(250);stable=Read(()=>Tick(1000))==before;}
+                if(!stable)throw new InvalidOperationException("Stop left a visible timer running");}
             }
             Query("not-present");Wait(()=>Tick(0)!=null);Query("");Wait(()=>Tick(1000)!=null);
             if(config.App=="Qt"){
-                Query("×©×œ×•×");Wait(()=>Tick(1000)!=null);
-                Query("row-0 ×©×œ×•×");Wait(()=>Tick(1)!=null);
-                Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text="×©×œ×•× ðŸŒ ";
+                Query("\u05e9\u05dc\u05d5\u05dd");Wait(()=>Tick(1000)!=null);
+                Query("row-0 \u05e9\u05dc\u05d5\u05dd");Wait(()=>Tick(1)!=null);
+                Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text="\u05e9\u05dc\u05d5\u05dd \U0001F320";
                 Wait(()=>Tick(0)!=null);
-                Wait(()=>Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text=="×©×œ×•× ðŸŒ ");
+                Wait(()=>Named("Filter synthetic rows",ControlType.Edit)!.AsTextBox().Text=="\u05e9\u05dc\u05d5\u05dd \U0001F320");
                 Query("");Wait(()=>Tick(1000)!=null);
                 report["unicodeChecks"]="real Hebrew keyboard filter/bidi exact match; accessible ValuePattern supplementary-character roundtrip updates the model; synthetic surrogate-key packets and real IME composition are separate unaccepted paths";
             }
@@ -177,12 +190,30 @@ internal static class CandidateChecks
             report["extraChecks"]="10/60 Hz update and Stop; empty filter; close while burst active; fresh reopen/reset IDs and tick; focus restoration; main workflow after workbench";
             }
             void ResizeClient(int width,int height){Native.GetClientRect(window,out var c);Native.GetWindowRect(window,out var w);Native.SetWindowPos(window,0,20,20,(int)(w.Right-w.Left+width*dpi/96-c.Right),(int)(w.Bottom-w.Top+height*dpi/96-c.Bottom),0x14);Thread.Sleep(200);}
-            void Capture(string name){Native.GetWindowRect(window,out var r);using var bitmap=new System.Drawing.Bitmap(r.Right-r.Left,r.Bottom-r.Top);using var graphics=System.Drawing.Graphics.FromImage(bitmap);graphics.CopyFromScreen(r.Left,r.Top,0,0,bitmap.Size);bitmap.Save(Path.Combine(config.Output,name),System.Drawing.Imaging.ImageFormat.Png);}
+            void Capture(string name){
+                Native.GetWindowThreadProcessId(window,out var targetPid);Native.GetWindowThreadProcessId(Native.GetForegroundWindow(),out var foregroundPid);
+                if(targetPid!=foregroundPid)throw new InvalidOperationException("Foreground lost before capture");
+                Native.GetWindowRect(window,out var r);using var bitmap=new System.Drawing.Bitmap(r.Right-r.Left,r.Bottom-r.Top);using(var graphics=System.Drawing.Graphics.FromImage(bitmap))graphics.CopyFromScreen(r.Left,r.Top,0,0,bitmap.Size);bitmap.Save(Path.Combine(config.Output,name),System.Drawing.Imaging.ImageFormat.Png);
+                Native.GetClientRect(window,out var c);var point=new Native.Point();Native.ClientToScreen(window,ref point);
+                using var content=new System.Drawing.Bitmap(c.Right,c.Bottom);using(var graphics=System.Drawing.Graphics.FromImage(content))graphics.CopyFromScreen(point.X,point.Y,0,0,content.Size);content.Save(Path.Combine(config.Output,Path.GetFileNameWithoutExtension(name)+"-client.png"),System.Drawing.Imaging.ImageFormat.Png);
+            }
             Button("About this test");Wait(()=>Named("Close",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
+            Thread.Sleep(200);Capture("about.png");
             var tab=new[]{new KeyInput{Type=1,Key=new Key{Vk=9}},new KeyInput{Type=1,Key=new Key{Vk=9,Flags=2}}};Keys(2,tab,Marshal.SizeOf<KeyInput>());
             Wait(()=>Named("Close",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
             Button("Close");Wait(()=>Named("About this test",ControlType.Button)?.Properties.HasKeyboardFocus.ValueOrDefault==true);
             ResizeClient(480,640);
+            var firstAction=Read(()=>Id("decrypt"));
+            if(firstAction!=null){
+                var bounds=firstAction.Properties.BoundingRectangle.Value;Native.GetClientRect(window,out var smallClient);var smallOrigin=new Native.Point();Native.ClientToScreen(window,ref smallOrigin);
+                report["narrowActionBounds"]=new{left=bounds.Left-smallOrigin.X,right=bounds.Right-smallOrigin.X,width=bounds.Width,clientWidth=smallClient.Right};
+                if(bounds.Width>smallClient.Right||bounds.Right>smallOrigin.X+smallClient.Right+2)throw new InvalidOperationException("Narrow action exceeds client width; stacking alone is insufficient");
+            }
+            if(wxUi){
+                var heading=Named("NeutronStar GUI Bench",ControlType.Text)??throw new InvalidOperationException("Missing wx heading");
+                var bounds=heading.Properties.BoundingRectangle.Value;report["narrowHeadingBounds"]=new{bounds.Width,bounds.Height};
+                if(bounds.Width<160*dpi/96||bounds.Height<20*dpi/96)throw new InvalidOperationException("Narrow header collapsed despite stacked cards");
+            }
             if(config.App=="Qt"){
                 bool reached=false;
                 for(int i=0;i<16;i++){
@@ -226,6 +257,10 @@ internal static class CandidateChecks
             // UIA state can precede physical paint; this is only visual QA.
             Thread.Sleep(200);
             Capture("main.png");
+            ResizeClient(1280,800);Wait(()=>Named("Ready",ControlType.Text)!=null);Thread.Sleep(200);Capture("wide.png");
+            var wideAction=Id("decrypt")??throw new InvalidOperationException("Wide main action missing");var wideBounds=wideAction.Properties.BoundingRectangle.Value;
+            report["wideActionBounds"]=new{width=wideBounds.Width*96.0/dpi,clientWidth=1280};
+            if(wideBounds.Width>500*dpi/96)throw new InvalidOperationException("Wide content does not honor the centered maximum width");
             report["status"]="passed";exit=0;
         }
         catch(Exception error){try{if(window!=0&&Native.GetWindowThreadProcessId(Native.GetForegroundWindow(),out var foregroundPid)!=0&&foregroundPid==process?.Id){Native.GetWindowRect(window,out var frame);using var snapshot=new System.Drawing.Bitmap(frame.Right-frame.Left,frame.Bottom-frame.Top);using var graphics=System.Drawing.Graphics.FromImage(snapshot);graphics.CopyFromScreen(frame.Left,frame.Top,0,0,snapshot.Size);snapshot.Save(Path.Combine(config.Output,"failure.png"),System.Drawing.Imaging.ImageFormat.Png);}}catch{}report["status"]="failed";report["error"]=error.GetType().Name+": "+error.Message;report["stack"]=error.StackTrace;try{report["lastTree"]=Document()?.FindAllDescendants().Take(120).Select(e=>new{type=e.Properties.ControlType.ValueOrDefault.ToString(),name=e.Properties.Name.ValueOrDefault,id=e.Properties.AutomationId.ValueOrDefault,enabled=e.Properties.IsEnabled.ValueOrDefault,focus=e.Properties.HasKeyboardFocus.ValueOrDefault,offscreen=e.Properties.IsOffscreen.ValueOrDefault}).ToArray();}catch{}}

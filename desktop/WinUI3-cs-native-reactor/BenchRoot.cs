@@ -11,7 +11,7 @@ namespace NeutronStar.ReactorBench;
 public sealed class BenchRoot : Component
 {
     internal const string Font = "ms-appx:///Assets/Fonts/inter-latin-400-normal.ttf#Inter, ms-appx:///Assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf#Noto Sans Hebrew, Segoe UI Emoji";
-    internal static TextBlockElement T(string text, double size = 14) => TextBlock(text).FontSize(size).FontFamily(Font).Foreground("#171A18");
+    internal static TextBlockElement T(string text, double size = 14) => TextBlock(text).FontSize(size).FontFamily(Font).Foreground("#171A18").Set(t => { t.LineHeight = size * (size == 24 ? 1.3 : 1.5); t.LineStackingStrategy = LineStackingStrategy.BlockLineHeight; if (size == 24) t.CharacterSpacing = -40; });
     internal static Element Card(Element child) => Border(child).Padding(16).Background("#FFFFFF").WithBorder("#DCE3DE", 1).CornerRadius(8);
     internal static Element Icon(string name) => Image("ms-appx:///Assets/Icons/" + name + ".svg").AccessibilityHidden().Width(16).Height(16).Set(image => { if (image.Source is not SvgImageSource) image.Source = new SvgImageSource(new Uri("ms-appx:///Assets/Icons/" + name + ".svg")); });
     internal static ButtonElement B(string text, Action click, string? id = null, bool enabled = true, string styleKey = "BaseButton") => Button(text, click).IsEnabled(enabled).AutomationName(text).AutomationId(id ?? text).ApplyStyle(styleKey);
@@ -40,17 +40,18 @@ public sealed class BenchRoot : Component
                 // writes during Render can continuously invalidate a preview host.
                 button = button with
                 {
-                    ContentElement = Border(T(label).Foreground("#FFFFFF").HAlign(HorizontalAlignment.Center).VAlign(VerticalAlignment.Center)).Padding(12, 8).Background("#047857").CornerRadius(8).Opacity(s.Loaded && s.Status != "running" ? 1 : .55)
+                    ContentElement = Border(HStack(8, Icon("arrow-up-from-line-white"), T(label).Foreground("#FFFFFF")).HAlign(HorizontalAlignment.Center).VAlign(VerticalAlignment.Center)).Padding(12, 8).Background("#047857").CornerRadius(8).Opacity(s.Loaded && s.Status != "running" ? 1 : .55)
                 };
                 button = button.Padding(0).Set(b => { b.HorizontalContentAlignment = HorizontalAlignment.Stretch; b.VerticalContentAlignment = VerticalAlignment.Stretch; });
             }
+            if (!primary) button = button with { ContentElement = HStack(8, Icon("arrow-down-to-line"), T(label)).HAlign(HorizontalAlignment.Center).VAlign(VerticalAlignment.Center) };
             return Card(VStack(0, HStack(8, Icon(icon), T(title, 16).Bold()), T("SYNTHETIC INPUT", 10).Foreground("#5D6660").Margin(0, 20, 0, 9), Border(VStack(5, T(op == "encrypt" ? Reducers.Fixture : "Synthetic sample: starlight.nsx"), op == "decrypt" ? T("No disk file is opened.", 12).Foreground("#5D6660") : null)).Padding(13).MinHeight(94).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(6), button.Margin(0, 16, 0, 0)));
         }
         var decrypt = Operation("Decrypt", "unlock-keyhole", "Simulate decryption", "decrypt", false);
         var encrypt = Operation("Encrypt", "lock-keyhole", "Simulate encryption", "encrypt", true);
         var header = VStack(8, HStack(12, Border(Icon("orbit").Width(20).Height(20)).Width(40).Height(40).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(8), T("NeutronStar GUI Bench", 24).Bold()), T("A UI-only simulation for comparing desktop frontends.").Foreground("#5D6660"));
         var (showAbout, setAbout) = UseState(false);
-        var about = B("About this test", () => setAbout(true), "about-trigger", !showAbout);
+        var about = B("About this test", () => setAbout(true), "about-trigger", !showAbout) with { ContentElement = HStack(6, Icon("info"), T("About this test", 12)).VAlign(VerticalAlignment.Center) };
         Element headerLayout = narrow ? VStack(12, header, about) : Grid(columns: [GridSize.Star(), GridSize.Auto], rows: [GridSize.Auto], header, about.Grid(row: 0, column: 1));
         Element cardsLayout = narrow ? VStack(20, decrypt, encrypt) : (Grid(columns: [GridSize.Star(), GridSize.Star()], rows: [GridSize.Auto], decrypt, encrypt.Grid(row: 0, column: 1)) with
         {
@@ -65,7 +66,10 @@ public sealed class BenchRoot : Component
         });
         return ScrollViewer(VStack(20, headerLayout, Border(HStack(7, Icon("shield-check"), T("SIMULATION · NO FILES OR CRYPTOGRAPHY.", 10))).Padding(9, 7).Background("#F1F4F2").WithBorder("#DCE3DE", 1).CornerRadius(6).HAlign(HorizontalAlignment.Left),
         cardsLayout,
-        Card(VStack(16, HStack(12, T(Reducers.Status(s)).AutomationId("status"), s.Status == "running" ? B("Cancel", () => { timer.Stop(); dispatch(new Cancel()); }) : null, B("Reset", () => { timer.Stop(); dispatch(new Reset()); }, enabled: s.Loaded)), Progress(s.Progress).Height(6).AutomationName("Simulation progress").Set(p => p.Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 4, 120, 87))), HStack(8, T("Simulation progress", 11), T($"{s.Progress}%", 11)))),
+        Card(VStack(14,
+        Grid(columns: [GridSize.Star(), GridSize.Auto], rows: [GridSize.Auto], T(Reducers.Status(s), 13).VAlign(VerticalAlignment.Center).AutomationId("status"), HStack(8, s.Status == "running" ? B("Cancel", () => { timer.Stop(); dispatch(new Cancel()); }) : null, B("Reset", () => { timer.Stop(); dispatch(new Reset()); }, enabled: s.Loaded)).Grid(row: 0, column: 1)),
+        VStack(8, Progress(s.Progress).Height(6).AutomationName("Simulation progress").Set(p => p.Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(255, 4, 120, 87))),
+        Grid(columns: [GridSize.Star(), GridSize.Auto], rows: [GridSize.Auto], T("Simulation progress", 11).Foreground("#5D6660"), T($"{s.Progress}%", 11).Foreground("#5D6660").Grid(row: 0, column: 1))))),
         footer,
         ContentDialog("About this test", T("Actions are UI-only simulations. No files, cryptography, Go CLI, network or native bridge are involved."), "") with
         {

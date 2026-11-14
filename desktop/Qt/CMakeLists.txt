@@ -17,7 +17,8 @@ qt_add_qml_module(${target} URI NeutronStar VERSION 1.0
 qt_add_resources(${target} assets PREFIX "/" BASE assets FILES
     assets/Fonts/inter-latin-400-normal.ttf assets/Fonts/inter-latin-500-normal.ttf
     assets/Fonts/inter-latin-600-normal.ttf assets/Fonts/noto-sans-hebrew-hebrew-400-normal.ttf
-    assets/Icons/orbit.svg assets/Icons/shield-check.svg assets/Icons/lock-keyhole.svg assets/Icons/unlock-keyhole.svg)
+    assets/Icons/orbit.svg assets/Icons/shield-check.svg assets/Icons/lock-keyhole.svg assets/Icons/unlock-keyhole.svg assets/Icons/info.svg
+    assets/Icons/arrow-down-to-line.svg assets/Icons/arrow-up-from-line.svg assets/Icons/arrow-up-from-line-white.svg)
 target_link_libraries(${target} PRIVATE Qt6::Quick Qt6::QuickControls2 d3d11 dxgi user32)
 target_include_directories(${target} PRIVATE src)
 target_compile_options(${target} PRIVATE /W4 /WX /permissive- /utf-8 /guard:cf)

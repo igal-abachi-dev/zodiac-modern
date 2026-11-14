@@ -1,0 +1,12 @@
+Tauri exit=1 18s 2026-11-14T19:15:28
+Electron exit=1 4s 2026-11-14T19:15:32
+Avalonia exit=0 35s 2026-11-14T19:16:06
+WinUI exit=0 35s 2026-11-14T19:16:42
+Reactor exit=0 32s 2026-11-14T19:17:14
+Flutter exit=1 15s 2026-11-14T19:17:29
+Qt exit=0 21s 2026-11-14T19:17:50
+Slint exit=0 18s 2026-11-14T19:18:08
+ReactNative exit=0 34s 2026-11-14T19:18:42
+Wx exit=1 58s 2026-11-14T19:19:39
+ImGui exit=0 38s 2026-11-14T19:20:17
+DONE

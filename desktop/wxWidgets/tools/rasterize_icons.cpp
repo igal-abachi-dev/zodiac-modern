@@ -5,7 +5,7 @@
 int main(int argc,char** argv) {
     if(argc!=3)return 2;
     wxInitializer init;if(!init)return 3;wxInitAllImageHandlers();
-    for(const auto* name:{"orbit","lock-keyhole","unlock-keyhole","shield-check"}) {
+    for(const auto* name:{"orbit","lock-keyhole","unlock-keyhole","shield-check","info","arrow-down-to-line","arrow-up-from-line"}) {
         const auto bitmap=wxBitmapBundle::FromSVGFile(wxString::FromUTF8(argv[1])+"/"+name+".svg",wxSize(96,96));
         if(!bitmap.IsOk()||!bitmap.GetBitmap(wxSize(96,96)).ConvertToImage().SaveFile(wxString::FromUTF8(argv[2])+"/"+name+".png",wxBITMAP_TYPE_PNG))return 4;
     }

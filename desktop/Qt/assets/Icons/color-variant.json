@@ -1,0 +1,7 @@
+{
+  "source": "arrow-up-from-line.svg",
+  "sourceSha256": "3a9b8037387df9d552042e229aa9a16ae7326b52bf2a5aab07450f3b539a404c",
+  "output": "arrow-up-from-line-white.svg",
+  "outputSha256": "9a1e1e5fd82f55053dd8a4f556cded8c8faf27bf8da0dd930bdbe43ef514e389",
+  "change": "Only currentColor stroke replaced with #ffffff; Lucide 1.58.0 ISC paths unchanged"
+}

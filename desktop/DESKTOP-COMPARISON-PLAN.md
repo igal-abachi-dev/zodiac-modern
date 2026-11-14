@@ -138,3 +138,53 @@ records their distinct authoring/rendering models and Reactor's experimental
 status. Treat Dear ImGui DX11/DX12 as separate variants with explicit present/idle
 policies. Use the same reference contract and disclose any control, list or
 accessibility limitations. No overall desktop winner has been measured yet.
+
+## Visual parity revision — 2026-11-05
+
+All eleven candidates are implemented, including React Native Windows, wxWidgets
+and Dear ImGui. The earlier reservation paragraph describes the older stage.
+Before a new comparative pilot, use the [visual/control parity contract](DESKTOP-VISUAL-PARITY.md):
+Svelte is the primary reference and Avalonia fills desktop-specific gaps. Match
+controls as far as public framework styling permits; retain stock controls rather
+than introducing custom-painted replacements to manufacture pixel identity.
+
+The updated checker records client-area screenshots during idle/progress/filtering,
+dialog/workbench/narrow states and actual button geometry. Narrow stacking must
+also keep actions inside the client width. Its timings remain correctness-tool
+observations, not a calibrated cross-stack performance cohort. Keep remaining
+stock palette, scrollbar, dialog, typography and accessibility differences explicit.
+Old executable/source freezes do not cover these visual revisions; rebuild and
+freeze the final artifacts again before the pilot. Physical AT/IME/high-contrast,
+clean-machine and multi-monitor gates remain deferred.
+
+## Measurement preparation — 2026-11-14
+
+- **.NET pin:** the installed SDK is now 10.0.404 (10.0.402/10.0.403 are gone). `global.json` was moved to 10.0.404 for
+  Avalonia, both WinUI candidates, `candidate-checks` and Dear ImGui's window checks; those builds and model tests pass.
+  The six-host collectors and `WinUI3-webview2` keep their historical pins and results.
+- **Rebuilds:** Avalonia, both WinUI candidates, Electron, Tauri, Flutter, Qt, Dear ImGui and React Native Windows were
+  rebuilt successfully. **Slint and wxWidgets do not currently compile** (`slint-rust/ui/main.slint:112`,
+  `wxWidgets/src/main.cpp:214`); they are excluded until fixed and re-validated.
+- **New collector:** [`host-test-support/desktop-measurement/`](host-test-support/desktop-measurement/PROTOCOL.md) uses DXGI
+  Desktop Duplication present times as the pixel clock (compositor present, not photon scan-out) and reuses UIA
+  readiness as a secondary endpoint. Calibration floor (synthetic window, click to presented frame): median 27 ms.
+- **Status:** calibration, per-variant ready references (two recordings each; zero visual noise) and a 24-launch startup
+  pilot (ten variants) passed. The measured startup, idle, action and list cohorts have **not** been run, and the action
+  and list scenarios are not implemented. A hang found along the way (an orchestrator waiting on a pipe held by a launched
+  app, and a settle loop watching whole-desktop frames) was fixed; the rejected attempt is retained.
+
+## Measured cohort — 2026-11-14 (complete)
+
+- **Result:** `desktop-cohort-3`, 557 attempts, 0 failed; startup (20 rounds + 3 warmups, 14 lanes), idle (3 lifetimes + 1
+  warmup), interaction (8 lifetimes + 1 warmup, 17 steps including the 1k/10k list workload) for all twelve variants. Tables,
+  limits, deviations and the failed-attempt history are in
+  [`host-test-support/results/20261114-desktop/RESULTS.md`](host-test-support/results/20261114-desktop/RESULTS.md); factor 5 of
+  [CODE-COMPARISON.md](CODE-COMPARISON.md) is re-scored from it.
+- **Slint and wxWidgets** were fixed (`main.slint:112` operator spacing; wx `SetSpacer` → `AssignSpacer`) and included. The
+  correctness gate also exposed a real wxWidgets wide-layout bug (content cap ignored), fixed in `wxWidgets/src/main.cpp`, and a
+  race in the checker's Stop step (now requires the timer to become stable within 1.5 s).
+- **Deviations from the approved plan:** capture is DXGI Desktop Duplication rather than Windows.Graphics.Capture; UIA is
+  not a timing endpoint for actions and lists (pixel endpoints only; UIA used for startup readiness and target lookup); the
+  10/30/60 Hz burst workloads are not measured (below the pixel-change threshold); lean counts (n = 3 idle, n = 8 interaction);
+  pilot acceptance was automated plus operator inspection, not an independent review.
+- Wide-scope items still deferred: physical AT/IME/high-contrast, clean-machine deployment, multi-monitor, photon scan-out.

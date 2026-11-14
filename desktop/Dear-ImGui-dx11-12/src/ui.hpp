@@ -18,6 +18,7 @@ struct Ui {
     std::vector<Widget> widgets;
     ImFont *regular = nullptr;
     ImFont *bold = nullptr;
+    ImFont *symbols = nullptr;
     bool ready = false, about = false, restoreAbout = false, restoreWorkbench = false;
     std::size_t visibleRows = 0;
     std::uint64_t firstId = 0;
@@ -31,9 +32,10 @@ struct Ui {
 
 private:
     void mark(const char *name, bool enabled = true);
-    bool button(const char *label, bool enabled = true, float width = 0);
+    bool button(const char *label, bool enabled = true, float width = 0, bool primary = false,
+                float fontSize = 12);
     void title(const char *text, float size = 22);
-    void icon(bool orbit, bool locked = true);
+    void icon(const char *glyph, float size = 16);
     void mainPage(const GraphicsInfo &graphics);
     void workPage();
 };
