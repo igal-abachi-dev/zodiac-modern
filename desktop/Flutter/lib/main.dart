@@ -10,22 +10,16 @@ const emerald = Color(0xff047857), canvas = Color(0xfff8faf9);
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  for (final entry in {
+  // Fonts and icons are independent local assets: load them concurrently, still before UI readiness is published.
+  const fonts = {
     'Inter': [
       'inter-latin-400-normal.ttf',
       'inter-latin-500-normal.ttf',
       'inter-latin-600-normal.ttf',
     ],
     'Noto Sans Hebrew': ['noto-sans-hebrew-hebrew-400-normal.ttf'],
-  }.entries) {
-    final loader = FontLoader(entry.key);
-    for (final file in entry.value) {
-      loader.addFont(rootBundle.load('assets/fonts/$file'));
-    }
-    await loader.load();
-  }
-  // Decode the local icons before publishing UI readiness, too.
-  for (final name in [
+  };
+  const icons = [
     'orbit',
     'shield-check',
     'lock-keyhole',
@@ -33,9 +27,19 @@ Future<void> main() async {
     'info',
     'arrow-down-to-line',
     'arrow-up-from-line',
-  ]) {
-    await SvgAssetLoader('assets/icons/$name.svg').loadBytes(null);
-  }
+  ];
+  await Future.wait([
+    for (final entry in fonts.entries)
+      () {
+        final loader = FontLoader(entry.key);
+        for (final file in entry.value) {
+          loader.addFont(rootBundle.load('assets/fonts/$file'));
+        }
+        return loader.load();
+      }(),
+    for (final name in icons)
+      SvgAssetLoader('assets/icons/$name.svg').loadBytes(null),
+  ]);
   runApp(const BenchApp());
 }
 

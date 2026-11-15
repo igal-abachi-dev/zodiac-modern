@@ -188,3 +188,139 @@ clean-machine and multi-monitor gates remain deferred.
   10/30/60 Hz burst workloads are not measured (below the pixel-change threshold); lean counts (n = 3 idle, n = 8 interaction);
   pilot acceptance was automated plus operator inspection, not an independent review.
 - Wide-scope items still deferred: physical AT/IME/high-contrast, clean-machine deployment, multi-monitor, photon scan-out.
+
+## Follow-up 2026-11-15: fixes and targeted re-measurement
+
+- **Fixed:** Avalonia ReadyToRun (startup 1282 -> 784 ms) and sparse list updates (filter typing 1479 -> 597 ms); parallel asset preload in
+  Flutter (1603 -> 1495 ms, about 7%). Avalonia model tests now include a randomized equivalence check.
+- **Not application defects:** Flutter's startup is the engine (a stock Flutter app shows its window at about 1270 ms on this machine);
+  Tauri's fresh-profile cost is first creation of a WebView2 profile and was left at the matched configuration.
+- **Left as designed:** the unvirtualized 1k/10k workload (RNW workbench open, web hosts' 10k-row swap). A separate, labeled virtualized lane
+  is still the open option, per the list rule above.
+- **Method:** new frozen cohort `desktop-cohort-5` (a failed calibration in `desktop-cohort-4` is retained): Avalonia and Flutter changed;
+  Tauri, Electron and RNW unchanged as controls; startup n = 20, interaction n = 15, 0 failed attempts. An exploratory Avalonia A/B
+  (ReadyToRun x diff) isolated each fix. Details and caveats, including the unreliable 10,000-row step and about 5-9% same-session
+  drift: [RESULTS.md](host-test-support/results/20261114-desktop/RESULTS.md).
+
+## Insights and decisions (2026-11-15)
+
+Basis: the seven-factor scores and measured runtime in [CODE-COMPARISON.md](CODE-COMPARISON.md), the first cohort and the follow-up in
+[RESULTS.md](host-test-support/results/20261114-desktop/RESULTS.md). One machine, one small screen plus a synthetic list workbench; the
+weights assume a small team with Svelte/TypeScript, C# and some Rust/Go experience.
+
+### Final ranking (weighted, 7 factors)
+
+Tauri + Svelte 4.25 · Electron + Svelte 3.80 · WinUI 3 MVVM 3.70 · Avalonia 3.60 · Qt Quick 3.55 · wxWidgets 3.30 · WinUI 3 Reactor 2.80 ·
+Flutter 2.70 · Slint 2.60 · React Native Windows 2.50 · Dear ImGui 2.45. Tauri with a bundled WebView2 runtime scores 3.80 and still
+ranks first. Measured runtime changed only three cells (Electron 2 to 3, Flutter 4 to 3, Slint 4 to 3) and did not change the top five.
+
+### What the measurements taught
+
+1. **Native is not automatically faster.** Avalonia and Flutter started slowest in the first cohort. Avalonia's was a build setting
+   (plain JIT; ReadyToRun gives 1282 to 784 ms). Flutter's is the engine: a stock Flutter app shows its window at about 1270 ms here.
+2. **Web hosts are the fastest in use.** Tauri and Electron steps take 12-55 ms (10,000-row swap about 190-200 ms); WinUI and Flutter settle
+   at about 400 ms because of control animations; Avalonia steps take 110-250 ms after the list fix.
+3. **Tauri's cost is the first launch.** A fresh WebView2 profile adds about 870 ms (1393 versus 510-520 ms retained). Electron has no such
+   penalty (about 500-550 ms either way). Memory is not Tauri's strength: 98 MiB over 7 processes, versus 90 MiB over 4 for Electron.
+4. **Idle is a non-issue; memory is the idle number.** Every stack read 0.00-0.31% CPU in all five window states. wxWidgets 3 MiB; WinUI, Qt,
+   Avalonia, RNW 37-48 MiB; Flutter 66; Electron 90; Tauri 98; Slint 104.
+5. **List update strategy matters more than toolkit.** Avalonia's filter typing was 1.5 s because every keystroke replaced the whole list;
+   sparse changed-row updates cut it to about 0.6 s. Check how a toolkit's list binding notifies before blaming the toolkit.
+6. **The 10,000-row step is a weak measurement** for stacks whose UI thread blocks (Avalonia, React Native Windows, Flutter): one presented
+   frame whose time swings from about 2 ms to 1.2 s. Use it only together with the next step, or add an input-latency probe.
+
+### Decision: Tauri or Electron (with Svelte 5 or React)?
+
+**Tauri + Svelte 5 by default.** Measured, the two web hosts are about equal in use and at startup (Electron 501-547 ms, Tauri 510-520 ms
+warm), so the choice is about delivery, risk and what you control:
+
+| Pick | When | Cost |
+| --- | --- | --- |
+| **Tauri** | Default for a Windows-first tool you will ship and maintain | Depends on the installed Evergreen WebView2 (shared, serviced by Windows; a bundled Fixed Version is over 250 MB); about 870 ms first-launch profile cost; you write a thin Rust layer; WebKit/WebView differences on macOS and Linux if you go cross-platform |
+| **Electron** | You need Node in-process, native Node modules, a pinned and identical Chromium on every OS, built-in PDF printing, or a VS Code-class extension ecosystem | 358 MiB folder; you own Chromium security updates; 4 processes and 90 MiB at idle |
+
+Keep native calls behind one frontend interface so switching hosts never means rewriting the UI.
+
+**Svelte 5 or React?** Both ran the same measured UI shape; the benchmark did not separate frameworks, so this is judgment, not a
+measurement. Choose **Svelte 5** by default (smaller bundle: 115 KB JS here, least glue, runes state, your stated skills). Switch to
+**React** only when a required library is React-only (block editors such as BlockNote or Plate, some data-grid and chart components) or the
+team already works in React. Do not choose React merely for hiring or popularity on a small team that already knows Svelte.
+
+### Decision: Avalonia or WinUI 3 (when not using WebView2)?
+
+| Pick | When | Cost |
+| --- | --- | --- |
+| **Avalonia** | You want full control of a custom design, one process in C#, possible macOS/Linux later, or a security-sensitive app with no browser at all | Not Windows controls (Skia-drawn); UI Automation comes through Avalonia's peers (it passed the correctness gate); 105 MiB self-contained, 784 ms start after ReadyToRun; smaller adoption on this PC than WinUI |
+| **WinUI 3** | Windows-only, and it should behave like part of Windows (settings-style tools, utilities): Microsoft-serviced Fluent controls, ContentDialog, native UIA and input; a stock look is not the differentiator, Avalonia can match it | 231 MiB self-contained folder (ONNX Runtime and DirectML alone 38.5 MiB; plan to trim), about 400 ms control animations before the UI settles, Windows-only, verbose UI code |
+
+**Both can look like stock Windows Fluent.** In this benchmark both used their own standard Fluent controls (`DESKTOP-VISUAL-PARITY.md`), and
+Avalonia's visual result was the closest native one to the reference, so appearance alone is a weak reason to pick WinUI. What differs is
+where the controls come from and what you get for free:
+
+| Aspect | WinUI 3 | Avalonia (Fluent theme) |
+| --- | --- | --- |
+| Control implementation | Real Microsoft controls, serviced through the Windows App SDK; new Fluent controls and fixes arrive from Microsoft | Avalonia's own re-implementation of Fluent; it follows Microsoft's design with some lag, and small differences in details, animation and states remain |
+| Windows integration | Native dialogs (`ContentDialog`), text input and IME, UI Automation, system theme and accent, title bar, Windows 11 features first | Follows the system theme and supports the common integration, but through its own peers and platform layer; some native behaviours are approximated; physical assistive technology and IME were not tested for either |
+| Platforms | Windows only | Windows, macOS, Linux (and mobile/WebAssembly), same code |
+| Size and start | 231 MiB self-contained; 580 ms start; about 400 ms control animations before the UI settles | 105 MiB; 784 ms start (after ReadyToRun); steps 110-250 ms after the list fix |
+| Customization | Possible but fights the stock controls (we needed theme-resource overrides to match the custom reference) | Lookless templated controls restyle easily |
+| Licence and maturity | Microsoft, free; the Reactor variant is preview | MIT core, independent project |
+
+Native look scored WinUI 5 and Avalonia 4 (15% weight): that reflects control origin and platform behaviour more than pixels. The scores were
+not tested against real users or assistive technology.
+
+**Rule of thumb:** if a stock-Fluent look is all you want, **both work**, so decide on the rest. Choose **WinUI 3** when the app is Windows-only
+and must behave like part of Windows (system dialogs, IME, accessibility, Microsoft-serviced controls and new Windows features as they ship),
+or a stock-look utility where native behaviour matters more than size. Choose **Avalonia** for a custom or branded look, any cross-platform
+plan, a smaller footprint or the MIT licence, or the secret-handling path of a security tool. Use WinUI 3 MVVM, not Reactor (preview, 2.80).
+In the design-heavy freelancer scenario Avalonia scored 34 against WinUI's 29; in the general table WinUI is slightly ahead (3.70 versus
+3.60).
+
+### Decision: Avalonia or Qt Quick?
+
+Neither uses Windows' own controls: both draw their own UI on the GPU (Avalonia on Skia via ANGLE/D3D11; Qt Quick on its own scene graph over
+D3D11 here), so this is not "native versus custom". The deciding factors are your language and the kind of app.
+
+| Pick | When | Cost |
+| --- | --- | --- |
+| **Avalonia** | C# team; business or productivity software (forms, grids, dashboards, workflows); MIT licensing without a legal review; the .NET/NuGet ecosystem; faster development (32.5 KB authored for the reference screen versus 41.1 KB for Qt); a security-sensitive app with no browser in one managed process | No built-in 3D UI or shader effects; media, web view and PDF come from NuGet; 105 MiB self-contained; 784 ms startup after ReadyToRun; smaller adoption on this PC |
+| **Qt Quick** | C++ team; media and creative tools (DaVinci Resolve, Avid, DxO, VLC and parts of Photoshop use Qt on this PC); 3D UI and shaders (`Qt Quick 3D`, `ShaderEffect`); embedded or automotive targets; built-in Chromium, PDF, charts, serial and Bluetooth | LGPLv3/GPL or commercial licence (some add-on modules GPL-or-commercial only; static linking has LGPL obligations), so budget a legal review; DLL, QML module and plugin deployment (`qt.conf`, `windeployqt`; clean-machine deployment unverified); C++ linker and DLL-path pitfalls |
+
+Measured here: Qt is 69.2 MiB, about 703 ms startup and about 48 MiB idle; Avalonia is 105.1 MiB, 784 ms (1282 ms before ReadyToRun) and about 48 MiB
+idle. Qt is lighter on disk; memory and startup are close. Scores: Qt 3.55 (rank 5; adoption 5, runtime 4, productivity 3, risk 3) against Avalonia
+3.60 (rank 4; adoption 3, runtime 3, productivity 4, risk 4). The totals are almost equal, so the language and app type decide, not the numbers.
+
+**Rule of thumb:** a C# team building a business or productivity app should choose **Avalonia**. Choose **Qt Quick** for a C++ team, a media-heavy,
+3D or shader-heavy UI, or embedded hardware, and accept the licensing and deployment work. For a team that knows C#, Svelte and some Rust/Go but
+not C++, Avalonia is the practical choice; Qt only makes sense if the app type requires it or C++ expertise is added.
+
+### Final recommendation: a default order plus conditional picks
+
+The weighted table (Tauri 4.25, Electron 3.80, WinUI 3 3.70, Avalonia 3.60, Qt 3.55) ranks stacks under declared weights. For a team that knows
+Svelte/TypeScript, C# and some Rust/Go, but not C++, the practical order is a default and a runner-up, then a pick by need:
+
+1. **Tauri v2 + Svelte 5**, the default. Use **React** instead only when a required library is React-only (for example BlockNote or Plate block
+   editors) or the team already works in React.
+2. **Avalonia + MVVM**, the native C# alternative: custom or branded look, one process, MIT, cross-platform if needed, a security-sensitive path with
+   no browser. A stock Fluent look is not a reason to choose WinUI 3 over it, because Avalonia's Fluent theme can match it.
+3. **Pick by need** (none is a general default for this team):
+
+| Choose | When | What it costs |
+| --- | --- | --- |
+| **WinUI 3 + MVVM** | A Windows-only utility that must behave like part of Windows: Microsoft-serviced controls, `ContentDialog`, native input/IME and UI Automation, Windows 11 features as they ship | 231 MiB folder (about 400 ms control animations); Windows only. Use MVVM, not Reactor (preview) |
+| **Electron + Svelte** | No WebView2 available (locked-down or offline machines); a pinned, identical Chromium on every OS; Node in-process or native Node modules; avoiding a Rust layer; avoiding Tauri's first-launch cost (about 870 ms) | 358 MiB; you own Chromium security updates; about 90 MiB at idle over 4 processes |
+| **Qt Quick** | A C++ team; media or creative tools, 3D or shader UI, embedded/automotive, built-in Chromium/PDF/charts/hardware modules | LGPL/commercial review, DLL/plugin deployment, C++ build work. Needs C++ skills this team does not have, which is why it is not third by default |
+
+Why not collapse these into one ranking: WinUI 3 and Electron have real conditions where they win; they just are not the best default for this team. Tauri
+still beats Electron on size (4.5 MiB versus 358 MiB), servicing burden and the Rust security boundary, and it is a close call when the app is Windows-only
+and the team is comfortable with Rust.
+
+Not recommended now: WinUI 3 Reactor (preview), React Native Windows, Slint, Flutter. Dear ImGui for internal tools only. wxWidgets only when size
+dominates.
+
+### Limits on these decisions
+
+- One machine, one small synthetic app; real apps with editors, tables and IPC will stress different paths.
+- Physical assistive technology, IME, high contrast, clean-machine deployment and multi-monitor were not tested.
+- Pixel times are compositor present times, not photon scan-out. Same-session drift is about 5-9%.
+- The 10/30/60 Hz update bursts and the virtualized-list case were not measured.

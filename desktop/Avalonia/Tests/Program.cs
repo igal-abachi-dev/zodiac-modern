@@ -33,6 +33,25 @@ w.Query = "missing";
 Check(w.VisibleRows.Count == 0, "empty filter");
 w.Query = "";
 foreach (var hz in new[] { 10, 30, 60 }) { w.Burst(hz); clock.Advance(100); Check(clock.Pending == 1, "burst"); w.Stop(); Check(clock.Pending == 0, "stop"); }
+// Incremental list publishing must always equal a plain recomputation, whatever the order of queries and edits.
+{
+    var rng = new Random(7); var queries = new[] { "", "r", "row-1", "row-12", "row-120", "1", "9", "row-9", "שלום", "zzz", "row-12000 " };
+    w.Replace(1000);
+    for (int step = 0; step < 400; step++)
+    {
+        var q = queries[rng.Next(queries.Length)];
+        switch (rng.Next(6)) { case 0: w.Reverse(); break; case 1: w.Splice(); break; case 2: w.Update(); break; case 3: w.Replace(rng.Next(2) == 0 ? 50 : 1000); break; default: break; }
+        w.Query = q;
+        var active = w.VisibleRows.ToArray();
+        w.Query = "";
+        var all = w.VisibleRows.ToArray();
+        Check(active.SequenceEqual(all.Where(r => r.Label.Contains(q, StringComparison.Ordinal))), "incremental filter equals recompute at step " + step);
+        w.Query = q;
+        Check(w.VisibleRows.SequenceEqual(active) && w.Summary.StartsWith(active.Length + " rows;"), "refilter and summary at step " + step);
+        if (rng.Next(3) == 0) { w.Update(); var after = w.VisibleRows.ToArray(); w.Query = ""; Check(after.SequenceEqual(w.VisibleRows.ToArray().Where(r => r.Label.Contains(q, StringComparison.Ordinal))), "update under query at step " + step); }
+    }
+    w.Query = "";
+}
 w.Remount();
 Check(w.Tick == 0 && w.VisibleRows[0].Id == 0, "remount");
 w.Burst(30);

@@ -38,9 +38,11 @@ the specification was written in HTML/CSS terms first.
    single-process native app in one language with no browser or IPC bridge.
    Choose it when you want native C#/.NET over a web UI and the app does not
    depend on web-only components. See [Tauri versus Avalonia](#tauri--svelte-versus-avalonia-in-depth).
-3. **WinUI 3 + MVVM (C#) — for standard-looking Windows apps.** Use it when the app
-   should look and behave like a stock Windows 11 app (system utility, settings-
-   style tool, native Fluent controls and accessibility), not for a bespoke design.
+3. **WinUI 3 + MVVM (C#) — for apps that should behave like part of Windows.** Use it
+   for a Windows-only system utility or settings-style tool where Microsoft-serviced
+   controls, system dialogs, input/IME and native UI Automation matter. Avalonia's
+   Fluent theme can look just as stock, so appearance alone is not the reason;
+   the difference is where the controls come from and the platform behaviour.
 
 **Electron is not a separate pick.** It runs the same web UI as Tauri with a
 bundled Chromium and Node instead of the system WebView2 and Rust. Keep it only as
@@ -60,7 +62,7 @@ Windows conventions, UIA gaps and lack of Windows adoption evidence.
 | Situation for your next desktop app | Use | Why |
 | --- | --- | --- |
 | Default: small/medium Windows tool, your skills, fast iteration | **Tauri v2 + Svelte 5** | Least glue, best text/accessibility foundation, 4.5 MiB EXE, reuse of web/Svelte design work; Rust only for the narrow native layer |
-| Windows-only, native Fluent look and native UIA are the priority | **WinUI 3 + MVVM (C#)** | Real Windows controls, ContentDialog, strongest native integration; plan to trim the 231 MiB self-contained folder |
+| Windows-only, and native controls, dialogs, input and UIA matter (Avalonia can match the Fluent look) | **WinUI 3 + MVVM (C#)** | Real Microsoft controls, ContentDialog, strongest native integration; plan to trim the 231 MiB self-contained folder |
 | Native C# app with full control over a custom design, or cross-platform | **Avalonia + MVVM** (close 2nd overall) | Closest native re-creation of the reference, one language/process, MIT, 105 MiB self-contained (before trimming/AOT) |
 | Professional, heavy custom UI, C++ team, cross-platform | **Qt Quick/QML** | Most proven in pro creative tools on this PC; budget for LGPL/commercial review and DLL/plugin deployment |
 | Need Node in-process, a pinned Chromium, or VS Code-class web ecosystem | **Electron + Svelte** | Same productivity as Tauri; accept 358 MiB and Chromium servicing |
@@ -219,7 +221,7 @@ Whole runnable folder, excluding PDB debug symbols. File sizes, not RAM.
 | --- | ---: | ---: | ---: | --- | --- |
 | Tauri + Svelte | **4.5 MiB** EXE (assets embedded; dist 215 KB, 115 KB JS) | 1 | 4.5 MiB | — | Installed **Evergreen WebView2** (shared). A bundled Fixed Version runtime is >250 MB unpacked per Microsoft |
 | Electron + Svelte | **357.7 MiB** | 73 | 238.2 MiB | `dxcompiler.dll` 25.8 MB, `resources.pak`, ICU | None (ships Chromium + Node) |
-| Avalonia | **105.1 MiB** | 222 | apphost | CoreLib 16 MB, SkiaSharp 11.6 MB, ANGLE 5.4 MB | None (self-contained .NET 10, JIT, untrimmed) |
+| Avalonia | **105.1 MiB** | 222 | apphost | CoreLib 16 MB, SkiaSharp 11.6 MB, ANGLE 5.4 MB | None (self-contained .NET 10, ReadyToRun since 2026-11-15, untrimmed; size not re-measured) |
 | WinUI MVVM | **231.2 MiB** | 529 | apphost | Windows SDK projection 26 MB, **onnxruntime + DirectML 38.5 MiB**, CoreLib, `Microsoft.ui.xaml.dll` 15 MB | None (self-contained .NET + Windows App SDK) |
 | WinUI Reactor | **235.7 MiB** | 548 | apphost | Same as MVVM | Same |
 | Flutter | **28.0 MiB** | 30 | small runner | `flutter_windows.dll` 21.3 MB, AOT `app.so` 5.4 MB | **Microsoft VC++ runtime** |
@@ -351,15 +353,29 @@ One machine (Windows 11, 3840x2160 at 200%, RTX 2070 SUPER), the same reference 
 | Slint | 644 | 104 | 1 | ~175 ms tail on every step |
 | WinUI 3 Reactor | 657 | 40 | 1 | Like MVVM; ~400 ms settle |
 | Qt Quick | 703 | 48 | 1 | Fast about/reset; list swaps 200-500 ms |
-| Avalonia | 1282 | 48 | 1 | Slow to start (cause not investigated); filter typing ~1.5 s |
-| Flutter | 1603 | 66 | 1 | Slowest start; ~400 ms settle |
+| Avalonia | 1282 first run; **784 after ReadyToRun** | 48 | 1 | First run: JIT start, filter typing ~1.5 s. After the follow-up fixes: filter typing ~0.6 s, splice/update ~115 ms |
+| Flutter | 1603 first run; 1495 after a preload tweak | 66 | 1 | Slowest start, and it is the engine: a stock Flutter app is as slow to show a window (~1270 ms); ~400 ms settle |
 
 What this changes:
 
 - **Tauri's runtime is good, not best.** Its steps are the fastest measured and idle memory is modest (98 MiB across 7 processes), but it is not the lightest and **a fresh WebView2 profile adds about 870 ms** to first launch. A Tauri app that cares about first-run feel should keep the profile warm or show a native splash.
 - **Electron is better than expected** at startup (501 ms, no fresh-profile penalty) and about as quick as Tauri in use; its cost is delivery size (357.7 MiB) and 90 MiB over 4 processes, not speed. That narrows Tauri's runtime lead to memory and process count only.
-- **Native single-process stacks are not automatically faster.** Avalonia (1282 ms) and Flutter (1603 ms) start slowest; Slint carries the largest idle footprint among the natives (104 MiB); WinUI 3 settles slowly because of its control transitions. wxWidgets and Dear ImGui are the lean ones, at the cost of the factor 2, 3 and 6 scores above.
+- **Native single-process stacks are not automatically faster.** Avalonia (1282 ms on the first run) and Flutter (1603 ms) started slowest. Avalonia's was a build setting, not the toolkit: ReadyToRun brought it to 784 ms (see the follow-up below). Flutter's is the engine itself on this machine; Slint carries the largest idle footprint among the natives (104 MiB); WinUI 3 settles slowly because of its control transitions. wxWidgets and Dear ImGui are the lean ones, at the cost of the factor 2, 3 and 6 scores above.
 - **Nothing was busy while idle.** All twelve variants read 0.00-0.31% CPU (one timer tick) in visible, unfocused, occluded, minimized and restored states, so idle memory is the useful idle number.
+
+#### Follow-up fixes and re-measurement (2026-11-15)
+
+The slow spots from the first run were investigated, fixed where the cause was in the application, and re-measured in a new frozen cohort (Avalonia and Flutter rebuilt; Tauri, Electron and React Native Windows unchanged as controls; startup n = 20, interaction n = 15; same-session drift about 5-9%). Details, caveats and data: `host-test-support/results/20261114-desktop/RESULTS.md` ("Follow-up 2026-11-15").
+
+| Problem | Verdict | Before -> after (median) |
+| --- | --- | --- |
+| Avalonia startup | **Fixed**: ReadyToRun (plain JIT was the cause; A/B-confirmed) | 1282 -> 784 ms |
+| Avalonia filter typing | **Fixed**: sparse list updates instead of replacing every row on each keystroke (A/B-confirmed) | 1479 -> 597 ms; filter-clear 547 -> 125, splice 260 -> 115, update 224 -> 116. Remount rose about 200 -> 290 ms (cause not found) |
+| Flutter startup | **Not an app problem**: a stock Flutter app shows its window at about 1270 ms on this machine too; parallel asset preload gained ~7% | 1603 -> 1495 ms |
+| Tauri fresh-profile first launch | **Not fixed**: first creation of a WebView2 profile; the host is deliberately kept at the matched configuration, no flags changed | 1393 -> 1394 ms (retained 510 ms) |
+| RNW workbench open; Tauri/Electron 10k-row swap | **Left as designed**: the unvirtualized stress workload is a parity rule; a separate labeled virtualized lane would be the way to measure product-style lists | unchanged (RNW ~1 s, web hosts ~190-200 ms) |
+
+Two cautions: the 10,000-row step is a single presented frame for stacks whose UI thread blocks, so its value swings from about 2 ms to 1.2 s between identical runs and can spill into the next step; several first-run medians for those steps were understated. The ranking and scores above do not change: Avalonia's runtime score stays 3, and the fixes do not alter the top five.
 
 ### Per-factor order
 

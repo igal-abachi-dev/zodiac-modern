@@ -12,6 +12,6 @@ try{& dotnet restore NeutronStar.Avalonia.csproj --locked-mode --configfile NuGe
  & (Join-Path $PSScriptRoot 'scripts/Write-Notices.ps1')
  New-Item -ItemType Directory -Path .cache -Force | Out-Null
  $files=@(Get-ChildItem -LiteralPath $publishRoot -Recurse -File|Sort-Object FullName|ForEach-Object{@{path=$_.FullName.Substring($publishRoot.Length+1).Replace('\','/');bytes=$_.Length;sha256=(Get-FileHash -LiteralPath $_.FullName).Hash}})
- $receipt=@{schema=1;avalonia='12.1.4';mvvm='8.4.2';mode='self-contained .NET 10 JIT; Skia; standard Fluent controls; unvirtualized list';executableSha256=(Get-FileHash out/win-x64/NeutronStar-Avalonia.exe).Hash;assemblySha256=(Get-FileHash out/win-x64/NeutronStar-Avalonia.dll).Hash;lockSha256=(Get-FileHash packages.lock.json).Hash;files=$files;comparison='Not run'}
+ $receipt=@{schema=1;avalonia='12.1.4';mvvm='8.4.2';mode='self-contained .NET 10 ReadyToRun; Skia; standard Fluent controls; unvirtualized list with sparse updates';executableSha256=(Get-FileHash out/win-x64/NeutronStar-Avalonia.exe).Hash;assemblySha256=(Get-FileHash out/win-x64/NeutronStar-Avalonia.dll).Hash;lockSha256=(Get-FileHash packages.lock.json).Hash;files=$files;comparison='Not run'}
  [IO.File]::WriteAllText((Join-Path $PSScriptRoot '.cache/build-receipt.json'),($receipt|ConvertTo-Json -Depth 5))
 }finally{Pop-Location}

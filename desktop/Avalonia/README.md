@@ -31,9 +31,12 @@ and debug the app/tests normally.
 
 `Build.ps1` restores the locked graph, runs the independent model checks, cleans
 only its fixed generated publish directory, publishes and generates notices and
-a file/hash receipt. The primary build is self-contained **JIT**, with neither
-Native AOT, trimming nor ReadyToRun enabled. Those would be separately labeled
-deployment/optimization variants rather than silent benchmark changes.
+a file/hash receipt. The primary build is self-contained **ReadyToRun** (since
+2026-11-15; it was plain JIT in the first benchmark cohort, where startup was
+1282 ms versus 784 ms now). Native AOT and trimming are not enabled and would be
+separately labeled variants. ReadyToRun compiles with the
+`microsoft.netcore.app.crossgen2` pack, restored from nuget.org at publish time
+and not recorded in `packages.lock.json`.
 
 ## Implementation
 
@@ -44,8 +47,14 @@ deployment/optimization variants rather than silent benchmark changes.
   card/header/footer arrangement. It does not perform domain operations.
 - A plain `ItemsControl` with an explicit `StackPanel` deliberately realizes
   every stress-test row. No default list virtualization hides the cost of the
-  10,000-row workload. Immutable row/list updates are this implementation's
-  strategy, not an assertion that they are optimal for every Avalonia app.
+  10,000-row workload. Rows are immutable records. When the new list keeps the
+  old order, only the removed, replaced and inserted rows are applied to one
+  `ObservableCollection` (sparse changed-row notifications, like the Qt and
+  Slint models); reorders and mostly-new lists are published whole. Before
+  2026-11-15 every change replaced the whole `ItemsSource`, which made filter
+  typing take about 1.5 s. A randomized test compares the incremental result
+  with a plain recomputation. Not an assertion that this is optimal for every
+  Avalonia app.
 - Local Inter 400/500/600 and Noto Sans Hebrew use the same Fontsource 5.3.0
   glyphs as the web design, decompressed to TTF for native loading. The conversion
   script and per-file provenance/hashes are committed; it is a development-time
