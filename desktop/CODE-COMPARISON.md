@@ -826,6 +826,59 @@ Practical cautions carried over from this cohort:
   decide the local database, sync/conflict model (CRDT such as Yjs/Automerge or
   server-authoritative) and permissions before UI work starts.
 
+## Which stack for which app type (lessons from the installed-apps rewrite exercise)
+
+For each of the 91 entries in [installed_apps.md](installed_apps.md) I picked the stack I would use for a from-scratch,
+exact-feature remake (the "If rewritten today" column), with team skills, deployment size and migration cost set aside. This
+section records what that exercise showed. **The picks are judgements, not tests.** The benchmark measured one small synthetic
+screen, not those apps, and the engine (PDF, imaging, codecs, sync, parsers) matters more than the UI toolkit in large products;
+every pick is for the UI shell only.
+
+### Three questions that decided almost every row
+
+1. **Where is the hot path?** If a canvas, timeline, video surface or large live table updates every frame from an engine, a
+   same-process native toolkit wins. If the UI is lists, forms and content with coarse actions, a web UI is fine.
+2. **What language is the engine?** A C or C++ engine pairs with Qt, which calls it directly. A .NET engine, or Windows APIs
+   called from C#, pairs with Avalonia. A Rust engine pairs with Tauri, whose host is Rust. If an engine is Rust and the UI is
+   native, neither Qt nor Avalonia is direct (both use a C ABI), so that call is open.
+3. **Is the UI made of web-shaped components?** Editors, kanban boards, chat and markdown, HTML email, catalogs and
+   design-heavy screens have ready-made web parts. Custom-drawn views do not.
+
+### Which framework for which app type
+
+| App type | Pick | Why | What it costs |
+| --- | --- | --- | --- |
+| Launchers, stores, catalogs, chat/AI, mail, API clients, Git clients, FFmpeg queue tools, node editors, galleries (26 rows) | **Tauri v2 + Svelte 5** | The UI is content and components, the engine is Rust or a sidecar, calls are coarse, and design fidelity is easy | 7 WebView2 processes (about 98 MiB idle here), +870 ms on a fresh profile, WebView2 dependency, a browser-hardening job |
+| Pro media and creative tools, players, DAWs, C/C++ engines (imaging, FreeRDP, security services), model-heavy live tables, hex views (19 rows) | **Qt**: Widgets for dock-heavy tools, Quick for video/OSD UI | Direct engine calls, GPU surface integration, docking, and models that send sparse row changes (list filter-to-one 49 ms in this benchmark) | LGPL obligations, C++ memory safety, build complexity, not native Fluent |
+| .NET tools, small Windows system utilities, editors and canvases over C# code (15 rows) | **Avalonia** | One memory-safe language end to end, MIT, no bridge, cross-platform copies come free | Password/IME/screen-reader behavior unverified, 105 MiB, 784 ms start after ReadyToRun, list diffs hand-written (filter-to-one 1,479 ms before the fix, 597 ms after), no ready block-editor ecosystem |
+| Windows components that must follow system theme, high contrast and Settings behavior (5 rows) | **WinUI 3** | Real Microsoft controls and first-class UI Automation | Windows-only, 231 MiB, verbose UI |
+| Tiny classic tools where start and size dominate (8 rows) | **wxWidgets** | Real Win32 controls, a 6 MiB EXE, lowest runtime cost | Classic look, manual layout |
+| Editors with an existing ecosystem, or one Chromium on every OS (3 rows) | **Electron** | The ecosystem or multi-OS parity is the product | Large footprint, you service Chromium |
+| Developer inspectors (2 rows) | **Dear ImGui** | Fast to build, GPU immediate-mode drawing | No accessibility or bidi shaping: internal audiences only |
+
+Qt Widgets versus Qt Quick: QML belongs to Qt Quick; Widgets is plain C++ `QWidget` classes. Dock-heavy creative tools lean
+Widgets, video and OSD UI lean Quick, and a security form is lower-risk on Widgets (no QML engine or JavaScript evaluation in the
+GUI process). The installed-app survey shows `QApplication` linked in Photoshop, which is not proof of its UI stack.
+
+### What the pattern shows
+
+- **The engine matters more than the toolkit.** Qt and Avalonia picks follow the engine language; Tauri picks are Rust or
+  sidecar engines behind content UIs.
+- **Most changes are legacy escapes, not churn.** About 45% of the entries stay on their current family. The 46 "Change" rows
+  mostly leave VCL, MFC, WPF, Swing, CEF and Qt 5, not modern stacks.
+- **Many rows are real ties.** The small Windows utilities and the Photoshop-class canvases would work on two or three of these
+  stacks; one is named only because a pick was required.
+- **Security-sensitive apps do not favour Tauri.** Zodiac's receiver GUI and an endpoint-security form favour a small trusted
+  base with no web layer, so they went to Qt Widgets (see [zodiac-modern-gui.md](../zodiac-modern-gui.md)); Avalonia was the
+  earlier favourite in `desktop-gui.md` and is not ruled out, but its password field is unverified.
+
+### Evidence strength
+
+- **Measured (synthetic app, one machine):** startup, idle memory, interaction latency and the list behavior quoted above.
+- **Programmatic probes only:** Qt 6.12 password-field IME and UI Automation behavior ([docs/spikes/gui](../docs/spikes/gui/README.md)).
+  No physical screen reader or IME was used, and nothing was measured for Avalonia's password field.
+- **Reasoned, not tested:** every pick for a real application (canvas, timeline, engine coupling, ecosystem fit).
+
 ## What would change this ranking
 
 - The calibrated cross-toolkit pilot (startup, whole-tree private memory, idle CPU,
