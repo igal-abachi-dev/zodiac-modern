@@ -69,9 +69,9 @@ and stored through the OS credential store so a later E2EE sync does not require
 | Layer | Choice | Why |
 | --- | --- | --- |
 | Shell | **Tauri v2** (Rust, WebView2) | The UI is made of web-shaped components (block editor, kanban, grids, command palette), the engine is Rust, calls are coarse. See CODE-COMPARISON.md. |
-| Frontend | **Svelte 5** (runes), TypeScript, Vite (SvelteKit as an SPA) | Fits the existing skills. **React is the fallback** if the editor spike (section 8) fails. |
+| Frontend | **Svelte 5** (runes), TypeScript, Vite (SvelteKit as an SPA) | Fits the existing skills. **TipTap on React is the fallback** if the editor spike (section 8) shows Svelte is too costly. |
 | UI primitives | Accessible headless components (bits-ui or shadcn-svelte style), Tailwind or CSS tokens from Figma variables | Accessibility without building primitives. |
-| Editor | **TipTap / ProseMirror** | Framework-agnostic; BlockNote or Plate (React) are the alternatives. |
+| Editor | **TipTap / ProseMirror** (owner decision) | Framework-agnostic; chosen by the owner. It needs more custom block work than BlockNote (section 5A). |
 | Lists and tables | TanStack Table and Virtual, pragmatic-drag-and-drop | Virtualization and kanban without a framework lock-in. |
 | Data | **SQLite** in Rust (`rusqlite`, bundled build with FTS5) | Section 4. |
 | Types across the bridge | Generated TypeScript types from the Rust commands (for example `tauri-specta`) | One source of truth for the command surface. |
@@ -150,12 +150,141 @@ Notes on the two samples, so the ideas are not lost:
 | Shell | Sidebar, tabs, Ctrl+K command palette, global search, tray quick-add | Keyboard-first; FTS5 search across issues, pages, clients, invoices; global shortcut and tray in Rust |
 | Issues | List, board, saved views, labels, priorities, estimates | Saved views stored as validated query JSON compiled to parameterized SQL (never string-built); fractional-index ordering for drag-and-drop; virtualized lists; billable time can feed invoice lines |
 | CRM | Clients, contacts, pipeline, activity timeline, custom fields, CSV import | Pipeline board shares the kanban component with issues; timeline from the `changes` log and notes |
-| Pages / KB | Block editor: slash menu, headings, lists, toggles, tables, callouts, mentions, backlinks, templates | TipTap with `dir=auto` per block; links to issues and clients by ID; Markdown and PDF export |
+| Pages / KB | Block editor: slash menu, headings, lists, toggles, tables, callouts, mentions, backlinks, templates | Detailed in section 5A: one JSON document per page, Rust-derived search text and links, `dir=auto` per block, entity mentions by ID, Markdown and PDF export |
 | Invoicing | Products and services, quotes, invoices, receipts, payments, recurring invoices, multi-currency, expenses | Rust state machine draft, issued, paid or void; gap-free numbering per series inside one transaction; issued rows frozen by a trigger; audit in `invoice_events` |
 | Reports | Revenue by client, receivables aging, VAT summary, accountant export | SQL views; CSV export |
 | Tax and legal | Dated, configurable VAT setting; Israeli tax-authority allocation numbers and document-type rules | **Verify current rules with an accountant before building.** The integration is a later, isolated module behind an interface |
 | Windows 11 | Mica on the sidebar, notifications, deep links, signed auto-update | Native caption kept for Snap; plugin behavior to be verified in spike S4 |
 | Data safety | Backup, restore, export, language, theme, data location | Restore tested in CI with fixture databases |
+
+## 5A. Pages module: the Notion-style knowledge base
+
+The module is called **Pages**; user-defined tables inside it are called **Lists**. It is a deliberately small block editor with
+links, search and export, built on the stack in section 2. It is **not** a general Notion clone, and the ideas below come from a
+reference plan for a local-first notes workspace, adapted to this product (Rust core, **TipTap** as the editor, entities that are
+real tables).
+
+**Rust owns the page logic**: the save pipeline, text and link extraction, versions, search indexing, export and import all run in the Rust core. The editor in the webview only produces and consumes the document JSON, so the same rules serve a later web client (section 11).
+
+### Scope
+
+| First release | Later | Excluded until users ask |
+| --- | --- | --- |
+| Nested pages, page tree, trash; headings, lists, checklists, quotes, callouts, code blocks, dividers, tables; images and file attachments; drag-and-drop block order; slash menu and keyboard shortcuts; page and entity links with backlinks; tags; templates; recent pages; full-text search; snapshots; Markdown and JSON export, ZIP backup | Lists (typed properties, table and list views); board view; daily notes; favourites; filters, sorting and grouping for Lists; Markdown import; Notion import | Real-time co-editing, comments, per-page permissions, public sites, formulas, relations and rollups, custom block plugins, calendar and email apps, automations, charts, forms, AI writing, a Notion-compatible API |
+
+### Data model (sketch; STRICT tables, final names decided in P1)
+
+```sql
+pages(id, parent_id, title, icon, doc_json, doc_schema_version, plain_text, props_json, sort_key,
+      revision, created_at, updated_at, deleted_at)
+entity_links(source_page_id, target_kind, target_id, created_at)   -- page, issue, client, invoice, ...
+tags(id, name) ; page_tags(page_id, tag_id)
+attachments(sha256 PRIMARY KEY, size, mime, original_name, created_at) ; page_attachments(page_id, sha256)
+page_versions(id, page_id, revision, content_hash, doc_json_zstd, reason, created_at)
+list_schemas(id, page_id, schema_json, created_at, updated_at)
+page_search  -- FTS5 virtual table: title, body, tags, props
+changes      -- the op-log outbox from section 4
+```
+
+- **One editor document per page**, stored as JSON, not one row per block. A block becomes its own row only if the product must
+  query it by itself.
+- **Issues, clients and invoices stay first-class relational tables** (section 4). A page refers to them by ID; Lists are only for
+  user-defined tables of notes. Rows of a List are pages, so they get content, links, history and attachments for free. There are
+  no relations, rollups or formulas in Lists.
+- **Entity mentions:** a custom inline node `{kind, id, label snapshot}` links to an issue, client or invoice. The link survives a
+  rename (the label refreshes from the entity), and backlinks come from `entity_links`.
+
+### Save pipeline (one Rust transaction per committed save)
+
+1. Store `doc_json` and bump `revision`.
+2. Derive `plain_text`, tags and entity links **in Rust from the stored JSON**, not from values the webview sends, so the index
+   cannot drift from the content.
+3. Update the FTS5 row and the link edges.
+4. Append a `changes` record (the outbox from section 1A).
+5. Create a snapshot when the rule in "History" fires.
+
+Autosave runs after a short idle delay and on blur or close. Kill-during-save tests (spike S3) must show no torn state.
+
+### Editor and document format
+
+- **The editor is TipTap (ProseMirror), by the owner's decision.** The reference plan used BlockNote, a more complete Notion-style
+  editor out of the box; choosing TipTap means the block-editing experience is assembled from extensions and custom code. Plan for
+  that work: the slash menu, drag handle, block conversion, callouts, toggles and the entity mention node are built on TipTap
+  extensions and its suggestion utilities, and only the editor itself is shared with a React variant. Ready-made Notion-style
+  editors built on TipTap exist as references (for example Novel, public knowledge, not re-verified here).
+- **Spike S1 verifies TipTap against these pass criteria:** slash menu, drag handle, nested blocks, table block, checklist, code
+  block, entity mention node, undo/redo, paste from Word and from the web, mixed Hebrew/English typing, and keyboard-only
+  operation. TipTap itself is framework-agnostic and has official React support; on Svelte it is used through its core API or a
+  community wrapper (not verified here). If TipTap on Svelte proves too costly, the fallback is **TipTap on React**, not another
+  editor.
+- **Check the licence of every extension before use.** The TipTap core and most extensions are open source (MIT, public
+  knowledge), but some extensions and cloud services are paid; avoid any that are not compatible with a product you might sell.
+- **The document schema belongs to the app, not to the editor library.** `doc_schema_version` is stored on every page; migration
+  functions upgrade old documents when the schema changes; golden-file tests load fixture documents from every past version and
+  must round-trip them. Store no library-internal ephemeral state.
+- **JSON is lossless; Markdown is the portable form.** Custom blocks and mentions export to Markdown with a documented fallback
+  (a fenced block or an HTML comment carrying the JSON) so a re-import can restore them. State this loss plainly in the export UI.
+
+### Hebrew, RTL and mixed text (the editor is not done until these pass)
+
+- `dir="auto"` per block, with a page-level direction override; CSS logical properties everywhere; lists, tables and callouts
+  mirror correctly; numbers, dates and ILS amounts stay left-to-right inside Hebrew text.
+- Test cases kept as fixtures: Hebrew-only, English-only, alternating runs, punctuation at run boundaries, numbers inside Hebrew,
+  Hebrew inside an English heading, caret movement and selection across direction changes, pasted text from Word and Google Docs,
+  and entity mentions inside RTL blocks.
+- PDF and Markdown exports must keep the direction of each block.
+
+### Search (SQLite FTS5)
+
+- Index title, body text, tags and List property text; show results with `snippet()` highlighting; rank with `bm25`.
+- **Hebrew handling is tested in spike S3, not assumed:** the `unicode61` tokenizer treats Hebrew letters as word characters but
+  does no stemming, so prefix letters (ה, ו, ב and so on) can cause misses. Plan: normalize text before indexing by stripping
+  niqqud and cantillation marks (the Unicode range U+0591 to U+05C7), keep the original text for display, support prefix
+  queries, and consider a trigram index for substring search if the tests need it. Mixed Hebrew/English queries are part of the
+  test set. Whether `remove_diacritics` alone handles Hebrew points is unverified, so the normalization step is the safe default.
+- No external search engine and no vector database.
+
+### Attachments
+
+Content-addressed blobs on disk (`blobs/ab/cd/<sha256>`), deduplicated and integrity-checked on open and in a backup verify pass.
+Previews: images, plain text and code inline; PDFs open externally or as a thumbnail; no Office rendering. A size cap per file is a
+setting, and a missing blob shows a clear repair message instead of failing silently.
+
+### History
+
+Snapshots when the user stops editing for a configurable interval, when a page closes after meaningful changes, when a sync
+conflict occurs, and on a manual checkpoint. Deduplicate by content hash and compress. Default retention (configurable): the last
+100 versions per page, daily snapshots for 30 days, weekly after that. Restore and compare are P2 features; compare can start as
+a plain-text diff.
+
+### Sync behavior for pages (applies from the optional sync stage)
+
+- **Page bodies:** never silently last-write-wins. If two devices edit one page from the same base revision, keep both: the
+  accepted version and a "conflict copy" page, and let the user merge.
+- **Metadata** (title, icon, position): field-level merge when edits do not overlap, otherwise report the conflict.
+- With end-to-end-encrypted sync the **clients detect conflicts after pulling**, because the relay sees only ciphertext
+  (section 1A). Yjs for page bodies comes only after this model is stable, and only for the body, never for the whole workspace.
+
+### Accessibility and print
+
+- Every block operation reachable from the keyboard (move, indent, convert type, open the slash menu, insert a mention), visible
+  focus, an announced result for slash-menu choices, reduced-motion and high-contrast support.
+- Editors built on `contenteditable` have known screen-reader gaps, so test physically with NVDA and Narrator; nothing in this
+  plan claims conformance.
+- Printing and PDF export of a page reuse the Rust PDF path from spike S2, so a printed page and an exported page match.
+
+### Pages milestones
+
+| Milestone | Deliver | Exit evidence |
+| --- | --- | --- |
+| K0 spike | Editor choice (S1), FTS5 Hebrew behavior (S3), JSON round trip, kill-during-save | Written results; create, restart, reopen, search, export all work |
+| K1 notebook | Page tree, create/rename/move/delete, editor with autosave, shortcuts, recent pages, trash, migrations | Daily use as a notes app, no server |
+| K2 knowledge | Entity and page links, backlinks, tags, search, templates, snapshots with restore, Markdown and JSON export, ZIP backup | Fixture round trips, Hebrew/RTL fixtures pass |
+| K3 files and recovery | Attachments, integrity verification, backup restore, crash-recovery tests | Killing the app during edit or attachment import corrupts nothing |
+| K4 Lists | Schema editor, typed properties, table and list views, CSV import and export | Manage a simple tracker without leaving Pages |
+
+K1 and K2 belong to phase P2, K3 to P2 and P4, K4 only after the first release proves demand. Not planned: a plugin runtime,
+real-time collaboration, comments and AI.
 
 ## 6. UI direction
 
@@ -194,17 +323,18 @@ Notes on the two samples, so the ideas are not lost:
 
 ## 8. Spikes before committing
 
-- **S1 editor:** slash menu, drag handle, table block and mixed Hebrew/English typing in TipTap on Svelte, versus BlockNote on
-  React. Decide Svelte or React by the result, not by ecosystem size.
+- **S1 editor (TipTap):** slash menu, drag handle, table block, entity mention node, paste from Word and the web, and mixed
+  Hebrew/English typing, with the pass criteria in section 5A. Run it on Svelte first; if the cost is too high, repeat on React
+  with TipTap and choose the frontend framework by that result.
 - **S2 PDF:** a Hebrew invoice with ILS, mixed text and numbers through WebView2 print versus Typst.
-- **S3 SQLite:** FTS5 search on Hebrew (with and without niqqud), collation choice, migration and backup procedure, a kill-during-
-  write test.
+- **S3 SQLite:** FTS5 search on Hebrew (prefix letters, with and without niqqud, normalization versus `remove_diacritics`, mixed
+  Hebrew/English queries), collation choice, migration and backup procedure, a kill-during-write test for the page save pipeline.
 - **S4 Windows polish:** Mica, tray, notifications, deep links, global shortcut and updater behavior under Tauri.
 - **S5 lists:** a 10,000-row virtualized issue list and drag-and-drop on a mid-range machine.
 
 ## 9. Testing
 
-Rust unit tests for domain rules; migration tests on fixture databases; kill-during-write and restore tests; Hebrew/RTL visual
+Rust unit tests for domain rules, including golden-file tests that load page documents from every past schema version; migration tests on fixture databases; kill-during-write and restore tests; Hebrew/RTL visual
 checks; keyboard and screen-reader walk-throughs; end-to-end tests through the WebView2 driver.
 
 ## 10. Risks and open questions
@@ -217,7 +347,7 @@ checks; keyboard and screen-reader walk-throughs; end-to-end tests through the W
   market pays for them are not decided and not tested.
 - **Local-only data loss** until backups exist; P4 is therefore required before any real-user release.
 
-- The block editor is the hardest single component; the spike may flip the frontend to React.
+- The block editor is the hardest single component, and TipTap gives less Notion-style behaviour out of the box than BlockNote; the spike may flip the frontend to React (still with TipTap).
 - PDF generation with correct Hebrew bidi is not built into Tauri and is untested here.
 - Legal invoicing rules (numbering, allocation numbers, document types) must come from an accountant, not from this plan.
 - WebView2 availability and servicing; WebKit differences if macOS is added later.
